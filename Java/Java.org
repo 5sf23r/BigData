@@ -821,89 +821,179 @@
       #+END_SRC
 *** 关系运算符
     ==、>、<、> =、< =、! =
+    比较（关系）运算符--结果一定是布尔值
 *** 逻辑运算符
     - 用于连接布尔值或者布尔表达式的符号
       表达式：
           用于连接变量或者数据，而且符合java语法的式子
-          a+b(算术表达式) a<b(布尔表达式)
-          &(逻辑与)  |逻辑与
-    #+BEGIN_SRC java
-      /*
-        逻辑运算符，对两个boolean类型数据之间进行计算
-        结果也是boolean类型
+          a+b(算术表达式)
+          a<b(布尔表达式)
+          &(逻辑与)  |逻辑或   ^逻辑异或  ！逻辑非  ||双或
+      总结：
+          逻辑运算符，对两个BOOLEAN类型数据之间进行计算
+          结果也是BOOLEAN类型
 
-        &（按位与）      ：只要有一个false，结果就false
-        | (或)          ：只要有一个true，结果就是true
-        ^（按位异或）    ：两边相同为false，不同为true
-        !(非)           ：取反 !true = false  !false = true
-        &&(短路与.逻辑与) :一边是false，另一边不运行
-        ||(短路或逻辑或） :一边true，另一边不运行
-       ,*/
-      public class Operator_5{
-          public static void main(String[] args){
-              System.out.println(false & true);
-              System.out.println(false | true);
-              System.out.println(false ^ false);//F
-              System.out.println(true ^ true);//T
-              System.out.println(true ^ false);//F
+          &（按位与）       :只要有一个FALSE，结果就FALSE
+          (或)|           :只要有一个TRUE，结果就是TRUE
+          ^（按位异或）     :两边相同为FALSE，不同为TRUE
+          !(非)           :取反 !TRUE = FALSE  !FALSE = TRUE
+          &&(短路与.逻辑与) :一边是FALSE，另一边不运行;左边是false，则右边默认不执行--短路
+          (短路或逻辑或)||  :一边true，另一边不运行;如果左边是true，则右边就默认不执行--短路
 
-              System.out.println(!true);
-              System.out.println("--------------------------------");
-              int i = 3;
-              int j = 4;
-              System.out.println(3>4 && ++j>2);
-              System.out.println(i);
-              System.out.println(j);
+          如果双或在双与的前面，双或发生短路，就会把双与一起短路掉
+          &&和||优先级一样
+          开发中常用双与和双或
+     #+BEGIN_SRC java
+        public class Operator_5{
+            public static void main(String[] args){
+                System.out.println(false & true);
+                System.out.println(false | true);
+                System.out.println(false ^ false);//F
+                System.out.println(true ^ true);//T
+                System.out.println(true ^ false);//F
 
-              System.out.println(3==3 || ++j>2);
-              System.out.println(i);
-              System.out.println(j);
+                System.out.println(!true);
+                System.out.println("--------------------------------");
+                int i = 3;
+                int j = 4;
+                System.out.println(3>4 && ++j>2);
+                System.out.println(i);
+                System.out.println(j);
 
-              //&&在||前面时，不能短路||
-              int i1=3,j1=5;
-              boolean b1 = false && i1++ > 1 || j1++>3;
-              System.out.println(i1);
-              System.out.println(j1);
-              System.out.println(b1);
+                System.out.println(3==3 || ++j>2);
+                System.out.println(i);
+                System.out.println(j);
 
-              //||在&&前面时，短路&&
-              int i2=3,j2=5;
-              boolean b2 = true || i2++ > 6 && j2++ > 10;
-              System.out.println(i2);
-              System.out.println(j2);
-              System.out.println(b2);
+                //&&在||前面时，不能短路||
+                int i1=3,j1=5;
+                boolean b1 = false && i1++ > 1 || j1++>3;
+                System.out.println(i1);
+                System.out.println(j1);
+                System.out.println(b1);
 
-          }
-      }
+                //||在&&前面时，短路&&
+                int i2=3,j2=5;
+                boolean b2 = true || i2++ > 6 && j2++ > 10;
+                System.out.println(i2);
+                System.out.println(j2);
+                System.out.println(b2);
+
+            }
+        }
     #+END_SRC
+     #+BEGIN_SRC java
+        class Luoji{
+            public static void main(String[] args){
+                int a=3;
+                int b=4;
+                int c=5;
+                int a1=3;
+                int b1=4;
+                int c1=5;
+                int a2=3;
+                int b2=4;
+                int c2=5;
+                int a3=3;
+                int b3=4;
+                int c3=5;
+                int a4=3;
+                int b4=4;
+                int c4=5;
+                System.out.println((a++==b)&&(c++>b));
+                //4,4,5
+                System.out.println(a+","+b+","+c);
+
+                System.out.println((c1++>b1)&&(a1++==b1));
+                //4,4,6
+                System.out.println(a1+","+b1+","+c1);
+
+                System.out.prtinln(true&&(a2++!=b)||(c2++>b2));
+                //4,4,5
+                System.out.println(a2+","+b2+","+c2);
+
+                System.out.prtinln(false&&(a3++!=b)||(c3++>b3));
+                //3,4,6
+                System.out.println(a3+","+b3+","+c3);
+
+                //如果双或在双与的前面，双或发生了短路就会把双与一起短路掉
+                // System.out.println(true||(a4++!=b4)&&(c4++>b4));
+                //3,4,5
+                // System.out.println(a4+","+b4+","+c4);
+                System.out.println(true&&c4++>b4);
+                System.out.println(c4);
+            }
+        }
+    #+END_SRC
+     [[~/Documents/BigData/Java/Luoji.java]]
 *** 位运算符
-    & | ^ <<左移 >>右移 >>>无符号右移 ~取反
+    要把数据转成二进制的补码形式才能进行位运算
+    移位的位数要对32进行取余，取余的结果才是真正移动的位数--规定
+    - &（按位与） |（按位或） ^（按位异或）
+      任意一个数&1==1就是奇数
+      任意一个正数&任意一个数=正数
+      任意一个负数|任意一个数=负数
+      任意一个数|0=原来的值
 
-    5 & 8=0
-      5 00000101
-    & 8 00001000
-    --------------
-      0 00000000
+      4 & 5=4 遇0则0
+        4 00000000 00000000 00000000 00000100
+      & 5 00000000 00000000 00000000 00000101
+      --------------
+        4 00000000 00000000 00000000 00000100
 
-    5 | 8 = 13
-      5 00000101
-    | 8 00001000
-   ---------------
-     13 00001101
+      4 | 5=5 遇1则1
+        4 00000000 00000000 00000000 00000100
+      | 5 00000000 00000000 00000000 00000101
+      --------------
+        5 00000000 00000000 00000000 00000101
 
-    5 ^ 8 =13
-      5 00000101
-    ^ 8 00001000
-    --------------
-    13  00001101
+      4 ^ 5 =1 相同则0 不同则1
+        4 00000000 00000000 00000000 00000100
+      ^ 5 00000000 00000000 00000000 00000101
+      --------------
+        1 00000000 00000000 00000000 00000001
+      ~ 4=
+        4 00000000 00000000 00000000 00000100 补
+          11111111 11111111 11111111 11111010 反
+       -5 10000000 00000000 00000000 00000101 原
+      [[~/Documents/BigData/Java/Wei.java]]
+    - <<左移 >>右移 >>>无符号右移 ~取反
+      >>
+      如果是正数右移几位就在最左边补几个0
+      如果是负数右移几位就在最左边补几个1
+      如果是正数右移几位，操作数/2^移动位数
+      <<
+      无论正负数左移几位最右边就补几个0
+      左移几位，操作数*2^移动位数
+      >>>
+      一定是正数
+      无论正负数右移几位，就在最左边补几个0
+      4 >> 2
+      4 [00]00000000 00000000 00000000 000001(00)
+      1     00000000 00000000 00000000 00000001
 
-    ~ 3 = -4
-        00000011
-      -------------
-        11111100  --- 补码
-        11111011  --- 反码
-        10000100  --- 原码
+      4 << 2
+      4  (00)00000000 00000000 00000000 00000100[00]
+      16     00000000 00000000 00000000 00010000
 
+      4 >>> 2
+      4 [00]00000000 00000000 00000000 000001(00)
+      1     00000000 00000000 00000000 00000001
+      #+BEGIN_SRC java
+          class WeiDemo4{
+              public static void main(String[] args){
+                  // >>
+                  System.out.println(4>>2);//4/2^2
+                  // <<
+                  System.out.println(4<<2);//4*2^2
+                  //>>>
+                  System.out.println(4>>>2);
+              }
+          }
+      #+END_SRC
+      [[~/Documents/BigData/Java/WeiDemo4.java]]
+**** 按位异或的扩展
+     如果一个数按位异或上另一个数两次，结果就是本身
+     [[~/Documents/BigData/Java/WeiDemo.java]]
 **** 交换值的方式：
      - 方式一：异或法
        int x = 5
@@ -912,27 +1002,69 @@
        x = x ^ y;
        y = x ^ y; ---> y = x ^ y ^ y; ---> y = x; ---> y = 5;
        x = x ^ y; ---> x = x ^ y ^ x; ---> x = y; ---> x = 7;
+       #+BEGIN_SRC java
+           class WeiDemo2{
+               public static void main(String[] args){
+                   int a=4;
+                   int b=5;
+                   //按位异或
+                   a=a^b;
+                   b=a^b;
+                   a=a^b;
+                   System.out.println("a:"+a+",b:"+b);
 
-      - 方式二：加减法
+              }
+          }
+
+       #+END_SRC
+       [[~/Documents/BigData/Java/WeiDemo2.java]]
+     - 方式二：加减法
         int x = 3;
         int y = 7;
 
         x = x + y;
         y = x - y; ---> y = x + y - y; ---> y = x; ---> y = 3;
         x = x - y; ---> x = x + y - x; ---> x = y; ---> x = 7;
+        #+BEGIN_SRC java
+            class WeiDemo3{
+                public static void main(String[] args){
+                    int a=4;
+                    int b=5;
+                    a=a+b;
+                    b=a-b;
+                    a=a-b;
+                    System.out.println("a:"+a+",b:"+b);
+                }
+            }
 
-      - 方式三：第三方变量
+        #+END_SRC
+        [[~/Documents/BigData/Java/WeiDemo3.java]]
+     - 方式三：第三方变量
         int x = 3;
         int y = 7;
         int z = x;
         x = y;
         y = z;
-      - 扩展：考虑三种方式的优劣性
+        #+BEGIN_SRC java
+            class WeiDemo1{
+                public static void main(String[] args){
+                    int a=4;
+                    int b=5;
+                    //中间变量
+                    int temp=a;
+                    a=b;
+                    b=temp;
+                    System.out.println("a:"+a+",b:"+b);
+                }
+            }
+        #+END_SRC
+        [[~/Documents/BigData/Java/WeiDemo1.java]]
+     - 扩展：考虑三种方式的优劣性
         异或法的效率最高，但使用频率最低            ---只能适用于整数值的交换
         加减法的效率低于异或法，但是高于第三方变量法  ---理论上适用于数值型（小数运算不准确）
         第三方变量法的效率最低，但是使用频率是最高的  ---适用于所有的类型
 *** 运算符的优先级
-
+    () ~ ++ -- ! * / % + - << >> >>> 关系 逻辑 & | ^ 三元 赋值
     #+BEGIN_SRC java
       public class OperatorDemo121{
           public static void main(String[] args){
@@ -975,227 +1107,111 @@
     #+END_SRC
 
 *** 三元运算符
-    #+BEGIN_SRC java
-      /*
-        三元运算符
-        公式：
-            逻辑值 ? 结果1:结果2;
-            逻辑值是true，三元运算符的结果，就是1
-            逻辑值是false，三元运算符的结果，就是2
-       ,*/
+    三元运算符
+        格式：
+            表达式（布尔值） ? 表达式值1:表达式值2;
+        执行流程：
+            先去计算表达式的值，如果这个值是true，就把表达式值1返回，
+                            如果这个值是false，就把表达式值2进行返回
+    - 求两个整数的最大值
+      #+BEGIN_SRC java
       public class Operator_6{
           public static void main(String[] args){
-              System.out.println(3>2 ? 99:88);
-
-              String s = 0==0?"哈哈":"呵呵";
-              System.out.println(s);
-          }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      public class Operator122{
-          public static void main(String[] args){
-              int i = 3,j = 8,k = 5;
-              //三元表达式的嵌套
-              int max = i > j ? (i > k ? i : k) : (j > k ? j : k);
+              //求两个整数的最大值
+              int a=5;
+              int b=9;
+              //有另一个变量来接收值得时候，要保证这个变量的类型和两个表达式值的类型一致
               System.out.println(max);
-
-              /*int max = i > j ? i : j;
-              max = max > k ? max : k;
-              System.out.println(max);
-              ,*/
+              //连个表达式值的类型可以不一样但是有个前提，没有另一个变量来接收返回值
+              System.out.println(a>b?'a':true);
           }
       }
     #+END_SRC
+    - 求三个整数的最大值
+      #+BEGIN_SRC java
+          public class Operator122{
+              public static void main(String[] args){
+                  int i = 3,j = 8,k = 5;
+                  //三元表达式的嵌套
+                  int max = i > j ? (i > k ? i : k) : (j > k ? j : k);
+                  System.out.println(max);
 
-    #+BEGIN_SRC java
-      public class Operator133{
-          public static void main(String[] args){
-              //定义一个整数变量，判断这个整数是一个寄数还是一个偶数
-              int num = 15;
-              String str = (num % 2) == 1 ? "奇数" : "偶数";
-              //String str = (num & 1) == 1 ? "奇数" : "偶数";
-              System.out.println(str);
+                  /*int max = i > j ? i : j;
+                  max = max > k ? max : k;
+                  System.out.println(max);
+                  ,*/
+              }
           }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-
-      public class Operator134{
-          public static void main(String[] args){
-              /*定义一个变量表示分数:
-                分数 >= 90 ----- A
-                分数 >= 80 ----- B
-                分数 >= 70 ----- C
-                分数 >= 60 ----- D
-                分数 <  60 ----- E
-               ,*/
-              double score = 79.5;
-              char level = score >= 90 ? 'A' :
-                  (score >= 80 ? 'B' :
-                   (score >= 70 ? 'C' :
-                    (score >= 60 ? 'D' : 'E')));
-              System.out.println(level);
+      #+END_SRC
+    - 判断一个数是奇数还是偶数
+      #+BEGIN_SRC java
+          public class Operator133{
+              public static void main(String[] args){
+                  //定义一个整数变量，判断这个整数是一个寄数还是一个偶数
+                  int num = 15;
+                  String str = (num % 2) == 1 ? "奇数" : "偶数";
+                  //String str = (num & 1) == 1 ? "奇数" : "偶数";
+                  System.out.println(str);
+              }
           }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      public class Operator135{
-          public static void main(String[] args){
-              /*定义一个变量表示年份，判断这一年是平年还是闰年：
-                逢百年整除400,不是百年整除4
-                2000 --- 闰年
-                2100 --- 平年
-                2012 --- 闰年
-               ,*/
-              int year = 2900;
-              String str = year % 100 == 0 ?
-                  (year % 400 == 0 ? "闰年" : "平年") :
-                  (year % 4 == 0 ? "闰年" : "平年");
-              System.out.println(str);
+      #+END_SRC
+    - 分数评级
+      #+BEGIN_SRC java
+          public class Operator134{
+              public static void main(String[] args){
+                  /*定义一个变量表示分数:
+                    分数 >= 90 ----- A
+                    分数 >= 80 ----- B
+                    分数 >= 70 ----- C
+                    分数 >= 60 ----- D
+                    分数 <  60 ----- E
+                  ,*/
+                  double score = 79.5;
+                  char level = score >= 90 ? 'A' :
+                      (score >= 80 ? 'B' :
+                      (score >= 70 ? 'C' :
+                      (score >= 60 ? 'D' : 'E')));
+                      System.out.println(level);
+              }
           }
-      }
-    #+END_SRC
-
-** 扩展
-   - 整数n,快速的判断n是否是2^x的形式
-     n & (n - 1) == 0
-
-   - 补码在什么情况下会发生进位现象？ ---2^n
-     0         0
-     1         1
-     2         10
-     3         11
-     4         100
-     5         101
-     6         110
-     7         111
-     8         1000
-     9         1001
-     10        1010
-     11        1011
-     ...
-     15        1111
-     16        10000
-** 商场库存清单案例
-   #+BEGIN_SRC java
-     /*
-       实现商品库存清单案例
-          步骤：
-           1.实现表头，是固定数据，直接写输出语句
-           2.表格中间，商品数据，采用变量形式 定义变量，找对数据类型
-             输出所有变量
-           3.表格尾巴，有一部分数据是固定的
-             另一部分，商品数据进行数学计算，运算符
-      ,*/
-     public class shop{
-         public static void main(String[] args){
-             //输出表头固定数据
-             System.out.println("--------------------商城库存清单--------------------");
-             System.out.println("品牌型号         尺寸           价格           库存数");
-             //定义表格中的数据变量
-             //品牌型号，String，尺寸，价格 double   库存int
-             String macBrand = "MacBookAir";
-             double macSize = 13.3;
-             double macPrice = 6988.88;
-             int macCount = 5;
-
-             String thinkBrand = "ThinkPad450";
-             double thinkSize = 14;
-             double thinkPrice = 5999.99;
-             int thinkCount = 10;
-             System.out.println(macBrand +"   "+ macSize +"   "+ macPrice +"   "+ macCount);
-             System.out.println(thinkBrand +"   "+thinkSize +"   "+thinkPrice +"   "+thinkCount);
-
-             //计算库存总数，所有商品数量库存求和
-             int totalCount = macCount + thinkCount;
-             //计算所有商品库存的总金额，每个商品价格*库存数
-             double totalMoney = macCount*macPrice + thinkPrice*thinkCount;
-             //输出表格的底部
-             System.out.println("总库存数："+totalCount);
-             System.out.println("商品库存总金额："+totalMoney);
-         }
-     }
-   #+END_SRC
-** 运算符总结
-*** 数据类型转换
-    - 数据类型范围从小到大排序(byte < char < short < int < long < float < double),布尔类型boolean不能参与类型转换
-    - 自动类型转换，范围小的数据类型向范围大的数据类型转换时使用
-    - 强制类型转换，范围大的数据类型向范围小的数据类型转换时使用
-*** 算术运算符
-    - 用来完成算术运算（加减乘除等）
-    - ++ -- 运算符使用
-      + ++ --前置（如++a），当参与运算时，变量a的值先自增1，然后用自增后的新值在参与运算
-      + ++ --后置（如a++），当参与运算时，变量a先使用原有值参与运算符，变量a的值在自增1
-*** 赋值运算符
-    - 用来完成数据的赋值（如int a = 100；）
-    - += -= *= /=这样的赋值运算符包含了一个强制类型转换的操作，会将左右两边运算后的结果，强制类型转换后赋值个左边
-      int n =10;
-      byte by = 20;
-      by +=n;//运算完毕后，by的值为byte类型30，相当于代码by=（byte）（by+n）;
-    - 比较运算符
-      + 用来比较数据的大小（如3>4），比较运算符也称为条件运算符
-      + 标胶后的结果为布尔类型boolean的值
-      + “==”两个等号代表比较是否相等，“=”一个等号代表赋值
-*** 逻辑运算符
-    - 逻辑与&和逻辑短路与&&：代表着并且的意思，左右两边都要条件成立，结果采薇true
-    - 逻辑或|和逻辑短路或||：代表着或者的意思，左边两边有一个条件成立，结果就为true
-    - 逻辑非！：代表着相反的意思，原先是false，结果就为true；原先是true，结果就为false
-    - 逻辑异或^：左右两边条件结果相同，结果就为false，左右两边条件结果不同，结果就为true
-    - ||在&&前边的时候能够把&&给短路掉，但是&&在||前边，不能短路掉||
-*** 位运算符
-    位运算针对的整数的补码进行计算
-    - &
-      将数据转化为补码，进行按位与，将1看做true，将0看做false进行计算，将计算结果转化为十进制显示
-          正数 & 其他的数字 = 正数   （正数最高位是0，负数最高位是1）
-          偶数 & 其他数     = 偶数   （）
-          0    & 任何数    = 0
-          1    & 奇数      = 1
-          1    & 偶数      = 0
-    - |
-      将数据转化为补码，进行按位或，将计算结果转化为十进制显示
-          负数  | 任何数 = 负数
-          奇数  | 任何数 = 奇数
-          0    |  任何数 = 原数
-    - ^
-      将数据转化为补码，进行按位异或，将结果转化为十进制显示
-          b ^ b = 0
-          0 ^ a = a
-          a ^ b ^ b = a
-    - <<
-      将数据转化为补码之后，按照指定的位数移动，移出的数据舍弃，低位次空出补0.最后将结果转化为十进制显示
-      在一定范围内，左移就是乘以2的几次方
-    - >>
-      将数据转化为补码之后按照指定的位数向右移动，移出的数据舍弃，高位次空出，正数补0.负数补1，最后将结果转化为十进制显示
-      正数右移，越移越小，最小到0
-      负数右移，越移越大，最大到-1
-      在一定范围内，右移就是除以2的几次方
-      注意：-1 >> n = -1
-    - >>>
-      将数据转化为补码之后，按照指定的位数向右移动，移出的数据舍弃，高位次补0.最后将结果转化为十进制显示
-      正数右移和无符号右移没有区别
-      负数无符号右移完成之后会变成一个正数
-    在进行移位运算，并不是直接移动对应的位数，而是将要移动的位数对32进行取余，移动的是余数对应的位数
-    28 << 35 = 28 << (35%32) = 28 << 3 = 224
-    100 << 32 = 100
-    - ~
-      将数据转化为补码之后，无论高低位一律是1变0，0变1，计算出来的结果是补码，转化为原码之后再变为十进制来显示
-      快速算法规律 ~i = -i - 1
-*** 运算符的优先级
-    ~ ++ -- ! * / % + - (<< >> >>>) 关系 逻辑 & | ^ 三元 赋值
-    - 一元运算符：
-      ~ ++ -- !
-    - 二元运算符：
-       * / % + - (<< >> >>>) 关系 逻辑 & | ^
-
-    一元运算 > 二元运算 > 三元运算 > 赋值
-*** 三元运算符
-    - 根据判断条件运算结果，执行不同的表达式值；条件为true，执行表达式1，否则，执行表达式2
+      #+END_SRC
+    - 平年还是闰年
+      #+BEGIN_SRC java
+          public class Operator135{
+              public static void main(String[] args){
+                  /*定义一个变量表示年份，判断这一年是平年还是闰年：
+                  逢百年整除400,不是百年整除4
+                  2000 --- 闰年
+                  2100 --- 平年
+                  2012 --- 闰年
+                  ,*/
+                  int year = 2900;
+                  String str = year % 100 == 0 ?
+                      (year % 400 == 0 ? "闰年" : "平年") :
+                      (year % 4 == 0 ? "闰年" : "平年");
+                      System.out.println(str);
+              }
+          }
+      #+END_SRC
 ** 引用数据类型
 *** Scanner类
+    步骤：
+        1.导包
+        2.找到Scanner
+        3.获取数据
+    #+BEGIN_SRC java
+       import java.util.Scanner;
+       class JavaDemo{
+           public static void main(String[] args){
+               Scanner sc=new Scanner(System.in);
+               int num =sc.netxInt();
+               //System.out.println(num);
+               String s=sc.next();
+               System.out.println(s);
+           }
+       }
+   #+END_SRC
+   [[ ~/Documents/BigData/Java/JavaDemo.java]]
 **** 引用数据类型的使用
      数据类型 变量名 = new 数据类型（）;
      调用该类型实例的功能：
@@ -1272,31 +1288,33 @@
        }
      #+END_SRC
 ** 流程控制语句
+   顺序结构
+       java中绝大部分的代码都是从上往下，由左往右依次执行执行
+   选择结构
+       if语句
+       switch语句
+   循环结构
 *** 选择结构if
 **** if语句：
+     编写格式：if（判断条件）{语句体;}
+     执行流程：先去计算判断条件的值，如果是true就去执行语句体，
+             如果是false就跳过不执行，执行其他语句
+     [[~/Documents/BigData/Java/20.png]]
      #+BEGIN_SRC java
-      /*
-        if语句：
-          编写格式：
-          if（逻辑值）{
-          if语句的执行体
-          }
-          条件：结果必须是布尔类型 1==1 true||false
-          执行体：当if中的条件为true的时候，执行大括号中的执行体
-                 if条件是false的时候，什么也不做
-       ,*/
-      public class IfDemo{
-          public static void main(String[] args){
-              int i = 5;
-              if(i ==5){
-                  System.out.println("if中的条件是true");
-                  i++;
-              }
-              System.out.println(i);
-          }
-      }
-     #+END_SRC
+         import java.util.Scanner;
+         class IfDemo{
+             public static void main(String[] args){
+                 Scanner sc=new Scanner(System.in);
+                 int money=sc.nextInt();
+                 if(money > 999){
+                     System.out.println("OKOKOK~~~");
+                 }
+                 System.out.println("Over");
+             }
+         }
 
+     #+END_SRC
+     输入三个整数，打印这三个整数中的最大值
      #+BEGIN_SRC java
        import java.util.Scanner;
        public class IfElseExer{
@@ -1336,180 +1354,85 @@
            }
        }
      #+END_SRC
-
-     #+BEGIN_SRC java
-       import java.util.Scanner;
-       public class IfElseExer2{
-           public static void main(String[] args){
-               Scanner sc = new Scanner(System.in);
-               double score = s.nextDouble();
-
-               if(score > 100 || score < 0){
-                   System.out.println("分数不合法");
-               }else{
-                   if(score >= 90){
-                       System.out.println("A");
-                   }else{
-                       if(score >= 80){
-                           System.out.println("B");
-                       }else{
-                           if(score >= 70){
-                               System.out.println("C");
-                           }else{
-                               if(score >= 60){
-                                   System.out.println("E");
-                               }
-                           }
-                       }
-                   }
-               }
-           }
-       }
-     #+END_SRC
-
 **** if...else语句
-     #+BEGIN_SRC java
-       /*
-         if...else语句格式
-             编写格式：
-             if(条件){
-             if的执行体
-             }else{
-             else的执行体
-             }
-             当if中的条件为true，执行if的执行体
-             当if中的条件为false，执行else的执行体
-
-        ,*/
-       public class IfElseDemo{
-           public static void main(String[] args){
-               int i =17;
-               //判断变量是否为奇偶数，除以2，看余数是0还是1
-               if(i%2==0){
-                   System.out.println("是偶数");
+     编写格式：if(判断条件){语句体1;}else{语句体2;}
+     执行流程：先去计算判断条件，如果是true就执行语句体1，如果false就执行语句体2
+     如果if语句格式2返回的是一个值就和三目等效
+     [[~/Documents/BigData/Java/21.png]]
+     - 求两个整数的最大值
+       #+BEGIN_SRC java
+         int a=10;
+         int b=1;
+         if(a>b){
+             System.out.println(a);
+         }else{
+             System.out.println(b);
+         }
+        #+END_SRC
+       [[~/Documents/BigData/Java/IfDeo2.java]]
+     - 求三个整数的最大值
+       #+BEGIN_SRC java
+           int a=10;
+           int b=1;
+           int c=8;
+           if(a>b){
+               if(a>c){
+                   System.out.println(a);
                }else{
-                   System.out.println("是奇数");
+                   System.out.println(c);
+               }
+           }else{
+               if(b>c){
+                   System.out.println(b);
+               }else{
+                   System.out.println(c);
                }
            }
-       }
-     #+END_SRC
+       #+END_SRC
+       [[~/Documents/BigData/Java/IfDemo3.java]]
 **** if...else if...else语句
-     #+BEGIN_SRC java
-       /*
-         if...else if...else 语句
-         适合在程序中，实现多条件的判断
-         编写格式：
-            if(条件){
-                执行体
-            }else if(条件){
-                执行体
-            }else if(条件){
-                执行体
+     适合在程序中，实现多条件的判断
+     编写格式：
+            if(判断条件1){
+                语句体1;
+            }else if(判断条件2){
+                语句体2;
+            }else if(判断条件3){
+                语句体3;
             }
             ...
             else{
-                执行体
+                语句体n+1;
             }
-            当if中的条件是true，执行if执行体
-            if中的条件是false，执行else执行体
-            一个语句中，包含多个if，只要有1个if的条件是true，其他的代码，不在执行
-            注意：如果if或者是else中的代码块只有一句话，那么{}可以省略不写
-        ,*/
-       import java.util.Scanner;
-       public class IfElseIfDemo{
-           public static void main(String[] args){
-               Scanner sc = new Scanner(System.in);
-               double score = sc.nextDouble();
-
-               if(score > 100 || score < 0){
-                   System.out.println("分数非法");
-               }else if(score >= 90){
-                   System.out.println("A");
-               }else if(score >= 80){
-                   System.out.println("B");
-               }else if(score >= 70){
-                   System.out.println("C");
-               }else if(score >= 60){
-                   System.out.println("D");
-               }else{
-                   System.out.println("E");
-               }
-
-               /*
-               if(score > 100 || score < 0)
-                   System.out.println("分数非法");
-               else if(score >= 90)
-                   System.out.println("A");
-               else if(score >= 80)
-                   System.out.println("B");
-               else if(score >= 70)
-                   System.out.println("C");
-               else if(score >= 60)
-                   System.out.println("D");
-               else
-                   System.out.println("E");
-               */
-           }
-       }
-     #+END_SRC
-
+     执行流程：先计算判断条件1，如果是true，就执行语句体1，如果是false就去计算判断条件2，如果是true就执行语句体2
+             如果是false就去计算判断条件3，如果是true就执行语句体3，如果全部false就执行语句体n+1
+     [[~/Documents/BigData/Java/22.png]]
      #+BEGIN_SRC java
-       import java.util.Scanner;
-       public class IFDemo1{
-           public static void main(String[] args){
-               Scanner sc = new Scanner(System.in);
-               int month = sc.nextInt();
-
-               if(month >12 || month <1)
-                   System.out.println("Illegal month");
-               else if(month >= 3 && month <= 5)
-                   System.out.println("Spring");
-               else if(month >= 6 && month <= 8)
-                   System.out.println("Summer");
-               else if(month >= 9 && month <= 11)
-                   System.out.println("Autumn");
-               else
-                   System.out.println("Winter");
-           }
-       }
+         //根据输入的星星数展示用户的段位
+         Scanner sc=new Scanner(System.in);
+         int xing=sc.nextInt();
+         if(xing>=0&&xing<10){
+             System.out.println("C");
+         }else if(xing>=10&&xing<20){
+             System.out.println("B");
+         }else if(xing>=20&&xing<30){
+             System.out.println("A");
+         }else if(xing>=30&&xing<90){
+             System.out.println("S");
+         }else if(xing>=90&&xing<100){
+             System.out.println("S+");
+         }else{
+             System.out.println("XXXX");
+         }
      #+END_SRC
-
-     #+BEGIN_SRC java
-       import java.util.scanner;
-       public class IfDemo2{
-           public static void main(String[] args){
-               Scanner sc = new Scanner(System.in);
-               int day = sc.nextInt();
-
-               if(day < 1 || day > 7)
-                   System.out.println("输入有误");
-               else if(day == 1)
-                   System.out.println("Monday");
-               else if(day == 2)
-                   System.out.println("Tuesday");
-               else if(day == 3)
-                   System.out.println("Wednesday");
-               else if(day == 4)
-                   System.out.println("Thursday");
-               else if(day == 5)
-                   System.out.println("Friday");
-               else
-                   System.out.println("Saturday");
-           }
-       }
-     #+END_SRC
-
 **** 选择结构if语句与三元运算转换
-     #+BEGIN_SRC java
-       /*
-         if语句和三元运算符的替换
-         要求：已经知道两个数，计算最大值
-         两个整数，比较大小
+     要求：已经知道两个数，计算最大值
+     两个整数，比较大小
 
-         使用if还是三元
-           判断条件多，使用if语句
-           三元，必须有结果，if可以没有结果
-        ,*/
+     使用if还是三元
+     判断条件多，使用if语句
+     三元，必须有结果，if可以没有结果
+     #+BEGIN_SRC java
        public class IfElseDemo{
            public static void main(String[] args){
                int i = 15;
@@ -1528,20 +1451,17 @@
        }
      #+END_SRC
 *** 循环语句while
-    #+BEGIN_SRC java
-
-      /*
-        循环语句：可以让一部分代码，反复执行
-        while循环：
-            编写格式：
-
+    循环语句：可以让一部分代码，反复执行
+    while循环：
+        编写格式：
             while(条件){
                 循环体
             }
             条件：当条件是true，就执行循环体，当执行完循环体后，程序再次执行while中的
             条件，如果条件是true，继续执行循环体，直到条件是false的时候，循环就结束
             需要定义变量来控制循环的次数
-       ,*/
+    #+BEGIN_SRC java
+
       import java.util.Scanner;
       public class WhileDemo{
           public static void main(String[] args){
@@ -2236,6 +2156,140 @@
           }
       }
     #+END_SRC
+
+** 扩展
+   - 整数n,快速的判断n是否是2^x的形式
+     n & (n - 1) == 0
+   - 补码在什么情况下会发生进位现象？ ---2^n
+     0         0
+     1         1
+     2         10
+     3         11
+     4         100
+     5         101
+     6         110
+     7         111
+     8         1000
+     9         1001
+     10        1010
+     11        1011
+     ...
+     15        1111
+     16        10000
+** 商场库存清单案例
+   #+BEGIN_SRC java
+     /*
+       实现商品库存清单案例
+          步骤：
+           1.实现表头，是固定数据，直接写输出语句
+           2.表格中间，商品数据，采用变量形式 定义变量，找对数据类型
+             输出所有变量
+           3.表格尾巴，有一部分数据是固定的
+             另一部分，商品数据进行数学计算，运算符
+      ,*/
+     public class shop{
+         public static void main(String[] args){
+             //输出表头固定数据
+             System.out.println("--------------------商城库存清单--------------------");
+             System.out.println("品牌型号         尺寸           价格           库存数");
+             //定义表格中的数据变量
+             //品牌型号，String，尺寸，价格 double   库存int
+             String macBrand = "MacBookAir";
+             double macSize = 13.3;
+             double macPrice = 6988.88;
+             int macCount = 5;
+
+             String thinkBrand = "ThinkPad450";
+             double thinkSize = 14;
+             double thinkPrice = 5999.99;
+             int thinkCount = 10;
+             System.out.println(macBrand +"   "+ macSize +"   "+ macPrice +"   "+ macCount);
+             System.out.println(thinkBrand +"   "+thinkSize +"   "+thinkPrice +"   "+thinkCount);
+
+             //计算库存总数，所有商品数量库存求和
+             int totalCount = macCount + thinkCount;
+             //计算所有商品库存的总金额，每个商品价格*库存数
+             double totalMoney = macCount*macPrice + thinkPrice*thinkCount;
+             //输出表格的底部
+             System.out.println("总库存数："+totalCount);
+             System.out.println("商品库存总金额："+totalMoney);
+         }
+     }
+   #+END_SRC
+** 运算符总结
+*** 数据类型转换
+    - 数据类型范围从小到大排序(byte < char < short < int < long < float < double),布尔类型boolean不能参与类型转换
+    - 自动类型转换，范围小的数据类型向范围大的数据类型转换时使用
+    - 强制类型转换，范围大的数据类型向范围小的数据类型转换时使用
+*** 算术运算符
+    - 用来完成算术运算（加减乘除等）
+    - ++ -- 运算符使用
+      + ++ --前置（如++a），当参与运算时，变量a的值先自增1，然后用自增后的新值在参与运算
+      + ++ --后置（如a++），当参与运算时，变量a先使用原有值参与运算符，变量a的值在自增1
+*** 赋值运算符
+    - 用来完成数据的赋值（如int a = 100；）
+    - += -= *= /=这样的赋值运算符包含了一个强制类型转换的操作，会将左右两边运算后的结果，强制类型转换后赋值个左边
+      int n =10;
+      byte by = 20;
+      by +=n;//运算完毕后，by的值为byte类型30，相当于代码by=（byte）（by+n）;
+    - 比较运算符
+      + 用来比较数据的大小（如3>4），比较运算符也称为条件运算符
+      + 标胶后的结果为布尔类型boolean的值
+      + “==”两个等号代表比较是否相等，“=”一个等号代表赋值
+*** 逻辑运算符
+    - 逻辑与&和逻辑短路与&&：代表着并且的意思，左右两边都要条件成立，结果采薇true
+    - 逻辑或|和逻辑短路或||：代表着或者的意思，左边两边有一个条件成立，结果就为true
+    - 逻辑非！：代表着相反的意思，原先是false，结果就为true；原先是true，结果就为false
+    - 逻辑异或^：左右两边条件结果相同，结果就为false，左右两边条件结果不同，结果就为true
+    - ||在&&前边的时候能够把&&给短路掉，但是&&在||前边，不能短路掉||
+*** 位运算符
+    位运算针对的整数的补码进行计算
+    - &
+      将数据转化为补码，进行按位与，将1看做true，将0看做false进行计算，将计算结果转化为十进制显示
+          正数 & 其他的数字 = 正数   （正数最高位是0，负数最高位是1）
+          偶数 & 其他数     = 偶数   （）
+          0    & 任何数    = 0
+          1    & 奇数      = 1
+          1    & 偶数      = 0
+    - |
+      将数据转化为补码，进行按位或，将计算结果转化为十进制显示
+          负数  | 任何数 = 负数
+          奇数  | 任何数 = 奇数
+          0    |  任何数 = 原数
+    - ^
+      将数据转化为补码，进行按位异或，将结果转化为十进制显示
+          b ^ b = 0
+          0 ^ a = a
+          a ^ b ^ b = a
+    - <<
+      将数据转化为补码之后，按照指定的位数移动，移出的数据舍弃，低位次空出补0.最后将结果转化为十进制显示
+      在一定范围内，左移就是乘以2的几次方
+    - >>
+      将数据转化为补码之后按照指定的位数向右移动，移出的数据舍弃，高位次空出，正数补0.负数补1，最后将结果转化为十进制显示
+      正数右移，越移越小，最小到0
+      负数右移，越移越大，最大到-1
+      在一定范围内，右移就是除以2的几次方
+      注意：-1 >> n = -1
+    - >>>
+      将数据转化为补码之后，按照指定的位数向右移动，移出的数据舍弃，高位次补0.最后将结果转化为十进制显示
+      正数右移和无符号右移没有区别
+      负数无符号右移完成之后会变成一个正数
+    在进行移位运算，并不是直接移动对应的位数，而是将要移动的位数对32进行取余，移动的是余数对应的位数
+    28 << 35 = 28 << (35%32) = 28 << 3 = 224
+    100 << 32 = 100
+    - ~
+      将数据转化为补码之后，无论高低位一律是1变0，0变1，计算出来的结果是补码，转化为原码之后再变为十进制来显示
+      快速算法规律 ~i = -i - 1
+*** 运算符的优先级
+    ~ ++ -- ! * / % + - (<< >> >>>) 关系 逻辑 & | ^ 三元 赋值
+    - 一元运算符：
+      ~ ++ -- !
+    - 二元运算符：
+       * / % + - (<< >> >>>) 关系 逻辑 & | ^
+
+    一元运算 > 二元运算 > 三元运算 > 赋值
+*** 三元运算符
+    - 根据判断条件运算结果，执行不同的表达式值；条件为true，执行表达式1，否则，执行表达式2
 
 ** ASCII编码表
     American Standard Code for Information Interchange,美国标准信息交换代码
@@ -3865,7 +3919,6 @@
           }
       }
     #+END_SRC
-
 
 
 ** 随机点名器案例
