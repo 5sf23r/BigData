@@ -1288,12 +1288,15 @@
        }
      #+END_SRC
 ** 流程控制语句
-   顺序结构
-       java中绝大部分的代码都是从上往下，由左往右依次执行执行
-   选择结构
-       if语句
-       switch语句
-   循环结构
+   - 顺序结构
+     java中绝大部分的代码都是从上往下，由左往右依次执行执行
+   - 选择结构
+     if语句
+     switch语句
+   - 循环结构
+     for
+     while
+     do...while
 *** 选择结构if
 **** if语句：
      编写格式：if（判断条件）{语句体;}
@@ -1566,27 +1569,42 @@
    #+END_SRC
 
 *** for循环
+    格式：
+        for(初始值;判断值;控制条件){
+            循环体;
+        }
+    执行流程:
+        1.先计算初始值
+        2.初始值与判断条件进行判断
+        3.如果是true，就执行循环体，执行完循环体之后执行控制条件
+        4.执行完的值与判断条件进行判断
+        如果是true就执行3，4操作；知道false出现就结束循环
+        [[~/Documents/BigData/Java/24.png]]
+
     #+BEGIN_SRC java
-      /*
-        for循环
-            编写格式：
-            for(初始化变量;条件;增量){
-            循环体
+        class ForDemo{
+            public static void main(String[] args){
+                for(int i=0;i<10;i++){
+                    System.out.println("helloworld");
+                }
             }
-            初始化变量：定义变量，作用，控制循环的次数
-            条件：当条件是true，执行循环体，条件是false，结束循环
-            增量：变量自增情况
-       ,*/
-      public class ForDemo{
+        }
+    #+END_SRC
+
+    - 输出0~10
+    #+BEGIN_SRC java
+      class ForDemo1{
           public static void main(String[] args){
-              //for循环，输出0~10
+              //print 0~10
               for(int i = 0;i<11;i++){
                   System.out.println(i);
               }
           }
       }
     #+END_SRC
+    [[~/Documents/BigData/Java/ForDemo1.java]]
 
+    - 输出1+4的结果
     #+BEGIN_SRC java
       /*
         利用for循环，计算1+4的结果
@@ -1595,7 +1613,7 @@
         1+2的和+3
         1+2+3的和+4
        ,*/
-      public class ForDemo_1{
+      class ForDemo_1{
           public static void main(String[] args){
               //定义变量，记录求和后的数据
               int sum = 0;
@@ -1608,51 +1626,60 @@
           }
       }
     #+END_SRC
+    [[~/Documents/BigData/Java/ForDemo.java]]
 
+    - 计算1~n中的所有奇数和
     #+BEGIN_SRC java
-      public class ForDemoa{
+      import java.util.Scanner;
+      class ForDemoa{
           public static void main(String[] args){
-              /*
-                计算1~n中的所有的奇数和
-               ,*/
-
-              int n = 100;
-              int sum = 0;
-              for(int i = 1; i <= n; i += 2){
-                  sum += i;
+              Scanner sc=new Scanner(System.in);
+              int n=sc.nextInt();
+              for(int i=1;i<=n;i++){
+                  sum +=i;
               }
               System.out.println(sum);
           }
       }
     #+END_SRC
+    [[~/Documents/BigData/Java/ForDemo3.java]]
 
+    - 计算1~n中的所有偶数和
     #+BEGIN_SRC java
-      /*
-        利用循环，输出字母包含大写小写，52个
-        输出A~Z，a~z
-        利用编码表实现，字母和数字的对应关系
-        A~Z 65~90
-        a~z 97~122
+        import java.util.Scanner;
+        class ForDemo4{
+            public static void main(String[] args){
+                Scanner sc=new Scanner(System.in);
+                int sum=0;
+                int n=sc.nextInt();
+                for(int i=0;i<=n;i+=2){
+                    sum+=i;
+                }
+                System.out.println(sum);
+            }
+        }
+    #+END_SRC
+    [[~/Documents/BigData/Java/ForDemo4.java]]
 
-        步骤：
-            1.定义变量，保存小写a,大写A
-            2.循环26次，输出定义好的变量
-                每次循环，变量++
-       ,*/
-      public class LoopTest_2{
-          public static void main(String[] args){
-              char xiaoXie = 'a';
-              char daXie = 'A';
-              for(int i =0;i<26;i++){
-                  //输出保存字母的变量
-                  System.out.println(xiaoXie+"..."+daXie);
-                  daXie++;
-                  xiaoXie++;
-              }
-          }
-      }
+    - 求5的阶乘
+    #+BEGIN_SRC java
+        class ForDemo5{
+            public static void main(String[] args){
+
+            }
+        }
     #+END_SRC
 
+    - 在控制台输出所有水仙花数
+    - 统计水仙花数有多少个
+    - 请在控制台输出满足如下条件的五位数
+      个位数等于万位
+      十位数等于千位
+      个位数+十位数+千位数+万位数=百位数
+    - 请统计1~10000之间同时满足如下条件的数据有多少个
+      对3整除余2
+      对5整数余3
+      对7整除余2
 **** 99乘法表
     利用嵌套for循环，实现99乘法表
     - 实现步骤：
@@ -1868,68 +1895,61 @@
       }
     #+END_SRC
 *** 选择结构switch
-    #+BEGIN_SRC java
-      /*
-        选择语句 switch语句
-        编写格式
-            switch(表达式){
-            case 常量1：
-                要执行的语句;
-                break;
-            case 常量2：
-                要执行的语句;
-                break;
-            case 常量3：
-                要执行的语句;
-                break;
+    格式：
+        switch(表达式){
+            case 值1:
+            语句体1;
+            case 值2:
+            语句体1;
+            case 值3:
+            语句体 3;
+               ...
             default:
-                要执行的语句;
-                break;
+            语句体n+1;
+            break;
+        }
+    执行流程：计算表达式的值，拿到这个值和每个case后面的值依次进行比较，如果有case的值满足比较条件，就执行对应的语句体。如果都不满足就默认执行语句体n+1，语句结束。
+    [[~/Documents/BigData/Java/23.png]]
+    switch语句中的表达式的数据类型，是有要求的
+    jdk1.0 ~ 1.4 数据类型接受 byte short int char
+    jdk1.5       数据类型接受byte short int char enum（枚举）
+    jdk1.7       数据类型接受byte short int char enum（枚举），string
+    #+BEGIN_SRC java
+        import java.util.Scanner;
+        class SwitchDemo{
+            public static void main(String[] args){
+                Scanner sc = new Scanner(System.in);
+                int week = sc.nextInt();
+                //switch语句
+                switch(week){
+                case 1:
+                    System.out.println("星期一");
+                    break;
+                case 2:
+                    System.out.println("星期二");
+                    break;
+                case 3:
+                    System.out.println("星期三");
+                    break;
+                case 4:
+                    System.out.println("星期四");
+                    break;
+                case 5:
+                    System.out.println("星期五");
+                    break;
+                case 6:
+                    System.out.println("星期六");
+                    break;
+                case 7:
+                    System.out.println("星期日");
+                    break;
+                default:
+                    System.out.println("星期不存在");
+                    break;
+                }
             }
-            执行流程：表达式，和case后面的常量进行比较
-            和哪个case后的常量相同，就执行哪个case后面的程序，遇到break，就全结束
-
-            switch语句中的表达式的数据类型，是有要求的
-            jdk1.0 ~ 1.4 数据类型接受 byte short int char
-            jdk1.5       数据类型接受byte short int char enum（枚举）
-            jdk1.7       数据类型接受byte short int char enum（枚举），string
-       ,*/
-      import java.util.Scanner;
-      public class SwitchDemo{
-          public static void main(String[] args){
-              Scanner sc = new Scanner(System.in);
-              int week = sc.nextInt();
-              //switch语句
-              switch(week){
-              case 1:
-                  System.out.println("星期一");
-                  break;
-              case 2:
-                  System.out.println("星期二");
-                  break;
-              case 3:
-                  System.out.println("星期三");
-                  break;
-              case 4:
-                  System.out.println("星期四");
-                  break;
-              case 5:
-                  System.out.println("星期五");
-                  break;
-              case 6:
-                  System.out.println("星期六");
-                  break;
-              case 7:
-                  System.out.println("星期日");
-                  break;
-              default:
-                  System.out.println("星期不存在");
-                  break;
-              }
-          }
-      }
+        }
     #+END_SRC
-
     #+BEGIN_SRC java
       import java.util.Scanner;
       public class SwitchDemo1{
@@ -3919,7 +3939,6 @@
           }
       }
     #+END_SRC
-
 
 ** 随机点名器案例
 
