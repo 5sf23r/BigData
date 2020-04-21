@@ -1592,94 +1592,183 @@
     #+END_SRC
 
     - 输出0~10
-    #+BEGIN_SRC java
-      class ForDemo1{
-          public static void main(String[] args){
-              //print 0~10
-              for(int i = 0;i<11;i++){
-                  System.out.println(i);
-              }
-          }
-      }
-    #+END_SRC
-    [[~/Documents/BigData/Java/ForDemo1.java]]
+      #+BEGIN_SRC java
+          class ForDemo1{
+              public static void main(String[] args){
+                  //print 0~10
+                  for(int i = 0;i<11;i++){
+                      System.out.println(i);
+                }
+            }
+        }
+      #+END_SRC
+      [[~/Documents/BigData/Java/ForDemo1.java]]
 
     - 输出1+4的结果
-    #+BEGIN_SRC java
-      /*
-        利用for循环，计算1+4的结果
-        1+2+3+4=10
+      #+BEGIN_SRC java
+        /*
+          利用for循环，计算1+4的结果
+          1+2+3+4=10
 
-        1+2的和+3
-        1+2+3的和+4
-       ,*/
-      class ForDemo_1{
-          public static void main(String[] args){
-              //定义变量，记录求和后的数据
-              int sum = 0;
-              //利用循环，将变量从1变化到4
-              for(int i=1;i<=4;i++){
-                  //对变量进行求和
-                  sum = sum + i;
-              }
-              System.out.println(sum);
-          }
-      }
-    #+END_SRC
-    [[~/Documents/BigData/Java/ForDemo.java]]
-
-    - 计算1~n中的所有奇数和
-    #+BEGIN_SRC java
-      import java.util.Scanner;
-      class ForDemoa{
-          public static void main(String[] args){
-              Scanner sc=new Scanner(System.in);
-              int n=sc.nextInt();
-              for(int i=1;i<=n;i++){
-                  sum +=i;
-              }
-              System.out.println(sum);
-          }
-      }
-    #+END_SRC
-    [[~/Documents/BigData/Java/ForDemo3.java]]
-
-    - 计算1~n中的所有偶数和
-    #+BEGIN_SRC java
-        import java.util.Scanner;
-        class ForDemo4{
+          1+2的和+3
+          1+2+3的和+4
+         ,*/
+        class ForDemo_1{
             public static void main(String[] args){
-                Scanner sc=new Scanner(System.in);
-                int sum=0;
-                int n=sc.nextInt();
-                for(int i=0;i<=n;i+=2){
-                    sum+=i;
+                //定义变量，记录求和后的数据
+                int sum = 0;
+                //利用循环，将变量从1变化到4
+                for(int i=1;i<=4;i++){
+                    //对变量进行求和
+                    sum = sum + i;
                 }
                 System.out.println(sum);
             }
         }
-    #+END_SRC
-    [[~/Documents/BigData/Java/ForDemo4.java]]
+      #+END_SRC
+      [[~/Documents/BigData/Java/ForDemo.java]]
+
+    - 计算1~n中的所有奇数和
+      #+BEGIN_SRC java
+          import java.util.Scanner;
+          class ForDemoa{
+              public static void main(String[] args){
+                  Scanner sc=new Scanner(System.in);
+                  int n=sc.nextInt();
+                  /*for(int i=1;i<=n;i+=2){
+                      sum=sum+i;
+                  }
+                  System.out.println(sum);*/
+                  for(int i=1;i<=n;i++){
+                      if((i&1)!=0){
+                          sum+=i;
+                      }
+                  }
+                  System.out.println(sum);
+              }
+          }
+      #+END_SRC
+      [[~/Documents/BigData/Java/ForDemo3.java]]
+
+    - 计算1~n中的所有偶数和
+      #+BEGIN_SRC java
+          import java.util.Scanner;
+          class ForDemo4{
+              public static void main(String[] args){
+                  Scanner sc=new Scanner(System.in);
+                  int sum=0;
+                  int n=sc.nextInt();
+                  /*for(int i=0;i<=n;i+=2){
+                      sum+=i;
+                  }
+                  System.out.println(sum);*/
+                  for(int i=1;i<=n;i++){
+                      if((i&1)==0){
+                          sum+=i;
+                      }
+                  }
+                  System.out.println(sum);
+              }
+          }
+      #+END_SRC
+      [[~/Documents/BigData/Java/ForDemo4.java]]
 
     - 求5的阶乘
-    #+BEGIN_SRC java
-        class ForDemo5{
-            public static void main(String[] args){
-
-            }
-        }
-    #+END_SRC
+      #+BEGIN_SRC java
+          class ForDemo5{
+              public static void main(String[] args){
+                  int sum=1;
+                  for(int i=1;i<=5;i++){
+                      sum=sum*i;
+                  }
+                  System.out.println(sum);
+              }
+          }
+      #+END_SRC
+      [[~/Documents/BigData/Java/ForDemo5.java]]
 
     - 在控制台输出所有水仙花数
+      三位数 abc=a^3+b^3+c^3
+      123 %10=3
+      123 /10%10=2
+      123 /100=1
+      #+BEGIN_SRC java
+          class ForDemo6{
+              public static void main(String[] args){
+                  for(int i=100;i<1000;i++){
+                      int ge=i%10;
+                      int shi=i/10%10;
+                      int bai=i/100;
+                      if(i==ge*ge*ge+shi*shi*shi+bai*bai*bai){
+                          System.out.println(i);
+                      }
+                  }
+              }
+          }
+      #+END_SRC
+      [[~/Documents/BigData/Java/ForDemo6.java]]
+
     - 统计水仙花数有多少个
+      #+BEGIN_SRC java
+          class ForDemo7{
+              public static void main(String[] args){
+                  int count=0;
+                  for(int i=100;i<1000;i++){
+                      int ge=i%10;
+                      int shi=i/10%10;
+                      int bai=i/100;
+                      if(i==ge*ge*ge+shi*shi*shi+bai*bai*bai){
+                          count++;
+                      }
+                  }
+                  System.out.println(count);
+              }
+          }
+
+      #+END_SRC
+      [[~/Documents/BigData/Java/ForDemo7.java]]
+
     - 请在控制台输出满足如下条件的五位数
       个位数等于万位
       十位数等于千位
       个位数+十位数+千位数+万位数=百位数
-    - 请统计1~10000之间同时满足如下条件的数据有多少个
+      #+BEGIN_SRC java
+          class ForDemo8{
+              public static void main(String[] args){
+                  for(int i=10000;i<100000;i++){
+                      int ge=i%10;
+                      int shi=i/10%10;
+                      int bai=i/100%10;
+                      int qian=i/1000%10;
+                      int wan=i/10000;
+                      if((ge==wan)&&(shi==qian)&&(ge+shi+qian+wan==bai)){
+                          System.out.println(i);
+                      }
+                  }
+              }
+          }
+
+      #+END_SRC
+      [[~/Documents/BigData/Java/ForDemo8.java]]
+
+    - 请统计1~1000之间同时满足如下条件的数据有多少个
       对3整除余2
       对5整数余3
       对7整除余2
+      #+BEGIN_SRC java
+          class ForDemo9{
+              public static void main(String[] args){
+                  int count=0;
+                  for(int i=1;i<1000;i++){
+                      if((i%3==2)&&(i%5==3)&&(i%7==2)){
+                          count++;
+                      }
+                  }
+                  System.out.println(count);
+              }
+          }
+      #+END_SRC
+      [[~/Documents/BigData/Java/ForDemo9.java]]
 **** 99乘法表
     利用嵌套for循环，实现99乘法表
     - 实现步骤：
