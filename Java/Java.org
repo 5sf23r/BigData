@@ -1454,15 +1454,29 @@
        }
      #+END_SRC
 *** 循环语句while
+    循环次数不确定的时候，首选while
     循环语句：可以让一部分代码，反复执行
-    while循环：
-        编写格式：
-            while(条件){
-                循环体
+    编写格式：
+        while(判断条件){
+            循环体;
+            控制条件;
             }
             条件：当条件是true，就执行循环体，当执行完循环体后，程序再次执行while中的
             条件，如果条件是true，继续执行循环体，直到条件是false的时候，循环就结束
             需要定义变量来控制循环的次数
+    #+BEGIN_SRC java
+    class WhileDemo{
+        public static void main(String[] args){
+            int i=1;
+            while(i<=10){
+                System.out.println(i);
+                i++;
+            }
+        }
+    }
+    #+END_SRC
+    [[~/Documents/BigData/Java/WhileDemo.java]]
+
     #+BEGIN_SRC java
 
       import java.util.Scanner;
@@ -1486,7 +1500,7 @@
 
     #+BEGIN_SRC java
      import java.util.Scanner;
-     public class LooTest{
+     class LooTest{
          public static void main(String[] args){
              /*输入一个整数n,求1~n中的所有的奇数的和*/
              Scanner sc = new Scanner(System.in);
@@ -1504,7 +1518,7 @@
 
     #+BEGIN_SRC java
      import java.util.Scanner;
-     public class WhileDemo3{
+     class WhileDemo3{
          public static void main(String[] args){
              /*输入一个整数n，打印1~n中所有能被3整除而不被5整除的数字*/
 
@@ -1523,7 +1537,7 @@
 
     #+BEGIN_SRC java
      import java.util.Scanner;
-     public class SwitchDemo4{
+     class SwitchDemo4{
          public static void main(String[] args){
              /*输入一个整数n，输出这个n是一个几位数*/
 
@@ -1545,7 +1559,7 @@
 
     #+BEGIN_SRC java
      import java.util.Scanner;
-     public class WhileDemo4{
+     class WhileDemo4{
          public static void main(String[] args){
              /*输入一个整数n，打印这个整数n的所有的因数
              （这个数能够整除n，这个数就是n的因数）
