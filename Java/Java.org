@@ -1297,8 +1297,10 @@
      for
      while
      do...while
-*** 选择结构if
-**** if语句：
+*** 选择结构
+**** if
+***** 选择结构if
+***** if语句：
      编写格式：if（判断条件）{语句体;}
      执行流程：先去计算判断条件的值，如果是true就去执行语句体，
              如果是false就跳过不执行，执行其他语句
@@ -1357,7 +1359,7 @@
            }
        }
      #+END_SRC
-**** if...else语句
+***** if...else语句
      编写格式：if(判断条件){语句体1;}else{语句体2;}
      执行流程：先去计算判断条件，如果是true就执行语句体1，如果false就执行语句体2
      如果if语句格式2返回的是一个值就和三目等效
@@ -1393,7 +1395,7 @@
            }
        #+END_SRC
        [[~/Documents/BigData/Java/IfDemo3.java]]
-**** if...else if...else语句
+***** if...else if...else语句
      适合在程序中，实现多条件的判断
      编写格式：
             if(判断条件1){
@@ -1428,7 +1430,7 @@
              System.out.println("XXXX");
          }
      #+END_SRC
-**** 选择结构if语句与三元运算转换
+***** 选择结构if语句与三元运算转换
      要求：已经知道两个数，计算最大值
      两个整数，比较大小
 
@@ -1453,136 +1455,181 @@
            }
        }
      #+END_SRC
-*** 循环语句while
-    循环次数不确定的时候，首选while
-    循环语句：可以让一部分代码，反复执行
-    编写格式：
-        while(判断条件){
-            循环体;
-            控制条件;
-            }
-            条件：当条件是true，就执行循环体，当执行完循环体后，程序再次执行while中的
-            条件，如果条件是true，继续执行循环体，直到条件是false的时候，循环就结束
-            需要定义变量来控制循环的次数
+**** switch
+***** 选择结构switch
+
+    格式：
+        switch(表达式){
+            case 值1:
+            语句体1;
+            case 值2:
+            语句体1;
+            case 值3:
+            语句体 3;
+               ...
+            default:
+            语句体n+1;
+            break;
+        }
+    执行流程：计算表达式的值，拿到这个值和每个case后面的值依次进行比较，如果有case的值满足比较条件，就执行对应的语句体。如果都不满足就默认执行语句体n+1，语句结束。
+    [[~/Documents/BigData/Java/23.png]]
+    switch语句中的表达式的数据类型，是有要求的
+    jdk1.0 ~ 1.4 数据类型接受 byte short int char
+    jdk1.5       数据类型接受byte short int char enum（枚举）
+    jdk1.7       数据类型接受byte short int char enum（枚举），string
     #+BEGIN_SRC java
-    class WhileDemo{
-        public static void main(String[] args){
-            int i=1;
-            while(i<=10){
-                System.out.println(i);
-                i++;
+        import java.util.Scanner;
+        class SwitchDemo{
+            public static void main(String[] args){
+                Scanner sc = new Scanner(System.in);
+                int week = sc.nextInt();
+                //switch语句
+                switch(week){
+                case 1:
+                    System.out.println("星期一");
+                    break;
+                case 2:
+                    System.out.println("星期二");
+                    break;
+                case 3:
+                    System.out.println("星期三");
+                    break;
+                case 4:
+                    System.out.println("星期四");
+                    break;
+                case 5:
+                    System.out.println("星期五");
+                    break;
+                case 6:
+                    System.out.println("星期六");
+                    break;
+                case 7:
+                    System.out.println("星期日");
+                    break;
+                default:
+                    System.out.println("星期不存在");
+                    break;
+                }
             }
         }
-    }
     #+END_SRC
-    [[~/Documents/BigData/Java/WhileDemo.java]]
+    #+BEGIN_SRC java
+      import java.util.Scanner;
+      public class SwitchDemo1{
+          public static void main(String[] args){
+              //输入一个符号(+ - * /)，然后输入两个数字，根据给定的符号来计算两个数字的结果
+              Scanner sc = new Scanner(System.in);
+              String sym = sc.nextLine();
+              double a = sc.nextDouble();
+              double b = sc.nextDouble();
+              switch(sym){
+              case "+":
+                  System.out.println("a + b =",a + b);
+                  break;
+              case "-":
+                  System.out.println("a - b =",a - b);
+                  break;
+              case "*":
+                  System.out.println("a * b =",a * b);
+                  break;
+              case "/":
+                  System.out.println("a / b =",a / b);
+                  break;
+              default :
+                  System.out.println("Illegal symbol");
+              }
+          }
+      }
+    #+END_SRC
+
+***** case穿透
 
     #+BEGIN_SRC java
+      /*
+        switch特性：case穿透性
+        案例：星期1 ~ 5输出，工作日，星期6 ~ 7  输出休息日
+        case 1 case2...case5 输出结果相同
 
-      import java.util.Scanner;
-      public class WhileDemo{
+        case后面的常量和switch中数据相同，没有break，一直向下穿透
+        case后面没有break，程序就会一直向下穿透
+       ,*/
+      public class SwitchDemo_1{
           public static void main(String[] args){
-              /*输入五个数字，获取最大值*/
-              Scanner sc = new Scanner(System.in);
-              int max = sc.nextInt();
-              int count = 1;
-              while(count < 5){
-                  int num = s.nextInt();
-                  if(max < num){
-                      max = num;
-                  }
-                  count ++;
+              int week=1;
+
+              switch(week){
+              case 1:
+              case 2:
+              case 3:
+              case 4:
+              case 5:
+                  System.out.println("工作日");
+                  break;
+
+              case 6:
+              case 7:
+                  System.out.println("休息日");
+                  break;
               }
-              System.out.println(max);
           }
       }
     #+END_SRC
 
     #+BEGIN_SRC java
-     import java.util.Scanner;
-     class LooTest{
-         public static void main(String[] args){
-             /*输入一个整数n,求1~n中的所有的奇数的和*/
-             Scanner sc = new Scanner(System.in);
-             int n = sc.nextInt();
-             int count = 1;
-             int sum = 0;
-             while(count <= n){
-                 sum += count;
-                 count += 2;
-             }
-             System.out.println(sum);
-         }
-     }
-   #+END_SRC
+      import java.util.Scanner;
+      public class SwitchDemo2{
+          public static void main(String[] args){
+              /*输入三个数字分别表示年月日，计算这一天是这一年的第几天*/
 
-    #+BEGIN_SRC java
-     import java.util.Scanner;
-     class WhileDemo3{
-         public static void main(String[] args){
-             /*输入一个整数n，打印1~n中所有能被3整除而不被5整除的数字*/
+              Scanner sc = new Scanner(System.in);
+              int year = sc.nextInt();
+              int month = sc.nextInt();
+              int day = sc.nextInt();
 
-             Scanner sc = new Scanner(System.in);
-             int n = sc.nextInt();
-             int count = 3;
-             while(count <= n){
-                 if(count % 5 != 0){
-                     System.out.println(count);
-                 }
-                 count += 3;
-             }
-         }
-     }
-   #+END_SRC
+              //定义变量记录总的天数
+              int sum = 0;
 
-    #+BEGIN_SRC java
-     import java.util.Scanner;
-     class SwitchDemo4{
-         public static void main(String[] args){
-             /*输入一个整数n，输出这个n是一个几位数*/
+              switch(month){
+              //经历了一个完整的11月
+              case 12:
+                  sum += 30;
+              //经历了一个完整的10月
+              case 11:
+                  sum += 31;
+              case 10:
+                  sum += 30;
+              case 9:
+                  sum += 31;
+              case 8:
+                  sum += 31;
+              case 7:
+                  sum += 30;
+              case 6:
+                  sum += 31;
+              case 5:
+                  sum += 30;
+              case 4:
+                  sum += 31;
+              case 3:
+                  if(year % 400 == 0 || year % 100 != 0 && year % 4 == 0){
+                      sum += 29;
+                  }else{
+                      sum += 28;
+                  }
+              case 2:
+                  sum += 31;
+              case 1:
+                  sum += 0;
+              }
+              sum += day;
+              System.out.println(sum);
+          }
+      }
+    #+END_SRC
 
-
-             Scanner sc = new Scanner(System.in);
-             int n = sc.nextInt();
-             //定义一个变量来记录位数
-             int count = 0;
-             while(n != 0){
-                 count ++;
-
-                 //减少一位
-                 n /= 10;
-             }
-             System.out.println(count);
-         }
-     }
-   #+END_SRC
-
-    #+BEGIN_SRC java
-     import java.util.Scanner;
-     class WhileDemo4{
-         public static void main(String[] args){
-             /*输入一个整数n，打印这个整数n的所有的因数
-             （这个数能够整除n，这个数就是n的因数）
-               思路：
-                   先获取1~n中的所有的数
-                   再判断这个是数能否整除n
-              ,*/
-
-             Scanner sc = new Scanner(System.in);
-             int n = sc.nextInt();
-
-             int count = 1;
-             while(n >= count){
-                 if(n % count == 0){
-                     System.out.println(n);
-                 }
-                 count ++;
-             }
-         }
-     }
-   #+END_SRC
-
-*** for循环
+*** 循环结构
+**** for
+***** for循环
     格式：
         for(初始值;判断值;控制条件){
             循环体;
@@ -1783,7 +1830,7 @@
           }
       #+END_SRC
       [[~/Documents/BigData/Java/ForDemo9.java]]
-**** 99乘法表
+***** 99乘法表
     利用嵌套for循环，实现99乘法表
     - 实现步骤：
          1. 定义外循环控制行数
@@ -1820,34 +1867,205 @@
       }
       #+END_SRC
 
-*** 增强for循环
+***** 增强for循环
     - 格式：
       for(数据类型变量名 : 被遍历的集合或者数组){执行语句}
     - 区别
       必须有被遍历的目标（如集合或数组）
       不能获取下标
-*** do...while循环
+**** while
+***** 循环语句while
+    循环次数不确定的时候，首选while
+    循环语句：可以让一部分代码，反复执行
+    编写格式：
+        while(判断条件){
+            循环体;
+            控制条件;
+            }
+            条件：当条件是true，就执行循环体，当执行完循环体后，程序再次执行while中的
+            条件，如果条件是true，继续执行循环体，直到条件是false的时候，循环就结束
+            需要定义变量来控制循环的次数
     #+BEGIN_SRC java
-      /*
-        do...while循环
-            编写格式：
+    class WhileDemo{
+        public static void main(String[] args){
+            int i=1;
+            while(i<=10){
+                System.out.println(i);
+                i++;
+            }
+        }
+    }
+    #+END_SRC
+    [[~/Documents/BigData/Java/WhileDemo.java]]
 
-            do{
-            循环体
-            }while(条件);
-            特点：无论条件是否满足，循环体都会执行一次
-       ,*/
-      public class DoWhileDemo{
+    #+BEGIN_SRC java
+
+      import java.util.Scanner;
+      public class WhileDemo{
           public static void main(String[] args){
-              int i = 0;
-              do{
-                  System.out.println(i);
-                  i++;
-              }while(i<5);
+              /*输入五个数字，获取最大值*/
+              Scanner sc = new Scanner(System.in);
+              int max = sc.nextInt();
+              int count = 1;
+              while(count < 5){
+                  int num = s.nextInt();
+                  if(max < num){
+                      max = num;
+                  }
+                  count ++;
+              }
+              System.out.println(max);
           }
       }
     #+END_SRC
-*** 嵌套循环
+
+    #+BEGIN_SRC java
+     import java.util.Scanner;
+     class LooTest{
+         public static void main(String[] args){
+             /*输入一个整数n,求1~n中的所有的奇数的和*/
+             Scanner sc = new Scanner(System.in);
+             int n = sc.nextInt();
+             int count = 1;
+             int sum = 0;
+             while(count <= n){
+                 sum += count;
+                 count += 2;
+             }
+             System.out.println(sum);
+         }
+     }
+   #+END_SRC
+
+    #+BEGIN_SRC java
+     import java.util.Scanner;
+     class WhileDemo3{
+         public static void main(String[] args){
+             /*输入一个整数n，打印1~n中所有能被3整除而不被5整除的数字*/
+
+             Scanner sc = new Scanner(System.in);
+             int n = sc.nextInt();
+             int count = 3;
+             while(count <= n){
+                 if(count % 5 != 0){
+                     System.out.println(count);
+                 }
+                 count += 3;
+             }
+         }
+     }
+   #+END_SRC
+
+    #+BEGIN_SRC java
+     import java.util.Scanner;
+     class SwitchDemo4{
+         public static void main(String[] args){
+             /*输入一个整数n，输出这个n是一个几位数*/
+
+
+             Scanner sc = new Scanner(System.in);
+             int n = sc.nextInt();
+             //定义一个变量来记录位数
+             int count = 0;
+             while(n != 0){
+                 count ++;
+
+                 //减少一位
+                 n /= 10;
+             }
+             System.out.println(count);
+         }
+     }
+   #+END_SRC
+
+    #+BEGIN_SRC java
+     import java.util.Scanner;
+     class WhileDemo4{
+         public static void main(String[] args){
+             /*输入一个整数n，打印这个整数n的所有的因数
+             （这个数能够整除n，这个数就是n的因数）
+               思路：
+                   先获取1~n中的所有的数
+                   再判断这个是数能否整除n
+              ,*/
+
+             Scanner sc = new Scanner(System.in);
+             int n = sc.nextInt();
+
+             int count = 1;
+             while(n >= count){
+                 if(n % count == 0){
+                     System.out.println(n);
+                 }
+                 count ++;
+             }
+         }
+     }
+   #+END_SRC
+
+***** do...while循环
+    格式：
+        do{循环体;}while(判断条件);
+    一般格式：
+        初始值;
+        do{循环体;控制条件;}while(判断条件);
+        1.先计算初始值
+        2.直接执行循环体以及控制条件
+        3.执行完控制条件后的值和判断条件进行判断，
+          true的话重复操作2、3，知道false就结束循环
+    #+BEGIN_SRC java
+      /*
+
+       ,*/
+      public class DoWhileDemo{
+          public static void main(String[] args){
+              int i = 1;
+              do{
+                  System.out.println(i);
+                  i++;
+              }while(i<=10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    );
+          }
+      }
+    #+END_SRC
+***** 实现一个猜数字的小游戏
+
+    #+BEGIN_SRC java
+      /*
+        实现猜数字的小游戏
+            随机数一个数字，让用户猜
+            结果三种情况：
+                中了，大了，小了
+            随机数：Random
+            键盘输入：Scanner
+            猜的数字，和随机数进行比较：if判断
+            直到猜中为止，反复去猜，循环while
+       ,*/
+      import java.util.Random;
+      import java.util.Scanner;
+      public class GuestNum{
+          public static void main(String[] args){
+              System.out.println("游戏开始");
+              System.out.println("输入1~100的数字");
+              Random ran = new Random();
+              int ranNum = ran.nextInt(100)+1;
+
+              Scanner sc = new Scanner(System.in);
+
+              while(true){
+                  int num = sc.nextInt();
+                  if(num > ranNum){
+                      System.out.println("猜大了");
+                  }else if(num<ranNum){
+                      System.out.println("猜小了");
+                  }else
+                      System.out.println("中了");
+                  break;
+              }
+          }
+      }
+    #+END_SRC
+
+**** 嵌套循环
 
     #+BEGIN_SRC java
       /*
@@ -1907,7 +2125,31 @@
      }
    #+END_SRC
 
-*** 跳转语句
+**** 三种循环的区别于联系
+     联系：
+         1.三种循环可以等效转换
+         2.优先选择for循环，其次是while最后才是do...while
+         3.都会出现死循环
+     区别：
+         1.do...while最少会执行一次
+         2.for循环的初始值循环结束之后拿不到这个值
+*** 嵌套循环(嵌套循环/双层循环)
+    外层循环控制行数
+    内层循环控制的是列数
+    - 打印星星
+      #+BEGIN_SRC java
+          class  Java1{
+              public static void main(String[] args){
+                  for(int i=1;i<=5;i++){
+                      for(int j=0;i<=5;j++){
+                          System.out.print("*");
+                      }
+                      System.out.println();
+                  }
+              }
+          }
+      #+END_SRC
+*** 跳转语句break、continue
 **** break
     #+BEGIN_SRC java
       /*
@@ -1960,214 +2202,8 @@
            }
        }
      #+END_SRC
-*** 实现一个猜数字的小游戏
 
-    #+BEGIN_SRC java
-      /*
-        实现猜数字的小游戏
-            随机数一个数字，让用户猜
-            结果三种情况：
-                中了，大了，小了
-            随机数：Random
-            键盘输入：Scanner
-            猜的数字，和随机数进行比较：if判断
-            直到猜中为止，反复去猜，循环while
-       ,*/
-      import java.util.Random;
-      import java.util.Scanner;
-      public class GuestNum{
-          public static void main(String[] args){
-              System.out.println("游戏开始");
-              System.out.println("输入1~100的数字");
-              Random ran = new Random();
-              int ranNum = ran.nextInt(100)+1;
-
-              Scanner sc = new Scanner(System.in);
-
-              while(true){
-                  int num = sc.nextInt();
-                  if(num > ranNum){
-                      System.out.println("猜大了");
-                  }else if(num<ranNum){
-                      System.out.println("猜小了");
-                  }else
-                      System.out.println("中了");
-                  break;
-              }
-          }
-      }
-    #+END_SRC
-*** 选择结构switch
-    格式：
-        switch(表达式){
-            case 值1:
-            语句体1;
-            case 值2:
-            语句体1;
-            case 值3:
-            语句体 3;
-               ...
-            default:
-            语句体n+1;
-            break;
-        }
-    执行流程：计算表达式的值，拿到这个值和每个case后面的值依次进行比较，如果有case的值满足比较条件，就执行对应的语句体。如果都不满足就默认执行语句体n+1，语句结束。
-    [[~/Documents/BigData/Java/23.png]]
-    switch语句中的表达式的数据类型，是有要求的
-    jdk1.0 ~ 1.4 数据类型接受 byte short int char
-    jdk1.5       数据类型接受byte short int char enum（枚举）
-    jdk1.7       数据类型接受byte short int char enum（枚举），string
-    #+BEGIN_SRC java
-        import java.util.Scanner;
-        class SwitchDemo{
-            public static void main(String[] args){
-                Scanner sc = new Scanner(System.in);
-                int week = sc.nextInt();
-                //switch语句
-                switch(week){
-                case 1:
-                    System.out.println("星期一");
-                    break;
-                case 2:
-                    System.out.println("星期二");
-                    break;
-                case 3:
-                    System.out.println("星期三");
-                    break;
-                case 4:
-                    System.out.println("星期四");
-                    break;
-                case 5:
-                    System.out.println("星期五");
-                    break;
-                case 6:
-                    System.out.println("星期六");
-                    break;
-                case 7:
-                    System.out.println("星期日");
-                    break;
-                default:
-                    System.out.println("星期不存在");
-                    break;
-                }
-            }
-        }
-    #+END_SRC
-    #+BEGIN_SRC java
-      import java.util.Scanner;
-      public class SwitchDemo1{
-          public static void main(String[] args){
-              //输入一个符号(+ - * /)，然后输入两个数字，根据给定的符号来计算两个数字的结果
-              Scanner sc = new Scanner(System.in);
-              String sym = sc.nextLine();
-              double a = sc.nextDouble();
-              double b = sc.nextDouble();
-              switch(sym){
-              case "+":
-                  System.out.println("a + b =",a + b);
-                  break;
-              case "-":
-                  System.out.println("a - b =",a - b);
-                  break;
-              case "*":
-                  System.out.println("a * b =",a * b);
-                  break;
-              case "/":
-                  System.out.println("a / b =",a / b);
-                  break;
-              default :
-                  System.out.println("Illegal symbol");
-              }
-          }
-      }
-    #+END_SRC
-
-*** case穿透
-
-    #+BEGIN_SRC java
-      /*
-        switch特性：case穿透性
-        案例：星期1 ~ 5输出，工作日，星期6 ~ 7  输出休息日
-        case 1 case2...case5 输出结果相同
-
-        case后面的常量和switch中数据相同，没有break，一直向下穿透
-        case后面没有break，程序就会一直向下穿透
-       ,*/
-      public class SwitchDemo_1{
-          public static void main(String[] args){
-              int week=1;
-
-              switch(week){
-              case 1:
-              case 2:
-              case 3:
-              case 4:
-              case 5:
-                  System.out.println("工作日");
-                  break;
-
-              case 6:
-              case 7:
-                  System.out.println("休息日");
-                  break;
-              }
-          }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      import java.util.Scanner;
-      public class SwitchDemo2{
-          public static void main(String[] args){
-              /*输入三个数字分别表示年月日，计算这一天是这一年的第几天*/
-
-              Scanner sc = new Scanner(System.in);
-              int year = sc.nextInt();
-              int month = sc.nextInt();
-              int day = sc.nextInt();
-
-              //定义变量记录总的天数
-              int sum = 0;
-
-              switch(month){
-              //经历了一个完整的11月
-              case 12:
-                  sum += 30;
-              //经历了一个完整的10月
-              case 11:
-                  sum += 31;
-              case 10:
-                  sum += 30;
-              case 9:
-                  sum += 31;
-              case 8:
-                  sum += 31;
-              case 7:
-                  sum += 30;
-              case 6:
-                  sum += 31;
-              case 5:
-                  sum += 30;
-              case 4:
-                  sum += 31;
-              case 3:
-                  if(year % 400 == 0 || year % 100 != 0 && year % 4 == 0){
-                      sum += 29;
-                  }else{
-                      sum += 28;
-                  }
-              case 2:
-                  sum += 31;
-              case 1:
-                  sum += 0;
-              }
-              sum += day;
-              System.out.println(sum);
-          }
-      }
-    #+END_SRC
-
-*** break和continue
+**** break和continue
     - break
       可以在选择结构和循环结构中使用，表示终止当前的一层结构
     - continue
@@ -2280,6 +2316,43 @@
       }
     #+END_SRC
 
+*** 打印99乘法表
+    1*1=1
+    1*2=2 2*2=4
+    1*3=3 2*3=6 3*3=9
+
+    1
+    11
+    111
+    1111
+    11111
+
+    #+BEGIN_SRC java
+        class Java2{
+            public static void main(String[] args){
+                for(int i=1;i<=9;i++){
+                    for(int j=0;j<9;j++){
+                        System.out.print("1");
+                    }
+                    System.out.println();
+                }
+            }
+        }
+    #+END_SRC
+    #+BEGIN_SRC java
+        class Java3{
+            public static void main(String[] args){
+                for(int i=1;i<=9;i++){
+                    for(int j=1;j<=i;j++){
+                        // int m=i*j;
+                        // System.out.print(j+"*"+i+"="+m);
+                        System.out.print(j+"*"+i+"="+(i*j)+'\t');
+                    }
+                    System.out.println();
+                }
+            }
+        }
+    #+END_SRC
 ** 扩展
    - 整数n,快速的判断n是否是2^x的形式
      n & (n - 1) == 0
