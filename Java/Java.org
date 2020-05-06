@@ -1830,43 +1830,6 @@
           }
       #+END_SRC
       [[~/Documents/BigData/Java/ForDemo9.java]]
-***** 99乘法表
-    利用嵌套for循环，实现99乘法表
-    - 实现步骤：
-         1. 定义外循环控制行数
-         2. 内循环控制个数，个数，每次都在递增
-         3. 循环中输出，乘法表的格式  1*3=3
-      #+BEGIN_SRC java
-      public class LoopTest_3{
-          public static void main(String[] args){
-              for(int i = 1;i<=9;i++){
-                  for(int j=1;j<=i;j++){
-                      System.out.print(j+"*"+i+"="+i*j"\n");
-                  }
-                  System.out.println();
-              }
-          }
-      }
-      #+END_SRC
-
-      #+BEGIN_SRC java
-      import java.util.Scanner;
-      public class LoopTest_4{
-          public static void main(String[] args){
-              Scanner sc = new Scanner(System.in);
-              print99(sc.nextInt());
-          }
-          public static void print99(int n){
-              for(int i = 1;i<=n;i++){
-                  for(int j=1;j<=i;j++){
-                      System.out.print(j+"*"+i+"="+i*j"\n");
-                  }
-                  System.out.println();
-              }
-          }
-      }
-      #+END_SRC
-
 ***** 增强for循环
     - 格式：
       for(数据类型变量名 : 被遍历的集合或者数组){执行语句}
@@ -2149,173 +2112,6 @@
               }
           }
       #+END_SRC
-*** 跳转语句break、continue
-**** break
-    #+BEGIN_SRC java
-      /*
-        break 关键字
-        作用于循环中
-       ,*/
-      public class BreakDemo{
-          public static void main(String[] args){
-              int i=i;
-              while(true){
-                  if(i == 3){
-                      break;
-                  }else{
-                      System.out.println(i);
-                  }
-              }
-          }
-      }
-    #+END_SRC
-
-    - 标记，结束带标记的
-    #+BEGIN_SRC java
-      public class BreakDemo_1{
-          public static void main(String[] args){
-              a:for(int i = 0;i<2;i++){
-                  for(int j = 0;j<5;j++){
-                      System.out.println("j="+j);
-                      break a;
-                  }
-                  System.out.println("i="+i);
-              }
-          }
-      }
-    #+END_SRC
-**** continue
-
-     #+BEGIN_SRC java
-       /*
-         continue 关键字
-         作用：在循环中，种植本次循环，开始下一次循环
-        ,*/
-       public class ContinueDemo{
-           public static void main(String[] args){
-               for(int i=0;i<10;i++){
-                   if(i%2==0){
-                       continue;
-                   }
-                   System.out.println(i);
-               }
-           }
-       }
-     #+END_SRC
-
-**** break和continue
-    - break
-      可以在选择结构和循环结构中使用，表示终止当前的一层结构
-    - continue
-      只能用于循环结构中，表示跳过当前的一次循环继续下次循环
-
-
-    #+BEGIN_SRC java
-      import java.util.Scanner;
-      public class BreakContinueDemo{
-          public static void main(String[] args){
-              /*
-                输入一个数字，判断这个数字是否是一个质数
-                    ---除了1和本身以外没有别的因数
-
-                    100个数中最大的因数是100
-                    次大的是50
-                    过了50没有可能整除100
-
-                    n -> 2 ~ n/2
-               ,*/
-              Scanner sc = new Scanner(System.in);
-              int num = s.nextInt();
-
-              if(num <= 1){
-                  System.out.println(num + "不是质数");
-              }else{
-
-                  //默认这个数字是一个质数，用true表示
-                  //如果它不是质数用false表示
-                  boolean flag = true;
-                  for(int i = 2; i <= num /2; i++){
-
-                      //判断除了i和它本身是否出现了另外的因数
-                      //出现了的情况结束判断循环
-                      if(num % i == 0){
-                          flag = false;
-                          break;
-                      }
-                  }
-                  if(flag)
-                      System.out.println(num + "是质数");
-                  else
-                      System.out.println(num + "不是质数");
-              }
-          }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      public class BreakContinueDemo{
-          public static void main(String[] args){
-              /*
-                100文钱买100只鸡，3 -> 1只公鸡，2 -> 1只母鸡，1 -> 3只小鸡
-                100文钱买100只鸡有多少种买法？
-               ,*/
-
-              //公鸡最多买33只，但是不能卖33只
-              for(int i = 0; i < 33; i++){
-                  //母鸡最多买50只，也不能买50只
-                  for(int j = 0; j < 50; j++){
-                      ing k = 100 - i - j;
-                      //1文钱3只小鸡，所以小鸡的个数一定是3的倍数
-                      if(k % 3 == 0 && 3 * i + 2 * j + k /3 == 100){
-                          System.out.println("公鸡：" + i);
-                          System.out.println("母鸡：" + j);
-                          System.out.println("小鸡：" + k);
-                          System.out.println("================================");
-                      }
-                  }
-              }
-          }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      import java.util.Scanner;
-      public class BreakContinueDemo3{
-          public static void main(String[] args){
-              /*
-                输入一个数字n，然后将n分解质因数
-                120 = 2 * 2 * 2 * 3 * 5 --- 这个数字是n的因数而且本身是一个质数
-
-
-
-                100 2
-                50  2
-                25
-                把2除尽，碰到2的倍数就不会再整除 --- 2是质数
-                把3除尽，碰到3的倍数就不会再整除 --- 3是质数
-                4 --- 不能整除 --- 4不是质数
-                把5除尽，碰到5的倍数就不会整除  --- 5是质数
-                6 --- 不能整除 --- 6不是质数
-                7 --- 7是质数
-                只要在前面把小的数字除尽，那么碰到这个数字的倍数一定是不能整除，而这个小的数字是一个质数 --- 一个数字要么本身是一个质数，要么是另一个质数的倍数
-               ,*/
-
-              Scanner sc = new Scanner(System.in);
-              int n = s.nextInt();
-
-              for(int i = 2;n != 1;){
-                  if(n % i == 0){
-                      System.out.println(i);
-                      n /= i;
-                  }else{
-                      //如果取余不为0，那么说明这个数字已经被除尽，就需要除下一个数字
-                      i++;
-                  }
-              }
-          }
-      }
-    #+END_SRC
-
 *** 打印99乘法表
     1*1=1
     1*2=2 2*2=4
@@ -2353,228 +2149,100 @@
             }
         }
     #+END_SRC
-** 扩展
-   - 整数n,快速的判断n是否是2^x的形式
-     n & (n - 1) == 0
-   - 补码在什么情况下会发生进位现象？ ---2^n
-     0         0
-     1         1
-     2         10
-     3         11
-     4         100
-     5         101
-     6         110
-     7         111
-     8         1000
-     9         1001
-     10        1010
-     11        1011
-     ...
-     15        1111
-     16        10000
-** 商场库存清单案例
-   #+BEGIN_SRC java
-     /*
-       实现商品库存清单案例
-          步骤：
-           1.实现表头，是固定数据，直接写输出语句
-           2.表格中间，商品数据，采用变量形式 定义变量，找对数据类型
-             输出所有变量
-           3.表格尾巴，有一部分数据是固定的
-             另一部分，商品数据进行数学计算，运算符
-      ,*/
-     public class shop{
-         public static void main(String[] args){
-             //输出表头固定数据
-             System.out.println("--------------------商城库存清单--------------------");
-             System.out.println("品牌型号         尺寸           价格           库存数");
-             //定义表格中的数据变量
-             //品牌型号，String，尺寸，价格 double   库存int
-             String macBrand = "MacBookAir";
-             double macSize = 13.3;
-             double macPrice = 6988.88;
-             int macCount = 5;
-
-             String thinkBrand = "ThinkPad450";
-             double thinkSize = 14;
-             double thinkPrice = 5999.99;
-             int thinkCount = 10;
-             System.out.println(macBrand +"   "+ macSize +"   "+ macPrice +"   "+ macCount);
-             System.out.println(thinkBrand +"   "+thinkSize +"   "+thinkPrice +"   "+thinkCount);
-
-             //计算库存总数，所有商品数量库存求和
-             int totalCount = macCount + thinkCount;
-             //计算所有商品库存的总金额，每个商品价格*库存数
-             double totalMoney = macCount*macPrice + thinkPrice*thinkCount;
-             //输出表格的底部
-             System.out.println("总库存数："+totalCount);
-             System.out.println("商品库存总金额："+totalMoney);
-         }
-     }
-   #+END_SRC
-** 运算符总结
-*** 数据类型转换
-    - 数据类型范围从小到大排序(byte < char < short < int < long < float < double),布尔类型boolean不能参与类型转换
-    - 自动类型转换，范围小的数据类型向范围大的数据类型转换时使用
-    - 强制类型转换，范围大的数据类型向范围小的数据类型转换时使用
-*** 算术运算符
-    - 用来完成算术运算（加减乘除等）
-    - ++ -- 运算符使用
-      + ++ --前置（如++a），当参与运算时，变量a的值先自增1，然后用自增后的新值在参与运算
-      + ++ --后置（如a++），当参与运算时，变量a先使用原有值参与运算符，变量a的值在自增1
-*** 赋值运算符
-    - 用来完成数据的赋值（如int a = 100；）
-    - += -= *= /=这样的赋值运算符包含了一个强制类型转换的操作，会将左右两边运算后的结果，强制类型转换后赋值个左边
-      int n =10;
-      byte by = 20;
-      by +=n;//运算完毕后，by的值为byte类型30，相当于代码by=（byte）（by+n）;
-    - 比较运算符
-      + 用来比较数据的大小（如3>4），比较运算符也称为条件运算符
-      + 标胶后的结果为布尔类型boolean的值
-      + “==”两个等号代表比较是否相等，“=”一个等号代表赋值
-*** 逻辑运算符
-    - 逻辑与&和逻辑短路与&&：代表着并且的意思，左右两边都要条件成立，结果采薇true
-    - 逻辑或|和逻辑短路或||：代表着或者的意思，左边两边有一个条件成立，结果就为true
-    - 逻辑非！：代表着相反的意思，原先是false，结果就为true；原先是true，结果就为false
-    - 逻辑异或^：左右两边条件结果相同，结果就为false，左右两边条件结果不同，结果就为true
-    - ||在&&前边的时候能够把&&给短路掉，但是&&在||前边，不能短路掉||
-*** 位运算符
-    位运算针对的整数的补码进行计算
-    - &
-      将数据转化为补码，进行按位与，将1看做true，将0看做false进行计算，将计算结果转化为十进制显示
-          正数 & 其他的数字 = 正数   （正数最高位是0，负数最高位是1）
-          偶数 & 其他数     = 偶数   （）
-          0    & 任何数    = 0
-          1    & 奇数      = 1
-          1    & 偶数      = 0
-    - |
-      将数据转化为补码，进行按位或，将计算结果转化为十进制显示
-          负数  | 任何数 = 负数
-          奇数  | 任何数 = 奇数
-          0    |  任何数 = 原数
-    - ^
-      将数据转化为补码，进行按位异或，将结果转化为十进制显示
-          b ^ b = 0
-          0 ^ a = a
-          a ^ b ^ b = a
-    - <<
-      将数据转化为补码之后，按照指定的位数移动，移出的数据舍弃，低位次空出补0.最后将结果转化为十进制显示
-      在一定范围内，左移就是乘以2的几次方
-    - >>
-      将数据转化为补码之后按照指定的位数向右移动，移出的数据舍弃，高位次空出，正数补0.负数补1，最后将结果转化为十进制显示
-      正数右移，越移越小，最小到0
-      负数右移，越移越大，最大到-1
-      在一定范围内，右移就是除以2的几次方
-      注意：-1 >> n = -1
-    - >>>
-      将数据转化为补码之后，按照指定的位数向右移动，移出的数据舍弃，高位次补0.最后将结果转化为十进制显示
-      正数右移和无符号右移没有区别
-      负数无符号右移完成之后会变成一个正数
-    在进行移位运算，并不是直接移动对应的位数，而是将要移动的位数对32进行取余，移动的是余数对应的位数
-    28 << 35 = 28 << (35%32) = 28 << 3 = 224
-    100 << 32 = 100
-    - ~
-      将数据转化为补码之后，无论高低位一律是1变0，0变1，计算出来的结果是补码，转化为原码之后再变为十进制来显示
-      快速算法规律 ~i = -i - 1
-*** 运算符的优先级
-    ~ ++ -- ! * / % + - (<< >> >>>) 关系 逻辑 & | ^ 三元 赋值
-    - 一元运算符：
-      ~ ++ -- !
-    - 二元运算符：
-       * / % + - (<< >> >>>) 关系 逻辑 & | ^
-
-    一元运算 > 二元运算 > 三元运算 > 赋值
-*** 三元运算符
-    - 根据判断条件运算结果，执行不同的表达式值；条件为true，执行表达式1，否则，执行表达式2
-
-** ASCII编码表
-    American Standard Code for Information Interchange,美国标准信息交换代码
-    数字0 ~ 9对应ASCII编码十进制为48 ~ 57，字母a~z对应ASCII编码十进制为97~122，
-     字母A~Z对应ASCII编码十进制为65~90
-
+*** 跳转语句break、continue
+**** break
+     (1)用于switch语句
+     (2)用在循环中，结束当前循环
+        #+BEGIN_SRC java
+            class BreakDemo{
+                public static void main(String[] args){
+                    int i=i;
+                    while(true){
+                        if(i == 3){
+                            break;
+                        }else{
+                        System.out.println(i);
+                        }
+                    }
+                }
+            }
+        #+END_SRC
+     (3)break tag
+        在多层循环时，通过break tag方式，指定在break时要跳出的是哪一层循环
+        #+BEGIN_SRC java
+            class BreakDemo_1{
+                public static void main(String[] args){
+                    a:for(int i = 0;i<2;i++){
+                        for(int j = 0;j<5;j++){
+                            System.out.println("j="+j);
+                            break a;
+                        }
+                        System.out.println("i="+i);
+                    }
+                }
+            }
+        #+END_SRC
+**** continue
+     跳过本次循环
      #+BEGIN_SRC java
-       /*
-         ASCII编码表演示
-         字符Java 数据类型，char
-         整数Java 数据类型，int
-
-         int 类型和char数据类型转换
-         char 两个字节，int四个字节
-
-         char转成int类型的时候，类型自动提示，char数据类型，会查询编码表，得到整数
-         int转成char类型的时候，强制转化，会查询编码表
-
-         char存储汉字，查询Unicode编码表
-         char可以和int计算，提示为int类型，内存中两个字节
-         char取值范围是0~65535,为无符号的数据类型，二进制没有符号位
-
-        ,*/
-       public class ASCIIDemo{
-           public static void main(String[] args){
-               char c = 'a';
-               int i = c+1;
-               System.out.println(i);
-
-               int j = 90;
-               char h = (char)j;
-               System.out.println(h);
-
-               System.out.println((char)6);
-
-               char k = '你';
-               System.out.println(k);
-
-               char m = 65535;
-           }
-       }
+         class ContinueDemo{
+             public static void main(String[] args){
+                 for(int i=0;i<10;i++){
+                     if(i%2==0){
+                         continue;
+                     }
+                     System.out.println(i);
+                 }
+             }
+         }
      #+END_SRC
 
+
+
 ** 数组
-   #+BEGIN_SRC java
-     /*
-       数组：
-           存储同一类型的多个数据的容器 --- 数组 --- 大小固定
-           对存入数组的元素进行了编号 --- 下标 --- 从0开始计算的
-       定义格式：
-           数据类型[] 数组名 = new 数据类型[长度];
-           int[]      arr = new int[5];
-           表示定义了一个能存储5个整型元素的数组
-           动态初始化
+   存储多个相同数据类型元素的容器
+*** 数组格式：
+    - 数据类型[] 数组名 = new 数据类型[元素的个数或者数组的长度];
+          int[]  arr = new int[3];
+      表示整型数组arr的元素个数为3个
+      支持声明和赋值两个过程
+      #+BEGIN_SRC java
+          int[] arr=new int[2];
+          int[] arr1;
+          arr1=new int[3];
+      #+END_SRC
+    - 数组类型[] 数组名 = new 数据类型[]{元素值1,元素值2,元素值3,...,元素值n};
+         int[]  arr  = new int[]{1,2,3,4,3};
+      具体的值确定了，长度也就确定了
+      支持声明和赋值两个过程
+      #+BEGIN_SRC java
+          int[] arr=new int[]{1,2,1,3};
+          int[] arr1;
+          arr1 = new int[]{1,2,1,3};
+      #+END_SRC
+    - 数据类型[] 数组名 = {元素值1,元素值2,元素值3,...,元素值n};
+         int[]  arr  ={1,2,3};
+      给定具体的值，长度就确定了
 
-           数据类型[] 数组名 = new 数据类型[]{元素1，元素2，元素3...};
-           int[]    arr   = new int[]{2,8,8,6,8};
-           元素的个数就是数组的长度
+      int arr1;
+      arr1={1,2,3};//错误的写法
 
-           数据类型[] 数组名 = {元素1，元素2，元素3};
-      ,*/
-     public class ArrayDemo{
-         public static void mian(String[] args){
-             int[] arr = new int[3];
-             arr[1] = 7;
-             //ArrayIndexOutOfBoundException --- 数组下标越界异常
-             arr[3] = 10;
-             System.out.println(arr);
-
-             int[] arr1 = new int[]{2,3,4,5,1};
-             System.out.println(arr1);
-             /*
-               打印arr1 输出的 [I@15db9742
-               [  表示变量的实际类型为数组
-               I  如果变量是一个数组，那么这一部分就表示数组中的元素类型为 int
-               @  表示标记，表示后面是一个地址
-               15db9742   表示这个对象的哈希吗的十六进制的展现形式---可以认为表示地址
-              ,*/
+      new:创建对象，开辟新的内存空间
+          没有开辟空间就无法存储数据
+*** 数组的内存地址
+    #+BEGIN_SRC java
+        int[] arr=new int[2];
+        int[] arr1;
+        arr1=new int[3];
+        System.out.println(arr);//[I@7852e922
+    #+END_SRC
+    [I@7852e922:数组的内存地址
+                  [ 表示这块区域的对象类型为数组类型
+                  I 表示这块区域的对象元素的数据类型为整型
+                  @ 代表后面的是内存的地址值
+                  7842e922 表示对象的哈希吗值的十六进制的表现形式
 
 
-             //通过索引的方式，数组中的三个元素
-             System.out.println(arr[0]);
-             System.out.println(arr[1]);
-             System.out.println(arr[2]);1
-
-             System.out.println(arr.length);
-         }
-     }
-   #+END_SRC
 *** 数组的内存
     java将占用的内存分为了5块：栈内存、堆内存、方法区、本地方法栈、PC计数器（计数器）
     栈内存：存储的变量。变量在生命的时候存储到栈内存中，不会自动给值，除非在程序中手动给值。
@@ -2588,117 +2256,164 @@
            boolean - false
            其他类型的默认值一律是null
            对象使用完成不一定会从堆内存中立即移出，而是在不确定的某个时刻被回收
-*** 为数组的元素赋值
 
-    #+BEGIN_SRC java
-      /*
-        数组的操作，使用索引，对数组中的元素赋值
-       ,*/
-      public class ArrayDemo_1{
-          public static void main(String[] args){
-              int[] arr = new int[5];
+*** 数组基本操作
+**** 获取数组中的元素
+     数组名[数组的索引];
+     arr[2];
+     数组的索引(下标)就是元素在数组中的位置，索引由0开始，最大的索引是"数组的长度-1"
+     #+BEGIN_SRC java
+         int[] nums={1,3,4,1,5};
+         System.out.println(nums[0]);
+         System.out.println(nums[1]);
+         System.out.println(nums[2]);
+     #+END_SRC
+**** 获取数组长度
+     #+BEGIN_SRC java
+         int[] arr = {2,8,9,12};
+         int len = arr.length;
+     #+END_SRC
+**** 数组的遍历
+     - 遍历数组下标,先获取下标，然后利用下标获取元素
+       #+BEGIN_SRC java
+       int[] arr  = {2,1,3,5,7,0,4};
+       for(int i = 0;i<arr.length;i++){
+           System.out.println(arr[i]);
+       }
+       #+END_SRC
+     - 直接获取数组中的元素(只能遍历数组，不能改变数组中的元素)
+       #+BEGIN_SRC java
+           int[] arr = {2,2,3,4,5};
+           for(int i : arr){
+               System.out.println(i);
+           }
+       #+END_SRC
+     - 将数组中的元素拼接成一个字符串返回
+       #+BEGIN_SRC java
+           import java.util.Arrays;
+           class ArrayDemo_8{
+               public static void main(String[] args){
+                   int[] arr=new int[]{1,23,4};
+                   String str = Arrays.toString(arr);
+                   System.out.println(str);
+               }
+           }
+       #+END_SRC
 
-              //将1索引上的元素，赋值3
-              arr[1]=3;
-              System.out.println(arr[1]);
-              System.out.println(arr[2]);
-          }
-      }
-    #+END_SRC
-*** 获取数组长度
+**** 数组的元素赋值
+     #+BEGIN_SRC java
+         int[] arr = new int[5];
+         arr[1]=3;
+     #+END_SRC
+***** 数组越界异常
+      ArrayIndexOutOfBoundsException
 
-    #+BEGIN_SRC java
-      public class ArrayApplicationDemo{
-          public static void main(String[] args){
-              int[] arr = {2,8,9,12};
+**** 修改数组中的元素
+     #+BEGIN_SRC java
+         int[] arr={1,2,3,4};
+         arr[2] =100;
+     #+END_SRC
+*** 数组常用应用
+**** 获取数组中最值（最大值/最小值）
+     - 定义一个变量记录最大值
+       如果第0位小于第1位，那么将第1位的值赋值给max，以此类推
+       #+BEGIN_SRC java
+           int[] arr = {2,8,9,2,2,5,6};
+           int max = arr[0];
+           for(int i = 1; i<arr.length;i++){
+               if(max <arr[i])
+                   max = arr[i];
+               }
+               System.out.println(max);
+       #+END_SRC
+     - 定义一个变量记录最大值的下标
+       #+BEGIN_SRC java
+           int[] arr = {2,3,6,5,3,2,,7};
+           int max = 0;
+           for(int i = 1;i<arr.length;i++){
+               if(arr[max] <arr[i])
+                   max = i;
+               }
+               System.out.println(arr[max]);
+       #+END_SRC
+**** 查找数组中元素所在位置
+     查找指定元素所在的位置
+     #+BEGIN_SRC java
+         int[] arr={1,2,5,8,3};
+         int find=3;
+         for(int i=0;i<arr.length;i++){
+             if(find == arr[i]){
+                 System.out.println(i);
+             }
+         }
+     #+END_SRC
+**** 反转数组
+     - 创建性数组，从原数组倒着拿，往新数组正着放
+      O(n) o(n)
+    - 首尾互换
+      O(n) o(1)
+      #+BEGIN_SRC java
+        import java.util.Arrays;
+        public class ArraysApplicationDemo1{
+            public static void main(String[] args){
+                int[] arr = {2,6,1,8,4,3,0};
+                //数组的反转
+                for(int i = 0,j = arr.length - 1;i<j;i++,j--){
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+      #+END_SRC
+    - 查找元素出现的位置(无序数组)
+      #+BEGIN_SRC java
+        public class ArrayApplicationDemo2{
+            public static void main(String[] args){
+                int[] arr = {2,3,4,8,5};
+                int num = 9;
+                for(int i = 0;i<arr.length;i++){
+                    if(arr[i] == num){
+                        System.out.println(i);
+                        break;
+                    }
+                }
+            }
+        }
+      #+END_SRC
+    - 查找元素出现的位置(有序数组)(折半查找/二分查找)
+      #+BEGIN_SRC java
+        public class ArrayApplicationDemo2{
+            public static void main(String[] args){
+                int[] arr = {12,14,16,17,53,78,87};
+                int num = 17;
 
-              //获取数组的长度
-              int len = arr.length;
-              System.out.println(len);
-          }
-      }
-    #+END_SRC
-*** 数组的遍历
-    方式一：遍历数组下标,先获取下标，然后利用下标获取元素
-    #+BEGIN_SRC java
-      public class ArrayDemo_3{
-          public static void main(String[] args){
-              int[] arr  = {2,1,3,5,7,0,4};
-              for(int i = 0;i<arr.length;i++){
-                  System.out.println(arr[i]);
-              }
-          }
-      }
-    #+END_SRC
+                //记录最小值的下标
+                int min = 0;
+                //记录最大值的下标
+                int max = arr.length - 1;
+                //计算中间值
+                int mid = (min + max)/2;
 
-    方式二：直接获取数组中的元素(只能遍历数组，不能改变数组中的元素)
-    #+BEGIN_SRC java
-      public class ArrayDemo01{
-          public static void main(String[] args){
-              /*
-                直接获取数组中的元素，获取出来的每一个元素是一个int类型的元素，也就意味着可以定义一个int类型的变量来一次表示数组中的每一个元素
-               ,*/
-              int[] arr = {2,2,3,4,5};
-
-              //增强for循环
-              /*
-                for(int i : arr){}
-                这种有冒号的for循环叫做foreach循环，foreach语句是java5的新特征之一，在遍历数组、集合方面，foreach为开发人员提供了极大的方便
-                for(元素类型t 元素变量x : 遍历对象obj){}
-               ,*/
-              for(int i : arr){
-                  System.out.println(i);
-              }
-          }
-      }
-    #+END_SRC
-
-    方式三:将数组中的元素拼接成一个字符串返回
-    #+BEGIN_SRC java
-      import java.util.Arrays;
-      public class ArrayDemo_8{
-          public static void main(String[] args){
-              String str = Arrays.toString(arr);
-              System.out.println(str);
-              }
-          }
-      }
-    #+END_SRC
-
-*** 获取数组中最值（最大值/最小值）
-    - 获取最大值
-      + 方式一：定义一个变量记录最大值
-        #+BEGIN_SRC java
-          public class ArrayDemo_10{
-              public staic void main(String[] args){
-                  int[] arr = {2,8,9,2,2,5,6};
-
-                  //定义一个变量记录最大值，如果第0位小于第1位，那么将第1位的值赋值给max，以此类推
-                  int max = arr[0];
-                  for(int i = 1; i<arr.length;i++){
-                      if(max <arr[i])
-                          max = arr[i];
-                  }
-                  System.out.println(max);
-              }
-          }
-        #+END_SRC
-
-      + 方式二：定义一个变量记录最大值的下标
-        #+BEGIN_SRC java
-          public class ArrayDemo_12{
-              public static void main(String[] args){
-                  int[] arr = {2,3,6,5,3,2,,7};
-                  //定义一个变量记录最大值得下标
-                  int max = 0;
-                  for(int i = 1;i<arr.length;i++){
-                      if(arr[max] <arr[i])
-                          max = i;
-                  }
-                  System.out.println(arr[max]);
-              }
-          }
-        #+END_SRC
+                while(arr[mid] != num){
+                    if(num > arr[mid])
+                        min = mid + 1;
+                    else
+                        max = mid -1;
+                    if(min > max){
+                        System.out.println("查找的数不存在");
+                        break;
+                    }
+                    mid = (min + max)/2;
+                }
+                System.out.println(mid);
+            }
+        }
+      #+END_SRC
+      + 时间复杂度
+        (1/2)^x = n ---> O(logn)
+      + 空间复杂度
+        o(1)
 
 *** 数组排序
     - 冒泡排序
@@ -2786,74 +2501,6 @@
       Arrays.sort(arr);
       + 时间复杂度
         O(nlogn)
-*** 反转数组
-    - 创建性数组，从原数组倒着拿，往新数组正着放
-      O(n) o(n)
-    - 首尾互换
-      O(n) o(1)
-      #+BEGIN_SRC java
-        import java.util.Arrays;
-        public class ArraysApplicationDemo1{
-            public static void main(String[] args){
-                int[] arr = {2,6,1,8,4,3,0};
-                //数组的反转
-                for(int i = 0,j = arr.length - 1;i<j;i++,j--){
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
-            }
-        }
-      #+END_SRC
-    - 查找元素出现的位置(无序数组)
-      #+BEGIN_SRC java
-        public class ArrayApplicationDemo2{
-            public static void main(String[] args){
-                int[] arr = {2,3,4,8,5};
-                int num = 9;
-                for(int i = 0;i<arr.length;i++){
-                    if(arr[i] == num){
-                        System.out.println(i);
-                        break;
-                    }
-                }
-            }
-        }
-      #+END_SRC
-    - 查找元素出现的位置(有序数组)(折半查找/二分查找)
-      #+BEGIN_SRC java
-        public class ArrayApplicationDemo2{
-            public static void main(String[] args){
-                int[] arr = {12,14,16,17,53,78,87};
-                int num = 17;
-
-                //记录最小值的下标
-                int min = 0;
-                //记录最大值的下标
-                int max = arr.length - 1;
-                //计算中间值
-                int mid = (min + max)/2;
-
-                while(arr[mid] != num){
-                    if(num > arr[mid])
-                        min = mid + 1;
-                    else
-                        max = mid -1;
-                    if(min > max){
-                        System.out.println("查找的数不存在");
-                        break;
-                    }
-                    mid = (min + max)/2;
-                }
-                System.out.println(mid);
-            }
-        }
-      #+END_SRC
-      + 时间复杂度
-        (1/2)^x = n ---> O(logn)
-      + 空间复杂度
-        o(1)
-
 
 *** 数组的复制
     - System.arraycopy(要复制的数组,要复制的起始下标,要存放的数组,要存放的起始下标,要复制的元素个数);
