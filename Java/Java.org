@@ -359,10 +359,10 @@
        + long类型需要在结尾添加l/L作为标识：long l = 10L;
        + float类型需要在结尾添加f/F作为标识：float f = 3.5f;
        + 一个字符直接量只能代表一个字符，不可以在一个字符直接量中写入多个字符，不允许有空的字符直接量
-         [[~/Documents/BigData/Java/13.png]]
+         [[./13.png]]
       + 引用数据类型（复杂数据类型）
 **** 表示范围是怎么来的
-    - 整数类型
+***** 整数类型
       byte ---> 1byte = 8bit ---> 1bit表示两个二进制数：0或者1;2bit表示四个二进制
           数：00、11、01、10;3bit表示8个二进制数：000、001、011、010、111、101、
           110、100,以此类推,1byte表示2^8（256）个二进制数，正数最大的是01111111也可以理解为10000000-1（2^7-1）
@@ -370,7 +370,7 @@
       short ---> 2byte = 16bit ---> -2^15 ~ 2^15 - 1
       int ---> 4byte = 32bit ---> -2^31 ~ 2^31 - 1
       long ---> 8byte = 64bit ---> -2^63 ~ 2^63 - 1
-    - 浮点型
+***** 浮点型
       float --->4byte
 
 **** 文字转成数字----->编码
@@ -387,7 +387,7 @@
      '中'占两个字节
      所有的完整码表默认兼容西欧码表
 **** 转义字符
-     [[~/Documents/BigData/Java/14.png]]
+     [[./14.png]]
 *** 常量与类型
     - java中默认的整数类型是int类型
     - java中默认的浮点型是double类型
@@ -395,74 +395,76 @@
       + 5.28D为double类型
       + 1.26F为float类型
 *** 定义变量(创建变量)
-    - 限制数据的变化范围：数据类型
-      区分其他变量：变量名
-      保证变量操作之前有数据：初始化
-    - 定义格式
-      数据类型 变量名 = 数据值;
-      int    a    =  100;
-
-      变量声明
-      int j;
-      变量赋值
+**** 数据类型
+     限制数据的变化范围
+**** 变量名
+     区分其他变量
+**** 初始化
+     保证变量操作之前有数据
+**** 定义格式
+     数据类型 变量名 = 数据值;
+     int    a    =  100;
+**** 变量声明
+     int j;
+**** 变量赋值
       j = 6;
-    #+BEGIN_SRC java
-        /*
+     #+BEGIN_SRC java
+         /*
           定义Java中的变量
           定义出所有数据类型的变量
           四类八种
          ,*/
-        public class VariableDemo{
-            public static void main(String[] args){
-                //定义整数类型，字节类型byte类型
-                //内存中1个字节，-128 ~ 127
-                byte b = 100;
-                System.out.println(b);
+         class VariableDemo{
+             public static void main(String[] args){
+                 //定义整数类型，字节类型byte类型
+                 //内存中1个字节，-128 ~ 127
+                 byte b = 100;
+                 System.out.println(b);
 
-                //定义整数类型，短整型，short类型
-                //内存中2个字节，-32768 ~ 32767
-                short s = 200;
-                System.out.println(s);
+                 //定义整数类型，短整型，short类型
+                 //内存中2个字节，-32768 ~ 32767
+                 short s = 200;
+                 System.out.println(s);
 
-                //定义整数类型，整型，int类型
-                //内存中4个字节，-2147483648 ~ 2147483647
-                int i = 500006;
-                System.out.println(i);
+                 //定义整数类型，整型，int类型
+                 //内存中4个字节，-2147483648 ~ 2147483647
+                 int i = 500006;
+                 System.out.println(i);
 
-                //定义整数类型，长整型，long类型
-                //内存中8个字节
-                long l = 21474836470L;
-                System.out.println(l);
+                 //定义整数类型，长整型，long类型
+                 //内存中8个字节
+                 long l = 21474836470L;
+                 System.out.println(l);
 
-                //定义浮点数据类型，单精度，float类型
-                //内存中4个字节
-                float f = 1.0F;
-                System.out.println(f);
+                 //定义浮点数据类型，单精度，float类型
+                 //内存中4个字节
+                 float f = 1.0F;
+                 System.out.println(f);
 
-                //定义浮点数据类型，双精度double类型
-                //内存中8个字节
-                double d = 2.2;
-                System.out.println(d);
+                 //定义浮点数据类型，双精度double类型
+                 //内存中8个字节
+                 double d = 2.2;
+                 System.out.println(d);
 
-                //定义字符类型，char
-                //内存中2个字节，必须单引号包裹，只能写1个字符
-                char c = '我';
-                System.out.println(c);
+                 //定义字符类型，char
+                 //内存中2个字节，必须单引号包裹，只能写1个字符
+                 char c = '我';
+                 System.out.println(c);
 
-                //定义布尔类型，boolean
-                //内存中1个字节，数据值，true false
-                boolean bool = true;
-                System.out.println(bool);
-            }
-        }
-      #+END_SRC
+                 //定义布尔类型，boolean
+                 //内存中1个字节，数据值，true false
+                 boolean bool = true;
+                 System.out.println(bool);
+             }
+         }
+     #+END_SRC
 
 *** 定义字符串变量
     #+BEGIN_SRC java
       /*
         常量：字符串，双引号，包裹，“0 ~ n”
        ,*/
-      public class Variable_1{
+       class Variable_1{
           public static void main(String[] args){
               //定义变量，字符串类型，数据类型String表示字符串的数据类型
               String s = "我爱Java";
@@ -475,7 +477,7 @@
 *** 变量定义使用注意事项
     - 变量定义后可以不赋值，使用时在赋值，不赋值不能使用
       #+BEGIN_SRC java
-        public class Variable_2{
+        class Variable_2{
             public static void main(String[] args){
                 int x;
                 x = 20;
@@ -485,7 +487,7 @@
       #+END_SRC
     - 变量使用是有自己的作用范围，变量的有效范围是只在定义的一对大括号内
       #+BEGIN_SRC java
-       public class Variable_3{
+       class Variable_3{
            public static void main(String[] args){
                int i = 5;
                System.out.println(i);
@@ -533,10 +535,10 @@
             }
         }
     #+END_SRC
-    [[~/Documents/BigData/Java/7.png]]
-    [[~/Documents/BigData/Java/8.png]]
+    [[./7.png]]
+    [[./8.png]]
     如果=右边只有常量进行运算就会进行编译时期的优化，就会直接算出结果值在进行赋值
-    [[~/Documents/BigData/Java/15.png]]
+    [[./15.png]]
     - 自动类型转换（范围小转大）
       范围大的数据类型 变量 = 范围小的数据类型值;
       double d = 1000;
@@ -567,10 +569,10 @@
       #+END_SRC
 ** 运算符
 *** 算术运算符
-    + 除法运算
-      - 如果都是整型数据进行操作，结果一定是整型
+**** 除法运算
+     - 如果都是整型数据进行操作，结果一定是整型
          i*1.0/j 结果就是浮点数
-         #+BEGIN_SRC java
+        #+BEGIN_SRC java
            class SuanShu{
                public static void main(String[] args){
                    int i=900;
@@ -580,7 +582,7 @@
                }
            }
        #+END_SRC
-         [[~/Documents/BigData/Java/SuanShu.java]]
+         [[./SuanShu.java]]
       - 算术异常
         ArithmeticException:/by zero ---算术异常
         #+BEGIN_SRC java
@@ -595,12 +597,12 @@
         #+BEGIN_SRC java
             System.out.println(-0.0/0.0);
         #+END_SRC
-    + 取余%
+**** 取余%
       取余结果的正负和%左边的正负一致
       #+BEGIN_SRC java
           System.out.println(-a%3);
       #+END_SRC
-    + ++ --
+**** ++ --
       - 单独使用
         #+BEGIN_SRC java
             int a =4;
@@ -630,7 +632,7 @@
               //5
               System.out.println(a);
            #+END_SRC
-          [[~/Documents/BigData/Java/17.png]]
+          [[./17.png]]
         - byte、char、short使用++时底层都有强制类型转换
           #+BEGIN_SRC java
               //-128
@@ -673,7 +675,7 @@
         任何数据在计算机中存储的补码
 
        ,*/
-       public class Operator{
+       class Operator{
           public static void main(String[] args){
               // + 连接作用，将一个字符串和其他数据连接起来
               // + 遇到字符串，变成连接符号
@@ -725,7 +727,7 @@
         n = ++m; ---> ++ 先算，后将++过的值赋给n
 
        ,*/
-      public class Opeartor_1{
+      class Opeartor_1{
           public static void main(String[] args){
               int j = 5;
               int j = i++;
@@ -758,15 +760,14 @@
       }
     #+END_SRC
 *** 赋值运算符
-    - 运算符
-      [[~/Documents/BigData/Java/18.png]]
+      [[./18.png]]
       #+BEGIN_SRC java
       /*
         赋值运算符
         =
         += -= *= /= %= &= |= ^= <<= >>= >>>=
        ,*/
-      public class Operator_4{
+      class Operator_4{
           public static void main(String[] args){
               //= 赋值运算，将后面的值，赋值给左边的变量
               int i = 3;
@@ -791,20 +792,20 @@
           }
       }
     #+END_SRC
-    - b+=a;//11 b=a+b;底层会默认加上强制类型转换
+**** b+=a;//11 b=a+b;底层会默认加上强制类型转换
       #+BEGIN_SRC java
           byte a=10;
           byte b=1;
           b+=a;//11 b=a+b;
           System.out.println(b);
       #+END_SRC
-    - 连等定义？
+**** 连等定义？
       #+BEGIN_SRC java
           int x=y=z;//不支持
           int x=1,y=3,z=2;//支持
       #+END_SRC
-    - 连等赋值?
-      [[~/Documents/BigData/Java/19.png]]
+**** 连等赋值?
+      [[./19.png]]
       #+BEGIN_SRC java
           byte a=4;
           byte b=1;
@@ -823,13 +824,13 @@
     ==、>、<、> =、< =、! =
     比较（关系）运算符--结果一定是布尔值
 *** 逻辑运算符
-    - 用于连接布尔值或者布尔表达式的符号
-      表达式：
+    用于连接布尔值或者布尔表达式的符号
+**** 表达式：
           用于连接变量或者数据，而且符合java语法的式子
           a+b(算术表达式)
           a<b(布尔表达式)
           &(逻辑与)  |逻辑或   ^逻辑异或  ！逻辑非  ||双或
-      总结：
+**** 总结：
           逻辑运算符，对两个BOOLEAN类型数据之间进行计算
           结果也是BOOLEAN类型
 
@@ -844,7 +845,7 @@
           &&和||优先级一样
           开发中常用双与和双或
      #+BEGIN_SRC java
-        public class Operator_5{
+        class Operator_5{
             public static void main(String[] args){
                 System.out.println(false & true);
                 System.out.println(false | true);
@@ -924,12 +925,12 @@
             }
         }
     #+END_SRC
-     [[~/Documents/BigData/Java/Luoji.java]]
+     [[./Luoji.java]]
 *** 位运算符
     要把数据转成二进制的补码形式才能进行位运算
     移位的位数要对32进行取余，取余的结果才是真正移动的位数--规定
-    - &（按位与） |（按位或） ^（按位异或）
-      任意一个数&1==1就是奇数
+**** &（按位与） |（按位或） ^（按位异或）
+     任意一个数&1==1就是奇数
       任意一个正数&任意一个数=正数
       任意一个负数|任意一个数=负数
       任意一个数|0=原来的值
@@ -955,18 +956,19 @@
         4 00000000 00000000 00000000 00000100 补
           11111111 11111111 11111111 11111010 反
        -5 10000000 00000000 00000000 00000101 原
-      [[~/Documents/BigData/Java/Wei.java]]
-    - <<左移 >>右移 >>>无符号右移 ~取反
-      >>
+      [[./Wei.java]]
+**** <<左移 >>右移 >>>无符号右移 ~取反
+***** >>
       如果是正数右移几位就在最左边补几个0
       如果是负数右移几位就在最左边补几个1
       如果是正数右移几位，操作数/2^移动位数
-      <<
+***** <<
       无论正负数左移几位最右边就补几个0
       左移几位，操作数*2^移动位数
-      >>>
+***** >>>
       一定是正数
       无论正负数右移几位，就在最左边补几个0
+***** 示例
       4 >> 2
       4 [00]00000000 00000000 00000000 000001(00)
       1     00000000 00000000 00000000 00000001
@@ -990,7 +992,7 @@
               }
           }
       #+END_SRC
-      [[~/Documents/BigData/Java/WeiDemo4.java]]
+      [[./WeiDemo4.java]]
 **** 按位异或的扩展
      如果一个数按位异或上另一个数两次，结果就是本身
      [[~/Documents/BigData/Java/WeiDemo.java]]
@@ -1066,7 +1068,7 @@
 *** 运算符的优先级
     () ~ ++ -- ! * / % + - << >> >>> 关系 逻辑 & | ^ 三元 赋值
     #+BEGIN_SRC java
-      public class OperatorDemo121{
+        class OperatorDemo121{
           public static void main(String[] args){
               /*如果算术比关系的优先级高，就先算2+5 =7，然后比较3>7，所以结果是false
               如果关系比算术高，就先算3>2 = true,然后计算true + 5，因为类型不能转换，所以会报错
@@ -1107,29 +1109,30 @@
     #+END_SRC
 
 *** 三元运算符
-    三元运算符
-        格式：
-            表达式（布尔值） ? 表达式值1:表达式值2;
-        执行流程：
+**** 格式和执行流程
+     格式：
+         表达式（布尔值） ? 表达式值1:表达式值2;
+     执行流程：
             先去计算表达式的值，如果这个值是true，就把表达式值1返回，
                             如果这个值是false，就把表达式值2进行返回
-    - 求两个整数的最大值
+**** 示例
+***** 求两个整数的最大值
       #+BEGIN_SRC java
-      public class Operator_6{
-          public static void main(String[] args){
-              //求两个整数的最大值
-              int a=5;
-              int b=9;
-              //有另一个变量来接收值得时候，要保证这个变量的类型和两个表达式值的类型一致
-              System.out.println(max);
-              //连个表达式值的类型可以不一样但是有个前提，没有另一个变量来接收返回值
-              System.out.println(a>b?'a':true);
+          class Operator_6{
+              public static void main(String[] args){
+                  //求两个整数的最大值
+                  int a=5;
+                  int b=9;
+                  //有另一个变量来接收值得时候，要保证这个变量的类型和两个表达式值的类型一致
+                  System.out.println(max);
+                  //连个表达式值的类型可以不一样但是有个前提，没有另一个变量来接收返回值
+                  System.out.println(a>b?'a':true);
+              }
           }
-      }
-    #+END_SRC
-    - 求三个整数的最大值
+      #+END_SRC
+***** 求三个整数的最大值
       #+BEGIN_SRC java
-          public class Operator122{
+          class Operator122{
               public static void main(String[] args){
                   int i = 3,j = 8,k = 5;
                   //三元表达式的嵌套
@@ -1143,9 +1146,9 @@
               }
           }
       #+END_SRC
-    - 判断一个数是奇数还是偶数
+***** 判断一个数是奇数还是偶数
       #+BEGIN_SRC java
-          public class Operator133{
+          class Operator133{
               public static void main(String[] args){
                   //定义一个整数变量，判断这个整数是一个寄数还是一个偶数
                   int num = 15;
@@ -1155,9 +1158,9 @@
               }
           }
       #+END_SRC
-    - 分数评级
+***** 分数评级
       #+BEGIN_SRC java
-          public class Operator134{
+          class Operator134{
               public static void main(String[] args){
                   /*定义一个变量表示分数:
                     分数 >= 90 ----- A
@@ -1175,9 +1178,9 @@
               }
           }
       #+END_SRC
-    - 平年还是闰年
+***** 平年还是闰年
       #+BEGIN_SRC java
-          public class Operator135{
+          class Operator135{
               public static void main(String[] args){
                   /*定义一个变量表示年份，判断这一年是平年还是闰年：
                   逢百年整除400,不是百年整除4
@@ -1211,14 +1214,14 @@
            }
        }
    #+END_SRC
-   [[ ~/Documents/BigData/Java/JavaDemo.java]]
+   [[./JavaDemo.java]]
 **** 引用数据类型的使用
      数据类型 变量名 = new 数据类型（）;
      调用该类型实例的功能：
      变量名.方法名();
 **** Scanner类
      完成用户键盘录入，获取到录入的数据
-     - Scanner使用步骤
+***** Scanner使用步骤
        导包：import java.util.Scanner;
        创建对象实例：Scanner sc = new Scanner(System.in);
        调用方法：
@@ -1831,11 +1834,13 @@
       #+END_SRC
       [[~/Documents/BigData/Java/ForDemo9.java]]
 ***** 增强for循环
-    - 格式：
-      for(数据类型变量名 : 被遍历的集合或者数组){执行语句}
-    - 区别
-      必须有被遍历的目标（如集合或数组）
-      不能获取下标
+      底层的实质是迭代
+      - 格式：
+        for(数据类型变量名 : 被遍历的集合或者数组){执行语句}
+      - 区别
+        必须有被遍历的目标（如集合或数组）
+        不能获取下标
+        把所有的数组元素拷贝一份拿过来新型输出
 **** while
 ***** 循环语句while
     循环次数不确定的时候，首选while
@@ -2197,8 +2202,118 @@
          }
      #+END_SRC
 
+*** 练习
+**** 对于下列代码输出的结果是什么——hehe
+     当if语句省略大括号的时候，语句体只有一句
+     #+BEGIN_SRC java
+         public class Test{
+             public static void main(String[] args){
+                 int i=3;
+                 if(i<3)
+                 System.out.println("haha");
+                 System.out.println("hehe");
+             }
+         }
+     #+END_SRC
+**** 对于下列代码输出的结果是什么——死循环，没有输出
+     while(判断条件);{循环体；控制条件；}
+     当while()后面出现分号表示执行完判断条件后直接结束，不仅如此{}执行循环体和控制条件
+     所以i一直等于0---死循环
+     #+BEGIN_SRC java
+         public class Test{
+             public static void main(String[] args){
+                 int i=0;
+                 while(i<10);
+                 {
+                     System.out.println(i);
+                     i++;
+                 }
+             }
+         }
+     #+END_SRC
+**** 对于下列代码输出的结果是什么——编译时报错
+     要保证每块区域的变量事先都有定义
+     #+BEGIN_SRC java
+         public class Test{
+             public static void main(String[] args){
+                 int i= 5;
+                 switch(i){
+                     default:
+                         int y=5;
+                     case 4:
+                         y+=4;
+                     case 3:
+                         y+=3;
+                         break;
+                     case 2:
+                         y+=2;
+                     case 1:
+                         y+=1;
+                 }
+                 System.out.println(y);
+             }
+         }
+     #+END_SRC
+**** 对于下列代码输出的结果是什么——1,1 2,1
+     #+BEGIN_SRC java
+         public class Test{
+             public static void main(String[] args){
+                 Outer:for(int i=1;i<3;i++){
+                     Inner:for(int j=1;j<3;j++){
+                         if(j==2)
+                             continue Outer;
+                         System.out.println(i+","+j);
+                     }
+                 }
+             }
+         }
+     #+END_SRC
+**** 百钱买百鸡是我国古代的著名数学题。题目这样描述：3文钱可以买1只公鸡，2文钱可以买1只母鸡，1文钱可以买3只小鸡，用100文钱可以买100只鸡，那么公鸡、母鸡、小鸡各多少只？
+     #+BEGIN_SRC java
+         //公鸡
+         int x=0;
+         //母鸡
+         int y=0;
+         //小鸡
+         int z=0;
+         //把每组的排列组合都列出来
+         //公鸡范围
+         for(x=0;x<=33;x++){
+             //母鸡的范围
+             for(y=0;y<=50;y++){
+                 //小鸡的范围
+                 z=100-x-y;
+                 //小鸡也是整数
+                 if(z%3==0){
+                     //判断条件
+                     if(3*x+2*y+(z/3)==100){
+                         System.out.println(x+" "+y+" "+z);
+                     }
+                 }
+             }
+         }
+     #+END_SRC
+** Java的内存
+   java将占用的内存分为了5块：栈内存、堆内存、方法区(面向对象讲)、本地方法栈、PC计数器（计数器）
+*** 栈内存：存储的变量(目前阶段)。
+            变量在声明的时候存储到栈内存中，不会自动给值，除非在程序中手动给值。
+            变量在栈内存中使用完成之后要立即释放。
+            int[] arr=new int[2];
+            arr通过堆内存中对象的地址找到值
+*** 堆内存：存储的是对象。
+            对象在存储到堆内存中之后，会被堆内存赋予一个默认值；
+            byte/short/int - 0
+            long - 0L
+            float - 0.0f
+            double - 0.0
+            char - \u0000
+            boolean - false
+            引用数据类型 - null
+            对象使用完成不一定会从堆内存中立即移出，而是在不确定的某个时刻被回收
+            int[] arr=new int[2];  new就是在堆内存中开辟一个新空间
 
-
+*** int[] arr1=new int[]{2,3,5};
+     系统默认初始值优先于程序初始值
 ** 数组
    存储多个相同数据类型元素的容器
 *** 数组格式：
@@ -2242,22 +2357,7 @@
                   @ 代表后面的是内存的地址值
                   7842e922 表示对象的哈希吗值的十六进制的表现形式
 
-
-*** 数组的内存
-    java将占用的内存分为了5块：栈内存、堆内存、方法区、本地方法栈、PC计数器（计数器）
-    栈内存：存储的变量。变量在生命的时候存储到栈内存中，不会自动给值，除非在程序中手动给值。
-           变量在栈内存中使用完成之后要立即释放。
-    堆内存：存储的是对象。对象在存储到堆内存中之后，会被堆内存赋予一个默认值；
-           byte/short/int - 0
-           long - 0L
-           float - 0.0f
-           double - 0.0
-           char - \u0000
-           boolean - false
-           其他类型的默认值一律是null
-           对象使用完成不一定会从堆内存中立即移出，而是在不确定的某个时刻被回收
-
-*** 数组基本操作
+*** 数组常用操作
 **** 获取数组中的元素
      数组名[数组的索引];
      arr[2];
@@ -2268,38 +2368,6 @@
          System.out.println(nums[1]);
          System.out.println(nums[2]);
      #+END_SRC
-**** 获取数组长度
-     #+BEGIN_SRC java
-         int[] arr = {2,8,9,12};
-         int len = arr.length;
-     #+END_SRC
-**** 数组的遍历
-     - 遍历数组下标,先获取下标，然后利用下标获取元素
-       #+BEGIN_SRC java
-       int[] arr  = {2,1,3,5,7,0,4};
-       for(int i = 0;i<arr.length;i++){
-           System.out.println(arr[i]);
-       }
-       #+END_SRC
-     - 直接获取数组中的元素(只能遍历数组，不能改变数组中的元素)
-       #+BEGIN_SRC java
-           int[] arr = {2,2,3,4,5};
-           for(int i : arr){
-               System.out.println(i);
-           }
-       #+END_SRC
-     - 将数组中的元素拼接成一个字符串返回
-       #+BEGIN_SRC java
-           import java.util.Arrays;
-           class ArrayDemo_8{
-               public static void main(String[] args){
-                   int[] arr=new int[]{1,23,4};
-                   String str = Arrays.toString(arr);
-                   System.out.println(str);
-               }
-           }
-       #+END_SRC
-
 **** 数组的元素赋值
      #+BEGIN_SRC java
          int[] arr = new int[5];
@@ -2313,7 +2381,40 @@
          int[] arr={1,2,3,4};
          arr[2] =100;
      #+END_SRC
-*** 数组常用应用
+**** 获取数组长度
+     #+BEGIN_SRC java
+         int[] arr = {2,8,9,12};
+         int len = arr.length;
+     #+END_SRC
+**** 数组的遍历
+     一次输出数组元素的值
+     - 遍历数组下标,先获取下标，然后利用下标获取元素
+       #+BEGIN_SRC java
+       int[] arr  = {2,1,3,5,7,0,4};
+       for(int i = 0;i<arr.length;i++){
+           System.out.println(arr[i]);
+       }
+       #+END_SRC
+     - 直接获取数组中的元素(只能遍历数组，不能改变数组中的元素)
+       把所有的数组元素拷贝一份拿过来进行输出
+       #+BEGIN_SRC java
+           int[] arr = {2,2,3,4,5};
+           for(int i : arr){
+               System.out.println(i);
+           }
+       #+END_SRC
+     - 将数组中的元素转成字符串返回
+       #+BEGIN_SRC java
+           import java.util.Arrays;
+           class ArrayDemo_8{
+               public static void main(String[] args){
+                   int[] arr=new int[]{1,23,4};
+                   String str = Arrays.toString(arr);
+                   System.out.println(str);
+               }
+           }
+       #+END_SRC
+
 **** 获取数组中最值（最大值/最小值）
      - 定义一个变量记录最大值
        如果第0位小于第1位，那么将第1位的值赋值给max，以此类推
@@ -2328,7 +2429,7 @@
        #+END_SRC
      - 定义一个变量记录最大值的下标
        #+BEGIN_SRC java
-           int[] arr = {2,3,6,5,3,2,,7};
+       int[] arr = {2,3,6,5,3,2,,7};
            int max = 0;
            for(int i = 1;i<arr.length;i++){
                if(arr[max] <arr[i])
@@ -2336,209 +2437,193 @@
                }
                System.out.println(arr[max]);
        #+END_SRC
-**** 查找数组中元素所在位置
-     查找指定元素所在的位置
-     #+BEGIN_SRC java
-         int[] arr={1,2,5,8,3};
-         int find=3;
-         for(int i=0;i<arr.length;i++){
-             if(find == arr[i]){
-                 System.out.println(i);
-             }
-         }
-     #+END_SRC
-**** 反转数组
-     - 创建性数组，从原数组倒着拿，往新数组正着放
-      O(n) o(n)
-    - 首尾互换
-      O(n) o(1)
+**** 数组逆序
+     - 创建新数组，从原数组正着拿，往新数组倒着放，在将新数组的地址给arr
+       [1,2,3] [3,2,1]
+       i=0   arr.length-1-0
+       i=1   arr.length-1-1
+       i=2   arr.length-1-2
+       #+BEGIN_SRC java
+           import java.util.Arrays;
+           class ArrayReserver{
+               public static void main(String[] args){
+                   int[] arr={1,2,7,4,5};
+                   int[] arr1=new int[arr.length];
+                   for(int i=0;i<arr.length;i++){
+                       arr1[arr.length-1-i]=arr[i];
+                   }
+                   arr=arr1;
+                   System.out.println(Arrays.toString(arr));
+               }
+           }
+       #+END_SRC
+     - 数值的位置变换
+       [1,2,5,7,8]
+       0 arr.length-1
+       1 arr.length-1-1
+       2 arr.length-1-2
+       变换次数：arr.length/2
+       #+BEGIN_SRC java
+           import java.util.Arrays;
+           public class ArraysApplicationDemo1{
+               public static void main(String[] args){
+                   int[] arr = {2,6,1,8,4,3,0};
+                   for(int i=0;i<arr.length/2;i++){
+                       int temp = arr[i];
+                       arr[i]=arr[arr.length-i-1];
+                       arr[arr.length-i-1]=temp;
+                   }
+                   System.out.println(Arrays.toString(arr));
+               }
+           }
+       #+END_SRC
+**** 数组的查找
+     根据查找数，返回这个查找数在数组出现的下标
+***** 查找元素出现的位置(无序数组)
       #+BEGIN_SRC java
-        import java.util.Arrays;
-        public class ArraysApplicationDemo1{
-            public static void main(String[] args){
-                int[] arr = {2,6,1,8,4,3,0};
-                //数组的反转
-                for(int i = 0,j = arr.length - 1;i<j;i++,j--){
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
-            }
-        }
+          int[] arr={1,2,5,8,3};
+          int find=3;
+              for(int i=0;i<arr.length;i++){
+                  if(find == arr[i]){
+                      System.out.println(i);
+                  }
+              }
       #+END_SRC
-    - 查找元素出现的位置(无序数组)
       #+BEGIN_SRC java
-        public class ArrayApplicationDemo2{
-            public static void main(String[] args){
-                int[] arr = {2,3,4,8,5};
-                int num = 9;
-                for(int i = 0;i<arr.length;i++){
-                    if(arr[i] == num){
-                        System.out.println(i);
-                        break;
-                    }
-                }
-            }
-        }
+          int[] arr={1,5,2,8,3,4};
+          int num=8;
+          int count=0;
+              for(int i:arr){
+                  if(i==num){
+                      System.out.println(count);
+                      break;
+                  }
+                  count++;
+              }
       #+END_SRC
-    - 查找元素出现的位置(有序数组)(折半查找/二分查找)
       #+BEGIN_SRC java
-        public class ArrayApplicationDemo2{
-            public static void main(String[] args){
-                int[] arr = {12,14,16,17,53,78,87};
-                int num = 17;
-
-                //记录最小值的下标
-                int min = 0;
-                //记录最大值的下标
-                int max = arr.length - 1;
-                //计算中间值
-                int mid = (min + max)/2;
-
-                while(arr[mid] != num){
-                    if(num > arr[mid])
-                        min = mid + 1;
-                    else
-                        max = mid -1;
-                    if(min > max){
-                        System.out.println("查找的数不存在");
-                        break;
-                    }
-                    mid = (min + max)/2;
-                }
-                System.out.println(mid);
-            }
-        }
+          int[] arr = {2,3,4,8,5};
+          int num = 9;
+              for(int i = 0;i<arr.length;i++){
+                  if(arr[i] == num){
+                      System.out.println(i);
+                      break;
+                  }
+              }
       #+END_SRC
-      + 时间复杂度
-        (1/2)^x = n ---> O(logn)
-      + 空间复杂度
-        o(1)
-
-*** 数组排序
-    - 冒泡排序
-         相邻两个元素进行两两比较，然后交换位置
-
+***** 查找元素出现的位置(有序数组)(折半查找/二分查找)
       #+BEGIN_SRC java
-
-      public class ArrayDemo_1234{
-          public static void main(String[] args){
-              int[] arr ={2,2,3,5,6,7,3,1};
-
-              //数组的排序
-              for(int i = 1; i<arr.length;i++){
-                  //控制轮数
-                  for(int j = 1;j<= arr.length - 1;j++){
-                      if(arr[j - 1] > arr[j]){
-                          int temp = arr[j -1];
-                          arr[j - 1] = arr[j];
-                          arr[j] = temp;
-                      }
+          int[] arr={1,2,3,5,6,8,9};
+          int num=8;
+          int min=0;
+          int max=arr.length-1;
+          int mid=(min+max)/2;
+          //标志位
+          boolean flag=true;
+          //操作循环拿中间下标对应的元素值和查找数进行比较
+          while(arr[mid]!=num){
+              //中间下标对应的数组元素值小于查找数
+              if(arr[mid]<num){
+                  min=mid+1;
+              }
+              //中间下标对应的数组元素值大于查找数
+              if(arr[mid]>num){
+                  max=mid-1;
+              }
+              //判断不在范围内的数
+              if(min>max){
+                  System.out.println("没有这个数");
+                  flag=false;
+                  break;
+              }
+              //新的中间下标值
+              mid=(min+max)/2;
+          }
+          if(flag){
+              System.out.println(mid);
+          }
+      #+END_SRC
+**** 数组排序
+     排列数组元素顺序
+***** 冒泡排序
+      相邻两个元素进行两两比较，然后交换位置
+      [[./25.png]]
+      #+BEGIN_SRC java
+          int[] arr={2,1,3,6,5};
+          //嵌套循环
+          //控制轮数
+          for(int i=1;i<arr.length;i++){
+              //控制参与操作元素的个数
+              for(int j=1;j<=arr.length-i;j++){
+                  //两两比较
+                  if(arr[j-1]>arr[j]){
+                      int temp=arr[j-1];
+                      arr[j-1]=arr[j];
+                      arr[j]=temp;
                   }
               }
           }
-      }
-    #+END_SRC
-      + 时间复杂度
-        时间复杂度---找重复执行的这段代码，将这段代码的执行时间认为成是单位1，那么
-                 执行这个单位1的次数就是时间复杂度，习惯上，只考虑最高阶，不考虑
-                 系数，用O()表示
-                 三种形式n^x,(logn)^x,n(logn)^y;底数默认为2
-                 时间复杂度不决定时间的长短，决定的是次数的多少
-        轮数：数组长度 - 1
-        第i轮比较的次数： 数组长度 - i
-        第j轮比较的起始下标：j - 1和 j
-
-        相邻两个元素进行两两比较然后交换变换位置---冒泡排序
-        数组长度假设为n
-        第 n 轮     执行 1 次
-        n-1          2
-        n-2          3
-        ...
-        1            n-1
-
-        总共要执行 (n-1)(n-1+1)/2 ---> 1/2*n^2 - 1/2*n
-        其中 1/2*n^2 对结果的影响最大，所以时间复杂度就为O(n^2)
-      + 空间复杂度
-        空间复杂度---在已知的条件下，执行这段代码需要额外耗费的空间的数量
-        在数组长度随意变化的情况下，冒泡排序只需要三个变量，不随长度变化而变化
-        o(1)
-        3 = 3 * n^0 ---> n^0 ---> o(1)
-    - 选择排序
-      选定一位然后依次和其他位进行比较
-      #+BEGIN_SRC java
-        import java.util.Arrays;
-        public class ArrayApplicationDemo{
-            public static void main(String[] args){
-                int[] arr = {2,3,5,6,1,7,9};
-                //控制轮数
-                for(int i = 1;i<arr.length;i++){
-                    /*
-                      轮数：长度 - 1
-                      第i轮选定的下标： i - 1
-                      第i轮要比较的下标：i
-                     ,*/
-
-                    //控制要标胶的下标
-                    for(int j = i;j<arr.length;j++){
-                        if(arr[i - 1] > arr[j]){
-                            int temp = arr[i - 1];
-                            arr[i - 1] = arr[j];
-                            arr[j] = temp;
-                        }
-                    }
-                }
-                String str = Arrays.toString(arr);
-                System.out.println(str);
-            }
-        }
+          System.out.println(Arrays.toString(arr));
       #+END_SRC
-      + 时间复杂度
-        O(n^2)
-      + 空间复杂度
-        o(1)
-    - 升序排序
-      Arrays.sort(arr);
-      + 时间复杂度
-        O(nlogn)
-
-*** 数组的复制
-    - System.arraycopy(要复制的数组,要复制的起始下标,要存放的数组,要存放的起始下标,要复制的元素个数);
-       #+BEGIN_SRC java
-      public class ArrayDemo{
-          public static void main(String[] args){
-              int[] arr1 = {2,1,5,6,8,0,9};
-              int[] arr2 = new int[5];
-
-              //复制元素
-              System.arraycopy(arr1,3,arr2,1,3);
-              for(int i : arr2){
-                  System.out.println(i);
+***** 选择排序
+      选定一位然后依次和其他位进行比较
+      [[./26.png]]
+      #+BEGIN_SRC java
+          int[] arr={2,1,3,6,5};
+          //操作嵌套循环
+          //控制轮数
+          for(int i=1;i<arr.length;i++){
+              //参与运算元素的范围
+              for(int j=i-1;j<arr.length;j++){
+                  //
+                  if(arr[i-1]>arr[j]){
+                      int temp=arr[j];
+                      arr[j]=arr[i-1];
+                      arr[i-1]=temp;
+                  }
               }
           }
-      }
-    #+END_SRC
-*** 数组的扩容
-    实际上数组的扩容本质上就是数组的复制
-    int[] newArr = new int[len];
-    int min = arr1.length > len ? leng : arr1.length;
-    System.arraycopy(arr1,0,newArr,0,min);
-    arr1 = newArr;
-    - Arrays.copyOf(原数组,改变之后的长度);
-
+          System.out.println(Arrays.toString(arr));
+      #+END_SRC
+***** 升序排序
       #+BEGIN_SRC java
-        import java.util.Arrays;
-        public class ArrayDemo2{
-            public static void main(String[] args){
-                int[] arr1 = {2,3,5,6,8,3};
-                int[] arr2 = new int[5];
+          Arrays.sort(arr);
+      #+END_SRC
+**** 数组的扩容
+     数组定义完成之后长度无法改变
+     实际上数组的扩容本质上就是数组的复制
+     System.arraycopy(要复制的数组,要复制的起始下标,要存放的数组,要存放的起始下标,
+                      要复制的元素个数);
+     #+BEGIN_SRC java
+         int[] arr1 = {2,1,5,6,8,0,9};
+         int[] arr2 = new int[5];
+         System.arraycopy(arr1,3,arr2,1,3);
+         for(int i : arr2){
+             System.out.println(i);
+         }
+     #+END_SRC
+***** Arrays.copyOf(原数组,改变之后的长度);
+      #+BEGIN_SRC java
+          import java.util.Arrays;
+          class ArrayDemo2{
+              public static void main(String[] args){
+                  int[] arr1 = {2,3,5,6,8,3};
+                  int[] arr2 = new int[5];
 
-                arr1 = Arrays.copyOf(arr1,15);
-                System.out.println(Arrays.toString(arr1));
-            }
-        }
+                  arr1 = Arrays.copyOf(arr1,15);
+                  System.out.println(Arrays.toString(arr1));
+              }
+          }
       #+END_SRC
 
+**** 时间复杂度
+     核心代码执行的时间
+     二分查找：n(数组长度)/2^x=1 x=log2n(log以2为底的) O(log2n)
+     冒泡、选择：n(n-1)--->n^2-n--->O(n^2)
+     Arrays.sort():O(nlogn)
+**** 空间复杂度
+     在代码运行过程中产生的要占用的内存
+     二分查找、冒泡、选择：O(1)
 ** 二维数组
    存储一维i数组的数组
 *** 定义格式
@@ -2837,107 +2922,7 @@
     #+END_SRC
 
 ** 数组的应用
-   - 时间复杂度
-     核心代码执行的时间
-     二分查找：n(数组长度)/2^x=1 x=log2n(log以2为底的) O(log2n)
-     冒泡、选择：n(n-1)--->n^2-n--->O(n^2)
-     Arrays.sort():O(nlogn)
-   - 空间复杂度
-     在代码运行过程中产生的要占用的内存
-     二分查找、冒泡、选择：O(1)
-   - 扩容
-     数组定义完成之后长度无法改变--->数组的复制
 
-     #+BEGIN_SRC java
-       import java.util.Arrays;
-       class KuoRong{
-           public static void main(String[] args){
-               //原数组
-               int[] arr={1,2,5,3,7};
-
-               //新数组
-               int[] arr1=new int[arr.length];
-               //数组的复制
-               //（原数组，原数组的开始复制的起始下标，新数组，新数组开始复制的起始下标，复制的元素个数）
-               //System.out.println(arr,0,arr1,0,5);
-               //底层还是根据System.arraycopy()来完成的
-               //返回的是一个新数组
-               //(原数组，操作之后的数组的长度)
-               arr=Arrays.copyOf(arr,2);
-               System.out.println(Arrays.toString(arr));
-           }
-       }
-     #+END_SRC
-   - 二维数组
-     数组元素是一维数组的数组就是二维数组
-     + 定义格式
-       1. 数组类型[][] 数组名=new 数组类型[一维数组的个数][一维数组元素的个数];
-          int[][] arr=new int[2][3];
-
-          #+BEGIN_SRC java
-            class ErWei{
-                public static void main(String[] args){
-                    int[][] arr=new int[2][3];
-                    //二维数组的地址值：[[I@7852e922
-                    System.out.println(arr);
-                    //一维数组的地址值：[I@4e25154f
-                    System.out.println(arr[0]);
-                    //二维数组的第一个一维数组的第一个元素值：0
-                    System.out.println(arr[0][0]);
-
-                }
-            }
-          #+END_SRC
-
-       2. 数据类型[][] 数组名=new 数据类型[一维数组的个数][];
-          int[][] =new int[3][];
-
-          //赋值
-          arr[0]=new int[3];//可以
-          arr[0]=new int[]{1,2,3};//可以
-          arr[0]={1,4,5};//不可以
-          arr[0][0]---找不到
-
-          #+BEGIN_SRC java
-            class ErWei1{
-                public static void main(String[] args){
-                    int[][] arr=new int[3][];
-                    //一维数组赋值
-                    arr[0]=new int[3];
-                    arr[0]=new int[]{1,2,4};
-                    //不可以
-                    arr[0]={1,2,3,4};
-                    //null
-                    System.out.println(arr[0]);
-                    //NullPointerException--->空指针异常
-                    System.out.println(arr[0][0]);
-                }
-            }
-          #+END_SRC
-
-       3. 数据类型[][] 数组名={{元素值1,元素值2,...},{元素值1,元素值2,...},{元素值1,元素值2,...}};
-          int[][] arr={{1,2,3},{2,3,4},{5,6,7}};
-
-          #+BEGIN_SRC java
-            class ErWei2{
-                public static void main(String[] args){
-                    int[][] arr={{1,2,3},{4,5},{6,7,8,9}};
-                    }
-                }
-
-          #+END_SRC
-
-     + int x,y
-       (int[] y ; int y[])都是声明数组
-       如果int[] x,y[]---int[]x,int[]y[]---int[] x,int[][] y都已经初始化完成，下
-       列选项正确的是？
-       A.x=y;
-       B.x[0]=y[0];
-       C.x[0]=y[0];
-       D.x[0][0]=y;
-       E.x[0][0]=y[0][0];
-       int[]x,y,z[]---[]如果在数据类型的后面就会去修饰数据类型修饰的所有变量，如
-       果[]在变量的后面只能修饰变量
 ** 数组总结
 *** 数组（一维数组）
     - 它是一个用来存储同一个数据类型多个元素的一个容器（数组长度是固定的，数组中存储的元素的数据类型要求一致）
