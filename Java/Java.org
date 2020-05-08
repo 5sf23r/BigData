@@ -2625,96 +2625,98 @@
      在代码运行过程中产生的要占用的内存
      二分查找、冒泡、选择：O(1)
 ** 二维数组
-   存储一维i数组的数组
+   数组元素是一维数组的数组
 *** 定义格式
-    数据类型[][] 数组名 = new 数据类型[存储的一维数组的个数][每一个一维数组存放的元素个数];
-    int[][] arr = new int[3][5];
-    表示定义了存储3个元素类型为int的一维数组，每一个一维数组中存放5个元素
-    arr[1] 获取的是下标为1的位置上的一维数组
-    arr[1][3] = 6;
-
-    数据类型[][] 数组名 = new 数据类型[包含的一维数组的个数][];
-    int[][] arr = new int[5][];
-    表示定义了能存储5个元素类型为int的一维数组
-    arr[0] = new int[5];
-    arr[1] = new int[2];
-    arr[2] = new int[4];
-
-    数据类型[][] 数组名 = {数组1，数组2，数组3，...};
-    int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
-    既定义包含的一维数组的个数，也定义了每一个一维数组中的元素
-
-    #+BEGIN_SRC java
-      public class ArrayDemo2{
-          public static void main(String[] args){
-              int[][] arr = new int[3][2];
-              for(int i = 0;i<arr.length;i++){
-                  System.out.println(arr[i]);
-              }
-          }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      public class ArrayDemo3{
-          public static void main(String[] args){
-              int[][] arr = new int[5][];
-              arr[0] = new int[3];
-              arr[0][0] = 10;
-          }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      public class ArrayDemo4{
-          public static void main(String[] args){
-              int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
-              System.out.println(arr[1][3]);
-          }
-      }
-    #+END_SRC
+**** 数据类型[][] 数组名 = new 数据类型[一维数组的个数][每个一维数组元素的个数];
+     int[][] arr = new int[3][5];
+     arr[0]---第一个一维数组
+     arr[0][0]---第一个一维数组的第一个元素
+     #+BEGIN_SRC java
+          int[][] arr=new int[2][3];
+          //[[I@7852e922---二维数组地址值
+          System.out.println(arr);
+          //[I@4e25154f
+          System.out.println(arr[0]);
+          //0
+          System.out.println(arr[0][1]);
+     #+END_SRC
+**** 数据类型[][] 数组名 = new 数据类型[一维数组个数][];
+     int[][] arr = new int[5][];
+     表示定义了能存储5个元素类型为int的一维数组
+     #+BEGIN_SRC java
+     //声明两个一维数组
+     int[][] arr=new int[5][];
+     arr[0] = new int[5];
+     arr[1] = new int[2];
+     arr[2] = new int[4];
+     arr[0] = new int[]{1,2,3};
+     arr[0] = {1,4,5};//不可以
+     #+END_SRC
+***** NullPointerException---空指针异常
+      #+BEGIN_SRC java
+          int[][] arr=new int[5][];
+          //null
+          System.out.println(arr[0]);
+          //NullPointerException
+          System.out.println(arr[0][0]);
+      #+END_SRC
+**** 数据类型[][] 数组名 = new 数据类型[][]{{数组1},{数组2}};
+**** 数据类型[][] 数组名 = {数组1，数组2，数组3，...};
+     int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
+     既定义包含的一维数组的个数，也定义了每一个一维数组中的元素
+     #+BEGIN_SRC java
+         int[][] arr={{2,6},{2,5,7,7},{5},{2,76,5}};
+     #+END_SRC
+*** int[] x;int x[];//等效
+    如果[]在数据类型的后面，就会随着数据类型修饰的内容一起去修饰，
+    如果[]在变量的后面，那么这个[]只修饰变量
+    对int[] x,y[]进行了初始化，下列正确的是？BD
+    A.x[0][0]=y[0];
+    B.x[0]=y[0][0];
+    C.x=y;
+    D.x=y[0];
+    E.x[0]=y;
+*** 二维数组内存图
+    [[./27.png]]
 *** 二维数组的遍历
-    - 普通遍历
-      #+BEGIN_SRC java
-      public class ArrayDemo4{
-          public static void main(String[] args){
-              int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
-              for(int i = 0;i<arr.length;i++){
-                  for(int j = 0;j<arr[i].length;j++){
-                      System.out.println(arr[i][j]);
-                  }
-              }
-          }
-      }
-    #+END_SRC
-    - 增强for循环
-      #+BEGIN_SRC java
-        public class ArrayDemo5{
-            public static void main(String[] args){
-                int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
-                //定义一个一维数组依次表示二维数组中的每一个元素
-                for(int[] as : arr){
-                    for(int i = 0;i<as.length;i++){
-                        System.out.println(as[i]);
-                    }
-                }
-            }
-        }
-      #+END_SRC
-
-      #+BEGIN_SRC java
-        public class ArrayDemo6{
-            public static void main(String[] args){
-                int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
-                for(int[] as : arr){
-                    for(int i : as){
-                        System.out.println(i);
-                    }
-                }
-            }
-        }
-      #+END_SRC
-
+**** 普通遍历
+     #+BEGIN_SRC java
+         int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
+         //控制的是一维数组的个数
+         for(int i = 0;i<arr.length;i++){
+             //控制的是每个一维数组的元素
+             for(int j = 0;j<arr[i].length;j++){
+                 System.out.print(arr[i][j]+"\t");
+             }
+             System.out.println();
+         }
+     #+END_SRC
+**** 增强for循环
+     #+BEGIN_SRC java
+         class ArrayDemo5{
+             public static void main(String[] args){
+                 int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
+                 //定义一个一维数组依次表示二维数组中的每一个元素
+                 for(int[] as : arr){
+                     for(int i = 0;i<as.length;i++){
+                         System.out.println(as[i]);
+                     }
+                 }
+             }
+         }
+     #+END_SRC
+     #+BEGIN_SRC java
+         class ArrayDemo6{
+             public static void main(String[] args){
+                 int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
+                 for(int[] as : arr){
+                     for(int i : as){
+                         System.out.println(i);
+                     }
+                 }
+             }
+         }
+     #+END_SRC
 
 
 *** 数组的常见的异常
