@@ -2293,6 +2293,31 @@
              }
          }
      #+END_SRC
+**** 读入一个整数n,输出如下图形：
+     当输入n=3时，输出：
+         *              空格 2     1   n=3      星星1      1   2*行-1
+        *****                  1     2               3      2
+       *******                 0     3               5      3
+     当输入n=4时，输出：
+         *
+        *****
+       *******
+      *********
+     #+BEGIN_SRC java
+         int n=5;
+         for(int x=1;x<=n,i++){
+             //空格
+             for(int y=0;y<n-x;y++){
+                 System.out.print(" ");
+             }
+             //星星
+             for(int z=1;z<=2*x-1;z++){
+                 System.out.print("*");
+             }
+             System.out.println();
+         }
+     #+END_SRC
+****
 ** Java的内存
    java将占用的内存分为了5块：栈内存、堆内存、方法区(面向对象讲)、本地方法栈、PC计数器（计数器）
 *** 栈内存：存储的变量(目前阶段)。
@@ -2390,10 +2415,10 @@
      一次输出数组元素的值
      - 遍历数组下标,先获取下标，然后利用下标获取元素
        #+BEGIN_SRC java
-       int[] arr  = {2,1,3,5,7,0,4};
-       for(int i = 0;i<arr.length;i++){
-           System.out.println(arr[i]);
-       }
+           int[] arr  = {2,1,3,5,7,0,4};
+           for(int i = 0;i<arr.length;i++){
+               System.out.println(arr[i]);
+           }
        #+END_SRC
      - 直接获取数组中的元素(只能遍历数组，不能改变数组中的元素)
        把所有的数组元素拷贝一份拿过来进行输出
