@@ -92,7 +92,7 @@
 ** 关键字
    在java中被赋予了特殊含义的单词，53个关键字，两个保留字（const,goto也是关键字）
    在java中所有的关键字都是小写的
-   [[~/Documents/BigData/Java/16.png]]
+   [[./16.png]]
 ** 标识符
    在java中可以自定义的名称
    就是名称的意思，所有的名称统称为标识符。
@@ -181,26 +181,26 @@
      ，9f+1=A0，ff+1=100，要求以0X/0x作为开头 0x5 0xAF
 **** 举例
      #+BEGIN_SRC java
-     class JavaDemo2{
-         public static void main(String[] args){
-             //输出二进制数
-             System.out.println(0b100);
-             //输出八进制
-             System.out.println(0100);
-             //输出十进制
-             System.out.println(100);
-             //输出十六进制
-             System.out.println(0x100);
+         class JavaDemo2{
+             public static void main(String[] args){
+                 //输出二进制数
+                 System.out.println(0b100);
+                 //输出八进制
+                 System.out.println(0100);
+                 //输出十进制
+                 System.out.println(100);
+                 //输出十六进制
+                 System.out.println(0x100);
+             }
          }
-     }
 
      #+END_SRC
-     [[~/Documents/BigData/Java/JavaDemo2.java]]
+     [[./JavaDemo2.java]]
 **** 进制转换
 ***** 其他进制转换为十进制
 ****** 二进制转换为十进制
        从低位次（数字最右边是低位次）开始，按位次乘以2的位次次幂，然后求和
-       [[~/Documents/BigData/Java/2.png]]
+       [[./2.png]]
        100 ---> 4
        =1*2^2 + 0*2^1 + 0*2^0
        =4
@@ -208,7 +208,7 @@
        = 1*2^0 + 0*2^1 + 1*2^2 + 1*2^3
        =13
 ****** 十六进制转换为十进制
-       [[~/Documents/BigData/Java/3.png]]
+       [[./3.png]]
        522 ---> 1314
        =5*16^2 + 2*16^1 + 2*16^0
        =1314
@@ -220,13 +220,13 @@
        规律：位乘以基数的权次幂之和
 ***** 十进制转换为其他进制
 ****** 十进制转换为二进制
-       [[~/Documents/BigData/Java/4.png]]
+       [[./4.png]]
        十进制 14 ---> 二进制 1110
 
        规律：除基取余，直至商为0，余数翻转
 ***** 任意进制直接的转换
 ****** 二进制向八进制转换
-       [[~/Documents/BigData/Java/10.png]]
+       [[./10.png]]
        三变一----从低位次开始，每三位二进制划分为一组，产生一个八进制数字，最高位可能不足三位，补0，补齐三位，然后也产生一个八进制数字
        1100110 = 0146
        001 100 110
@@ -234,21 +234,21 @@
        100 = 4
        110 = 6
 ****** 八进制向二进制转换
-       [[~/Documents/BigData/Java/11.png]]
+       [[./11.png]]
        一变三----每一位八进制都会产生三位二进制数字
        0527 = 101 010 111
        5 = 101
        2 = 010
        7 = 111
 ****** 二进制转十六进制
-       [[~/Documents/BigData/Java/12.png]]
+       [[./12.png]]
        四变一----每四位产生一位十六进制
        1110101101 = 0x3ad
        1101 = d(13)
        1010 = a(10)
        0011 - 3
 ****** 十六进制转二进制
-       [[~/Documents/BigData/Java/9.png]]
+       [[./9.png]]
        一变四
        0xe3c = 1110 0011 1100
        e(14) = 1110
@@ -256,7 +256,7 @@
        c(12) = 1100
 ****** 以十进制为中转进行转换
       X进制先转为十进制，这个十进制转换为Y进制
-      [[~/Documents/BigData/Java/5.png]]
+      [[./5.png]]
       二进制 101 ---> 八进制 5
             = 1*2^2 + 1*2^0
             = 5
@@ -265,7 +265,7 @@
        (5*n^0 + 1*n^1)*(4*n^0) = 0*n^0 + 2*n^1 + 1*n^2
 ****** 拆分组合
        三个二进制的数范围为0~7（000~111），0~7可以看做是8进制
-       [[~/Documents/BigData/Java/6.png ]]
+       [[./6.png ]]
        + 二进制--->八进制（三变一）
          从低位次开始，每三位二进制划分为一组转换为十进制数，最高位可能不足三位，用0补齐三位
          1100110 ---> 001100110 ---> 001 100 110 ---> 1 4 6
@@ -995,7 +995,7 @@
       [[./WeiDemo4.java]]
 **** 按位异或的扩展
      如果一个数按位异或上另一个数两次，结果就是本身
-     [[~/Documents/BigData/Java/WeiDemo.java]]
+     [[./WeiDemo.java]]
 **** 交换值的方式：
      - 方式一：异或法
        int x = 5
@@ -1019,7 +1019,7 @@
           }
 
        #+END_SRC
-       [[~/Documents/BigData/Java/WeiDemo2.java]]
+       [[./WeiDemo2.java]]
      - 方式二：加减法
         int x = 3;
         int y = 7;
@@ -1040,7 +1040,7 @@
             }
 
         #+END_SRC
-        [[~/Documents/BigData/Java/WeiDemo3.java]]
+        [[./WeiDemo3.java]]
      - 方式三：第三方变量
         int x = 3;
         int y = 7;
@@ -1060,7 +1060,7 @@
                 }
             }
         #+END_SRC
-        [[~/Documents/BigData/Java/WeiDemo1.java]]
+        [[./WeiDemo1.java]]
      - 扩展：考虑三种方式的优劣性
         异或法的效率最高，但使用频率最低            ---只能适用于整数值的交换
         加减法的效率低于异或法，但是高于第三方变量法  ---理论上适用于数值型（小数运算不准确）
@@ -1302,12 +1302,11 @@
      do...while
 *** 选择结构
 **** if
-***** 选择结构if
 ***** if语句：
      编写格式：if（判断条件）{语句体;}
      执行流程：先去计算判断条件的值，如果是true就去执行语句体，
              如果是false就跳过不执行，执行其他语句
-     [[~/Documents/BigData/Java/20.png]]
+     [[./20.png]]
      #+BEGIN_SRC java
          import java.util.Scanner;
          class IfDemo{
@@ -1366,7 +1365,7 @@
      编写格式：if(判断条件){语句体1;}else{语句体2;}
      执行流程：先去计算判断条件，如果是true就执行语句体1，如果false就执行语句体2
      如果if语句格式2返回的是一个值就和三目等效
-     [[~/Documents/BigData/Java/21.png]]
+     [[./21.png]]
      - 求两个整数的最大值
        #+BEGIN_SRC java
          int a=10;
@@ -1377,7 +1376,7 @@
              System.out.println(b);
          }
         #+END_SRC
-       [[~/Documents/BigData/Java/IfDeo2.java]]
+       [[./IfDeo2.java]]
      - 求三个整数的最大值
        #+BEGIN_SRC java
            int a=10;
@@ -1397,7 +1396,7 @@
                }
            }
        #+END_SRC
-       [[~/Documents/BigData/Java/IfDemo3.java]]
+       [[./IfDemo3.java]]
 ***** if...else if...else语句
      适合在程序中，实现多条件的判断
      编写格式：
@@ -1414,7 +1413,7 @@
             }
      执行流程：先计算判断条件1，如果是true，就执行语句体1，如果是false就去计算判断条件2，如果是true就执行语句体2
              如果是false就去计算判断条件3，如果是true就执行语句体3，如果全部false就执行语句体n+1
-     [[~/Documents/BigData/Java/22.png]]
+     [[./22.png]]
      #+BEGIN_SRC java
          //根据输入的星星数展示用户的段位
          Scanner sc=new Scanner(System.in);
@@ -1643,7 +1642,7 @@
         3.如果是true，就执行循环体，执行完循环体之后执行控制条件
         4.执行完的值与判断条件进行判断
         如果是true就执行3，4操作；知道false出现就结束循环
-        [[~/Documents/BigData/Java/24.png]]
+        [[./24.png]]
 
     #+BEGIN_SRC java
         class ForDemo{
@@ -1666,7 +1665,7 @@
             }
         }
       #+END_SRC
-      [[~/Documents/BigData/Java/ForDemo1.java]]
+      [[./ForDemo1.java]]
 
     - 输出1+4的结果
       #+BEGIN_SRC java
@@ -1690,7 +1689,7 @@
             }
         }
       #+END_SRC
-      [[~/Documents/BigData/Java/ForDemo.java]]
+      [[./ForDemo.java]]
 
     - 计算1~n中的所有奇数和
       #+BEGIN_SRC java
@@ -1712,7 +1711,7 @@
               }
           }
       #+END_SRC
-      [[~/Documents/BigData/Java/ForDemo3.java]]
+      [[./ForDemo3.java]]
 
     - 计算1~n中的所有偶数和
       #+BEGIN_SRC java
@@ -1735,7 +1734,7 @@
               }
           }
       #+END_SRC
-      [[~/Documents/BigData/Java/ForDemo4.java]]
+      [[./ForDemo4.java]]
 
     - 求5的阶乘
       #+BEGIN_SRC java
@@ -1749,7 +1748,7 @@
               }
           }
       #+END_SRC
-      [[~/Documents/BigData/Java/ForDemo5.java]]
+      [[./ForDemo5.java]]
 
     - 在控制台输出所有水仙花数
       三位数 abc=a^3+b^3+c^3
@@ -1770,7 +1769,7 @@
               }
           }
       #+END_SRC
-      [[~/Documents/BigData/Java/ForDemo6.java]]
+      [[./ForDemo6.java]]
 
     - 统计水仙花数有多少个
       #+BEGIN_SRC java
@@ -1790,7 +1789,7 @@
           }
 
       #+END_SRC
-      [[~/Documents/BigData/Java/ForDemo7.java]]
+      [[./ForDemo7.java]]
 
     - 请在控制台输出满足如下条件的五位数
       个位数等于万位
@@ -1813,7 +1812,7 @@
           }
 
       #+END_SRC
-      [[~/Documents/BigData/Java/ForDemo8.java]]
+      [[./ForDemo8.java]]
 
     - 请统计1~1000之间同时满足如下条件的数据有多少个
       对3整除余2
@@ -1832,7 +1831,7 @@
               }
           }
       #+END_SRC
-      [[~/Documents/BigData/Java/ForDemo9.java]]
+      [[./ForDemo9.java]]
 ***** 增强for循环
       底层的实质是迭代
       - 格式：
@@ -1864,7 +1863,7 @@
         }
     }
     #+END_SRC
-    [[~/Documents/BigData/Java/WhileDemo.java]]
+    [[./WhileDemo.java]]
 
     #+BEGIN_SRC java
 
@@ -2176,7 +2175,7 @@
         在多层循环时，通过break tag方式，指定在break时要跳出的是哪一层循环
         #+BEGIN_SRC java
             class BreakDemo_1{
-                public static void main(String[] args){
+            public static void main(String[] args){
                     a:for(int i = 0;i<2;i++){
                         for(int j = 0;j<5;j++){
                             System.out.println("j="+j);
