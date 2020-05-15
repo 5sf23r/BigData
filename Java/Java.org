@@ -39,56 +39,88 @@
     JAVA_HOME = JDK的安装目录
     PATH = %JAVA_HOME%\bin
 ** 包
-   package cn.tedu.exer
-   - javac -d E:\\ Demo.java
-     -d 参数，表示在编译的时候需要将包生成对应的文件夹
+   package cm.tedu.exer
+   #+BEGIN_SRC java
+       package cm.tedu.exer;
+       class PackageDemo{
+           public static void main(String[] args){
+               System.out.println("OK");
+           }
+       }
+   #+END_SRC
+   [[./PackageDemo.java]]
+*** 带包编译和运行
+    #+BEGIN_SRC java
+        package cn.tedu.exer;
+            class PackageDemo{
+            public static void main(String[] args){
+                System.out.println("OK");
+            }
+        }
+    #+END_SRC
+    [[./PackageDemo.java]]
+    #+BEGIN_SRC java
+        package cm.tedu.exer;
+        class PackageDemo{
+            public static void main(String[] args){
+                System.out.println("OK");
+            }
+        }
+    #+END_SRC
+    [[./PackageDemo1.java]]
+**** 编译
+    -d：新建目录;表示在编译的时候需要将包生成对应的文件夹
+     .：当前目录
      E:\\ 编译之后产生的文件夹的存放位置
-   - java cn.tedu.exer.Demo
+     javac -d . PackageDemo.java
+     javac -d E:\\ PackageDemo1.java
+**** 运行
+    Java 包名.类名
+    java cn.tedu.exer.PackageDemo
+    java cm.tedu.exer.PackageDemo1
 ** 案例：输出HelloWorld
-   1. 定义一个类
-      class HelloWorld{}
-   2. 定义main方法
-      class HelloWorld{
-         public static void main(String[] args){
-         }
-      }
-      main主函数的主要作用：
-      1. 可以让类单独运行
-      2. 是程序的入口
-      3. 被JVM调用
-      4. 输出语句
+*** 定义一个类
+    class HelloWorld{}
+*** 定义main方法
+    #+BEGIN_SRC java
+        public static void main(String[] args){}
+    #+END_SRC
+    #+BEGIN_SRC java
+        class HelloWorld{
+            public static void main(String[] args){
+            }
+        }
+    #+END_SRC
+**** main主函数的主要作用：
+     1. 可以让类单独运行
+     2. 是程序的入口
+     3. 被JVM调用
+     4. 输出语句
          System.out.println("helloworld");
-   - 总结：
-     .java文件（源文件）经过编译成为.class文件（二进制文件/字节码文件）
-     编译时期（检测代码的语法问题）
-     运行时期（执行代码的逻辑）
-   - 注意：
-     1. .class文件名称和类名一致
-     2. 公共类的类名要和.java文件的文件名称保持一致
-     3. .java文件中只能最多有一个公共类
-     4. .java文件中可以存储多个类，有几个类就会生成几个.class文件，如果出现大小写的问题就看最后一个
-     5. 带包编译和运行
-        -d：新建目录
-        .：当前目录
-        javac -d . JavaDemo.java
-
-        Java包名.类名
-        java cn.tedu.day01.JavaDemo.java
+*** 总结：
+    .java文件（源文件）经过编译成为.class文件（二进制文件/字节码文件）
+    编译时期（检测代码的语法问题）
+    运行时期（执行代码的逻辑）
+*** 注意：
+    1. .class文件名称和类名一致
+    2. 公共类的类名要和.java文件的文件名称保持一致
+    3. .java文件中只能最多有一个公共类
+    4. .java文件中可以存储多个类，有几个类就会生成几个.class文件，如果出现大小写的问题就看最后一个
 ** 注释
 *** 书写格式
     编译时，编译器会忽略注释的存在。
-    - 单行注释
-      //注释内容
-    - 多行注释
-      /*
+**** 单行注释
+     //注释内容
+**** 多行注释
+     /*
       注释内容
       */
       + 可以嵌套单行注释，不可以嵌套多行注释
-    - 文档注释
-      /**
+**** 文档注释
+     /**
       注释内容
       */
-      + 通过javadoc命令对注释的内容进行抽取，抽取到文档中（程序员说明书）
+      通过javadoc命令对注释的内容进行抽取，抽取到文档中（程序员说明书）
 ** 关键字
    在java中被赋予了特殊含义的单词，53个关键字，两个保留字（const,goto也是关键字）
    在java中所有的关键字都是小写的
