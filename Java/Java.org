@@ -3002,82 +3002,64 @@
     1. 单独调用
     2. 输出调用
     3. 赋值调用
+**** 方法的注意事项
+     1. 方法被调用才执行
+     2. 两个明确：返回值的数据类型，参数列表
+
 **** 单独调用
      方法名(参数值)
-    #+BEGIN_SRC java
-        package cn.commandoptionsec.method;
-        public class MethodDemo{
-            public static void main(String[] args){
-                //调用方法
-                //单独调用
-                printXing(3,6);
-            }
-            //效果不需要进行返回---返回值类型---void
-            //参数列表---int x,int y
-            public static void printXing(int x,int y){
-                for(int i=1;i<=8;i++){
-                    for(int j=1;j<=6;j++){
-                        System.out.print("*");
-                    }
-                    System.out.println();
-                }
-            }
-        }
-    #+END_SRC
      #+BEGIN_SRC java
-       public class MethodDemo{
-           public static void main(String[] args[]){
-               //调用方法，方法执行起来
-               //在方法main中，调用方法getArea
-               int area=getArea(5*6);
-               System.out.println("面积是："+area);
-           }
-           /*
-             要求:计算一个长方形的面积
-             定义一个方法解决这个要求
-             分析方法定义过程：
-                 1.明确方法计算后的结果的数据类型 int 定义格式对应的就是返回值类型
-                 2.方法计算的过程中，有没有位置的数据，宽和长，未知数据的数据类型 int
-                    未知数的变量，定义在方法的小括号内
-
-           ,*/
-           public static int getArea(int w,int h){
-               //实现方法的功能主体
-               //int area=w*h;
-               return w*h;
-            }
-           /*
-             1.从main入口，开始执行程序
-             2.从main的代码开始执行程序
-             3.调用方法，getArea，传递的参数5，6
-                5传递给方法的参数w
-                6传递给方法的参数h
-             4.方法getArea开始运行
-               计算w*h=30
-               return 30返回，将后面的数据，返回给方法的调用者
-
-             注意：
-                 1.方法getArea定义后，参数，变量w,h有没有具体的数值呢？
-                   是没有具体数值的。
-                 2.变量w,h在什么时候才赋值？
-                   被调用的时候，数值由调用者传递过来
-              方法的参数里面的变量，叫做形式变量，简称形参(有变量，但是我不用你的情况下你永远都没有值)
-              调用者在调用方法的时候传递5,6被叫做实际参数
-
-              过程：
-                   程序运行时期，必须要进入内存
-                   运行文件，编译后的class文件今日内存
-                   JVM虚拟机，调用main
-                   main方法进栈托运
-                   main方法中，调用方法getArea，传递参数
-                   getArea方法进栈运行
-                   计算结果返回调用者
-                   方法getArea就结束了，出栈，释放内存资源
-                   main获取到了方法getArea的结果
-            ,*/
-       }
+         package cn.commandoptionesc.method;
+         public class MethodDemo{
+             public static void main(String[] args){
+                 //调用方法
+                 //单独调用
+                 printXing(3,6);
+             }
+             //效果不需要进行返回---返回值类型---void
+             //参数列表---int x,int y
+             public static void printXing(int x,int y){
+                 for(int i=1;i<=8;i++){
+                     for(int j=1;j<=6;j++){
+                         System.out.print("*");
+                     }
+                     System.out.println();
+                 }
+             }
+         }
      #+END_SRC
-     [[file:./Code/MethodDemo.java]]
+     [[./MethodDemo.java]]
+**** 输出调用
+     #+BEGIN_SRC java
+         package cn.commandoptionesc.method;
+         public class MethodDemo1{
+             public static void main(String() args){
+                 //sum(2,4);
+                 //输出调用
+                 System.out.println(sum(2,4));
+             }
+             public static int sum(int m,int n){
+                 int sum=m+n;
+                 return sum;
+             }
+         }
+     #+END_SRC
+**** 赋值调用
+     #+BEGIN_SRC java
+         package cn.commandoptionesc.method;
+         public class MethodDemo2{
+             public static void main(String[] args){
+                 int result=sum(2,5);
+                 System.out.println(result);
+             }
+             public static int sum(int m,int n){
+                 int sum = m+n;
+                 return sum;
+             }
+         }
+     #+END_SRC
+
+
 *** 方法的定义练习
     1. 打印3行，每行3个*号的矩形
         #+BEGIN_SRC java
@@ -3149,22 +3131,7 @@
         #+END_SRC
         [[file:./Code/MethodDemo.java]]
 
-*** 定义方法和使用的注意事项
-    1. 方法不能定义在另一个方法的里面
-    2. 写错方法名
-    3. 写错了参数列表
-    4. 方法返回值是void，方法中可以省略return不写
-        return下面不能有代码
-    5. 方法返回值类型，和return后面数据类型必须匹配
-    6. 方法重复定义问题 不可以重复定义
-    7. 调用方法的时候，返回值是void，不能写在输出语句中
 
-    1. 方法被调用才执行
-    2. 确定两个明确：返回值的数据类型，参数列表
-    3. return可以出现在没有返回值的方法里用于结束方法
-        作用：把返回值进行返回 结束方法
-    4. 要处理所有数据,保证每一类数据都有返回
-    5. 抽取成方法是不定的，根据个人经验
 
 *** 方法的重载(overload)
     在同一个类中，允许出现同名的方法，只要方法的参数列表不同即可，这样的方法就是重载
