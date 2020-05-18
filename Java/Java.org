@@ -3005,7 +3005,35 @@
 **** 方法的注意事项
      1. 方法被调用才执行
      2. 两个明确：返回值的数据类型，参数列表
-
+     3. 没有返回值的方法，不能使用输出调用和赋值调用（不能输出，不能调用）
+     4. return可以出现在没有返回值的方法里，用于结束方法
+        作用：
+            a.把返回值进行返回
+            b.结束方法
+        #+BEGIN_SRC java
+            package cn.commandoptionesc.method;
+            public class MethodDemo3{
+                public static void main(String[] args){
+                    printXing(3,6);
+                }
+                public static void printXing(int x,int y){
+                    for(int i=1;i<=x;i++){
+                        for(int j=1;j<=y;j++){
+                            if(j==2)
+                                //结束方法
+                                return;
+                            System.out.println("*");
+                        }
+                        System.out.println();
+                    }
+                    //如果输出1就是结束方法，不是结束循环
+                    System.out.println(1);
+                }
+            }
+        #+END_SRC
+        [[./MethodDemo3.java]]
+     5. 要处理所有的数据，保证每一类数据都有返回
+     6. 抽取成方法是不定的，根据个人经验
 **** 单独调用
      方法名(参数值)
      #+BEGIN_SRC java
@@ -3019,8 +3047,8 @@
              //效果不需要进行返回---返回值类型---void
              //参数列表---int x,int y
              public static void printXing(int x,int y){
-                 for(int i=1;i<=8;i++){
-                     for(int j=1;j<=6;j++){
+                 for(int i=1;i<=x;i++){
+                     for(int j=1;j<=y;j++){
                          System.out.print("*");
                      }
                      System.out.println();
@@ -3039,11 +3067,14 @@
                  System.out.println(sum(2,4));
              }
              public static int sum(int m,int n){
-                 int sum=m+n;
+                /* int sum=m+n;
                  return sum;
+                 */
+                 return m+n;
              }
          }
      #+END_SRC
+     [[./MethodDemo1.java]]
 **** 赋值调用
      #+BEGIN_SRC java
          package cn.commandoptionesc.method;
@@ -3058,80 +3089,81 @@
              }
          }
      #+END_SRC
+     [[./MethodDemo2.java]]
 
+*** 方法练习
+    1. 判断一个整数是否是奇数
+       #+BEGIN_SRC java
+           //两个明确：返回值类型boolean 参数列表 int m
+           package cn.commandoptionesc.method;
+           public class MethodDemo4{
+               public static void main(String[] args){
+                   boolean boo= isOdd(8);
+                   System.out.println(boo);
+               }
+               public static boolean isOdd(int m){
+                   //把不正常的范围进行优化
+                   if(m<0){
+                       System.out.println("rewrite");
+                       return false;
+                   }
+                   //正常的范围
+                   if(m%2!=0){
+                       return true;
+                   }
+                   //正常范围，但为偶数
+                   return false;
+               }
+           }
+       #+END_SRC
+       [[./MethodDemo4.java]]
+    2. 判断一个整数是否是质数
+       #+BEGIN_SRC java
+           //两个明确：返回值类型booblean 参数列表int m
+           package cn.commandoptionesc.method;
+           public class MethodDemo5{
+               public static void main(String[] args){
 
-*** 方法的定义练习
-    1. 打印3行，每行3个*号的矩形
-        #+BEGIN_SRC java
-          /*
-            方法的定义练习
-
-           ,*/
-          import java.util.Scanner;
-          public class MethodDemo{
-
-              public static void main(String[] args){
-                  //printRect();
-                  //int number=getNumber();
-                  //System.out.println(getNumber);
-                  //printRect2(3,5);
-                  System.out.println(getAvg(2,4,6));
-              }
-              /*
-                定义无返回值无参数方法，如打印3行，每行3个*号的矩形
-                为什么没有返回值：
-                    打印矩形，传出效果，不需要讲结果返回
-                    明确未知数：不需要未知数
-              ,*/
-              public static void printRect(){
-                  for(int i=0;i<=3;i++){
-                      for(int j=0;j<=3;j++){
-                          System.out.println("*");
-                      }
-                      System.out.println();
-                  }
-              }
-
-
-              /*
-                定义有返回值无参数方法，如键盘录入得到一个整数
-                明确方法计算后结果的数据类型 int
-                明确有没有未知数，没有
-               ,*/
-              public static int getNumber(){
-                  Scanner sc=new Scanner(System.in);
-                  //int num =sc.nextInt();
-                  return sc.nextInt();
-              }
-
-              /*
-                定义无返回值有参数方法，如打印制定M行，每行N个*号的矩形
-                明确方法计算后结果，控制台输出图形,没有返回值的
-                方法中有没有未知数，图形行数，和列数，是未知的，数据类型 int
-               ,*/
-              public static void printRect2(int m,int n){
-                  for(int i=0;i<m,i++){
-                      for(int j=0;j<n;j++){
-                          System.out.print("*");
-                      }
-                      System.out.println();
-                  }
-              }
-
-
-              /*
-                定义有返回值有参数方法，如求三个数的平均值
-                明确方法计算后的数据类型，返回值类型 int
-                明确方法未知数，三个位置的整数
-               ,*/
-              public static int getAvg(int a,int b,int c){
-                  return (a+b+c)/3;
-              }
-          }
-        #+END_SRC
-        [[file:./Code/MethodDemo.java]]
-
-
+               }
+               public static boolean isPrime(int m){
+                   //不正常范围
+                   if(m<2){
+                       return false;
+                   }
+                   //正常范围下的依次判断
+                   for(int i=2;i<=m/2;i++){
+                       //判断是否能被整除
+                       if(m%i==0){
+                           return false;
+                       }
+                   }
+                   return true;
+               }
+           }
+       #+END_SRC
+       [[./MethodDemo5.java]]
+       #+BEGIN_SRC java
+           package cn.commandoptionesc.method;
+           public class MethodDemo6{
+               public static void main(String[] args){
+                   isPrime(9);
+               }
+               public static boolean isPrime(int m){
+                   if(m<2){
+                      System.out.println("N");
+                      return;
+                   }
+                   for(int i=2;i<=m/2;i++){
+                       if(m%i==0){
+                           System.out.println("N");
+                           return;
+                       }
+                   }
+                   System.out.println("Y");
+               }
+           }
+       #+END_SRC
+       [[./MethodDemo6.java]]
 
 *** 方法的重载(overload)
     在同一个类中，允许出现同名的方法，只要方法的参数列表不同即可，这样的方法就是重载
