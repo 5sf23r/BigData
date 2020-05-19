@@ -3166,58 +3166,115 @@
        [[./MethodDemo6.java]]
 
 *** 方法的重载(overload)
-    在同一个类中，允许出现同名的方法，只要方法的参数列表不同即可，这样的方法就是重载
-    参数列表不同：参数的个数，数据类型，顺序不同
+    在一个类中，出现了方法名相同的方法
+    1. 如果有最精确的方法就会进行精确的匹配
+    2. 如果没有精确匹配就会进行相对精确匹配
+    3. 如果出现了多个相对精确的匹配就会报错
+    #+BEGIN_SRC java
+        package cn.commandoptionesc.method;
+        public class MethodDemo7{
+            public static void main(String[] args){
+                //方法名和参数列表共同作为方法签名
+                //通过方法签名进行区分调用
+                //如果有最精确的方法就会进行精确的匹配
+                //如果没有精确匹配就会进行相对精确匹配
+                //入股出现了多个相对精确的匹配就会报错
+                System.out.println(sum(2,3));
+            }
+            //求和
+            //sum(int,int)
+            public static int sum(int i,int j){
+                System.out.println("int,int");
+                return i+j;
+            }
+            //sum(int,double)
+            public static double sum1(int m,double n){
+                System.out.println("int,double");
+                return m+n;
+            }
+            //sum(double,double)
+            public static double sum2(double d1,double d2){
+                System.out.println("double,double");
+                return d1+d2;
+            }
+        }
 
-     #+BEGIN_SRC java
-       /*
-         方法的重载特性（overload）
-        ,*/
-       public class MethodOverLoad{
-           public static void main(String[] args){
-               //对于重载的调用，是根据参数传递进行区分
-               System.out.println(getSum(1,2,3));
-               System.out.println(getSum(1,2));
-               System.out.println(getSum(2.5,3.5));
-           }
-
-
-           /*
-             对参数求和，利用方法的重载特性
-            ,*/
-           public static int getSum(int a,int b){
-               System.out.println("两个int参数");
-               return a+b;
-           }
-           public static int getSum(int a,int b,int c){
-               System.out.println("三个int参数");
-               return a+b+c;
-           }
-           public static double getSum(double a,double b){
-               System.out.println("两个double参数");
-               return a+b;
-           }
-
-
-           /*
-             定义方法，对参数求和
-             参数，没规定几个，数据类型
-            ,*/
-           // public static int getSum(int a,int b){
-           //     return a+b;
-           // }
-           // public static double getSumDouble(double a,double b){
-           //     return a+b;
-           // }
-           // public static int getSum3(int a,int b,int c){
-           //     return a+b+c;
-           // }
-
-
-       }
-     #+END_SRC
-     [[file:./Code/MethodOverload.java]]
-
+    #+END_SRC
+    [[./MethodDemo7.java]]
+*** 方法的传值
+    1. 基本数据类型
+       值的拷贝
+    2. 引用数据类型
+       地址值的拷贝
+       如果这个拷贝的地址找到了堆内存并进行了改动，原值就会改动
+       如果没有找到堆内存，原值就不会影响
+    #+BEGIN_SRC java
+        package cn.commandoptionesc.method;
+        public class MethodDemo8{
+            //所有的方法的执行都是在栈中
+            public static void main(String[] args){
+                int i=2;
+                //实参---实际参数
+                //如果传入的是基本类型，就是值的拷贝
+                m(i);
+                //2
+                System.out.println(i);
+            }
+            //形参---接受值
+            public static void m(int i){
+                i++;
+            }
+        }
+    #+END_SRC
+    [[./MethodDemo8.java]]
+    #+BEGIN_SRC java
+        package cn.commandoptionesc.method;
+        public class MethodDemo9{
+            public static void main(String[] args){
+                int i=2;
+                int[] arr={1,2,3};
+                m(arr[0]);
+                //1
+                System.out.println(arr[0]);
+            }
+            public static void m(int i){
+                i++;
+            }
+        }
+    #+END_SRC
+    [[./MethodDemo9.java]]
+    #+BEGIN_SRC java
+        package cn.commandoptionesc.method;
+        public class MethodDemo10{
+            public static void main(String[] args){
+                int[] arr={1,2,3};
+                //如果传入的是引用数据类型，实质是地址值的拷贝
+                n(arr);
+                //10
+                System.out.println(arr[0]);
+            }
+            public static void n(int[] arr){
+                arr[0]=10;
+            }
+        }
+    #+END_SRC
+    [[./MethodDemo10.java]]
+    #+BEGIN_SRC java
+        package cn.commandoptionesc.method;
+        public class MethodDemo11{
+            public static void main(String[] args){
+                int[] arr={1,2,3};
+                mn(arr);
+                //1
+                System.out.println(arr[0]);
+            }
+            public static void mn(int[] arr){
+                //拷贝之后的地址值被新的地址值覆盖
+                arr=new int[]{2,3,4};
+            }
+        }
+    #+END_SRC
+    [[./MethodDemo11.java]]
 *** 方法重载的注意事项
     1. 参数列表必须不同
        + 参数个数不同，如method(int x)与method(int x,int y)不同
