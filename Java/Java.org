@@ -3250,6 +3250,7 @@
                 int[] arr={1,2,3};
                 //如果传入的是引用数据类型，实质是地址值的拷贝
                 n(arr);
+
                 //10
                 System.out.println(arr[0]);
             }
@@ -3275,318 +3276,52 @@
         }
     #+END_SRC
     [[./MethodDemo11.java]]
-*** 方法重载的注意事项
-    1. 参数列表必须不同
-       + 参数个数不同，如method(int x)与method(int x,int y)不同
-       + 参数类型不同，如method(int x)与method(double x)不同
-       + 参数顺序不同，如method(int x,double y)与method(double x,int y)不同
-    2. 重载和参数变量名无关
-       + 如method(int x)与method(int y)不是方法重载，不能同时存在
-    3. 方法的重载和返回值类型无关
-       + 如void method(int x)与int method(int y)不是方法重载，不能同时存在
-    4. 重载和修饰符无关
-       + 如public method()与public static method()不是重载，不能同时存在
-    技巧：重载只看方法名和参数列表
 
-     #+BEGIN_SRC java
-       package cn.tedu.method;
-       public class MethodDemo1{
-           //求和
-           //sum(int,int)
-           public static int sum(int i,int j){
-               return i+j;
-           }
-           public static double sum3(double x,int y){
-               return x+y;
-           }
-           //sum(int,double)
-           public static double sum1(int m,double n){
-               return m+n;
-           }
-           //sum(double,double)
-           public static double sum2(double d1,double d2){
-               return d1+d2;
-           }
+*** 方法的递归
+    sum(10)=10+9+8+7+6+5+4+3+2+1
+           =10+9+8+7+6+5+4+3+2+1
+           =10+sum(9)
+               9+sum(8)
+                 8+sum(7)
+                   7+sum(6)
+                     6+sum(5)
+                       5+sum(4)
+                         4+sum(3)
+                           3+sum(2)
+                             2+sum(1)
+    #+BEGIN_SRC java
+        package cn.commandoptionesc.method;
+        public class MethodDemo12{
+            public static void main(String[] args){
+                System.out.println(diGui(10));
+                System.out.println(diGui(5));
 
-           public static void main(String[] args){
-               //方法名和参数列表共同作为方法签名
-               //通过方法签名进行区分调用
-               //如果有最精确的方法就会进行精确的匹配
-               //如果没有进行精确匹配就会进行相对精确匹配
-               //如果出现多个相对精确的匹配就会报错
-               System.out.println(sum(2,3));
-           }
-       }
-   #+END_SRC
-     [[file:./Code/Methoddemo1.java]]
+            }
+            //递归方法求和
+            public static int diGui(int n){
+                //递归结束的条件
+                if(n==1){
+                    return 1;
+                }
+                //调用方法自己本身
+                return n+diGui(n-1);
+                //return 10+diGui(9);
+                //          9+diGui(8)
+                //            8+diGui(7)
+                //              7+diGui(6)
+                //         ...
+                //               2+diGui(1)
+            }
 
-*** 参数传递(方法的传值)
-     1. 定义时，参数列表中的变量，我们称之为形式参数
-     2. 调用方法时，传入给方法的数值，我们称之为实际参数引用类型
-
-*** 方法调用中的参数传递问题
-    1. 方法参数是基本数据类型
-
-        #+BEGIN_SRC java
-          /*
-            方法，调用中的参数传递问题
-           ,*/
-          public class MethodDemo2{
-              public statci void main(String[] args){
-                  int a=1;
-                  int b=2;
-                  Change(a,b);
-                  System.out.println(a);//1
-                  System.out.println(b);//2
-              }
-
-
-              public static void Change(int a,int b){
-                  a=a+b;
-                  b=b+a;
-              }
-          }
-
-        #+END_SRC
-        [[file:./Code/MethodDemo2.java]]
-    2. 方法参数是引用类型
-        传递的是内存地址
-
-        #+BEGIN_SRC java
-          public class MethodDemo3{
-              public static void main(String[] args){
-                  int[] arr={1,2,3,4};
-                  System.out.println(arr[2]);//3
-                  change(arr);//传递的是内存地址
-                  System.out.println(arr[2]);//100
-              }
-
-
-              public static void change(int[] arr){
-                  arr[2]=100;
-              }
-          }
-        #+END_SRC
-        [[file:./Code/MethodDemo3.java]]
-*** 方法的传值
-    1. 如果传入的是基本数据类型就直接进行拷贝
-    2. 如果传入的是引用数据类型就是地址值的拷贝，如果这个拷贝的
-       地址值找到了堆内存并进行了改动原值就会改动
-    3. 如果没有找到堆内存就不影响
-*** 练习-实现随机点名器
-    1. 存储所有学生姓名
-    2. 预览所有学生姓名
-    3. 随机数作为索引，到数组中找元素
-    将功能独立出来，作为方法，调用方法即可
-     #+BEGIN_SRC java
-       /*
-         1. 存储所有学生姓名
-         2. 预览所有学生姓名
-         3. 随机数作为索引，到数组中找元素
-
-         定义三个功能，用到同一个姓名数据
-         姓名存储到数组中，三个方法，使用一个数组中的数据
-        ,*/
-       import java.util.Random;
-       public class CallName{
-           public static void main(String[] args){
-               //定义数组，存储学生姓名
-               String[] names=new String[5];
-               //调用添加姓名方法
-               addStudent(names);
-               //调用遍历数组方法
-               printStudentName(names);
-               //调用随机姓名的方法
-               String name = randomStudentName(names);
-               System.out.println(name);
-           }
-
-           /*
-             定义方法，随机数，做索引,数组中找到学生姓名
-             返回值？学生姓名
-             参数？数组
-            ,*/
-           public static String randomStudentName(String[] names){
-               Random ran=new Random();
-               int index=ran.nextInt(names.length);
-               return names[index];
-           }
-
-           /*
-             定义方法，遍历数组
-             返回值？没有
-             参数？数组
-            ,*/
-           public static void printStudentName(String[] names){
-               for(int i=0;i<names.length;i++){
-                   System.out.println(names[i]);
-               }
-           }
-
-           /*
-             定义方法，实现向数组中添加学生姓名
-             返回值? 没有
-             参数？参数就是数组
-           ,*/
-           public static void addStudent(String[] names){
-               names[0]="a";
-               names[1]="b";
-               names[2]="c";
-               names[3]="d";
-               names[4]="e";
-           }
-       }
-
-     #+END_SRC
-*** 练习-实现商品的库存管理
-    1. 功能
-       + 展示用户选择功能清单
-       + 根据选择的功能编号，进行不同的操作
-         A.展示所有库存
-         B.修改库存数量
-    2. 分析
-       + 展示用户清单
-         输出语句，用户输入，选择功能序号
-       + 根据选择，调用不同的方法
-         Switch语句
-           case 1 2 3
-         A 展示库存
-           将存储商品的数组，遍历
-         B 修改库存
-           修改所有的库存数量
-     #+BEGIN_SRC java
-       import java.util.Scanner;
-       public class Shopp{
-           public static void main(String[] args){
-               //使用数组，保存商品的信息
-               //品名，尺寸，价格，库存数，定义5个数组
-               String[] brand={"MacBookAir","ThinkPadT450"};
-               double[] size={13.3,14.5,15.6};
-               double[] price={9998.98,6790.58};
-               int[] count={0,0};//需要返回来
-
-               while(true){
-               int choose=chooseFunction();
-                      switch(choose){
-                      case 1:
-                          //调用查看库存清单方法
-                          printStore(brand,size,price,count);
-                          break;
-                      case 2:
-                          //调用修改库存的方法
-                          update(brand,count);
-                          break;
-                      case 3:
-                          return;
-                      default:
-                          System.out.println("没有这个功能");
-                          break;
-                      }
-                      }
-                  }
-
-                  /*
-                    定义方法，修改所有商品的库存
-                    用户输入1个，修改1个
-                    返回值，没有
-                    参数，库存数的数组,品名的数组
-                   ,*/
-                  public static void update(String[] brand,int[] count){
-                      //遍历数组，遍历一个，修改一个
-                      //接收键盘键入
-                      Scanner sc = new Scanner(System.in);
-                      //遍历数组
-                      for(int i=0;i<brand.length;i++){
-                          System.out.println("请输入"+brand[i]+"的库存数");
-                          //键盘输入，录入库存，存储到库存的数组中
-                          int newCount=sc.nextInt();
-                          count[i]=newCount;
-                      }
-
-                  }
-
-                  /*
-                    定义方法，展示所有的库存清单，遍历
-                    返回值，没有
-                    参数，数组
-                   ,*/
-                  public static void printStore(String[] brand,double[] size,double[] price,int[] count){
-                      System.out.println("------------商场库存清单-----------");
-                      System.out.println("品牌型号     尺寸     价格   库存数");
-                      //定义变量，计算总库存数，和总价格
-                      int totalCount=0;
-                      int totaMoney=0;
-                      //遍历数组，将数组中的所有的商品信息打印出来
-                      for(int i=0;i<brand.length;i++){
-                          System.out.println(brand[i]+"  "+size[i]+"  "+price[i]+"  "+count[i]);
-                          totalCount+=count[i];
-                          totalMoney+=count[i]*price[i];
-                      }
-                      System.out.println("总库存数："+totalCount);
-                      System.out.println("商品库存总金额："+totalMoney);
-                  }
-
-                  /*
-                    定义方法，实现用户的选择功能，还需要将功能的序号返回来
-                    返回值：int
-                    参数，没有
-                   ,*/
-                  public static int chooseFunction(){
-                      System.out.println("库存管理");
-                      System.out.println("1.查看库存清单");
-                      System.out.println("2.修改商品库存数量");
-                      System.out.println("请输出要执行的操作的序号");
-                      //接收键盘输入
-                      Scanner sc=new Scanner(System.in);
-                      int chooseNunber=sc.nextInt();
-                      return chooseNumber;
-                  }
-              }
-
-            #+END_SRC
-*** 方法递归
-    局限性：可能会出现栈溢出错误
-     #+BEGIN_SRC java
-       /*
-         sum（10）=10+9+8+7+6+5+4+3+2+1
-                  =10+sum(9)
-                  =10+9+sum(8)
-                  =10+9+8+sum(7)
-                  =10+9+8+7+sum(6)
-                  =10+9+8+7+6+sum(5)
-                  =10+9+8+7+6+5+sum(4)
-                  =10+9+8+7+6+5+4+sum(3)
-                  =10+9+8+7+6+5+4+3+sum(2)
-                  =10+9+8+7+6+5+4+3+2+sum(1)
-        ,*/
-       public class DiGui{
-           public static void main(String[] args){
-               System.out.println(diGui(10));
-               System.out.println(diGui(5));
-           }
-
-           //递归方法求5的阶乘
-           public static int diGui1(int n){
-               if(n==1){
-                   return 1;
-               }
-               return n*diGui1(n-1);
-           }
-
-           //递归方法求和
-           public static int diGui(int n){
-               //递归结束的条件
-               if(n==1){
-                   return 1;
-               }
-               //调用方法自己本身
-               return n+diGui(n-1);
-               //return 10+diGui(9)
-               //          9+diGui(8)
-               //             ...
-           }
-       }
-     #+END_SRC
+            //递归求5的阶乘
+            public static int diGui2(int m){
+                //结束条件
+                if(n==1){
+                    return 1;
+                }
+                return n*diGui2(n-1);
+        }
+    #+END_SRC
 ** 引用数据类型--类
 *** 自定义类
 
