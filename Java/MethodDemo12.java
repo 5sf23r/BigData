@@ -1,8 +1,10 @@
 package cn.commandoptionesc.method;
 public class MethodDemo12{
     public static void main(String[] args){
+        //StackOverflowError---栈溢出错误
+        System.out.println(diGui(10000000));
         System.out.println(diGui(10));
-        System.out.println(diGui(5));
+        System.out.println(diGui2(5));
 
     }
     //递归方法求和
@@ -18,14 +20,15 @@ public class MethodDemo12{
         //            8+diGui(7)
         //              7+diGui(6)
         //         ...
-        //               2+diGui(1)
+        //                2+diGui(1)
     }
 
     //递归求5的阶乘
-    public static int diGui2(int m){
+    public static int diGui2(int n){
         //结束条件
         if(n==1){
             return 1;
         }
         return n*diGui2(n-1);
     }
+}

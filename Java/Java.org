@@ -3314,7 +3314,7 @@
             }
 
             //递归求5的阶乘
-            public static int diGui2(int m){
+            public static int diGui2(int n){
                 //结束条件
                 if(n==1){
                     return 1;
@@ -3322,6 +3322,7 @@
                 return n*diGui2(n-1);
         }
     #+END_SRC
+    局限性：可能会出现栈溢出错误
 ** 引用数据类型--类
 *** 自定义类
 
