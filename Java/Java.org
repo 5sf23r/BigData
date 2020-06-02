@@ -3277,6 +3277,41 @@
     #+END_SRC
     [[./MethodDemo11.java]]
 
+    #+BEGIN_SRC java
+        public class Ex{
+            public static void main(String[] args){
+                int[] a={1,2,3,4,5};
+                expand(a);
+                System.out.println(a);
+
+                changeArray(a);
+                System.out.println(a[0]);
+
+                pringArray(a);
+            }
+            public static void expand(int[] a){
+                int[] newArray=new int[a.length*2];
+                System.out.println(a,0,newArray,0,a.length);
+                a=newArray;
+                for(int i=0;i<a.length;i++){
+                    System.out.print(a[i]+"\t");
+                }
+                System.out.println();
+                System.out.println(a);
+            }
+            public static void changeArray(int[] a){
+                a[0]=10;
+                System.out.println(a[0]);
+            }
+            public static void printArray(int[] a){
+                for(int i=0;i<a.length;i++){
+                    System.out.print(a[i]+"\t");
+                }
+                System.out.println();
+            }
+        }
+    #+END_SRC
+
 *** 方法的递归
     sum(10)=10+9+8+7+6+5+4+3+2+1
            =10+9+8+7+6+5+4+3+2+1
@@ -4325,12 +4360,6 @@
      }
    #+END_SRC
 * 面向对象
-** 面向对象的引入
-   面向对象---就是一种编程范式(一种套路---遇到问题的一种解决方案)
-
-   买菜
-   洗菜
-   烧菜
 ** 面向对象
 *** 理解什么是面向过程、面向对象
     - 面向过程：
@@ -4411,7 +4440,6 @@
 
         }
       #+END_SRC
-      [[file:./Code/Car.java]]
 
       #+BEGIN_SRC java
         /*
@@ -4433,6 +4461,95 @@
         }
       #+END_SRC
       [[file:./Code/CarTest.java]]
+*** 类与对象之间的关系
+    对着一类事物进行抽取，把这类事物共有的特征抽取成了属性，把共有的行为抽取成了方法，把这一类事物抽取成了类
+    类是对象的概括
+    对象是类的具体实现
+    [[./28.png]]
+    #+BEGIN_SRC java
+        package cn.commandoptionesc.object;
+        public class ObjectDemo{
+            public static void main(String[] args){
+                //创建Person类的对象
+                //构造方法---用于构建对象
+                Person p=new Person();
+                //给属性进行赋值
+                p.age=10;
+                p.name="lili";
+                p.gender="女";
+                //输出
+                System.out.println(p.age);
+                //方法调用
+                p.eat();
+                //基本类型，传入的就是值的拷贝
+                //m(p.age);
+                //传入的是引用数据类型，就是对象的地址值的拷贝
+                n(p);
+                //0
+                System.out.println(p.age);
+            }
+            public static void m(int i){
+                i++;
+            }
+            public static void n(Person p){
+                p.age=10;
+                p.eat();
+            }
+        }
+        //Person类
+        class Person{
+            //特征---属性
+            String name;
+            int age;
+            char gender;
+
+            //构造方法---1.与类同名 2.没有类型修饰
+            //java规定如果类中没有构造方法，JVM就会在底层自动添加一个无参构造
+            public Person(){}
+            //与类同名的普通方法
+            public void Person(){}
+
+            //行为---方法
+            public void eat(){
+                System.out.println(name+"在吃东西。。。");
+            }
+            public void sleep(){
+                System.out.println("在睡觉");
+            }
+        }
+    #+END_SRC
+*** 构造方法
+    与类同名且没有返回值类型修饰的方法，用于创建对象以及属性初始化
+    如果类中没有构造方法，JVM会自动添加一个无参构造
+    如果类中已经有构造方法，JVM就不会再自动添加一个无参构造
+    允许重载
+    #+BEGIN_SRC java
+        package cn.commandoptionesc.object;
+        public class ObjectDemo1{
+            public static void main(String[] args){
+                //创建Person类的对象
+                //构造方法---用于构建对象
+                Person p=new Person(16);
+                System.out.println(p.age);
+            }
+        }
+        //Person类
+        class Person{
+            //构造方法---1.与类同名 2.没有类型修饰
+            //java规定如果类中没有构造方法，JVM就会在底层自动添加一个无参构造
+            public Person(){
+            }
+            //有参构造
+            //构造方法允许重载
+            //如果类中提供了构造方法，JVM就不会再自动添加一个无参构造
+            public Person(int a){
+                age=a;
+            }
+            //与类同名的普通方法
+            public void Person(){
+            }
+        }
+    #+END_SRC
 *** 类与对象的区别
     - 类是对某一类事物的抽象描述，而对象用于表示现实中该类事物的个体。
     - 定义位置上的区别
