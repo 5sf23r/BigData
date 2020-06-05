@@ -1,0 +1,22 @@
+* MySQL程序
+** 选项文件（配置文件）
+*** windows读取选项文件
+    %WINDIR%\my.ini,%WINDIR%\my.cnf   全局选项
+    C:\my.ini,C:\my.cnf               全局选项
+    BASEDIR\my.ini,BASEDIR\my.cnf     全局选项
+    defaults-extra-file               读取指定的文件(如果有)
+    %APPDATA%\MySQL\.mylogin.cnf      登录路径选项（仅客户端）
+    DATADIR\mysqld-auto.cnf           使用set persist或者set persist_only来保存的系统变量（仅服务器）
+* MySQL服务器
+  MySQL服务器（mysqld）
+** 配置服务器
+*** 查看服务器使用的默认命令选项和系统变量值
+    *shell> mysqld --verbose --help*
+*** 查看服务器当前系统变量
+    *mysql> show variables;*
+*** 查看服务器统计信息和状态指示符
+    *mysql> show status;*
+
+    也可以使用：
+    *shell> mysqladmin variables*
+    *shell> mysqladmin extended-status*
