@@ -1,5 +1,7 @@
 package cn.commandoptionesc.object;
 public class ObjectDemo3{
+    //属性
+    int j=10;
     public static void main(String[] args){
         int j=7;
         //局部（方法）代码块

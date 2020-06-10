@@ -4360,7 +4360,7 @@
      }
    #+END_SRC
 * 面向对象
-** 面向对象
+** 面向对象引入
    在java中所有的非静态的属性和方法都可以通过对象调用
 *** 理解什么是面向过程、面向对象
     - 面向过程：
@@ -4801,73 +4801,89 @@
         }
 
     #+END_SRC
-*** 类与对象的区别
-    - 类是对某一类事物的抽象描述，而对象用于表示现实中该类事物的个体。
-    - 定义位置上的区别
-      成员变量，定义在类中，方法外
-      局部变量，方法内，语句外
-    - 作用域不同
-      成员变量，作用范围是整个类
-      局部变量，方法内，语句内
-    - 默认值不同
-      成员变量,有自己的默认值
-    - 内存位置不同
-      成员变量，跟随对象进入堆内存存储
-      局部变量，跟随自己的方法，进入栈内存
-    - 生命周期不同
-      成员变量，跟随对象，在堆中存储，内存等待JVM清理，生命相对较长
-      局部变量，跟随方法，方法出栈，生命相对较短
+    #+BEGIN_SRC java
+        /*
+          有名字对象，引用类型变量，可以反复使用
+          匿名对象，没有引用变量，只能使用一次
 
-*** 基本类型和引用类型作为参数传递
-    - 内存的压栈和弹栈
-     #+BEGIN_SRC java
-       public class Person{
-           public static void main(String[] args){
-           String name;
-           }
-       }
-     #+END_SRC
-
-     #+BEGIN_SRC java
-       /*
-         方法的参数类型，是基本数据类型，引用数据类型
+          匿名对象，可以当做参数进行传递
+          匿名对象，可以当做方法的返回值
         ,*/
-       public class TestPerson{
-           public static void main(String[] args){
-               int a=1;
-               function(a);
-               System.out.println(a);//1
+        import java.util.Scanner;
+        public class PersoneTest{
+            public static void main(String[] args){
+                //创建一个普通变量
+                Persone p = new Persone();
 
-               Person p=new Person();
-               p.name="张三";
-               ,#+BEGIN_SRC java
+                new Persone().eat();
 
-               #+END_SRC
+                //匿名对象，可以当做参数进行传递
+                method(new Persone());
+                //匿名对象，可以当做方法的返回值
+                Persone p1 = method();
+                p1.eat();
+            }
 
-               System.out.pringln(p.name);//张三
+            //匿名对象，可以当做方法的返回值
+            //方法返回值是Persone类型
+            //方法return语句，返回的是这个类的对象
+            public static Persone method(){
+                //Persone p = new Persone();
+                return new Persone();
+            }
 
-               function(p);
-               System.out.println(p.name);//李四
-           }
+            //调用方法method，传递Persone类型对象
+            public static void method(Persone p){
+                p.eat();
+            }
+        }
+    #+END_SRC
+*** 成员变量与局部变量（在类内方法外非静态的属性和方法-成员变量，成员方法）
+    - 位置
+      成员变量：在方法外类内
+      局部变量：方法内或者代码块内
+    - 作用范围
+      成员变量：整个类
+      局部变量：方法或者代码块内
+    - 内存变量
+      成员变量：堆
+      局部变量：栈
+    - 生命周期
+      成员变量：随着类的对象的创建而产生，对象使用完成之后在某个特定的时间进行回收
+      局部变量：随着方法或者代码块的执行而产生，方法调用完成或者执行完成就立即清除
+** 面向对象特征
+   封装、继承、多态、抽象
+*** 封装
+    封装的体现形式---方法，对属性进行私有化，通过公共的访问方式去访问私有属性，可以提高代码的数据安全性
+    #+BEGIN_SRC java
 
-           /*
-             定义方法，参数类型是引用数据类型
-             参数是Person类型
-             p接收的是一个内存的地址
-             main中的变量p和function中的变量p，保存的地址是一样的
-            ,*/
-           public static void function(Person p){
-               p.name="李四";
-           }
-
-           /*
-             定义方法，参数类型是基本数据类型
-            ,*/
-           public static void function(int a){
-               a+=5;
-           }
-       }
-     #+END_SRC
+    #+END_SRC
+*** 继承关系
+    多个类中存在相同的内容，就把相同的内容抽取到一个新类中，让新类和原来的类就通过extends关键字就产生了关联关系
+    子类可以拿到父类部分信息
+    - 集成形式：
+      java支持单集成（父类只能有一个，子类可以有多个）
+      c语言支持多技能
+      #+BEGIN_SRC java
+          class A{
+              m();
+          }
+          class B{
+              n();
+          }
+          //多继承同时拿到m和n方法，极高的提高代码的复用性
+          class C extends B,A{}
+      #+END_SRC
+      #+BEGIN_SRC java
+          class A{
+              m(return 1;);
+          }
+          class B{
+              m(return true;);
+          }
+          //单技能可以避免方法的混用，提高代码的复用性
+          class c extends A,B{}
+      #+END_SRC
 ** 封装
    + 面向对象思想的三个特征：封装，继承，多态
 *** 关键字private
@@ -6219,73 +6235,6 @@
      返回值：true，false
      作用：判断指定的对象是否为给定类创建的对象
 ** 构造方法
-
-   #+BEGIN_SRC java
-   /*
-       自定义的Person类，成员变量，name age
-       要求在new Person的同时，就指定好name，age的值
-       实现功能，利用方法去实现，构造方法，构造器Constructor
-       作用：在new的同时对成员变量赋值,又叫做给对象的属性初始化赋值，new Personaa的同时对
-           属性name，age赋值
-
-       构造方法的定义格式：
-           修饰符 方法名(参数列表){}
-               方法的名字，必须和类的名字完全一致
-               构造方法不允许写返回值类型，void也不能写
-
-           - 构造方法在什么时候运行？
-                在new的时候，自动执行，只运行一次，仅此而已
-           -  每个class必须拥有构造方法，构造方法不写也有
-               编译的时候，javac，会壁咚检查类中是否有构造方法
-               如果有，就这样
-               如果没有，编译器就会自动添加一个构造方法
-           - 编译器自动添加的构造方法：public Person(){}
-           - 自己手写了构造方法，编译的时候，不会自动添加构造方法
-      ,*/
-     public class Personaa{
-         private String name;
-         private int age;
-
-         //定义出Personaa类的构造方法
-         public Personaa(String name ,int age){
-             // System.out.println("我是一个空参数的构造方法");
-             this.name = name;
-             this.age = age;
-         }
-
-
-
-         public String getName(){
-             return name;
-         }
-         public void setName(String name){
-             this.name = name;
-         }
-         public int getAge(){
-             return age;
-         }
-         public void setAge(int age){
-             this.age = age;
-         }
-     }
-   #+END_SRC
-
-   #+BEGIN_SRC java
-     /*
-       new对象的时候，就是在调用对象的构造方法
-       new Person();调用的是类中的空参数构造方法
-       new Person("张三".30);调用类中的有参数构造方法
-     ,*/
-     public class PersonaaTest{
-         public static void main(String[] args){
-             Personaa p = new Personaa("张三",20);
-
-             //对象p调用方法getName，getAge
-             System.out.println(p.getName());
-             System.out.pringln(p.getAge());
-         }
-     }
-   #+END_SRC
 *** 构造方法的重载
 
     #+BEGIN_SRC java
@@ -6879,53 +6828,7 @@ y      public class PersonaaaaaaaaTest{
     运行，静态方法，运行父类中的静态方法
     运行，非静态方法，运行子类的重写方法
     成员变量，编译运行全看父类
-** 匿名对象
 
-   #+BEGIN_SRC java
-     public class Persone{
-         public void eat(){
-             System.out.println("人在吃饭");
-         }
-     }
-   #+END_SRC
-
-   #+BEGIN_SRC java
-     /*
-       有名字对象，引用类型变量，可以反复使用
-       匿名对象，没有引用变量，只能使用一次
-
-       匿名对象，可以当做参数进行传递
-       匿名对象，可以当做方法的返回值
-     ,*/
-     import java.util.Scanner;
-     public class PersoneTest{
-         public static void main(String[] args){
-             //创建一个普通变量
-             Persone p = new Persone();
-
-             new Persone().eat();
-
-             //匿名对象，可以当做参数进行传递
-             method(new Persone());
-             //匿名对象，可以当做方法的返回值
-             Persone p1 = method();
-             p1.eat();
-         }
-
-         //匿名对象，可以当做方法的返回值
-         //方法返回值是Persone类型
-         //方法return语句，返回的是这个类的对象
-         public static Persone method(){
-             //Persone p = new Persone();
-             return new Persone();
-         }
-
-         //调用方法method，传递Persone类型对象
-         public static void method(Persone p){
-             p.eat();
-         }
-     }
-   #+END_SRC
 ** 内部类
 
    #+BEGIN_SRC java
