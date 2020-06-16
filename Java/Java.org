@@ -4923,6 +4923,37 @@
     | protected | 可以 | 可以     | 可以   | 不可以 |
     | private   | 可以 | 同包子类 | 可以   | 不可以 |
     | 默认      | 可以 | 不可以   | 不可以 | 不可以 |
+*** 继承
+**** 重写
+     访问权限修饰符（public protected 默认 private）
+     - private：
+       父类中被private修饰的内容、构造方法、构造代码块对于子类而言都是拿不到的
+       #+BEGIN_SRC java
+           package cn.commandoptionesc.extendsx;
+           public class ExtendsDemo1{
+               public static void main(String[] args){
+
+               }
+           }
+
+           //
+           class A{
+               //私有化的方法  对子类不可见
+               private void m(){
+
+               }
+           }
+
+           class B extends A{
+               //新方法
+               int m(){
+                   return 1;
+                   }
+               }
+
+       #+END_SRC
+     - protected:
+
 ** 封装
    + 面向对象思想的三个特征：封装，继承，多态
 *** 关键字private

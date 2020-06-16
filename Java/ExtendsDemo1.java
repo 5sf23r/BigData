@@ -7,11 +7,15 @@ public class ExtendsDemo1{
 
 //
 class A{
-    public void m(){
+    //私有化的方法  对子类不可见
+    private void m(){
         
     }
 }
 
 class B extends A{
-    public void m(){}
+    //新方法
+    int m(){
+        return 1;
+    }
 }
