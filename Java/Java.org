@@ -4597,7 +4597,7 @@
 
      #+END_SRC
 **** this()
-     this()---this语句---在当前构造方法中调用奔雷其他形式的构造方法,一定要放在首行
+     this()---this语句---在当前构造方法中调用本类其他形式的构造方法,一定要放在首行
      #+BEGIN_SRC java
          package cn.commandoptionesc.object;
          public class ThisDemo2{
@@ -4651,6 +4651,7 @@
          }
 
      #+END_SRC
+     [[./ExtendsDemo2.java]]
 *** 构造代码块
     在方法外，类内出现{}就是构造代码块，可以进行初始化，在每个构造方法前，优先执行，调用任意的构造方法，构造代码块都要执行
     #+BEGIN_SRC java
@@ -4952,8 +4953,103 @@
                }
 
        #+END_SRC
+       [[./ExtendsDemo1.java]]
      - protected:
+       #+BEGIN_SRC java
+           package cn.commandoptionesc.extendsx.b;
+           import cn.commandoptionesc.extendsx.a.A;
+               public class B{
+                   public static void main(String[] args){
+                   //对象调用方法---访问
+                   //new A().m();
+                   B b=new B();
+                   b.m();
+               }
+           }
+           class C extends A{
+               public static void main(String[] args){
+                   B b=new b();
+                   //被protected修饰的方法，子类对象要在子类中使用
+                   //bm();
+               }
+           }
+       #+END_SRC
+       #+BEGIN_SRC java
+           package cn.commandoptionesc.extendsx.a;
+           public class A{
+               //
+               protected void m(){
 
+               }
+           }
+       #+END_SRC
+       [[./A.java]]
+       [[./B.java]]
+**** super关键字
+     父类的对象，用于调用父类的属性和方法
+     子类的所有的构造方法都要默认调用父类的无参构造（通过super()）
+     如果父类提供其他形式的构造方法，子类就要使用相应形式的super(),要在首行
+     父类对象优先子类对象的存在
+     父类构造代码块--->父类构造方法--->子类构造代码块--->子类构造方法
+     #+BEGIN_SRC java
+         package cn.commandoptionesc.extendsx;
+         public class ExtendsDemo2{
+             public static void main(String[] args){
+                 new Pig().eat();
+             }
+         }
+         //动物类
+         class Animal{
+             public Animal(){
+
+             }
+             public Animal(int age){
+
+             }
+             //方法
+             public void eat(){
+                 System.out.println("在吃东西...");
+             }
+
+             public void sleep(){
+                 System.out.println("在睡觉...");
+             }
+         }
+         class Pig extends Animal{
+             //父类对象优先子类对象存在
+             //子类所有的构造方法都要去调用父类无参构造（默认）
+             public Pig(){
+                 //super()----super语句，在子类中调用父类的构造方法
+                 //子类所有的构造方法都含有super()
+                 //本构造方法中有了其他形式的super()就没有super（）
+                 //super(1);
+             }
+             public Pig(int age){
+                 //super()
+                 //this();
+                 super(age);
+             }
+             public void eat(){
+                 System.out.println("在呼呼呼的吃...");
+                 System.out.println("慢慢的吃饱了...");
+                 System.out.println("吃饱了就想睡觉...");
+                 //父类方法
+                 //非静态的方法可以通过对象调用
+                 //super.sleep();------代表父类的对象调用sleep()方法
+                 super.sleep();
+                 sleep();
+             }
+         }
+     #+END_SRC
+**** 多态
+     - 在代码操作过程中可以灵活展现多种形式
+     - 程序的时期---多态时期
+       + 编译时多态(重载)：就是在编译时期进行绑定代码
+         #+BEGIN_SRC java
+             public void m(){}
+             public void m(int n){}
+         #+END_SRC
+       + 运行时多态(重写)：就是运行时期进行代码的绑定
 ** 封装
    + 面向对象思想的三个特征：封装，继承，多态
 *** 关键字private
