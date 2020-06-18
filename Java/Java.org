@@ -5050,6 +5050,90 @@
              public void m(int n){}
          #+END_SRC
        + 运行时多态(重写)：就是运行时期进行代码的绑定
+         重写，向上造型---前提是集成
+     - 向上造型
+       子类类型被提升为父类类型
+       向上造型的对象可以调用哪些方法看父类，具体的执行看子类（父类---目录 子类---正文）
+     - 向下造型
+       Fu f = new Zi();
+       Zi z = (Zi)f;
+       多态中的向下转型，父类类型强制转回子类类型
+       好处：调用子类特有的功能
+     - 优点：
+       + 参数的统一化
+       + 功能调用的统一
+       + 解耦（高内聚、低耦合）
+     #+BEGIN_SRC java
+         package cn.commandoptionesc.duotai;
+         public class DTDemo{
+             public static void main(String[] args){
+                 //告诉别人要养宠物，宠物是猫
+                 //声明类---父类，实际创建类---子类 向上造型
+                 Pet p=new Cat();
+
+                 //调用方法
+                 //向上造型创建的对象调用方法执行，由子类具体执行
+                 p.eat();
+
+                 //向上造型创建的对象可以调用哪些方法看父类
+                 //p.play();
+                 p.sleep();
+                 n(p);
+                 n(new Dog());
+                 n(new Cat());
+             }
+             //参数的统一
+             //只要等到运行时期才能明确向上造型的对象由谁实际创建
+             public static void n(Pet p){
+                 p.eat();
+             }
+         }
+         //宠物类
+         class Pet{
+             //方法
+             public void eat(){
+                 System.out.println("在吃东西...");
+             }
+             public void sleep(){
+                 System.out.println("在睡觉...");
+             }
+         }
+
+         //猫
+         class Cat extends Pet{
+
+             //重写方法
+             public void eat(){
+                 System.out.println("一点一点的吃...");
+             }
+
+             public void play(){
+                 System.out.println("在舔爪子...");
+             }
+         }
+
+         //狗
+         class Dog extends Pet{
+
+             //重写
+             public void eat(){
+                 System.out.println("大口大口的吃...");
+             }
+             public void bark(){
+                 System.out.println("在汪汪汪的叫...");
+             }
+         }
+
+     #+END_SRC
+     #+BEGIN_SRC java
+         /*
+           图形类(Shape),长和宽(属性),求面积，求周长(方法)
+           ---矩形类---(含参构造---赋值) 周长和面积
+           ---正方形类---(含参构造---赋值)周长和面积
+           ---圆形---（含参构造---赋值）周长和面积
+         */
+     #+END_SRC
+
 ** 封装
    + 面向对象思想的三个特征：封装，继承，多态
 *** 关键字private
@@ -6021,182 +6105,7 @@
         }
 
 ** 多态
-*** 多态调用的三种形式
 
-   #+BEGIN_SRC java
-     public class Fu{
-         public void show{
-             System.out.println("父类的show方法");
-         }
-     }
-   #+END_SRC
-
-   #+BEGIN_SRC java
-     public class Zi extends Fu{
-         public void show(){
-             System.out.println("子类重写父类show方法");
-         }
-     }
-   #+END_SRC
-
-   #+BEGIN_SRC java
-     public class DuoTest{
-         public static void main(String[] args){
-             //多态的调用方法，方法必须运行子类的重写
-             //Java中，对象的多态性，调用程序中的方法
-             //公式：父类类型或者是接口类型 变量 = new 子类的对象（）：
-             Fu f = new Zi();
-             f.show();
-
-             //抽象类Animal，子类是Cat
-             Animal a = new Cat();
-             a.eat();
-
-             //接口smoking，实现类Students
-             Smoking sk = new Student();
-             sk.somking();
-         }
-     }
-   #+END_SRC
-
-   #+BEGIN_SRC java
-     public abstract class Animal{
-         public abstract void eat();
-     }
-   #+END_SRC
-
-   #+BEGIN_SRC java
-     public class Cat extends Animal{
-         public void eat(){
-             System.out.println("猫吃猫粮");
-         }
-     }
-   #+END_SRC
-
-   #+BEGIN_SRC java
-     public interface Smoking{
-         public abstract void smoking();
-     }
-   #+END_SRC
-
-   #+BEGIN_SRC java
-     public class Students implements Smoking{
-         public void smoking(){
-             System.out.println("学生在吸烟");
-         }
-     }
-   #+END_SRC
-*** 多态中成员方法的特点
-
-   #+BEGIN_SRC java
-     public class Fua{
-         int a = 1;
-
-         public void show(){
-             System.out.println("父类");
-         }
-     }
-   #+END_SRC
-
-   #+BEGIN_SRC java
-     public class Zia extends Fua{
-         int a =2;
-
-         public void show(){
-             System.out.println(){
-                 System.out.println("子类");
-             }
-         }
-     }
-   #+END_SRC
-
-   #+BEGIN_SRC java
-     /*
-       多态中，成员特点
-       成员变量：
-           编译的时候，参考父类中有没有这个变量，如果有，编译成功，没有编译失败
-           运行的时候，运行的是父类中的变量值
-           编译运行全看父类
-
-       成员方法：
-           编译的时候，参考父类中有没有这个方法，如果有，编译成功，没有编译失败
-           运行的时候，运行的是子类的重写方法
-           编译看父类，运行看子类
-      ,*/
-     public class DuoaTest{
-         public static void main(String[] args){
-             Fua f = new Zia();
-             System.out.println(f.a);
-
-             f.show();
-         }
-     }
-   #+END_SRC
-
-*** instanceof关键字
-
-    #+BEGIN_SRC java
-      public abstract class Animala{
-
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      public abstract class Persona{
-          public abstract void sleep();
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      public class Studenta extends Persona{
-          public void sleep(){
-              System.out.println("学生在睡觉");
-          }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      /*
-        运算符比较运算符，结果真假值
-        关键字，instanceof，比较引用数据类型,比较一个引用类型的变量是不是这个类型的对象
-              p变量，是Studenta类型对象，还是Teachera类型对象
-      ,*/
-      public class InstanceofTest{
-          public static void main(String[] args){
-              Persona p = new Studenta();
-              boolean b = p instanceof Studenta;
-              System.out.println(b);
-
-              p.sleep();
-          }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      public class Teachera extend Persona{
-          public void sleep(){
-              System.out.println("老师在休息");
-          }
-      }
-    #+END_SRC
-*** 多态中的转型
-**** 向上转型
-     java强制数据类型的语言，参数运算的数据，保证类型的同一项
-     byte b = 1; b = b+1;
-
-     父类的引用 变量 = new 子类的对象（）;
-     Fu f = new Zi(); ---> 子类类型被提升为父类类型
-     运算的两个数据类型不同的，出现的自动类型提升，将取值范围小的，自动提升为取值
-     范围大的（向上转型）
-     范围小的被看成是子类，范围大的看成父类
-**** 向下转型
-     b = (byte)(b+1);
-     基本数据类型强制转换公式
-
-     Fu f = new Zi();
-     Zi z = (Zi)f;
-     多态中的向下转型，父类类型强制转回子类类型
-     好处：调用子类特有的功能
 **** 多态转型的案例
 
      #+BEGIN_SRC java
