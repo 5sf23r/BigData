@@ -4,10 +4,12 @@ public class DTEx{
         //
         Shape s=new Chang(4,5);
         Shape s1=new Yuan(6);
+        Shape s2=new Zheng(8);
         System.out.println(s.getArea());
         System.out.println(s.getGirth());
         System.out.println(s1.getArea());
         System.out.println(s1.getGirth());
+        S
     }
 }
 
