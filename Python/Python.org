@@ -88,3 +88,69 @@
         # 运算结果产生新的对象
         c = a + b
     #+END_SRC
+
+    #+BEGIN_SRC python
+        """
+            画出下列代码内存图
+        """
+        # 变量交换
+
+        name01 = "苏大强"
+        name02 = "苏明玉"
+        temp = name01
+        name01 = name02
+        name02 = temp
+        print(name01)
+        print(name02)
+    #+END_SRC
+
+    #+BEGIN_SRC python
+        num01 = name02 = 500
+        num03 , name04 = 800 , 1000
+        print(num01)
+        print(num03)
+        print(name04)
+    #+END_SRC
+** del语句
+** 核心数据类型
+   - 在python中变量没有类型，但关联的对象有类型
+   - 通过type函数可查看数据类型
+     print(type())
+   #+BEGIN_SRC python
+       """
+           数据类型
+       """
+       # 整型
+       # 十进制：0123456789 10
+       a = 500
+       # 二进制(逢二进一)：01 10
+       b = 0b10
+       print(b)
+       # 八进制：01234567 10
+       c = 0o12
+       # 十六进制:0123456789abcdef 20
+       d = 0xf
+    #+END_SRC
+   [[./Source Code/Demo7.py]]
+*** 整型int
+
+    - 整数
+      包含正数、负数、0
+    - 字面值
+      十进制：5
+      二进制：0b开头，后跟1或者1
+      八进制：0o开头，后跟0~7
+      十六进制：0x开头，后跟0~9,A~F,a~f
+    - 小整数池
+*** 浮点型float
+    - 小数
+      包含正数、负数，0.0
+    - 字面值
+      小数：1.0 2.5
+      科学计数法：e/E(正负号)指数
+      1.23e^-2(等同于0.0123)
+      1.23456e^5(等同于123456.0)
+*** 字符串str
+    - 用来记录文本信息（文字信息）
+    - 字面值：双引号
+      name = "张无忌"
