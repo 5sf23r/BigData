@@ -5144,17 +5144,71 @@
      用static修饰的变量就叫做静态变量，也叫类变量
      静态变量是随着类（所有信息）的加载（方法区的静态常量池）而加载静态区，接着赋予初始值
      静态变量优先于对象存在，可以通过类名来调用，也可以通过对象调用，静态变量底层就是一个被所有对象共享的地址。
-
-
+     静态变量---共享---属性是否适合共享？
      #+BEGIN_SRC java
+         package cn.commandoptionesc.staticx;
+         public class StaticDemo{
+             public static void main(String[] args){
+                 //创建对象
+                 Person p=new Person();
+                 //赋值
+                 p.name="梅超风";
+                 p.age=30;
+                 p.gender='女';
 
+                 Person p1=new Person();
+                 p1.name="欧阳锋";
+                 p1.age=50;
+                 p1.gender='男';
+
+                 Person p2=new Person();
+                 p2.name="lili";
+                 p2.age=43;
+                 p2.gender='中';
+
+                 System.out.println(p2.toString());
+                 System.out.println(p1.toString());
+                 System.out.println(p.toString());
+                 }
+             }
+         //Personl类
+         class Person{
+             //属性
+             String name;
+             int age;
+             //static修饰变量
+             static char gender;
+
+
+             //toString()方法
+             public String toString(){
+                 return "name:"+name+",age:"+age+",gender:"+gender;
+             }
+         }
      #+END_SRC
    - 修饰方法
      被static修饰的方法叫静态方法
+     随着类的加载而加载到方法区的静态区，不会对静态方法进行赋予初始值，只是存放，当被调用的时候自动加载到栈中执行。与类
+     同级，类方法，通过类名点调用也可以通过对象调用。
+     #+BEGIN_SRC java
+         System.arraycopy();
+         Arrays.copyof();
+         Arrays.toString();
+         Arrays.sort();
+         Systemm.out.println();
+     #+END_SRC
      静态方法也是存储在方法区，只不过加载的时候没有运行，什么时候调用，什么时候去栈中运行。
+
+
      注意：
          静态变量不可以定义到静态方法中
-         静态方法中，不可以直接调用非静态的方法。另外也不能存在this和super这样的关键字。讲台是优先于对象存在的。
+         静态方法中，不可以直接调用非静态的方法。另外也不能存在this和super这样的关键字。静态是优先于对象存在的。
+         - 方法或者 构造方法中可以定义静态变量？
+           不可以，方法要等到调用的时候，内容才执行，静态变量要与类同级。
+         - 静态方法里可以使用this？
+           不可以，静态方法是类级别的，this是对象级别的。
+         - main静态方法，"直接"调用非静态的属性和方法？
+           不可以，静态信息不能调用非静态的信息，非静态的可以调用静态的（出现非静态的说明，加载过程已经走完了）
          静态方法可以重载
          静态方法不可以重写，但是可以存在方法签名一样的静态方法，这种方式叫做隐藏
          隐藏时需注意：父类方法和子类方法要么都是静态的，要么都是非静态的

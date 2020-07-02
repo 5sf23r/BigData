@@ -22,6 +22,7 @@ public class StaticDemo{
         System.out.println(p1.toString());
         System.out.println(p.toString());
     }
+    public 
 }
 //Personl类
 class Person{
