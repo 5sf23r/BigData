@@ -21,8 +21,17 @@ public class StaticDemo{
         System.out.println(p2.toString());
         System.out.println(p1.toString());
         System.out.println(p.toString());
+        //静态不能调用非静态方法
+        //n();
+        //静态可以调用非静态方法
+        m();
     }
-    public 
+    public void n(){
+        
+    }
+    public static void m(){
+        
+    }
 }
 //Personl类
 class Person{

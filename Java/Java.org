@@ -5199,22 +5199,192 @@
      #+END_SRC
      静态方法也是存储在方法区，只不过加载的时候没有运行，什么时候调用，什么时候去栈中运行。
 
-
      注意：
          静态变量不可以定义到静态方法中
          静态方法中，不可以直接调用非静态的方法。另外也不能存在this和super这样的关键字。静态是优先于对象存在的。
-         - 方法或者 构造方法中可以定义静态变量？
+         - 方法或者构造方法中可以定义静态变量？
            不可以，方法要等到调用的时候，内容才执行，静态变量要与类同级。
          - 静态方法里可以使用this？
            不可以，静态方法是类级别的，this是对象级别的。
          - main静态方法，"直接"调用非静态的属性和方法？
            不可以，静态信息不能调用非静态的信息，非静态的可以调用静态的（出现非静态的说明，加载过程已经走完了）
-         静态方法可以重载
-         静态方法不可以重写，但是可以存在方法签名一样的静态方法，这种方式叫做隐藏
-         隐藏时需注意：父类方法和子类方法要么都是静态的，要么都是非静态的
+           #+BEGIN_SRC java
+               package cn.commandoptionesc.staticx;
+               public class StaticDemo{
+                   public static void main(String[] args){
+                       //静态不能调用非静态方法
+                       //n();
+                       //静态可以调用非静态方法
+                       m();
+                   }
+                   public void n(){}
+                   public static void m(){ }
+               }
+           #+END_SRC
+           [[./StaticDemo1.java]]
+         - 静态方法可以重载
+         - 静态方法不可以重写
+           但是父子类中可以存在方法签名一致的静态方法，这种方式叫做隐藏
+           隐藏时需注意：父类方法和子类方法要么都是静态的，要么都是非静态的
+           #+BEGIN_SRC java
+               package cn.commandoptionesc.staticx;
+               public class StaticDemo1{
+                   public static void main(String[] args){
+
+                   }
+               }
+               class AA{
+                   public void m(){}
+                   public static void n(){}
+               }
+               class B extends A{
+                   //注解---@Override:表示下面的方法是重写方法
+                   @Override
+                   public void m(){}
+                   //静态方法没有重写
+                   //静态方法与类同级
+                   //重写为多态服务---多样性---对象
+                   //@Override
+                   public static void n(){}
+               }
+           #+END_SRC
+           [[./StaticDemo2.java]]
    - 修饰代码块
+     在方法外类内static{}
      用static修饰的代码块
-     它是随着类的加载而加载到方法区中，在类创建对象前去执行一次，而且也只会在类
+     它是随着类的加载而加载到方法区中，在类创建对象前去执行一次（被static修饰的内容都只加载一次）
+     父类静态--->子类静态--->父类对象--->子类对象
+     #+BEGIN_SRC java
+         package cn.commandoptionesc.staticx;
+         public class StaticDemo4{
+             public static void main(String[] args){
+                 new SD();
+             }
+         }
+         class SD1{
+             static{
+                 System.out.println("静态代码块1");
+             }
+             {
+                 System.out.println("构造代码块1");
+             }
+         }
+         class SD extends SD1{
+             static int i;
+             //静态代码块
+             //随着类的加载而加载但是只加载一次，与类同级
+             static{
+                 //静态变量
+                 i = 9;
+                 System.out.println("静态代码块");
+             }
+             {
+                 System.out.println("构造代码块");
+             }
+             public SD(){
+                 System.out.println("无参构造");
+             }
+         }
+     #+END_SRC
+     [[./StaticDemo4.java]]
+
+     #+BEGIN_SRC java
+         package cn.commandoptionesc.staticx;
+         public class StaticDemo5{
+             public static void main(String[] args){
+                 new DB();
+             }
+         }
+         class DA{
+             static DC d=new DC();
+             static{
+                 System.out.println("DA 1");
+             }
+             {
+                 System.out.println("DA 2");
+             }
+
+             public DA(){
+                 System.out.println("DA 3");
+             }
+         }
+         class DB extends DA{
+             static{
+                 System.out.println("DB 1");
+             }
+             {
+                 System.out.println("DB 2");
+             }
+
+             public DB(){
+                 System.out.println("DB 3");
+             }
+         }
+         class DC{
+             public DC(){
+                 System.out.println("DC");
+             }
+         }
+         class DD extends DC{
+             public DD(){
+                 System.out.println("DD");
+             }
+         }
+
+
+
+
+
+     #+END_SRC
+     [[./StaticDemo5.java]]
+
+     #+BEGIN_SRC java
+         package cn.commandoptionesc.staticx;
+         public class StaticDemo6{
+             public static void main(String[] args){
+                 new DB();
+             }
+         }
+         class DA{
+             //static DC d;
+             DD dd = new DD();
+             static{
+                 System.out.println("DA 1");
+             }
+
+             {
+                 System.out.println("DA 2");
+             }
+
+             public DA(){
+                 System.out.println("DA 3");
+             }
+         }
+         class DB extends DA{
+             static{
+                 System.out.println("DB 1");
+             }
+
+             {
+                 System.out.println("DB 2");
+             }
+
+             public DB(){
+                 System.out.println("DB 3");
+             }
+         }
+         class DC{
+             public DC(){
+                 System.out.println("DC");
+             }
+         }
+         class DD extends DC{
+             public DD(){
+                 System.out.println("DD");
+             }
+         }
+     #+END_SRC
+     [[./StaticDemo6.java]]
 ** 封装
    + 面向对象思想的三个特征：封装，继承，多态
 *** 关键字private
