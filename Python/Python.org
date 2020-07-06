@@ -55,6 +55,8 @@
        # ‘ = ’ 叫做赋值符号
        # msg存储的就是输入的信息
        msg = input("请输入内容：")
+       #字面意思：打印/显示
+       #作用：将程序中的信息，输出到终端
        print(msg)
 
    #+END_SRC
@@ -154,3 +156,80 @@
     - 用来记录文本信息（文字信息）
     - 字面值：双引号
       name = "张无忌"
+    #+BEGIN_SRC python
+        name = "张无忌"
+        #依然是字符串
+        f = "1.05"
+        #字符串，不是整数100
+        g = "100"
+        print(name)
+        print(f)
+        print(g)
+    #+END_SRC
+    [[./Source Code/Demo8.py]]
+** 数据类型转换
+   #+BEGIN_SRC python
+        """
+            数据类型转换
+                int float str
+        """
+        str01 = "100"
+        #str --> int
+        #注意：如果字符串存储的数据，不像整形，转换失败
+        int01 = int(str01)
+        re = int01 + 1
+        #int --> str
+        print("结果是："+str(re))
+
+   #+END_SRC
+   [[./Source Code/Demo9.py]]
+** 运算符
+*** 算数运算符
+    + - * /
+    #+BEGIN_SRC python
+        num01 = 5
+        num02 = 2
+        num03 = 56
+        num04 = 10
+        #2.5 除法：取最终结果
+        print(num01 / num02)
+        #2   除法：取整数
+        print(num01 // num02)
+        #6   除法：取余数
+        print(num03 % num04)
+        #获取各位
+        print(56 % 10)
+        #幂运算
+        print(2 ** 2)
+    #+END_SRC
+    [[./Source Code/Demo10.py]]
+*** 增强运算符
+    += -= *= /= //= %= **=
+    #+BEGIN_SRC python
+        num03 = 56
+        num04 = 10
+        #不会改变num03的值
+        print(num03 + 5)
+        print(num03)
+        #会改变num03的值
+        num03 = num03 + 5
+        print(num03)
+        #相当于num03 = num03 + 5
+        num03 += 5
+    #+END_SRC
+    [[./Source Code/Demo11.py]]
+** 练习
+   - 1
+     在终端中获取一个变量
+     在获取另外一个变量
+     然后编写程序，交换两个变量的数据
+     最后打印两个变量
+     #+BEGIN_SRC python
+         msg01 = input("请输入内容:")
+         msg02 = input("请继续输入内容：")
+         temp = msg02
+         msg02 = msg01
+         msg01 = temp
+         print("msg01 = " + msg01)
+         print("msg02 = " + msg02)
+     #+END_SRC
