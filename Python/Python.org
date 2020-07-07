@@ -227,9 +227,25 @@
      #+BEGIN_SRC python
          msg01 = input("请输入内容:")
          msg02 = input("请继续输入内容：")
-         temp = msg02
-         msg02 = msg01
-         msg01 = temp
+         #temp = msg02
+         #msg02 = msg01
+         #msg01 = temp
+         msg01,msg02 = msg02,msg01
          print("msg01 = " + msg01)
          print("msg02 = " + msg02)
+     #+END_SRC
+   - 2
+     在终端中获取一个商品单价 5
+     在获取一个购买的数量 3
+     最后获取支付的金额 20
+     计算应该找回多少钱 5
+     #+BEGIN_SRC python
+         price01 = input("请输入商品的单价：")
+         num01 = input("请输入购买的数量")
+         money01 = input("请输入支付的金额")
+         price02 = int(price01)
+         num02 = int(num01)
+         money02 = int(money01)
+         yu = money02 - price02 * num02
+         print("应该找回钱数"+ str(yu))
      #+END_SRC
