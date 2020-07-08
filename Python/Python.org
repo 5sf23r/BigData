@@ -240,12 +240,18 @@
      最后获取支付的金额 20
      计算应该找回多少钱 5
      #+BEGIN_SRC python
-         price01 = input("请输入商品的单价：")
-         num01 = input("请输入购买的数量")
-         money01 = input("请输入支付的金额")
-         price02 = int(price01)
-         num02 = int(num01)
-         money02 = int(money01)
-         yu = money02 - price02 * num02
+         str_price = input("请输入商品的单价：")
+         float_price = float(str_price)
+         str_num = input("请输入购买的数量")
+         int_num = int(str_num)
+         money = float(input("请输入支付的金额"))
+         yu = money - float_price * int_num
          print("应该找回钱数"+ str(yu))
+     #+END_SRC
+   - 3
+     古代的称，一斤是十六两
+     在终端中获取两，然后计算是几斤零几两
+     显示格式：几斤零几两
+     #+BEGIN_SRC python
+
      #+END_SRC
