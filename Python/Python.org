@@ -185,7 +185,8 @@
    [[./Source Code/Demo9.py]]
 ** 运算符
 *** 算数运算符
-    + - * /
+    + - * / // % **幂运算
+    优先级从高到低：() ** * / % // + -
     #+BEGIN_SRC python
         num01 = 5
         num02 = 2
@@ -252,6 +253,27 @@
      古代的称，一斤是十六两
      在终端中获取两，然后计算是几斤零几两
      显示格式：几斤零几两
+     #+BEGIN_SRC python
+         liang_init = int (input ("请输入斤数"))
+         jin = liang_init // 16
+         liang = liang_init % 16
+         print(str(jin)+"斤"+str(liang)+"两")
+     #+END_SRC
+   - 4
+     公式：
+         距离 = 加速度 * 时间 ** 2 * 0.5 + 初速度 * 时间
+     已知（在终端中录入）:距离、时间、初速度
+     计算：加速度
+     #+BEGIN_SRC python
+         distance = float(input("请输入距离："))
+         time = float(input("请输入时间："))
+         initial_velocity = float(input("请输入初速度："))
+         accelerated_speed = (distance - initial_velocity * time) * 2/time ** 2
+         print("加速度 = " + str(accelerated_speed))
+     #+END_SRC
+   - 5
+     在终端中获取一个四位整数：1234
+     计算每位相加和1+2+3+4
      #+BEGIN_SRC python
 
      #+END_SRC
