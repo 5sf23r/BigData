@@ -167,6 +167,20 @@
         print(g)
     #+END_SRC
     [[./Source Code/Demo8.py]]
+*** 复数
+    复数 = 实部 + 虚部
+    #+BEGIN_SRC python
+        a = 10 + 3j
+        print(type(a))
+    #+END_SRC
+*** bool
+    带有判断性质的陈述句
+    #+BEGIN_SRC python
+        num01 = 10
+        num02 = 3
+        b = 10 < 3
+        print(b)
+    #+END_SRC
 ** 数据类型转换
    #+BEGIN_SRC python
         """
@@ -219,6 +233,10 @@
         num03 += 5
     #+END_SRC
     [[./Source Code/Demo11.py]]
+*** 比较运算
+    > < <= >= == 不等
+    #+BEGIN_SRC python
+    #+END_SRC
 ** 练习
    - 1
      在终端中获取一个变量
@@ -275,5 +293,18 @@
      在终端中获取一个四位整数：1234
      计算每位相加和1+2+3+4
      #+BEGIN_SRC python
-
+         #方式一：
+         num = int(input("请输入一个四位的整数:"))
+         ge = num % 10
+         shi = num // 10 % 10
+         bai = num // 100 %10
+         qian = num // 1000
+         result = ge + shi + bai + qian
+         print("每位相加的和为：" + str(result))
+         #方式二：推荐使用方式二，省内存
+         result = num % 10
+         result += num // 10 % 10
+         result += num // 100 % 10
+         result += num // 1000
+         print("结果是：" + str(result))
      #+END_SRC
