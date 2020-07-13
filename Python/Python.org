@@ -25,26 +25,26 @@
 * Python数据基本类型
 ** 注释
 *** 单行注释
-    以#号开头
+以#号开头
 *** 多行注释
-    三个引号开头，三个引号结尾
-   #+BEGIN_SRC python
-       """
-           汇率转换器
-       """
-       #获取数据--美元
-       str_usd = input("请输入美元")
-       int_usd = float(str_usd)
-       #逻辑计算--美元 x 7.1393
-       result = int_usd * 7.1393
-       #显示结果--人民币
-       print("结果是："+str(result))
+三个引号开头，三个引号结尾
+#+BEGIN_SRC python
+"""
+汇率转换器
+"""
+#获取数据--美元
+str_usd = input("请输入美元")
+int_usd = float(str_usd)
+#逻辑计算--美元 x 7.1393
+result = int_usd * 7.1393
+#显示结果--人民币
+print("结果是："+str(result))
 
-       #这是单行注释
-       """
-       这是多行注释
-       """
-   #+END_SRC
+#这是单行注释
+"""
+这是多行注释
+"""
+#+END_SRC
 ** 函数
    表示一个功能，函数定义者是提供功能的人，函数调用者是使用功能的人
    #+BEGIN_SRC python
@@ -234,9 +234,31 @@
     #+END_SRC
     [[./Source Code/Demo11.py]]
 *** 比较运算
-    > < <= >= == 不等
-    #+BEGIN_SRC python
-    #+END_SRC
+> < <= >= == 不等
+#+BEGIN_SRC python
+print(10.5 > 5)
+#+END_SRC
+*** 逻辑运算符
+判断bool的关系
+and or not
+**** and
+表示并且的关系，现象：遇假则为假
+#+BEGIN_SRC python
+print(True and True)
+print(True and False)
+print(False and True)
+print(False and False)
+#+END_SRC
+**** or
+表示或者的关系，现象：遇真则为真
+#+BEGIN_SRC python
+
+#+END_SRC
+**** not
+#+BEGIN_SRC python
+
+#+END_SRC
+
 ** 练习
    - 1
      在终端中获取一个变量
