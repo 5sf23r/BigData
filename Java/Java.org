@@ -350,49 +350,48 @@
 
 * Java基本语法组成
 ** 变量
-   - 变量概述
-     在代码执行过程中值发生改变的量
-     变量是内存中装载数据的容器
+- 变量概述
+  在代码执行过程中值发生改变的量
+  变量是内存中装载数据的容器
 *** 计算机存储单元
-    - 在计算机中，是以二进制形式来存储数据，每一位二进制在内存中称之为一“位”(bit,简写为b)
-    - 变量是内存中最小的容器，用来存储数据
-    - 计算机存储的最小单位叫 "位（bit）"，又称之为"比特位"，通常以小写的"b"表示
-    - 计算机存储空间的计量单位为"字节（byte）为最小的存储单元，通常用大写"B"表示，字节由连续的8个位组成
-      8bit = 1byte
-      1024B = 1KB
-      1024KB = 1MB
-      1024MB = 1GB
-      1024GB = 1TB
-
-      100Mb = 12.5MB
+- 在计算机中，是以二进制形式来存储数据，每一位二进制在内存中称之为一“位”(bit,简写为b)
+- 变量是内存中最小的容器，用来存储数据
+- 计算机存储的最小单位叫 "位（bit）"，又称之为"比特位"，通常以小写的"b"表示
+- 计算机存储空间的计量单位为"字节（byte）为最小的存储单元，通常用大写"B"表示，字节由连续的8个位组成
+  8bit = 1byte
+  1024B = 1KB
+  1024KB = 1MB
+  1024MB = 1GB
+  1024GB = 1TB
+      ...
+  100Mb = 12.5MB
 *** 基本类型之4类8种
-    - 数据类型分为基本数据类型和引用数据类型（数组、类、接口）
-    - 变量必须要有明确的类型，什么类型的变量装载什么类型的数据
-      + 基本数据类型（4类8种）
-        1. 整型
+- 数据类型分为基本数据类型和引用数据类型（数组、类、接口）
+- 变量必须要有明确的类型，什么类型的变量装载什么类型的数据
+  + 基本数据类型（4类8种）
+    1. 整型
                                          占用内存（字节）                  表示范围
            byte（字节）                        1                  -128（-2^7） ~ 127(2^7-1)
            short（短整型）                     2                 -23767-(2^15) ~ 32767(2^15-1)
            int（整型）                         4            -2147483648(-2^31) ~ 2147483648(2^31-1)
            long（长整型）                      8                        -2^63  ~ 2^63-1
-        2. 浮点型
+    2. 浮点型
            float（单精度）                     4             -3.403E38(-10^38) ~ 3.403E38(10^38)
-           double（双精度）                    8           -1.798E308(-10^308) ~ 1.798E308(10^308)
-        3. 布尔型
+           double（双精度）                    8           -1.798E308(-10^308) ~ 1.798E308(10^
+    3. 布尔型
            boolean                            1                     只有两个值true与false
-        4. 字符型
+    4. 字符型
            char                               2                            0 ~ 65535   表示一个字符，如（'a' 'A' '0' '家'）
            - 文字转成数字---编码     转换规则--编码表
+  + 4e4 = 4*10^4 表示十进制的科学计数法
+  + 0x5p3 = 5*2^3 表示的是十六进制的科学计数法
 
-       + 4e4 = 4*10^4 表示十进制的科学计数法
-       + 0x5p3 = 5*2^3 表示的是十六进制的科学计数法
-
-       + 整数默认为int，小数默认为double
-       + long类型需要在结尾添加l/L作为标识：long l = 10L;
-       + float类型需要在结尾添加f/F作为标识：float f = 3.5f;
-       + 一个字符直接量只能代表一个字符，不可以在一个字符直接量中写入多个字符，不允许有空的字符直接量
-         [[./13.png]]
-      + 引用数据类型（复杂数据类型）
+  + 整数默认为int，小数默认为double
+  + long类型需要在结尾添加l/L作为标识：long l = 10L;
+  + float类型需要在结尾添加f/F作为标识：float f = 3.5f;
+  + 一个字符直接量只能代表一个字符，不可以在一个字符直接量中写入多个字符，不允许有空的字符直接量
+    [[./13.png]]
+  + 引用数据类型（复杂数据类型）
 **** 表示范围是怎么来的
 ***** 整数类型
       byte ---> 1byte = 8bit ---> 1bit表示两个二进制数：0或者1;2bit表示四个二进制
@@ -421,409 +420,406 @@
 **** 转义字符
      [[./14.png]]
 *** 常量与类型
-    - java中默认的整数类型是int类型
-    - java中默认的浮点型是double类型
-      + 3.14没有后缀，所以为double类型
-      + 5.28D为double类型
-      + 1.26F为float类型
+- java中默认的整数类型是int类型
+- java中默认的浮点型是double类型
+  1. 3.14没有后缀，所以为double类型
+  2. 5.28D为double类型
+  3. 1.26F为float类型
 *** 定义变量(创建变量)
 **** 数据类型
-     限制数据的变化范围
+限制数据的变化范围
 **** 变量名
-     区分其他变量
+区分其他变量
 **** 初始化
-     保证变量操作之前有数据
+保证变量操作之前有数据
 **** 定义格式
-     数据类型 变量名 = 数据值;
-     int    a    =  100;
+数据类型 变量名 = 数据值;
+int    a    =  100;
 **** 变量声明
-     int j;
+int j;
 **** 变量赋值
-      j = 6;
-     #+BEGIN_SRC java
-         /*
-          定义Java中的变量
-          定义出所有数据类型的变量
-          四类八种
-         ,*/
-         class VariableDemo{
-             public static void main(String[] args){
-                 //定义整数类型，字节类型byte类型
-                 //内存中1个字节，-128 ~ 127
-                 byte b = 100;
-                 System.out.println(b);
+j = 6;
+#+BEGIN_SRC java
+/*
+  定义Java中的变量
+  定义出所有数据类型的变量
+  四类八种
+,*/
+class VariableDemo{
+    public static void main(String[] args){
+    //定义整数类型，字节类型byte类型
+    //内存中1个字节，-128 ~ 127
+    byte b = 100;
+    System.out.println(b);
 
-                 //定义整数类型，短整型，short类型
-                 //内存中2个字节，-32768 ~ 32767
-                 short s = 200;
-                 System.out.println(s);
+    //定义整数类型，短整型，short类型
+    //内存中2个字节，-32768 ~ 32767
+    short s = 200;
+    System.out.println(s);
 
-                 //定义整数类型，整型，int类型
-                 //内存中4个字节，-2147483648 ~ 2147483647
-                 int i = 500006;
-                 System.out.println(i);
+    //定义整数类型，整型，int类型
+    //内存中4个字节，-2147483648 ~ 2147483647
+    int i = 500006;
+    System.out.println(i);
 
-                 //定义整数类型，长整型，long类型
-                 //内存中8个字节
-                 long l = 21474836470L;
-                 System.out.println(l);
+    //定义整数类型，长整型，long类型
+    //内存中8个字节
+    long l = 21474836470L;
+    System.out.println(l);
 
-                 //定义浮点数据类型，单精度，float类型
-                 //内存中4个字节
-                 float f = 1.0F;
-                 System.out.println(f);
+    //定义浮点数据类型，单精度，float类型
+    //内存中4个字节
+    float f = 1.0F;
+    System.out.println(f);
 
-                 //定义浮点数据类型，双精度double类型
-                 //内存中8个字节
-                 double d = 2.2;
-                 System.out.println(d);
+    //定义浮点数据类型，双精度double类型
+    //内存中8个字节
+    double d = 2.2;
+    System.out.println(d);
 
-                 //定义字符类型，char
-                 //内存中2个字节，必须单引号包裹，只能写1个字符
-                 char c = '我';
-                 System.out.println(c);
+    //定义字符类型，char
+    //内存中2个字节，必须单引号包裹，只能写1个字符
+    char c = '我';
+    System.out.println(c);
 
-                 //定义布尔类型，boolean
-                 //内存中1个字节，数据值，true false
-                 boolean bool = true;
-                 System.out.println(bool);
-             }
-         }
-     #+END_SRC
-
+    //定义布尔类型，boolean
+    //内存中1个字节，数据值，true false
+    boolean bool = true;
+    System.out.println(bool);
+    }
+}
+#+END_SRC
 *** 定义字符串变量
-    #+BEGIN_SRC java
-      /*
-        常量：字符串，双引号，包裹，“0 ~ n”
-       ,*/
-       class Variable_1{
-          public static void main(String[] args){
-              //定义变量，字符串类型，数据类型String表示字符串的数据类型
-              String s = "我爱Java";
-              //String属于引用类型，定义方式和基本类型一样
-              System.out.println(s);
+#+BEGIN_SRC java
+/*
+  常量：字符串，双引号，包裹，“0 ~ n”
+,*/
+class Variable_1{
+    public static void main(String[] args){
+        //定义变量，字符串类型，数据类型String表示字符串的数据类型
+        String s = "我爱Java";
+        //String属于引用类型，定义方式和基本类型一样
+        System.out.println(s);
 
+    }
+}
+#+END_SRC
+*** 变量定义使用注意事项
+- 变量定义后可以不赋值，使用时在赋值，不赋值不能使用
+  #+BEGIN_SRC java
+  class Variable_2{
+      public static void main(String[] args){
+          int x;
+          x = 20;
+          System.out.println(x);
+      }
+  }
+  #+END_SRC
+- 变量使用是有自己的作用范围，变量的有效范围是只在定义的一对大括号内
+  #+BEGIN_SRC java
+  class Variable_3{
+      public static void main(String[] args){
+          int i = 5;
+          System.out.println(i);
+          {
+              int j = 10;
+          }
+          System.out.println(j);
           }
       }
-    #+END_SRC
-*** 变量定义使用注意事项
-    - 变量定义后可以不赋值，使用时在赋值，不赋值不能使用
-      #+BEGIN_SRC java
-        class Variable_2{
-            public static void main(String[] args){
-                int x;
-                x = 20;
-                System.out.println(x);
-            }
-        }
-      #+END_SRC
-    - 变量使用是有自己的作用范围，变量的有效范围是只在定义的一对大括号内
-      #+BEGIN_SRC java
-       class Variable_3{
-           public static void main(String[] args){
-               int i = 5;
-               System.out.println(i);
-               {
-                   int j = 10;
-               }
-               System.out.println(j);
-           }
-       }
-     #+END_SRC
-    - 变量不可以重复定义
+  #+END_SRC
+- 变量不可以重复定义
 *** 数据类型转换
-    范围小的数据类型值（如byte），可以直接转换为范围大的数据类型值（如int）
-    byte、char、short只要做操作都会类型提升为int类型(byte、char、short在底层是按照int类型进行存储的)
-    范围大的数据类型值（如int），不可以直接转换为范围小的数据类型值（如byte）
-    #+BEGIN_SRC java
-        class DataTypeDemo{
-            public static void main(String[] args){
-                //相同数据类型
-                int a=1;
-                int b=2;
-                System.out.println(a+b);
-                //不同数据类型
-                byte b1=3;
-                int i=5;
-                int c=b1+i;
-                System.out.println(c);
+范围小的数据类型值（如byte），可以直接转换为范围大的数据类型值（如int）
+byte、char、short只要做操作都会类型提升为int类型(byte、char、short在底层是按照int类型进行存储的)
+范围大的数据类型值（如int），不可以直接转换为范围小的数据类型值（如byte）
+#+BEGIN_SRC java
+class DataTypeDemo{
+    public static void main(String[] args){
+        //相同数据类型
+        int a=1;
+        int b=2;
+        System.out.println(a+b);
+        //不同数据类型
+        byte b1=3;
+        int i=5;
+        int c=b1+i;
+        System.out.println(c);
 
-                //byte --- short 可以
-                /*byte b1 = 10;
-                short c2=b;*/
+        //byte --- short 可以
+        /*byte b1 = 10;
+        short c2=b;*/
 
-                //java会进行类型检查，如果是字符就会安装对应的编码就会转换成对应的数值在赋值给变量s
-                //如果这个数值不在变量的表示范围之内就会报错
-                short s='中';
-                char c3=97;
-                System.out.prtinln(c);
-                //除了char类型其他的基本类型都会有负值
-                //可能会导致出现负值char找不到对应的字符
-                /*double s=-10;
-                char c=s;*/
-                char c4=19;
-                int i4=c4;
-                System.out.println(c4);
-            }
-        }
-    #+END_SRC
-    [[./7.png]]
-    [[./8.png]]
-    如果=右边只有常量进行运算就会进行编译时期的优化，就会直接算出结果值在进行赋值
-    [[./15.png]]
-    - 自动类型转换（范围小转大）
-      范围大的数据类型 变量 = 范围小的数据类型值;
-      double d = 1000;
-    - 强制类型转换（范围大转小）
-      大类型可以强转为小类型，但是在转化的时候因为字节的损失所以可能导致数据不准确
-      强制类型转换，没有要求的时候，不做
-      范围小的数据类型 变量 = （范围小的数据类型）范围大的数据类型值;
-      int i = (int)6.718; //i的值为6
+        //java会进行类型检查，如果是字符就会安装对应的编码就会转换成对应的数值在赋值给变量s
+        //如果这个数值不在变量的表示范围之内就会报错
+        short s='中';
+        char c3=97;
+        System.out.prtinln(c);
+        //除了char类型其他的基本类型都会有负值
+        //可能会导致出现负值char找不到对应的字符
+        /*double s=-10;
+        char c=s;*/
+        char c4=19;
+        int i4=c4;
+        System.out.println(c4);
+    }
+}
+#+END_SRC
+[[./7.png]]
+[[./8.png]]
+如果=右边只有常量进行运算就会进行编译时期的优化，就会直接算出结果值在进行赋值
+[[./15.png]]
+- 自动类型转换（范围小转大）
+  范围大的数据类型 变量 = 范围小的数据类型值;
+  double d = 1000;
+- 强制类型转换（范围大转小）
+  大类型可以强转为小类型，但是在转化的时候因为字节的损失所以可能导致数据不准确
+  强制类型转换，没有要求的时候，不做
+  范围小的数据类型 变量 = （范围小的数据类型）范围大的数据类型值;
+  int i = (int)6.718; //i的值为6
 
-      double d = 3.14;
-      int i2 = (int)d;    //i2的值为3
-      #+BEGIN_SRC java
-          /*
-            128 二进制
-            00000000 00000000 00000000 10000000 int
-            128int转为byte为：10000000 补码
-                            11111111  反码
-                            10000000  原码
-            值为 -0   表示当前数据类型的最小值，为-128
-          */
-          class DataTypeDemo1{
-              public static void mian(String[] args){
-                  //b11=-128
-                  byte b11 = (byte)128;
-                  System.out.println(b11);
-              }
-          }
-      #+END_SRC
+  double d = 3.14;
+  int i2 = (int)d;    //i2的值为3
+  #+BEGIN_SRC java
+  /*
+    128 二进制
+    00000000 00000000 00000000 10000000 int
+    128int转为byte为：10000000 补码
+                     11111111  反码
+                     10000000  原码
+    值为 -0   表示当前数据类型的最小值，为-128
+  */
+  class DataTypeDemo1{
+      public static void mian(String[] args){
+          //b11=-128
+          byte b11 = (byte)128;
+          System.out.println(b11);
+      }
+  }
+  #+END_SRC
 ** 运算符
 *** 算术运算符
 **** 除法运算
-     - 如果都是整型数据进行操作，结果一定是整型
-         i*1.0/j 结果就是浮点数
-        #+BEGIN_SRC java
-           class SuanShu{
-               public static void main(String[] args){
-                   int i=900;
-                   int j=9;
-                   System.out.println(i/j);
-                   System.out.println(i*1.0/j);
-               }
-           }
-       #+END_SRC
-         [[./SuanShu.java]]
-      - 算术异常
-        ArithmeticException:/by zero ---算术异常
-        #+BEGIN_SRC java
-             System.out.println(a/0);
-         #+END_SRC
-      - Infinity -Infinity   正无穷大 负无穷大   java允许小数除0
-        #+BEGIN_SRC java
-             System.out.println(a*1.0/0);
-             System.out.println(-a*1.0/0);
-         #+END_SRC
-      - NaN -- not a Number
-        #+BEGIN_SRC java
-            System.out.println(-0.0/0.0);
-        #+END_SRC
+- 如果都是整型数据进行操作，结果一定是整型
+  i*1.0/j 结果就是浮点数
+  #+BEGIN_SRC java
+  class SuanShu{
+      public static void main(String[] args){
+          int i=900;
+          int j=9;
+          System.out.println(i/j);
+          System.out.println(i*1.0/j);
+      }
+  }
+  #+END_SRC
+  [[./SuanShu.java]]
+- 算术异常
+  ArithmeticException:/by zero ---算术异常
+  #+BEGIN_SRC java
+  System.out.println(a/0);
+  #+END_SRC
+- Infinity -Infinity   正无穷大 负无穷大   java允许小数除0
+  #+BEGIN_SRC java
+  System.out.println(a*1.0/0);
+  System.out.println(-a*1.0/0);
+  #+END_SRC
+- NaN -- not a Number
+  #+BEGIN_SRC java
+  System.out.println(-0.0/0.0);
+  #+END_SRC
 **** 取余%
-      取余结果的正负和%左边的正负一致
-      #+BEGIN_SRC java
-          System.out.println(-a%3);
-      #+END_SRC
+取余结果的正负和%左边的正负一致
+#+BEGIN_SRC java
+System.out.println(-a%3);
+#+END_SRC
 **** ++ --
-      - 单独使用
-        #+BEGIN_SRC java
-            int a =4;
-            int a1 = 4;
-            //4
-            System.out.println(a++);
-            //5
-            System.out.println(a);
-            //4
-            System.out.println(a1--);
-            //3
-            System.out.println(a1);
+- 单独使用
+  #+BEGIN_SRC java
+  int a =4;
+  int a1 = 4;
+  //4
+  System.out.println(a++);
+  //5
+  System.out.println(a);
+  //4
+  System.out.println(a1--);
+  //3
+  System.out.println(a1);
 
-            //3
-            System.out.println(--a);
-            //3
-            System.out.println(a);
-        #+END_SRC
-        - 如果++或者--用在操作数的后面，先进行赋值，在进行自加或者更自减
-        - 如果++或者--用在操作数的前面，先自加1或者自减1，在进行赋值
-      - 参与运算
-        - =右边前面的值发生改变之后会影响后面的值
-          #+BEGIN_SRC java
-              b =++a+a--+a++;
-              //14
-              System.out.println(b);
-              //5
-              System.out.println(a);
-           #+END_SRC
-          [[./17.png]]
-        - byte、char、short使用++时底层都有强制类型转换
-          #+BEGIN_SRC java
-              //-128
-              byte b = 127;
-              b++;
-              System.out.println(b);
-          #+END_SRC
-          #+BEGIN_SRC java
-              //b
-              char c='a';
-              c++;
-              System.out.println(c);
-          #+END_SRC
-          #+BEGIN_SRC java
-              //-32768
-              short s=32767;
-              s++;
-              System.out.println(s);
-          #+END_SRC
+  //3
+  System.out.println(--a);
+  //3
+  System.out.println(a);
+  #+END_SRC
+- 如果++或者--用在操作数的后面，先进行赋值，在进行自加或者更自减
+- 如果++或者--用在操作数的前面，先自加1或者自减1，在进行赋值
+- 参与运算
+- =右边前面的值发生改变之后会影响后面的值
+  #+BEGIN_SRC java
+  b =++a+a--+a++;
+  //14
+  System.out.println(b);
+  //5
+  System.out.println(a);
+  #+END_SRC
+  [[./17.png]]
+- byte、char、short使用++时底层都有强制类型转换
+  #+BEGIN_SRC java
+  //-128
+  byte b = 127;
+  b++;
+  System.out.println(b);
+  #+END_SRC
+  #+BEGIN_SRC java
+  //b
+  char c='a';
+  c++;
+  System.out.println(c);
+  #+END_SRC
+  #+BEGIN_SRC java
+  //-32768
+  short s=32767;
+  s++;
+  System.out.println(s);
+  #+END_SRC
+  #+BEGIN_SRC java
+  /*
+    算术运算符
+    + 加法，连接
+    - 减法
+    ,* 乘法
+    /除法
+    % 取模，获取余数
+    ++ 自加1
+    -- 自减1
 
-    #+BEGIN_SRC java
-      /*
-        算术运算符
-        + 加法，连接
-        - 减法
-        ,* 乘法
-        /除法
-        % 取模，获取余数
-        ++ 自加1
-        -- 自减1
+    byte/short/char在 运算的时候会自动提升为int
+    int在计算完成之后结果一定是int
+    小类型和大类型运算的时候结果一定是大类型
+    整数/0---算数异常
+    非零小数/0 非零数字/0.0---infinity
+    0/0.0 0.0/0 0.0/0.0---NaN
+    %的结果的符号看的是%左边数字的符号
+    ++/-- 自增/自减 ---在变量之前先自增后运算；在变量之后先运算后自增---在底层做了一次强制转换
+    任何数据在计算机中存储的补码
 
-        byte/short/char在 运算的时候会自动提升为int
-        int在计算完成之后结果一定是int
-        小类型和大类型运算的时候结果一定是大类型
-        整数/0---算数异常
-        非零小数/0 非零数字/0.0---infinity
-        0/0.0 0.0/0 0.0/0.0---NaN
-        %的结果的符号看的是%左边数字的符号
-        ++/-- 自增/自减 ---在变量之前先自增后运算；在变量之后先运算后自增---在底层做了一次强制转换
-        任何数据在计算机中存储的补码
+    ,*/
+  class Operator{
+      public static void main(String[] args){
+          // + 连接作用，将一个字符串和其他数据连接起来
+          // + 遇到字符串，变成连接符号
+          // + 任何类型只要和字符串+，所有的数据都变成了字符串
+          System.out.println("5+5="10);
 
-       ,*/
-       class Operator{
-          public static void main(String[] args){
-              // + 连接作用，将一个字符串和其他数据连接起来
-              // + 遇到字符串，变成连接符号
-              // + 任何类型只要和字符串+，所有的数据都变成了字符串
-              System.out.println("5+5="10);
+          //byte/short/char在参与运算的时候会自动提升为int
+          byte i = 3, j = 4;
+          //byte k = i + j;
+          //k的类型必须是int
+          byte k = (byte)(i + j);
+          int k = i + j;
 
-              //byte/short/char在参与运算的时候会自动提升为int
-              byte i = 3, j = 4;
-              //byte k = i + j;
-              //k的类型必须是int
-              byte k = (byte)(i + j);
-              int k = i + j;
+          //除法运算
+          //如果都是整型数据进行操作，结果一定是整型
+          int i = 100;
+          int j = 9;
+          System.out.println(i/j);
+          //以下操作得到的不是整型
+          System.out.println(i*1.0/j);
 
-              //除法运算
-              //如果都是整型数据进行操作，结果一定是整型
-              int i = 100;
-              int j = 9;
-              System.out.println(i/j);
-              //以下操作得到的不是整型
-              System.out.println(i*1.0/j);
+          //取模运算，两个数相除，获取的是余数
+          int k = 6;
+          int m = 2;
+          System.out.println(k%m);
 
-              //取模运算，两个数相除，获取的是余数
-              int k = 6;
-              int m = 2;
-              System.out.println(k%m);
+          //自增运算 ++
+          int a = 3;
+          int b = 4;
 
-              //自增运算 ++
-              int a = 3;
-              int b = 4;
+          a++;
+          System.out.println(a);
 
-              a++;
-              System.out.println(a);
-
-              ++b;
-              System.out.println(b);
-          }
+          ++b;
+          System.out.println(b);
       }
-    #+END_SRC
+  }
+  #+END_SRC
 
-    #+BEGIN_SRC java
-      /*
-        ++ 写在变量前面，和写在变量后面的区别
-        a = 1;
-        a++;
-        ++a;
-        变量独立计算的时候，++在前在后没有区别
-        j = i++; ---> ++ 后算，先将i的值，赋值j，i自己在++
+  #+BEGIN_SRC java
+  /*
+    ++ 写在变量前面，和写在变量后面的区别
+    a = 1;
+    a++;
+    ++a;
+    变量独立计算的时候，++在前在后没有区别
+    j = i++; ---> ++ 后算，先将i的值，赋值j，i自己在++
 
-        n = ++m; ---> ++ 先算，后将++过的值赋给n
+    n = ++m; ---> ++ 先算，后将++过的值赋给n
 
-       ,*/
-      class Opeartor_1{
-          public static void main(String[] args){
-              int j = 5;
-              int j = i++;
-              System.out.println(i);//6
-              System.out.println(j);//5
+  ,*/
+  class Opeartor_1{
+      public static void main(String[] args){
+          int j = 5;
+          int j = i++;
+          System.out.println(i);//6
+          System.out.println(j);//5
 
-              int m = 5;
-              int n = ++m;
-              System.out.println(m);//6
-              Syetem.out.println(n);//6
-          }
+          int m = 5;
+          int n = ++m;
+          System.out.println(m);//6
+          Syetem.out.println(n);//6
       }
-    #+END_SRC
+  }
+  #+END_SRC
+  #+BEGIN_SRC java
+  class SuanShu1{
+      public static void main(String[] args){
+          int a = 4;
+          int b = 5;
 
-    #+BEGIN_SRC java
-      class SuanShu1{
-          public static void main(String[] args){
-              int a = 4;
-              int b = 5;
+          //整型和浮点型数据遇到字符会和字符对应的编码值进行相加
+          System.out.println(a + b + 'a');
+          //字符串可以和任意数据类型的数据进行拼接
+          System.out.println(a + b + "c" + 'a');
+          // + 可以是相加，也可以是字符串连接符
+          System.out.println(a + b);
+          System.out.println("A:" + a + ",B:" + b);
 
-      //整型和浮点型数据遇到字符会和字符对应的编码值进行相加
-              System.out.println(a + b + 'a');
-      //字符串可以和任意数据类型的数据进行拼接
-              System.out.println(a + b + "c" + 'a');
-      // + 可以是相加，也可以是字符串连接符
-              System.out.println(a + b);
-              System.out.println("A:" + a + ",B:" + b);
-
-          }
       }
-    #+END_SRC
+  }
+  #+END_SRC
 *** 赋值运算符
-      [[./18.png]]
-      #+BEGIN_SRC java
-      /*
-        赋值运算符
-        =
-        += -= *= /= %= &= |= ^= <<= >>= >>>=
-       ,*/
-      class Operator_4{
-          public static void main(String[] args){
-              //= 赋值运算，将后面的值，赋值给左边的变量
-              int i = 3;
-              i = i + 3;
-              System.out.println(i);
+[[./18.png]]
+#+BEGIN_SRC java
+/*
+  赋值运算符
+  =
+  += -= *= /= %= &= |= ^= <<= >>= >>>=
+  ,*/
+class Operator_4{
+    public static void main(String[] args){
+        //= 赋值运算，将后面的值，赋值给左边的变量
+        int i = 3;
+        i = i + 3;
+        System.out.println(i);
 
-              //+= 赋值运算符 i+=3 --->  i=i+3
-              int j = 5;
-              j+=6;//j=j+6;
-              System.out.println(j);
+        //+= 赋值运算符 i+=3 --->  i=i+3
+        int j = 5;
+        j+=6;//j=j+6;
+        System.out.println(j);
 
-              //byte char short 使用++ --时底层都是强制类型转换
-              byte b = 1;
-              // b = b + 1;//无法进行相加，需要进行强制转换
-              b = (byte)(b+1);
-              System.out.println(b);
+        //byte char short 使用++ --时底层都是强制类型转换
+        byte b = 1;
+        // b = b + 1;//无法进行相加，需要进行强制转换
+        b = (byte)(b+1);
+        System.out.println(b);
 
-              byte b1 = 1;
-              b1 += 1;//等同于(byte)(b + 1);
-              System.out.println(b1);
+        byte b1 = 1;
+        b1 += 1;//等同于(byte)(b + 1);
+        System.out.println(b1);
 
-          }
-      }
-    #+END_SRC
+    }
+}
+#+END_SRC
 **** b+=a;//11 b=a+b;底层会默认加上强制类型转换
       #+BEGIN_SRC java
           byte a=10;
@@ -853,119 +849,119 @@
           System.out.println(b);//-16
       #+END_SRC
 *** 关系运算符
-    ==、>、<、> =、< =、! =
-    比较（关系）运算符--结果一定是布尔值
+==、>、<、> =、< =、! =
+比较（关系）运算符--结果一定是布尔值
 *** 逻辑运算符
-    用于连接布尔值或者布尔表达式的符号
+用于连接布尔值或者布尔表达式的符号
 **** 表达式：
-          用于连接变量或者数据，而且符合java语法的式子
-          a+b(算术表达式)
-          a<b(布尔表达式)
-          &(逻辑与)  |逻辑或   ^逻辑异或  ！逻辑非  ||双或
+用于连接变量或者数据，而且符合java语法的式子
+a+b(算术表达式)
+a<b(布尔表达式)
+&(逻辑与)  |逻辑或   ^逻辑异或  ！逻辑非  ||双或
 **** 总结：
-          逻辑运算符，对两个BOOLEAN类型数据之间进行计算
-          结果也是BOOLEAN类型
+逻辑运算符，对两个BOOLEAN类型数据之间进行计算
+结果也是BOOLEAN类型
 
-          &（按位与）       :只要有一个FALSE，结果就FALSE
-          (或)|           :只要有一个TRUE，结果就是TRUE
-          ^（按位异或）     :两边相同为FALSE，不同为TRUE
-          !(非)           :取反 !TRUE = FALSE  !FALSE = TRUE
-          &&(短路与.逻辑与) :一边是FALSE，另一边不运行;左边是false，则右边默认不执行--短路
-          (短路或逻辑或)||  :一边true，另一边不运行;如果左边是true，则右边就默认不执行--短路
+&（按位与）       :只要有一个FALSE，结果就FALSE
+(或)|           :只要有一个TRUE，结果就是TRUE
+^（按位异或）     :两边相同为FALSE，不同为TRUE
+!(非)           :取反 !TRUE = FALSE  !FALSE = TRUE
+&&(短路与.逻辑与) :一边是FALSE，另一边不运行;左边是false，则右边默认不执行--短路
+(短路或逻辑或)||  :一边true，另一边不运行;如果左边是true，则右边就默认不执行--短路
 
-          如果双或在双与的前面，双或发生短路，就会把双与一起短路掉
-          &&和||优先级一样
-          开发中常用双与和双或
-     #+BEGIN_SRC java
-        class Operator_5{
-            public static void main(String[] args){
-                System.out.println(false & true);
-                System.out.println(false | true);
-                System.out.println(false ^ false);//F
-                System.out.println(true ^ true);//T
-                System.out.println(true ^ false);//F
+如果双或在双与的前面，双或发生短路，就会把双与一起短路掉
+&&和||优先级一样
+开发中常用双与和双或
+#+BEGIN_SRC java
+class Operator_5{
+    public static void main(String[] args){
+        System.out.println(false & true);
+        System.out.println(false | true);
+        System.out.println(false ^ false);//F
+        System.out.println(true ^ true);//T
+        System.out.println(true ^ false);//F
 
-                System.out.println(!true);
-                System.out.println("--------------------------------");
-                int i = 3;
-                int j = 4;
-                System.out.println(3>4 && ++j>2);
-                System.out.println(i);
-                System.out.println(j);
+        System.out.println(!true);
+        System.out.println("--------------------------------");
+        int i = 3;
+        int j = 4;
+        System.out.println(3>4 && ++j>2);
+        System.out.println(i);
+        System.out.println(j);
 
-                System.out.println(3==3 || ++j>2);
-                System.out.println(i);
-                System.out.println(j);
+        System.out.println(3==3 || ++j>2);
+        System.out.println(i);
+        System.out.println(j);
 
-                //&&在||前面时，不能短路||
-                int i1=3,j1=5;
-                boolean b1 = false && i1++ > 1 || j1++>3;
-                System.out.println(i1);
-                System.out.println(j1);
-                System.out.println(b1);
+        //&&在||前面时，不能短路||
+        int i1=3,j1=5;
+        boolean b1 = false && i1++ > 1 || j1++>3;
+        System.out.println(i1);
+        System.out.println(j1);
+        System.out.println(b1);
 
-                //||在&&前面时，短路&&
-                int i2=3,j2=5;
-                boolean b2 = true || i2++ > 6 && j2++ > 10;
-                System.out.println(i2);
-                System.out.println(j2);
-                System.out.println(b2);
+        //||在&&前面时，短路&&
+        int i2=3,j2=5;
+        boolean b2 = true || i2++ > 6 && j2++ > 10;
+        System.out.println(i2);
+        System.out.println(j2);
+        System.out.println(b2);
 
-            }
-        }
-    #+END_SRC
-     #+BEGIN_SRC java
-        class Luoji{
-            public static void main(String[] args){
-                int a=3;
-                int b=4;
-                int c=5;
-                int a1=3;
-                int b1=4;
-                int c1=5;
-                int a2=3;
-                int b2=4;
-                int c2=5;
-                int a3=3;
-                int b3=4;
-                int c3=5;
-                int a4=3;
-                int b4=4;
-                int c4=5;
-                System.out.println((a++==b)&&(c++>b));
-                //4,4,5
-                System.out.println(a+","+b+","+c);
+    }
+}
+#+END_SRC
+#+BEGIN_SRC java
+class Luoji{
+    public static void main(String[] args){
+        int a=3;
+        int b=4;
+        int c=5;
+        int a1=3;
+        int b1=4;
+        int c1=5;
+        int a2=3;
+        int b2=4;
+        int c2=5;
+        int a3=3;
+        int b3=4;
+        int c3=5;
+        int a4=3;
+        int b4=4;
+        int c4=5;
+        System.out.println((a++==b)&&(c++>b));
+        //4,4,5
+        System.out.println(a+","+b+","+c);
 
-                System.out.println((c1++>b1)&&(a1++==b1));
-                //4,4,6
-                System.out.println(a1+","+b1+","+c1);
+        System.out.println((c1++>b1)&&(a1++==b1));
+        //4,4,6
+        System.out.println(a1+","+b1+","+c1);
 
-                System.out.prtinln(true&&(a2++!=b)||(c2++>b2));
-                //4,4,5
-                System.out.println(a2+","+b2+","+c2);
+        System.out.prtinln(true&&(a2++!=b)||(c2++>b2));
+        //4,4,5
+        System.out.println(a2+","+b2+","+c2);
 
-                System.out.prtinln(false&&(a3++!=b)||(c3++>b3));
-                //3,4,6
-                System.out.println(a3+","+b3+","+c3);
+        System.out.prtinln(false&&(a3++!=b)||(c3++>b3));
+        //3,4,6
+        System.out.println(a3+","+b3+","+c3);
 
-                //如果双或在双与的前面，双或发生了短路就会把双与一起短路掉
-                // System.out.println(true||(a4++!=b4)&&(c4++>b4));
-                //3,4,5
-                // System.out.println(a4+","+b4+","+c4);
-                System.out.println(true&&c4++>b4);
-                System.out.println(c4);
-            }
-        }
-    #+END_SRC
-     [[./Luoji.java]]
+        //如果双或在双与的前面，双或发生了短路就会把双与一起短路掉
+        // System.out.println(true||(a4++!=b4)&&(c4++>b4));
+        //3,4,5
+        // System.out.println(a4+","+b4+","+c4);
+        System.out.println(true&&c4++>b4);
+        System.out.println(c4);
+    }
+}
+#+END_SRC
+[[./Luoji.java]]
 *** 位运算符
-    要把数据转成二进制的补码形式才能进行位运算
-    移位的位数要对32进行取余，取余的结果才是真正移动的位数--规定
+要把数据转成二进制的补码形式才能进行位运算
+移位的位数要对32进行取余，取余的结果才是真正移动的位数--规定
 **** &（按位与） |（按位或） ^（按位异或）
-     任意一个数&1==1就是奇数
-      任意一个正数&任意一个数=正数
-      任意一个负数|任意一个数=负数
-      任意一个数|0=原来的值
+任意一个数&1==1就是奇数
+任意一个正数&任意一个数=正数
+任意一个负数|任意一个数=负数
+任意一个数|0=原来的值
 
       4 & 5=4 遇0则0
         4 00000000 00000000 00000000 00000100
@@ -991,15 +987,15 @@
       [[./Wei.java]]
 **** <<左移 >>右移 >>>无符号右移 ~取反
 ***** >>
-      如果是正数右移几位就在最左边补几个0
-      如果是负数右移几位就在最左边补几个1
-      如果是正数右移几位，操作数/2^移动位数
+如果是正数右移几位就在最左边补几个0
+如果是负数右移几位就在最左边补几个1
+如果是正数右移几位，操作数/2^移动位数
 ***** <<
-      无论正负数左移几位最右边就补几个0
-      左移几位，操作数*2^移动位数
+无论正负数左移几位最右边就补几个0
+左移几位，操作数*2^移动位数
 ***** >>>
-      一定是正数
-      无论正负数右移几位，就在最左边补几个0
+一定是正数
+无论正负数右移几位，就在最左边补几个0
 ***** 示例
       4 >> 2
       4 [00]00000000 00000000 00000000 000001(00)
@@ -1013,292 +1009,297 @@
       4 [00]00000000 00000000 00000000 000001(00)
       1     00000000 00000000 00000000 00000001
       #+BEGIN_SRC java
-          class WeiDemo4{
-              public static void main(String[] args){
-                  // >>
-                  System.out.println(4>>2);//4/2^2
-                  // <<
-                  System.out.println(4<<2);//4*2^2
-                  //>>>
-                  System.out.println(4>>>2);
-              }
+      class WeiDemo4{
+          public static void main(String[] args){
+              // >>
+              System.out.println(4>>2);//4/2^2
+              // <<
+              System.out.println(4<<2);//4*2^2
+              //>>>
+              System.out.println(4>>>2);
           }
+      }
       #+END_SRC
       [[./WeiDemo4.java]]
 **** 按位异或的扩展
-     如果一个数按位异或上另一个数两次，结果就是本身
-     [[./WeiDemo.java]]
+如果一个数按位异或上另一个数两次，结果就是本身
+[[./WeiDemo.java]]
 **** 交换值的方式：
-     - 方式一：异或法
-       int x = 5
-       int y = 7
+- 方式一：异或法
+  int x = 5
+  int y = 7
 
-       x = x ^ y;
-       y = x ^ y; ---> y = x ^ y ^ y; ---> y = x; ---> y = 5;
-       x = x ^ y; ---> x = x ^ y ^ x; ---> x = y; ---> x = 7;
-       #+BEGIN_SRC java
-           class WeiDemo2{
-               public static void main(String[] args){
-                   int a=4;
-                   int b=5;
-                   //按位异或
-                   a=a^b;
-                   b=a^b;
-                   a=a^b;
-                   System.out.println("a:"+a+",b:"+b);
+  x = x ^ y;
+  y = x ^ y; ---> y = x ^ y ^ y; ---> y = x; ---> y = 5;
+  x = x ^ y; ---> x = x ^ y ^ x; ---> x = y; ---> x = 7;
+  #+BEGIN_SRC java
+  class WeiDemo2{
+      public static void main(String[] args){
+          int a=4;
+          int b=5;
+          //按位异或
+          a=a^b;
+          b=a^b;
+          a=a^b;
+          System.out.println("a:"+a+",b:"+b);
 
-              }
-          }
-
-       #+END_SRC
-       [[./WeiDemo2.java]]
-     - 方式二：加减法
-        int x = 3;
-        int y = 7;
-
-        x = x + y;
-        y = x - y; ---> y = x + y - y; ---> y = x; ---> y = 3;
-        x = x - y; ---> x = x + y - x; ---> x = y; ---> x = 7;
-        #+BEGIN_SRC java
-            class WeiDemo3{
-                public static void main(String[] args){
-                    int a=4;
-                    int b=5;
-                    a=a+b;
-                    b=a-b;
-                    a=a-b;
-                    System.out.println("a:"+a+",b:"+b);
-                }
-            }
-
-        #+END_SRC
-        [[./WeiDemo3.java]]
-     - 方式三：第三方变量
-        int x = 3;
-        int y = 7;
-        int z = x;
-        x = y;
-        y = z;
-        #+BEGIN_SRC java
-            class WeiDemo1{
-                public static void main(String[] args){
-                    int a=4;
-                    int b=5;
-                    //中间变量
-                    int temp=a;
-                    a=b;
-                    b=temp;
-                    System.out.println("a:"+a+",b:"+b);
-                }
-            }
-        #+END_SRC
-        [[./WeiDemo1.java]]
-     - 扩展：考虑三种方式的优劣性
-        异或法的效率最高，但使用频率最低            ---只能适用于整数值的交换
-        加减法的效率低于异或法，但是高于第三方变量法  ---理论上适用于数值型（小数运算不准确）
-        第三方变量法的效率最低，但是使用频率是最高的  ---适用于所有的类型
-*** 运算符的优先级
-    () ~ ++ -- ! * / % + - << >> >>> 关系 逻辑 & | ^ 三元 赋值
-    #+BEGIN_SRC java
-        class OperatorDemo121{
-          public static void main(String[] args){
-              /*如果算术比关系的优先级高，就先算2+5 =7，然后比较3>7，所以结果是false
-              如果关系比算术高，就先算3>2 = true,然后计算true + 5，因为类型不能转换，所以会报错
-              System.out.println(3>2+5);
-              ,*/
-
-              /*如果先算的是关系，那么就先计算2>3=false,然后计算true&&false = false
-                如果先计算逻辑，那么先算true&&2不能计算，会报错
-              System.out.println(true&&2>3);
-              ,*/
-
-              /*如果位比算术优先级高，先算5&1=1，然后计算3+1=4
-                如果算术比位的高，先算3+5=8，然后计算8+1=0
-              System.out.println(3 + 5 & 1);
-              ,*/
-
-              /*位>关系   ----true
-                位<关系   ----报错
-              System.out.println(3 > 5 & 1);
-              ,*/
-
-              /*算术>位 ---20
-                位>算术 ---11
-              System.out.println(3 + 2 << 2);
-              ,*/
-
-              /*位>关系 ---false
-                关系>位 ---报错
-              System.out.println(3 > 2 << 2);
-              ,*/
-
-              /*~>算术 ---2
-                算术>~ --- -8
-              System.out.println(~2 + 5);
-              ,*/
-          }
       }
-    #+END_SRC
+  }
+  #+END_SRC
+  [[./WeiDemo2.java]]
+- 方式二：加减法
+  int x = 3;
+  int y = 7;
 
+  x = x + y;
+  y = x - y; ---> y = x + y - y; ---> y = x; ---> y = 3;
+  x = x - y; ---> x = x + y - x; ---> x = y; ---> x = 7;
+  #+BEGIN_SRC java
+  class WeiDemo3{
+      public static void main(String[] args){
+          int a=4;
+          int b=5;
+          a=a+b;
+          b=a-b;
+          a=a-b;
+          System.out.println("a:"+a+",b:"+b);
+      }
+  }
+
+  #+END_SRC
+  [[./WeiDemo3.java]]
+- 方式三：第三方变量
+  int x = 3;
+  int y = 7;
+  int z = x;
+  x = y;
+  y = z;
+  #+BEGIN_SRC java
+  class WeiDemo1{
+      public static void main(String[] args){
+          int a=4;
+          int b=5;
+          //中间变量
+          int temp=a;
+          a=b;
+          b=temp;
+          System.out.println("a:"+a+",b:"+b);
+      }
+  }
+  #+END_SRC
+  [[./WeiDemo1.java]]
+- 扩展：考虑三种方式的优劣性
+  异或法的效率最高，但使用频率最低            ---只能适用于整数值的交换
+  加减法的效率低于异或法，但是高于第三方变量法  ---理论上适用于数值型（小数运算不准确）
+  第三方变量法的效率最低，但是使用频率是最高的  ---适用于所有的类型
+*** 运算符的优先级
+() ~ ++ -- ! * / % + - << >> >>> 关系 逻辑 & | ^ 三元 赋值
+#+BEGIN_SRC java
+class OperatorDemo121{
+    public static void main(String[] args){
+        /*
+          如果算术比关系的优先级高，就先算2+5 =7，然后比较3>7，所以结果是false
+          如果关系比算术高，就先算3>2 = true,然后计算true + 5，因为类型不能转换，所以会报错
+          System.out.println(3>2+5);
+        ,*/
+
+        /*
+          如果先算的是关系，那么就先计算2>3=false,然后计算true&&false = false
+          如果先计算逻辑，那么先算true&&2不能计算，会报错
+          System.out.println(true&&2>3);
+        ,*/
+
+        /*
+          如果位比算术优先级高，先算5&1=1，然后计算3+1=4
+          如果算术比位的高，先算3+5=8，然后计算8+1=0
+          System.out.println(3 + 5 & 1);
+        ,*/
+
+        /*
+          位>关系   ----true
+          位<关系   ----报错
+          System.out.println(3 > 5 & 1);
+        ,*/
+
+        /*
+          算术>位 ---20
+          位>算术 ---11
+          System.out.println(3 + 2 << 2);
+        ,*/
+
+        /*
+          位>关系 ---false
+          关系>位 ---报错
+          System.out.println(3 > 2 << 2);
+        ,*/
+
+        /*
+          ~>算术 ---2
+          算术>~ --- -8
+          System.out.println(~2 + 5);
+        ,*/
+    }
+}
+#+END_SRC
 *** 三元运算符
 **** 格式和执行流程
-     格式：
-         表达式（布尔值） ? 表达式值1:表达式值2;
-     执行流程：
-            先去计算表达式的值，如果这个值是true，就把表达式值1返回，
-                            如果这个值是false，就把表达式值2进行返回
+格式：
+表达式（布尔值） ? 表达式值1:表达式值2;
+执行流程：
+先去计算表达式的值，如果这个值是true，就把表达式值1返回，
+如果这个值是false，就把表达式值2进行返回
 **** 示例
 ***** 求两个整数的最大值
-      #+BEGIN_SRC java
-          class Operator_6{
-              public static void main(String[] args){
-                  //求两个整数的最大值
-                  int a=5;
-                  int b=9;
-                  //有另一个变量来接收值得时候，要保证这个变量的类型和两个表达式值的类型一致
-                  System.out.println(max);
-                  //连个表达式值的类型可以不一样但是有个前提，没有另一个变量来接收返回值
-                  System.out.println(a>b?'a':true);
-              }
-          }
-      #+END_SRC
+#+BEGIN_SRC java
+class Operator_6{
+    public static void main(String[] args){
+        //求两个整数的最大值
+        int a=5;
+        int b=9;
+        //有另一个变量来接收值得时候，要保证这个变量的类型和两个表达式值的类型一致
+        System.out.println(max);
+        //连个表达式值的类型可以不一样但是有个前提，没有另一个变量来接收返回值
+        System.out.println(a>b?'a':true);
+    }
+}
+#+END_SRC
 ***** 求三个整数的最大值
-      #+BEGIN_SRC java
-          class Operator122{
-              public static void main(String[] args){
-                  int i = 3,j = 8,k = 5;
-                  //三元表达式的嵌套
-                  int max = i > j ? (i > k ? i : k) : (j > k ? j : k);
-                  System.out.println(max);
+#+BEGIN_SRC java
+class Operator122{
+    public static void main(String[] args){
+        int i = 3,j = 8,k = 5;
+        //三元表达式的嵌套
+        int max = i > j ? (i > k ? i : k) : (j > k ? j : k);
+        System.out.println(max);
 
-                  /*int max = i > j ? i : j;
-                  max = max > k ? max : k;
-                  System.out.println(max);
-                  ,*/
-              }
-          }
+        /*int max = i > j ? i : j;
+        max = max > k ? max : k;
+        System.out.println(max);
+        ,*/
+    }
+}
       #+END_SRC
 ***** 判断一个数是奇数还是偶数
-      #+BEGIN_SRC java
-          class Operator133{
-              public static void main(String[] args){
-                  //定义一个整数变量，判断这个整数是一个寄数还是一个偶数
-                  int num = 15;
-                  String str = (num % 2) == 1 ? "奇数" : "偶数";
-                  //String str = (num & 1) == 1 ? "奇数" : "偶数";
-                  System.out.println(str);
-              }
-          }
-      #+END_SRC
+#+BEGIN_SRC java
+class Operator133{
+    public static void main(String[] args){
+        //定义一个整数变量，判断这个整数是一个寄数还是一个偶数
+        int num = 15;
+        String str = (num % 2) == 1 ? "奇数" : "偶数";
+        //String str = (num & 1) == 1 ? "奇数" : "偶数";
+        System.out.println(str);
+    }
+}
+#+END_SRC
 ***** 分数评级
-      #+BEGIN_SRC java
-          class Operator134{
-              public static void main(String[] args){
-                  /*定义一个变量表示分数:
-                    分数 >= 90 ----- A
-                    分数 >= 80 ----- B
-                    分数 >= 70 ----- C
-                    分数 >= 60 ----- D
-                    分数 <  60 ----- E
-                  ,*/
-                  double score = 79.5;
-                  char level = score >= 90 ? 'A' :
-                      (score >= 80 ? 'B' :
-                      (score >= 70 ? 'C' :
-                      (score >= 60 ? 'D' : 'E')));
-                      System.out.println(level);
-              }
-          }
-      #+END_SRC
+#+BEGIN_SRC java
+class Operator134{
+    public static void main(String[] args){
+        /*
+          定义一个变量表示分数:
+          分数 >= 90 ----- A
+          分数 >= 80 ----- B
+          分数 >= 70 ----- C
+          分数 >= 60 ----- D
+          分数 <  60 ----- E
+        ,*/
+        double score = 79.5;
+        char level = score >= 90 ? 'A' :
+        (score >= 80 ? 'B' :
+        (score >= 70 ? 'C' :
+        (score >= 60 ? 'D' : 'E')));
+        System.out.println(level);
+    }
+}
+#+END_SRC
 ***** 平年还是闰年
-      #+BEGIN_SRC java
-          class Operator135{
-              public static void main(String[] args){
-                  /*定义一个变量表示年份，判断这一年是平年还是闰年：
-                  逢百年整除400,不是百年整除4
-                  2000 --- 闰年
-                  2100 --- 平年
-                  2012 --- 闰年
-                  ,*/
-                  int year = 2900;
-                  String str = year % 100 == 0 ?
-                      (year % 400 == 0 ? "闰年" : "平年") :
-                      (year % 4 == 0 ? "闰年" : "平年");
-                      System.out.println(str);
-              }
-          }
-      #+END_SRC
+#+BEGIN_SRC java
+class Operator135{
+    public static void main(String[] args){
+        /*
+          定义一个变量表示年份，判断这一年是平年还是闰年：
+          逢百年整除400,不是百年整除4
+          2000 --- 闰年
+          2100 --- 平年
+          2012 --- 闰年
+        ,*/
+        int year = 2900;
+        String str = year % 100 == 0 ?
+        (year % 400 == 0 ? "闰年" : "平年") :
+        (year % 4 == 0 ? "闰年" : "平年");
+        System.out.println(str);
+    }
+}
+#+END_SRC
 ** 引用数据类型
 *** Scanner类
-    步骤：
-        1.导包
-        2.找到Scanner
-        3.获取数据
-    #+BEGIN_SRC java
-       import java.util.Scanner;
-       class JavaDemo{
-           public static void main(String[] args){
-               Scanner sc=new Scanner(System.in);
-               int num =sc.netxInt();
-               //System.out.println(num);
-               String s=sc.next();
-               System.out.println(s);
-           }
-       }
-   #+END_SRC
-   [[./JavaDemo.java]]
+步骤：
+    1.导包
+    2.找到Scanner
+    3.获取数据
+#+BEGIN_SRC java
+import java.util.Scanner;
+class JavaDemo{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int num =sc.netxInt();
+        //System.out.println(num);
+        String s=sc.next();
+        System.out.println(s);
+    }
+}
+#+END_SRC
+[[./JavaDemo.java]]
 **** 引用数据类型的使用
-     数据类型 变量名 = new 数据类型（）;
-     调用该类型实例的功能：
-     变量名.方法名();
+数据类型 变量名 = new 数据类型（）;
+调用该类型实例的功能：
+变量名.方法名();
 **** Scanner类
-     完成用户键盘录入，获取到录入的数据
+完成用户键盘录入，获取到录入的数据
 ***** Scanner使用步骤
-       导包：import java.util.Scanner;
-       创建对象实例：Scanner sc = new Scanner(System.in);
-       调用方法：
-          int i = sc.nextInt();用来接收控制台录入的数字
-          String s = sc.next();用来接收控制台录入的字符串
+导包：import java.util.Scanner;
+创建对象实例：Scanner sc = new Scanner(System.in);
+调用方法：
+        int i = sc.nextInt();用来接收控制台录入的数字
+        String s = sc.next();用来接收控制台录入的字符串
+#+BEGIN_SRC java
+/*
+  引用数据类型，介绍一个类Scanner
+  java中已经存在，是sun公司为用户做好的类
+  用他定义引用数据类型变量，和基本类型变量区别
+  int a=1;
+  格式：
+      类型 变量名 = new 类型（）；
+      举例：创建出Scanner类的变量
+      Scanner sc = new Scanner（）;
+      int a = 1;
+      每个引用类型，都有自己的功能，如何使用功能
+      公式：
+          变量.功能名字();
+          Scanner类，作用，让我在命令行中，接受键盘的输入
+,*/
+import java.util.Scanner;
+public class ScannerDemo{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        System.out.println(num);
 
-          #+BEGIN_SRC java
-            /*
-              引用数据类型，介绍一个类Scanner
-              java中已经存在，是sun公司为用户做好的类
-              用他定义引用数据类型变量，和基本类型变量区别
-                  int a=1;
-                  格式：
-                    类型 变量名 = new 类型（）；
-                  举例：创建出Scanner类的变量
-                     Scanner sc = new Scanner（）;
-                     int a = 1;
-               每个引用类型，都有自己的功能，如何使用功能
-               公式：
-                 变量.功能名字();
-                 Scanner类，作用，让我在命令行中，接受键盘的输入
-             ,*/
-            import java.util.Scanner;
-            public class ScannerDemo{
-                public static void main(String[] args){
-                    Scanner sc = new Scanner(System.in);
-                   int num = sc.nextInt();
-                    System.out.println(num);
-
-                    String s = sc.next();
-                    System.out.println(s+1);
-                }
-            }
-          #+END_SRC
+        String s = sc.next();
+        System.out.println(s+1);
+    }
+}
+#+END_SRC
 *** 随机数类Random
-     用于产生随机数的类
-     #+BEGIN_SRC java
-
-       /*
-         java中已经有的引用类型  Random类,作用，产生随机数
-         步骤：
-            1.导入包，Random，也在java.util文件夹
-            2.公式：创建出Random类型的变量
-                  数据类型  变量名 = new 数据类型();
-            3.变量. 调用Random类中的功能，产生随机数
+用于产生随机数的类
+#+BEGIN_SRC java
+/*
+  java中已经有的引用类型  Random类,作用，产生随机数
+  步骤：
+      1. 导入包，Random，也在java.util文件夹
+      2. 公式：创建出Random类型的变量
+         数据类型  变量名 = new 数据类型();
+      3. 变量. 调用Random类中的功能，产生随机数
          Ramdom类，提供功能，名字 nextInt()产生一个随机数，结果是int类型
          出现随机数的范围，在功能nextInt(写一个整数)，整数：随机出来的范围
          随机数的范围在0~指定的整数之间的随机数 nextInt(100) ---> 0~99
@@ -1306,219 +1307,222 @@
          产生浮点数的随机数：功能名字 nextDouble() 随机数的范围 0.0~1.0
 
          随机数：伪随机数，虚拟机根据人写好的一个算法，生成出来的
-        ,*/
-       import java.util.Random;
-       public class RandomDemo{
-           public static void main(String[] args){
-               Random ran = new Random();
-               int i =ran.nextInt(50);
-               System.out.println(i);
+,*/
+import java.util.Random;
+public class RandomDemo{
+    public static void main(String[] args){
+        Random ran = new Random();
+        int i =ran.nextInt(50);
+        System.out.println(i);
 
-               //问题？产生随机数，范围1~100之间
-               //nextInt（100）---> 0~99+1
+        //问题？产生随机数，范围1~100之间
+        //nextInt（100）---> 0~99+1
 
-               double d = ran.nextDouble();
-               System.out.println(d);
-           }
-       }
-     #+END_SRC
+        double d = ran.nextDouble();
+        System.out.println(d);
+    }
+}
+#+END_SRC
 ** 流程控制语句
-   - 顺序结构
-     java中绝大部分的代码都是从上往下，由左往右依次执行执行
-   - 选择结构
-     if语句
-     switch语句
-   - 循环结构
-     for
-     while
-     do...while
+- 顺序结构
+  java中绝大部分的代码都是从上往下，由左往右依次执行执行
+- 选择结构
+  if语句
+  switch语句
+- 循环结构
+  for
+  while
+  do...while
 *** 选择结构
 **** if
 ***** if语句：
-     编写格式：if（判断条件）{语句体;}
-     执行流程：先去计算判断条件的值，如果是true就去执行语句体，
-             如果是false就跳过不执行，执行其他语句
-     [[./20.png]]
-     #+BEGIN_SRC java
-         import java.util.Scanner;
-         class IfDemo{
-             public static void main(String[] args){
-                 Scanner sc=new Scanner(System.in);
-                 int money=sc.nextInt();
-                 if(money > 999){
-                     System.out.println("OKOKOK~~~");
-                 }
-                 System.out.println("Over");
-             }
-         }
+编写格式：if（判断条件）{语句体;}
+执行流程：先去计算判断条件的值，如果是true就去执行语句体，
+如果是false就跳过不执行，执行其他语句
+[[./20.png]]
+#+BEGIN_SRC java
+import java.util.Scanner;
+class IfDemo{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int money=sc.nextInt();
+        if(money > 999){
+            System.out.println("OKOKOK~~~");
+        }
+        System.out.println("Over");
+    }
+}
+#+END_SRC
+****** 输入三个整数，打印这三个整数中的最大值
+#+BEGIN_SRC java
+import java.util.Scanner;
+public class IfElseExer{
+    public static void main(String[] args){
+        //输入三个整数，打印这三个整数中的最大值
 
-     #+END_SRC
-     输入三个整数，打印这三个整数中的最大值
-     #+BEGIN_SRC java
-       import java.util.Scanner;
-       public class IfElseExer{
-           public static void main(String[] args){
+        Scanner s = new Scanner(System.in);
+        int i = s.nextInt();
+        int j = s.nextInt();
+        int k = s.nextInt();
 
-               //输入三个整数，打印这三个整数中的最大值
+        /*
+          if(i > j){
+              if(i > k){
+                  System.out.println(i);
+              }else{
+                  System.out.println(k);
+              }
+          }else{
+              if(j > k){
+                  System.out.println(j);
+              }else{
+                  System.out.println(k);
+              }
+          }
+        */
 
-               Scanner s = new Scanner(System.in);
-               int i = s.nextInt();
-               int j = s.nextInt();
-               int k = s.nextInt();
-
-               /*
-               if(i > j){
-                   if(i > k){
-                       System.out.println(i);
-                   }else{
-                       System.out.println(k);
-                   }
-               }else{
-                   if(j > k){
-                       System.out.println(j);
-                   }else{
-                       System.out.println(k);
-                   }
-                   }*/
-
-               //定义变量记录最大值
-               int max = i;
-               if(max < j){
-                   max = j;
-               }
-               if(max < k){
-                   max = k;
-               }
-               System.out.println(max);
-           }
-       }
-     #+END_SRC
+        //定义变量记录最大值
+        int max = i;
+        if(max < j){
+            max = j;
+        }
+        if(max < k){
+            max = k;
+        }
+        System.out.println(max);
+    }
+}
+#+END_SRC
 ***** if...else语句
-     编写格式：if(判断条件){语句体1;}else{语句体2;}
-     执行流程：先去计算判断条件，如果是true就执行语句体1，如果false就执行语句体2
-     如果if语句格式2返回的是一个值就和三目等效
-     [[./21.png]]
-     - 求两个整数的最大值
-       #+BEGIN_SRC java
-         int a=10;
-         int b=1;
-         if(a>b){
-             System.out.println(a);
-         }else{
-             System.out.println(b);
-         }
-        #+END_SRC
-       [[./IfDeo2.java]]
-     - 求三个整数的最大值
-       #+BEGIN_SRC java
-           int a=10;
-           int b=1;
-           int c=8;
-           if(a>b){
-               if(a>c){
-                   System.out.println(a);
-               }else{
-                   System.out.println(c);
-               }
-           }else{
-               if(b>c){
-                   System.out.println(b);
-               }else{
-                   System.out.println(c);
-               }
-           }
-       #+END_SRC
-       [[./IfDemo3.java]]
+编写格式：if(判断条件){语句体1;}else{语句体2;}
+执行流程：先去计算判断条件，如果是true就执行语句体1，如果false就执行语句体2
+如果if语句格式2返回的是一个值就和三目等效
+[[./21.png]]
+****** 举例
+1. 求两个整数的最大值
+   #+BEGIN_SRC java
+   int a=10;
+   int b=1;
+   if(a>b){
+       System.out.println(a);
+   }else{
+       System.out.println(b);
+   }
+   #+END_SRC
+   [[./IfDeo2.java]]
+2. 求三个整数的最大值
+   #+BEGIN_SRC java
+   int a=10;
+   int b=1;
+   int c=8;
+   if(a>b){
+       if(a>c){
+           System.out.println(a);
+       }else{
+           System.out.println(c);
+       }
+   }else{
+       if(b>c){
+           System.out.println(b);
+       }else{
+           System.out.println(c);
+       }
+   }
+   #+END_SRC
+   [[./IfDemo3.java]]
 ***** if...else if...else语句
-     适合在程序中，实现多条件的判断
-     编写格式：
-            if(判断条件1){
-                语句体1;
-            }else if(判断条件2){
-                语句体2;
-            }else if(判断条件3){
-                语句体3;
-            }
+适合在程序中，实现多条件的判断
+编写格式：
+       if(判断条件1){
+           语句体1;
+       }else if(判断条件2){
+           语句体2;
+       }else if(判断条件3){
+           语句体3;
+       }
             ...
-            else{
-                语句体n+1;
-            }
-     执行流程：先计算判断条件1，如果是true，就执行语句体1，如果是false就去计算判断条件2，如果是true就执行语句体2
-             如果是false就去计算判断条件3，如果是true就执行语句体3，如果全部false就执行语句体n+1
-     [[./22.png]]
-     #+BEGIN_SRC java
-         //根据输入的星星数展示用户的段位
-         Scanner sc=new Scanner(System.in);
-         int xing=sc.nextInt();
-         if(xing>=0&&xing<10){
-             System.out.println("C");
-         }else if(xing>=10&&xing<20){
-             System.out.println("B");
-         }else if(xing>=20&&xing<30){
-             System.out.println("A");
-         }else if(xing>=30&&xing<90){
-             System.out.println("S");
-         }else if(xing>=90&&xing<100){
-             System.out.println("S+");
-         }else{
-             System.out.println("XXXX");
-         }
-     #+END_SRC
+       else{
+           语句体n+1;
+       }
+执行流程：
+       先计算判断条件1，如果是true，就执行语句体1，
+       如果是false就去计算判断条件2，如果是true就执行语句体2
+       如果是false就去计算判断条件3，如果是true就执行语句体3，
+       如果全部false就执行语句体n+1
+[[./22.png]]
+#+BEGIN_SRC java
+//根据输入的星星数展示用户的段位
+Scanner sc=new Scanner(System.in);
+int xing=sc.nextInt();
+if(xing>=0&&xing<10){
+    System.out.println("C");
+}else if(xing>=10&&xing<20){
+    System.out.println("B");
+}else if(xing>=20&&xing<30){
+    System.out.println("A");
+}else if(xing>=30&&xing<90){
+    System.out.println("S");
+}else if(xing>=90&&xing<100){
+    System.out.println("S+");
+}else{
+    System.out.println("XXXX");
+}
+#+END_SRC
 ***** 选择结构if语句与三元运算转换
-     要求：已经知道两个数，计算最大值
+要求：已经知道两个数，计算最大值
      两个整数，比较大小
 
      使用if还是三元
      判断条件多，使用if语句
      三元，必须有结果，if可以没有结果
-     #+BEGIN_SRC java
-       public class IfElseDemo{
-           public static void main(String[] args){
-               int i = 15;
-               int j = 6;
-               //使用if语句，判断出最大值
-               if(i>j){
-                   System.out.println(i+"是最大值");
-               }else{
-                   System.out.println(j+"是最大值")
-               }
+#+BEGIN_SRC java
+public class IfElseDemo{
+    public static void main(String[] args){
+        int i = 15;
+        int j = 6;
+        //使用if语句，判断出最大值
+        if(i>j){
+            System.out.println(i+"是最大值");
+        }else{
+            System.out.println(j+"是最大值")
+        }
 
-               //使用三元运算实现
-               int k=i>j?i:j;
-               System.out.println(k+"是最大值");
-           }
-       }
-     #+END_SRC
+        //使用三元运算实现
+        int k=i>j?i:j;
+        System.out.println(k+"是最大值");
+    }
+}
+#+END_SRC
 **** switch
 ***** 选择结构switch
-
-    格式：
-        switch(表达式){
-            case 值1:
-            语句体1;
-            case 值2:
-            语句体1;
-            case 值3:
-            语句体 3;
-               ...
-            default:
-            语句体n+1;
-            break;
-        }
-    执行流程：计算表达式的值，拿到这个值和每个case后面的值依次进行比较，如果有case的值满足比较条件，就执行对应的语句体。如果都不满足就默认执行语句体n+1，语句结束。
-    [[~/Documents/BigData/Java/23.png]]
-    switch语句中的表达式的数据类型，是有要求的
-    jdk1.0 ~ 1.4 数据类型接受 byte short int char
-    jdk1.5       数据类型接受byte short int char enum（枚举）
-    jdk1.7       数据类型接受byte short int char enum（枚举），string
-    #+BEGIN_SRC java
-        import java.util.Scanner;
-        class SwitchDemo{
-            public static void main(String[] args){
-                Scanner sc = new Scanner(System.in);
-                int week = sc.nextInt();
-                //switch语句
-                switch(week){
+格式：
+    switch(表达式){
+        case 值1:
+        语句体1;
+        case 值2:
+        语句体1;
+        case 值3:
+        语句体 3;
+          ...
+        default:
+        语句体n+1;
+        break;
+    }
+执行流程：计算表达式的值，拿到这个值和每个case后面的值依次进行比较，
+         如果有case的值满足比较条件，就执行对应的语句体。如果都不满足就默认执行语句体n+1，语句结束。
+[[~/Documents/BigData/Java/23.png]]
+switch语句中的表达式的数据类型，是有要求的
+jdk1.0 ~ 1.4 数据类型接受 byte short int char
+jdk1.5       数据类型接受byte short int char enum（枚举）
+jdk1.7       数据类型接受byte short int char enum（枚举），string
+#+BEGIN_SRC java
+import java.util.Scanner;
+    class SwitchDemo{
+        public static void main(String[] args){
+            Scanner sc = new Scanner(System.in);
+            int week = sc.nextInt();
+            //switch语句
+            switch(week){
                 case 1:
                     System.out.println("星期一");
                     break;
@@ -1543,1452 +1547,1404 @@
                 default:
                     System.out.println("星期不存在");
                     break;
-                }
-            }
-        }
-    #+END_SRC
-    #+BEGIN_SRC java
-      import java.util.Scanner;
-      public class SwitchDemo1{
-          public static void main(String[] args){
-              //输入一个符号(+ - * /)，然后输入两个数字，根据给定的符号来计算两个数字的结果
-              Scanner sc = new Scanner(System.in);
-              String sym = sc.nextLine();
-              double a = sc.nextDouble();
-              double b = sc.nextDouble();
-              switch(sym){
-              case "+":
-                  System.out.println("a + b =",a + b);
-                  break;
-              case "-":
-                  System.out.println("a - b =",a - b);
-                  break;
-              case "*":
-                  System.out.println("a * b =",a * b);
-                  break;
-              case "/":
-                  System.out.println("a / b =",a / b);
-                  break;
-              default :
-                  System.out.println("Illegal symbol");
-              }
-          }
-      }
-    #+END_SRC
-
-***** case穿透
-
-    #+BEGIN_SRC java
-      /*
-        switch特性：case穿透性
-        案例：星期1 ~ 5输出，工作日，星期6 ~ 7  输出休息日
-        case 1 case2...case5 输出结果相同
-
-        case后面的常量和switch中数据相同，没有break，一直向下穿透
-        case后面没有break，程序就会一直向下穿透
-       ,*/
-      public class SwitchDemo_1{
-          public static void main(String[] args){
-              int week=1;
-
-              switch(week){
-              case 1:
-              case 2:
-              case 3:
-              case 4:
-              case 5:
-                  System.out.println("工作日");
-                  break;
-
-              case 6:
-              case 7:
-                  System.out.println("休息日");
-                  break;
-              }
-          }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      import java.util.Scanner;
-      public class SwitchDemo2{
-          public static void main(String[] args){
-              /*输入三个数字分别表示年月日，计算这一天是这一年的第几天*/
-
-              Scanner sc = new Scanner(System.in);
-              int year = sc.nextInt();
-              int month = sc.nextInt();
-              int day = sc.nextInt();
-
-              //定义变量记录总的天数
-              int sum = 0;
-
-              switch(month){
-              //经历了一个完整的11月
-              case 12:
-                  sum += 30;
-              //经历了一个完整的10月
-              case 11:
-                  sum += 31;
-              case 10:
-                  sum += 30;
-              case 9:
-                  sum += 31;
-              case 8:
-                  sum += 31;
-              case 7:
-                  sum += 30;
-              case 6:
-                  sum += 31;
-              case 5:
-                  sum += 30;
-              case 4:
-                  sum += 31;
-              case 3:
-                  if(year % 400 == 0 || year % 100 != 0 && year % 4 == 0){
-                      sum += 29;
-                  }else{
-                      sum += 28;
-                  }
-              case 2:
-                  sum += 31;
-              case 1:
-                  sum += 0;
-              }
-              sum += day;
-              System.out.println(sum);
-          }
-      }
-    #+END_SRC
-
-*** 循环结构
-**** for
-***** for循环
-    格式：
-        for(初始值;判断值;控制条件){
-            循环体;
-        }
-    执行流程:
-        1.先计算初始值
-        2.初始值与判断条件进行判断
-        3.如果是true，就执行循环体，执行完循环体之后执行控制条件
-        4.执行完的值与判断条件进行判断
-        如果是true就执行3，4操作；知道false出现就结束循环
-        [[./24.png]]
-
-    #+BEGIN_SRC java
-        class ForDemo{
-            public static void main(String[] args){
-                for(int i=0;i<10;i++){
-                    System.out.println("helloworld");
-                }
-            }
-        }
-    #+END_SRC
-
-    - 输出0~10
-      #+BEGIN_SRC java
-          class ForDemo1{
-              public static void main(String[] args){
-                  //print 0~10
-                  for(int i = 0;i<11;i++){
-                      System.out.println(i);
-                }
-            }
-        }
-      #+END_SRC
-      [[./ForDemo1.java]]
-
-    - 输出1+4的结果
-      #+BEGIN_SRC java
-        /*
-          利用for循环，计算1+4的结果
-          1+2+3+4=10
-
-          1+2的和+3
-          1+2+3的和+4
-         ,*/
-        class ForDemo_1{
-            public static void main(String[] args){
-                //定义变量，记录求和后的数据
-                int sum = 0;
-                //利用循环，将变量从1变化到4
-                for(int i=1;i<=4;i++){
-                    //对变量进行求和
-                    sum = sum + i;
-                }
-                System.out.println(sum);
-            }
-        }
-      #+END_SRC
-      [[./ForDemo.java]]
-
-    - 计算1~n中的所有奇数和
-      #+BEGIN_SRC java
-          import java.util.Scanner;
-          class ForDemoa{
-              public static void main(String[] args){
-                  Scanner sc=new Scanner(System.in);
-                  int n=sc.nextInt();
-                  /*for(int i=1;i<=n;i+=2){
-                      sum=sum+i;
-                  }
-                  System.out.println(sum);*/
-                  for(int i=1;i<=n;i++){
-                      if((i&1)!=0){
-                          sum+=i;
-                      }
-                  }
-                  System.out.println(sum);
-              }
-          }
-      #+END_SRC
-      [[./ForDemo3.java]]
-
-    - 计算1~n中的所有偶数和
-      #+BEGIN_SRC java
-          import java.util.Scanner;
-          class ForDemo4{
-              public static void main(String[] args){
-                  Scanner sc=new Scanner(System.in);
-                  int sum=0;
-                  int n=sc.nextInt();
-                  /*for(int i=0;i<=n;i+=2){
-                      sum+=i;
-                  }
-                  System.out.println(sum);*/
-                  for(int i=1;i<=n;i++){
-                      if((i&1)==0){
-                          sum+=i;
-                      }
-                  }
-                  System.out.println(sum);
-              }
-          }
-      #+END_SRC
-      [[./ForDemo4.java]]
-
-    - 求5的阶乘
-      #+BEGIN_SRC java
-          class ForDemo5{
-              public static void main(String[] args){
-                  int sum=1;
-                  for(int i=1;i<=5;i++){
-                      sum=sum*i;
-                  }
-                  System.out.println(sum);
-              }
-          }
-      #+END_SRC
-      [[./ForDemo5.java]]
-
-    - 在控制台输出所有水仙花数
-      三位数 abc=a^3+b^3+c^3
-      123 %10=3
-      123 /10%10=2
-      123 /100=1
-      #+BEGIN_SRC java
-          class ForDemo6{
-              public static void main(String[] args){
-                  for(int i=100;i<1000;i++){
-                      int ge=i%10;
-                      int shi=i/10%10;
-                      int bai=i/100;
-                      if(i==ge*ge*ge+shi*shi*shi+bai*bai*bai){
-                          System.out.println(i);
-                      }
-                  }
-              }
-          }
-      #+END_SRC
-      [[./ForDemo6.java]]
-
-    - 统计水仙花数有多少个
-      #+BEGIN_SRC java
-          class ForDemo7{
-              public static void main(String[] args){
-                  int count=0;
-                  for(int i=100;i<1000;i++){
-                      int ge=i%10;
-                      int shi=i/10%10;
-                      int bai=i/100;
-                      if(i==ge*ge*ge+shi*shi*shi+bai*bai*bai){
-                          count++;
-                      }
-                  }
-                  System.out.println(count);
-              }
-          }
-
-      #+END_SRC
-      [[./ForDemo7.java]]
-
-    - 请在控制台输出满足如下条件的五位数
-      个位数等于万位
-      十位数等于千位
-      个位数+十位数+千位数+万位数=百位数
-      #+BEGIN_SRC java
-          class ForDemo8{
-              public static void main(String[] args){
-                  for(int i=10000;i<100000;i++){
-                      int ge=i%10;
-                      int shi=i/10%10;
-                      int bai=i/100%10;
-                      int qian=i/1000%10;
-                      int wan=i/10000;
-                      if((ge==wan)&&(shi==qian)&&(ge+shi+qian+wan==bai)){
-                          System.out.println(i);
-                      }
-                  }
-              }
-          }
-
-      #+END_SRC
-      [[./ForDemo8.java]]
-
-    - 请统计1~1000之间同时满足如下条件的数据有多少个
-      对3整除余2
-      对5整数余3
-      对7整除余2
-      #+BEGIN_SRC java
-          class ForDemo9{
-              public static void main(String[] args){
-                  int count=0;
-                  for(int i=1;i<1000;i++){
-                      if((i%3==2)&&(i%5==3)&&(i%7==2)){
-                          count++;
-                      }
-                  }
-                  System.out.println(count);
-              }
-          }
-      #+END_SRC
-      [[./ForDemo9.java]]
-***** 增强for循环
-      底层的实质是迭代
-      - 格式：
-        for(数据类型变量名 : 被遍历的集合或者数组){执行语句}
-      - 区别
-        必须有被遍历的目标（如集合或数组）
-        不能获取下标
-        把所有的数组元素拷贝一份拿过来新型输出
-**** while
-***** 循环语句while
-    循环次数不确定的时候，首选while
-    循环语句：可以让一部分代码，反复执行
-    编写格式：
-        while(判断条件){
-            循环体;
-            控制条件;
-            }
-            条件：当条件是true，就执行循环体，当执行完循环体后，程序再次执行while中的
-            条件，如果条件是true，继续执行循环体，直到条件是false的时候，循环就结束
-            需要定义变量来控制循环的次数
-    #+BEGIN_SRC java
-    class WhileDemo{
-        public static void main(String[] args){
-            int i=1;
-            while(i<=10){
-                System.out.println(i);
-                i++;
             }
         }
     }
-    #+END_SRC
-    [[./WhileDemo.java]]
+#+END_SRC
+#+BEGIN_SRC java
+import java.util.Scanner;
+public class SwitchDemo1{
+    public static void main(String[] args){
+        //输入一个符号(+ - * /)，然后输入两个数字，根据给定的符号来计算两个数字的结果
+        Scanner sc = new Scanner(System.in);
+        String sym = sc.nextLine();
+        double a = sc.nextDouble();
+        double b = sc.nextDouble();
+        switch(sym){
+            case "+":
+                System.out.println("a + b =",a + b);
+                break;
+            case "-":
+                System.out.println("a - b =",a - b);
+                break;
+            case "*":
+                System.out.println("a * b =",a * b);
+                break;
+            case "/":
+                System.out.println("a / b =",a / b);
+                break;
+            default :
+                System.out.println("Illegal symbol");
+            }
+        }
+    }
+#+END_SRC
+***** case穿透
+#+BEGIN_SRC java
+/*
+  switch特性：case穿透性
+  案例：星期1 ~ 5输出，工作日，星期6 ~ 7  输出休息日
+  case 1 case2...case5 输出结果相同
 
-    #+BEGIN_SRC java
+  case后面的常量和switch中数据相同，没有break，一直向下穿透
+  case后面没有break，程序就会一直向下穿透
+,*/
+public class SwitchDemo_1{
+    public static void main(String[] args){
+        int week=1;
+        switch(week){
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                System.out.println("工作日");
+                break;
+            case 6:
+            case 7:
+                System.out.println("休息日");
+                break;
+            }
+        }
+    }
+#+END_SRC
+#+BEGIN_SRC java
+import java.util.Scanner;
+public class SwitchDemo2{
+    public static void main(String[] args){
+        /*输入三个数字分别表示年月日，计算这一天是这一年的第几天*/
 
-      import java.util.Scanner;
-      public class WhileDemo{
-          public static void main(String[] args){
-              /*输入五个数字，获取最大值*/
-              Scanner sc = new Scanner(System.in);
-              int max = sc.nextInt();
-              int count = 1;
-              while(count < 5){
-                  int num = s.nextInt();
-                  if(max < num){
-                      max = num;
-                  }
-                  count ++;
-              }
-              System.out.println(max);
-          }
-      }
-    #+END_SRC
+        Scanner sc = new Scanner(System.in);
+        int year = sc.nextInt();
+        int month = sc.nextInt();
+        int day = sc.nextInt();
 
-    #+BEGIN_SRC java
-     import java.util.Scanner;
-     class LooTest{
-         public static void main(String[] args){
-             /*输入一个整数n,求1~n中的所有的奇数的和*/
-             Scanner sc = new Scanner(System.in);
-             int n = sc.nextInt();
-             int count = 1;
-             int sum = 0;
-             while(count <= n){
-                 sum += count;
-                 count += 2;
+        //定义变量记录总的天数
+        int sum = 0;
+
+        switch(month){
+            //经历了一个完整的11月
+            case 12:
+                sum += 30;
+                //经历了一个完整的10月
+            case 11:
+                sum += 31;
+            case 10:
+                sum += 30;
+            case 9:
+                sum += 31;
+            case 8:
+                sum += 31;
+            case 7:
+                sum += 30;
+            case 6:
+                sum += 31;
+            case 5:
+                sum += 30;
+            case 4:
+                sum += 31;
+            case 3:
+                if(year % 400 == 0 || year % 100 != 0 && year % 4 == 0){
+                    sum += 29;
+                }else{
+                    sum += 28;
+                }
+            case 2:
+                sum += 31;
+            case 1:
+                sum += 0;
+            }
+            sum += day;
+            System.out.println(sum);
+        }
+    }
+#+END_SRC
+*** 循环结构
+**** for
+***** for循环
+格式：
+    for(初始值;判断值;控制条件){
+        循环体;
+    }
+
+执行流程:
+       1.先计算初始值
+       2.初始值与判断条件进行判断
+       3.如果是true，就执行循环体，执行完循环体之后执行控制条件
+       4.执行完的值与判断条件进行判断
+         如果是true就执行3，4操作；知道false出现就结束循环
+[[./24.png]]
+#+BEGIN_SRC java
+class ForDemo{
+    public static void main(String[] args){
+        for(int i=0;i<10;i++){
+            System.out.println("helloworld");
+        }
+    }
+}
+#+END_SRC
+****** 举例
+1. 输出0~10
+   #+BEGIN_SRC java
+   class ForDemo1{
+       public static void main(String[] args){
+           //print 0~10
+           for(int i = 0;i<11;i++){
+               System.out.println(i);
+           }
+       }
+   }
+   #+END_SRC
+   [[./ForDemo1.java]]
+2. 输出1+4的结果
+   #+BEGIN_SRC java
+   /*
+     利用for循环，计算1+4的结果
+     1+2+3+4=10
+
+     1+2的和+3
+     1+2+3的和+4
+   ,*/
+   class ForDemo_1{
+       public static void main(String[] args){
+           //定义变量，记录求和后的数据
+           int sum = 0;
+           //利用循环，将变量从1变化到4
+           for(int i=1;i<=4;i++){
+               //对变量进行求和
+               sum = sum + i;
+           }
+               System.out.println(sum);
+           }
+       }
+   #+END_SRC
+   [[./ForDemo.java]]
+3. 计算1~n中的所有奇数和
+   #+BEGIN_SRC java
+   import java.util.Scanner;
+   class ForDemoa{
+       public static void main(String[] args){
+           Scanner sc=new Scanner(System.in);
+           int n=sc.nextInt();
+           /*
+             for(int i=1;i<=n;i+=2){
+                 sum=sum+i;
              }
              System.out.println(sum);
-         }
-     }
+           */
+           for(int i=1;i<=n;i++){
+               if((i&1)!=0){
+                   sum+=i;
+               }
+           }
+           System.out.println(sum);
+       }
+   }
    #+END_SRC
-
-    #+BEGIN_SRC java
-     import java.util.Scanner;
-     class WhileDemo3{
-         public static void main(String[] args){
-             /*输入一个整数n，打印1~n中所有能被3整除而不被5整除的数字*/
-
-             Scanner sc = new Scanner(System.in);
-             int n = sc.nextInt();
-             int count = 3;
-             while(count <= n){
-                 if(count % 5 != 0){
-                     System.out.println(count);
-                 }
-                 count += 3;
+   [[./ForDemo3.java]]
+4. 计算1~n中的所有偶数和
+   #+BEGIN_SRC java
+   import java.util.Scanner;
+   class ForDemo4{
+       public static void main(String[] args){
+           Scanner sc=new Scanner(System.in);
+           int sum=0;
+           int n=sc.nextInt();
+           /*
+             for(int i=0;i<=n;i+=2){
+                 sum+=i;
              }
-         }
-     }
+             System.out.println(sum);
+           */
+           for(int i=1;i<=n;i++){
+               if((i&1)==0){
+                   sum+=i;
+               }
+           }
+           System.out.println(sum);
+       }
+   }
    #+END_SRC
-
-    #+BEGIN_SRC java
-     import java.util.Scanner;
-     class SwitchDemo4{
-         public static void main(String[] args){
-             /*输入一个整数n，输出这个n是一个几位数*/
-
-
-             Scanner sc = new Scanner(System.in);
-             int n = sc.nextInt();
-             //定义一个变量来记录位数
-             int count = 0;
-             while(n != 0){
-                 count ++;
-
-                 //减少一位
-                 n /= 10;
-             }
-             System.out.println(count);
-         }
-     }
+   [[./ForDemo4.java]]
+5. 求5的阶乘
+   #+BEGIN_SRC java
+   class ForDemo5{
+       public static void main(String[] args){
+           int sum=1;
+           for(int i=1;i<=5;i++){
+               sum=sum*i;
+           }
+           System.out.println(sum);
+       }
+   }
    #+END_SRC
-
-    #+BEGIN_SRC java
-     import java.util.Scanner;
-     class WhileDemo4{
-         public static void main(String[] args){
-             /*输入一个整数n，打印这个整数n的所有的因数
-             （这个数能够整除n，这个数就是n的因数）
-               思路：
-                   先获取1~n中的所有的数
-                   再判断这个是数能否整除n
-              ,*/
-
-             Scanner sc = new Scanner(System.in);
-             int n = sc.nextInt();
-
-             int count = 1;
-             while(n >= count){
-                 if(n % count == 0){
-                     System.out.println(n);
-                 }
-                 count ++;
-             }
-         }
-     }
+   [[./ForDemo5.java]]
+6. 在控制台输出所有水仙花数
+   三位数 abc=a^3+b^3+c^3
+   123 %10=3
+   123 /10%10=2
+   123 /100=1
+   #+BEGIN_SRC java
+   class ForDemo6{
+       public static void main(String[] args){
+           for(int i=100;i<1000;i++){
+               int ge=i%10;
+               int shi=i/10%10;
+               int bai=i/100;
+               if(i==ge*ge*ge+shi*shi*shi+bai*bai*bai){
+                   System.out.println(i);
+               }
+           }
+       }
+   }
    #+END_SRC
-
+   [[./ForDemo6.java]]
+7. 统计水仙花数有多少个
+   #+BEGIN_SRC java
+   class ForDemo7{
+       public static void main(String[] args){
+           int count=0;
+           for(int i=100;i<1000;i++){
+               int ge=i%10;
+               int shi=i/10%10;
+               int bai=i/100;
+               if(i==ge*ge*ge+shi*shi*shi+bai*bai*bai){
+                   count++;
+               }
+           }
+           System.out.println(count);
+       }
+   }
+   #+END_SRC
+   [[./ForDemo7.java]]
+8. 请在控制台输出满足如下条件的五位数
+   个位数等于万位
+   十位数等于千位
+   个位数+十位数+千位数+万位数=百位数
+   #+BEGIN_SRC java
+   class ForDemo8{
+       public static void main(String[] args){
+           for(int i=10000;i<100000;i++){
+               int ge=i%10;
+               int shi=i/10%10;
+               int bai=i/100%10;
+               int qian=i/1000%10;
+               int wan=i/10000;
+               if((ge==wan)&&(shi==qian)&&(ge+shi+qian+wan==bai)){
+                   System.out.println(i);
+               }
+           }
+       }
+   }
+   #+END_SRC
+   [[./ForDemo8.java]]
+9. 请统计1~1000之间同时满足如下条件的数据有多少个
+   对3整除余2
+   对5整数余3
+   对7整除余2
+   #+BEGIN_SRC java
+   class ForDemo9{
+       public static void main(String[] args){
+           int count=0;
+           for(int i=1;i<1000;i++){
+               if((i%3==2)&&(i%5==3)&&(i%7==2)){
+                   count++;
+               }
+           }
+           System.out.println(count);
+       }
+   }
+   #+END_SRC
+   [[./ForDemo9.java]]
+***** 增强for循环
+底层的实质是迭代
+- 格式：
+      for(数据类型变量名 : 被遍历的集合或者数组){执行语句}
+- 区别：
+      必须有被遍历的目标（如集合或数组）
+      不能获取下标
+      把所有的数组元素拷贝一份拿过来新型输出
+**** while
+***** 循环语句while
+循环次数不确定的时候，首选while
+- 循环语句：可以让一部分代码，反复执行
+- 编写格式：
+          while(判断条件){
+              循环体;
+              控制条件;
+          }
+- 条件：
+      当条件是true，就执行循环体，当执行完循环体后，程序再次执行while中的条件，
+      如果条件是true，继续执行循环体，直到条件是false的时候，循环就结束
+      需要定义变量来控制循环的次数
+#+BEGIN_SRC java
+class WhileDemo{
+    public static void main(String[] args){
+        int i=1;
+        while(i<=10){
+            System.out.println(i);
+            i++;
+        }
+    }
+}
+#+END_SRC
+[[./WhileDemo.java]]
+****** 举例
+1. 输入五个数字，获取最大值
+   #+BEGIN_SRC java
+   import java.util.Scanner;
+   public class WhileDemo{
+       public static void main(String[] args){
+           Scanner sc = new Scanner(System.in);
+           int max = sc.nextInt();
+           int count = 1;
+           while(count < 5){
+               int num = s.nextInt();
+               if(max < num){
+                   max = num;
+               }
+               count ++;
+           }
+           System.out.println(max);
+       }
+   }
+   #+END_SRC
+2. /输入一个整数n,求1~n中的所有的奇数的和/
+   #+BEGIN_SRC java
+   import java.util.Scanner;
+   class LooTest{
+       public static void main(String[] args){
+           Scanner sc = new Scanner(System.in);
+           int n = sc.nextInt();
+           int count = 1;
+           int sum = 0;
+           while(count <= n){
+               sum += count;
+               count += 2;
+           }
+           System.out.println(sum);
+       }
+   }
+   #+END_SRC
+3. 输入一个整数n，打印1~n中所有能被3整除而不被5整除的数字
+   #+BEGIN_SRC java
+   import java.util.Scanner;
+   class WhileDemo3{
+       public static void main(String[] args){
+           Scanner sc = new Scanner(System.in);
+           int n = sc.nextInt();
+           int count = 3;
+           while(count <= n){
+               if(count % 5 != 0){
+                   System.out.println(count);
+               }
+               count += 3;
+           }
+       }
+   }
+   #+END_SRC
+4. 输入一个整数n，输出这个n是一个几位数
+   #+BEGIN_SRC java
+   import java.util.Scanner;
+   class SwitchDemo4{
+       public static void main(String[] args){
+           Scanner sc = new Scanner(System.in);
+           int n = sc.nextInt();
+           //定义一个变量来记录位数
+           int count = 0;
+           while(n != 0){
+               count ++;
+               //减少一位
+               n /= 10;
+           }
+           System.out.println(count);
+       }
+   }
+   #+END_SRC
+5. 输入一个整数n，打印这个整数n的所有的因数
+   （这个数能够整除n，这个数就是n的因数）
+   思路：
+       先获取1~n中的所有的数
+       再判断这个是数能否整除n
+   #+BEGIN_SRC java
+   import java.util.Scanner;
+   class WhileDemo4{
+       public static void main(String[] args){
+           Scanner sc = new Scanner(System.in);
+           int n = sc.nextInt();
+           int count = 1;
+           while(n >= count){
+               if(n % count == 0){
+                   System.out.println(n);
+               }
+               count ++;
+           }
+       }
+   }
+   #+END_SRC
 ***** do...while循环
-    格式：
-        do{循环体;}while(判断条件);
-    一般格式：
-        初始值;
-        do{循环体;控制条件;}while(判断条件);
-        1.先计算初始值
-        2.直接执行循环体以及控制条件
-        3.执行完控制条件后的值和判断条件进行判断，
-          true的话重复操作2、3，知道false就结束循环
-    #+BEGIN_SRC java
-      /*
+- 格式：
+      do{循环体;}while(判断条件);
+- 一般格式：
+      初始值;
+      do{循环体;控制条件;}while(判断条件);
 
-       ,*/
-      public class DoWhileDemo{
-          public static void main(String[] args){
-              int i = 1;
-              do{
-                  System.out.println(i);
-                  i++;
-              }while(i<=10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    );
-          }
-      }
-    #+END_SRC
-***** 实现一个猜数字的小游戏
+  1.先计算初始值
+  2.直接执行循环体以及控制条件
+  3.执行完控制条件后的值和判断条件进行判断，
+    true的话重复操作2、3，知道false就结束循环
+#+BEGIN_SRC java
+public class DoWhileDemo{
+    public static void main(String[] args){
+        int i = 1;
+        do{
+            System.out.println(i);
+            i++;
+        }while(i<=10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    );
+    }
+}
+#+END_SRC
+****** 举例
+实现一个猜数字的小游戏
+#+BEGIN_SRC java
+/*
+  实现猜数字的小游戏
+  随机数一个数字，让用户猜
+  结果三种情况：
+  中了，大了，小了
+  随机数：Random
+  键盘输入：Scanner
+  猜的数字，和随机数进行比较：if判断
+  直到猜中为止，反复去猜，循环while
+,*/
+import java.util.Random;
+import java.util.Scanner;
+public class GuestNum{
+    public static void main(String[] args){
+        System.out.println("游戏开始");
+        System.out.println("输入1~100的数字");
+        Random ran = new Random();
+        int ranNum = ran.nextInt(100)+1;
 
-    #+BEGIN_SRC java
-      /*
-        实现猜数字的小游戏
-            随机数一个数字，让用户猜
-            结果三种情况：
-                中了，大了，小了
-            随机数：Random
-            键盘输入：Scanner
-            猜的数字，和随机数进行比较：if判断
-            直到猜中为止，反复去猜，循环while
-       ,*/
-      import java.util.Random;
-      import java.util.Scanner;
-      public class GuestNum{
-          public static void main(String[] args){
-              System.out.println("游戏开始");
-              System.out.println("输入1~100的数字");
-              Random ran = new Random();
-              int ranNum = ran.nextInt(100)+1;
+        Scanner sc = new Scanner(System.in);
 
-              Scanner sc = new Scanner(System.in);
-
-              while(true){
-                  int num = sc.nextInt();
-                  if(num > ranNum){
-                      System.out.println("猜大了");
-                  }else if(num<ranNum){
-                      System.out.println("猜小了");
-                  }else
-                      System.out.println("中了");
-                  break;
-              }
-          }
-      }
-    #+END_SRC
+        while(true){
+            int num = sc.nextInt();
+            if(num > ranNum){
+                System.out.println("猜大了");
+            }else if(num<ranNum){
+                System.out.println("猜小了");
+            }else
+                System.out.println("中了");
+                break;
+            }
+        }
+    }
+#+END_SRC
 
 **** 嵌套循环
-
-    #+BEGIN_SRC java
-      /*
-        循环的嵌套：循环里面还有循环，for形式多
-        for(){
-          for(){
-          }
-        }
-        总的循环次数 = 内循环次数 * 外循环的次数
-        内循环，是外循环的循环体
-
-        外循环，控制的是行数
-        内循环，控制的是没行的个数
-       ,*/
-      public class ForForDemo{
-          public static void main(String[] args){
-              for(int i = 0;i<9;i++){
-                  for(int j = 0;j<i+1;j++){
-                      System.out.print("*");
-                  }
-              }System.out.println();
-          }
+#+BEGIN_SRC java
+/*
+  循环的嵌套：循环里面还有循环，for形式多
+  for(){
+      for(){
       }
-    #+END_SRC
+  }
+  总的循环次数 = 内循环次数 * 外循环的次数
+  内循环，是外循环的循环体
 
-    #+BEGIN_SRC java
-     /*
-       要求:计算出水仙花数
-           三位数 100~999 个位数的立方 + 十位数的立方 + 百位数的立方 = 自己本身
-           153 = 1*1*1 + 5*5*5 + 3*3*3
-           已知三位数  123 获取出每个数位 利用除法，取模运算
+  外循环，控制的是行数
+  内循环，控制的是没行的个数
+,*/
+public class ForForDemo{
+    public static void main(String[] args){
+        for(int i = 0;i<9;i++){
+            for(int j = 0;j<i+1;j++){
+                System.out.print("*");
+            }
+        }
+        System.out.println();
+    }
+}
+#+END_SRC
+***** 举例
+要求:计算出水仙花数
+     三位数 100~999 个位数的立方 + 十位数的立方 + 百位数的立方 = 自己本身
+     153 = 1*1*1 + 5*5*5 + 3*3*3
+     已知三位数  123 获取出每个数位 利用除法，取模运算
+实现步骤：
+       1.定义变量，存储三个数位上的整数
+       2.利用循环，循环中的变量，从100变化到999
+       3.循环中得到三位数，利用算术，拆解陈三个单独数位
+       4.将三个数位立方的求和计算，计算后的求和和他自己进行比较判断
+         若相同位水仙花
+#+BEGIN_SRC java
+public class LoopTest_1{
+    public static void main(String[] args){
+        //定义三个变量
+        int bai = 0;
+        int shi = 0;
+        int ge = 0;
 
-           实现步骤：
-               1.定义变量，存储三个数位上的整数
-               2.利用循环，循环中的变量，从100变化到999
-               3.循环中得到三位数，利用算术，拆解陈三个单独数位
-               4.将三个数位立方的求和计算，计算后的求和和他自己进行比较判断
-                   若相同位水仙花
-      ,*/
-     public class LoopTest_1{
-         public static void main(String[] args){
-         //定义三个变量
-             int bai = 0;
-             int shi = 0;
-             int ge = 0;
+        for(int i = 100;i<=999;i++){
+            bai = i/100;
+            shi = i/10%10;
+            ge = i%10;
 
-             for(int i = 100;i<=999;i++){
-                 bai = i/100;
-                 shi = i/10%10;
-                 ge = i%10;
-
-                 if(bai*bai*bai+shi*shi*shi+ge*ge*ge == i){
-                     System.out.println(i+"为水仙花");
-                 }
-             }
-         }
-     }
-   #+END_SRC
-
+            if(bai*bai*bai+shi*shi*shi+ge*ge*ge == i){
+                System.out.println(i+"为水仙花");
+            }
+        }
+    }
+}
+#+END_SRC
 **** 三种循环的区别于联系
-     联系：
-         1.三种循环可以等效转换
-         2.优先选择for循环，其次是while最后才是do...while
-         3.都会出现死循环
-     区别：
-         1.do...while最少会执行一次
-         2.for循环的初始值循环结束之后拿不到这个值
+- 联系：
+      1.三种循环可以等效转换
+      2.优先选择for循环，其次是while最后才是do...while
+      3.都会出现死循环
+- 区别：
+      1.do...while最少会执行一次
+      2.for循环的初始值循环结束之后拿不到这个值
 *** 嵌套循环(嵌套循环/双层循环)
-    外层循环控制行数
-    内层循环控制的是列数
-    - 打印星星
-      #+BEGIN_SRC java
-          class  Java1{
-              public static void main(String[] args){
-                  for(int i=1;i<=5;i++){
-                      for(int j=0;i<=5;j++){
-                          System.out.print("*");
-                      }
-                      System.out.println();
-                  }
-              }
-          }
-      #+END_SRC
-*** 打印99乘法表
-    1*1=1
-    1*2=2 2*2=4
-    1*3=3 2*3=6 3*3=9
+外层循环控制行数
+内层循环控制的是列数
+**** 举例
+1. 打印星星
+   #+BEGIN_SRC java
+   class  Java1{
+       public static void main(String[] args){
+           for(int i=1;i<=5;i++){
+               for(int j=0;i<=5;j++){
+                   System.out.print("*");
+               }
+               System.out.println();
+           }
+       }
+   }
+   #+END_SRC
+2. 打印99乘法表
+   1*1=1
+   1*2=2 2*2=4
+   1*3=3 2*3=6 3*3=9
 
-    1
-    11
-    111
-    1111
-    11111
+   1
+   11
+   111
+   1111
+   11111
 
-    #+BEGIN_SRC java
-        class Java2{
-            public static void main(String[] args){
-                for(int i=1;i<=9;i++){
-                    for(int j=0;j<9;j++){
-                        System.out.print("1");
-                    }
-                    System.out.println();
-                }
-            }
-        }
-    #+END_SRC
-    #+BEGIN_SRC java
-        class Java3{
-            public static void main(String[] args){
-                for(int i=1;i<=9;i++){
-                    for(int j=1;j<=i;j++){
-                        // int m=i*j;
-                        // System.out.print(j+"*"+i+"="+m);
-                        System.out.print(j+"*"+i+"="+(i*j)+'\t');
-                    }
-                    System.out.println();
-                }
-            }
-        }
-    #+END_SRC
+   #+BEGIN_SRC java
+       class Java2{
+           public static void main(String[] args){
+               for(int i=1;i<=9;i++){
+                   for(int j=0;j<9;j++){
+                       System.out.print("1");
+                   }
+                   System.out.println();
+               }
+           }
+       }
+   #+END_SRC
+   #+BEGIN_SRC java
+   class Java3{
+       public static void main(String[] args){
+           for(int i=1;i<=9;i++){
+               for(int j=1;j<=i;j++){
+                   // int m=i*j;
+                   // System.out.print(j+"*"+i+"="+m);
+                   System.out.print(j+"*"+i+"="+(i*j)+'\t');
+               }
+               System.out.println();
+           }
+       }
+   }
+   #+END_SRC
 *** 跳转语句break、continue
 **** break
-     (1)用于switch语句
-     (2)用在循环中，结束当前循环
-        #+BEGIN_SRC java
-            class BreakDemo{
-                public static void main(String[] args){
-                    int i=i;
-                    while(true){
-                        if(i == 3){
-                            break;
-                        }else{
-                        System.out.println(i);
-                        }
-                    }
-                }
-            }
-        #+END_SRC
-     (3)break tag
-        在多层循环时，通过break tag方式，指定在break时要跳出的是哪一层循环
-        #+BEGIN_SRC java
-            class BreakDemo_1{
-            public static void main(String[] args){
-                    a:for(int i = 0;i<2;i++){
-                        for(int j = 0;j<5;j++){
-                            System.out.println("j="+j);
-                            break a;
-                        }
-                        System.out.println("i="+i);
-                    }
-                }
-            }
-        #+END_SRC
+1. 用于switch语句
+2. 用在循环中，结束当前循环
+   #+BEGIN_SRC java
+   class BreakDemo{
+       public static void main(String[] args){
+           int i=i;
+           while(true){
+               if(i == 3){
+                   break;
+               }else{
+                   System.out.println(i);
+               }
+           }
+       }
+   }
+   #+END_SRC
+3. break tag
+   在多层循环时，通过break tag方式，指定在break时要跳出的是哪一层循环
+   #+BEGIN_SRC java
+   class BreakDemo_1{
+       public static void main(String[] args){
+           a:for(int i = 0;i<2;i++){
+               for(int j = 0;j<5;j++){
+                   System.out.println("j="+j);
+                   break a;
+               }
+                   System.out.println("i="+i);
+               }
+           }
+       }
+   #+END_SRC
 **** continue
-     跳过本次循环
-     #+BEGIN_SRC java
-         class ContinueDemo{
-             public static void main(String[] args){
-                 for(int i=0;i<10;i++){
-                     if(i%2==0){
-                         continue;
-                     }
-                     System.out.println(i);
-                 }
-             }
-         }
-     #+END_SRC
+跳过本次循环
+#+BEGIN_SRC java
+class ContinueDemo{
+    public static void main(String[] args){
+        for(int i=0;i<10;i++){
+            if(i%2==0){
+                continue;
+            }
+            System.out.println(i);
+        }
+    }
+}
+#+END_SRC
 
 *** 练习
-**** 对于下列代码输出的结果是什么——hehe
-     当if语句省略大括号的时候，语句体只有一句
-     #+BEGIN_SRC java
-         public class Test{
-             public static void main(String[] args){
-                 int i=3;
-                 if(i<3)
-                 System.out.println("haha");
-                 System.out.println("hehe");
-             }
-         }
-     #+END_SRC
-**** 对于下列代码输出的结果是什么——死循环，没有输出
-     while(判断条件);{循环体；控制条件；}
-     当while()后面出现分号表示执行完判断条件后直接结束，不仅如此{}执行循环体和控制条件
-     所以i一直等于0---死循环
-     #+BEGIN_SRC java
-         public class Test{
-             public static void main(String[] args){
-                 int i=0;
-                 while(i<10);
-                 {
-                     System.out.println(i);
-                     i++;
-                 }
-             }
-         }
-     #+END_SRC
-**** 对于下列代码输出的结果是什么——编译时报错
-     要保证每块区域的变量事先都有定义
-     #+BEGIN_SRC java
-         public class Test{
-             public static void main(String[] args){
-                 int i= 5;
-                 switch(i){
-                     default:
-                         int y=5;
-                     case 4:
-                         y+=4;
-                     case 3:
-                         y+=3;
-                         break;
-                     case 2:
-                         y+=2;
-                     case 1:
-                         y+=1;
-                 }
-                 System.out.println(y);
-             }
-         }
-     #+END_SRC
-**** 对于下列代码输出的结果是什么——1,1 2,1
-     #+BEGIN_SRC java
-         public class Test{
-             public static void main(String[] args){
-                 Outer:for(int i=1;i<3;i++){
-                     Inner:for(int j=1;j<3;j++){
-                         if(j==2)
-                             continue Outer;
-                         System.out.println(i+","+j);
-                     }
-                 }
-             }
-         }
-     #+END_SRC
-**** 百钱买百鸡是我国古代的著名数学题。题目这样描述：3文钱可以买1只公鸡，2文钱可以买1只母鸡，1文钱可以买3只小鸡，用100文钱可以买100只鸡，那么公鸡、母鸡、小鸡各多少只？
-     #+BEGIN_SRC java
-         //公鸡
-         int x=0;
-         //母鸡
-         int y=0;
-         //小鸡
-         int z=0;
-         //把每组的排列组合都列出来
-         //公鸡范围
-         for(x=0;x<=33;x++){
-             //母鸡的范围
-             for(y=0;y<=50;y++){
-                 //小鸡的范围
-                 z=100-x-y;
-                 //小鸡也是整数
-                 if(z%3==0){
-                     //判断条件
-                     if(3*x+2*y+(z/3)==100){
-                         System.out.println(x+" "+y+" "+z);
-                     }
-                 }
-             }
-         }
-     #+END_SRC
-**** 读入一个整数n,输出如下图形：
-     当输入n=3时，输出：
+1. 对于下列代码输出的结果是什么——hehe
+   当if语句省略大括号的时候，语句体只有一句
+   #+BEGIN_SRC java
+   public class Test{
+       public static void main(String[] args){
+           int i=3;
+           if(i<3)
+               System.out.println("haha");
+               System.out.println("hehe");
+       }
+   }
+   #+END_SRC
+2. 对于下列代码输出的结果是什么——死循环，没有输出
+   while(判断条件);{循环体；控制条件；}
+   当while()后面出现分号表示执行完判断条件后直接结束，不仅如此{}执行循环体和控制条件
+   所以i一直等于0---死循环
+   #+BEGIN_SRC java
+   public class Test{
+       public static void main(String[] args){
+           int i=0;
+           while(i<10);
+           {
+               System.out.println(i);
+               i++;
+           }
+       }
+   }
+   #+END_SRC
+3. 对于下列代码输出的结果是什么——编译时报错
+   要保证每块区域的变量事先都有定义
+   #+BEGIN_SRC java
+   public class Test{
+       public static void main(String[] args){
+           int i= 5;
+           switch(i){
+               default:
+               int y=5;
+               case 4:
+                   y+=4;
+               case 3:
+                   y+=3;
+                   break;
+               case 2:
+                   y+=2;
+               case 1:
+                   y+=1;
+           }
+           System.out.println(y);
+       }
+   }
+   #+END_SRC
+4. 对于下列代码输出的结果是什么——1,1 2,1
+   #+BEGIN_SRC java
+   public class Test{
+       public static void main(String[] args){
+           Outer:for(int i=1;i<3;i++){
+               Inner:for(int j=1;j<3;j++){
+                   if(j==2)
+                       continue Outer;
+                   System.out.println(i+","+j);
+               }
+           }
+       }
+   }
+   #+END_SRC
+5. 百钱买百鸡是我国古代的著名数学题。题目这样描述：3文钱可以买1只公鸡，2文钱可以买1只母鸡，1文钱可以买3只小鸡，用100文钱可以买100只鸡，那么公鸡、母鸡、小鸡各多少只？
+   #+BEGIN_SRC java
+   //公鸡
+   int x=0;
+   //母鸡
+   int y=0;
+   //小鸡
+   int z=0;
+   //把每组的排列组合都列出来
+   //公鸡范围
+   for(x=0;x<=33;x++){
+       //母鸡的范围
+       for(y=0;y<=50;y++){
+           //小鸡的范围
+           z=100-x-y;
+           //小鸡也是整数
+           if(z%3==0){
+               //判断条件
+               if(3*x+2*y+(z/3)==100){
+                   System.out.println(x+" "+y+" "+z);
+               }
+           }
+       }
+   }
+   #+END_SRC
+6. 读入一个整数n,输出如下图形：
+   当输入n=3时，输出：
          *              空格 2     1   n=3      星星1      1   2*行-1
         *****                  1     2               3      2
        *******                 0     3               5      3
-     当输入n=4时，输出：
+   当输入n=4时，输出：
          *
         *****
        *******
       *********
-     #+BEGIN_SRC java
-         int n=5;
-         for(int x=1;x<=n,i++){
-             //空格
-             for(int y=0;y<n-x;y++){
-                 System.out.print(" ");
-             }
-             //星星
-             for(int z=1;z<=2*x-1;z++){
-                 System.out.print("*");
-             }
-             System.out.println();
-         }
-     #+END_SRC
-****
+   #+BEGIN_SRC java
+   int n=5;
+   for(int x=1;x<=n,i++){
+       //空格
+       for(int y=0;y<n-x;y++){
+           System.out.print(" ");
+       }
+       //星星
+       for(int z=1;z<=2*x-1;z++){
+           System.out.print("*");
+       }
+       System.out.println();
+   }
+   #+END_SRC
 ** Java的内存
-   java将占用的内存分为了5块：栈内存、堆内存、方法区(面向对象讲)、本地方法栈、PC计数器（计数器）
+java将占用的内存分为了5块：栈内存、堆内存、方法区(面向对象讲)、本地方法栈、PC计数器（计数器）
 *** 栈内存：存储的变量(目前阶段)。
-            变量在声明的时候存储到栈内存中，不会自动给值，除非在程序中手动给值。
-            变量在栈内存中使用完成之后要立即释放。
-            int[] arr=new int[2];
-            arr通过堆内存中对象的地址找到值
+变量在声明的时候存储到栈内存中，不会自动给值，除非在程序中手动给值。
+变量在栈内存中使用完成之后要立即释放。
+int[] arr=new int[2];
+arr通过堆内存中对象的地址找到值
 *** 堆内存：存储的是对象。
-            对象在存储到堆内存中之后，会被堆内存赋予一个默认值；
-            byte/short/int - 0
-            long - 0L
-            float - 0.0f
-            double - 0.0
-            char - \u0000
-            boolean - false
-            引用数据类型 - null
-            对象使用完成不一定会从堆内存中立即移出，而是在不确定的某个时刻被回收
-            int[] arr=new int[2];  new就是在堆内存中开辟一个新空间
-
+对象在存储到堆内存中之后，会被堆内存赋予一个默认值；
+byte/short/int - 0
+long - 0L
+float - 0.0f
+double - 0.0
+char - \u0000
+boolean - false
+引用数据类型 - null
+对象使用完成不一定会从堆内存中立即移出，而是在不确定的某个时刻被回收
+int[] arr=new int[2];  new就是在堆内存中开辟一个新空间
 *** int[] arr1=new int[]{2,3,5};
-     系统默认初始值优先于程序初始值
+系统默认初始值优先于程序初始值
 ** 数组
-   存储多个相同数据类型元素的容器
+存储多个相同数据类型元素的容器
 *** 数组格式：
-    - 数据类型[] 数组名 = new 数据类型[元素的个数或者数组的长度];
-          int[]  arr = new int[3];
-      表示整型数组arr的元素个数为3个
-      支持声明和赋值两个过程
-      #+BEGIN_SRC java
-          int[] arr=new int[2];
-          int[] arr1;
-          arr1=new int[3];
-      #+END_SRC
-    - 数组类型[] 数组名 = new 数据类型[]{元素值1,元素值2,元素值3,...,元素值n};
-         int[]  arr  = new int[]{1,2,3,4,3};
-      具体的值确定了，长度也就确定了
-      支持声明和赋值两个过程
-      #+BEGIN_SRC java
-          int[] arr=new int[]{1,2,1,3};
-          int[] arr1;
-          arr1 = new int[]{1,2,1,3};
-      #+END_SRC
-    - 数据类型[] 数组名 = {元素值1,元素值2,元素值3,...,元素值n};
-         int[]  arr  ={1,2,3};
-      给定具体的值，长度就确定了
+- 数据类型[] 数组名 = new 数据类型[元素的个数或者数组的长度];
+  int[]  arr = new int[3];
+  表示整型数组arr的元素个数为3个
+  支持声明和赋值两个过程
+  #+BEGIN_SRC java
+  int[] arr=new int[2];
+  int[] arr1;
+  arr1=new int[3];
+  #+END_SRC
+- 数组类型[] 数组名 = new 数据类型[]{元素值1,元素值2,元素值3,...,元素值n};
+  int[]  arr  = new int[]{1,2,3,4,3};
+  具体的值确定了，长度也就确定了
+  支持声明和赋值两个过程
+  #+BEGIN_SRC java
+  int[] arr=new int[]{1,2,1,3};
+  int[] arr1;
+  arr1 = new int[]{1,2,1,3};
+  #+END_SRC
+- 数据类型[] 数组名 = {元素值1,元素值2,元素值3,...,元素值n};
+  int[]  arr  ={1,2,3};
+  给定具体的值，长度就确定了
 
-      int arr1;
-      arr1={1,2,3};//错误的写法
+  int arr1;
+  arr1={1,2,3};//错误的写法
 
-      new:创建对象，开辟新的内存空间
-          没有开辟空间就无法存储数据
+  new:创建对象，开辟新的内存空间
+      没有开辟空间就无法存储数据
 *** 数组的内存地址
-    #+BEGIN_SRC java
-        int[] arr=new int[2];
-        int[] arr1;
-        arr1=new int[3];
-        System.out.println(arr);//[I@7852e922
-    #+END_SRC
-    [I@7852e922:数组的内存地址
-                  [ 表示这块区域的对象类型为数组类型
-                  I 表示这块区域的对象元素的数据类型为整型
-                  @ 代表后面的是内存的地址值
-                  7842e922 表示对象的哈希吗值的十六进制的表现形式
+#+BEGIN_SRC java
+int[] arr=new int[2];
+int[] arr1;
+arr1=new int[3];
+System.out.println(arr);//[I@7852e922
+#+END_SRC
+[I@7852e922:数组的内存地址
+            [ 表示这块区域的对象类型为数组类型
+            I 表示这块区域的对象元素的数据类型为整型
+            @ 代表后面的是内存的地址值
+            7842e922 表示对象的哈希吗值的十六进制的表现形式
 
 *** 数组常用操作
 **** 获取数组中的元素
-     数组名[数组的索引];
-     arr[2];
-     数组的索引(下标)就是元素在数组中的位置，索引由0开始，最大的索引是"数组的长度-1"
-     #+BEGIN_SRC java
-         int[] nums={1,3,4,1,5};
-         System.out.println(nums[0]);
-         System.out.println(nums[1]);
-         System.out.println(nums[2]);
-     #+END_SRC
+数组名[数组的索引];
+arr[2];
+数组的索引(下标)就是元素在数组中的位置，索引由0开始，最大的索引是"数组的长度-1"
+#+BEGIN_SRC java
+int[] nums={1,3,4,1,5};
+System.out.println(nums[0]);
+System.out.println(nums[1]);
+System.out.println(nums[2]);
+#+END_SRC
 **** 数组的元素赋值
-     #+BEGIN_SRC java
-         int[] arr = new int[5];
-         arr[1]=3;
-     #+END_SRC
+#+BEGIN_SRC java
+int[] arr = new int[5];
+arr[1]=3;
+#+END_SRC
 ***** 数组越界异常
-      ArrayIndexOutOfBoundsException
-
+ArrayIndexOutOfBoundsException
 **** 修改数组中的元素
-     #+BEGIN_SRC java
-         int[] arr={1,2,3,4};
-         arr[2] =100;
-     #+END_SRC
+#+BEGIN_SRC java
+int[] arr={1,2,3,4};
+arr[2] =100;
+#+END_SRC
 **** 获取数组长度
-     #+BEGIN_SRC java
-         int[] arr = {2,8,9,12};
-         int len = arr.length;
-     #+END_SRC
+#+BEGIN_SRC java
+int[] arr = {2,8,9,12};
+int len = arr.length;
+#+END_SRC
 **** 数组的遍历
-     一次输出数组元素的值
-     - 遍历数组下标,先获取下标，然后利用下标获取元素
-       #+BEGIN_SRC java
-           int[] arr  = {2,1,3,5,7,0,4};
-           for(int i = 0;i<arr.length;i++){
-               System.out.println(arr[i]);
-           }
-       #+END_SRC
-     - 直接获取数组中的元素(只能遍历数组，不能改变数组中的元素)
-       把所有的数组元素拷贝一份拿过来进行输出
-       #+BEGIN_SRC java
-           int[] arr = {2,2,3,4,5};
-           for(int i : arr){
-               System.out.println(i);
-           }
-       #+END_SRC
-     - 将数组中的元素转成字符串返回
-       #+BEGIN_SRC java
-           import java.util.Arrays;
-           class ArrayDemo_8{
-               public static void main(String[] args){
-                   int[] arr=new int[]{1,23,4};
-                   String str = Arrays.toString(arr);
-                   System.out.println(str);
-               }
-           }
-       #+END_SRC
-
+一次输出数组元素的值
+1. 遍历数组下标,先获取下标，然后利用下标获取元素
+   #+BEGIN_SRC java
+   int[] arr  = {2,1,3,5,7,0,4};
+   for(int i = 0;i<arr.length;i++){
+       System.out.println(arr[i]);
+   }
+   #+END_SRC
+2. 直接获取数组中的元素(只能遍历数组，不能改变数组中的元素)
+   把所有的数组元素拷贝一份拿过来进行输出
+   #+BEGIN_SRC java
+   int[] arr = {2,2,3,4,5};
+   for(int i : arr){
+       System.out.println(i);
+   }
+   #+END_SRC
+4. 将数组中的元素转成字符串返回
+   #+BEGIN_SRC java
+   import java.util.Arrays;
+   class ArrayDemo_8{
+       public static void main(String[] args){
+           int[] arr=new int[]{1,23,4};
+           String str = Arrays.toString(arr);
+           System.out.println(str);
+       }
+   }
+   #+END_SRC
 **** 获取数组中最值（最大值/最小值）
-     - 定义一个变量记录最大值
-       如果第0位小于第1位，那么将第1位的值赋值给max，以此类推
-       #+BEGIN_SRC java
-           int[] arr = {2,8,9,2,2,5,6};
-           int max = arr[0];
-           for(int i = 1; i<arr.length;i++){
-               if(max <arr[i])
-                   max = arr[i];
-               }
-               System.out.println(max);
-       #+END_SRC
-     - 定义一个变量记录最大值的下标
-       #+BEGIN_SRC java
-       int[] arr = {2,3,6,5,3,2,,7};
-           int max = 0;
-           for(int i = 1;i<arr.length;i++){
-               if(arr[max] <arr[i])
-                   max = i;
-               }
-               System.out.println(arr[max]);
-       #+END_SRC
+1. 定义一个变量记录最大值
+   如果第0位小于第1位，那么将第1位的值赋值给max，以此类推
+   #+BEGIN_SRC java
+   int[] arr = {2,8,9,2,2,5,6};
+   int max = arr[0];
+   for(int i = 1; i<arr.length;i++){
+       if(max <arr[i])
+           max = arr[i];
+   }
+   System.out.println(max);
+   #+END_SRC
+2. 定义一个变量记录最大值的下标
+   #+BEGIN_SRC java
+   int[] arr = {2,3,6,5,3,2,,7};
+   int max = 0;
+   for(int i = 1;i<arr.length;i++){
+       if(arr[max] <arr[i])
+           max = i;
+   }
+   System.out.println(arr[max]);
+   #+END_SRC
 **** 数组逆序
-     - 创建新数组，从原数组正着拿，往新数组倒着放，在将新数组的地址给arr
-       [1,2,3] [3,2,1]
-       i=0   arr.length-1-0
-       i=1   arr.length-1-1
-       i=2   arr.length-1-2
-       #+BEGIN_SRC java
-           import java.util.Arrays;
-           class ArrayReserver{
-               public static void main(String[] args){
-                   int[] arr={1,2,7,4,5};
-                   int[] arr1=new int[arr.length];
-                   for(int i=0;i<arr.length;i++){
-                       arr1[arr.length-1-i]=arr[i];
-                   }
-                   arr=arr1;
-                   System.out.println(Arrays.toString(arr));
-               }
+1. 创建新数组，从原数组正着拿，往新数组倒着放，在将新数组的地址给arr
+   [1,2,3] [3,2,1]
+   i=0   arr.length-1-0
+   i=1   arr.length-1-1
+   i=2   arr.length-1-2
+   #+BEGIN_SRC java
+   import java.util.Arrays;
+   class ArrayReserver{
+       public static void main(String[] args){
+           int[] arr={1,2,7,4,5};
+           int[] arr1=new int[arr.length];
+           for(int i=0;i<arr.length;i++){
+               arr1[arr.length-1-i]=arr[i];
            }
-       #+END_SRC
-     - 数值的位置变换
-       [1,2,5,7,8]
-       0 arr.length-1
-       1 arr.length-1-1
-       2 arr.length-1-2
-       变换次数：arr.length/2
-       #+BEGIN_SRC java
-           import java.util.Arrays;
-           public class ArraysApplicationDemo1{
-               public static void main(String[] args){
-                   int[] arr = {2,6,1,8,4,3,0};
-                   for(int i=0;i<arr.length/2;i++){
-                       int temp = arr[i];
-                       arr[i]=arr[arr.length-i-1];
-                       arr[arr.length-i-1]=temp;
-                   }
-                   System.out.println(Arrays.toString(arr));
-               }
+           arr=arr1;
+           System.out.println(Arrays.toString(arr));
+       }
+   }
+   #+END_SRC
+2. 数值的位置变换
+   [1,2,5,7,8]
+   0 arr.length-1
+   1 arr.length-1-1
+   2 arr.length-1-2
+   变换次数：arr.length/2
+   #+BEGIN_SRC java
+   import java.util.Arrays;
+   public class ArraysApplicationDemo1{
+       public static void main(String[] args){
+           int[] arr = {2,6,1,8,4,3,0};
+           for(int i=0;i<arr.length/2;i++){
+               int temp = arr[i];
+               arr[i]=arr[arr.length-i-1];
+               arr[arr.length-i-1]=temp;
            }
-       #+END_SRC
+           System.out.println(Arrays.toString(arr));
+       }
+   }
+   #+END_SRC
 **** 数组的查找
-     根据查找数，返回这个查找数在数组出现的下标
+根据查找数，返回这个查找数在数组出现的下标
 ***** 查找元素出现的位置(无序数组)
-      #+BEGIN_SRC java
-          int[] arr={1,2,5,8,3};
-          int find=3;
-              for(int i=0;i<arr.length;i++){
-                  if(find == arr[i]){
-                      System.out.println(i);
-                  }
-              }
-      #+END_SRC
-      #+BEGIN_SRC java
-          int[] arr={1,5,2,8,3,4};
-          int num=8;
-          int count=0;
-              for(int i:arr){
-                  if(i==num){
-                      System.out.println(count);
-                      break;
-                  }
-                  count++;
-              }
-      #+END_SRC
-      #+BEGIN_SRC java
-          int[] arr = {2,3,4,8,5};
-          int num = 9;
-              for(int i = 0;i<arr.length;i++){
-                  if(arr[i] == num){
-                      System.out.println(i);
-                      break;
-                  }
-              }
-      #+END_SRC
+#+BEGIN_SRC java
+int[] arr={1,2,5,8,3};
+int find=3;
+for(int i=0;i<arr.length;i++){
+    if(find == arr[i]){
+        System.out.println(i);
+    }
+}
+#+END_SRC
+#+BEGIN_SRC java
+int[] arr={1,5,2,8,3,4};
+int num=8;
+int count=0;
+for(int i:arr){
+    if(i==num){
+        System.out.println(count);
+        break;
+    }
+    count++;
+}
+#+END_SRC
+#+BEGIN_SRC java
+int[] arr = {2,3,4,8,5};
+int num = 9;
+for(int i = 0;i<arr.length;i++){
+    if(arr[i] == num){
+        System.out.println(i);
+        break;
+    }
+}
+#+END_SRC
 ***** 查找元素出现的位置(有序数组)(折半查找/二分查找)
-      #+BEGIN_SRC java
-          int[] arr={1,2,3,5,6,8,9};
-          int num=8;
-          int min=0;
-          int max=arr.length-1;
-          int mid=(min+max)/2;
-          //标志位
-          boolean flag=true;
-          //操作循环拿中间下标对应的元素值和查找数进行比较
-          while(arr[mid]!=num){
-              //中间下标对应的数组元素值小于查找数
-              if(arr[mid]<num){
-                  min=mid+1;
-              }
-              //中间下标对应的数组元素值大于查找数
-              if(arr[mid]>num){
-                  max=mid-1;
-              }
-              //判断不在范围内的数
-              if(min>max){
-                  System.out.println("没有这个数");
-                  flag=false;
-                  break;
-              }
-              //新的中间下标值
-              mid=(min+max)/2;
-          }
-          if(flag){
-              System.out.println(mid);
-          }
-      #+END_SRC
+#+BEGIN_SRC java
+int[] arr={1,2,3,5,6,8,9};
+int num=8;
+int min=0;
+int max=arr.length-1;
+int mid=(min+max)/2;
+//标志位
+boolean flag=true;
+//操作循环拿中间下标对应的元素值和查找数进行比较
+while(arr[mid]!=num){
+    //中间下标对应的数组元素值小于查找数
+    if(arr[mid]<num){
+        min=mid+1;
+    }
+    //中间下标对应的数组元素值大于查找数
+    if(arr[mid]>num){
+        max=mid-1;
+    }
+    //判断不在范围内的数
+    if(min>max){
+        System.out.println("没有这个数");
+        flag=false;
+        break;
+    }
+    //新的中间下标值
+    mid=(min+max)/2;
+}
+if(flag){
+    System.out.println(mid);
+}
+#+END_SRC
 **** 数组排序
-     排列数组元素顺序
+排列数组元素顺序
 ***** 冒泡排序
-      相邻两个元素进行两两比较，然后交换位置
-      [[./25.png]]
-      #+BEGIN_SRC java
-          int[] arr={2,1,3,6,5};
-          //嵌套循环
-          //控制轮数
-          for(int i=1;i<arr.length;i++){
-              //控制参与操作元素的个数
-              for(int j=1;j<=arr.length-i;j++){
-                  //两两比较
-                  if(arr[j-1]>arr[j]){
-                      int temp=arr[j-1];
-                      arr[j-1]=arr[j];
-                      arr[j]=temp;
-                  }
-              }
-          }
-          System.out.println(Arrays.toString(arr));
-      #+END_SRC
+相邻两个元素进行两两比较，然后交换位置
+[[./25.png]]
+#+BEGIN_SRC java
+int[] arr={2,1,3,6,5};
+//嵌套循环
+//控制轮数
+for(int i=1;i<arr.length;i++){
+    //控制参与操作元素的个数
+    for(int j=1;j<=arr.length-i;j++){
+        //两两比较
+        if(arr[j-1]>arr[j]){
+            int temp=arr[j-1];
+            arr[j-1]=arr[j];
+            arr[j]=temp;
+        }
+    }
+}
+System.out.println(Arrays.toString(arr));
+#+END_SRC
 ***** 选择排序
-      选定一位然后依次和其他位进行比较
-      [[./26.png]]
-      #+BEGIN_SRC java
-          int[] arr={2,1,3,6,5};
-          //操作嵌套循环
-          //控制轮数
-          for(int i=1;i<arr.length;i++){
-              //参与运算元素的范围
-              for(int j=i-1;j<arr.length;j++){
-                  //
-                  if(arr[i-1]>arr[j]){
-                      int temp=arr[j];
-                      arr[j]=arr[i-1];
-                      arr[i-1]=temp;
-                  }
-              }
-          }
-          System.out.println(Arrays.toString(arr));
-      #+END_SRC
+选定一位然后依次和其他位进行比较
+[[./26.png]]
+#+BEGIN_SRC java
+int[] arr={2,1,3,6,5};
+//操作嵌套循环
+//控制轮数
+for(int i=1;i<arr.length;i++){
+    //参与运算元素的范围
+    for(int j=i-1;j<arr.length;j++){
+        //
+        if(arr[i-1]>arr[j]){
+            int temp=arr[j];
+            arr[j]=arr[i-1];
+            arr[i-1]=temp;
+        }
+    }
+}
+System.out.println(Arrays.toString(arr));
+#+END_SRC
 ***** 升序排序
-      #+BEGIN_SRC java
-          Arrays.sort(arr);
-      #+END_SRC
+#+BEGIN_SRC java
+Arrays.sort(arr);
+#+END_SRC
 **** 数组的扩容
-     数组定义完成之后长度无法改变
-     实际上数组的扩容本质上就是数组的复制
-     System.arraycopy(要复制的数组,要复制的起始下标,要存放的数组,要存放的起始下标,
-                      要复制的元素个数);
-     #+BEGIN_SRC java
-         int[] arr1 = {2,1,5,6,8,0,9};
-         int[] arr2 = new int[5];
-         System.arraycopy(arr1,3,arr2,1,3);
-         for(int i : arr2){
-             System.out.println(i);
-         }
-     #+END_SRC
+数组定义完成之后长度无法改变
+实际上数组的扩容本质上就是数组的复制
+System.arraycopy(要复制的数组,要复制的起始下标,要存放的数组,要存放的起始下标,要复制的元素个数);
+#+BEGIN_SRC java
+int[] arr1 = {2,1,5,6,8,0,9};
+int[] arr2 = new int[5];
+System.arraycopy(arr1,3,arr2,1,3);
+for(int i : arr2){
+    System.out.println(i);
+}
+#+END_SRC
 ***** Arrays.copyOf(原数组,改变之后的长度);
-      #+BEGIN_SRC java
-          import java.util.Arrays;
-          class ArrayDemo2{
-              public static void main(String[] args){
-                  int[] arr1 = {2,3,5,6,8,3};
-                  int[] arr2 = new int[5];
+#+BEGIN_SRC java
+import java.util.Arrays;
+class ArrayDemo2{
+    public static void main(String[] args){
+        int[] arr1 = {2,3,5,6,8,3};
+        int[] arr2 = new int[5];
 
-                  arr1 = Arrays.copyOf(arr1,15);
-                  System.out.println(Arrays.toString(arr1));
-              }
-          }
-      #+END_SRC
-
+        arr1 = Arrays.copyOf(arr1,15);
+        System.out.println(Arrays.toString(arr1));
+    }
+}
+#+END_SRC
 **** 时间复杂度
-     核心代码执行的时间
-     二分查找：n(数组长度)/2^x=1 x=log2n(log以2为底的) O(log2n)
-     冒泡、选择：n(n-1)--->n^2-n--->O(n^2)
-     Arrays.sort():O(nlogn)
+核心代码执行的时间
+二分查找：n(数组长度)/2^x=1 x=log2n(log以2为底的) O(log2n)
+冒泡、选择：n(n-1)--->n^2-n--->O(n^2)
+Arrays.sort():O(nlogn)
 **** 空间复杂度
-     在代码运行过程中产生的要占用的内存
-     二分查找、冒泡、选择：O(1)
+在代码运行过程中产生的要占用的内存
+二分查找、冒泡、选择：O(1)
 ** 二维数组
-   数组元素是一维数组的数组
+数组元素是一维数组的数组
 *** 定义格式
 **** 数据类型[][] 数组名 = new 数据类型[一维数组的个数][每个一维数组元素的个数];
-     int[][] arr = new int[3][5];
-     arr[0]---第一个一维数组
-     arr[0][0]---第一个一维数组的第一个元素
-     #+BEGIN_SRC java
-          int[][] arr=new int[2][3];
-          //[[I@7852e922---二维数组地址值
-          System.out.println(arr);
-          //[I@4e25154f
-          System.out.println(arr[0]);
-          //0
-          System.out.println(arr[0][1]);
-     #+END_SRC
+int[][] arr = new int[3][5];
+arr[0]---第一个一维数组
+arr[0][0]---第一个一维数组的第一个元素
+#+BEGIN_SRC java
+int[][] arr=new int[2][3];
+//[[I@7852e922---二维数组地址值
+System.out.println(arr);
+//[I@4e25154f
+System.out.println(arr[0]);
+//0
+System.out.println(arr[0][1]);
+#+END_SRC
 **** 数据类型[][] 数组名 = new 数据类型[一维数组个数][];
-     int[][] arr = new int[5][];
-     表示定义了能存储5个元素类型为int的一维数组
-     #+BEGIN_SRC java
-     //声明两个一维数组
-     int[][] arr=new int[5][];
-     arr[0] = new int[5];
-     arr[1] = new int[2];
-     arr[2] = new int[4];
-     arr[0] = new int[]{1,2,3};
-     arr[0] = {1,4,5};//不可以
-     #+END_SRC
+int[][] arr = new int[5][];
+表示定义了能存储5个元素类型为int的一维数组
+#+BEGIN_SRC java
+//声明两个一维数组
+int[][] arr=new int[5][];
+arr[0] = new int[5];
+arr[1] = new int[2];
+arr[2] = new int[4];
+arr[0] = new int[]{1,2,3};
+arr[0] = {1,4,5};//不可以
+#+END_SRC
 ***** NullPointerException---空指针异常
-      #+BEGIN_SRC java
-          int[][] arr=new int[5][];
-          //null
-          System.out.println(arr[0]);
-          //NullPointerException
-          System.out.println(arr[0][0]);
-      #+END_SRC
+#+BEGIN_SRC java
+int[][] arr=new int[5][];
+//null
+System.out.println(arr[0]);
+//NullPointerException
+System.out.println(arr[0][0]);
+#+END_SRC
 **** 数据类型[][] 数组名 = new 数据类型[][]{{数组1},{数组2}};
 **** 数据类型[][] 数组名 = {数组1，数组2，数组3，...};
-     int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
-     既定义包含的一维数组的个数，也定义了每一个一维数组中的元素
-     #+BEGIN_SRC java
-         int[][] arr={{2,6},{2,5,7,7},{5},{2,76,5}};
-     #+END_SRC
-*** int[] x;int x[];//等效
-    如果[]在数据类型的后面，就会随着数据类型修饰的内容一起去修饰，
-    如果[]在变量的后面，那么这个[]只修饰变量
-    对int[] x,y[]进行了初始化，下列正确的是？BD
-    A.x[0][0]=y[0];
-    B.x[0]=y[0][0];
-    C.x=y;
-    D.x=y[0];
-    E.x[0]=y;
+int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
+既定义包含的一维数组的个数，也定义了每一个一维数组中的元素
+#+BEGIN_SRC java
+int[][] arr={{2,6},{2,5,7,7},{5},{2,76,5}};
+#+END_SRC
+*** 注意：
+int[] x;int x[];//等效
+如果[]在数据类型的后面，就会随着数据类型修饰的内容一起去修饰，
+如果[]在变量的后面，那么这个[]只修饰变量
+
+对int[] x,y[]进行了初始化，下列正确的是？BD
+A.x[0][0]=y[0];
+B.x[0]=y[0][0];
+C.x=y;
+D.x=y[0];
+E.x[0]=y;
 *** 二维数组内存图
-    [[./27.png]]
+[[./27.png]]
 *** 二维数组的遍历
 **** 普通遍历
-     #+BEGIN_SRC java
-         int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
-         //控制的是一维数组的个数
-         for(int i = 0;i<arr.length;i++){
-             //控制的是每个一维数组的元素
-             for(int j = 0;j<arr[i].length;j++){
-                 System.out.print(arr[i][j]+"\t");
-             }
-             System.out.println();
-         }
-     #+END_SRC
+ #+BEGIN_SRC java
+ int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
+ //控制的是一维数组的个数
+ for(int i = 0;i<arr.length;i++){
+     //控制的是每个一维数组的元素
+     for(int j = 0;j<arr[i].length;j++){
+         System.out.print(arr[i][j]+"\t");
+     }
+     System.out.println();
+ }
+ #+END_SRC
 **** 增强for循环
-     #+BEGIN_SRC java
-         class ArrayDemo5{
-             public static void main(String[] args){
-                 int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
-                 //定义一个一维数组依次表示二维数组中的每一个元素
-                 for(int[] as : arr){
-                     for(int i = 0;i<as.length;i++){
-                         System.out.println(as[i]);
-                     }
-                 }
-             }
-         }
-     #+END_SRC
-     #+BEGIN_SRC java
-         class ArrayDemo6{
-             public static void main(String[] args){
-                 int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
-                 for(int[] as : arr){
-                     for(int i : as){
-                         System.out.println(i);
-                     }
-                 }
-             }
-         }
-     #+END_SRC
-
+#+BEGIN_SRC java
+class ArrayDemo5{
+    public static void main(String[] args){
+        int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
+        //定义一个一维数组依次表示二维数组中的每一个元素
+        for(int[] as : arr){
+            for(int i = 0;i<as.length;i++){
+                System.out.println(as[i]);
+            }
+        }
+    }
+}
+#+END_SRC
+#+BEGIN_SRC java
+class ArrayDemo6{
+    public static void main(String[] args){
+        int[][] arr = {{2,6},{2,5,6,7,8},{5},{2,6,3}};
+        for(int[] as : arr){
+            for(int i : as){
+                System.out.println(i);
+            }
+        }
+    }
+}
+#+END_SRC
 
 *** 数组的常见的异常
+#+BEGIN_SRC java
+/*
+  数组操作中，常见的两个异常
+  - 数组的索引越界异常
+    + 负数索引（人为的）
+    + 超出范围
+  - 空指针异常
+,*/
+public class ArrayDemo_4{
+    public static void main(String[] args){
+        //数组的索引越界异常
+        int[] arr = {5,2,1};
+        //数组中3个元素，索引0，1，2
+        System.out.println(arr[3]);
 
-    #+BEGIN_SRC java
-      /*
-        数组操作中，常见的两个异常
-            - 数组的索引越界异常
-              + 负数索引（人为的）
-              + 超出范围
-            - 空指针异常
-       ,*/
-      public class ArrayDemo_4{
-          public static void main(String[] args){
-              //数组的索引越界异常
-              int[] arr = {5,2,1};
-              //数组中3个元素，索引0，1，2
-              System.out.println(arr[3]);
+        //空指针异常
+        int[] arr2 = {1,5,8};
+        //执行正常
+        System.out.println(arr2[2]);
 
-              //空指针异常
-              int[] arr2 = {1,5,8};
-              //执行正常
-              System.out.println(arr2[2]);
-
-              //arr2不在保存数组的地址了
-              arr2 = null;
-              //不能正常执行
-              System.out.println(arr2[2]);
-          }
-      }
-    #+END_SRC
-
+        //arr2不在保存数组的地址了
+        arr2 = null;
+        //不能正常执行
+        System.out.println(arr2[2]);
+    }
+}
+#+END_SRC
 *** 数组获取最值得原理思想
+#+BEGIN_SRC java
+/*
+  计算数组中的最大值
+  数组 {4,1,7,5}; 作比较
+,*/
+public class ArrayDemo_5{
+    //定义数组，int类型
+    int[] arr ={5,1,2,4,6,8,0,3};
+    //定义变量，记录数组中0索引上的元素
+    int max = arr[0];
 
-    #+BEGIN_SRC java
-      /*
-        计算数组中的最大值
-        数组 {4,1,7,5}; 作比较
-       ,*/
-      public class ArrayDemo_5{
-          //定义数组，int类型
-          int[] arr ={5,1,2,4,6,8,0,3};
-          //定义变量，记录数组中0索引上的元素
-          int max = arr[0];
-
-          //遍历数组，获取所有的元素，和变量max比较
-          for(int i = 1;i<arr.length-1;i++){
-              //变量max，和数组中的每个元素进行比较
-              //如果max，小于了数组中的一个元素
-              if(max <arr[i]){
-                  //较大的数组的元素，赋值给max
-                  max = arr[i];
-              }
-              //遍历完成，变量max，就是数组最大值
-              System.out.println(max);
-          }
-      }
-    #+END_SRC
+    //遍历数组，获取所有的元素，和变量max比较
+    for(int i = 1;i<arr.length-1;i++){
+        //变量max，和数组中的每个元素进行比较
+        //如果max，小于了数组中的一个元素
+        if(max <arr[i]){
+            //较大的数组的元素，赋值给max
+            max = arr[i];
+        }
+        //遍历完成，变量max，就是数组最大值
+        System.out.println(max);
+    }
+}
+#+END_SRC
 *** 二维数组的定义和访问
+#+BEGIN_SRC java
+/*
+  二维数组
+  数组中的数组，数组里面存储的还是数组
+  定义方式和一维数组很相似
+  int[][] arr = new int[3][4];
+  [3] --->表示：二维数组中，有三个一维数组
+  [4] --->表示：三个一维数组中，每个数组的长度是4
+,*/
+public class ArrayArrayDemo{
+    public static void main(String[] args){
+        int[][] arr = new int[3][4];
+        System.out.println(arr);
 
-    #+BEGIN_SRC java
+        System.out.println(arr[1]);
+        System.out.println(arr[2][3]);
+    }
+}
+#+END_SRC
+#+BEGIN_SRC java
+/*
+  int[][] arr = new int[3][];
+  二维数组中定义三个一维数组，每个一维数组长度没有指定
+  arr[0]
+  arr[1]
+  arr[2]
+  必须要new
+  arr[0] = new int[5];
+  arr[1] = new int[4];
 
-      /*
-        二维数组
-            数组中的数组，数组里面存储的还是数组
-            定义方式和一维数组很相似
-            int[][] arr = new int[3][4];
-            [3] --->表示：二维数组中，有三个一维数组
-            [4] --->表示：三个一维数组中，每个数组的长度是4
-       ,*/
-      public class ArrayArrayDemo{
-          public static void main(String[] args){
-              int[][] arr = new int[3][4];
-              System.out.println(arr);
+  最简单的二维数组定义方式
+  int[][] arr = {{1,4},{3,4,5},{0,9,4}};
+,*/
+public class ArrayArrayDemo_1{
+    public static void main(String[] args){
+        int[][] arr = {{1,2,3},{4,5},{5,6,7},{0}};
 
-              System.out.println(arr[1]);
-              System.out.println(arr[2][3]);
+        //问题：打印7，是数组中的元素
+        System.out.println(arr[2][1]);
 
-          }
-      }
-    #+END_SRC
-
-    #+BEGIN_SRC java
-      /*
-        int[][] arr = new int[3][];
-        二维数组中定义三个一维数组，每个一维数组长度没有指定
-        arr[0]
-        arr[1]
-        arr[2]
-        必须要new
-            arr[0] = new int[5];
-            arr[1] = new int[4];
-
-         最简单的二维数组定义方式
-         int[][] arr = {{1,4},{3,4,5},{0,9,4}};
-
-      ,*/
-      publci class ArrayArrayDemo_1{
-          public static void main(String[] args){
-              int[][] arr = {{1,2,3},{4,5},{5,6,7},{0}};
-
-              //问题：打印7，是数组中的元素
-              System.out.println(arr[2][1]);
-
-              //问题：输出结果
-              System.out.println(arr[3][0]);
-          }
-      }
-    #+END_SRC
-
+        //问题：输出结果
+        System.out.println(arr[3][0]);
+    }
+}
+#+END_SRC
 *** 二维数组的遍历
+#+BEGIN_SRC java
+/*
+  二维数组的遍历
+  二维数组中，存储4个一维数组，每个一维数组的长度不同
 
-    #+BEGIN_SRC java
-      /*
-        二维数组的遍历
-            二维数组中，存储4个一维数组，每个一维数组的长度不同
+  遍历：for循环，遍历二维数组
+  遍历过程中，for遍历一维数组
 
-            遍历：for循环，遍历二维数组
-                 遍历过程中，for遍历一维数组
+,*/
+public class ArrayArrayDemo_2{
+    public static void main(String[] args){
+        int[][] arr = {{1,2,3},{4,5},{6,5,2},{0}};
 
-       ,*/
-      public class ArrayArrayDemo_2{
-          public static void main(String[] args){
-              int[][] arr = {{1,2,3},{4,5},{6,5,2},{0}};
-
-              //外循环，遍历二维数组
-              for(int i= 0;i<arr.length;i++){
-                  //内循环，遍历每个一位数组 arr[0] arr[1] arr[i]
-                  for(int j=0;j<arr[i].length;i++){
-                      System.out.println(arr[i][j]);
-                  }
-                  System.out.println();
-              }
-          }
-      }
-    #+END_SRC
-
+        //外循环，遍历二维数组
+        for(int i= 0;i<arr.length;i++){
+            //内循环，遍历每个一位数组 arr[0] arr[1] arr[i]
+            for(int j=0;j<arr[i].length;i++){
+                System.out.println(arr[i][j]);
+            }
+            System.out.println();
+        }
+    }
+}
+#+END_SRC
 *** 二维数组的求和练习
+#+BEGIN_SRC java
+/*
+  二维数组的遍历求和
+  第一小组销售额为{11,12}万元
+  第二小组销售额为{21,22,23}万元
+  第三小组销售额为{31,32,33,34}万元
+  每个小组就是一个数组，三个数组存储到一个数组中，形成二维数组
+  求和：
+      每个小组求和
+      所有元素求和
+,*/
+public class ArrayArraydDemo_3{
+    public static void main(String[] args){
+        //定义变量，保存2个求和的值
+        //所有元素的求和
+        int sum = 0;
+        //每个一维数组的求和
+        int groupSum = 0;
 
-    #+BEGIN_SRC java
-      /*
-        二维数组的遍历求和
-            第一小组销售额为{11,12}万元
-            第二小组销售额为{21,22,23}万元
-            第三小组销售额为{31,32,33,34}万元
-            每个小组就是一个数组，三个数组存储到一个数组中，形成二维数组
-            求和：
-                每个小组求和
-                所有元素求和
-       ,*/
-      public class ArrayArraydDemo_3{
-          public static void main(String[] args){
-              //定义变量，保存2个求和的值
-              //所有元素的求和
-              int sum = 0;
-              //每个一维数组的求和
-              int groupSum = 0;
-
-              for(int i= 0;i<arr.length;i++){
-                  for(int j=0;j<arr[i].length;j++){
-                      //将一维数组的元素求和
-                      groupSum + = arr[i][j];
-                  }
-                  System.out.println("每个小组总金额"+groupSun);
-                  //将每个一维数组的综合在相加
-                  sun+=groupSum;
-                  //每个一维数组求和，清空
-                  groupSum = 0;
-              }
-              System.out.println("本公司总金额"+sum);
-          }
-      }
-    #+END_SRC
-
+        for(int i= 0;i<arr.length;i++){
+            for(int j=0;j<arr[i].length;j++){
+                //将一维数组的元素求和
+                groupSum + = arr[i][j];
+            }
+            System.out.println("每个小组总金额"+groupSun);
+            //将每个一维数组的综合在相加
+            sun+=groupSum;
+            //每个一维数组求和，清空
+            groupSum = 0;
+        }
+        System.out.println("本公司总金额"+sum);
+    }
+}
+#+END_SRC
 *** 随机点名案例
+#+BEGIN_SRC java
+/*
+  存储全班人的姓名
+  1. 存储姓名
+  2. 预览所有人的姓名
+  3. 随机出一个人的姓名
+,*/
+import java.util.Random;
+public class CallName{
+    public static void main(String[] args){
+        //存储姓名，姓名存储到数组中
+        //数组存储姓名，姓名的数据类型，String
+        String[] names = {"张三","李四","王五","李蕾","韩梅梅","小明","小花"};
 
-    #+BEGIN_SRC java
-      /*
-        存储全班人的姓名
-            1. 存储姓名
-            2. 预览所有人的姓名
-            3. 随机出一个人的姓名
-       ,*/
-      import java.util.Random;
-      public class CallName{
-          public static void main(String[] args){
-              //存储姓名，姓名存储到数组中
-              //数组存储姓名，姓名的数据类型，String
-              String[] names = {"张三","李四","王五","李蕾","韩梅梅","小明","小花"};
+        //预览：遍历数组，打印所有姓名
+        for(int i = 0;i<names.length;i++){
+            System.out.println(names[i]);
+        }
+        System.out.println("---------------------------");
 
-              //预览：遍历数组，打印所有姓名
-              for(int i = 0;i<names.length;i++){
-                  System.out.println(names[i]);
-              }
-              System.out.println("---------------------------");
-
-              //随机出一个人的名
-              //利用随机数，生成一个整数，作为索引，到数组中找到对象的元素
-              Random ran = new Random();
-              //随机数，范围必须是0 ~ 数组的最大索引
-              int index = ran.nextInt(names.length);//index 就是随机数，作为索引
-              System.out.println(names[index]);
-          }
-      }
-    #+END_SRC
+        //随机出一个人的名
+        //利用随机数，生成一个整数，作为索引，到数组中找到对象的元素
+        Random ran = new Random();
+        //随机数，范围必须是0 ~ 数组的最大索引
+        int index = ran.nextInt(names.length);//index 就是随机数，作为索引
+        System.out.println(names[index]);
+    }
+}
+#+END_SRC
 
 ** eclipse
-   source ---src 域名 www.baidu.com
-   com.baidu.部门.组号...
+source ---src 域名 www.baidu.com
+com.baidu.部门.组号...
 ** 方法
-   一段具有特殊功能的代码块，需要时可以通过方法名重复的调用，减少冗余代码
+一段具有特殊功能的代码块，需要时可以通过方法名重复的调用，减少冗余代码
 *** 书写格式
-    修饰符 返回值类型 方法的名字（参数列表...）{
-        方法体
-        return ;
-    }
+修饰符 返回值类型 方法的名字（参数列表...）{
+    方法体
+    return ;
+}
 
     修饰符：固定写法public static
     返回值类型：返回什么样的数据就用对应的数据类型来接
@@ -2997,179 +2953,178 @@
     参数列表：数据类型和参数的个数
     方法体：执行核心代码
     return：方法的返回，将计算的结果返回;结束方法（用于结束方法以及返回方法指定类型的值）
-
 *** 方法的调用
-    1. 单独调用
-    2. 输出调用
-    3. 赋值调用
+1. 单独调用
+2. 输出调用
+3. 赋值调用
 **** 方法的注意事项
-     1. 方法被调用才执行
-     2. 两个明确：返回值的数据类型，参数列表
-     3. 没有返回值的方法，不能使用输出调用和赋值调用（不能输出，不能调用）
-     4. return可以出现在没有返回值的方法里，用于结束方法
-        作用：
-            a.把返回值进行返回
-            b.结束方法
-        #+BEGIN_SRC java
-            package cn.commandoptionesc.method;
-            public class MethodDemo3{
-                public static void main(String[] args){
-                    printXing(3,6);
-                }
-                public static void printXing(int x,int y){
-                    for(int i=1;i<=x;i++){
-                        for(int j=1;j<=y;j++){
-                            if(j==2)
-                                //结束方法
-                                return;
-                            System.out.println("*");
-                        }
-                        System.out.println();
-                    }
-                    //如果输出1就是结束方法，不是结束循环
-                    System.out.println(1);
-                }
-            }
-        #+END_SRC
-        [[./MethodDemo3.java]]
-     5. 要处理所有的数据，保证每一类数据都有返回
-     6. 抽取成方法是不定的，根据个人经验
-**** 单独调用
-     方法名(参数值)
-     #+BEGIN_SRC java
-         package cn.commandoptionesc.method;
-         public class MethodDemo{
-             public static void main(String[] args){
-                 //调用方法
-                 //单独调用
-                 printXing(3,6);
-             }
-             //效果不需要进行返回---返回值类型---void
-             //参数列表---int x,int y
-             public static void printXing(int x,int y){
-                 for(int i=1;i<=x;i++){
-                     for(int j=1;j<=y;j++){
-                         System.out.print("*");
-                     }
-                     System.out.println();
-                 }
-             }
-         }
-     #+END_SRC
-     [[./MethodDemo.java]]
-**** 输出调用
-     #+BEGIN_SRC java
-         package cn.commandoptionesc.method;
-         public class MethodDemo1{
-             public static void main(String() args){
-                 //sum(2,4);
-                 //输出调用
-                 System.out.println(sum(2,4));
-             }
-             public static int sum(int m,int n){
-                /* int sum=m+n;
-                 return sum;
-                 */
-                 return m+n;
-             }
-         }
-     #+END_SRC
-     [[./MethodDemo1.java]]
-**** 赋值调用
-     #+BEGIN_SRC java
-         package cn.commandoptionesc.method;
-         public class MethodDemo2{
-             public static void main(String[] args){
-                 int result=sum(2,5);
-                 System.out.println(result);
-             }
-             public static int sum(int m,int n){
-                 int sum = m+n;
-                 return sum;
-             }
-         }
-     #+END_SRC
-     [[./MethodDemo2.java]]
+1. 方法被调用才执行
+2. 两个明确：返回值的数据类型，参数列表
+3. 没有返回值的方法，不能使用输出调用和赋值调用（不能输出，不能调用）
+4. return可以出现在没有返回值的方法里，用于结束方法
 
+   作用：
+      a.把返回值进行返回
+      b.结束方法
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.method;
+   public class MethodDemo3{
+       public static void main(String[] args){
+           printXing(3,6);
+       }
+       public static void printXing(int x,int y){
+           for(int i=1;i<=x;i++){
+               for(int j=1;j<=y;j++){
+                   if(j==2)
+                       //结束方法
+                       return;
+                       System.out.println("*");
+                   }
+               System.out.println();
+           }
+           //如果输出1就是结束方法，不是结束循环
+           System.out.println(1);
+       }
+   }
+   #+END_SRC
+   [[./MethodDemo3.java]]
+5. 要处理所有的数据，保证每一类数据都有返回
+6. 抽取成方法是不定的，根据个人经验
+**** 单独调用
+方法名(参数值)
+#+BEGIN_SRC java
+package cn.commandoptionesc.method;
+    public class MethodDemo{
+        public static void main(String[] args){
+            //调用方法
+            //单独调用
+            printXing(3,6);
+        }
+        //效果不需要进行返回---返回值类型---void
+        //参数列表---int x,int y
+        public static void printXing(int x,int y){
+            for(int i=1;i<=x;i++){
+                for(int j=1;j<=y;j++){
+                    System.out.print("*");
+                }
+            System.out.println();
+        }
+    }
+}
+#+END_SRC
+[[./MethodDemo.java]]
+**** 输出调用
+#+BEGIN_SRC java
+package cn.commandoptionesc.method;
+public class MethodDemo1{
+    public static void main(String() args){
+        //sum(2,4);
+        //输出调用
+        System.out.println(sum(2,4));
+    }
+    public static int sum(int m,int n){
+        /* int sum=m+n;
+           return sum;
+        */
+        return m+n;
+    }
+}
+#+END_SRC
+[[./MethodDemo1.java]]
+**** 赋值调用
+#+BEGIN_SRC java
+package cn.commandoptionesc.method;
+public class MethodDemo2{
+    public static void main(String[] args){
+        int result=sum(2,5);
+        System.out.println(result);
+    }
+    public static int sum(int m,int n){
+        int sum = m+n;
+        return sum;
+    }
+}
+#+END_SRC
+[[./MethodDemo2.java]]
 *** 方法练习
-    1. 判断一个整数是否是奇数
-       #+BEGIN_SRC java
-           //两个明确：返回值类型boolean 参数列表 int m
-           package cn.commandoptionesc.method;
-           public class MethodDemo4{
-               public static void main(String[] args){
-                   boolean boo= isOdd(8);
-                   System.out.println(boo);
-               }
-               public static boolean isOdd(int m){
-                   //把不正常的范围进行优化
-                   if(m<0){
-                       System.out.println("rewrite");
-                       return false;
-                   }
-                   //正常的范围
-                   if(m%2!=0){
-                       return true;
-                   }
-                   //正常范围，但为偶数
+1. 判断一个整数是否是奇数
+   #+BEGIN_SRC java
+   //两个明确：返回值类型boolean 参数列表 int m
+   package cn.commandoptionesc.method;
+   public class MethodDemo4{
+       public static void main(String[] args){
+           boolean boo= isOdd(8);
+           System.out.println(boo);
+       }
+       public static boolean isOdd(int m){
+           //把不正常的范围进行优化
+           if(m<0){
+               System.out.println("rewrite");
+               return false;
+           }
+           //正常的范围
+           if(m%2!=0){
+               return true;
+           }
+           //正常范围，但为偶数
+           return false;
+       }
+   }
+   #+END_SRC
+   [[./MethodDemo4.java]]
+2. 判断一个整数是否是质数
+   #+BEGIN_SRC java
+   //两个明确：返回值类型booblean 参数列表int m
+   package cn.commandoptionesc.method;
+   public class MethodDemo5{
+       public static void main(String[] args){
+
+       }
+       public static boolean isPrime(int m){
+           //不正常范围
+           if(m<2){
+               return false;
+           }
+           //正常范围下的依次判断
+           for(int i=2;i<=m/2;i++){
+               //判断是否能被整除
+               if(m%i==0){
                    return false;
                }
            }
-       #+END_SRC
-       [[./MethodDemo4.java]]
-    2. 判断一个整数是否是质数
-       #+BEGIN_SRC java
-           //两个明确：返回值类型booblean 参数列表int m
-           package cn.commandoptionesc.method;
-           public class MethodDemo5{
-               public static void main(String[] args){
-
-               }
-               public static boolean isPrime(int m){
-                   //不正常范围
-                   if(m<2){
-                       return false;
-                   }
-                   //正常范围下的依次判断
-                   for(int i=2;i<=m/2;i++){
-                       //判断是否能被整除
-                       if(m%i==0){
-                           return false;
-                       }
-                   }
-                   return true;
+           return true;
+       }
+   }
+   #+END_SRC
+   [[./MethodDemo5.java]]
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.method;
+   public class MethodDemo6{
+       public static void main(String[] args){
+           isPrime(9);
+       }
+       public static boolean isPrime(int m){
+           if(m<2){
+               System.out.println("N");
+               return;
+           }
+           for(int i=2;i<=m/2;i++){
+               if(m%i==0){
+                   System.out.println("N");
+                   return;
                }
            }
-       #+END_SRC
-       [[./MethodDemo5.java]]
-       #+BEGIN_SRC java
-           package cn.commandoptionesc.method;
-           public class MethodDemo6{
-               public static void main(String[] args){
-                   isPrime(9);
-               }
-               public static boolean isPrime(int m){
-                   if(m<2){
-                      System.out.println("N");
-                      return;
-                   }
-                   for(int i=2;i<=m/2;i++){
-                       if(m%i==0){
-                           System.out.println("N");
-                           return;
-                       }
-                   }
-                   System.out.println("Y");
-               }
-           }
-       #+END_SRC
-       [[./MethodDemo6.java]]
+           System.out.println("Y");
+       }
+   }
+   #+END_SRC
+   [[./MethodDemo6.java]]
 
 *** 方法的重载(overload)
-    在一个类中，出现了方法名相同的方法
-    1. 如果有最精确的方法就会进行精确的匹配
-    2. 如果没有精确匹配就会进行相对精确匹配
-    3. 如果出现了多个相对精确的匹配就会报错
+在一个类中，出现了方法名相同的方法
+1. 如果有最精确的方法就会进行精确的匹配
+2. 如果没有精确匹配就会进行相对精确匹配
+3. 如果出现了多个相对精确的匹配就会报错
     #+BEGIN_SRC java
         package cn.commandoptionesc.method;
         public class MethodDemo7{
@@ -4361,497 +4316,492 @@
    #+END_SRC
 * 面向对象
 ** 面向对象引入
-   在java中所有的非静态的属性和方法都可以通过对象调用
+在java中所有的非静态的属性和方法都可以通过对象调用
 *** 理解什么是面向过程、面向对象
-    - 面向过程：
-      关注实现细节，复用性
-      遇到一件事，思考”我该怎么做”，然后一步步实现过程
-      关注的是一系列功能具体实现的细节
-    - 面向对象
-      把所有的实现细节整合到对象中，只要找到对象就能拿到对应的功能
-      遇到一件事，思考“我该让谁来做”。那个“谁”就是对象，总而言之一群对象合力把事情解决好了。
-      + 面向对象基于面向过程，面向对象优于面向过程？
-        如果使用场景越简单就优先于采用面向过程，反之采用面向对象
+- 面向过程：
+  关注实现细节，复用性
+  遇到一件事，思考”我该怎么做”，然后一步步实现过程
+  关注的是一系列功能具体实现的细节
+- 面向对象
+  把所有的实现细节整合到对象中，只要找到对象就能拿到对应的功能
+  遇到一件事，思考“我该让谁来做”。那个“谁”就是对象，总而言之一群对象合力把事情解决好了。
+  + 面向对象基于面向过程，面向对象优于面向过程？
+    如果使用场景越简单就优先于采用面向过程，反之采用面向对象
 *** 面向对象举例(组装电脑)
-    - 面向过程
-      查询组件报价，自己买，自己组装，组装好。
-    - 面向对象
-      找个懂电脑的人帮我买，帮我组装，过程不过问。
+- 面向过程
+  查询组件报价，自己买，自己组装，组装好。
+- 面向对象
+  找个懂电脑的人帮我买，帮我组装，过程不过问。
 *** 对象在代码中的体现
-    - 类的真正意义就是描述事物，属性和功能统称为事物中的成员
-      事物的成员分为两种：成员属性和成员功能
-      + 成员属性在代码中的体现就是成员变量
-      + 成员功能在代码中的体现就是成员方法
-    - 定义类的格式
-      #+BEGIN_SRC java
-        public class 类名{
-            //可编写0~n个属性
-            数据类型 变量名1;
-            数据类型 变量名2;
+- 类的真正意义就是描述事物，属性和功能统称为事物中的成员
+  事物的成员分为两种：成员属性和成员功能
+  + 成员属性在代码中的体现就是成员变量
+  + 成员功能在代码中的体现就是成员方法
+- 定义类的格式
+  #+BEGIN_SRC java
+  public class 类名{
+      //可编写0~n个属性
+      数据类型 变量名1;
+      数据类型 变量名2;
 
-            //可编写~n个方法
-            修饰符 返回值类型 方法名(参数){
-                执行语句;
-            }
+      //可编写~n个方法
+      修饰符 返回值类型 方法名(参数){
+          执行语句;
+      }
+  }
+  #+END_SRC
+  + 汽车类
+    #+BEGIN_SRC java
+    public class Car{
+        String color;
+        int number;
+
+        void run(){
+            System.out.println(color + ":"+number);
         }
-      #+END_SRC
-      + 汽车类
-        #+BEGIN_SRC java
-          public class Car{
-              String color;
-              int number;
-
-              void run(){
-                  System.out.println(color + ":"+number);
-              }
-          }
-        #+END_SRC
-    - 创建对象的格式
-      + 类名 对象名 =new 类名();
-        Car c=new Car();
+    }
+    #+END_SRC
+- 创建对象的格式
+  + 类名 对象名 =new 类名();
+      Car c=new Car();
       创建Car类的对象
-      对象在堆内创建后，类的成员变量，跟随对象进入到堆内存中，赋值默认值
-    - 小案例
-      #+BEGIN_SRC java
-        /*
-          类的方式，描述现实中的事物 小汽车
+    对象在堆内创建后，类的成员变量，跟随对象进入到堆内存中，赋值默认值
+- 小案例
+  #+BEGIN_SRC java
+  /*
+    类的方式，描述现实中的事物 小汽车
 
-              小汽车 属性和功能
-                    属性：颜色 轮胎个数  变量定义
-                    功能：跑 方法
-                 属性和方法，都属于类的成员
-                 属性又叫做成员变量
-                 方法又叫做成员方法
-         ,*/
-        public class Car{
-            //定义Car类的属性
+    小汽车 属性和功能
+        属性：颜色 轮胎个数  变量定义
+        功能：跑 方法
+    属性和方法，都属于类的成员
+    属性又叫做成员变量
+    方法又叫做成员方法
+  ,*/
+  public class Car{
+      //定义Car类的属性
 
-            //定义颜色属性
-            String color;
-            //定义轮胎个数
-            int count;
+      //定义颜色属性
+      String color;
+      //定义轮胎个数
+      int count;
 
-            public static void main(String[] args){
+      public static void main(String[] args){
 
-            }
+      }
 
-            public void run(){
-                System.out.println("小汽车再跑..."+color+"..."+count);
-            }
+      public void run(){
+          System.out.println("小汽车再跑..."+color+"..."+count);
+      }
 
-        }
-      #+END_SRC
+  }
+  #+END_SRC
+  #+BEGIN_SRC java
+  /*
+    测试,自定义的类Car
+    创建出Car类的变量
+    变量，调用属性，成员变量
+    变量，调用方法
 
-      #+BEGIN_SRC java
-        /*
-          测试,自定义的类Car
-          创建出Car类的变量
-          变量，调用属性，成员变量
-          变量，调用方法
-
-         ,*/
-        public class CarTest{
-            public static void main(String[] args){
-                //创建出Car类的变量/创建出Car类的对象
-                Car c=new car();
-                //对象.调用类中的属性和方法
-                c.color="无色";
-                c.count=5;
-                c.run();
-            }
-        }
-      #+END_SRC
-      [[file:./Code/CarTest.java]]
+  ,*/
+  public class CarTest{
+      public static void main(String[] args){
+          //创建出Car类的变量/创建出Car类的对象
+          Car c=new car();
+          //对象.调用类中的属性和方法
+          c.color="无色";
+          c.count=5;
+          c.run();
+      }
+  }
+  #+END_SRC
 *** 类与对象之间的关系
-    对着一类事物进行抽取，把这类事物共有的特征抽取成了属性，把共有的行为抽取成了方法，把这一类事物抽取成了类
-    类是对象的概括
-    对象是类的具体实现
-    [[./28.png]]
-    #+BEGIN_SRC java
-        package cn.commandoptionesc.object;
-        public class ObjectDemo{
-            public static void main(String[] args){
-                //创建Person类的对象
-                //构造方法---用于构建对象
-                Person p=new Person();
-                //给属性进行赋值
-                p.age=10;
-                p.name="lili";
-                p.gender="女";
-                //输出
-                System.out.println(p.age);
-                //方法调用
-                p.eat();
-                //基本类型，传入的就是值的拷贝
-                //m(p.age);
-                //传入的是引用数据类型，就是对象的地址值的拷贝
-                n(p);
-                //0
-                System.out.println(p.age);
-            }
-            public static void m(int i){
-                i++;
-            }
-            public static void n(Person p){
-                p.age=10;
-                p.eat();
-            }
+对着一类事物进行抽取，把这类事物共有的特征抽取成了属性，把共有的行为抽取成了方法，把这一类事物抽取成了类
+类是对象的概括
+对象是类的具体实现
+[[./28.png]]
+#+BEGIN_SRC java
+package cn.commandoptionesc.object;
+public class ObjectDemo{
+    public static void main(String[] args){
+        //创建Person类的对象
+        //构造方法---用于构建对象
+        Person p=new Person();
+        //给属性进行赋值
+        p.age=10;
+        p.name="lili";
+        p.gender="女";
+        //输出
+        System.out.println(p.age);
+        //方法调用
+        p.eat();
+        //基本类型，传入的就是值的拷贝
+        //m(p.age);
+        //传入的是引用数据类型，就是对象的地址值的拷贝
+        n(p);
+        //0
+        System.out.println(p.age);
+    }
+    public static void m(int i){
+        i++;
+    }
+    public static void n(Person p){
+        p.age=10;
+        p.eat();
         }
-        //Person类
-        class Person{
-            //特征---属性
-            String name;
-            int age;
-            char gender;
+    }
+    //Person类
+    class Person{
+        //特征---属性
+        String name;
+        int age;
+        char gender;
 
-            //构造方法---1.与类同名 2.没有类型修饰
-            //java规定如果类中没有构造方法，JVM就会在底层自动添加一个无参构造
-            public Person(){}
-            //与类同名的普通方法
-            public void Person(){}
+        //构造方法---1.与类同名 2.没有类型修饰
+        //java规定如果类中没有构造方法，JVM就会在底层自动添加一个无参构造
+        public Person(){}
+        //与类同名的普通方法
+        public void Person(){}
 
-            //行为---方法
-            public void eat(){
-                System.out.println(name+"在吃东西。。。");
-            }
-            public void sleep(){
-                System.out.println("在睡觉");
-            }
+        //行为---方法
+        public void eat(){
+            System.out.println(name+"在吃东西。。。");
         }
-    #+END_SRC
+        public void sleep(){
+            System.out.println("在睡觉");
+        }
+    }
+#+END_SRC
 *** 构造方法
-    与类同名且没有返回值类型修饰的方法，用于创建对象以及属性初始化
-    如果类中没有构造方法，JVM会自动添加一个无参构造
-    如果类中已经有构造方法，JVM就不会再自动添加一个无参构造
-    允许重载
-    #+BEGIN_SRC java
-        package cn.commandoptionesc.object;
-        public class ObjectDemo1{
-            public static void main(String[] args){
-                //创建Person类的对象
-                //构造方法---用于构建对象
-                Person p=new Person(16);
-                System.out.println(p.age);
-            }
-        }
-        //Person类
-        class Person{
-            //构造方法---1.与类同名 2.没有类型修饰
-            //java规定如果类中没有构造方法，JVM就会在底层自动添加一个无参构造
-            public Person(){
-            }
-            //有参构造
-            //构造方法允许重载
-            //如果类中提供了构造方法，JVM就不会再自动添加一个无参构造
-            public Person(int a){
-                age=a;
-            }
-            //与类同名的普通方法
-            public void Person(){
-            }
-        }
-    #+END_SRC
+与类同名且没有返回值类型修饰的方法，用于创建对象以及属性初始化
+如果类中没有构造方法，JVM会自动添加一个无参构造
+如果类中已经有构造方法，JVM就不会再自动添加一个无参构造
+允许重载
+#+BEGIN_SRC java
+package cn.commandoptionesc.object;
+public class ObjectDemo1{
+    public static void main(String[] args){
+        //创建Person类的对象
+        //构造方法---用于构建对象
+        Person p=new Person(16);
+        System.out.println(p.age);
+    }
+}
+//Person类
+class Person{
+    //构造方法---1.与类同名 2.没有类型修饰
+    //java规定如果类中没有构造方法，JVM就会在底层自动添加一个无参构造
+    public Person(){
+    }
+    //有参构造
+    //构造方法允许重载
+    //如果类中提供了构造方法，JVM就不会再自动添加一个无参构造
+    public Person(int a){
+        age=a;
+    }
+    //与类同名的普通方法
+    public void Person(){
+    }
+}
+#+END_SRC
 *** this关键字
 **** this.
-     代表的是当前类的对象，可以指代类还没有创建出来的对象。还可以指代当前类正在活动的对象，可以调用类中的属性和方法。
-     #+BEGIN_SRC java
-         package cn.commandoptionesc.object;
-         public class ThisDemo{
-             public static void main(String[] args){
-                 //创建对象
-                 Student s1=new Student();
-                 //this指代的对象就是s1
-                 System.out.println("s1:"+s1);
-                 Student s2=new Student(12);
-                 System.out.println("s2:"+s2);
-                 s1.study();
-             }
-
-         }
-         //学生类
-         class Student{
-             //属性
-             String name;
-             int age;
-             char gender;
-             //学号
-             String no;
-
-             //
-             public Student(){
-                 System.out.println("this:"+this);
-             }
-
-             public Student(int age){
-                 this.age=age;
-                 System.out.println("this2:"+this);
-             }
-
-             //方法
-             public void study(){
-                 //this可以代替当前类，还没有创建出来的对象
-                 System.out.println(this.name+"在好好学习");
-                 System.out.println("this3:"+this);
-             }
-         }
-
-     #+END_SRC
-**** this()
-     this()---this语句---在当前构造方法中调用本类其他形式的构造方法,一定要放在首行
-     #+BEGIN_SRC java
-         package cn.commandoptionesc.object;
-         public class ThisDemo2{
-             public static void main(String[] args){
-             //创建对象
-             Student s1=new Student();
-             //this指代的对象就是s1
-             System.out.println("s1:"+s1);
-             Student s2=new Student(12);
-             System.out.println("s2:"+s2);
-             s1.study();
-             }
-
-         }
-         //学生类
-         class Student{
-             //属性
-             String name;
-             int age;
-             char gender;
-             //学号
-             String no;
-             public Student(int age){
-                 this.age=age;
-             }
-
-             //
-             public Student(int age,String name){
-                 //System.out.println("this:"+this);
-                 //this.age=age;
-                 //this()---this语句---在当前构造方法中调用奔雷其他形式的构造方法
-                 //调用构造方法的age
-                 this(age);
-                 this.name=name;
-             }
-
-             public Student(int age,char gender,String name){
-                 // this.name=name;
-                 //this.age=age;
-                 this(age,name);
-                 this.gender=gender;
-                 //System.out.println("this2:"+this);
-             }
-
-             //方法
-             public void study(){
-                 //this可以代替当前类，还没有创建出来的对象
-                 //System.out.println(this.name+"在好好学习");
-                 //System.out.println("this3:"+this);
-             }
-         }
-
-     #+END_SRC
-     [[./ExtendsDemo2.java]]
-*** 构造代码块
-    在方法外，类内出现{}就是构造代码块，可以进行初始化，在每个构造方法前，优先执行，调用任意的构造方法，构造代码块都要执行
-    #+BEGIN_SRC java
-        package cn.commandoptionesc.object;
-        public class ObjectDemo2{
-            public static void main(String[] args){
+代表的是当前类的对象，可以指代类还没有创建出来的对象。还可以指代当前类正在活动的对象，可以调用类中的属性和方法。
+#+BEGIN_SRC java
+package cn.commandoptionesc.object;
+    public class ThisDemo{
+        public static void main(String[] args){
             //创建对象
-            Baby b=new Baby();
-            System.out.println("b.name:"+b.name+","+"b.age:"+b.age);
-
-
-            Baby b1=new Baby("lol",12);
-            System.out.println("b1.name:"+b1.name+","+"b1.age:"+b1.age);
-            }
-        }
-        //婴儿类
-        class Baby{
-            //属性
-            int age;
-            String name;
-            char gender;
-
-            //构造代码块---属性初始化
-            //构造代码块会在每个构造方法之前先执行
-            {
-                this.name="lili";
-                this.age=1;
-                //检验构造代码块是否在每个构造方法前执行
-                System.out.println("构造代码块");
-            }
-
-            //构造方法
-            public Baby(){
-                /* this.name="lili";
-                this.age=1;*/
-            }
-
-            //有参构造
-            public Baby(int age){
-                /* this.name="lili";
-                this.age=1;*/
-                //this.age=age;
-            }
-
-            //
-            public Baby(String name,int age){
-                /* this.name=name;
-                this.age=age;*/
-                /*this.name="lili";
-                this.age=1;*/
-                System.out.println("有参构造");
-            }
-            //方法
-            public void Cry(){
-                System.out.println(this.name+"在哇哇哇的哭");
-            }
+            Student s1=new Student();
+            //this指代的对象就是s1
+            System.out.println("s1:"+s1);
+            Student s2=new Student(12);
+            System.out.println("s2:"+s2);
+            s1.study();
         }
 
-    #+END_SRC
+    }
+    //学生类
+    class Student{
+        //属性
+        String name;
+        int age;
+        char gender;
+        //学号
+        String no;
+
+        //
+        public Student(){
+            System.out.println("this:"+this);
+        }
+
+        public Student(int age){
+            this.age=age;
+            System.out.println("this2:"+this);
+        }
+
+        //方法
+        public void study(){
+            //this可以代替当前类，还没有创建出来的对象
+            System.out.println(this.name+"在好好学习");
+            System.out.println("this3:"+this);
+        }
+    }
+#+END_SRC
+**** this()
+this()---this语句---在当前构造方法中调用本类其他形式的构造方法,一定要放在首行
+#+BEGIN_SRC java
+package cn.commandoptionesc.object;
+    public class ThisDemo2{
+        public static void main(String[] args){
+            //创建对象
+            Student s1=new Student();
+            //this指代的对象就是s1
+            System.out.println("s1:"+s1);
+            Student s2=new Student(12);
+            System.out.println("s2:"+s2);
+            s1.study();
+        }
+
+    }
+    //学生类
+    class Student{
+        //属性
+        String name;
+        int age;
+        char gender;
+        //学号
+        String no;
+        public Student(int age){
+            this.age=age;
+        }
+
+        //
+        public Student(int age,String name){
+            //System.out.println("this:"+this);
+            //this.age=age;
+            //this()---this语句---在当前构造方法中调用奔雷其他形式的构造方法
+            //调用构造方法的age
+            this(age);
+            this.name=name;
+        }
+
+        public Student(int age,char gender,String name){
+            // this.name=name;
+            //this.age=age;
+            this(age,name);
+            this.gender=gender;
+            //System.out.println("this2:"+this);
+        }
+
+        //方法
+        public void study(){
+            //this可以代替当前类，还没有创建出来的对象
+            //System.out.println(this.name+"在好好学习");
+            //System.out.println("this3:"+this);
+        }
+    }
+
+#+END_SRC
+[[./ExtendsDemo2.java]]
+*** 构造代码块
+在方法外，类内出现{}就是构造代码块，可以进行初始化，在每个构造方法前，优先执行，调用任意的构造方法，构造代码块都要执行
+#+BEGIN_SRC java
+package cn.commandoptionesc.object;
+public class ObjectDemo2{
+    public static void main(String[] args){
+        //创建对象
+        Baby b=new Baby();
+        System.out.println("b.name:"+b.name+","+"b.age:"+b.age);
+
+
+        Baby b1=new Baby("lol",12);
+        System.out.println("b1.name:"+b1.name+","+"b1.age:"+b1.age);
+    }
+}
+//婴儿类
+class Baby{
+    //属性
+    int age;
+    String name;
+    char gender;
+
+    //构造代码块---属性初始化
+    //构造代码块会在每个构造方法之前先执行
+    {
+        this.name="lili";
+        this.age=1;
+        //检验构造代码块是否在每个构造方法前执行
+        System.out.println("构造代码块");
+    }
+
+    //构造方法
+    public Baby(){
+        /* this.name="lili";
+        this.age=1;*/
+    }
+
+    //有参构造
+    public Baby(int age){
+        /* this.name="lili";
+        this.age=1;*/
+        //this.age=age;
+    }
+
+    //
+    public Baby(String name,int age){
+        /* this.name=name;
+        this.age=age;*/
+        /*this.name="lili";
+        this.age=1;*/
+        System.out.println("有参构造");
+    }
+    //方法
+    public void Cry(){
+        System.out.println(this.name+"在哇哇哇的哭");
+    }
+}
+
+#+END_SRC
 *** 局部代码块
-    在方法中{}---用于控制变量的生命周期，提高内存利用率
-    #+BEGIN_SRC java
-        package cn.commandoptionesc.object;
-        public class ObjectDemo3{
-            public static void main(String[] args){
-                int j=7;
-                //局部（方法）代码块
-                //控制变量的生命周期
-                {
-                    int i=10;
-                    System.out.println(i+j);
-                }
-
-                //1000行
-            }
+在方法中{}---用于控制变量的生命周期，提高内存利用率
+#+BEGIN_SRC java
+package cn.commandoptionesc.object;
+public class ObjectDemo3{
+    public static void main(String[] args){
+        int j=7;
+        //局部（方法）代码块
+        //控制变量的生命周期
+        {
+            int i=10;
+            System.out.println(i+j);
         }
 
-    #+END_SRC
+        //1000行
+    }
+}
+#+END_SRC
 *** 匿名对象
-    没有名称的对象---可以调用属性和方法
-    弊端：使用一次就要创建一个对象，开辟新的空间
-    主要用于参数的传递
-    #+BEGIN_SRC java
-        package cn.commandoptionesc.object;
-        public class ObjectDemo2{
-            public static void main(String[] args){
-                //创建对象
-                Baby b=new Baby();
-                System.out.println("b.name:"+b.name+","+"b.age:"+b.age);
+没有名称的对象---可以调用属性和方法
+弊端：使用一次就要创建一个对象，开辟新的空间
+主要用于参数的传递
+#+BEGIN_SRC java
+package cn.commandoptionesc.object;
+public class ObjectDemo2{
+    public static void main(String[] args){
+        //创建对象
+        Baby b=new Baby();
+        System.out.println("b.name:"+b.name+","+"b.age:"+b.age);
 
 
-                Baby b1=new Baby("lol",12);
-                System.out.println("b1.name:"+b1.name+","+"b1.age:"+b1.age);
+        Baby b1=new Baby("lol",12);
+        System.out.println("b1.name:"+b1.name+","+"b1.age:"+b1.age);
 
 
-                //创建匿名对象,调用属性和方法
-                new Baby("lilei",13).Cry();
+        //创建匿名对象,调用属性和方法
+        new Baby("lilei",13).Cry();
 
 
-                //用于参数传递
-                //给对象传值
-                m(Baby());
+        //用于参数传递
+        //给对象传值
+        m(Baby());
+    }
+    public static void m(Bybu b){}
+    }
+    //婴儿类
+    class Baby{
+        //属性
+        int age;
+        String name;
+        char gender;
 
-            }
-            public static void m(Bybu b){}
-        }
-        //婴儿类
-        class Baby{
-            //属性
-            int age;
-            String name;
-            char gender;
-
-            //构造代码块---属性初始化
-            //构造代码块会在每个构造方法之前先执行
-            {
-                this.name="lili";
-                this.age=1;
-                //检验构造代码块是否在每个构造方法前执行
-                System.out.println("构造代码块");
-            }
-
-            //构造方法
-            public Baby(){
-                /* this.name="lili";
-                   this.age=1;*/
-            }
-
-            //有参构造
-            public Baby(int age){
-                /* this.name="lili";
-                   this.age=1;*/
-                //this.age=age;
-            }
-
-            //
-            public Baby(String name,int age){
-                /* this.name=name;
-                   this.age=age;*/
-                /* this.name="lili";
-                   this.age=1;*/
-                System.out.println("有参构造");
-            }
-            //方法
-            public void Cry(){
-                System.out.println(this.name+"在哇哇哇的哭");
-            }
+        //构造代码块---属性初始化
+        //构造代码块会在每个构造方法之前先执行
+        {
+            this.name="lili";
+            this.age=1;
+            //检验构造代码块是否在每个构造方法前执行
+            System.out.println("构造代码块");
         }
 
-    #+END_SRC
-    #+BEGIN_SRC java
-        /*
-          有名字对象，引用类型变量，可以反复使用
-          匿名对象，没有引用变量，只能使用一次
-
-          匿名对象，可以当做参数进行传递
-          匿名对象，可以当做方法的返回值
-        ,*/
-        import java.util.Scanner;
-        public class PersoneTest{
-            public static void main(String[] args){
-                //创建一个普通变量
-                Persone p = new Persone();
-
-                new Persone().eat();
-
-                //匿名对象，可以当做参数进行传递
-                method(new Persone());
-                //匿名对象，可以当做方法的返回值
-                Persone p1 = method();
-                p1.eat();
-            }
-
-            //匿名对象，可以当做方法的返回值
-            //方法返回值是Persone类型
-            //方法return语句，返回的是这个类的对象
-            public static Persone method(){
-                //Persone p = new Persone();
-                return new Persone();
-            }
-
-            //调用方法method，传递Persone类型对象
-            public static void method(Persone p){
-                p.eat();
-            }
+        //构造方法
+        public Baby(){
+            /* this.name="lili";
+            this.age=1;*/
         }
-    #+END_SRC
+
+        //有参构造
+        public Baby(int age){
+            /* this.name="lili";
+            this.age=1;*/
+            //this.age=age;
+        }
+
+        //
+        public Baby(String name,int age){
+            /* this.name=name;
+            this.age=age;*/
+            /* this.name="lili";
+            this.age=1;*/
+            System.out.println("有参构造");
+        }
+        //方法
+        public void Cry(){
+            System.out.println(this.name+"在哇哇哇的哭");
+        }
+    }
+
+#+END_SRC
+#+BEGIN_SRC java
+/*
+  有名字对象，引用类型变量，可以反复使用
+  匿名对象，没有引用变量，只能使用一次
+
+  匿名对象，可以当做参数进行传递
+  匿名对象，可以当做方法的返回值
+,*/
+import java.util.Scanner;
+public class PersoneTest{
+    public static void main(String[] args){
+        //创建一个普通变量
+        Persone p = new Persone();
+
+        new Persone().eat();
+
+        //匿名对象，可以当做参数进行传递
+        method(new Persone());
+        //匿名对象，可以当做方法的返回值
+        Persone p1 = method();
+        p1.eat();
+    }
+
+    //匿名对象，可以当做方法的返回值
+    //方法返回值是Persone类型
+    //方法return语句，返回的是这个类的对象
+    public static Persone method(){
+        //Persone p = new Persone();
+        return new Persone();
+    }
+
+    //调用方法method，传递Persone类型对象
+    public static void method(Persone p){
+        p.eat();
+    }
+}
+#+END_SRC
 *** 成员变量与局部变量（在类内方法外非静态的属性和方法-成员变量，成员方法）
-    - 位置
-      成员变量：在方法外类内
-      局部变量：方法内或者代码块内
-    - 作用范围
-      成员变量：整个类
-      局部变量：方法或者代码块内
-    - 内存变量
-      成员变量：堆
-      局部变量：栈
-    - 生命周期
-      成员变量：随着类的对象的创建而产生，对象使用完成之后在某个特定的时间进行回收
-      局部变量：随着方法或者代码块的执行而产生，方法调用完成或者执行完成就立即清除
+- 位置
+  成员变量：在方法外类内
+  局部变量：方法内或者代码块内
+- 作用范围
+  成员变量：整个类
+  局部变量：方法或者代码块内
+- 内存变量
+  成员变量：堆
+  局部变量：栈
+- 生命周期
+  成员变量：随着类的对象的创建而产生，对象使用完成之后在某个特定的时间进行回收
+  局部变量：随着方法或者代码块的执行而产生，方法调用完成或者执行完成就立即清除
 ** 面向对象特征
    封装、继承、多态、抽象
 *** 封装
@@ -5136,321 +5086,318 @@
      #+END_SRC
 
 ** static关键字(静态)
-   可以修饰：变量、方法、代码块、内部类
-   属于类的信息全部存储在方法区内
-   类是一个模板，对象是这个模板将要具有的具体特征和行为。
-   [[./29.png]]
-   - 修饰变量
-     用static修饰的变量就叫做静态变量，也叫类变量
-     静态变量是随着类（所有信息）的加载（方法区的静态常量池）而加载静态区，接着赋予初始值
-     静态变量优先于对象存在，可以通过类名来调用，也可以通过对象调用，静态变量底层就是一个被所有对象共享的地址。
-     静态变量---共享---属性是否适合共享？
-     #+BEGIN_SRC java
-         package cn.commandoptionesc.staticx;
-         public class StaticDemo{
-             public static void main(String[] args){
-                 //创建对象
-                 Person p=new Person();
-                 //赋值
-                 p.name="梅超风";
-                 p.age=30;
-                 p.gender='女';
+可以修饰：变量、方法、代码块、内部类
+属于类的信息全部存储在方法区内
+类是一个模板，对象是这个模板将要具有的具体特征和行为。
+[[./29.png]]
+- 修饰变量
+  用static修饰的变量就叫做静态变量，也叫类变量
+  静态变量是随着类（所有信息）的加载（方法区的静态常量池）而加载静态区，接着赋予初始值
+  静态变量优先于对象存在，可以通过类名来调用，也可以通过对象调用，静态变量底层就是一个被所有对象共享的地址。
+  静态变量---共享---属性是否适合共享？
+  #+BEGIN_SRC java
+  package cn.commandoptionesc.staticx;
+  public class StaticDemo{
+      public static void main(String[] args){
+          //创建对象
+          Person p=new Person();
+          //赋值
+          p.name="梅超风";
+          p.age=30;
+          p.gender='女';
 
-                 Person p1=new Person();
-                 p1.name="欧阳锋";
-                 p1.age=50;
-                 p1.gender='男';
+          Person p1=new Person();
+          p1.name="欧阳锋";
+          p1.age=50;
+          p1.gender='男';
 
-                 Person p2=new Person();
-                 p2.name="lili";
-                 p2.age=43;
-                 p2.gender='中';
+          Person p2=new Person();
+          p2.name="lili";
+          p2.age=43;
+          p2.gender='中';
 
-                 System.out.println(p2.toString());
-                 System.out.println(p1.toString());
-                 System.out.println(p.toString());
-                 }
-             }
-         //Personl类
-         class Person{
-             //属性
-             String name;
-             int age;
-             //static修饰变量
-             static char gender;
-
-
-             //toString()方法
-             public String toString(){
-                 return "name:"+name+",age:"+age+",gender:"+gender;
-             }
-         }
-     #+END_SRC
-   - 修饰方法
-     被static修饰的方法叫静态方法
-     随着类的加载而加载到方法区的静态区，不会对静态方法进行赋予初始值，只是存放，当被调用的时候自动加载到栈中执行。与类
-     同级，类方法，通过类名点调用也可以通过对象调用。
-     #+BEGIN_SRC java
-         System.arraycopy();
-         Arrays.copyof();
-         Arrays.toString();
-         Arrays.sort();
-         Systemm.out.println();
-     #+END_SRC
-     静态方法也是存储在方法区，只不过加载的时候没有运行，什么时候调用，什么时候去栈中运行。
-
-     注意：
-         静态变量不可以定义到静态方法中
-         静态方法中，不可以直接调用非静态的方法。另外也不能存在this和super这样的关键字。静态是优先于对象存在的。
-         - 方法或者构造方法中可以定义静态变量？
-           不可以，方法要等到调用的时候，内容才执行，静态变量要与类同级。
-         - 静态方法里可以使用this？
-           不可以，静态方法是类级别的，this是对象级别的。
-         - main静态方法，"直接"调用非静态的属性和方法？
-           不可以，静态信息不能调用非静态的信息，非静态的可以调用静态的（出现非静态的说明，加载过程已经走完了）
-           #+BEGIN_SRC java
-               package cn.commandoptionesc.staticx;
-               public class StaticDemo{
-                   public static void main(String[] args){
-                       //静态不能调用非静态方法
-                       //n();
-                       //静态可以调用非静态方法
-                       m();
-                   }
-                   public void n(){}
-                   public static void m(){ }
-               }
-           #+END_SRC
-           [[./StaticDemo1.java]]
-         - 静态方法可以重载
-         - 静态方法不可以重写
-           但是父子类中可以存在方法签名一致的静态方法，这种方式叫做隐藏
-           隐藏时需注意：父类方法和子类方法要么都是静态的，要么都是非静态的
-           #+BEGIN_SRC java
-               package cn.commandoptionesc.staticx;
-               public class StaticDemo1{
-                   public static void main(String[] args){
-
-                   }
-               }
-               class AA{
-                   public void m(){}
-                   public static void n(){}
-               }
-               class B extends A{
-                   //注解---@Override:表示下面的方法是重写方法
-                   @Override
-                   public void m(){}
-                   //静态方法没有重写
-                   //静态方法与类同级
-                   //重写为多态服务---多样性---对象
-                   //@Override
-                   public static void n(){}
-               }
-           #+END_SRC
-           [[./StaticDemo2.java]]
-   - 修饰代码块
-     在方法外类内static{}
-     用static修饰的代码块
-     它是随着类的加载而加载到方法区中，在类创建对象前去执行一次（被static修饰的内容都只加载一次）
-     父类静态--->子类静态--->父类对象--->子类对象
-     #+BEGIN_SRC java
-         package cn.commandoptionesc.staticx;
-         public class StaticDemo4{
-             public static void main(String[] args){
-                 new SD();
-             }
-         }
-         class SD1{
-             static{
-                 System.out.println("静态代码块1");
-             }
-             {
-                 System.out.println("构造代码块1");
-             }
-         }
-         class SD extends SD1{
-             static int i;
-             //静态代码块
-             //随着类的加载而加载但是只加载一次，与类同级
-             static{
-                 //静态变量
-                 i = 9;
-                 System.out.println("静态代码块");
-             }
-             {
-                 System.out.println("构造代码块");
-             }
-             public SD(){
-                 System.out.println("无参构造");
-             }
-         }
-     #+END_SRC
-     [[./StaticDemo4.java]]
-
-     #+BEGIN_SRC java
-         package cn.commandoptionesc.staticx;
-         public class StaticDemo5{
-             public static void main(String[] args){
-                 new DB();
-             }
-         }
-         class DA{
-             static DC d=new DC();
-             static{
-                 System.out.println("DA 1");
-             }
-             {
-                 System.out.println("DA 2");
-             }
-
-             public DA(){
-                 System.out.println("DA 3");
-             }
-         }
-         class DB extends DA{
-             static{
-                 System.out.println("DB 1");
-             }
-             {
-                 System.out.println("DB 2");
-             }
-
-             public DB(){
-                 System.out.println("DB 3");
-             }
-         }
-         class DC{
-             public DC(){
-                 System.out.println("DC");
-             }
-         }
-         class DD extends DC{
-             public DD(){
-                 System.out.println("DD");
-             }
-         }
+          System.out.println(p2.toString());
+          System.out.println(p1.toString());
+          System.out.println(p.toString());
+      }
+  }
+  //Personl类
+  class Person{
+      //属性
+      String name;
+      int age;
+      //static修饰变量
+      static char gender;
 
 
+      //toString()方法
+      public String toString(){
+          return "name:"+name+",age:"+age+",gender:"+gender;
+      }
+  }
+  #+END_SRC
+- 修饰方法
+  被static修饰的方法叫静态方法
+  随着类的加载而加载到方法区的静态区，不会对静态方法进行赋予初始值，只是存放，当被调用的时候自动加载到栈中执行。与类
+  同级，类方法，通过类名点调用也可以通过对象调用。
+  #+BEGIN_SRC java
+  System.arraycopy();
+  Arrays.copyof();
+  Arrays.toString();
+  Arrays.sort();
+  Systemm.out.println();
+  #+END_SRC
+  静态方法也是存储在方法区，只不过加载的时候没有运行，什么时候调用，什么时候去栈中运行。
+
+  注意：
+      静态变量不可以定义到静态方法中
+      静态方法中，不可以直接调用非静态的方法。另外也不能存在this和super这样的关键字。静态是优先于对象存在的。
+      - 方法或者构造方法中可以定义静态变量？
+        不可以，方法要等到调用的时候，内容才执行，静态变量要与类同级。
+      - 静态方法里可以使用this？
+        不可以，静态方法是类级别的，this是对象级别的。
+      - main静态方法，"直接"调用非静态的属性和方法？
+        不可以，静态信息不能调用非静态的信息，非静态的可以调用静态的（出现非静态的说明，加载过程已经走完了）
+        #+BEGIN_SRC java
+        package cn.commandoptionesc.staticx;
+        public class StaticDemo{
+            public static void main(String[] args){
+                //静态不能调用非静态方法
+                //n();
+                //静态可以调用非静态方法
+                m();
+            }
+            public void n(){}
+            public static void m(){ }
+        }
+        #+END_SRC
+        [[./StaticDemo1.java]]
+      - 静态方法可以重载
+      - 静态方法不可以重写
+        但是父子类中可以存在方法签名一致的静态方法，这种方式叫做隐藏
+        隐藏时需注意：父类方法和子类方法要么都是静态的，要么都是非静态的
+        #+BEGIN_SRC java
+        package cn.commandoptionesc.staticx;
+        public class StaticDemo1{
+            public static void main(String[] args){
+
+            }
+        }
+        class AA{
+            public void m(){}
+            public static void n(){}
+        }
+        class B extends A{
+            //注解---@Override:表示下面的方法是重写方法
+            @Override
+            public void m(){}
+            //静态方法没有重写
+            //静态方法与类同级
+            //重写为多态服务---多样性---对象
+            //@Override
+            public static void n(){}
+        }
+        #+END_SRC
+        [[./StaticDemo2.java]]
+- 修饰代码块
+  在方法外类内static{}
+  用static修饰的代码块
+  它是随着类的加载而加载到方法区中，在类创建对象前去执行一次（被static修饰的内容都只加载一次）
+  父类静态--->子类静态--->父类对象--->子类对象
+  #+BEGIN_SRC java
+  package cn.commandoptionesc.staticx;
+  public class StaticDemo4{
+      public static void main(String[] args){
+          new SD();
+      }
+  }
+  class SD1{
+      static{
+          System.out.println("静态代码块1");
+      }
+      {
+          System.out.println("构造代码块1");
+      }
+  }
+  class SD extends SD1{
+      static int i;
+      //静态代码块
+      //随着类的加载而加载但是只加载一次，与类同级
+      static{
+          //静态变量
+          i = 9;
+          System.out.println("静态代码块");
+      }
+      {
+          System.out.println("构造代码块");
+      }
+      public SD(){
+          System.out.println("无参构造");
+      }
+  }
+  #+END_SRC
+  [[./StaticDemo4.java]]
+
+  #+BEGIN_SRC java
+  package cn.commandoptionesc.staticx;
+  public class StaticDemo5{
+      public static void main(String[] args){
+          new DB();
+      }
+  }
+  class DA{
+      static DC d=new DC();
+      static{
+          System.out.println("DA 1");
+      }
+      {
+          System.out.println("DA 2");
+      }
+
+      public DA(){
+          System.out.println("DA 3");
+      }
+  }
+  class DB extends DA{
+      static{
+          System.out.println("DB 1");
+      }
+      {
+          System.out.println("DB 2");
+      }
+
+      public DB(){
+          System.out.println("DB 3");
+      }
+  }
+  class DC{
+      public DC(){
+          System.out.println("DC");
+      }
+  }
+  class DD extends DC{
+      public DD(){
+          System.out.println("DD");
+      }
+  }
+  #+END_SRC
+  [[./StaticDemo5.java]]
+
+  #+BEGIN_SRC java
+  package cn.commandoptionesc.staticx;
+  public class StaticDemo6{
+      public static void main(String[] args){
+          new DB();
+      }
+  }
+  class DA{
+      //static DC d;
+      DD dd = new DD();
+      static{
+          System.out.println("DA 1");
+      }
+
+      {
+          System.out.println("DA 2");
+      }
+
+      public DA(){
+          System.out.println("DA 3");
+      }
+  }
+  class DB extends DA{
+      static{
+          System.out.println("DB 1");
+      }
+
+      {
+          System.out.println("DB 2");
+      }
+
+      public DB(){
+          System.out.println("DB 3");
+      }
+  }
+  class DC{
+      public DC(){
+          System.out.println("DC");
+      }
+  }
+  class DD extends DC{
+      public DD(){
+          System.out.println("DD");
+      }
+  }
+  #+END_SRC
+  [[./StaticDemo6.java]]
 
 
-
-     #+END_SRC
-     [[./StaticDemo5.java]]
-
-     #+BEGIN_SRC java
-         package cn.commandoptionesc.staticx;
-         public class StaticDemo6{
-             public static void main(String[] args){
-                 new DB();
-             }
-         }
-         class DA{
-             //static DC d;
-             DD dd = new DD();
-             static{
-                 System.out.println("DA 1");
-             }
-
-             {
-                 System.out.println("DA 2");
-             }
-
-             public DA(){
-                 System.out.println("DA 3");
-             }
-         }
-         class DB extends DA{
-             static{
-                 System.out.println("DB 1");
-             }
-
-             {
-                 System.out.println("DB 2");
-             }
-
-             public DB(){
-                 System.out.println("DB 3");
-             }
-         }
-         class DC{
-             public DC(){
-                 System.out.println("DC");
-             }
-         }
-         class DD extends DC{
-             public DD(){
-                 System.out.println("DD");
-             }
-         }
-     #+END_SRC
-     [[./StaticDemo6.java]]
 ** 封装
-   + 面向对象思想的三个特征：封装，继承，多态
+面向对象思想的三个特征：封装，继承，多态
 *** 关键字private
-    1. 私有，属于成员修饰符，不能修饰局部变量
-    2. 被private修饰的成员，只能在自己的的本类中被使用
-    3. 对私有变量提供公共的访问方式：方法
-    4. 类中不需要对外提供的内容都需要私有化，包括属性和方法，并提供setXxx与getXxx方法对其进行访问
-    5. 私有仅仅是封装的体现形式
-    #+BEGIN_SRC java
-      /*
-        描述显示生活中的人的事物
-        属性：姓名 年龄
-        功能：说话
-      ,*/
-      public class Person2{
-          //人的姓名，成员变量
-          String name;
-          //人的年龄，成员变量
-          private int age;
+1. 私有，属于成员修饰符，不能修饰局部变量
+2. 被private修饰的成员，只能在自己的的本类中被使用
+3. 对私有变量提供公共的访问方式：方法
+4. 类中不需要对外提供的内容都需要私有化，包括属性和方法，并提供setXxx与getXxx方法对其进行访问
+5. 私有仅仅是封装的体现形式
+#+BEGIN_SRC java
+/*
+  描述显示生活中的人的事物
+  属性：姓名 年龄
+  功能：说话
+,*/
+public class Person2{
+    //人的姓名，成员变量
+    String name;
+    //人的年龄，成员变量
+    private int age;
 
-          //变量age被私有，提供方法，让外面的类使用
-          //定义方法，对age变量进行赋值，方法名字必须set开头
-          public void setAge(int a){
-              //对参数a进行范围的限制
-              if(a<0||a>200){
-                  //如果a超过范围，手动将age赋值为20
-                 age=20;
-              }else{
-                  //如果a没有超过范围，直接对age赋值
-                  age=a;
-              }
-          }
-          //定义方法，对变量age获取值使用，方法名字get
-          public int getAge(){
-              return age;
-          }
+    //变量age被私有，提供方法，让外面的类使用
+    //定义方法，对age变量进行赋值，方法名字必须set开头
+    public void setAge(int a){
+        //对参数a进行范围的限制
+        if(a<0||a>200){
+            //如果a超过范围，手动将age赋值为20
+            age=20;
+        }else{
+            //如果a没有超过范围，直接对age赋值
+            age=a;
+        }
+    }
+    //定义方法，对变量age获取值使用，方法名字get
+    public int getAge(){
+        return age;
+    }
 
-          public void speak(){
-              System.out.println(name+"..."+age);
-          }
-      }
-    #+END_SRC
+    public void speak(){
+        System.out.println(name+"..."+age);
+    }
+}
+#+END_SRC
 
-    #+BEGIN_SRC java
-      /*
-        定义好的Person2类进行测试
-        创建对象，对象调用属性和方法
-       ,*/
-      public class PersonTest2{
-          public static void main(String[] args){
-              //创建Person类的对象 new
-              Person2 p=new Person2();
-              //对长远变量赋
-              //p.age=20;
-              //对成员变量age赋值,只能调用set方法赋值
-              p.setAge(20);
-              p.setname="张三";
+#+BEGIN_SRC java
+/*
+  定义好的Person2类进行测试
+  创建对象，对象调用属性和方法
+,*/
+public class PersonTest2{
+    public static void main(String[] args){
+        //创建Person类的对象 new
+        Person2 p=new Person2();
+        //对长远变量赋
+        //p.age=20;
+        //对成员变量age赋值,只能调用set方法赋值
+        p.setAge(20);
+        p.setname="张三";
 
-              //调用类中的方法
-              p.speak();
+        //调用类中的方法
+        p.speak();
 
-              //输出成员变量age值，必须调用get方法
-              System.out.println(p.getAge());
-          }
-      }
-    #+END_SRC
+        //输出成员变量age值，必须调用get方法
+        System.out.println(p.getAge());
+    }
+}
+#+END_SRC
 
     #+BEGIN_SRC java
       /*
