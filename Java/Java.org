@@ -3157,174 +3157,172 @@ public class MethodDemo2{
     #+END_SRC
     [[./MethodDemo7.java]]
 *** 方法的传值
-    1. 基本数据类型
-       值的拷贝
-    2. 引用数据类型
-       地址值的拷贝
-       如果这个拷贝的地址找到了堆内存并进行了改动，原值就会改动
-       如果没有找到堆内存，原值就不会影响
-    #+BEGIN_SRC java
-        package cn.commandoptionesc.method;
-        public class MethodDemo8{
-            //所有的方法的执行都是在栈中
-            public static void main(String[] args){
-                int i=2;
-                //实参---实际参数
-                //如果传入的是基本类型，就是值的拷贝
-                m(i);
-                //2
-                System.out.println(i);
-            }
-            //形参---接受值
-            public static void m(int i){
-                i++;
-            }
-        }
-    #+END_SRC
-    [[./MethodDemo8.java]]
-    #+BEGIN_SRC java
-        package cn.commandoptionesc.method;
-        public class MethodDemo9{
-            public static void main(String[] args){
-                int i=2;
-                int[] arr={1,2,3};
-                m(arr[0]);
-                //1
-                System.out.println(arr[0]);
-            }
-            public static void m(int i){
-                i++;
-            }
-        }
-    #+END_SRC
-    [[./MethodDemo9.java]]
-    #+BEGIN_SRC java
-        package cn.commandoptionesc.method;
-        public class MethodDemo10{
-            public static void main(String[] args){
-                int[] arr={1,2,3};
-                //如果传入的是引用数据类型，实质是地址值的拷贝
-                n(arr);
+1. 基本数据类型
+   值的拷贝
+2. 引用数据类型
+   地址值的拷贝
+   如果这个拷贝的地址找到了堆内存并进行了改动，原值就会改动
+   如果没有找到堆内存，原值就不会影响
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.method;
+   public class MethodDemo8{
+       //所有的方法的执行都是在栈中
+       public static void main(String[] args){
+           int i=2;
+           //实参---实际参数
+           //如果传入的是基本类型，就是值的拷贝
+           m(i);
+           //2
+           System.out.println(i);
+       }
+       //形参---接受值
+       public static void m(int i){
+           i++;
+       }
+   }
+   #+END_SRC
+   [[./MethodDemo8.java]]
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.method;
+   public class MethodDemo9{
+       public static void main(String[] args){
+           int i=2;
+           int[] arr={1,2,3};
+           m(arr[0]);
+           //1
+           System.out.println(arr[0]);
+       }
+       public static void m(int i){
+           i++;
+       }
+   }
+   #+END_SRC
+   [[./MethodDemo9.java]]
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.method;
+   public class MethodDemo10{
+       public static void main(String[] args){
+           int[] arr={1,2,3};
+           //如果传入的是引用数据类型，实质是地址值的拷贝
+           n(arr);
 
-                //10
-                System.out.println(arr[0]);
-            }
-            public static void n(int[] arr){
-                arr[0]=10;
-            }
-        }
-    #+END_SRC
-    [[./MethodDemo10.java]]
-    #+BEGIN_SRC java
-        package cn.commandoptionesc.method;
-        public class MethodDemo11{
-            public static void main(String[] args){
-                int[] arr={1,2,3};
-                mn(arr);
-                //1
-                System.out.println(arr[0]);
-            }
-            public static void mn(int[] arr){
-                //拷贝之后的地址值被新的地址值覆盖
-                arr=new int[]{2,3,4};
-            }
-        }
-    #+END_SRC
-    [[./MethodDemo11.java]]
+           //10
+           System.out.println(arr[0]);
+       }
+       public static void n(int[] arr){
+           arr[0]=10;
+       }
+   }
+   #+END_SRC
+   [[./MethodDemo10.java]]
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.method;
+   public class MethodDemo11{
+       public static void main(String[] args){
+           int[] arr={1,2,3};
+           mn(arr);
+           //1
+           System.out.println(arr[0]);
+       }
+       public static void mn(int[] arr){
+           //拷贝之后的地址值被新的地址值覆盖
+           arr=new int[]{2,3,4};
+       }
+   }
+   #+END_SRC
+   [[./MethodDemo11.java]]
+   #+BEGIN_SRC java
+   public class Ex{
+       public static void main(String[] args){
+           int[] a={1,2,3,4,5};
+           expand(a);
+           System.out.println(a);
 
-    #+BEGIN_SRC java
-        public class Ex{
-            public static void main(String[] args){
-                int[] a={1,2,3,4,5};
-                expand(a);
-                System.out.println(a);
+           changeArray(a);
+           System.out.println(a[0]);
 
-                changeArray(a);
-                System.out.println(a[0]);
-
-                pringArray(a);
-            }
-            public static void expand(int[] a){
-                int[] newArray=new int[a.length*2];
-                System.out.println(a,0,newArray,0,a.length);
-                a=newArray;
-                for(int i=0;i<a.length;i++){
-                    System.out.print(a[i]+"\t");
-                }
-                System.out.println();
-                System.out.println(a);
-            }
-            public static void changeArray(int[] a){
-                a[0]=10;
-                System.out.println(a[0]);
-            }
-            public static void printArray(int[] a){
-                for(int i=0;i<a.length;i++){
-                    System.out.print(a[i]+"\t");
-                }
-                System.out.println();
-            }
-        }
-    #+END_SRC
-
+           pringArray(a);
+       }
+       public static void expand(int[] a){
+           int[] newArray=new int[a.length*2];
+           System.out.println(a,0,newArray,0,a.length);
+           a=newArray;
+           for(int i=0;i<a.length;i++){
+               System.out.print(a[i]+"\t");
+           }
+           System.out.println();
+           System.out.println(a);
+       }
+       public static void changeArray(int[] a){
+           a[0]=10;
+           System.out.println(a[0]);
+       }
+       public static void printArray(int[] a){
+           for(int i=0;i<a.length;i++){
+               System.out.print(a[i]+"\t");
+           }
+           System.out.println();
+       }
+   }
+   #+END_SRC
 *** 方法的递归
-    sum(10)=10+9+8+7+6+5+4+3+2+1
-           =10+9+8+7+6+5+4+3+2+1
-           =10+sum(9)
-               9+sum(8)
-                 8+sum(7)
-                   7+sum(6)
+sum(10)=10+9+8+7+6+5+4+3+2+1
+       =10+9+8+7+6+5+4+3+2+1
+       =10+sum(9)
+            9+sum(8)
+               8+sum(7)
+                  7+sum(6)
                      6+sum(5)
-                       5+sum(4)
-                         4+sum(3)
-                           3+sum(2)
-                             2+sum(1)
-    #+BEGIN_SRC java
-        package cn.commandoptionesc.method;
-        public class MethodDemo12{
-            public static void main(String[] args){
-                System.out.println(diGui(10));
-                System.out.println(diGui(5));
-
-            }
-            //递归方法求和
-            public static int diGui(int n){
-                //递归结束的条件
-                if(n==1){
-                    return 1;
-                }
-                //调用方法自己本身
-                return n+diGui(n-1);
-                //return 10+diGui(9);
-                //          9+diGui(8)
-                //            8+diGui(7)
-                //              7+diGui(6)
-                //         ...
-                //               2+diGui(1)
-            }
-
-            //递归求5的阶乘
-            public static int diGui2(int n){
-                //结束条件
-                if(n==1){
-                    return 1;
-                }
-                return n*diGui2(n-1);
+                        5+sum(4)
+                           4+sum(3)
+                              3+sum(2)
+                                 2+sum(1)
+#+BEGIN_SRC java
+package cn.commandoptionesc.method;
+public class MethodDemo12{
+    public static void main(String[] args){
+        System.out.println(diGui(10));
+        System.out.println(diGui(5));
+    }
+    //递归方法求和
+    public static int diGui(int n){
+        //递归结束的条件
+        if(n==1){
+            return 1;
         }
-    #+END_SRC
-    局限性：可能会出现栈溢出错误
+        //调用方法自己本身
+        return n+diGui(n-1);
+        //return 10+diGui(9);
+        //          9+diGui(8)
+        //            8+diGui(7)
+        //              7+diGui(6)
+        //         ...
+        //               2+diGui(1)
+    }
+
+    //递归求5的阶乘
+    public static int diGui2(int n){
+        //结束条件
+        if(n==1){
+            return 1;
+        }
+        return n*diGui2(n-1);
+    }
+}
+#+END_SRC
+局限性：可能会出现栈溢出错误
 
 ** 引用数据类型--类
 *** 自定义类
+#+BEGIN_SRC java
+/*
+  定义类
+      使用类的形式，对现实中的事物进行描述
+  事物：方法，属性
+  方法：这个事物具备的功能
+  属性：变量
 
-    #+BEGIN_SRC java
-      /*
-        定义类
-            使用类的形式，对现实中的事物进行描述
-            事物：方法，属性
-                方法：这个事物具备的功能
-                属性：变量
-            - 格式
+- 格式
             public class 类名{
                 属性定义
                     修饰符 数据类型 变量名 = 值
