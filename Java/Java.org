@@ -2373,7 +2373,7 @@ class ContinueDemo{
        System.out.println();
    }
    #+END_SRC
-** Java的内存
+** Java的内存存储
 java将占用的内存分为了5块：栈内存、堆内存、方法区(面向对象讲)、本地方法栈、PC计数器（计数器）
 *** 栈内存：存储的变量(目前阶段)。
 变量在声明的时候存储到栈内存中，不会自动给值，除非在程序中手动给值。
@@ -4459,7 +4459,7 @@ public class Shop{
 对着一类事物进行抽取，把这类事物共有的特征抽取成了属性，把共有的行为抽取成了方法，把这一类事物抽取成了类
 类是对象的概括
 对象是类的具体实现
-[[./28.png]]
+[[./img/28.png]]
 #+BEGIN_SRC java
 package cn.commandoptionesc.object;
 public class ObjectDemo{
@@ -4643,7 +4643,7 @@ package cn.commandoptionesc.object;
     }
 
 #+END_SRC
-[[./ExtendsDemo2.java]]
+[[./Source Code/ExtendsDemo2.java]]
 *** 构造代码块
 在方法外，类内出现{}就是构造代码块，可以进行初始化，在每个构造方法前，优先执行，调用任意的构造方法，构造代码块都要执行
 #+BEGIN_SRC java
@@ -4830,6 +4830,16 @@ public class PersoneTest{
 }
 #+END_SRC
 *** 成员变量与局部变量（在类内方法外非静态的属性和方法-成员变量，成员方法）
+|          |                                          |                                    |
+|----------+------------------------------------------+------------------------------------|
+| 区别     | 成员变量                                 | 局部变量                           |
+| 定义位置 | 方法外类中                               | 方法或者代码块内                   |
+| 作用范围 | 整个类                                   | 方法或者代码块内                   |
+| 内存变量 | 堆                                       | 栈                                 |
+| 生命周期 | 随着类的对象的创建而产生                 | 随着方法或者代码块的执行而产生     |
+|          | 对象使用完成之后在某个特定的时间进行销毁 | 方法调用完成或者执行完成就立即销毁 |
+|----------+------------------------------------------+------------------------------------|
+|          |                                          |                                    |
 - 位置
   成员变量：在方法外类内
   局部变量：方法内或者代码块内
@@ -4849,7 +4859,7 @@ public class PersoneTest{
     #+BEGIN_SRC java
 
     #+END_SRC
-    [[./ExtendsDemo.java]]
+    [[./Source Code/ExtendsDemo.java]]
 *** 继承关系
     多个类中存在相同的内容，就把相同的内容抽取到一个新类中，让新类和原来的类就通过extends关键字就产生了关联关系
     子类可以拿到父类部分信息
@@ -4943,7 +4953,7 @@ public class PersoneTest{
                }
 
        #+END_SRC
-       [[./ExtendsDemo1.java]]
+       [[./Source Code/ExtendsDemo1.java]]
      - protected:
        #+BEGIN_SRC java
            package cn.commandoptionesc.extendsx.b;
@@ -4973,8 +4983,8 @@ public class PersoneTest{
                }
            }
        #+END_SRC
-       [[./A.java]]
-       [[./B.java]]
+       [[./Source Code/A.java]]
+       [[./Source Code/B.java]]
 **** super关键字
      父类的对象，用于调用父类的属性和方法
      子类的所有的构造方法都要默认调用父类的无参构造（通过super()）
@@ -5129,7 +5139,7 @@ public class PersoneTest{
 可以修饰：变量、方法、代码块、内部类
 属于类的信息全部存储在方法区内
 类是一个模板，对象是这个模板将要具有的具体特征和行为。
-[[./29.png]]
+[[./Source Code/29.png]]
 - 修饰变量
   用static修饰的变量就叫做静态变量，也叫类变量
   静态变量是随着类（所有信息）的加载（方法区的静态常量池）而加载静态区，接着赋予初始值
@@ -5211,7 +5221,7 @@ public class PersoneTest{
             public static void m(){ }
         }
         #+END_SRC
-        [[./StaticDemo1.java]]
+        [[./Source Code/StaticDemo1.java]]
       - 静态方法可以重载
       - 静态方法不可以重写
         但是父子类中可以存在方法签名一致的静态方法，这种方式叫做隐藏
@@ -5238,7 +5248,7 @@ public class PersoneTest{
             public static void n(){}
         }
         #+END_SRC
-        [[./StaticDemo2.java]]
+        [[./Source Code/StaticDemo2.java]]
 - 修饰代码块
   在方法外类内static{}
   用static修饰的代码块
@@ -5276,7 +5286,7 @@ public class PersoneTest{
       }
   }
   #+END_SRC
-  [[./StaticDemo4.java]]
+  [[./Source Code/StaticDemo4.java]]
 
   #+BEGIN_SRC java
   package cn.commandoptionesc.staticx;
@@ -5321,7 +5331,7 @@ public class PersoneTest{
       }
   }
   #+END_SRC
-  [[./StaticDemo5.java]]
+  [[./Source Code/StaticDemo5.java]]
 
   #+BEGIN_SRC java
   package cn.commandoptionesc.staticx;
@@ -5332,6 +5342,8 @@ public class PersoneTest{
   }
   class DA{
       //static DC d;
+      //属性与对象一个级别，但是属性和构造代码块执行顺序一致
+      //谁在前面谁先执行
       DD dd = new DD();
       static{
           System.out.println("DA 1");
@@ -5369,7 +5381,45 @@ public class PersoneTest{
       }
   }
   #+END_SRC
-  [[./StaticDemo6.java]]
+  [[./Source Code/StaticDemo6.java]]
+
+  #+BEGIN_SRC java
+  package cn.commandoptionesc.staticx;
+  public class StaticDemo7{
+      public static void main(String[] args){
+          System.out.println(new SDText().i1);
+          System.out.println(new SDText().i2);
+          System.out.println(new SDText().i3);
+      }
+  }
+  class SDText{
+      // 定义了成员变量并且优质，执行构造代码块的内容，给成员变量进行赋值，最后的结果值就是6
+      int i1 = 1;
+      {
+          i1 = 6;
+      }
+
+      int i2=1;
+      {
+          i2+=6;
+      }
+
+      //java开始进行编译和执行，读到a=1，发现没有具体的类型，从上下文开始找，发现没有，会把a看成（标记）成成员变量
+      //此时这个标记就只能赋值，坐不了其他任何操作，往下找到了同名的定义，就会把标记的值给同名变量，同名变量自己赋值
+      //就把前面的赋值过程覆盖了
+      {
+          i3 = 4;
+      }
+      int i3=2;
+
+      /*{
+          i4+=3;
+      }
+
+      int i4=1;
+      */
+  }
+  #+END_SRC
 
 
 ** 封装
