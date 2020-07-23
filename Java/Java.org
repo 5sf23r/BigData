@@ -3362,6 +3362,7 @@ public class MethodDemo12{
 #+END_SRC
 局限性：可能会出现栈溢出错误
 
+
 ** 引用数据类型--类
 *** 自定义类
 #+BEGIN_SRC java
@@ -3873,495 +3874,486 @@ public class MethodDemo12{
 
 ** 数组方法练习
 *** 实现数组的遍历
-    定义方法，实现数组的遍历
-    遍历中，输出结果[11,33,565,66,78,89]
-    int[] arr ={3,4,45,7};
-    结果包含字符串,[],
-    实现步骤：
-        1. 定义方法实现数组的遍历
-        2. 先打印[ 中括号
-        3. 遍历数组
-           输出数组的元素和逗号
-           判断是否遍历到了数组的最后一个元素，如果是最后一个元素，输出]中括号
-
-           #+BEGIN_SRC java
-             public class ArrayMethidTest{
-                 public static void main(String[] args){
-                     int[] arr = {4,6,7,1};
-                 }
-                 public static void printArray(int[] arr){
-                     //输出一半中括号，不要换行打印
-                     System.out.print("[");
-                     //数组遍历
-                     for(int i=0;i<arr.length;i++){
-                         //判断遍历到的元素，是不是数组的最后一个元素
-                         //如何判断 循环变量 到达 length-1
-                         if(i == arr.length-1){
-                             //输出数组的元素和]
-                             System.out.print(arr[i]+"]");
-                         }else{
-                         //不是数组的最后一个元素，输出数组和逗号
-                             System.out.print(arr[i]+",");
-                         }
-                     }
-                     System.out.println();
-                 }
-             }
-           #+END_SRC
-
+定义方法，实现数组的遍历
+遍历中，输出结果[11,33,565,66,78,89]
+int[] arr ={3,4,45,7};
+结果包含字符串,[],
+实现步骤：
+    1. 定义方法实现数组的遍历
+    2. 先打印[ 中括号
+    3. 遍历数组
+       输出数组的元素和逗号
+       判断是否遍历到了数组的最后一个元素，如果是最后一个元素，输出]中括号
+#+BEGIN_SRC java
+public class ArrayMethidTest{
+    public static void main(String[] args){
+        int[] arr = {4,6,7,1};
+    }
+    public static void printArray(int[] arr){
+        //输出一半中括号，不要换行打印
+        System.out.print("[");
+        //数组遍历
+        for(int i=0;i<arr.length;i++){
+            //判断遍历到的元素，是不是数组的最后一个元素
+            //如何判断 循环变量 到达 length-1
+            if(i == arr.length-1){
+                //输出数组的元素和]
+                System.out.print(arr[i]+"]");
+            }else{
+                //不是数组的最后一个元素，输出数组和逗号
+                System.out.print(arr[i]+",");
+            }
+        }
+        System.out.println();
+    }
+}
+#+END_SRC
 *** 数组逆原理
-      数组的逆序
-      数组中的元素，进行位置上的交换
-      逆序不等于反向遍历
-      就是数组中最远的两个索引，进行位置交换，实现数组的逆序
-      使用的是数组的指针思想，就是变量，思想，可以随时变换索引
-      反转 reverse
+数组的逆序
+数组中的元素，进行位置上的交换
+逆序不等于反向遍历
+就是数组中最远的两个索引，进行位置交换，实现数组的逆序
+使用的是数组的指针思想，就是变量，思想，可以随时变换索引
+反转 reverse
 
-      逆序的实现思想，数组最远端位置的交换
-      数组的指针思想：就是数组的索引(指针是可以随时指向数组的任意一个索引的)
-      需要两个指针 ---> 一个大指针，一个小指针
-      大指针 ---> 最大索引
-      小指针 ---> 0索引
-      数组换位，借用第三方的变量，临时性存储
+逆序的实现思想，数组最远端位置的交换
+数组的指针思想：就是数组的索引(指针是可以随时指向数组的任意一个索引的)
+需要两个指针 ---> 一个大指针，一个小指针
+大指针 ---> 最大索引
+小指针 ---> 0索引
+数组换位，借用第三方的变量，临时性存储
+#+BEGIN_SRC java
+/*
 
-    #+BEGIN_SRC java
-      /*
+    实现步骤：
+        1. 定义方法，实现数组的逆序
+        2. 遍历数组实现数组的最远索引换位置
+           使用临时的第三方变量
 
-            实现步骤：
-                1. 定义方法，实现数组的逆序
-                2. 遍历数组实现数组的最远索引换位置
-                    使用临时的第三方变量
-       ,*/
-      public class ArrayMethodTest_1{
-          public static void main(String[] args){
-              int[] arr = {1,2,3,4};
-              reverse(arr);
-              printArray(arr);
-          }
+,*/
+public class ArrayMethodTest_1{
+    public static void main(String[] args){
+        int[] arr = {1,2,3,4};
+        reverse(arr);
+        printArray(arr);
+    }
 
-          /*
-            定义方法，实现数组的逆序
-            返回值：没有返回值
-            参数： 数组就是参数
-           ,*/
-          public static void reverse(int[] arr){
-              //利用循环，实现数组遍历，遍历过程中，最远端换位
-              //for的第一项，定义两个变量,最后，两个变量++ ，--
-              for(int min = 0,max = arr.length-1;min<max;min++,max--){
-                  //数组中的元素，进行位置交换
-                  //min索引和max索引的元素
-                  int temp = arr[min];
-                  //max索引上的元素，赋值给min索引
-                  arr[min] = arr[max];
-                  //临时变量，保存的数据，赋值到max索引上
-                  arr[max] = temp;
-              }
-          }
-          public static void printArray(int[] arr){
-              System.out.print("[");
-              for(int i=0;i<arr.length;i++){
-                  if(i==arr.length-1){
-                      System.out.print(arr[i]+"]");
-                  }else{
-                      System.out.print(arr[i]+",");
-                  }
-              }
-          }
-      }
-    #+END_SRC
-
+    /*
+      定义方法，实现数组的逆序
+      返回值：没有返回值
+      参数： 数组就是参数
+    ,*/
+    public static void reverse(int[] arr){
+        //利用循环，实现数组遍历，遍历过程中，最远端换位
+        //for的第一项，定义两个变量,最后，两个变量++ ，--
+        for(int min = 0,max = arr.length-1;min<max;min++,max--){
+            //数组中的元素，进行位置交换
+            //min索引和max索引的元素
+            int temp = arr[min];
+            //max索引上的元素，赋值给min索引
+            arr[min] = arr[max];
+            //临时变量，保存的数据，赋值到max索引上
+            arr[max] = temp;
+        }
+    }
+    public static void printArray(int[] arr){
+        System.out.print("[");
+        for(int i=0;i<arr.length;i++){
+            if(i==arr.length-1){
+                System.out.print(arr[i]+"]");
+            }else{
+                System.out.print(arr[i]+",");
+            }
+        }
+    }
+}
+#+END_SRC
 *** 数组元素排序
-    规则：比较大小位置交换
+规则：比较大小位置交换
 **** 选择排序(selectSort)：
-     数组中的每个元素都进行比较
-     数组中每个元素和其他元素进行比较换位置
-     #+BEGIN_SRC java
-       public class ArrayMethodTest_2{
-           public static void main(String[] args){
-               int[] arr = {3,1,5,7,9,0,2};
-               selectSort(arr);
-               printArray(arr);
-           }
-           /*
-             定义方法，实现数组的选择排序
-             返回值：没有
-             实现步骤：
-                 1. 嵌套循环实现排序
-                     外循环，控制的是一共比较了多少次
-                     内循环，控制的是每次比较了多少个元素
-                 2. 判断元素的大小值
-                     小值，存储到小的索引
-            ,*/
-           public static void selectSort(int[] arr){
-               for(int i = 0;i<arr.length-1;i++){
-                   //内循环，是每次都在减少，修改变量的定义
-                   for(int j = i+1;j<arr.length;j++){
-                       if(arr[i]<arr[j]){
-                           //数组换位
-                           int temp = arr[i];
-                           arr[i] = arr[j];
-                           arr[j] = temp;
-                       }
-                   }
-               }
-           }
-           public static void printArray(int[] arr){
-               System.out.print("[");
-               for(int i = 0;i<arr.length;i++){
-                   if(i == arr.length - 1){
-                       System.out.print(arr[i] + "]");
-                   }else{
-                       System.out.print(arr[i]+",");
-                   }
-               }
-               System.out.println();
-           }
-       }
-     #+END_SRC
+数组中的每个元素都进行比较
+数组中每个元素和其他元素进行比较换位置
+#+BEGIN_SRC java
+public class ArrayMethodTest_2{
+    public static void main(String[] args){
+        int[] arr = {3,1,5,7,9,0,2};
+        selectSort(arr);
+        printArray(arr);
+    }
+    /*
+      定义方法，实现数组的选择排序
+      返回值：没有
+      实现步骤：
+          1. 嵌套循环实现排序
+             外循环，控制的是一共比较了多少次
+             内循环，控制的是每次比较了多少个元素
+          2. 判断元素的大小值
+             小值，存储到小的索引
+    ,*/
+    public static void selectSort(int[] arr){
+        for(int i = 0;i<arr.length-1;i++){
+            //内循环，是每次都在减少，修改变量的定义
+            for(int j = i+1;j<arr.length;j++){
+                if(arr[i]<arr[j]){
+                    //数组换位
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+    }
+    public static void printArray(int[] arr){
+        System.out.print("[");
+        for(int i = 0;i<arr.length;i++){
+            if(i == arr.length - 1){
+                System.out.print(arr[i] + "]");
+            }else{
+                System.out.print(arr[i]+",");
+            }
+        }
+        System.out.println();
+    }
+}
+#+END_SRC
 **** 冒泡排序(bubbleSort)：
-     数组中相邻元素进行比较
-     数组的相邻元素换位置
-
-     #+BEGIN_SRC java
-       public class ArrayMethodTest_3{
-           public static void main(String[] args){
-               bubbleSort(arr);
-               printArray(arr);
-           }
-           /*
-             定义方法，实现数组的冒泡排序
-             返回值：没有
-             参数：数组
-            ,*/
-           public static void bubbleSort(int[] arr){
-               for(int i = 0;i<arr.length-1;i++){
-                   for(int j = 0;j<arr.length-i-1;j++){
-                       if(arr[j]>arr[j+1]){
-                           int temp = arr[j];
-                           arr[j] = arr[j+1];
-                           arr[j+1] = temp;
-                       }
-                   }
-               }
-           }
-           public static void printArray(int[] arr){
-               System.out.print("[");
-               for(int i = 0;i<arr.length;i++){
-                   if(i == arr.length -1){
-                       System.out.print(arr[i] + "]");
-                   }else{
-                       System.out.print(arr[i] + ",");
-                   }
-               }
-               System.out.println();
-           }
-       }
-     #+END_SRC
-
+1. 数组中相邻元素进行比较
+2. 数组的相邻元素换位置
+#+BEGIN_SRC java
+public class ArrayMethodTest_3{
+    public static void main(String[] args){
+        bubbleSort(arr);
+        printArray(arr);
+    }
+    /*
+      定义方法，实现数组的冒泡排序
+      返回值：没有
+      参数：数组
+    ,*/
+    public static void bubbleSort(int[] arr){
+        for(int i = 0;i<arr.length-1;i++){
+            for(int j = 0;j<arr.length-i-1;j++){
+                if(arr[j]>arr[j+1]){
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+    }
+    public static void printArray(int[] arr){
+        System.out.print("[");
+        for(int i = 0;i<arr.length;i++){
+            if(i == arr.length -1){
+                System.out.print(arr[i] + "]");
+            }else{
+                System.out.print(arr[i] + ",");
+            }
+        }
+        System.out.println();
+    }
+}
+#+END_SRC
 **** 折半查找
-     前提：被查找数组中的元素，必须有序排列
-     折半后的指针索引和被查找元素比较
-     元素>中间索引上的元素
-         小指针 = 中间索引 + 1
-     元素<中间索引上的元素
-         大指针 = 中间索引 - 1
-     小指针的索引>大指针索引，结束
-     没找到的情况下，得到一个-1的索引
-     元素 == 数组中间索引上的元素，也结束
-     结果就是中间索引
-
-     #+BEGIN_SRC java
-       public class ArrayMethodTest_4{
-           public static void main(String[] args){
-               int[] arr = {1,3,5,7,9,11,15};
-               int index = binarySearch(arr,11);
-               System.out.println(index);
-           }
-           /*
-             定义方法，实现，折半查找
-             返回值：索引
-             参数：数组，被找到的元素
-             实现步骤：
-                 1. 需要的变量定义
-                     三个，三个指针
-                 2. 进行循环折半
-                     可以折半的条件 min<=max
-                 3. 让被找元素，和中间索引元素进行比较
-                     元素>中间索引    小指针 = 中间+1
-                     元素<中间索引    大指针 = 中间-1
-                     元素==中间索引    找到了，结束了，返回中间索引
-                 4. 循环结束，无法折半
-                     元素没有找到，返回-1
-            ,*/
-           public static int binarySearch(int[] arr,int key){
-               //定义三个指针变量
-               int min = 0;
-               int max = arr.length -1;
-               int mid = 0;
-               //循环折半，条件min<=max
-               while(min<=max){
-                   //公式，计算中间索引
-                   mid = (min+max)/2;
-                   //让被找元素，和中间索引元素进行比较
-                   if(key>arr[mid]){
-                       min = mid + 1;
-                   }else if(key<arr[mid]){
-                       max = mid - 1;
-                   }else{
-                       //找到元素，返回元素索引
-                       return mid;
-                   }
-               }
-               return -1;
-           }
-       }
+前提：被查找数组中的元素，必须有序排列
+折半后的指针索引和被查找元素比较
+元素>中间索引上的元素
+  小指针 = 中间索引 + 1
+元素<中间索引上的元素
+  大指针 = 中间索引 - 1
+小指针的索引>大指针索引，结束
+没找到的情况下，得到一个-1的索引
+元素 == 数组中间索引上的元素，也结束
+  结果就是中间索引
+#+BEGIN_SRC java
+public class ArrayMethodTest_4{
+    public static void main(String[] args){
+        int[] arr = {1,3,5,7,9,11,15};
+        int index = binarySearch(arr,11);
+        System.out.println(index);
+    }
+    /*
+      定义方法，实现，折半查找
+      返回值：索引
+      参数：数组，被找到的元素
+      实现步骤：
+          1. 需要的变量定义
+             三个，三个指针
+          2. 进行循环折半
+             可以折半的条件 min<=max
+          3. 让被找元素，和中间索引元素进行比较
+             元素>中间索引    小指针 = 中间+1
+             元素<中间索引    大指针 = 中间-1
+             元素==中间索引    找到了，结束了，返回中间索引
+          4. 循环结束，无法折半
+             元素没有找到，返回-1
+    ,*/
+    public static int binarySearch(int[] arr,int key){
+        //定义三个指针变量
+        int min = 0;
+        int max = arr.length -1;
+        int mid = 0;
+        //循环折半，条件min<=max
+        while(min<=max){
+            //公式，计算中间索引
+            mid = (min+max)/2;
+            //让被找元素，和中间索引元素进行比较
+            if(key>arr[mid]){
+                min = mid + 1;
+            }else if(key<arr[mid]){
+                max = mid - 1;
+            }else{
+                //找到元素，返回元素索引
+                return mid;
+            }
+        }
+        return -1;
+    }
+}
      #+END_SRC
-
 ** 超市管理系统
+#+BEGIN_SRC java
+/*
+  自定义类，描述商品信息
+  商品属性:
+      编号：int
+      品名，String
+      价格，double
+      数量，int
+      总价，double
+,*/
+public class FruitItem{
+    int ID;
+    String name;
+    double price;
+    int number;
+    double money;
+}
+#+END_SRC
+#+BEGIN_SRC java
+/*
+  超市管理系统
+      实现：
+      1. 商品数据的初始化
+      2. 用户的菜单选择
+      3. 根据选择执行不同的功能
+          Creat，添加商品
+          Update，修改商品
+          Read，查看商品
+          Delete，修改商品
 
-   #+BEGIN_SRC java
-     /*
-       自定义类，描述商品信息
-       商品属性
-           编号：int
-           品名，String
-           价格，double
-           数量，int
-           总价，double
-     ,*/
-     public class FruitItem{
-         int ID;
-         String name;
-         double price;
-         int number;
-         double money;
-     }
-   #+END_SRC
-
-   #+BEGIN_SRC java
-     /*
-       超市管理系统
-       实现：
-           1. 商品数据的初始化
-           2. 用户的菜单选择
-           3. 根据选择执行不同的功能
-               Creat，添加商品
-               Update，修改商品
-               Read，查看商品
-               Delete，修改商品
-
-        所有功能，必须定义方法实现
-        主方法main 调用作用
-      ,*/
-     public class Shop{
-         public static void main(String[] args){
-             //创建ArrayList集合，存储商品类型，存储数据类型FruiteItem类型
-             ArrayList<FruitItem> array =new ArrayList<FruitItem>();
-             init(array);
-             while(true){
-                 //调用菜单方法
-                 mainMenu();
-                 //调用用户选择序号方法
-                 int choose =  chooseFunction();
-                 switch(choose){
-                 case 1:
-                     //调用1：货物清单
-                     showFruitList(array);
-                     break;
-                 case 2:
-                     //调用2：添加货物
-                     addFruit(array);
-                     break;
-                 case 3:
-                     //调用3：删除货物
-                     deleteFruit(array);
-                     break;
-                 case 4:
-                     //调用4：修改货物
-                     updateFruit(array);
-                     break;
-                 case 5:
-                     return ;
-                 default:
-                     System.out.println("输入有误");
-                     break;
-                 }
-             }
-         }
-         /*
-           定义方法，实现商品的修改功能
-           返回值：无
-           参数：集合
+          所有功能，必须定义方法实现
+          主方法main 调用作用
+,*/
+public class Shop{
+    public static void main(String[] args){
+        //创建ArrayList集合，存储商品类型，存储数据类型FruiteItem类型
+        ArrayList<FruitItem> array =new ArrayList<FruitItem>();
+        init(array);
+        while(true){
+            //调用菜单方法
+            mainMenu();
+            //调用用户选择序号方法
+            int choose =  chooseFunction();
+            switch(choose){
+                case 1:
+                    //调用1：货物清单
+                    showFruitList(array);
+                    break;
+                case 2:
+                    //调用2：添加货物
+                    addFruit(array);
+                    break;
+                case 3:
+                    //调用3：删除货物
+                    deleteFruit(array);
+                    break;
+                case 4:
+                    //调用4：修改货物
+                    updateFruit(array);
+                    break;
+                case 5:
+                    return ;
+                    default:
+                    System.out.println("输入有误");
+                    break;
+                }
+            }
+        }
+        /*
+          定义方法，实现商品的修改功能
+          返回值：无
+          参数：集合
 
 
-           提示用户选择的是修改功能
-           提示用户输入需要修改的商品编号
-           遍历集合，获取每个FruitItem的变量
-           变量调用ID属性，属性和用户输入的编号比较
-           如果相同：
-               修改调FruitItem中的属性值
-               键盘输入
-          ,*/
-         public static void updateFruit(ArrayList<FruitItem> array){
-             System.out.println("选择的是修改功能");
-             System.out.println("请输入商品的编号");
+          提示用户选择的是修改功能
+          提示用户输入需要修改的商品编号
+          遍历集合，获取每个FruitItem的变量
+          变量调用ID属性，属性和用户输入的编号比较
+          如果相同：
+              修改调FruitItem中的属性值
+              键盘输入
+        ,*/
+        public static void updateFruit(ArrayList<FruitItem> array){
+            System.out.println("选择的是修改功能");
+            System.out.println("请输入商品的编号");
 
-             Scanner sc = new Scanner(System.in);
-             int ID = sc.nextInt();
-             //遍历结合，获取每个FruitItem变量
-             for(int i = 0;i<array.size();i++){
-                 FruitItem item = new FruitItem();
-                 //获取FruitItem的属性ID，和用户输入的ID比较
-                 if(item.ID == ID){
-                     System.out.println("输入新的商品编号");
-                     item.ID = sc.nextInt();
+            Scanner sc = new Scanner(System.in);
+            int ID = sc.nextInt();
+            //遍历结合，获取每个FruitItem变量
+            for(int i = 0;i<array.size();i++){
+                FruitItem item = new FruitItem();
+                //获取FruitItem的属性ID，和用户输入的ID比较
+                if(item.ID == ID){
+                    System.out.println("输入新的商品编号");
+                    item.ID = sc.nextInt();
 
-                     System.out.println("输入新的商品名字");
-                     item.name = sc.next();
+                    System.out.println("输入新的商品名字");
+                    item.name = sc.next();
 
-                     System.out.println("输入新的商品价格");
-                     item.price = sc.nextDouble();
+                    System.out.println("输入新的商品价格");
+                    item.price = sc.nextDouble();
 
-                     System.out.println("商品修改成功");
-                     return ;
-                 }
-             }
-             System.out.println("您输入的编号不存在");
-         }
-         /*
-           定义方法，实现商品的删除功能
-           返回值：无
-           参数：集合
+                    System.out.println("商品修改成功");
+                    return ;
+                }
+            }
+            System.out.println("您输入的编号不存在");
+        }
+        /*
+          定义方法，实现商品的删除功能
+          返回值：无
+          参数：集合
 
-           删除依靠的是商品的编号
-           提示用户选择的是删除功能
-           键盘输入商品的编号
-           遍历结合，获取集合中的每个Fruititem变量
-           变量通用属性 ID 和用户的输入编号对比，相同就删除
-          ,*/
-         public static void deleteFruit(ArrayList<FruitItem> array){
-             System.out.println("选择的是删除功能");
-             System.out.println("请输入删除的编号");
-             Scanner sc = new Scanner(System.in);
+          删除依靠的是商品的编号
+          提示用户选择的是删除功能
+          键盘输入商品的编号
+          遍历结合，获取集合中的每个Fruititem变量
+          变量通用属性 ID 和用户的输入编号对比，相同就删除
+        ,*/
+        public static void deleteFruit(ArrayList<FruitItem> array){
+            System.out.println("选择的是删除功能");
+            System.out.println("请输入删除的编号");
+            Scanner sc = new Scanner(System.in);
 
-             int ID = sc.nextIne();
-             //遍历集合
-             for(int i = 0;i<array.size();i++){
-                 //获取到每个FruitItem变量
-                 FruitItem item = array.get(i);
-                 //变量，调用属性ID，和用户输入的编号比较
-                 if(item.ID == ID){
-                     //移除集合中的元素
-                     //集合的方法remove实现
-                     array.remove(i);
-                     System.out.println("删除成功");
-                     return ;
-                 }
-             }
-             System.out.println("您输入的编号不存在");
-         }
-         /*
-           定义方法，实现商品的添加功能
-           返回值：无
-           参数：集合
-           提示用户输入的是添加商品的功能
+            int ID = sc.nextIne();
+            //遍历集合
+            for(int i = 0;i<array.size();i++){
+                //获取到每个FruitItem变量
+                FruitItem item = array.get(i);
+                //变量，调用属性ID，和用户输入的编号比较
+                if(item.ID == ID){
+                    //移除集合中的元素
+                    //集合的方法remove实现
+                    array.remove(i);
+                    System.out.println("删除成功");
+                    return ;
+                }
+            }
+            System.out.println("您输入的编号不存在");
+        }
+        /*
+          定义方法，实现商品的添加功能
+          返回值：无
+          参数：集合
+          提示用户输入的是添加商品的功能
 
-           提示用户输入的是什么
+          提示用户输入的是什么
 
-           创建FruitItem变量，变量调用的属性
-           将输入的每个商品属性进行赋值
-          ,*/
-         public static void addFruit(ArrayList<FruitItem> arrau){
-             System.out.println("选择的是添加商品功能");
-             //创建Scanner变量
-             Scanner sc = new Scanner(System.in);
-             System.out.println("请输入商品的编号");
-             //输入商品的编号
-             int ID = sc.nextInt();
-             //输入商品的名字
-             System.out.println("请输入商品的名字");
-             String name = sc.next();
-             //输入商品的单价
-             System.out.println("输入商品的单价");
-             double price = sc.nextDouble();
-             //创建FruitItem变量
-             FruitItem item = new FruitItem();
-             //item.属性赋值
-             item.ID = ID;
-             item.name = name;
-             item.price = price;
-             array.add(item);
-         }
-         /*
-           定义方法，实现显示货物清单功能
-           返回值：无
-           参数：无
-           参数：集合
-           遍历集合，获取集合中的每个FruitItem变量，变量，调用属性
-          ,*/
-         public static void showFruitList(ArrayList<FruitItem> array){
-             System.out.println();
-             System.out.println("=======================商品库存清单========================");
-             System.out.println("商品编号      商品名称     商品单价");
-             //遍历集合
-             for(int i = 0;i<array.size();i++){
-                 //集合get方法，获取出每个FruitItem变量，可以使用FruitItem接受get结果
-                 FruitItem item = array.get(i);
-                 //变量item调用类中属性
-                 System.out.println(item.ID+"  "+item.name+"  "+item.price);
-             }
-         }
-         /*
-           定义方法，实现接受用户的键盘输入
-           返回编号
-          ,*/
-         public static int chooseFunction(){
-             Scanner sc = new Scanner(System.in);
-             return sc.nextInt();
-         }
-         /*
-           定义方法，实现主菜单
-           提示用户用户有哪些选择
-           方法返回值：无
-           参数：无
-          ,*/
-         public static void mainMenu(){
-             System.out.println("                            ");
-             System.out.println("-----------------欢迎光临----------------");
-             System.out.println("1. 货物清单 2. 添加货物 3. 删除货物 4. 修改货物 5. 退出");
-             System.out.println("请您输入要操作的功能序号");
-         }
-         /*
-           定义方法，实现商品数据的初始化
-           先将一部分数据，存储集合中
-           返回值：无
-           参数：集合
-           方法名：init
-          ,*/
-         public static void init(ArrayList<FruitItem> array){
-             //创建出多个FruitItem类型，并且属性赋值
-             FruitItem f1 = new FruitItem();
-             f1.ID = 9527;
-             f1.name = "少林寺";
-             f1.price = 12.7;
+          创建FruitItem变量，变量调用的属性
+          将输入的每个商品属性进行赋值
+        ,*/
+        public static void addFruit(ArrayList<FruitItem> arrau){
+            System.out.println("选择的是添加商品功能");
+            //创建Scanner变量
+            Scanner sc = new Scanner(System.in);
+            System.out.println("请输入商品的编号");
+            //输入商品的编号
+            int ID = sc.nextInt();
+            //输入商品的名字
+            System.out.println("请输入商品的名字");
+            String name = sc.next();
+            //输入商品的单价
+            System.out.println("输入商品的单价");
+            double price = sc.nextDouble();
+            //创建FruitItem变量
+            FruitItem item = new FruitItem();
+            //item.属性赋值
+            item.ID = ID;
+            item.name = name;
+            item.price = price;
+            array.add(item);
+        }
+        /*
+          定义方法，实现显示货物清单功能
+          返回值：无
+          参数：无
+          参数：集合
+          遍历集合，获取集合中的每个FruitItem变量，变量，调用属性
+        ,*/
+        public static void showFruitList(ArrayList<FruitItem> array){
+            System.out.println();
+            System.out.println("=======================商品库存清单========================");
+            System.out.println("商品编号      商品名称     商品单价");
+            //遍历集合
+            for(int i = 0;i<array.size();i++){
+                //集合get方法，获取出每个FruitItem变量，可以使用FruitItem接受get结果
+                FruitItem item = array.get(i);
+                //变量item调用类中属性
+                System.out.println(item.ID+"  "+item.name+"  "+item.price);
+            }
+        }
+        /*
+          定义方法，实现接受用户的键盘输入
+          返回编号
+        ,*/
+        public static int chooseFunction(){
+            Scanner sc = new Scanner(System.in);
+            return sc.nextInt();
+        }
+        /*
+          定义方法，实现主菜单
+          提示用户用户有哪些选择
+          方法返回值：无
+          参数：无
+        ,*/
+        public static void mainMenu(){
+            System.out.println("                            ");
+            System.out.println("-----------------欢迎光临----------------");
+            System.out.println("1. 货物清单 2. 添加货物 3. 删除货物 4. 修改货物 5. 退出");
+            System.out.println("请您输入要操作的功能序号");
+        }
+        /*
+          定义方法，实现商品数据的初始化
+          先将一部分数据，存储集合中
+          返回值：无
+          参数：集合
+          方法名：init
+        ,*/
+        public static void init(ArrayList<FruitItem> array){
+            //创建出多个FruitItem类型，并且属性赋值
+            FruitItem f1 = new FruitItem();
+            f1.ID = 9527;
+            f1.name = "少林寺";
+            f1.price = 12.7;
 
-             FruitItem f2 = new FruitItem();
-             f2.ID = 9522;
-             f2.name = "哈密瓜";
-             f2.price = 11.2;
+            FruitItem f2 = new FruitItem();
+            f2.ID = 9522;
+            f2.name = "哈密瓜";
+            f2.price = 11.2;
 
-             FruitItem f3 = new FruitItem();
-             f3.ID = 9231;
-             f3.name = "ABC";
-             f3.price = 34.3;
+            FruitItem f3 = new FruitItem();
+            f3.ID = 9231;
+            f3.name = "ABC";
+            f3.price = 34.3;
 
-             //创建3个FruitItem类型变量，存储到集合中
-             array.add(f1);
-             array.add(f2);
-             array.add(f3);
-         }
-     }
-   #+END_SRC
+            //创建3个FruitItem类型变量，存储到集合中
+            array.add(f1);
+            array.add(f2);
+            array.add(f3);
+        }
+    }
+#+END_SRC
 * 面向对象
 ** 面向对象引入
 在java中所有的非静态的属性和方法都可以通过对象调用
