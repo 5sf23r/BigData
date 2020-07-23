@@ -19,6 +19,30 @@ public class StudentDemo {
         System.out.println(s.gender);
         System.out.println(s.grade);
         System.out.println(s.no);
+
+
+        //创建了一个Student对象s2
+        Student s2 = new Student();
+        s2.play();
+        s2.study("Java");
+
+
+        //创建了一个Student对象
+        //注意：像这种没有名字的对象称之为匿名对象
+        new Student().play();
+
+        //new几次，就会创建几个对象，几个对象的地址是不一样的
+        System.out.println(new Student());
+        System.out.println(new Student());
+        System.out.println(new Student());
+        System.out.println(new Student());
+
+        //匿名对象可以作为参数进行传递
+        printName(new Student());
+    }
+
+    public static void printName(Student s){
+        System.out.println(s.name);
     }
 }
 
@@ -26,6 +50,7 @@ public class StudentDemo {
 //定义一个类表示学生
 class Student{
     //姓名、年龄、性别、班级、学号
+    //属性：成员变量
     String name;
     int age;
     byte gender;
@@ -33,18 +58,22 @@ class Student{
     String no;
 
     //定义方法表示“学习”行为
+    //定义在方法中的变量成为局部变量
     public void study(String subject){
+
         System.out.println(name + "在学习" + subject);
     }
 
     //定义方法表示“吃”行为
     public void eat(String food){
+
         System.out.println(name + "再吃" + food);
     }
 
 
     //定义方法表示“玩耍”行为
     public void play(){
+
         System.out.println(name + "在玩耍");
     }
 }

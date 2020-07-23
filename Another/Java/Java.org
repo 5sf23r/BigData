@@ -1,0 +1,129 @@
+* 面向对象
+** 面向对象简介
+*** 面向对象与面向过程的比较
+*** 类与对象的关系
+*** 对象的内存存储
+** 基本概念
+*** 成员变量和局部变量
+成员变量又叫属性
+|----------+------------------------------+--------------------------------|
+| 区别     | 成员变量                     | 局部变量                       |
+| 定义位置 | 定义在类中方法外             | 定义在方法或者语句中           |
+| 作用范围 | 整个类中                     | 对应的方法或者语句中           |
+| 内存位置 | 存储在堆内存中               | 存储在栈内存中，               |
+|          | 并且在堆内存中被赋予了默认值 | 而且没有默认值需要手动给定数据 |
+| 生命周期 | 在对象创建的时候创建,        | 在方法或者语句执行的时候创建,  |
+|          | 在对象被销毁的时候销毁       | 方法或者语句执行完成之后销毁   |
+|----------+------------------------------+--------------------------------|
+*** 匿名对象
+匿名对象就是指没有名字的对象
+- 注意事项
+  1. 因为匿名对象没有名字，所以只能在创建的时候使用一次
+  2. 匿名对象可以作为参数进行传递
+  3. 匿名对象如果没有作为参数传递，那么在栈内存中是没有引用的
+
+#+BEGIN_SRC java
+package cn.commandoptionesc;
+
+public class StudentDemo {
+    public static void main(String[] args){
+
+        //创建了一个Student对象
+        //注意：像这种没有名字的对象称之为匿名对象
+        new Student().play();
+
+        //new几次，就会创建几个对象，几个对象的地址是不一样的
+        System.out.println(new Student());
+        System.out.println(new Student());
+        System.out.println(new Student());
+        System.out.println(new Student());
+
+        //匿名对象可以作为参数进行传递
+        printName(new Student());
+    }
+
+    public static void printName(Student s){
+        System.out.println(s.name);
+    }
+}
+
+
+//定义一个类表示学生
+class Student{
+    //姓名、年龄、性别、班级、学号
+    //属性：成员变量
+    String name;
+    int age;
+    byte gender;
+    String grade;
+    String no;
+
+    //定义方法表示“学习”行为
+    //定义在方法中的变量成为局部变量
+    public void study(String subject){
+
+        System.out.println(name + "在学习" + subject);
+    }
+
+    //定义方法表示“吃”行为
+    public void eat(String food){
+
+        System.out.println(name + "再吃" + food);
+    }
+
+
+    //定义方法表示“玩耍”行为
+    public void play(){
+
+        System.out.println(name + "在玩耍");
+    }
+}
+
+#+END_SRC
+*** 构造方法
+1. 类中存在的方法名与类名一致而没有返回值类型的方法
+2. 作用
+   a. 构造方法最主要的作用是用于创建对象
+
+   b. 可以在构造方法中对属性进行初始化，或者执行其他一些初始化的操作
+3. 如果在类中没有手动给定构造方法，那么在编译的时候会自动添加一个默认的无参构造
+4. 如果一个类中手动添加了构造方法，那么在编译的时候就不会再添加无参的构造方法
+5. 构造方法虽然没有返回值类型，但是可以有return语句，其作用是避免一些不合常理的数据被赋值给属性
+6. 构造方法可以进行重载
+   #+BEGIN_SRC java
+   public class DriverDemo {
+       //创建Driver
+       //构造方法、构造函数
+       //这个类目前只提供了含参构造，所以只能调用含参构造来创建对象，而无法调用无参构造
+       Driver d = new Driver("Amy",19,(byte)0);
+       //当提供了无参构造，那么意味着可以利用无参构造创建对象
+       Driver d2 = new Driver();
+   }
+
+   class Driver{
+       String name;
+       int age;
+       byte gender;
+       //驾照号
+       String no;
+
+       //当一个类中没有手动定义构造函数的时候，那么这个类在编译完成之后自动添加一个无参构造函数
+       //与类同名，但是没有返回值类型
+       //利用new关键字来调用构造方法，利用构造方法来创建对象
+       public Driver(){
+
+       }
+
+       //定义一个含参构造
+       //一个类中如果手动定义了构造方法，那么这个类在编译的时候就不会自动添加构造方法
+        public Driver(String n,int a,byte g){
+           name = n;
+           age = a;
+           gender = g;
+       }
+   }
+   #+END_SRC
+
+#+BEGIN_SRC java
+
+#+END_SRC
