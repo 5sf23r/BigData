@@ -1,12 +1,14 @@
-package cn.commandoptionesc;
+package cn.commandoptionesc.object;
 
 public class DriverDemo {
-    //创建Driver
-    //构造方法、构造函数
-    //这个类目前只提供了含参构造，所以只能调用含参构造来创建对象，而无法调用无参构造
-    Driver d = new Driver("Amy",19,(byte)0);
-    //当提供了无参构造，那么意味着可以利用无参构造创建对象
-    Driver d2 = new Driver();
+    public static void main(String[] args) {
+        //创建Driver
+        //构造方法、构造函数
+        //这个类目前只提供了含参构造，所以只能调用含参构造来创建对象，而无法调用无参构造
+        Driver d = new Driver("Amy", 15, (byte) 0);
+        //当提供了无参构造，那么意味着可以利用无参构造创建对象
+        Driver d2 = new Driver();
+    }
 }
 
 class Driver{

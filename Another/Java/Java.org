@@ -125,5 +125,195 @@ class Student{
    #+END_SRC
 
 #+BEGIN_SRC java
+package cn.commandoptionesc;
+
+public class DriverDemo {
+    public static void main(String[] args) {
+        //创建Driver
+        //构造方法、构造函数
+        //这个类目前只提供了含参构造，所以只能调用含参构造来创建对象，而无法调用无参构造
+        Driver d = new Driver("Amy", 15, (byte) 0);
+        //当提供了无参构造，那么意味着可以利用无参构造创建对象
+        Driver d2 = new Driver();
+    }
+}
+
+class Driver{
+    String name;
+    int age;
+    byte gender;
+    //驾照号
+    String no;
+
+    //当一个类中没有手动定义构造函数的时候，那么这个类在编译完成之后自动添加一个无参构造函数
+    //与类同名，但是没有返回值类型
+    //利用new关键字来调用构造方法，利用构造方法来创建对象
+    public Driver(){
+
+    }
+
+    //定义一个含参构造
+    //一个类中如果手动定义了构造方法，那么这个类在编译的时候就不会自动添加构造方法
+    public Driver(String n,int a,byte g){
+        if(a<18){
+            System.out.println("年龄不合法，死机的最小年龄应该是18");
+            //可以利用利用return来规避不合理的值，结束构造方法
+            return;
+        }
+        name = n;
+        age = a;
+        gender = g;
+    }
+}
 
 #+END_SRC
+*** this关键字
+1. 因为在java中所有的非静态的方法和属性都是通过对象来调用的，而在本类中如果想调用本类中的方法和属性，并没有本类的对
+象，所以要用到this来代表当前类的对象，来调用属性和方法
+2. this代表本类在活动的对象的引用，可以认为是一个虚拟对象，用于在类内调用本类中的非静态方法和非静态属性
+3. this()语句表示在本类的构造方法中调用本类其他形式的构造方法。需要注意的是，this语句必须放在构造方法的第一行
+#+BEGIN_SRC java
+package cn.commandoptionesc.thies;
+
+public class ThisDemo {
+
+    //static修饰的属性或者方法就是静态的
+    public static void main(String[] args){
+
+        //活跃的对象是s1，所以this代表s1
+        Student s1 = new Student("Bob");
+        System.out.println(s1.name);
+        //此时，活跃的对象是s2，所以this代表s2
+        Student s2 = new Student("Alex");
+        //活跃的对象又变成s1，所以this代表s1
+        s1.age =15;
+
+    }
+}
+class Student{
+    //姓名
+    String name;
+    //年龄
+    int age;
+    //性别
+    byte gender;
+    //学号
+    String no;
+
+    //在Java中，当出现变量名一致的时候，采取就近原则来使用
+    //在Java中，所有的非静态属性和非静态方法都是通过对象来调用的
+    //在类内用this代替当前活跃的对象来调用属性或者方法
+    public Student(String name){
+        this.name = name;
+    }
+    public Student(String name,int age){
+        this.name = name;
+        this.age = age;
+    }
+    public Student(String name,int age,byte gender){
+        //this.name = name;
+        //this.age = age;
+        //表示调用Student(String,ing)
+        this(name, age);
+        this.gender = gender;
+    }
+    public Student(String name,int age,byte gender,String no){
+        //this.name = name;
+        //this.age = age;
+        //this.gender = gender;
+
+        //this语句
+        //会自动调用本类中符合形式的构造方法
+        //this(String,int,byte)--自动找--->Student(name,age,byte)
+        //this语句必须在构造方法的第一行
+        this(name, age, gender);
+        this.no = no;
+    }
+}
+
+#+END_SRC
+*** 构造代码块
+**** 构造代码块
+1. 所谓构造代码块是指定义在类内用{}包起来的代码，也称之为是初始化代码块
+2. 无论调用哪个构造方法，构造代码块都会执行
+3. 构造代码块是在创建对象的时候先于构造方法执行
+#+BEGIN_SRC java
+package cn.commandoptionesc.code;
+
+import javax.swing.plaf.basic.BasicButtonListener;
+
+public class ConstructorCodeDemo {
+    public static void main(String[] args) {
+        new Baby();
+        new Baby("helen");
+    }
+}
+
+//定义一个类表示婴儿
+class Baby{
+    String name;
+
+    //在类中用{}括起来的代码称之为构造代码块或者叫初始化代码块
+    //无论调用哪个构造方法，这个代码块都会执行
+    //构造代码块是先于构造方法执行的
+    {
+        this.cry();
+        this.eat();
+    }
+
+    public Baby(){
+    }
+
+    public Baby(String name){
+        System.out.println("~~~~~~~~~~");
+        this.name = name;
+    }
+
+    public void cry(){
+        System.out.println("这个婴儿在哭");
+    }
+
+    public void eat() {
+        System.out.println("这个婴儿在吃");
+    }
+}
+
+#+END_SRC
+**** 局部代码块
+1. 所谓局部代码块，是指定义在方法中用{}包起来的代码
+2. 作用是限制变量的生命周期从而提高栈内存的利用率
+#+BEGIN_SRC java
+package cn.commandoptionesc.code;
+
+public class LocalCodeDemo {
+    public static void main(String[] args) {
+
+        //在方法中用{}括起来的代码称之为局部代码块
+        {
+            //限制了变量的使用范围，缩短了变量的生命周期
+            //提高了栈内存的利用率
+            int j = 5;
+            int i = 7;
+            System.out.println(i+j);
+        }
+        System.out.println("running");
+    }
+}
+
+#+END_SRC
+*** 权限修饰符
+1. 使用范围
+   |-----------+--------+----------------+----------+----------|
+   | 关键字    | 本类中 | 子类中         | 同包类中 | 其他类中 |
+   |-----------+--------+----------------+----------+----------|
+   | public    | 可以   | 可以           | 可以     | 可以     |
+   | protected | 可以   | 可以           | 可以     | 不可以   |
+   | 默认      | 可以   | 同包子类中可以 | 可以     | 不可以   |
+   | private   | 可以   | 不可以         | 不可以   | 不可以   |
+   |-----------+--------+----------------+----------+----------|
+2. 注意事项
+   a. 限修饰符的范围是public > protected > 默认 > private
+
+   b. 需要注意的是，默认的权限修饰符只能在本类中以及同包类中使用，同包子类本质上也是同包类
+
+   c. protected在子类中使用指的是在对应的子类中使用，跨子类是不能使用的
