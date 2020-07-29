@@ -348,36 +348,188 @@ public class LocalCodeDemo{
 2. 静态是从类的层面来看的，已经超越了对象
 **** 静态变量：
 用static修饰变量那么这个变量我们就称之为静态变量，有称之为成员变量或者类变量
-1. 静态变量随着类的加载而加载到了方法区中的静态区，并且静态区中自动赋予一个默认值。静态变量优先于对象而存在，所以静态变量可以通过类名来调用，也可以通过对象来调用。该类产生的所有的对象实际上存的是该静态变量在静态区中的地址，静态变量是被所有对象所共享的
-2. 静态内存流程
+1.静态变量随着类的加载而加载到了方法区中的静态区，并且静态区中自动赋予一个默认值。静态变量优先于对象而存在，所以静态变量可以通过类名来调用，也可以通过对象来调用。该类产生的所有的对象实际上存的是该静态变量在静态区中的地址，静态变量是被所有对象所共享的
+2. 实际过程中，如果某些特征是所有属性共有的特征，例如一个班级的学生，那么这个时候班级这个属性就是所有学生共有的，那么此时这个属性就可以设置为静态的
+3. 静态内存流程
    [[./Img/1.png]]
+   [[./Img/10.png]]
 #+BEGIN_SRC java
+package cn.commandoptionesc.staticx;
 
+public class StaticDemo {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        s1.name = "Bob";
+        s1.age = 15;
+        s1.grade = "四年级";
+
+        Student s2 = new Student();
+        s2.name = "Alex";
+        s2.age = 16;
+        s2.grade = "五年级";
+
+        s1.toStr();
+        s2.toStr();
+    }
+}
+
+class Student{
+    String name;
+    int age;
+    static String grade;
+
+    public void toStr(){
+
+        System.out.println(name + "\t" + age + "\t" + grade);
+    }
+}
 #+END_SRC
 **** 静态方法：
 用static修饰的方法就叫做静态方法，也叫类方法
-1. 在类加载的时候加载到了方法区中的静态区，只是存储在静态区，在方法被调用的时候到栈内存中执行。静态区中的元素不归属于某一个对象而是归属于类。静态方法优先于对象而存在的，所以静态方法可以通过类名来调用，也可以通过对象来调用
-2. 静态变量不可以定义到静态方法中。静态方法在静态区中只存储不执行，当被调用的时候才在栈中执行。而静态变量是根据类的加载而加载，上来就要进行初始化 --- 所有的鼎泰元素都是定义在类中
+1. 在类加载的时候加载到了方法区中的静态区，只是存储在静态区，在方法被调用的时候到栈内存中执行。静态区中的元素不归属于某一个对象而是归属于类。静态方法优先于对象而存在的，所以静态方法可以通过类名来调用，也可以通过对象来调用,实际过程中静态方法一般是通过类名来调用。例如：Arrays.sort()，Arrays是一个类，sort是一个方法，通过类名来调用
+2. 静态变量不可以定义到静态方法中。静态方法在方法区中只存储不执行，当被调用的时候才在栈中执行。而静态变量是根据类的加载而加载，上来就要进行初始化--- 所有的静态元素都是定义在类中
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.staticx;
+
+   public class StaticDemo {
+       public static void main(String[] args) {
+
+       //静态变量要求在类加载的时候就得初始化，静态方法是在调用的时候才执行初始化
+       //Modifier "static" not allowed here
+       //static int i = 5;
+       }
+   }
+   #+END_SRC
 3. 静态方法中不可以直接调用本类中的非静态方法。在Java中所有非静态方法和非静态属性都是通过对象来调用的，静态方法是优先于对象存在的，也就意味着静态方法执行的时候可以没有对象。也因此在静态方法中不可以使用this和super。super与this都是和对象是想关联的，而静态优先于对象而存在。
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.staticx;
+
+   public class StaticDemo {
+       public static void main(String[] args) {
+
+           Student s1 = new Student();
+           s1.name = "Bob";
+
+           //Non-static method 'printName(cn.commandoptionesc.staticx.Student)' cannot be referenced from a static context
+           //printName(s1);
+           //this.printName(s1);
+       }
+       public void printName(Student s){
+           System.out.println(s.name);
+       }
+   }
+
+   class Student{
+       String name;
+   }
+   #+END_SRC
 4. 静态方法可以重载。重载对修饰符没有要求的，对返回值也没有要求
 5. 静态方法不可以重写（方法的覆盖）
    静态方法可以存在方法签名完全一致的静态方法，这不是重写，称之为隐藏。但是也适用于重写的那套规则。
-6. 注意：
-   如果父子类中存在方法签名相同的方法要么都是普通的方法，要么都是静态方法
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.staticx;
+
+   public class StaticDemo2 {
+       public static void main(String[] args) {
+           /*
+           a调用m方法应该打印"B running"
+           但打印的是"A runnimg"
+           所以不是重写
+           StaticMethodA a = new StaticMethodB();
+           a.m();
+           */
+       }
+   }
+
+   class StaticMethodA{
+       public static void m(){
+           System.out.println("A running");
+       }
+   }
+
+   class StaticMethodB extends StaticMethodA{
+       /*
+       加上@Override报错：Method does not override method from its superclass
+       @Override
+       */
+
+       //如果父子类中存在了方法签名完全一致的非静态方法，称之为隐藏(hide)
+       //如果父子类中存在了方法签名完全一致的方法，要么都是静态的，要么都是非静态的
+       public static void m(){
+           System.out.println("B running");
+       }
+   }
+   #+END_SRC
+6. 注意：如果父子类中存在方法签名相同的方法要么都是普通的方法，要么都是静态方法
 **** 静态代码块
 1. 在类中用static修饰用{}括起来的代码块
 2. 静态代码块针对的是类，所以也可以叫做类代码块
-3. 实际上静态代码块是随着类的加载而加载到方法区，在类创建对象或者执行方法之前执行一次，终其一生只执行一次
+3. 实际上静态代码块是随着类的加载而加载到方法区，在类创建对象或者执行方法之前执行一次，终其一生只执行一
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.staticx;
+
+   public class StaticDemo3 {
+       public static void main(String[] args) {
+           //静态代码块只在类加载的时候执行一次，因为累值加载一次，所以静态代码块也只执行一次
+           new A();
+           new A();
+       }
+   }
+
+   class A {
+
+       //静态代码块
+       static{
+           System.out.println("A");
+       }
+   }
+   #+END_SRC
 4. 执行顺序：
    在这个类第一次被真正使用（第一次创建对象/调用方法）的时候执行一次。如果一个类包含多个静态代码块，则按照书写顺序执行。由于类只在第一次使用的时候加载，所以静态代码块也只执行一次。
-5. 代码块执行顺序：
-   先父类后子类，先静态后动态。（先父子类的静态，后子类的动态）静态优先，父类优先
-6. 代码是从上到下，从左到右一次编译执行：
-   创建子类对象的时候需要先：创建父类对象 ---> 加载父类 ---> 执行父类静态代码块 ---> 执行子静态代码块 ---> 父类构造函数 ---> 子类构造代码块 ---> 子类构造函数
    #+BEGIN_SRC java
+   /*
+   A1 A2 A3 A2 A3
+   */
    public class ex4{
        public static void main(String[] args){
+           new A();
+           new A();
+       }
+   }
+   class A{
+       //静态代码块
+       static{
+           System.out.println("A 1");
+       }
 
+       {
+           System.out.println("A 2");
+       }
+
+       public A(){
+           System.out.println("A 3");
+       }
+   }
+   #+END_SRC
+5. 代码块执行顺序：
+   先父类后子类，先静态后动态。（先父子类的静态，后子类的动态）静态优先，父类优先;
+
+   代码是从上到下，从左到右一次编译执行：
+   创建子类对象的时候需要先：创建父类对象 ---> 加载父类 ---> 执行父类静态代码块 ---> 执行子静态代码块 ---> 父类构造函数 ---> 子类构造代码块 ---> 子类构造函数
+   试图加载B类，但是准备加载B类的时候发现B有父类A，所以先加载A类，执行A中的静态代码块，A类加载完成之后在加载B类，执行B中的静态代码块。试图创建B对象的时候，会先利用super语句创建一个A类对象，然后在创建B类对象
+   #+BEGIN_SRC java
+   /*
+   new B();
+   A1 B1 A2 A3 B2 B3
+
+   new B();
+   new B();
+   A1 B1 A2 A3 B2 B3 A2 A3 B2 B3
+   */
+   public class ex4{
+       public static void main(String[] args){
+           new B();
+           new B();
        }
    }
    class A{
@@ -398,6 +550,7 @@ public class LocalCodeDemo{
        static{
            System.out.println("B 1");
        }
+
        {
            System.out.println("B 2");
        }
@@ -406,9 +559,6 @@ public class LocalCodeDemo{
        }
    }
    #+END_SRC
-
-   new B();
-   试图B类，但是准备加载B类的时候发现B有父类A，所以先加载A类，执行A中的静态代码块，A类加载完成之后在加载B类，执行B中的静态代码快。试图创建B对象的时候，会先利用super语句创建一个A类对象，然后在创建B类对象
 
 *** final
 1. 常量
@@ -611,26 +761,40 @@ class Person{
 6. 方法的重写
    - 子类里存在了方法签名（方法名+参数列表）完全一致的非静态方法，就构成了方法的重写（覆盖）
    - 子类可继承父类中的方法，而不需要重新编写相同的方法。但有时子类并不想原封不动地继承父类的方法，而是想做一定的修改，这就需要曹勇方法的重写，方法重写又称方法覆盖
-   - 遵循原则：方法的重写需要遵循“两等两小一大”的原则：
+   - 遵循原则：方法的重写需要遵循“两等两小一大”的原则：方法签名、返回值类型、权限修饰符
      + 方法签名要求完全一致
      + 如果父类里的返回值是基本数据类型/void/最终类，那么子类里重写的返回值类型必须一致（如果父类的方法是private的话，子类是无法被继承的，即使子类重新定义这个方法，也不算重写）
+       #+BEGIN_SRC java
+       public class ex5{
+           public static void main(String[] args){
+           }
+       }
+       class A{
+           public void m(){
+           }
+       }
+       class B extends A{
+           public void m(){
+           }
+       }
+       #+END_SRC
      + 如果父类方法的返回值类型是一个引用类型，子类方法的返回值类型是父类方法的返回值类型的子类
-        #+BEGIN_SRC java
-        public class ex{
-            public static void main(String[] args){
-            }
-        }
-        class Pet{}
-        class Dog extends Pet{}
+       #+BEGIN_SRC java
+       public class ex{
+           public static void main(String[] args){
+           }
+       }
+       class Pet{}
+       class Dog extends Pet{}
 
-        class A{
-            public Pet m(){}
-        }
-        class B extends A{
-            //public Pet m(){}
-            public Dog m(){}
-        }
-        #+END_SRC
+       class A{
+           public Pet m(){}
+       }
+       class B extends A{
+           //public Pet m(){}
+           public Dog m(){}
+       }
+       #+END_SRC
      + 子类方法的权限修饰符的范围要大于等于父类方法权限修饰符的范围，需要注意的是，对于8种基本数据类型之间没有继承关系的，它们是同级关系
         #+BEGIN_SRC java
         public ex2{
@@ -640,6 +804,7 @@ class Person{
             protected void m(){}
         }
         class B extends A{
+            //父类用的protected，子类要么用相同的protected要么用比父类大的public
             //protected void m(){}
             public void m(){}
         }
@@ -650,6 +815,48 @@ class Person{
    - 在子类的构造方法中看，可以通过super关键字调用父类中的对应形式的构造方法，如果不指定，默认调用父类的无参构造
    - 如果父类中值提供了含参的构造方法，那么子类的构造方法中必须手动定义super语句来调用父类中的含参构造
    - super语句必须放在狗仔方法的第一行，所以super语句不能同时出现
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.extendsx;
+
+   public class ExtendsDemo4 {
+       public static void main(String[] args) {
+           B b = new B();
+           b.m();
+       }
+   }
+
+   //
+   class A {
+       public A(int i){
+
+       }
+       public void m(){
+           System.out.println("A ");
+       }
+   }
+
+   //
+   class B extends A{
+       //如果在子类中没有手动指定，那么在子类的构造方法中
+       //默认添加一个无参super()调用父类中对应形式的构造方法
+       public B(){
+           super(5);
+       }
+
+       public B(int i){
+           //先创建一个父类对象，然后才能在子类中调用父类对象中的属性或者方法
+           super(i);
+           System.out.println(i);
+       }
+
+       @Override
+       public void m() {
+           super.m();
+           System.out.println("B");
+       }
+   }
+
+   #+END_SRC
 ** 多态
 1. 多态是指允许不同类的对象对同一消息做出相应，即同一消息可以根据发送对象的不同而采用多种不同的行为方式。多态主要针对对象的行为及方法，而不是对象的属性。
 2. 体现形式：
