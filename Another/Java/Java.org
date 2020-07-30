@@ -764,14 +764,214 @@ class Student{
    - 抽象类中可以没有抽象方法
    - 抽象类中可以定义一切的属性和方法
    - 抽象类不能用final修饰。最终类不可以是抽象类
+     #+BEGIN_SRC java
+     package cn.commandoptionesc.abstractx;
+
+     public class AbstractDemo {
+         public static void main(String[] args) {
+
+             /*
+             //匿名内部类
+             Pet p = new Pet() {
+                 @Override
+                 public void eat() {
+                 }
+             }
+             */
+
+             Cat c = new Cat();
+
+             /*
+             //抽象类中可以有构造方法，就算添加上构造方法，也不是一个对象，依然是匿名内部类
+             Animal a = new Animal() {
+             };
+             */
+         }
+     }
+
+     /*
+     //抽象类中可以没有抽象方法
+     abstract class Animal{
+
+     }
+     */
+
+     //抽象类中可以有构造方法
+     abstract class Animal{
+         public Animal(){
+
+         }
+     }
+
+     /*
+     //父类不能用final修饰，因为final修饰的类不能被继承，而抽象类一定要被继承来覆盖抽象方法
+     final abstract class Pet{
+         public abstract void eat();
+         }
+     */
+
+     abstract class Pet{
+         String name;
+         public abstract void eat();
+
+         public void sleep(){
+             System.out.println(name + "在睡觉");
+         }
+     }
+
+
+     class Cat extends Pet{
+         //Class 'Cat' must either be declared abstract or implement abstract method 'eat()' in 'Pet'
+         //一个类继承抽象类之后，必须覆盖抽象类中的抽象方法，或者这个子类本身也是抽象类
+         @Override
+         public void eat() {
+             System.out.println("这只猫在吃鱼");
+         }
+     }
+
+     class Dog extends Pet{
+         @Override
+         public void eat() {
+             System.out.println("这只狗在吃骨头");
+         }
+     }
+     #+END_SRC
 2. 抽象方法：
    - 如果所有的子类中存在了一些名称一致而细节不同的方法的时候，这个时候可以在父子类中声明该行为，此时声明行为的时候不需要添加方法体，所以此时该方法就形成了抽象方法，使用abstract修饰
    - 简单来讲：就是在父子类进行继承的时候，子类重写父类的方法但是父类的方法在后续并不打算使用，因此就会将父类的方法的方法体删除声明抽象方法，子类直接重写即可
    - 抽象方法可以和抽象方法重载，也可以和实体方法重载
+     #+BEGIN_SRC java
+     package cn.commandoptionesc.ex;
+
+     public class AbstractDemo{
+         public static void main(String[] args){
+             Cat c = new Cat();
+             c.eat();
+             c.eat(1);
+             System.out.println(c.eat("猫粮"));
+         }
+     }
+
+     abstract class Pet{
+         public abstract void eat();
+         public abstract String eat(String food);
+         public int eat(int num){
+             System.out.println("吃了" + num + "斤食物");
+             return  num;
+         }
+     }
+
+     class Cat extends Pet{
+
+         @Override
+         public void eat() {
+             System.out.println("这只猫在吃鱼");
+         }
+
+         @Override
+         public String eat(String food) {
+             return food;
+         }
+     }
+     #+END_SRC
    - 抽象方法没有方法体
    - 抽象方法不可以被static、final、private修饰，因为final和privat修饰符修饰的方法都不可以被重写；static修饰的方法，优先于对象存在，没有具体对象没有办法加载
    - 抽象方法可以使用默认权限修饰，要求子类必须和父类同包
    - 抽象方法可以被protected权限修饰，要求要么同包要么是子类
+#+BEGIN_SRC java
+package cn.commandoptionesc.abstractx;
+
+public class AbstractDemo {
+    public static void main(String[] args) {
+
+        /*
+        //匿名内部类
+        Pet p = new Pet() {
+            @Override
+            public void eat() {
+
+            }
+        }
+        */
+
+        /*
+        //抽象类中可以有构造方法，就算添加上构造方法，也不是一个对象，依然是匿名内部类
+        Animal a = new Animal() {
+        };
+        */
+
+        Cat c = new Cat();
+        c.name = "xiaoli";
+        c.eat();
+        c.eat(1);
+        c.sleep();
+        System.out.println(c.eat("猫粮"));
+    }
+}
+
+/*
+//抽象类中可以没有抽象方法
+abstract class Animal{
+
+}
+*/
+
+//抽象类中可以有构造方法
+abstract class Animal{
+    public Animal(){
+
+    }
+}
+
+/*
+//父类不能用final修饰，因为final修饰的类不能被继承，而抽象类一定要被继承来覆盖抽象方法
+final abstract class Pet{
+public abstract void eat();
+}
+*/
+
+abstract class Pet{
+    String name;
+
+    public abstract void eat();
+    public abstract String eat(String food);
+    public int eat(int num){
+        System.out.println("吃了" + num + "斤食物");
+        return num;
+    }
+
+    public void sleep(){
+        System.out.println(name + "在睡觉");
+    }
+}
+
+
+class Cat extends Pet{
+    //Class 'Cat' must either be declared abstract or implement abstract method 'eat()' in 'Pet'
+    //一个类继承抽象类之后，必须覆盖抽象类中的抽象方法，或者这个子类本身也是抽象类
+    @Override
+    public void eat(){
+        System.out.println("这只猫在吃鱼");
+    }
+
+    @Override
+    public String eat(String food) {
+        return food;
+    }
+}
+
+class Dog extends Pet{
+    @Override
+    public void eat() {
+        System.out.println("这只狗在吃骨头");
+    }
+
+    @Override
+    public String eat(String food) {
+        return food;
+    }
+}
+#+END_SRC
 *** 接口interface
 1. 接口用interface来声明，其中所有方法都为抽象方法，但是从JDK1.8开始，接口中允许存在实体方法
 2. 通过implements关键字让接口和类产生联系，这个过程就叫实现
@@ -783,9 +983,153 @@ class Student{
 8. 虽然接口在编译完成之后会产生class文件，但是接口不是类
 9. 接口中可以定义属性，这个属性默认是一个静态常量即接口中的属性默认是用public static final来修饰
 10. 接口中的抽象方法默认用public abstract修饰，而且只能是public修饰的，public可以省略不写。在接口的子类中实现接口的方法记得用public修饰
-11. Java中类支持单继承，多实现。一个类只能继承一个类，但是一个类可以实现多个接口。一旦出现了多实现，那就必不可免的会导致方法调用混乱 - 类和类之间是单继承，类和接口之间是多实现，接口和接口之间是多继承
-12. 注意：Java中接口之间是多继承，并且接口和类之间是多实现的关系，所以就形成了一张继承关系网，由于在网状结构中寻找一个根节点比较困难，为了提高效率，Java在编译的时候放弃检查接口和类之间是否有实现关系。当类进行强势转换的时候，JVM在编译的时候会对两个类进行检查，检查这两个类之间是否有几成关系。如果有几成关系，则编译的时候会通过，但是运行的时候不一定正确，如果没有继承关系，则在编译的时候直接报错。
-13. 作用：统一结构。接口可以作为模板，配合多态实现解耦
+11. Java中类支持单继承，多实现。一个类只能继承一个类，但是一个类可以实现多个接口。
+    #+BEGIN_SRC java
+      package cn.commandoptionesc.interfacex;
+
+      public class InterfaceDemo {
+          public static void main(String[] args) {
+          }
+      }
+
+      //定义一个类表示图形Shape
+      //用interface定义的是一个接口
+      interface Shape{
+
+          double getGirth();
+          double getArea();
+
+      }
+
+      interface Girth{
+          double getGirth1();
+          double getArea1();
+
+      }
+
+
+      class ExD implements Shape,Girth{
+
+          @Override
+          public double getGirth() {
+              return 0;
+          }
+
+          @Override
+          public double getArea() {
+              return 0;
+          }
+
+          @Override
+          public double getGirth1() {
+              return 0;
+          }
+
+          @Override
+          public double getArea1() {
+              return 0;
+          }
+      }
+    #+END_SRC
+12. 一旦出现了多实现，那就必不可免的会导致方法调用混乱
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.interfacex;
+
+    public class InterfaceDemo{
+
+    }
+    interface A{
+        int m();
+    }
+    interface B{
+        boolean m();
+    }
+    class C implements A,B{
+        //一旦出现多实现，就避免不了的会导致方法混乱调用
+        //Java中又没有public int/boolean 这种写法
+        /*
+        public int/boolean m(){
+        }
+        */
+    }
+    #+END_SRC
+13. 类和类之间是单继承，类和接口之间是多实现，接口和接口之间是多继承
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.interfacex;
+    public class InterfaceDemo{
+
+    }
+    interface Shape{
+    }
+    interface Girth{
+    }
+    interface Girth1 extends Shape,Cloneable{
+    }
+    #+END_SRC
+14. 注意：Java中接口之间是多继承，并且接口和类之间是多实现的关系，所以就形成了一张继承关系网，由于在网状结构中寻找一个根节点比较困难，为了提高效率，Java在编译的时候放弃检查接口和类之间是否有实现关系。当类进行强势转换的时候，JVM在编译的时候会对两个类进行检查，检查这两个类之间是否有几成关系。如果有几成关系，则编译的时候会通过，但是运行的时候不一定正确，如果没有继承关系，则在编译的时候直接报错。
+    #+BEGIN_SRC java
+    package cn.commandoptionesc;
+
+    public class InterfaceDemo2 {
+        public static void main(String[] args) {
+
+            //在Java中，支持的是类和类之间的单继承，所以可以形成一颗继承结构树
+            //在继承结构树中，可以比较容易的确定两个类之间是否有继承关系
+            //因此在编译的时候会检查声明类和实现类（强转的类型）之间是否有继承关系
+            /*
+            A a = new B1();
+            //a的声明类型是A，要转化的类是B1，B1继承了A类，所以A和B1之间有继承关系
+            //因为有继承关系，所以在编译期间允许转换，在编译期间仅仅是检查是否有继承关系
+            //而不去检查到底是要转化为哪一个子类
+            //到了运行的时候，才会去检查这个对象到底能不能转换
+            //到了运行的时候，a的实际类型是B1，要强转的类型也是B1，可以转换
+            //编译可以，运行也可以
+            B1 b1 = (B1)a;
+            */
+
+            /*
+            //ClassCastException - 类型转换异常
+            A a = new B1();
+            //a的声明类型是A，要转化的类型是B2，A和B2之间有继承关系，所以编译通过
+            //但是到了实际运行的时候，a的实际类型是B1，要强转的类型是B2，类型不一致，所以运行失败
+            //编译可以，运行失败
+            B2 b2 = (B2)a;
+            */
+
+            /*
+            A a = new B1();
+            //a的声明类型是A，要转化的类型是C，A和C之间没有继承关系，所以编译失败
+            C c = (C)a;
+            */
+
+            //ClassCastException - 类型转换异常
+            //在Java中，类和接口之间是多实现，接口和接口之间是多继承的
+            //在一个网状结构中，想要确定连个结点之间是否有联系是一件比较麻烦的操作
+            //所以Java为了减少编译花费的时间，那么在编译阶段放弃检查
+            //也就意味着用接口声明对象的时候不检查结构关系，所以用任何一个接口都可以进行强转
+            //但是到了运行的时候回检查是否有关系
+            //到了运行的时候，要转化的类型是D，实际类型是B1，B1和D之间没有关系，所以运行失败
+            A a = new B1();
+            D d = (D)a;
+
+        }
+    }
+
+    class A{
+
+    }
+
+    class B1 extends A{}
+    class B2 extends A{}
+    class C{
+
+    }
+
+    interface D{
+
+    }
+    #+END_SRC
+15. 作用：统一结构。接口可以作为模板，配合多态实现解耦
 *** 内部类
 1. 定义类或者接口中的类就称之为内部类。内部类是封装的第三种形式
 2. 内部类根据使用的位置和修饰符不同分为：方法内部类、成员内部类、静态内部类和匿名内部类
