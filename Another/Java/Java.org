@@ -562,18 +562,194 @@ class Student{
 
 *** final
 1. 常量
-   当final修饰数据（基本类型和引用类型）的时候，表示这个变量的值不可变，称之为常亮。终其一生只能赋值一次。在Java中所说的常量往往是指静态常量。因为实质上只有静态常量才是独有的一个。
+   当final修饰数据（基本类型和引用类型）的时候，表示这个变量的值不可变，称之为常量。终其一生只能赋值一次。在Java中所说的常量往往是指静态常量。因为实质上只有静态常量才是独有的一个。
    - 特点：
      + 常量在定义好之后不可改变，final固定的是栈内存中的数值
+       #+BEGIN_SRC java
+       package cn.commandoptionesc.finalx;
+
+       public class FinalDemo1 {
+           public static void main(String[] args) {
+
+               final int i = 4;
+               //Cannot assign a value to final variable 'i'
+               //i = 5;
+
+               //此时arr在栈内存存储的地址，所以final限制的是arr的地址不能变
+               final int[] arr = {3,4,6,8};
+
+               //做地址改变，不可行，报错
+               //arr = new int[3];
+
+               //没有改变地址，只是改变了元素值
+               arr[0] = 10;
+               System.out.println(arr[0]);
+           }
+       }
+
+       class A {
+
+           //final也可以修饰成员属性，称之为成员常量
+           //final int id = 5;
+
+           /*
+           final int id;
+
+           {
+           id = 5;
+           }*/
+
+           /*
+           //对于非静态成员常量而言，只需要在构造方法执行完成之前给值即可
+           //final常量的值只能给一次
+           final int id;
+           public A(int id){
+           this.id = id;
+           }
+           */
+
+           //静态常量
+           //final static int id = 6;
+
+           final static int id;
+           static{
+           id = 6;
+           }
+       }
+
+       #+END_SRC
      + 常量可以作为参数传递，传递之后是否还是一个常量要看接收的方法中是否定义为一个常量
+       #+BEGIN_SRC java
+       package cn.commandoptionesc.finalx;
+
+       public class FinalDemo2 {
+           public static void main(String[] args) {
+               final int i = 3;
+               m(i);
+               System.out.println(i);
+           }
+
+           public static void m(int i ){
+               i++;
+           }
+       }
+
+       #+END_SRC
      + 对引用类型而言，final固定的是其在栈中的地址不可变。例如：数组在栈内存中存储的是地址，用final修饰，是不能改变数组的地址，但数组的值可以改变。对于对象而言，对象的引用不能改变，但是应用的属性值是可以进行改变的。
      + 成员常量只要是在对象创建完之前（构造方法/函数执行结束之前）赋初始值即可
      + 静态成员变量（static final）只要在类加载完成之前给值即可，而且只能在静态代码块中赋值
 2. 最终方法
    - final修饰方法的时候，这个方法就是最终方法
+     #+BEGIN_SRC java
+     package cn.commandoptionesc.finalx;
+
+     public class FinalDemo3 {
+         public static void main(String[] args) {
+             FA a = new FA();
+             a.m();
+         }
+     }
+
+     class FA{
+
+         //final修饰的方法称之为最终方法
+         public final void m(){
+             System.out.println("m()");
+         }
+     }
+     #+END_SRC
    - 特点：
-     + 最终方法不可以被重写也不能被隐藏，可以重载，可以被继承
+     + 可以重载
+       #+BEGIN_SRC java
+       package cn.commandoptionesc.finalx;
+
+       public class FinalDemo3 {
+           public static void main(String[] args) {
+               FA a = new FA();
+               a.m();
+               a.m(5);
+           }
+       }
+
+       class FA{
+
+           //final修饰的方法称之为最终方法
+           public final void m(){
+               System.out.println("m()");
+           }
+
+           public final void m(int i){
+               System.out.println("m(int)");
+           }
+       }
+       #+END_SRC
+     + 不可以重写,可以继承
+       #+BEGIN_SRC java
+       package cn.commandoptionesc.finalx;
+
+       public class FinalDemo3 {
+           public static void main(String[] args) {
+               FA a = new FA();
+               a.m();
+               a.m(5);
+
+               //最终方法可以继承
+               FB b = new FB();
+               b.m();
+           }
+       }
+
+       class FA{
+
+           //final修饰的方法称之为最终方法
+           //最终方法不允许被重写
+           public final void m(){
+               System.out.println("m()");
+           }
+
+           public final void m(int i){
+               System.out.println("m(int)");
+           }
+       }
+
+       class FB extends FA{
+
+           //最终方法不允许被重写
+           //'m()' cannot override 'm()' in 'cn.commandoptionesc.finalx.FA'; overridden method is final
+           /*
+           public void m(){
+
+               System.out.println("B m()");
+           }
+           */
+       }
+       #+END_SRC
+     + 最终方法不可以被重写也不能被隐藏
      + 静态方法可以被final修饰
+       #+BEGIN_SRC java
+       package cn.commandoptionesc.finalx;
+
+       public class FinalDemo3 {
+           public static void main(String[] args) {
+               FA a = new FA();
+               a.m();
+               a.m(5);
+
+           }
+       }
+
+       class FA{
+
+           //静态方法可以被final修饰
+           public final static void m(){
+               System.out.println("m()");
+           }
+
+           public final static void m(int i){
+               System.out.println("m(int)");
+           }
+       }
+       #+END_SRC
 3. 最终类
    - final修饰的类称之为最终类
    - 特点：
