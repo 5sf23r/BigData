@@ -1138,6 +1138,28 @@ class Dog extends Pet{
    - 除了静态内部类，其余的内部类都可以使用安全外部类的属性和方法，但是静态内部类只能使用外部类的静态成员
 4. 方法内部类
    - 定义在方法里的类叫做方法内部类，也叫局部内部类
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.innerclass;
+
+   public class InnerClassDemo1 {
+       public static void main(String[] args) {
+
+       }
+   }
+
+   class Outer1{
+       public void m(){
+           System.out.println("m running");
+
+           //在方法中定义的类，称之为方法内部类/局部内部类
+           class Inner1{
+               public void m(){
+                   System.out.println("inner m running");
+               }
+           }
+       }
+   }
+   #+END_SRC
    - 特点：
      + 可以定义成员属性和成员方法
      + 不可以定义静态属性和静态的方法，但是可以定义静态常量
@@ -1145,7 +1167,60 @@ class Dog extends Pet{
      + 可以使用外部类的属性和方法
      + 不可以使用当前方法里的局部变量，但是可以使用当前方法中的局部常量
    - 作用：方法内部类是为了私有本类方法中的参数
-5. 成员变量
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.innerclass;
+
+   public class InnerClassDemo1 {
+       public static void main(String[] args) {
+
+       }
+   }
+
+   class Outer1{
+
+       int x = 4;
+       static int y = 5;
+       public void m(){
+           int i = 3;
+           System.out.println("m running");
+
+           //在方法中定义的类，称之为方法内部类/局部内部类
+           //可以使用外部类的成员属性和方法
+           //方法内部类可以继承类，也可以实现接口
+           //方法内部类可以使用final或者是abstract修饰
+           class Inner1 {
+
+               int a = 3;
+
+               /*
+               //方法内部类中可以声明非静态属性和方法，可以声明静态常量，但是不能声明静态变量和静态方法
+               //static int b = 4;
+               static final int b = 5;
+               */
+
+               public void m(){
+                   x = 5;
+
+                   /*
+                   //方法内部类使用当前方法中的数据的时候，要求这个数据要是一个常量
+                   //Variable 'i' is accessed from within inner class, needs to be final or effectively final
+                   i = 6;
+                   */
+
+                   System.out.println(x);
+                   System.out.println(y);
+                   System.out.println(i);
+                   System.out.println("inner m running");
+               }
+           }
+
+           Inner1 i1 = new Inner1();
+           i1.m();
+
+       }
+   }
+   #+END_SRC
+5. 成员内部类
    - 定义在类内方法外的类叫做成员内部类，也就是成员变量的位置，利用外部类对象来创建成员内部类对象
    - 特点
      + 成员内部类可以定义非静态变量和非静态方法
@@ -1154,12 +1229,107 @@ class Dog extends Pet{
      + 可以使用外部类中的一切属性和一切方法
      + 内部类的权限可以定义为私有的
      + 可以继承类或者实现接口
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.innerclass;
+
+   public class InnerClassDemo2 {
+       public static void main(String[] args) {
+
+           /*
+           //创建外部类对象
+           Outer2 o2 = new Outer2();
+           */
+
+           //表示创建了一个内部类对象
+           Outer2.Inner2 oi2 = new Outer2().new Inner2();
+           oi2.m();
+       }
+   }
+
+   class Outer2{
+
+       int i = 3;
+       //在类中定义了一个内部类，这个内部类称之为成员内部类
+       //成员内部类可以继承别的类或者实现接口
+       //成员内部类可以使用权限修饰符final/abstract修饰
+       class Inner2{
+
+           int j = 3;
+
+           int i = 7;
+
+           /*
+           //成员内部类中可以定义非静态属性和非静态方法，但是不能定义静态变量和静态方法
+           static int m = 8;
+           */
+
+           //成员内部类可以定义静态常量
+           static final int n = 8;
+
+
+           public void m(){
+
+               //当内部类和外部类存在同名属性的时候,通过外部类.this.属性来调用
+               System.out.println(Outer2.this.i);
+
+               //成员内部类使用外部类中的一切属性和方法
+               System.out.println(i);
+           }
+       }
+   }
+   #+END_SRC
 6. 静态内部类
    - 用static修饰的成员内部类叫做静态内部类。可以直接利用外部类来创建静态内部类的对象
    - 特点
      + 可以定义成员属性成员方法
      + 可以定义静态属性和静态方法
      + 不允许使用外部类里面的非静态属性和静态方法
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.innerclass;
+
+   public class InnerClassDemo3 {
+       public static void main(String[] args) {
+
+           Outer3.Inner3 oi3 = new Outer3.Inner3();
+           oi3.m();
+       }
+   }
+
+   class Outer3{
+
+       int i = 5;
+       static int j = 8;
+
+       //静态内部类可以使用权限修饰符final/abstract修饰
+       static final class Inner9{}
+       static public class Inner8{}
+       static abstract class Inner7{}
+
+       //静态内部类可以继承别的类，也可以实现接口
+       static class Inner6 extends Exception{}
+       static class Inner5 implements Cloneable{}
+
+       //用static修饰的内部类称之为静态内部类
+       static class Inner3{
+
+
+           //静态内部类中可以定义非静态方法和非静态属性，也可以静态方法和静态属性
+           int x = 4;
+           static int y = 6;
+
+           public void m(){
+
+               /*
+               //静态内部类不能使用外部类中的非静态属性和非静态方法
+               System.out.println(i);
+               */
+
+               //静态内部类中可以使用外部类中的静态属性和静态方法
+               System.out.println(j);
+           }
+       }
+   }
+   #+END_src
 7. 匿名内部类
    - 没有名字的内部类叫做匿名内部类。包含成员匿名内部类，方法匿名内部类
    - 注意：
@@ -1172,6 +1342,56 @@ class Dog extends Pet{
      + 匿名内部类有构造函数。但是不能进行手动的添加
      + 当利用匿名内部类定义到了方法中，此时匿名内部类的使用规则和方法内部类一致
      + 如果匿名内部类定义到了类中，此时匿名内部类的使用规则和成员内部类一致
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.innerclass;
+
+   public class InnerClassDemo4 {
+
+       //当匿名内部类定义在类中，使用规则和成员内部类一致
+       Pet p = new Pet(){
+
+       };
+       public static void main(String[] args) {
+
+           //匿名内部类
+           //匿名内部类本质上是继承了new的类
+           //当匿名内部类定义在方法中的时候，使用规则就喝方法内部类一致
+           Animal a = new Animal() {
+               @Override
+               public void eat() {
+
+               }
+           };
+
+           //匿名内部类本质上是实现了这个接口
+           Pet p = new Pet() {
+           };
+
+           //只要一个类可以被继承，那么这个类就可以存在匿名内部类形式
+           Cat c = new Cat(){
+
+           };
+
+           /*
+           //最终类不能产生匿名内部类
+           //Cannot inherit from final 'cn.commandoptionesc.innerclass.Dog'
+           Dog d = new Dog(){
+           };
+           */
+
+       }
+   }
+
+   abstract class Animal{
+       public abstract void eat();
+   }
+
+   interface Pet{}
+
+   class Cat{}
+
+   final class Dog{}
+   #+END_SRC
 *** 包
 1. 声明包用的package，包的产生是为了解决同名文件的问题
 2. 注意：
@@ -1181,6 +1401,27 @@ class Dog extends Pet{
 5. 同一个包下的类在使用的时候也不需要导包
 6. 注意：
    包名在命名的时候尽量不以java,javax等开头
+#+BEGIN_SRC java
+//定义包的语句必须放在整个Java的第一行
+package cn.commandoptionesc.packagex;
+
+//如果需要使用不同包的类，需要用import来导包
+//可以使用*导入指定包下的所有的类
+//表示导入java.util包下的所有的类但是不包括util子包的类
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+//import java.util.Arrays;
+//import java.util.Scanner;
+
+
+public class PackageDemo {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        System.out.println(Arrays.toString(new int[]{2,4,5,6}));
+        //ConcurrentHashMap
+    }
+}
+#+END_SRC
 *** 垃圾分代回收机制
 1. 垃圾回收针对的是堆内存
 2. 对象在堆内存中存储，对象在使用完成之后会在不定的某个时刻被垃圾回收期(GC - Garbage Collector)解析掉。现阶段回收过程无法手动控制。当调用构造方法的时候，创建好一个对象，因为java中对每种数据类型都明确给定了大小，在创建对象的时候，会自动计算大小分配内存，所以在内存的回收和释放的时候也是由Java自己管理
