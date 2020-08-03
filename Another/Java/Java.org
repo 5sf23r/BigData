@@ -1427,7 +1427,6 @@ public class PackageDemo {
 2. 对象在堆内存中存储，对象在使用完成之后会在不定的某个时刻被垃圾回收期(GC - Garbage Collector)解析掉。现阶段回收过程无法手动控制。当调用构造方法的时候，创建好一个对象，因为java中对每种数据类型都明确给定了大小，在创建对象的时候，会自动计算大小分配内存，所以在内存的回收和释放的时候也是由Java自己管理
 3. 堆内存分为了新生代（年轻代）和老生代。新生代划分为伊甸园区和幸存区。一个对象新创建是放到了伊甸园区，如果这个对象在栈内存中没有引用，那么会在扫描的时候被解析，释放内存；在伊甸园区经过了一次扫描如果依然存活则标记到幸存区。幸存区的扫描频率要略低于伊甸园区。如果在幸存区中经过了多次扫描这个对象依然没有被解析则标记到老生代。如果老生代的对象发生了回收，导致程序的卡顿甚至崩溃
 4. 发生在新生代的回收称之为minor gc，即初生代回收；发生在老生代的回收称之为full gc，即完全回收
-
 * 面向对象的特征
 ** 封装
 1. 封装是面向对象方法的重要原则，就是把对象的属性和方法（或服务）结合为一个独立的整体，并尽可能隐藏对象的内部实现细节。封装是一种信息隐藏技术。
@@ -1690,24 +1689,266 @@ class Dog extends Pet{
 1. Object是Java中任何一个类都默认继承了Object
 2. 在Java中任何一个类都是Object的子类
 3. 重要方法
+   |----------+-------------------------------------------------------------------------------------------------------------------------------|
+   | 方法     | 解释                                                                                                                          |
+   | clone    | 1. 表示创建一个和当前对象属性值一样的对象                                                                                     |
+   |          | 2.这个方法在使用的时候，要求对象对应的类必须实现接口Cloneable。这个接口中没有任何的方法和属性，仅仅标记这个类的对象可以被克隆 |
+   | finalize | 通知GC进行垃圾回收。仅仅是起通知作用，而GC不一定启动                                                                          |
+   | getClass | 获取对象的实际类型                                                                                                            |
+   | hashCode | 1. 获取对象的哈希码。根据哈希散列算法产生对象的哈希码                                                                         |
+   |          | 2. 同一个对象的哈希码是一样的，不同的对象的哈希码是不同的                                                                     |
+   | toString | 当直接打印一个对象的时候，底层实际上在调用这个对象的toString方法                                                              |
+   | equals   | 1. 判断两个对象是否是同一个对象                                                                                               |
+   |          | 2. equals默认是比较两个对象的地址是否一致。实际过程中往往需要重写equals方法                                                   |
+   |          | 3. 重写equals要拆分成4步：                                                                                                    |
+   |          | a. 比较地址是否一致                                                                                                           |
+   |          | b. 判断参数是否为空                                                                                                           |
+   |          | c. 比较类型是否一致                                                                                                           |
+   |          | d. 判断属性值是否一样                                                                                                         |
+   |----------+-------------------------------------------------------------------------------------------------------------------------------|
+4. clone/hashcode
+   #+BEGIN_SRC java
 
-|----------+-------------------------------------------------------------------------------------------------------------------------------|
-| 方法     | 解释                                                                                                                          |
-| clone    | 1. 表示创建一个和当前对象                                                                                                     |
-|          | 2.这个方法在使用的时候，要求对象对应的类必须实现接口Cloneable。这个接口中没有任何的方法和属性，仅仅标记这个类的对象可以被克隆 |
-| finalize | 通知GC进行垃圾回收。仅仅是起通知作用，而GC不一定启动                                                                          |
-| getClass | 获取对象的实际类型                                                                                                            |
-| hashCode | 1. 获取对象的哈希码。根据哈希散列算法产生对象的哈希码                                                                         |
-|          | 2. 同一个对象的哈希码是一样的，不同的对象的哈希码是不同的                                                                     |
-| toString | 当直接打印一个对象的时候，底层实际上在调用这个对象的toString方法                                                              |
-| equals   | 1. 判断两个对象是否是同一个对象                                                                                               |
-|          | 2. equals默认是比较两个对象的地址是否一致。实际过程中往往需要重写equals方法                                                   |
-|          | 3. 重写equals要拆分成4步：                                                                                                    |
-|          | a. 比较地址是否一致                                                                                                           |
-|          | b. 判断参数是否为空                                                                                                           |
-|          | c. 比较类型是否一致                                                                                                           |
-|          | d. 判断属性值是否一样                                                                                                         |
-|----------+-------------------------------------------------------------------------------------------------------------------------------|
+   package cn.commandoptionesc.object;
+
+   public class ObjectDemo1 {
+       private int i;
+       public static void main(String[] args) throws Exception{
+
+           ObjectDemo1 o1 = new ObjectDemo1();
+           o1.i = 5;
+
+           //表示的是克隆，创建一个和o1属性值一样的对象
+           ObjectDemo1 o2 = (ObjectDemo1) o1.clone();
+           System.out.println(o2.i);
+           System.out.println(o1);
+           System.out.println(o2);
+
+           //用向上造型创建o对象
+           //o对象的声明类型是Object，实际类型是String
+           Object o = "abc";
+           //获取对象的实际类型
+           System.out.println(o.getClass());
+
+           //同一个对象的哈希码是一样的，不同的对象的哈希码是不同的
+           System.out.println(o.hashCode());
+           System.out.println(o.hashCode());
+           System.out.println(o.hashCode());
+           System.out.println(new Object().hashCode());
+           System.out.println(new Object().hashCode());
+           System.out.println(new Object().hashCode());
+       }
+   }
+   #+END_SRC
+5. toString
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.object;
+
+   public class ObjectDemo2 {
+       public static void main(String[] args) {
+           Person p = new Person();
+           p.setName("Sam");
+           p.setAge(15);
+
+           //当直接打印一个对象的时候，实际上底层会调用这个对象的toString方法
+           System.out.println(p);
+           System.out.println(p.toString());
+       }
+   }
+
+   class Person{
+       private  String name;
+       private int age;
+
+       public String getName() {
+           return name;
+       }
+
+       public void setName(String name) {
+           this.name = name;
+       }
+
+       public int getAge() {
+           return age;
+       }
+
+       public void setAge(int age) {
+           this.age = age;
+       }
+
+       @Override
+       public String toString() {
+           return name + "\t" + age;
+       }
+   }
+   #+END_SRC
+6. equals
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.object;
+
+   import java.util.Objects;
+
+   public class ObjectDemo3 {
+       public static void main(String[] args) {
+           Student s1 = new Student();
+           s1.setName(new String("Sam"));
+           s1.setAge(15);
+           s1.setNo("gwer1234");
+
+           Student s2 = new Student();
+           s2.setName(new String("Sam"));
+           s2.setAge(15);
+           s2.setNo("gwer1234");
+
+           //比较的是地址是否一样
+           System.out.println(s1.equals(s2));
+       }
+   }
+
+   class Student{
+       private String name;
+       private int age;
+       private String no;
+
+       public String getName() {
+           return name;
+       }
+
+       public void setName(String name) {
+           this.name = name;
+       }
+
+       public int getAge() {
+           return age;
+       }
+
+       public void setAge(int age) {
+           this.age = age;
+       }
+
+       public String getNo() {
+           return no;
+       }
+
+       public void setNo(String no) {
+           this.no = no;
+       }
+
+       @Override
+       public boolean equals(Object o) {
+           //判断两个对象的地址是否一样
+           if(this == o)
+               return true;
+
+           //判断参数是否为null
+           if(o == null)
+               return false;
+
+           //判断类型是否一致
+           if(this.getClass() != o.getClass())
+               return false;
+
+           //比较属性
+           Student s  = (Student) o;
+
+           //比较年龄是否一致
+           if(this.age != s.age)
+               return false;
+
+           //比较姓名
+           if(this.name == null){
+               if(s.name != null)
+                   return false;
+           }else if(!this.name.equals( s.name))
+                return false;
+
+           //比较学号
+           if(this.no == null){
+               if(s.no != null)
+                   return false;
+           }else if(!this.name.equals(s.name))
+               return false;
+           return true;
+       }
+   }
+   #+END_SRC
+#+BEGIN_SRC java
+
+package cn.commandoptionesc.object;
+
+import java.util.Objects;
+
+public class ObjectDemo4 {
+    public static void main(String[] args) {
+        Student1 s1 = new Student1();
+        s1.setName(new String("Sam"));
+        s1.setAge(15);
+        s1.setNo("gwer1234");
+
+        Student s2 = new Student();
+        s2.setName(new String("Sam"));
+        s2.setAge(15);
+        s2.setNo("gwer1234");
+
+        //比较的是地址是否一样
+        System.out.println(s1.equals(s2));
+    }
+}
+
+class Student1 {
+    private String name;
+    private int age;
+    private String no;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
+
+    @Override
+    public String toString() {
+        return "Student1{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", no='" + no + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student1 student1 = (Student1) o;
+        return age == student1.age &&
+                name.equals(student1.name) &&
+                no.equals(student1.no);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age, no);
+    }
+}
+#+END_SRC
 
 ** String
 1. String类是一个最终类
