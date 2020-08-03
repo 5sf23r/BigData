@@ -1954,6 +1954,7 @@ class Student1 {
 1. String类是一个最终类
 2. 字符串在Java底层是依靠字符数组来存储，字符数组是一个常量不可变
 3. 字符串的内存：
+
    [[./Img/2.png]]
 4. String str = "a";这句话只产生了一个对象
 5. String str = new String("a");这句话产生了2个对象
