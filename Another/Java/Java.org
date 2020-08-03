@@ -1954,13 +1954,369 @@ class Student1 {
 1. String类是一个最终类
 2. 字符串在Java底层是依靠字符数组来存储，字符数组是一个常量不可变
 3. 字符串的内存：
-
    [[./Img/2.png]]
 4. String str = "a";这句话只产生了一个对象
 5. String str = new String("a");这句话产生了2个对象
 6. String str = "a";String str2 = new String("a");这两句话产生了2个对象
-7. 因为+在底层是调用StringBuilder中append，所以如果需要进行大量的字符串拼接的时候，建议直接使用StringBuilder
+7. 因为+在底层是调用StringBuilder中append，所以如果需要进行大量的字符串拼接的时候，建议直接使用StringBuilder,因为在底层要进行多次转换。
 8. String类中提供了大量的操作字符串，但是不改变原字符串的方法
+*** + 拼接与StringBuilder类的appen方法
+#+BEGIN_SRC java
+package cn.commandoptionesc.stringx;
+
+public class StringDemo1 {
+    public static void main(String[] args) {
+
+        /*
+        //字符串是一个常量，定义好之后不能变
+        String str = "abc";
+        //对字符串改值的时候，实际上是给str赋值了一个新的字符数组的地址
+        str = "def";
+        System.out.println(str);
+         */
+
+        //直接指向运行时常量池的空间地址
+        String str1 = "ab";
+        //会进入运行时常量池中指向值的地址
+        String str2 = new String("ab");
+        //"a"和"b"都是字面量，Java在编译的时候会对字面量运算来进行优化
+        //所以这句话编译完成之后就是String str3 = "ab";
+        //也就意味着str3和str1的地址值是一样的
+        String str3 = "a" + "b";
+
+        String str4 = "a";
+        /*
+        str4 += "b"本质上是一个变量和一个字面量在运算，那么这个时候Java在编译的时候不会优化
+         +拼接在底层是调用StringBuilder中的append
+        str4 += "b"等价于：
+        new StringBuilder(str4).append("b").toString();
+        */
+        str4 +="b";
+
+        System.out.println(str1 == str2);
+        System.out.println(str1 == str3);
+        System.out.println(str1 == str4);
+
+
+    }
+}
+
+#+END_SRC
+*** + 拼接与StringBuilder类的appen方法的验证
+#+BEGIN_SRC java
+package cn.commandoptionesc.stringx;
+
+public class StringDemo2 {
+    public static void main(String[] args) {
+
+        // 获取1970-01-01 00：00：00到现在时间的毫秒值
+        long begin = System.currentTimeMillis();
+        /*
+        //7800+
+        String str = "";
+        for(int i = 0;i < 100000;i++){
+            str += "a";
+        }
+        */
+
+        //198
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0;i < 10000000;i++){
+            sb.append("a");
+        }
+        String str = sb.toString();
+        long end = System.currentTimeMillis();
+        System.out.println(end - begin);
+    }
+}
+#+END_SRC
+*** charAt、toCharArray
+#+BEGIN_SRC java
+package cn.commandoptionesc.stringx;
+
+public class StringDemo3 {
+    public static void main(String[] args) {
+
+        /*
+        String str = "big data";
+        //获取字符串指定下标位置上的字符
+        char c = str.charAt(2);
+        System.out.println(c);
+
+        //将字符串转化为字符数组
+        char[] cs = str.toCharArray();
+        for(char c1 : cs){
+            System.out.println(c1);
+        }
+        */
+
+        //将字符数组转化为字符串
+        char[] cs = {'b','i','g',' ','d','a','t','a'};
+        String str = new String(cs);
+        System.out.println(str);
+    }
+}
+#+END_SRC
+*** compareTo、compareToIgnoreCase、concat、caontains
+#+BEGIN_SRC java
+package cn.commandoptionesc.stringx;
+
+public class StringDemo {
+    public static void main(String[] args) {
+
+        /*
+        //7
+        String s1 = "hijklmn";
+        String s2 = "abcdefg";
+        System.out.println(s1.compareTo(s2));
+        */
+
+        //-10
+        String s1 = "hijklmn";
+        String s2 = "hsafsaf";
+        /*
+            1. 当比较两个字符串的时候，实际上底层会将这两个字符串转化为字符串
+                s1 --- arr1,s2 --- arr2
+            2. 拿两个字符组对应位置上的字符进行比较
+            3. 如果对应位置上的字符一样，则比较下一位
+            4. 如果对应位置上的字符不一样，则返回对应位置上的字符之差
+            5. 如果每一位都一样，但是一个字符数组首先遍历完，那么返回两个字符数组的长度之差
+         */
+        //如果返回值是正数，则说明s1 > s2
+        //如果返回值是负数，则说明s1 < s2
+        System.out.println(s1.compareTo(s2));
+
+        //a - 97
+        //A - 65
+        String s3 = "abcdef";
+        String s4 = "ABCDEF";
+        System.out.println(s3.compareTo(s4));
+        //忽略大小写进行比较
+        System.out.println(s3.compareToIgnoreCase(s4));
+
+        //concat()方法用于将指定的字符串参数连接到字符串上
+        String s5 = "asdfgh";
+        String s6 = "zxcvbn";
+        System.out.println(s5.concat(s6));
+        System.out.println(s5);
+
+        //判断字符串中是否包含指定子串，包含返回true否则false
+        System.out.println(s5.contains("a"));
+    }
+}
+
+#+END_SRC
+
+*** endsWith、startsWith、equals、instanceof、equalsIgnoreCase
+#+BEGIN_SRC java
+package cn.commandoptionesc.stringx;
+
+public class StringDemo2 {
+    public static void main(String[] args) {
+
+        String str = "abc";
+
+        //判断字符串是否是指定结尾
+        System.out.println(str.endsWith("e"));
+
+        //判断字符串时候是指定开头
+        System.out.println(str.startsWith("a"));
+
+        String str2 = new String("abc");
+        //System.out.println(str == str2);
+        //String的equals做过重写，不在是建单的比较两个字符串的地址是否一样
+        //而是比较两个字符串的值是否一样
+        System.out.println(str.equals(str2));
+
+        //判断"abc"是否是String对象
+        System.out.println("abc" instanceof Object);
+
+
+        String s1 = "abc";
+        String s2 = "ABC";
+        System.out.println(s1.equals(s2));
+        //忽略大小写比较两个字符串是否一样 --- 用在验证码
+        System.out.println(s1.equalsIgnoreCase(s2));
+
+    }
+}
+
+#+END_SRC
+*** getBytes、String
+#+BEGIN_SRC java
+package cn.commandoptionesc.stringx;
+
+public class StringDemo3{
+    public static void main(String[] args) throws Exception{
+
+        /*
+        String str = "大数据";
+
+        //将字符串按照当前项目的默认编码转化为字节数组
+        //idea中默认编码是UTF-8
+        //将字符转化为字节考虑编码，按照不同的编码转化出来的字节个数也是不一样的
+        //byte[] bs = str.getBytes();
+        //将字符串按照指定编码转化为字节数组
+        byte[] bs = str.getBytes("gbk");
+        System.out.println(bs.length);
+        */
+
+        /*
+        //将字节数组转化为字符串
+        //如果不指定编码，则是使用当前项目的编码
+        byte[] bs = {97,98,99,100,101,102,103};
+        //String str = new String(bs);
+
+        //指定编码
+        //String str = new String(bs,"gbk");
+
+        System.out.println(str);
+        */
+
+        //将字节数组指定部分的元素转化为字符串
+        //第二个参数表示从字节数组的哪一个位置开始转换
+        //第三个参数表示要转化的字节个数
+        byte[] bs2 = {97,98,99,100,101,102,103};
+        String str = new String(bs2,2,4);
+
+        System.out.println(str);
+
+    }
+}
+
+#+END_SRC
+*** hashCode、indexOf、intern、isEmpty
+#+BEGIN_SRC java
+package cn.commandoptionesc.stringx;
+
+public class StringDemo4 {
+    public static void main(String[] args) {
+
+        /*
+        //96345
+        String str = "abc";
+        //"abc"的哈希吗
+        //((31 * h + 'a') * 31 + 'b') * 31 + 'c'
+        //"def"的哈希吗
+        //((31 * 0 + 'd') * 31 + 'e') * 31 + 'f'
+        //同一个字符串的哈希吗一定是相同的
+        System.out.println(str.hashCode());
+        */
+
+        String str = "big data";
+        //获取i出现的下标
+        int index = str.indexOf("i");
+        System.out.println(index);
+
+        String str1 = "big data";
+        //获取指定字符/字符串在字符串中第一次出现的下标
+        int index1 = str.indexOf("a");
+        System.out.println(index1);
+
+        String str2 = "big data";
+        //从指定的下标找指定元素出现的位置
+        //如果指定的元素没有找到，则返回 -1
+        int index2 = str.indexOf("d",5);
+        System.out.println(index2);
+
+        String s1 = "abc";
+        String s2 = new String("abc");
+        //intern返回这个字符串的常量池地址而不是堆内存的地址
+        String s3 = new String("abc").intern();
+        System.out.println(s1 == s2);
+        System.out.println(s1 == s3);
+
+        //判断字符串的长度是否为0
+        System.out.println(s1.isEmpty());
+        String s4 = " ";
+        System.out.println(s4.isEmpty());
+    }
+}
+
+#+END_SRC
+*** lastIndexOf、replace、substring、toUpperCase、toLowerCase、trim
+#+BEGIN_SRC java
+package cn.commandoptionesc.stringx;
+
+public class StringDemo5 {
+    public static void main(String[] args) {
+
+        /*
+        String str = "data";
+        //lastIndexof表示找指定的字符串最后一次出现的下标
+        int index = str.lastIndexOf("a");
+        System.out.println(index);
+
+        //获取指定字符串的长度
+        System.out.println(str.length());
+
+        //用指定字符进行替换
+        //将这个字符串中的'a'替换为'+'
+        System.out.println(str.replace('a','+'));
+        */
+
+        String str1 = "big data";
+        //从指定下标开始，截取到末尾来截取一个子字符串
+        String sub = str1.substring(4);
+        System.out.println(sub);
+
+        //在Java中，一般表示范围的时候，包括头部但是不包括尾部
+        String sub1 = str1.substring(4,7);
+        System.out.println(sub1);
+
+        //将字符串中的所有的字符转化为大写
+        System.out.println(str1.toUpperCase());
+
+        //这个方法对汉字没有影响
+        String str2 = "大数据";
+        System.out.println(str2.toUpperCase());
+
+        String str3 = "COMMAND OPTION";
+        //将字符串中的所有的字符转化为小写
+        System.out.println(str3.toLowerCase());
+
+        //去掉字符串头部和尾部的空白字符
+        String str = "    \t abc      ";
+        System.out.println(str);
+        System.out.println(str.trim());
+    }
+}
+
+#+END_SRC
+*** toString与String.valueOf的区别
+#+BEGIN_SRC java
+package cn.commandoptionesc.stringx;
+
+public class StringDemo6 {
+    public static void main(String[] args) {
+
+        /*
+        Object o = new Object();
+        String s1 = o.toString();
+        //对于对象而言，对象的toString和String.valueOf的效果是一样的
+        String s2 = String.valueOf(o);
+        System.out.println(s1);
+        System.out.println(s2);
+        */
+
+        int[] arr = {2,3,7};
+        String s1 = arr.toString();
+        String s2 = String.valueOf(arr);
+        System.out.println(s1);
+        System.out.println(s2);
+
+        char[] cs = {'a','b','c'};
+        //对于字符数组而言，String.valueOf和toString方法的效果是不一样的
+        //toString是获取字符数组的地址
+        String s3 = cs.toString();
+        //将字符数组中的每一个元素拿出来拼接成了一个字符串，而不是打印这个字符数组的地址
+        String s4 = String.valueOf(cs);
+        System.out.println(s3);
+        System.out.println(s4);
+    }
+}
+
+#+END_SRC
 ** 正则表达式
 1. 针对字符串进行操作，利用指定的规则对字符串进行匹配、筛选、替换等操作
 2. 符号：
@@ -1986,7 +2342,260 @@ class Student1 {
 3. 当()将一些字符放在一组的时候，构成了正则表达式中的捕获组
 4. 捕获组的编号是从1开始递增，可以通过\\n的形式来引用对应编号的捕获组
 5. 捕获组的编号计算是从（出现的顺序来依次递增）
+*** 正则表达式举例
+#+BEGIN_SRC java
 
+package cn.commandoptionesc.regex;
+
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexDemo1 {
+    public static void main(String[] args) {
+
+        //判断一个字符串是否是"abc"
+
+        // 第一种
+        String str = "demo1";
+        System.out.println(str.equals("abc"));
+
+        //第二种
+        String str1 = "demo3";
+        //利用正则表达式完成判断
+        //利用这个对象来指定规则
+        Pattern p = Pattern.compile("abc");
+        //需要获取一个匹配器
+        Matcher m = p.matcher(str1);
+        //获取一个匹配结果
+        boolean b = m.matches();
+        System.out.println(b);
+
+        //第三种
+        //第三种等价于第二种
+        boolean b2 = str.matches("abc");
+        System.out.println(b2);
+    }
+}
+#+END_SRC
+*** [xyz]、[^abc]
+#+BEGIN_SRC java
+package cn.commandoptionesc.regex;
+
+public class RegexDemo2 {
+    public static void main(String[] args) {
+
+        /*
+        //判断字符串是否是由一个数字组成
+        String str = "1";
+        //[xyz] --- 表示x、y、z中的任何一个
+        System.out.println(str.matches("[0123456789]"));
+        //[]中是一个连写范围的时候，可以使用'-'来表示连续范围
+        System.out.println(str.matches("[0-9]"));
+        */
+
+        /*
+        //匹配：字符串由3个字符组成，第一个字符是小写字母，第二个字符是一个数字，第三个字符是一个大写字母
+        String str = "";
+        System.out.println(str.matches("[a-z][0-9][A-Z]"));
+        */
+
+        /*
+        //匹配：字符串由一个字符组成，而这个字符不是a/b/c
+        String str = " ";
+        System.out.println(str.matches("[^abc]"));
+        */
+    }
+}
+#+END_SRC
+*** . \
+#+BEGIN_SRC java
+package cn.commandoptionesc.regex;
+
+public class RegexDemo3 {
+    public static void main(String[] args) {
+
+        /*
+        //匹配：字符串由2个字符组成，第一个字符是数字，第二个字符可以是任意字符
+        String str = "2+";
+        // . 表示任意字符
+        System.out.println(str.matches("[0-9]."));
+        */
+
+        /*
+        //匹配： .
+        String str = ".";
+        System.out.println(str.matches("\\."));
+        */
+
+        /*
+        //匹配：\
+        String str = "\\";
+        System.out.println(str.matches("\\\\"));
+        */
+    }
+}
+
+#+END_SRC
+
+*** + ？ *
+#+BEGIN_SRC java
+package cn.commandoptionesc.regex;
+
+public class RegexDemo4 {
+    public static void main(String[] args) {
+
+        /*
+        //匹配：由小写字母组成的字符串
+        String str = "ace";
+        //可以理解为这个字符串中至少由一个小写字母组成
+        // + 表示至少一次
+        System.out.println(str.matches("[a-z] + "));
+        */
+
+        /*
+        //匹配：由数字开头的最多2个字符组成的字符串
+        String str = "32";
+        // ? 表示之多一次
+        System.out.println(str.matches("[0-9].?"));
+        */
+
+        //匹配：由数字开头的字符串
+        String str = "2a3";
+        // * 表示零次或者多次
+        System.out.println(str.matches("[0-9].*"));
+    }
+}
+
+#+END_SRC
+*** {n} {n,} {n,m}
+#+BEGIN_SRC java
+package cn.commandoptionesc.regex;
+
+public class RegexDemo1 {
+    public static void main(String[] args) {
+
+        /*
+        //判断字符串中是否有数字
+        String str = "b5a";
+        System.out.println(str.matches(".*[0-9].*"));
+        */
+
+        /*
+        //匹配：由5个小写字符组成的字符串
+        String str = "224jhhj";
+        //{n}表示恰好出现n次
+        System.out.println(str.matches("[a-z]{5}"));
+        */
+
+        /*
+        //匹配：由至少5个小写字母组成的字符串
+        String str = "abcdeg";
+        //{n,}表示敲好出现5次
+        System.out.println(str.matches("[a-z]{5,}"));
+        */
+
+        //匹配：由6-12个字符组成的字符串
+        String str = "";
+        //{n,m}表示至少出现n次但是不超过m次
+        System.out.println(str.matches(".{6,12}"));
+    }
+}
+
+#+END_SRC
+*** 捕获编号
+#+BEGIN_SRC java
+package cn.commandoptionesc.regex;
+
+public class RegexDemo2 {
+    public static void main(String[] args) {
+
+        /*
+        //匹配：字符串中出现2次 "ab" 的字符串
+        String str = "sfsfsf";
+        //当()将一些字符放在一组的时候，构成了正则表达式中的捕获组
+        System.out.println(str.matches(".*(ab).*(ab).*"));
+
+        //捕获组的编号是从1开始依次向上递增
+        // \\n表示引用前边对应编号的捕获组
+        System.out.println(str.matches(".*(ab).*\\1.*"));
+        */
+
+        /*
+        //匹配：叠字
+        String str = "哈哈哈";
+        System.out.println(str.matches("(.)\\1+"));
+        */
+
+        /*
+        //匹配：AABB形式的词语
+        String str = "高高兴兴";
+        System.out.println(str.matches("(.)\\1(.)\\2"));
+        */
+
+        /*
+        //匹配：ABAB形式的词语
+        String str = "溜达溜达";
+        System.out.println(str.matches("(..)=\\1"));
+        */
+
+        //捕获组的编号是从(出现的顺序开始依次编号)
+        // (A(BC)D)E)(F)
+        // \\1 A((BC)D)E
+        // \\2 (BC)D
+        // \\3 BC
+        // \\4 F
+    }
+}
+
+#+END_SRC
+*** $n
+#+BEGIN_SRC java
+package cn.commandoptionesc.regex;
+
+public class RegexDemo3 {
+    public static void main(String[] args) {
+
+        /*
+        String str = "abc2def3xyz";
+        //将字符串中所有的数字替换为*
+        System.out.println(str.replaceAll("[0-9]","*"));
+
+        //将字符串中的所有的数字都去除
+        System.out.println(str.replaceAll("[0-9]",""));
+        */
+
+        /*
+        String str = "我我我我爱爱爱爱学学习";
+        //将这个字符串还原为"我爱学习"
+        //$n在替换过程中表示引用前边对应编号的捕获组
+        System.out.println(str.replaceAll("(.)\\1+","$1"));
+        */
+
+        String str = "Amy Sam Tom Bob Lucy";
+        System.out.println(str.replaceAll("(.*)(Sam)(.*)(Lucy)","$1$4$3$2"));
+    }
+}
+
+#+END_SRC
+*** 切分split
+#+BEGIN_SRC java
+package cn.commandoptionesc.regex;
+
+import java.util.Arrays;
+
+public class RegexDemo4 {
+    public static void main(String[] args) {
+
+        String str = "abc2def3xyz";
+        //以数字为符号将字符串切分
+        //作为切分符号的数字在切分过程中会被切掉
+        String[] arr = str.split("[0-9]");
+        System.out.println(Arrays.toString(arr));
+    }
+}
+
+#+END_SRC
 ** 包装类
 1. 在Java中，基本类型的变量身上没有任何的方法和属性提供使用，如果需要操着这个基本类型，那么需要自动以过程来使用。因此Java针对每种基本类型都提供了对应的类形式来便捷的操作数据。提供的类形式就称之为包装类
 2. 包装类：

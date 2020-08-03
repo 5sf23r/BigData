@@ -20,8 +20,18 @@ public class StringDemo1 {
         //也就意味着str3和str1的地址值是一样的
         String str3 = "a" + "b";
 
+        String str4 = "a";
+        /*
+        str4 += "b"本质上是一个变量和一个字面量在运算，那么这个时候Java在编译的时候不会优化
+         +拼接在底层是调用StringBuilder中的append
+        str4 += "b"等价于：
+        new StringBuilder(str4).append("b").toString();
+        */
+        str4 +="b";
+
         System.out.println(str1 == str2);
         System.out.println(str1 == str3);
+        System.out.println(str1 == str4);
 
         
     }
