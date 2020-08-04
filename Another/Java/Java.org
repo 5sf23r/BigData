@@ -2606,6 +2606,101 @@ public class RegexDemo4 {
    |----------+------+-------+---------+------+-------+--------+-----------+--------|
 3. 将基本类型的变量直接赋值给引用类型的对象，这个过程称之为自动封箱。自动封箱在底层会调用对应类身上的valueOf方法
 4. 将引用类型的对象直接赋值给基本类型的变量，这个过程称之为自动拆箱。自动拆箱在底层会调用对应对象身上的***Value方法
+#+BEGIN_SRC java
+package cn.commandoptionesc.integer;
+
+public class IntegerDemo {
+    public static void main(String[] args) {
+
+        //int i = 157;
+
+        /*
+        //将基本类型的变量封装成对应的包装类型
+        Integer in = new Integer(i);
+        System.out.println(in);
+        */
+
+        /*
+        //将基本类型的变量i赋值给了对应的引用类型的对象in
+        //自动封箱
+        //在底层就会调用Integer类身上的valueOf方法将i封装成Integer对象
+        //等价于  Integer in = Integer.valueOf(i);
+        Integer in = i;
+        */
+
+        /*
+        double d = 3.57;
+        //相当于Double dou = Double.valueOf(d);
+        Double dou = d;
+        */
+
+        //自动拆箱
+        Integer in = new Integer(4);
+        //在底层会调用in对象身上的intValue方法
+        int i = in;
+
+        Double dou = new Double(3.28);
+        //double d = dou.doubleValue();
+        double d = dou;
+
+        Character ch = new Character('a');
+        //char c = ch.charValue();
+        char c = ch;
+
+
+
+
+
+
+    }
+}
+
+#+END_SRC
+#+BEGIN_SRC java
+package cn.commandoptionesc.integer;
+
+public class IntegerDemo2 {
+    public static void main(String[] args) {
+
+        //这种写法在底层会自动封箱，调用对应类身上的ValueOf方法
+        //当数据在 -128 ~ 127的时候，会从cache数组中获取对应位置上的值
+        //cache是一个静态数组，所以从同一个数组中拿值
+        Integer i1 = 25;// new Integer(325);
+        Integer i2 = 25;// new Integer(325);
+
+        //用==比较，比较两个对象的地址是否一致
+        System.out.println(i1 == i2);
+
+        //当包装类型和基本类型进行运算的时候，底层会将包装类型进行自动拆箱
+        //所以是两个基本类型在参与运算
+        Integer i3 = new Integer(500);
+        int i4 = 500;
+        System.out.println(i3 == i4);
+    }
+}
+
+#+END_SRC
+#+BEGIN_SRC java
+package cn.commandoptionesc.integer;
+
+public class IntegerDemo3 {
+    public static void main(String[] args) {
+
+        Integer i = new Integer("123");
+        System.out.println(i);
+        //NumberFormatException --- 数字格式异常
+        //Integer i2 = new Integer("abc");
+        Double d = new Double("6.81");
+        System.out.println(d);
+        //只要字符串不是"true"那么结果就是false
+        Boolean b = new Boolean("true");
+        System.out.println(b);
+
+        int i2 = Integer.parseInt("124");
+    }
+}
+
+#+END_SRC
 ** 数字运算
 1. BigDecimal是一个能够对小数进行精确运算的类。在静思园的时候要求参数以字符串形式传入
 2. BigInteger：能存储和计算超大证书
