@@ -2705,6 +2705,38 @@ public class IntegerDemo3 {
 1. BigDecimal是一个能够对小数进行精确运算的类。在静思园的时候要求参数以字符串形式传入
 2. BigInteger：能存储和计算超大证书
 3. Math：针对基本类型提供了初等数学运算 - 指数、对数、、幂、三角函数等
+#+BEGIN_SRC java
+package cn.commandoptionesc.big;
+
+import java.math.BigDecimal;
+
+public class BigDecimalDemo {
+    public static void main(String[] args) {
+
+        //小数在计算的时候无法保证精确
+        double d1 = 3.31;
+        double d2 = 2.97;
+        System.out.println(d1 - d2);
+
+        //如果需要对小数运算保证精确性，那么需要BigDecimal
+        BigDecimal b1 = new BigDecimal(3.31);
+        BigDecimal b2 = new BigDecimal(2.97);
+        //等价于3.31 - 2.97
+        System.out.println(b1.subtract(b2));
+        //等价于3.31 + 2.97
+        System.out.println(b1.add(b2));
+
+        //如果需要BigDecimal进行精确运算，那么需要将参数以字符串形式来传入
+        //当字符串传形式传入的时候，在底层会以字符数组形式来计算
+        BigDecimal b3 = new BigDecimal("3.31");
+        BigDecimal b4 = new BigDecimal("2.97");
+
+        System.out.println(b3.subtract(b4));
+        System.out.println(b3.add(b4));
+    }
+}
+
+#+END_SRC
 ** 日期
 1. Date类：这个类是属于java.util包下
    - 如果不指定，默认获取的是当前系统的时间
