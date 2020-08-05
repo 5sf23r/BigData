@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>对象 - 自定义对象</title>
+		<!--
+		-->		
+		<script type="text/javascript">
+			/*//1.自定义对象 - 通过构造函数定义01
+			//--其实此处所谓的构造函数就是一个普通函数
+			function Person(){
+			}
+			var p = new Person();
+			//--js中的对象的属性和方法是可以额外增加的
+			p.name = "zhangsan"
+			p.age = 19
+			p.say = function(){return "说。。。"}
+			p.eat = function(){return "吃。。。"}
+			//--js中的对象的属性和方法是可以删除的
+			console.log(p.name)
+			console.log(p.age)
+			console.log(p.say())
+			console.log(p.eat())
+			delete p.name
+			console.log(p)
+			delete p.eat
+			console.log(p)
+
+			//2.自定义对象 - 通过构造函数定义02
+			function Person2(name,age){
+				this.name = name
+				this.age = 0
+				this.eat = function(){return "吃。。"}
+			}
+			var p = new Person2("zs",29)
+			p.addr = "bj"			
+			console.log(p.name)			
+			console.log(p.age)			
+			console.log(p.eat())
+			console.log(p.addr)	
+
+			delete p.addr
+			console.log(p)
+			delete p.name
+			console.log(p)
+			delete p.age
+			console.log(p)
+			delete p.eat
+			console.log(p)
+
+			//3.自定义对象 - 对象直接量定义对象
+			var p = {name:"ls",age:25,addr:["bj","sh","gz"],eat:function(){return "吃。。"}}	
+			console.log(p.name)
+			console.log(p.age)
+			console.log(p.addr)
+			console.log(p.eat())
+			delete p.name
+			console.log(p)
+			delete p.age
+			console.log(p)
+			delete p.addr
+			console.log(p)
+			delete p.eat
+			console.log(p)
+
+			//4.对象操作 -- with
+			var p = {name:"ls",age:25,addr:["bj","sh","gz"],eat:function(){return "吃。。"}}	
+			with(p){
+				console.log(name)
+				console.log(age)
+				console.log(addr)
+				console.log(eat())
+			}*/
+			//5.对象操作 -- for..in..
+			var p = {name:"ls",age:25,addr:["bj","sh","gz"],eat:function(){return "吃。。"}}	
+			for(x in p){
+				console.log(x +"~" +p[x])
+			}
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<title>js-复杂数据类型-函数</title>
+		<script type="text/javascript">
+			function meau(e,food){
+				food = e(food);
+				return "吃"+food;
+			}
+			function eat(food){
+				if("羊肉串" == food){
+					return "烤"+food;	
+				}else if("煎饼" == food){
+					return "摊"+food;
+				}
+			}
+			console.log(meau(eat,"羊肉串"));
+			
+		</script>
+	</HEAD>
+	<BODY>
+	</BODY>
+</HTML>

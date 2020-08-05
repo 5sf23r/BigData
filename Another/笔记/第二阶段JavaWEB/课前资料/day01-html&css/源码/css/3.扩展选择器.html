@@ -1,0 +1,84 @@
+<!DOCTYPE　HTML>
+<html>
+	<head>
+		<title>扩展选择器</title>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<style type="text/css">
+			/*
+			div span{
+				border: 1px solid red;
+			}
+			*/
+			/*
+			div > span{
+				border: 1px solid red;
+			}
+			*/
+			/*
+			span,.c1,#div_2{
+				border: 1px solid red;
+			}
+			*/
+			/*
+			input[type='password']{
+				background-color: gray;
+			}
+			*/
+			/*
+			span[class='c1'] + p{
+				border: 1px solid red;
+			}
+			*/
+			/*
+			a:link{
+				font-size:50px;
+				color:yellow;
+			}
+			a:hover{
+				font-size:100px;
+				color:red;
+			}
+			a:active{
+				font-size:10px;
+				color:blue;
+				text-decoration: underline;
+			}
+			a:visited{
+				font-size:50px;
+				color:gray;
+			}
+			*/
+			#div_z{
+				background-color: red;
+			}
+			#div_z:hover{
+				background-color: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div_1">
+			aaa
+			<span>III</span>
+			<p>
+				<span>jjj</span>
+			</p>
+		</div>
+		<div class="c1" id="div_2">
+			bbb
+			<span>ggg</span>
+		</div>
+		<span id="span_1">ccc</span>
+		<span class="c1">ddd</span>
+		<p>eee</p>
+		<p class="c1">
+			fff
+			<span>hhh</span>
+		</p>
+		<input type="text"/>
+		<input type="password"/>
+		<br/>
+		<a href="#">xxx</a>
+		<div id="div_z">zz</div>
+	</body>
+</html>

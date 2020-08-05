@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>二级联动菜单</title>
+<!-- 
+	ie9的select 不支持innerHTML 
+	删除option时，由于删除后，options长度发生了变化，所以直接用for循环会删除不干净，可以由后向前删除，可以避免这样的问题
+-->
+<script>
+	function selectCity(province){
+		var provSelc = document.getElementById("province");
+		var citySelc = document.getElementById("city");
+		var data = {
+			"北京市":["海淀区","朝阳区","丰台区"],
+			"河北省":["石家庄","唐山","秦皇岛"],
+			"辽宁省":["沈阳","大连","鞍山"],
+			"山东省":["青岛","济南","烟台"]
+		};
+		//清除城市信息
+		for(var i = citySelc.options.length-1;i>0;i--){
+			citySelc.remove(i);
+		}
+			
+		//获取所选省份
+		var provOpt = provSelc.options[provSelc.selectedIndex];
+		var prov = provOpt.innerText;
+
+		//找到对应城市信息添加
+		var cities = data[prov];
+		for(var i = 0;i<cities.length;i++){
+			var opt = document.createElement("option");
+			opt.innerText = cities[i];
+			citySelc.appendChild(opt);
+		}
+	}	
+</script>
+</head>
+
+<!-- 
+	"海淀区","朝阳区","丰台区"
+    "石家庄","唐山","秦皇岛"
+    "沈阳","大连","鞍山"
+    "青岛","济南","烟台"
+    
+-->
+<body>
+<select id="province" onchange="selectCity(this)">
+	<option>--选择省市--</option>
+	<option>北京市</option>
+	<option>河北省</option>
+	<option>辽宁省</option>
+	<option>山东省</option>
+</select>
+
+
+<select id="city">
+	<option>--选择城市--</option>
+</select>
+</body>
+
+</html>

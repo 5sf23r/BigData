@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="day17log4j"
+  id="myeclipse.1558923060856"
+  context-root="/day17log4j"
+  j2ee-spec="5.0"
+  archive="day17log4j.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

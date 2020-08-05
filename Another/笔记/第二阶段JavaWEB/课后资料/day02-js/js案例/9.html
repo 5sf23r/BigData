@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<title>js-复杂数据类型-对象-自定义对象</title>
+		<script type="text/javascript">
+			//1.无参构造创建对象
+			/*function Person(){
+				
+			}
+			var p = new Person();
+			p.name="lg";
+			p.age = 18;
+			p.gender= "male"
+			p.say = function(){
+				return this.name+"say.....";
+			}
+			console.log(p);
+			console.log(p.say());
+			delete p.name;
+			
+			console.log(p);*/
+			//2.有参构造创建对象
+			/*function Person(name,age){
+				this.name = name;
+				this.age = age;
+			}
+			var p = new Person("ls",18);
+			p.addr = "bj";
+			delete p.name;
+			console.log(p);*/
+			//3.直接量方式创建对象
+			/*var p = {name:"js",age:18,addr:"bj"};
+			console.log(p);
+			delete p.name;
+			console.log(p);*/
+			var data = {
+				name:"朴乾",
+				age:28,
+				addr:"北京",
+				grilfriends:[
+					{name:"貂蝉",age:16,job:"送宝刀" },
+					{name:"西施",age:18,job:"沉鱼落雁"}
+				]
+			}
+			console.log(data["grilfriends"][1]["job"]);
+			//json串
+		</script>
+	</HEAD>
+	<BODY>
+		
+	</BODY>
+</HTML>

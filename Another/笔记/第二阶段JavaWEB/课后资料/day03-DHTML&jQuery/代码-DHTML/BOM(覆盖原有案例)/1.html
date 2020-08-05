@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<title>BOM模型</title>
+		<script type="text/javascript">
+			//window对象
+			/*window.onblur = function(){
+				alert(123);
+			}*/
+			/*window.onfocus = function(){
+				alert(321);
+			}*/
+			//文档就绪事件
+			/*window.onload = function(){
+				var div = document.getElementById("test");
+				div.innerText = "bbb";
+			}*/
+			//confirm   确认消息框
+			/*var flag = window.confirm("是否下课?");
+			if(flag){
+				alert("快点下课。");
+			}else{
+				alert("一会下课。")
+			}*/
+			//prompt   信息输入框
+			/*var password = window.prompt("请输入密码");
+			if(password == "007"){
+				alert("密码正确，立刻爆炸！");
+			}else{
+				alert("密码错误，还是爆炸！");
+			}*/
+			//window.close();
+			/*window.setInterval(function(){
+				var div = document.getElementById("test");
+				var date = new Date();
+				var time =  date.toLocaleString();
+				div.innerText = time;
+			}, 1000);*/
+			/*window.setTimeout(function(){
+				var div = document.getElementById("test");
+				
+				div.innerText = "time out!";
+				}, 3000);*/
+
+//			hash 设置或获取 href 属性中在井号“#”后面的分段。 
+//host 设置或获取 location 或 URL 的 hostname 和 port 号码。 
+//hostname 设置或获取 location 或 URL 的主机名称部分。 
+//href 设置或获取整个 URL 为字符串。 
+		//console.log(window.location.hash);
+		//console.log(window.location.host);
+		//console.log(window.location.hostname);
+		//console.log(window.location.href);
+		//screen
+//availHeight 获取系统屏幕的工作区域高度，排除 Microsoft® Windows® 任务栏。 
+//availWidth 获取系统屏幕的工作区域宽度，排除 Windows 任务栏。 
+		//console.log(window.screen.availHeight);
+		//console.log(window.screen.availWidth);
+		//navigator
+//appCodeName 获取浏览器的代码名称。 
+//appMinorVersion 获取应用程序的次版本值。 
+//appName 获取浏览器的名称。 
+//appVersion 获取浏览器运行的平台和版本。 
+		//console.log(window.navigator.appCodeName);
+		//console.log(window.navigator.appMinorVersion);
+		//console.log(window.navigator.appName);
+		//console.log(window.navigator.appVersion);
+		//history
+		function back(){
+			//window.history.back();
+			window.history.go(-1);
+		}
+		function forward(){
+			//window.history.forward();
+			window.history.go(1);
+		}
+		console.log(window.history.length);
+
+		</script>
+	</HEAD>
+	<BODY>
+		<div id="test" class="test">
+			waiting...
+		</div>
+		<input type="button" onclick="back()" value="后退"/>
+		<input type="button" onclick="forward()" value="前进"/>
+	</BODY>
+</HTML>

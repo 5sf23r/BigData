@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<title>jQuery的引入及js和jQuery的相互转换</title>
+		<script type="text/javascript" src="jquery-1.4.2.js">
+		</script>
+		<script type="text/javascript">
+			window.onload = function(){
+				//$("div").text("aaaaa");
+				//jQuery对象->js对象
+				var div = $("div")[0];
+				div.innerText= "ccc";
+				//js对象->jQuery对象
+			/*var div = document.getElementById("test");
+			$(div).text("bbb")*/
+			}
+			
+		</script>
+	</HEAD>
+	<BODY>
+		<div id="test" class="test">
+			
+		</div>
+	</BODY>
+</HTML>

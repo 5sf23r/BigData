@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name></display-name>
+	
+<context-param>
+	<param-name>param1</param-name>
+	<param-value>value1</param-value>
+</context-param>
+<context-param>
+	<param-name>param2</param-name>
+	<param-value>value2</param-value>
+</context-param>
+	 
+	<servlet>
+		<servlet-name>ServletConfigDemo1</servlet-name>
+		<servlet-class>cn.tedu.sconfig.ServletConfigDemo1</servlet-class>
+		<init-param>
+			<param-name>driver</param-name>
+			<param-value>com.mysql.jdbc.Driver</param-value>
+		</init-param>
+		<init-param>
+			<param-name>url</param-name>
+			<param-value>jdbc:mysql:///easymall</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ServletConfigDemo2</servlet-name>
+		<servlet-class>cn.tedu.sconfig.ServletConfigDemo2</servlet-class>
+		<init-param>
+			<param-name>user</param-name>
+			<param-value>admin</param-value>
+		</init-param>
+		<init-param>
+			<param-name>password</param-name>
+			<param-value>123456</param-value>
+		</init-param>
+	</servlet>
+  <servlet>
+    <servlet-name>ServletContextDemo1</servlet-name>
+    <servlet-class>cn.tedu.scontext.ServletContextDemo1</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ServletContextDemo2</servlet-name>
+    <servlet-class>cn.tedu.scontext.ServletContextDemo2</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ServletContextDemo3</servlet-name>
+    <servlet-class>cn.tedu.scontext.ServletContextDemo3</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Test</servlet-name>
+    <servlet-class>cn.tedu.Test</servlet-class>
+  </servlet>
+
+
+
+
+
+
+	<servlet-mapping>
+		<servlet-name>ServletConfigDemo1</servlet-name>
+		<url-pattern>/servlet/ServletConfigDemo1</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletConfigDemo2</servlet-name>
+		<url-pattern>/servlet/ServletConfigDemo2</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServletContextDemo1</servlet-name>
+    <url-pattern>/servlet/ServletContextDemo1</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServletContextDemo2</servlet-name>
+    <url-pattern>/servlet/ServletContextDemo2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServletContextDemo3</servlet-name>
+    <url-pattern>/servlet/ServletContextDemo3</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Test</servlet-name>
+    <url-pattern>/servlet/Test</url-pattern>
+  </servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

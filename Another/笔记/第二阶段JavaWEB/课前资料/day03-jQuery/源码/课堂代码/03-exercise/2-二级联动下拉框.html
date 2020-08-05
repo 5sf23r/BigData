@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>二级联动下拉框</title>
+<!--引入jquery的js库-->
+<script src="../js/jquery-1.4.2.js"></script>
+<script>
+	var data = {
+		"北京市": ["海淀区","朝阳区","丰台区"],
+		"河北省": ["石家庄","唐山","秦皇岛"],
+		"辽宁省": ["沈阳","大连","鞍山"],
+		"山东省": ["青岛","济南","烟台"]
+	}
+	var a = {
+		"id":1,
+		"name":"lishuai"
+	}
+	
+	/* --通过jQuery实现二级联动下拉框 -- */
+	function selectCity(thisobj){
+		
+		var prov = $(thisobj).val();
+		var citys = data[prov];
+		$("#city").html("<option>--选择城市--</option>");
+		for(var i=0;i<citys.length;i++){
+			$("#city").append("<option>"+citys[i]+"</option>");
+		}
+	
+		
+	}
+	/*//获取用户选中的省份
+		var prov = $(thisobj).val();
+
+		//获取省份对应的市区数据
+		var citys = data[prov];
+
+		//先清空之前的数据
+		$("#city").html("<option>--选择城市--</option>");
+		
+		//循环遍历取出每一个城市作为option选项填充到第二个下拉框中
+		for(var i=0; i<citys.length; i++){
+			$("#city").append("<option>"+citys[i]+"</option>");
+		}*/
+	
+	/* --通过js实现二级联动下拉框--
+	function selectCity(thisobj){
+		//获取用户选中的省份
+		var prov = thisobj.value;
+		//再根据省份获取对应的市区
+		var citys = data[prov];
+		//获取第二个下拉列表
+		var oCitySele = document.getElementById("city");
+		//清空之前的数据
+		//oCitySele.innerHTML = "<option>--选择城市--</option>";
+		var opts = oCitySele.getElementsByTagName("option");
+		var len = opts.length;
+		for(var i=1; i< len; i++){
+			oCitySele.removeChild(opts[1]);
+		}
+
+		//循环遍历, 将每一个城市依次填充到第二个下拉列表中
+		for(var i=0; i<citys.length; i++){
+			var oOption = document.createElement("option");
+			oOption.innerHTML = citys[i];
+			//将option挂载到select上
+			oCitySele.appendChild(oOption);
+		}
+	}
+	 */
+</script>
+<!-- 
+js实现注意问题: 
+	ie10以下的浏览器不支持 select,table上的innerHTML属性
+	删除option时，由于删除后，options长度发生了变化，所以直接用for循环会有漏删的情况，可以由后向前删除，可以避免这样的问题
+-->
+</head>
+
+<body>
+	
+	<select name="country" onchange="getCountry()"  >
+		<option value="none">--选择国家--</option>
+		<option value="中国">中国</option>
+		<option value="美国">美国</option>
+		<option value="日本">日本</option>
+	</select>
+	<br><br>
+	<hr/>
+	<br>
+	<div id="seleDiv">
+		<select id="province" onchange="selectCity(this)">
+			<option>--选择省市--</option>
+			<option>北京市</option>
+			<option>河北省</option>
+			<option>辽宁省</option>
+			<option>山东省</option>
+		</select>
+		<span id="citySpan">
+			<select id="city">
+				<option>--选择城市--</option>
+			</select>
+		</span>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<title>div盒子模型+css层叠样式表</title>
+		<style type="text/css">
+			/*@import url('6.css');*/
+			/*基本选择器*/
+			/*#div1{
+				color:#ABC123;
+				background:#123ABC;
+			}
+			.class1{
+				color:#DDC123;
+				background:#12FFBC;
+			}*/
+			/*div{
+				color:#DDAA11;
+				background: #FFAADD;
+			}*/
+			/*扩展选择器*/
+			/*div span{
+				color:#DDAA11;
+				background: #FFAADD;
+			}*/
+			/*div>span{
+				color:#DDAA11;
+				background: #FFAADD;
+			}*/
+			/*div+span{
+				color:#DDAA11;
+				background: #FFAADD;
+			}*/
+			/*div[name='ll']{
+				color:#DDAA11;
+				background: #FFAADD;
+			}*/
+			a:link{
+				color:#DDAA11;
+				background: #FFAADD;
+			}
+			/*a:visited{
+				color:#AABB21;
+				background: #FDFADD;
+			}*/
+			a:active{
+				color:#FF1493;
+				background: #BBFADD;
+			}
+			/*a:hover{
+				color:#AFFB21;
+				background: #AAFADD;
+			}*/
+			div:hover{
+				color:#AFFB21;
+				background: #AAFADD;
+			}
+			
+		</style>
+		<!--<link href="6.css" rel="stylesheet"/>-->
+		
+	</HEAD>
+	<BODY>
+		<div id="div1">我是div</div>
+		<div id="div2" class="class1">我是div</div>
+		<p>我是一个p标签</p>
+		<p>我是一个p标签</p>
+		<span class="class1">我是一个span</span>
+		<span>我是一个span</span>
+		<span>我是一个span</span>
+		<!--<div style="color:red;background:green">我是css的div</div>-->
+		<hr/>
+		<div id="div1">我是父级div
+			<div id="test" class="test" name="l">
+				我是儿子div
+			</div>
+			<span class="test">我是div儿子span1</span>
+			<span class="test">我是div儿子span2</span>
+			<p>
+				<span class="test">我是p儿子span2</span>
+				
+			</p>
+		</div>
+		<div id="test" class="test" name="ll">
+			单独div
+		</div>
+		<a href="#">点击跳转</a>
+	</BODY>
+</HTML>

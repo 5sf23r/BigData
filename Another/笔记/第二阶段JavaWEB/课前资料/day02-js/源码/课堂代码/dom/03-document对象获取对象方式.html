@@ -1,0 +1,56 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>如何通过document获取数据</title>
+	<script type="text/javascript">
+		function demo01(){
+			var unEle = document.getElementById("username")
+			alert(unEle.value)
+		}
+
+		function demo02(){
+			var psEles = document.getElementsByName("password");
+			for(var i = 0;i<psEles.length;i++){
+				var psEle = psEles[i]
+				alert(psEle.value)
+			}
+		}
+
+		function demo03(){
+			var inEles = document.getElementsByTagName("input")
+			for(var i = 0;i<inEles.length;i++){
+				var inEle = inEles[i]
+				alert(inEle.value)
+			}
+		}
+
+		function demo04(){
+			var pele = document.getElementById("pid")
+			//alert(pele.innerHTML)
+			//alert(pele.innerText)
+			pele.innerHTML = "<font color='blue'>呵呵呵呵</font>"
+			//pele.innerText = "<font color='blue'>哈哈哈哈</font>"
+		}
+	</script>
+
+</head>
+
+
+<body>
+
+	用户名称：<input type="text" name="username" id="username"/><br />
+    用户密码：<input type="password" name="password" id="password" /><br />
+    用户密码2：<input type="password" name="password" id="password2" /><br />
+    
+    <hr />
+    <input type="button" value="通过ID获取节点的值" onclick="demo01()" />
+    <input type="button" value="通过NAME获取节点的值" onclick="demo02()" />
+    <input type="button" value="通过TAG获取节点的值" onclick="demo03()" />        
+    
+    <hr  />
+    <p id="pid"><font color="red">获取P标签中的文字</font></p>
+	<input type="button" value="获取P中文字" onclick="demo04()" />
+	
+	
+</body>
+</html>

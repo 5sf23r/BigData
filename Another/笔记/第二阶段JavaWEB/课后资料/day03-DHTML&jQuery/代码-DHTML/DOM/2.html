@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>节点的增删改查</title>
+<!--加入样式表-->
+<style type="text/css">
+div {
+	border:#0099FF 1px solid;
+	height:60px;
+	width:120px;
+	margin:20px 0px 20px 20px;
+	padding:10px 0px 0px 20px;
+	}
+	
+#div_1{
+	background-color:#00FFFF;
+	}
+	
+#div_2{
+	background-color:#FF3399;
+	}
+	
+#div_3{
+	background-color:#0000FF;
+	}
+	
+#div_4{
+	background-color:#FFFF66;
+	}
+</style>
+
+<script type="text/javascript">
+	function addNode(){
+		////创建节点
+		//var new_div = document.createElement("div");
+		////添加节点 -- 将新节点挂载到父节点身上
+		////1.获取父节点
+		//	var parent = document.getElementsByTagName("body")[0];
+		////2.挂载
+		//	parent.appendChild(new_div);
+		//1.获取父节点
+		var parent = document.getElementsByTagName("body")[0];
+		//2.获取旧节点
+		var div_4 = document.getElementById("div_4");
+		//3.创建新节点
+		var new_div = document.createElement("div");
+		//4.根据父节点在旧节点之前插入新节点
+		parent.insertBefore(new_div,div_4);
+
+	}
+	function deleteNode(){
+		//1.获取要删除的节点
+		var div_3 = document.getElementById("div_3");
+		//2.获取父节点
+		var parent = document.getElementsByTagName("body")[0];
+		//3.将子节点从父节点身上删除
+		parent.removeChild(div_3);
+	}
+	function updateNode(){
+		//1.获取父节点
+		var parent = document.getElementsByTagName("body")[0];
+		//2.获取要被替换的旧节点
+		var div_2 = document.getElementById("div_2");
+		//3.创建一个新的节点
+		var new_div = document.createElement("div");
+		//4.替换旧节点
+		parent.replaceChild(new_div,div_2);
+	}
+	function copyNode(){
+		//1.获取一个节点
+		var div_4 = document.getElementById("div_4");
+		//2.克隆
+		var new_div = div_4.cloneNode(true);
+		//3.将克隆好的对象添加到js文档树中
+		var parent = document.getElementsByTagName("body")[0];
+		parent.appendChild(new_div);
+	}
+</script>
+
+</head>
+
+
+
+<body>
+    <div id="div_1">
+		
+    </div>
+    
+    <div id="div_2">
+    div区域2
+    </div>
+    
+    <div id="div_3">
+   	 div区域3
+    </div>
+    
+    <div id="div_4">
+    div区域4
+    </div>
+    
+    <hr />
+    <input type="button" value="创建并添加节点" onclick="addNode()" />
+    <input type="button" value="删除节点" onclick="deleteNode()" />
+    <input type="button" value="替换节点" onclick="updateNode()" />
+    <input type="button" value="克隆节点" onclick="copyNode()" />
+
+</body>
+</html>

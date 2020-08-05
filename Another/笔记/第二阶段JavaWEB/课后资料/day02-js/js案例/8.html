@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<title>js-复杂数据类型-对象-内置对象</title>
+		<script type="text/javascript">
+			//内置对象
+			//Math
+			console.log(Math.random());
+			console.log(Math.floor(3.4));
+			console.log(Math.ceil(3.4));
+			console.log(Math.round(3.4));
+			//Date对象
+			var date = new Date();
+			console.log(date.toLocaleString());
+			//Global对象
+			//isNaN()
+			//console.log(parseInt("123abc123"));
+			//eval()解释执行js语句
+			//RegExp正则对象
+			//lishuai_123@tedu.cn.com.org.edu
+			var reg = /^\w+@\w+(\.\w+)+$/;
+			var reg1 = new RegExp("\\w+@\\w+(\\.\\w+)+");
+			var email = "lishuai@tedu.cn.com";
+			console.log(reg1.test(email));
+		</script>
+	</HEAD>
+	<BODY>
+	</BODY>
+</HTML>

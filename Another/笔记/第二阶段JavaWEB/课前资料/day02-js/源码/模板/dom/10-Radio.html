@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>单选按钮</title>
+<style type="text/css">
+	#all div{
+		display:none;
+	}
+</style>
+<script type="text/javaScript">
+	function show(obj){
+		//隐藏所有
+		document.getElementById("result1").style.display="none";
+		document.getElementById("result2").style.display="none";
+		document.getElementById("result3").style.display="none";
+		document.getElementById("result4").style.display="none";
+		
+		//显示当前
+		var value = obj.value;
+		var div = document.getElementById("result"+value);
+		div.style.display = "block";
+	}
+</script>
+</head>
+
+<body>
+<div>
+	<h3>测试你的性格:</h3>
+	<div>请选择下列一种水果:</div>
+	<input type="radio" name="fruit" value="1" onclick="show(this)" />苹果<br />
+	<input type="radio" name="fruit" value="2"  onclick="show(this)" />西瓜<br />
+	<input type="radio" name="fruit" value="3"  onclick="show(this)"/>葡萄<br />
+	<input type="radio" name="fruit" value="4"  onclick="show(this)"/>芒果<br />
+	
+	<div id="all">
+	<div id="result1">
+		您的性格,很羞涩.
+	</div>
+	<div id="result2">
+		您的性格,很开朗.
+	</div>
+	<div id="result3">
+		您的性格,很内向.
+	</div>
+	<div id="result4">
+		您的性格,很醇香.
+	</div>
+	</div>
+</div>
+</body>
+</html>

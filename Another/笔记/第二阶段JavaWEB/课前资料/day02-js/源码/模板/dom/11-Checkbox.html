@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>全选反选问题</title>
+<script>
+	function checkAll(obj){
+		var items = document.getElementsByName("item");
+		for(var i = 0;i<items.length;i++){
+			items[i].checked = obj.checked;
+		}
+	}
+
+	window.onload = function(){
+		var items = document.getElementsByName("item");
+		var all1 = document.getElementById("all1");
+		for(var i = 0;i<items.length;i++){
+			items[i].onclick = function(){
+				var flag = true;
+				var items = document.getElementsByName("item");
+				for(var j = 0;j<items.length;j++){
+					if(items[j].checked==false){
+						flag = false;
+						break;
+					}
+				}
+				all1.checked = flag;
+			}
+		}
+	}
+
+	function check(){
+		var items = document.getElementsByName("item");
+		for(var i=0;i<items.length;i++){
+			items[i].checked = !items[i].checked;
+		}
+	}
+
+	function getSum(){
+		var money = 0;
+		var items = document.getElementsByName("item");
+		for(var i=0;i<items.length;i++){
+			if(items[i].checked){
+				money += parseInt(items[i].value);
+			}
+		}
+		document.getElementById("sumId").innerText = money;
+	}
+</script>
+</head>
+
+<body>
+<div>商品列表</div>
+<input type="checkbox" name="item" value="3000" />笔记本3000元<br />
+<input type="checkbox" name="item" value="2500"/>HTC手机2500<br />
+<input type="checkbox" name="item" value="8000" />苹果电脑8000<br />
+<input type="checkbox" name="item" value="1500" />IPAD1500<br />
+<input type="checkbox" name="item" value="400" />玩具汽车400<br />
+<input type="checkbox" id="all1" name="all" onclick="checkAll(this)"/>全选<br />
+<input type="checkbox" id="all2" name="all" onclick="check()"/>反选<br />
+<input type="button" value="总金额" onclick="getSum()" /><span id="sumId"></span>
+</body>
+</html>

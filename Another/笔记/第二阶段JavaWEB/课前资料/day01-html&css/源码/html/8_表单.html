@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>表单</title>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<script type="text/javascript">
+			function butClic(){
+				alert("还真敢点啊！");
+			}
+		</script>
+	</head>
+	<body>
+		<form action="#" method="GET">
+			<input type="hidden" name="u_id" value="9587"/>
+			<fieldset>
+				<legend>基本信息</legend>
+				用户名:<input type="text" id="username_id" name="username" value="zhangfei" readonly="readonly" />	
+				<br>		
+				密码:<input type="password" name="psw1"/>
+				<br>		
+				<input type="radio" name="gender" value="male" checked="checked"/>男
+				<input type="radio" name="gender" value="female"/>女
+				<br>		
+			</fieldset>
+			<fieldset>
+				<legend>其他信息</legend>
+				<input type="checkbox" name="like" value="zq"/>足球
+				<input type="checkbox" name="like" checked="checked" value="lq"/>篮球
+				<input type="checkbox" name="like" value="pq"/>排球
+				<input type="file" name="fx"/>
+				<input type="submit" value="来一个~"/>
+				<input type="reset" value="重新来~"/>
+				<input type="button" value="点我~" onclick="butClic()"/>
+				<input type="image" src="2.gif"/>
+				个人简介:<textarea name="desc" rows="5" cols="15"></textarea>
+				<select name="city" size="3" multiple="multiple">
+					<option value="bj">北京</option>
+					<option value="sh">上海</option>
+					<option value="gz">广州</option>
+					<option value="sz">深圳</option>
+					<option value="tl">铁岭</option>
+				</select>
+			</fieldset>
+		</form>
+	</body>	
+</html>

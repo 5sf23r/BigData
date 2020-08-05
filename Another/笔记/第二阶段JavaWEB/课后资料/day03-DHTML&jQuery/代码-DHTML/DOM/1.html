@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>如何通过document获取数据</title>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	<script type="text/javascript">
+		function demo1(){
+			//根据ID获取username文本中    的值
+			var username = document.getElementById("username");
+			//获取当前对象的value值
+			alert(username.value);
+		}
+
+		function demo2(){
+			//根据Name获取input的对象
+			var password = document.getElementsByName("password");
+			//获取其中的value值
+			//因为getElementsByName获取两个对象，这两个对象存储在一个数组中，如果需要取出每一个对象的value值，可以使用for遍历来操作。
+			for(var i=0;i<password.length;i++){
+				alert(password[i].value);
+			}
+		}
+
+		function demo3(){
+			//根据TagName(元素名)获取页面中的元素
+			var arr_input = document.getElementsByTagName("input");
+			//获取元素的value值
+			//利用for循环遍历输出每一个input元素的value值
+			for(var i=0;i<arr_input.length;i++){
+				alert(arr_input[i].value);
+			}
+		}
+		function demo4(){
+			//获取页面中的p元素
+			var p = document.getElementById("pid");
+			//获取p元素中的文本内容
+			//alert(p.innerText);
+			//设置p元素中的文本内容
+			//p.innerText = "10点多了";
+			p.innerHTML = "<font color='red'>10点多了</font>";
+		}
+	</script>
+	
+</head>
+<body>
+
+	用户名称：<input type="text" name="username" id="username" /><br />
+    用户密码：<input type="password" name="password" id="password" /><br />
+    用户密码2：<input type="password" name="password" id="password2" /><br />
+    
+    <hr />
+    <input type="button" value="通过ID获取节点的值" onclick="demo1()"/>
+    <input type="button" value="通过NAME获取节点的值"  onclick="demo2()" />
+    <input type="button" value="通过TAG获取节点的值" onclick="demo3()" />        
+    
+    <hr  />
+    <p id="pid"><font color="red">获取P标签中的文字</font></p>
+	<input type="button" value="获取P中文字" onclick="demo4()" />
+	
+</body>
+</html>

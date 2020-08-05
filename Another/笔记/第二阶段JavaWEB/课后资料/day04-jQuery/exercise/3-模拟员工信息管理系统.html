@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>table练习</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	body{
+		font-family: "微软雅黑"
+	}
+	h2, h4{ text-align: center; }
+	div#box1, div#box2 {
+		text-align:center;
+	}
+	hr{
+		margin: 20px 0;
+	}
+	table{ 
+		margin: 0 auto; 
+		width: 70%;
+		text-align: center;
+		border-collapse:collapse;
+	}
+	td, th{padding: 7px; width:20%;}
+	th{
+		background-color: #DCDCDC;
+	}
+</style>
+
+<!--引入jquery的js库-->
+<script src="../js/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+
+	//html文档加载完执行
+	$(function(){
+		//添加用户信息	
+		$("#add").click(function(){
+			//获取数据   //拓展：$.trim() 清楚用户输入内容前后的空格
+			var id = $.trim($("#box1 input[name='id']").val());
+			var name = $.trim($("#box1 input[name='name']").val());
+			var email = $.trim($("#box1 input[name='email']").val());
+			var salary = $.trim($("#box1 input[name='salary']").val());
+			//非空校验
+			if(id == "" || name == "" || email == "" || salary == ""){
+				alert("用户信息不能为空");
+				//打断代码，防止继续添加数据
+				return;
+			}
+			//邮箱格式校验
+			//lishuai@tedu.cn
+			var reg = /\w+@\w+(\.\w+)+/;
+			if(!reg.test(email)){
+				alert("邮箱格式不正确！");
+				return;
+			}
+			//id重复校验
+			var flag = false;
+			//如何获取页面中已有id，将用户输入的id与页面中已有id比较，如果id相同则证明id已经存在，反之则不存在。
+			$("table tr").each(function(){
+			//获取第二个td中的文本内容  注意：不是val()当前td不包含value
+				if($(this).find("td:eq(1)").text() == id){
+					flag = true;
+					alert("ID已存在");
+				}
+			});
+			if(flag){
+				return;
+			}
+			
+			
+			//添加数据
+			var tr = $("<tr></tr>");
+			//创建所需td
+			var td_check = $("<td><input type='checkbox'/></td>");
+			var td_id = $("<td>"+id+"</td>");
+			var td_name = $("<td>"+name+"</td>");
+			var td_email = $("<td>"+email+"</td>");
+			var td_salary = $("<td>"+salary+"</td>");
+			//将td添加到tr中
+			tr.append(td_check).append(td_id).append(td_name).append(td_email).append(td_salary);
+			//将tr加入到table中，作为一个新行展示。
+			var table = $("table");
+			table.append(tr);
+			
+		});
+		
+		//全选操作
+		$("#all").click(function(){
+			//所有的checkbox与第一行的checkbox的选中属性保持一致。
+			//先获取第一行的checkbox选中属性
+			var check = $(this).attr("checked");
+			//使全部checkbox选中属性与第一行的选中属性相同
+			$("input[type='checkbox']").attr("checked",check);
+			
+		});
+		//删除操作
+		$("#del").click(function(){
+			//不能删除第一行
+			//删除选中行
+			//1.找到选中行
+			$("input:checked:not(#all)").parents("tr").remove();
+		});
+		//更新操作
+		$("#upd").click(function(){
+			
+			//获取数据
+			var id = $.trim($("#box2 input[name='id']").val());
+			var name = $.trim($("#box2 input[name='name']").val());
+			var email = $.trim($("#box2 input[name='email']").val());
+			var salary = $.trim($("#box2 input[name='salary']").val());
+			//非空校验
+			if(id == "" || name == "" || email == "" || salary == ""){
+				alert("用户信息不能为空");
+				//打断代码，防止继续添加数据
+				return;
+			}
+			//更新操作
+			var flag = false;
+			//在页面中寻找所有的id，然后与用户输入的id向笔记，如果有则更新数据，如果没有则提示错误
+			$("table tr").each(function(){
+				if($(this).find("td:eq(1)").text() == id){
+					$(this).find("td:eq(2)").text(name);
+					$(this).find("td:eq(3)").text(email);
+					$(this).find("td:eq(4)").text(salary);
+					flag = true;
+				}
+			});
+			if(!flag){
+				alert("用户ID不存在");
+				
+			}
+		});
+	});
+
+	
+	
+</script>
+</head>
+
+<body>
+	<h2>添加新员工</h2>
+	<div id="box1">
+		ID：<input type="text" name="id"/>
+		姓名：<input type="text" name="name"/>
+		邮箱：<input type="text" name="email"/>
+		工资：<input type="text" name="salary"/>
+		<input type="button" id="add" value="添加"/>
+	</div>
+	<hr/>
+	<table border="1">
+		<tr>
+			<th>
+				<input type="checkbox" id="all"/>
+				<!--全选-->
+			</th>
+			<th>ID</th>
+			<th>姓名</th>
+			<th>邮箱</th>
+			<th>工资</th>
+		</tr>
+		<tr>
+			<td>
+				<input type="checkbox"/>
+			</td>
+			<td>1</td>
+			<td>宋江</td>
+			<td>sj@163.com</td>
+			<td>12000</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="checkbox"/>
+			</td>
+			<td>2</td>
+			<td>武松</td>
+			<td>ws@163.com</td>
+			<td>10500</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="checkbox"/>
+			</td>
+			<td>3</td>
+			<td>孙二娘</td>
+			<td>sen@163.com</td>
+			<td>11000</td>
+		</tr>
+	</table>
+	<h4><a href="#" id="del">删除选中</a></h2>
+
+	<hr/>
+
+	<div id="box2">
+		ID：<input type="text" name="id"/>
+		姓名：<input type="text" name="name"/>
+		邮箱：<input type="text" name="email"/>
+		工资：<input type="text" name="salary"/>
+		<input type="button" id="upd" value="修改"/>
+	</div>
+</body>
+</html>
+
+
+

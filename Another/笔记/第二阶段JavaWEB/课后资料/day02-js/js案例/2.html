@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<title>js基本数据类型</title>
+		<script type="text/javascript">
+			//1.Number
+			console.log(Number.MAX_VALUE);
+			console.log(Number.MIN_VALUE);
+			console.log(Number.POSITIVE_INFINITY);//Infinity
+			console.log(Number.NEGATIVE_INFINITY);//-Infinity
+			console.log(Infinity);
+			console.log(-Infinity);
+			console.log(NaN == "abc");
+			console.log(NaN == 123);
+			console.log(NaN == NaN);
+			console.log(isNaN("abc"));//true
+			console.log(isNaN(123));//false
+			//2.String
+			var str="abc";
+			var str1 = "BCD"
+			var str2 = "abc'bcd'"
+			console.log(str.length);
+			console.log(str.toUpperCase());
+			console.log(str1.toLowerCase());
+			console.log(str2.split("'"));
+			//3.boolean
+			console.log(true || false)//true
+			console.log(true && false)//false
+			console.log(true | false);//true
+			console.log(true & false);//false
+			console.log(!true);//false
+			//4.undefined
+			var a;
+			console.log(a);
+			//拓展：
+			console.log(null == undefined);
+			console.log(null === undefined);
+		</script>
+	</HEAD>
+	<BODY>
+	</BODY>
+</HTML>

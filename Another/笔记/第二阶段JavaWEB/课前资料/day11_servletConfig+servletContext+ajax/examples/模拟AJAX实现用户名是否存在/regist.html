@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>欢迎注册EasyMall</title>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="css/regist.css"/>
+	<script type="text/javascript">
+		var users = []
+		//模拟AJAX检查用户名是否已经存在的校验
+		function checkUsername(){
+			var username = document.getElementsByName("username")[0].value;
+			if(username == ""){
+				setMsg("用户名不能为空");
+				return;
+			}
+			if(users.indexOf(username) > -1){
+				setMsg("<img src='./img/1.gif' >");
+				setTimeout(function(){
+					setMsg("用户名已存在");
+				} , 1000);
+			}else{
+				setMsg("<img src='./img/1.gif' >");
+				setTimeout(function(){
+					setMsg("恭喜,用户名可以使用");
+				}, 1000);
+			}
+		}
+
+		//设置消息到#msg
+		function setMsg(msg){
+			var oMsg = document.getElementById("msg");
+			oMsg.innerHTML = msg+"";
+		}
+
+		//表单提交校验
+		function registUsername(){
+			var username = document.getElementsByName("username")[0].value;
+			if(username != "" && users.indexOf(username) < 0){
+				users.push(username);
+				alert("注册成功");
+			}
+			return false;
+		}
+
+	</script>
+</head>
+<body>
+	<h1>欢迎注册EasyMall</h1>
+	<form action="index.html" method="POST" onsubmit="return registUsername()">
+		<table>
+			<tr>
+				<td class="tds">用户名：</td>
+				<td><input type="text" name="username" onblur="checkUsername()" onfocus="setMsg('')">
+					<span id="msg" style="color:red;font-size:14px;">
+						
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="tds">密码：</td>
+				<td><input type="password" name="password"></td>
+			</tr>
+			<tr>
+				<td class="tds">确认密码：</td>
+				<td><input type="password" name="password2" ></td>
+			</tr>
+			<tr>
+				<td class="tds">昵称：</td>
+				<td><input type="text" name="nickname" ></span></td>
+			</tr>
+			<tr>
+				<td class="tds">邮箱：</td>
+				<td><input type="text" name="email" ></td>
+			</tr>
+			<tr>
+				<td class="tds">验证码：</td>
+				<td><input type="text" name="valistr"><img id="yzm_img" src="img/regist/yzm.png" style="cursor: pointer"/></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="注册用户"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

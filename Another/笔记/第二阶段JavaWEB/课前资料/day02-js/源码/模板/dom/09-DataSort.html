@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>表格中的数据排序</title>
+<style type="text/css">
+table {
+	border:#0099FF 1px solid;
+	border-collapse:collapse;
+	width:600px;
+	}
+	
+table td{
+	border:#0099FF 1px solid;
+	text-align:center;
+	}
+	
+#age:link,#age.visited {
+	color:#000000;
+	}
+</style>
+<script type="text/javaScript">
+	function sort(){
+		var tab = document.getElementsByTagName("table")[0];
+		var trs = document.getElementsByTagName("tr");
+		for(var i=1;i<trs.length;i++){
+			for(var j=1;j<trs.length-i;j++){
+				var td1 = trs[j].getElementsByTagName("td")[1];
+				var td2 = trs[j+1].getElementsByTagName("td")[1];
+				if(td1.innerText>td2.innerText){
+					var tr1_clone = trs[j].cloneNode(true);
+					var tr2_clone = trs[j+1].cloneNode(true);
+					tab.childNodes[0].replaceChild(tr1_clone,trs[j+1]);
+					tab.childNodes[0].replaceChild(tr2_clone,trs[j]);
+				}
+			}			
+		}
+	}
+</script>
+</head>
+
+
+
+<body>
+<table align="center">
+	<tr>
+		<th>姓名</th>
+		<th onclick="sort()" style="cursor:pointer;">年龄</th>
+		<th>地址</th>
+	</tr>
+	<tr>
+		<td>张三</td>
+		<td>25</td>
+		<td>北京</td>
+	</tr>
+	<tr>
+		<td>李四</td>
+		<td>23</td>
+		<td>天津</td>
+	</tr>
+	<tr>
+		<td>王五</td>
+		<td>28</td>
+		<td>上海</td>
+	</tr>
+	<tr>
+		<td>赵六</td>
+		<td>26</td>
+		<td>南京</td>
+	</tr>
+	<tr>
+		<td>周七</td>
+		<td>22</td>
+		<td>上海</td>
+	</tr>
+</table>
+</body>
+</html>

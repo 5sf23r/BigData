@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>下拉框</title>
+<script>
+	function getCountry(obj){
+		//alert(obj.value)
+		var opts = obj.getElementsByTagName("option")
+		for(var i = 0;i<opts.length;i++){
+			alert(opts[i].value+"~"+opts[i].selected)
+		}
+	}
+</script>
+</head>
+
+<body>
+<select name="country" onchange="getCountry(this)">
+	<option value="none">--选择国家--</option>
+	<option value="中国">中国</option>
+	<option value="美国">美国</option>
+	<option value="日本">日本</option>
+</select>
+</body>
+</html>

@@ -1,0 +1,61 @@
+/* jquery.load()方法实现 */
+/*
+$(selector).load(url,data,callback);
+	selector -- 选择器, 将从服务器获取到的数据加载到指定的元素中
+	url -- 发送请求的URL地址
+	data -- 可选, 向服务器发送的数据 key/value数据
+	callback -- 可选, load方法完成后所执行的函数
+ */
+$("#username_msg").load("<%= request.getContextPath() %>/AjaxCheckUsernameServlet", {username: username});
+
+===================================
+
+/* jquery.post()方法实现 -- 使用POST方式来进行异步请求*/
+/*
+$.post(url, [data], [callback]);
+	url -- 发送请求的URL地址
+	data -- 可选, 向服务器发送的数据
+	callback -- 可选, 请求成功后所执行的函数, 函数参数:
+		result -- 服务器返回的数据
+*/
+$.post("<%= request.getContextPath() %>/AjaxCheckUsernameServlet", {username: username}, function(result){
+	alert("jquery...post()");
+	$("#username_msg").html("<font style='color:red'>"+result+"</font>");
+});
+
+===================================
+
+/* jquery.get()方法实现 -- 使用GET方式来进行异步请求*/
+/*
+$.get(url, [data], [callback]);
+	url -- 发送请求的URL地址
+	data -- 可选, 向服务器发送的数据
+	callback -- 可选, 请求成功后所执行的函数
+*/
+$.get("<%= request.getContextPath() %>/AjaxCheckUsernameServlet", {username: username}, function(result){
+	alert("jquery...get()");
+	$("#username_msg").html("<font style='color:red'>"+result+"</font>");
+});
+
+===================================
+
+/* jquery.ajax()方法实现 */
+/*
+$.ajax(url, [data], [async], [callback]);
+	url -- 发送请求的URL地址
+	data -- 可选, 发送至服务器的key/value数据
+	async -- 可选, 默认为true, 表示异步交互
+	type -- 请求方式 , 默认为"GET"。
+	success -- 可选, 请求成功后执行的函数, 函数参数:
+		result -- 服务器返回的数据
+*/
+$.ajax({
+	url: "<%= request.getContextPath() %>/AjaxCheckUsernameServlet",
+	data: {"username": username},
+	async: true,
+	type: "POST",
+	success: function(result){
+		alert("jquery...ajax()");
+		$("#username_msg").html("<font style='color:red'>"+result+"</font>")
+	}
+});

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>函数</title>
+		<!--
+			js中函数有三种定义方式
+				普通函数定义：
+					function mx(n1,n2){return n1 + n2}
+				动态函数定义：
+					new Fuction("n1","n2","return n1 + n2")
+				函数直接量
+					function(n1,n2){return n1 + n2}
+
+			js中的函数本质上是一个对象 函数名只是指向这个函数的一个引用
+			和其他对象唯一的不同是可以通过指向函数的引用传入参数调用
+
+			所以 
+				也可以用其他引用也指向这个函数 从而使用该引用调用函数 也可以将函数名指向其他内容 使函数名不再指向函数 失去调用的能力
+			可以像一个普通的对象一样 被赋值给其他变量 
+			还可以像其他对象一样 当做另一个函数的参数传递 或 当做另一函数的返回值返回
+		-->		
+		<script type="text/javascript">
+			/*
+			//1.函数定义 - 普通函数定义
+			function sum1(num1,num2){
+				return num1 + num2;
+			}
+			console.log(sum1(3,2))
+			console.log(sum1(3,2,1))
+			console.log(sum1(3))
+
+			function sum2(){
+				var sum = 0;
+				for(var i = 0;i<arguments.length;i++){
+					var v = arguments[i]
+					if(!isNaN(v)){
+						sum += v
+					}
+				}
+				return sum
+			}
+			console.log(sum2(3,2,1,"abc"))
+			var sum3 = sum2
+			console.log(sum3(30,20))
+			sum2 = null
+			sum3 = null
+			*/
+			
+			/*
+			//2.函数定义 - 动态函数定义
+			function fun1(num1,num2){return num1+num2}
+			var fun1 = new Function("num1","num2","return num1+num2");
+			console.log(fun1(2,3))
+			var fun2 = fun1;
+			console.log(fun2(2,3))
+			*/
+			/*
+			//3.函数定义 - 函数直接量(匿名函数)定义
+			var fun1 = function(num1,num2){return num1 + num2}
+			console.log(fun1(2,3))
+			var fun2 = fun1
+			console.log(fun2(2,3))
+			*/
+
+
+			/*
+			//函数作为另一个函数的参数传递
+			function eat(food,cookFunc){
+				food = cookFunc(food)
+				console.log("吃..."+food)
+			}
+
+			function cookYRC(food){
+				return "烤熟" + food
+			}
+			eat("羊肉串",cookYRC);
+			eat("涮羊肉",new Function("food","return '煮熟的'+food "));
+			eat("狗不理",function(food){return "蒸熟的"+food});
+			*/
+
+			//函数作为另一个函数的返回值返回
+			function lookUpCookBook(food){
+				if("羊肉串" == food){
+					function cookYRC(food){
+						return "烤熟"+food
+					}
+					return cookYRC;
+				}else if("涮羊肉" == food){
+					return new Function("food","return '煮熟'+food")
+				}else if("狗不理" == food){
+					return function(food){return  "蒸熟"+food }
+				}
+			}
+			var cfunc1 = lookUpCookBook("羊肉串")
+			console.log(cfunc1("羊肉串"))
+			var cfunc1 = lookUpCookBook("涮羊肉")
+			console.log(cfunc1("涮羊肉"))
+			var cfunc1 = lookUpCookBook("狗不理")
+			console.log(cfunc1("狗不理"))
+			
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>JAVA PLATFORM, ENTERPRISE EDITION(Java EE)</title>
+</head>
+<body>
+SUN MICROSYSTEMS, INC. (?SUN?) IS WILLING TO LICENSE THIS SPECIFICATION<br>
+TO YOU ONLY UPON THE CONDITION THAT YOU ACCEPT ALL OF THE TERMS<br>
+CONTAINED IN THIS AGREEMENT. PLEASE READ THE TERMS AND CONDITIONS OF<br>
+THIS AGREEMENT CAREFULLY. BY DOWNLOADING THIS SPECIFICATION, YOU ACCEPT<br>
+THE TERMS AND CONDITIONS OF THE AGREEMENT. IF YOU ARE NOT WILLING TO BE<br>
+BOUND BY IT, SELECT THE "DECLINE" BUTTON AT THE BOTTOM OF THIS PAGE.<br>
+<br>
+<br>
+Specification: JSR-000244 Java(tm) Platform, Enterprise Edition
+("Specification")<br>
+<br>
+<br>
+Version: 5.0<br>
+<br>
+<br>
+Status: Final Release<br>
+<br>
+<br>
+Release: 8 May 2006<br>
+<br>
+<br>
+Copyright 2006 SUN MICROSYSTEMS, INC.<br>
+<br>
+4150 Network Circle, Santa Clara, California 95054, U.S.A<br>
+<br>
+All rights reserved.<br>
+<br>
+<br>
+LIMITED LICENSE GRANTS<br>
+<br>
+<br>
+1. _License for Evaluation Purposes_. Sun hereby grants you a<br>
+fully-paid, non-exclusive, non-transferable, worldwide, limited license<br>
+(without the right to sublicense), under Sun's applicable intellectual<br>
+property rights to view, download, use and reproduce the Specification<br>
+only for the purpose of internal evaluation. This includes (i)<br>
+developing applications intended to run on an implementation of the<br>
+Specification, provided that such applications do not themselves<br>
+implement any portion(s) of the Specification, and (ii) discussing the<br>
+Specification with any third party; and (iii) excerpting brief portions<br>
+of the Specification in oral or written communications which discuss the<br>
+Specification provided that such excerpts do not in the aggregate<br>
+constitute a significant portion of the Specification.<br>
+<br>
+<br>
+2. _License for the Distribution of Compliant Implementations_. Sun also<br>
+grants you a perpetual, non-exclusive, non-transferable, worldwide,<br>
+fully paid-up, royalty free, limited license (without the right to<br>
+sublicense) under any applicable copyrights or, subject to the<br>
+provisions of subsection 4 below, patent rights it may have covering the<br>
+Specification to create and/or distribute an Independent Implementation<br>
+of the Specification that: (a) fully implements the Specification<br>
+including all its required interfaces and functionality; (b) does not<br>
+modify, subset, superset or otherwise extend the Licensor Name Space, or<br>
+include any public or protected packages, classes, Java interfaces,<br>
+fields or methods within the Licensor Name Space other than those<br>
+required/authorized by the Specification or Specifications being<br>
+implemented; and (c) passes the Technology Compatibility Kit (including<br>
+satisfying the requirements of the applicable TCK Users Guide) for such<br>
+Specification ("Compliant Implementation"). In addition, the foregoing<br>
+license is expressly conditioned on your not acting outside its scope.<br>
+No license is granted hereunder for any other purpose (including, for<br>
+example, modifying the Specification, other than to the extent of your<br>
+fair use rights, or distributing the Specification to third parties).<br>
+Also, no right, title, or interest in or to any trademarks, service<br>
+marks, or trade names of Sun or Sun's licensors is granted hereunder.<br>
+Java, and Java-related logos, marks and names are trademarks or<br>
+registered trademarks of Sun Microsystems, Inc. in the U.S. and other<br>
+countries.<br>
+<br>
+<br>
+3. _Pass-through Conditions_. You need not include limitations (a)-(c)<br>
+from the previous paragraph or any other particular "pass through"<br>
+requirements in any license You grant concerning the use of your<br>
+Independent Implementation or products derived from it. However, except<br>
+with respect to Independent Implementations (and products derived from<br>
+them) that satisfy limitations (a)-(c) from the previous paragraph, You<br>
+may neither: (a) grant or otherwise pass through to your licensees any<br>
+licenses under Sun's applicable intellectual property rights; nor (b)<br>
+authorize your licensees to make any claims concerning their<br>
+implementation's compliance with the Specification in question.<br>
+<br>
+<br>
+4. _Reciprocity Concerning Patent Licenses_.<br>
+<br>
+<br>
+a. With respect to any patent claims covered by the license granted<br>
+under subparagraph 2 above that would be infringed by all technically<br>
+feasible implementations of the Specification, such license is<br>
+conditioned upon your offering on fair, reasonable and<br>
+non-discriminatory terms, to any party seeking it from You, a perpetual,<br>
+non-exclusive, non-transferable, worldwide license under Your patent<br>
+rights which are or would be infringed by all technically feasible<br>
+implementations of the Specification to develop, distribute and use a<br>
+Compliant Implementation.<br>
+<br>
+<br>
+b With respect to any patent claims owned by Sun and covered by the<br>
+license granted under subparagraph 2, whether or not their infringement<br>
+can be avoided in a technically feasible manner when implementing the<br>
+Specification, such license shall terminate with respect to such claims<br>
+if You initiate a claim against Sun that it has, in the course of<br>
+performing its responsibilities as the Specification Lead, induced any<br>
+other entity to infringe Your patent rights.<br>
+<br>
+<br>
+c Also with respect to any patent claims owned by Sun and covered by the<br>
+license granted under subparagraph 2 above, where the infringement of<br>
+such claims can be avoided in a technically feasible manner when<br>
+implementing the Specification such license, with respect to such<br>
+claims, shall terminate if You initiate a claim against Sun that its<br>
+making, having made, using, offering to sell, selling or importing a<br>
+Compliant Implementation infringes Your patent rights.<br>
+<br>
+<br>
+5. _Definitions_. For the purposes of this Agreement: "Independent<br>
+Implementation" shall mean an implementation of the Specification that<br>
+neither derives from any of Sun's source code or binary code materials<br>
+nor, except with an appropriate and separate license from Sun, includes<br>
+any of Sun's source code or binary code materials; "Licensor Name Space"<br>
+shall mean the public class or interface declarations whose names begin<br>
+with "java", "javax", "com.sun" or their equivalents in any subsequent<br>
+naming convention adopted by Sun through the Java Community Process, or<br>
+any recognized successors or replacements thereof; and "Technology<br>
+Compatibility Kit" or "TCK" shall mean the test suite and accompanying<br>
+TCK User's Guide provided by Sun which corresponds to the Specification<br>
+and that was available either (i) from Sun's 120 days before the first<br>
+release of Your Independent Implementation that allows its use for<br>
+commercial purposes, or (ii) more recently than 120 days from such<br>
+release but against which You elect to test Your implementation of the<br>
+Specification.<br>
+<br>
+<br>
+This Agreement will terminate immediately without notice from Sun if you<br>
+breach the Agreement or act outside the scope of the licenses granted
+above.<br>
+<br>
+<br>
+DISCLAIMER OF WARRANTIES<br>
+<br>
+<br>
+THE SPECIFICATION IS PROVIDED "AS IS". SUN MAKES NO REPRESENTATIONS OR<br>
+WARRANTIES, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO,<br>
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,<br>
+NON-INFRINGEMENT (INCLUDING AS A CONSEQUENCE OF ANY PRACTICE OR<br>
+IMPLEMENTATION OF THE SPECIFICATION), OR THAT THE CONTENTS OF THE<br>
+SPECIFICATION ARE SUITABLE FOR ANY PURPOSE. This document does not<br>
+represent any commitment to release or implement any portion of the<br>
+Specification in any product. In addition, the Specification could<br>
+include technical inaccuracies or typographical errors.<br>
+<br>
+<br>
+LIMITATION OF LIABILITY<br>
+<br>
+<br>
+TO THE EXTENT NOT PROHIBITED BY LAW, IN NO EVENT WILL SUN OR ITS<br>
+LICENSORS BE LIABLE FOR ANY DAMAGES, INCLUDING WITHOUT LIMITATION, LOST<br>
+REVENUE, PROFITS OR DATA, OR FOR SPECIAL, INDIRECT, CONSEQUENTIAL,<br>
+INCIDENTAL OR PUNITIVE DAMAGES, HOWEVER CAUSED AND REGARDLESS OF THE<br>
+THEORY OF LIABILITY, ARISING OUT OF OR RELATED IN ANY WAY TO YOUR<br>
+HAVING, IMPELEMENTING OR OTHERWISE USING USING THE SPECIFICATION, EVEN<br>
+IF SUN AND/OR ITS LICENSORS HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH<br>
+DAMAGES.<br>
+<br>
+You will indemnify, hold harmless, and defend Sun and its licensors from<br>
+any claims arising or resulting from: (i) your use of the Specification;<br>
+(ii) the use or distribution of your Java application, applet and/or<br>
+implementation; and/or (iii) any claims that later versions or releases<br>
+of any Specification furnished to you are incompatible with the<br>
+Specification provided to you under this license.<br>
+<br>
+<br>
+RESTRICTED RIGHTS LEGEND<br>
+<br>
+<br>
+U.S. Government: If this Specification is being acquired by or on behalf<br>
+of the U.S. Government or by a U.S. Government prime contractor or<br>
+subcontractor (at any tier), then the Government's rights in the<br>
+Software and accompanying documentation shall be only as set forth in<br>
+this license; this is in accordance with 48 C.F.R. 227.7201 through<br>
+227.7202-4 (for Department of Defense (DoD) acquisitions) and with 48<br>
+C.F.R. 2.101 and 12.212 (for non-DoD acquisitions).<br>
+<br>
+<br>
+REPORT<br>
+<br>
+<br>
+If you provide Sun with any comments or suggestions concerning the<br>
+Specification ("Feedback"), you hereby: (i) agree that such Feedback is<br>
+provided on a non-proprietary and non-confidential basis, and (ii) grant<br>
+Sun a perpetual, non-exclusive, worldwide, fully paid-up, irrevocable<br>
+license, with the right to sublicense through multiple levels of<br>
+sublicensees, to incorporate, disclose, and use without limitation the<br>
+Feedback for any purpose.<br>
+<br>
+<br>
+GENERAL TERMS<br>
+<br>
+<br>
+Any action related to this Agreement will be governed by California law<br>
+and controlling U.S. federal law. The U.N. Convention for the<br>
+International Sale of Goods and the choice of law rules of any<br>
+jurisdiction will not apply.<br>
+<br>
+<br>
+The Specification is subject to U.S. export control laws and may be<br>
+subject to export or import regulations in other countries. Licensee<br>
+agrees to comply strictly with all such laws and regulations and<br>
+acknowledges that it has the responsibility to obtain such licenses to<br>
+export, re-export or import as may be required after delivery to
+Licensee.<br>
+<br>
+<br>
+This Agreement is the parties' entire agreement relating to its subject<br>
+matter. It supersedes all prior or contemporaneous oral or written<br>
+communications, proposals, conditions, representations and warranties<br>
+and prevails over any conflicting or additional terms of any quote,<br>
+order, acknowledgment, or other communication between the parties<br>
+relating to its subject matter during the term of this Agreement. No<br>
+modification to this Agreement will be binding, unless in writing and<br>
+signed by an authorized representative of each party.<br>
+<br>
+<br>
+<br>
+<br>
+Rev. April, 2006<br>
+<br>
+Sun/Final/Full<br>
+<br>
+</body>
+</html>

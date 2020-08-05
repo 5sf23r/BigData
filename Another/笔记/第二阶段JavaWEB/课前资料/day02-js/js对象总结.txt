@@ -1,0 +1,6 @@
+基本数据类型 - 内置对象 String Number Boolean - 直接量 "abc" 123
+函数 - 内置对象 Function -- function(xx){xxx}
+数组 - 内置对象Array -- [1,3,5]
+对象 - 内置对象Object  -- {k:v,k:v,k:v}
+自定义对象 - 内置对象Object -- {k:v,k:v,k:v}
+正则表达式 - 内置对象RegExp -- /xxxxxx/
