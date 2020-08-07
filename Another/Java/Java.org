@@ -1,3 +1,10 @@
+* Java简介
+** 简介
+1. Java是1995年有SUN(Stanford University Network,斯坦福大学校园网)公司正式推出的一门编程语言
+2. 到目前为止，市面上几乎大部分的WEB应用的首选语言都是Java
+3. 大部分的大数据框架的底层实现语言也是Java
+4. 因为Java是由詹姆斯·高斯林（James·Gosling）带领小组研发的，所以将James·Gosling成为Java之父
+5. Java一共有10个特点：简单性、面向对象、分布性、编译和解释性、健壮性、安全性、可移植性
 * 面向对象
 ** 面向对象简介
 *** 面向对象与面向过程的比较
@@ -3101,6 +3108,52 @@ public class MathDemo {
     }
 }
    #+END_SRC
+7. try-catch-finally中的finally的特点是：无论出现异常与否，这个finally中的代码都会执行一次
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.exception;
+
+   public class ExceptionDemo {
+       public static void main(String[] args) {
+
+           //如果异常在处理完成之后需要进行善后
+           //finally:五路你出现异常与否，finally代码块都得执行一次
+           try{
+               System.out.println(10/0);
+           }catch(Exception e){
+               System.out.println("捕获异常");
+           }finally{
+               System.out.println("running");
+           }
+       }
+   }
+
+   #+END_SRC
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.exception;
+
+   public class ExceptionDemo2 {
+       public static void main(String[] args) {
+           System.out.println(m());
+       }
+
+       //代码是从上到下从左到右来一次编译运行的
+       public static int m(){
+
+           int i = 5;
+           try{
+               //先编译try中的return，return i++;因为++在i之后，所以先将i的值5取出来
+               //将5标记为结果，然后i自增为6，准备返回的时候，发现还有一个finally需要执行
+               //执行finally将i自增为7，进行返回，此时标记的返回结果是5，所以返回的也是5
+               return i++;
+           }catch(Exception e){
+               return i++;
+           }finally {
+               i++;
+               System.out.println("finally:" + i);
+           }
+       }
+   }
+   #+END_SRC
 #+BEGIN_SRC java
 package cn.commandoptionesc.exception;
 
@@ -3174,10 +3227,422 @@ class FileFormatException extends IOException {
 1. 集合是Java中提供的一套容器机制，这个容器的特点是大小不固定
 2. Collection是集合的顶级接口，包含了很多的字接口以及实现类：List、Set、Queue等
 3. <E>表示泛型，用于规定集合中元素的类型，因为泛型的限制，所以集合中存储的类型必须是引用类型:Collection<Integer>,Collection<Double>等；int[] arr,---arr的数据类型是数组，元素类型是int；Collection<String> c;---c的数据类型是Collection，元素类型是String
+#+BEGIN_SRC java
+package cn.commandoptionesc.Collection;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class CollectionDemo {
+    public static void main(String[] args) {
+
+        //创建一个集合对象
+        //表示创建了一个集合，集合中存储的元素类型是String
+        //集合在创建的时候，后边类型的泛型可以不写，会根据前边的类型进行自动推到
+        Collection<String> c = new ArrayList<>();
+
+        //添加元素
+        c.add("a");
+        c.add("b");
+        c.add("f");
+
+        String[] arr = c.toArray(new String[0]);
+        for(String s : arr){
+            System.out.println(s);
+        }
+
+        Object[] os = c.toArray();
+        for(Object o : os){
+            System.out.println(o);
+        }
+
+        //获取元素个数
+        System.out.println(c.size());
+
+        //判断元素是否存在
+        boolean r = c.contains("o");
+        System.out.println(r);
+
+        //清空集合
+        c.clear();
+
+        //判断集合是否为空
+        System.out.println(c.isEmpty());
+
+
+        //删除指定的元素
+        c.remove("b");
+        //如果移除的元素不存在，则不会出现任何问题
+        //底层会首先判断这个元素是否存在
+        c.remove("e");
+
+        System.out.println(c);
+    }
+}
+
+#+END_SRC
 4. List:列表
    - 元素有序（指的是保证元素的添加顺序），允许添加重复元素
    - 提供了下标来获取元素
+#+BEGIN_SRC java
+package cn.commandoptionesc.Collection;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListDemo {
+    public static void main(String[] args) {
+
+        List<String> list = new ArrayList<>();
+        list.add("f");
+        list.add("e");
+        list.add("a");
+        list.add("y");
+        list.add("e");
+        //在列表的指定下标位置上来插入元素:[f,e,a,s,y,e]
+        list.add(3,"s");
+        //IndexOutOfBoundsException:下标越界
+        //list.add(-1,"f");
+        System.out.println(list);
+
+        List<String> list2 = new ArrayList<>();
+        list2.add("f");
+        list2.add("e");
+        list2.add("a");
+        list2.add("y");
+        list2.add("e");
+        System.out.println(list.equals(list2));
+
+        List<String> list3 = new ArrayList<>();
+        list3.add(new String("f"));
+        list3.add(new String("e"));
+        list3.add(new String("a"));
+        list3.add(new String("y"));
+        list3.add(new String("e"));
+        //比较两个list是否一致
+        //逐位比较，每一位上的元素是否一致
+        System.out.println(list.equals(list3));
+
+        List<String> list4 = new ArrayList<>();
+        list4.add("f");
+        list4.add("e");
+        list4.add("a");
+        list4.add("y");
+        list4.add("e");
+
+        //获取指定下标位置上的元素
+        System.out.println(list4.get(0));
+
+        //获取指定元素第一次出现的下标
+        //如果没有找到，则返回-1
+        System.out.println(list4.indexOf("s"));
+
+        //获取指定元素最后一次出现的下标
+        System.out.println(list4.lastIndexOf("e"));
+
+        //溢出指定的元素，但是注意，只移除第一个
+        list4.remove("e");
+
+        //移除指定位置上的元素
+        list4.remove(0);
+
+        //替换指定位置上的元素
+        System.out.println(list.set(0,"h"));
+
+        //截取字列表 - 包头不包尾
+        System.out.println(list.subList(0,3));
+    }
+}
+
+#+END_SRC
    - 实现类：ArrayList底层是基于数组的，默认初始容量为10.每次扩容默认是在上一次容量的基础上增加一半的容量，也就意味着初始容量是10，那么扩容之后的容量就是15，再次扩容之后的容量就是22 - 用数组来模拟一个ArrayList - 线程不安全的列表 - ArrayList是便于查询而不便于增删
+     #+BEGIN_SRC java
+     package cn.commandoptionesc.collection;
+
+     import java.util.Arrays;
+
+     public class ArrayListDemo {
+         public static void main(String[] args) {
+
+         }
+     }
+
+     //模拟ArrayList
+     class ArrList{
+
+         //需要先定义一个数组来存储元素
+         private String[] data;
+         //表示元素个数，也表示要添加的元素的下标
+         private  int size = 0;
+
+         public ArrList(){
+
+             //如果没有参数，则数组的初始容量定义为10
+             data = new String[10];
+         }
+
+         public ArrList(int initialCapacity){
+
+             //需要先判断这个容量是否合法
+             if(initialCapacity < 0)
+                 throw new IllegalArgumentException();
+             //如果容量合法，则赋值
+             data = new String[initialCapacity];
+         }
+
+         //添加元素
+         public void add(String str){
+
+             //判断是否需要扩容
+             if(size >= data.length)
+                 grow();
+             data[size] = str;
+             size++;
+         }
+
+         private  void grow(){
+             if(data.length <= 1)
+                 data = Arrays.copyOf(data,data.length + 1);
+             else
+                 data = Arrays.copyOf(data,data.length + (data.length >> 1));
+         }
+     }
+
+     #+END_SRC
+     #+BEGIN_SRC java
+     package cn.commandoptionesc.collection;
+
+     import java.util.Arrays;
+     import java.util.Objects;
+
+     public class ArrayListDemo {
+         public static void main(String[] args) {
+             ArrList list = new ArrList(3);
+             list.add("a");
+             list.add("b");
+             list.add("c");
+             list.add("d");
+             list.add("e");
+
+             list.add(0,"f");
+
+             System.out.println(list.indexOf("c"));
+             list.remove(0);
+             System.out.println(list);
+         }
+     }
+
+     //模拟ArrayList
+     class ArrList{
+
+         //需要先定义一个数组来存储元素
+         private String[] data;
+         //表示元素个数，也表示要添加的元素的下标
+         private  int size = 0;
+
+         public ArrList(){
+
+             //如果没有参数，则数组的初始容量定义为10
+             data = new String[10];
+         }
+
+         public ArrList(int initialCapacity){
+
+             //需要先判断这个容量是否合法
+             if(initialCapacity < 0)
+                 throw new IllegalArgumentException();
+             //如果容量合法，则赋值
+             data = new String[initialCapacity];
+         }
+
+         //添加元素
+         public void add(String str){
+
+             //判断是否需要扩容
+             if(size >= data.length)
+                 grow();
+             data[size] = str;
+             size++;
+         }
+
+         //扩容
+         private  void grow(){
+             if(data.length <= 1)
+                 data = Arrays.copyOf(data,data.length + 1);
+             else
+                 data = Arrays.copyOf(data,data.length + (data.length >> 1));
+         }
+
+         //插入元素
+         public void add(int index,String str){
+
+             //判断插入的下标是否越界
+             if(index > size || index < 0)
+                 throw new IndexOutOfBoundsException("size:" + size + ",Index:" + index);
+
+             //判断是否需要扩容
+             if(size >= data.length)
+                 grow();
+
+             for(int i = size - 1;i >= index;i--){
+                 data[i + 1] = data[i];
+             }
+
+             //将元素放入index位
+             data[index] = str;
+
+             //元素个数+1
+             size++;
+         }
+         //清空列表
+         public void clear(){
+
+             data = new String[10];
+             size = 0;
+         }
+
+         //获取指定元素第一次出现的下标
+         //data[i] = null
+         //str = null
+         public int indexOf(String str){
+
+             for(int i = 0;i < size;i++){
+                 if(data[i] == str || data[i] != null && data[i].equals(str))
+                     return i;
+             }
+             //如果整个循环结束都没有返回，那就说明没有这个元素
+             return -1;
+         }
+
+         //判断是否有指定的元素
+         public boolean contains(String str){
+
+             int index = indexOf(str);
+             return index != -1;
+         }
+
+         @Override
+         public boolean equals(Object obj){
+             //判断地址是否一致
+             if(this == obj)
+                 return true;
+
+             //判断参数是否为空
+             if(obj == null)
+                 return false;
+
+             if(obj.getClass() != this.getClass())
+                 return  false;
+
+             ArrList list = (ArrList) obj;
+
+             if(this.size != list.size)
+                 return false;
+
+                 for(int i = 0;i < size; i++){
+            String s1 = this.data[i];
+            String s2 = list.data[i];
+            if(s1 == null){
+                if(s2 != null)
+                    return false;
+            }else if(!s1.equals(s2))
+                return false;
+        }
+        return true;
+    }
+
+    //判断下标是否越界
+    private void outOfIndex(int index){
+        if(index < 0 || index >= size)
+            throw new IndexOutOfBoundsException("Size:" + size + ",Index:" + index);
+    }
+
+    //获取指定下标上的元素
+    public String get(int index){
+
+            //判断下标是否越界
+            outOfIndex(index);
+
+            return data[index];
+    }
+
+        //判断集合是否为空
+        public boolean isEmpty() {
+            return size == 0;
+        }
+
+        //获取指定元素最后一次出现的下标
+    public int lastIndexOf(String str){
+        for(int i = size - 1;i >= 0;i--){
+            if(data[8] == str || data[i] != null && data[i].equals(str))
+                return i;
+        }
+        return -1;
+    }
+
+    //移除指定下标位置上的元素
+    public void remove(int index){
+
+            //判断下标是否越界
+            outOfIndex(index);
+            for(int i = index;i < size -1;i++){
+                data[i] = data[i + 1];
+            }
+            size--;
+        }
+
+        //移除指定的元素,注意只移除第一个
+        public void remove(String str){
+
+            //获取元素的下标
+            int index = indexOf(str);
+
+            if(index != -1){
+                this.remove(index);
+            }
+        }
+
+        //替换指定位置上的元素
+        public void set(int index,String str){
+            //判断下标是否越界
+            outOfIndex(index);
+            data[index] = str;
+        }
+
+        //获取元素个数
+        public int size(){
+            return size;
+        }
+
+        //截取子列表
+        public ArrList subList(int fromIndex,int toIndex){
+
+            //判断下标是否合法
+            if(toIndex < fromIndex || fromIndex < 0 || toIndex < 0 || fromIndex > size || toIndex > size)
+                throw new IllegalArgumentException();
+            ArrList sub = new ArrList();
+            for(int i = fromIndex;i < toIndex;i++){
+                sub.add(data[i]);
+            }
+            return sub;
+        }
+
+        //重写toString
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder("[");
+            for(int i = 0;i < size;i++){
+                sb.append(data[i]).append(",");
+            }
+
+             String str = sb.toString();
+             if(str.length() > 2)
+                 str = str.substring(0,str.length() - 2);
+             return str += "]";
+         }
+     }
+
+     #+END_SRC
    - 实现类：LinkedList底层是基于节点的，没有初始容量，也就不需要考虑扩容 - 线程不安全的列表 - LinkedList是便于增删而不便于查询
      [[./Img/4.png]]
    - Vector:向量。类似于ArrayList，底层也是基于数组来存储，但是每次扩容的时候，默认是增加一倍 - Vector是一个线程安全的集合
@@ -3188,9 +3653,13 @@ class FileFormatException extends IOException {
      | 栈底元素  | 最先放入栈中的元素 |
      | 栈顶元素  | 最后放入占中的元素 |
      |-----------+--------------------|
+
 5. Set:散列集合
    - 特点：不保证元素的顺序，而且要求元素元素不重复
    - HashSet：在地城会对元素进行排序，默认是升序排序。要求存储在TreeSet中的元素对应的类必须实现Comparable接口
+#+BEGIN_SRC java
+
+#+END_SRC
 6. Queue：队列，遵循先进先出的原则
 ** 和集合相关的类
 1. Iterator：迭代器。实际上是利用迭代的方式去遍历一个集合。迭代器在迭代过程中不允许直接增删原集合，而是需要通过迭代器提供的remove方法移除。增强for循环本质上是一个简化版的迭代器，增强for循环底层也是利用迭代器来迭代遍历的。要求能够被迭代的元素对应的类必须实现Iterable接口。
