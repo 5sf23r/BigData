@@ -3284,77 +3284,77 @@ public class CollectionDemo {
 4. List:列表
    - 元素有序（指的是保证元素的添加顺序），允许添加重复元素
    - 提供了下标来获取元素
-#+BEGIN_SRC java
-package cn.commandoptionesc.Collection;
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.Collection;
 
-import java.util.ArrayList;
-import java.util.List;
+   import java.util.ArrayList;
+   import java.util.List;
 
-public class ListDemo {
-    public static void main(String[] args) {
+   public class ListDemo {
+       public static void main(String[] args) {
 
-        List<String> list = new ArrayList<>();
-        list.add("f");
-        list.add("e");
-        list.add("a");
-        list.add("y");
-        list.add("e");
-        //在列表的指定下标位置上来插入元素:[f,e,a,s,y,e]
-        list.add(3,"s");
-        //IndexOutOfBoundsException:下标越界
-        //list.add(-1,"f");
-        System.out.println(list);
+           List<String> list = new ArrayList<>();
+           list.add("f");
+           list.add("e");
+           list.add("a");
+           list.add("y");
+           list.add("e");
+           //在列表的指定下标位置上来插入元素:[f,e,a,s,y,e]
+           list.add(3,"s");
+           //IndexOutOfBoundsException:下标越界
+           //list.add(-1,"f");
+           System.out.println(list);
 
-        List<String> list2 = new ArrayList<>();
-        list2.add("f");
-        list2.add("e");
-        list2.add("a");
-        list2.add("y");
-        list2.add("e");
-        System.out.println(list.equals(list2));
+           List<String> list2 = new ArrayList<>();
+           list2.add("f");
+           list2.add("e");
+           list2.add("a");
+           list2.add("y");
+           list2.add("e");
+           System.out.println(list.equals(list2));
 
-        List<String> list3 = new ArrayList<>();
-        list3.add(new String("f"));
-        list3.add(new String("e"));
-        list3.add(new String("a"));
-        list3.add(new String("y"));
-        list3.add(new String("e"));
-        //比较两个list是否一致
-        //逐位比较，每一位上的元素是否一致
-        System.out.println(list.equals(list3));
+           List<String> list3 = new ArrayList<>();
+           list3.add(new String("f"));
+           list3.add(new String("e"));
+           list3.add(new String("a"));
+           list3.add(new String("y"));
+           list3.add(new String("e"));
+           //比较两个list是否一致
+           //逐位比较，每一位上的元素是否一致
+           System.out.println(list.equals(list3));
 
-        List<String> list4 = new ArrayList<>();
-        list4.add("f");
-        list4.add("e");
-        list4.add("a");
-        list4.add("y");
-        list4.add("e");
+           List<String> list4 = new ArrayList<>();
+           list4.add("f");
+           list4.add("e");
+           list4.add("a");
+           list4.add("y");
+           list4.add("e");
 
-        //获取指定下标位置上的元素
-        System.out.println(list4.get(0));
+           //获取指定下标位置上的元素
+           System.out.println(list4.get(0));
 
-        //获取指定元素第一次出现的下标
-        //如果没有找到，则返回-1
-        System.out.println(list4.indexOf("s"));
+           //获取指定元素第一次出现的下标
+           //如果没有找到，则返回-1
+           System.out.println(list4.indexOf("s"));
 
-        //获取指定元素最后一次出现的下标
-        System.out.println(list4.lastIndexOf("e"));
+           //获取指定元素最后一次出现的下标
+           System.out.println(list4.lastIndexOf("e"));
 
-        //溢出指定的元素，但是注意，只移除第一个
-        list4.remove("e");
+           //溢出指定的元素，但是注意，只移除第一个
+           list4.remove("e");
 
-        //移除指定位置上的元素
-        list4.remove(0);
+           //移除指定位置上的元素
+           list4.remove(0);
 
-        //替换指定位置上的元素
-        System.out.println(list.set(0,"h"));
+           //替换指定位置上的元素
+           System.out.println(list.set(0,"h"));
 
-        //截取字列表 - 包头不包尾
-        System.out.println(list.subList(0,3));
-    }
-}
+           //截取字列表 - 包头不包尾
+           System.out.println(list.subList(0,3));
+       }
+   }
 
-#+END_SRC
+   #+END_SRC
    - 实现类：ArrayList底层是基于数组的，默认初始容量为10.每次扩容默认是在上一次容量的基础上增加一半的容量，也就意味着初始容量是10，那么扩容之后的容量就是15，再次扩容之后的容量就是22 - 用数组来模拟一个ArrayList - 线程不安全的列表 - ArrayList是便于查询而不便于增删
      #+BEGIN_SRC java
      package cn.commandoptionesc.collection;
@@ -3644,7 +3644,315 @@ public class ListDemo {
 
      #+END_SRC
    - 实现类：LinkedList底层是基于节点的，没有初始容量，也就不需要考虑扩容 - 线程不安全的列表 - LinkedList是便于增删而不便于查询
-     [[./Img/4.png]]
+     [[./Img0/4.png]]
+     #+BEGIN_SRC java
+     package cn.commandoptionesc.collection;
+
+     import java.util.LinkedList;
+     import java.util.List;
+
+     public class LinkedListDemo {
+         public static void main(String[] args) {
+
+             //LinkedList和ArrayList的使用方式一致，但是底层实现是不一样
+             List<String> list = new LinkedList<>();
+             list.add("a");
+             list.add("b");
+             list.add("t");
+
+             System.out.println(list);
+         }
+     }
+     #+END_SRC
+     #+BEGIN_SRC java
+     package cn.commandoptionesc.collection;
+
+     public class LinkedListDemo2 {
+         public static void main(String[] args) {
+             LinkList list = new LinkList();
+             list.add("a");
+             //list.add("a");
+             //list.add("b");
+             //list.add("c");
+             //list.add("d");
+             //list.add("e");
+             //list.add("f");
+
+             //list.remove(0);
+             //list.remove(5);
+             list.remove(2);
+
+             //System.out.println(list.indexOf("c"));
+
+             //list.add(0,g);
+             //list.add(6,"g");
+             //list.add(2,"g");
+
+             //list.clear();
+             System.out.println(list);
+         }
+     }
+
+     //模拟一个LinkedList
+     class LinkList {
+
+         private Node first;//头节点
+         private Node last;//尾节点
+         private int size = 0;//记录元素个数
+
+         //添加元素
+         public void add(String str){
+
+             //创建一个节点存储这个元素
+             Node n = new Node(null,str,null);
+             //判断这是不是添加的第一个元素
+             if(size == 0){
+                 //如果是一个元素，头节点和尾节点就是同一个节点
+                 first = last = n;
+             }else{
+                 //尾节点的下一位是新节点
+                 this.last.next = n;
+                 //新节点的上一位是尾节点
+                 n.prev = this.last;
+                 this.last = n;
+             }
+             size++;
+         }
+
+         //插入元素
+         public void add(int index,String str){
+
+             //判断下标是否越界
+             if(index < 0 || index > size)
+                 throw new IllegalArgumentException();
+
+             //创建一个Node对象来存储元素
+             Node n = new Node(null,str,null);
+             if(index == size){
+                 //尾部追加
+                 this.add(str);
+                 return ;
+             }else if(index == 0){
+                 //头部插入
+                 //新节点的下一位是原来的头节点
+                 n.next = first;
+                 //原来的头节点的上一位是新节点
+                 first.prev = n;
+                 //新节点成为头结点
+                 first = n;
+             }else {
+                 //中间插入
+                 //先找到要插入的下标位置对应的节点
+                 Node node = this.getNode(index);
+
+                 //原来的上一位的下一个节点成为新节点
+                 node.prev.next = n;
+                 //新节点的上一位是原来节点的上一位
+                 n.prev = node.prev;
+                 //新节点的下一位是原来的节点
+                 n.next = node;
+                 //原来节点的上一位是新节点
+                 node.prev = n;
+
+
+             }
+             size ++;
+         }
+
+         //获取指定下标位置上的节点
+         private Node getNode(int index){
+
+             if(index <= size/2){
+                 //下标在前半段
+                 int i = 0;
+                 Node n = this.first;
+
+                 while (i < index){
+                     n = n.next;
+                     i++;
+                 }
+                 return n;
+             }else{
+                 //下标在后半段
+                 int i = size - 1;
+                 Node n = this.last;
+                 while(i > index){
+                     n = n.next;
+                     i--;
+                 }
+                 return n;
+             }
+         }
+
+         //清空集合
+         public void clear(){
+
+             size = 0;
+             this.first = this.last = null;
+         }
+
+         //获取指定元素出现的节点
+         public int indexOf(String str){
+
+             Node n = this.first;
+             for(int i = 0;i < size;i++){
+                 String s = n.str;
+                 if(str == s || s !=null && s.equals(str))
+                     return i;
+
+                 n = n.next;
+             }
+             return -1;
+         }
+
+         //判断是否有指定元素
+         public boolean contains(String str){
+             int index = indexOf(str);
+             return index != -1;
+         }
+
+         private void outOfIndex(int index){
+             if(index < 0 || index >= size)
+                 throw new IndexOutOfBoundsException("Size:" + size + ",Index" + index);
+         }
+
+
+         //获取指定下标上的元素
+         public String get(int index){
+             //先判断下标是否越界
+             outOfIndex(index);
+             //获取指定小标上的元素
+             Node n = this.getNode(index);
+             return n.str;
+         }
+
+         public boolean isEmpty(){
+             return size == 0;
+         }
+
+         //获取指定元素最后一次出现的下标
+         public int lastIndexOf(String str){
+
+             Node n = this.last;
+             for(int i = size - 1;i >= 0;i--){
+                 String s = n.str;
+             if(s == str || s !=null && s.equals(str))
+                 return i;
+                 n = n.prev;
+             }
+             return -1;
+         }
+
+         //移除指定下标上的元素
+         public void remove(int index){
+
+             //判断下标是否越界
+             this.outOfIndex(index);
+
+             //判断是否只有1个元素
+             if(size == 1){
+                 first = last = null;
+             }else if(index == 0){
+                 //头部移除
+                 //头节点的下一个就变成了新的头节点
+                 first = first.next;
+                 //原来的头节点的指向清空
+                 first.prev.next = null;
+                 //新的头节点的上一位也要清空
+                 first.prev = null;
+             }else if(index == size -1){
+                 //尾部移除
+                 //尾节点的上一位就变成了新的尾节点
+                 last = last.prev;
+                 //原来的尾节点的指定要清空
+                 last.next.prev = null;
+                 //新的尾节点的下一位也要清空
+                 last.next = null;
+             }else{
+                 //中间移除
+                 //先找到要移除的位置的元素
+                 Node n = this.getNode(index);
+                 //原来节点的上一位的下一个节点要指向原来的下一位
+                 n.prev.next = n.next;
+                 //原来节点的下一位的上一位节点要指向原来的上一位
+                 n.next.prev = n.prev;
+                 //这个节点的指向要清空
+                 n.prev = null;
+                 n.next = null;
+                 n = null;
+             }
+             size --;
+         }
+
+         //移除指定的元素，只移动第一次
+         public void remove(String str){
+             int index = this.indexOf(str);
+             if(index != -1)
+             remove(index);
+         }
+
+         //替换指定位置上的元素
+         public void set(int index,String str){
+             //下标越界
+             outOfIndex(index);
+             //获取指定下标上的节点
+             Node n = this.getNode(index);
+             n.str = str;
+         }
+
+         //获取元素个数
+         public int size(){
+             return size;
+         }
+
+         //截取子字符串
+         public LinkList subList(int fromIndex,int toIndex){
+             if(fromIndex > toIndex || fromIndex < 0 || toIndex < 0 || fromIndex > size || toIndex > size)
+                 throw new IllegalArgumentException();
+
+             LinkList list = new LinkList();
+             //获取到指定下标位置上的节点
+             Node n = this.getNode(fromIndex);
+             for(int i = fromIndex; i < toIndex;i++){
+                 list.add(n.str);
+                 n = n.next;
+             }
+             return list;
+         }
+
+         //添加方法
+         @Override
+         public String toString() {
+             StringBuilder sb = new StringBuilder("[");
+             Node n = this.first;
+             for(int i = 0;i < size;i++){
+                 sb.append(n.str).append(",");
+                 //向后推后一位
+                 n = n.next;
+             }
+
+             String str = sb.toString();
+             if(str.length() > 2)
+                 str = str.substring(0,str.length() - 2);
+
+             return str += "]";
+         }
+
+         //提供一个内部类类存储节点信息
+         private class Node {
+
+             Node prev;//上一个节点
+             String str;//数据
+             Node next;//下一个节点
+
+             public Node(Node prev, String str, Node next) {
+                 this.prev = prev;
+                 this.str = str;
+                 this.next = next;
+             }
+         }
+     }
+     #+END_SRC
    - Vector:向量。类似于ArrayList，底层也是基于数组来存储，但是每次扩容的时候，默认是增加一倍 - Vector是一个线程安全的集合
    - Stack:栈。继承了Vector，本身是一个后进先出/先进后厨的结构。
      |-----------+--------------------|
@@ -3653,33 +3961,448 @@ public class ListDemo {
      | 栈底元素  | 最先放入栈中的元素 |
      | 栈顶元素  | 最后放入占中的元素 |
      |-----------+--------------------|
+     #+BEGIN_SRC java
+     package cn.commandoptionesc.collection;
 
+     import java.util.Stack;
+
+     public class StackDemo {
+         public static void main(String[] args) {
+
+             Stack<String> s = new Stack<>();
+
+             //添加元素 - 入栈
+             s.push("a");
+             s.push("b");
+             s.push("c");
+             s.push("d");
+
+             //从栈顶到栈地来寻找指定的元素第一次出现的位置，注意从1开始计费
+             System.out.println("b");
+
+             //获取但是不移除栈顶元素
+             //如果栈为空，则抛出EmptyStackException
+             //System.out.println(s.peek());
+
+             //获取但是移除栈顶元素
+             //System.out.println(s.pop());
+
+             //判断是否为空
+             //System.out.println(s.empty());
+
+             //判断栈是否为空
+             System.out.println(s);
+         }
+     }
+
+     #+END_SRC
 5. Set:散列集合
    - 特点：不保证元素的顺序，而且要求元素元素不重复
    - HashSet：在地城会对元素进行排序，默认是升序排序。要求存储在TreeSet中的元素对应的类必须实现Comparable接口
-#+BEGIN_SRC java
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.collection;
 
-#+END_SRC
+   import java.util.HashSet;
+   import java.util.Set;
+
+   public class HashSetDemo {
+       public static void main(String[] args) {
+
+
+           Set<String> set = new HashSet<>();
+           //不保证元素的存储顺序
+           //没有下标
+           set.add("big");
+           set.add("java");
+           set.add("java");
+           set.add("commandoptionesc");
+           set.add("java");
+
+           for(String str : set){
+               System.out.println(str);
+           }
+
+
+           System.out.println(set);
+       }
+   }
+
+   #+END_SRC
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.collection;
+
+   import java.util.TreeSet;
+
+   public class TreeSetDemo {
+       public static void main(String[] args) {
+
+           TreeSet<String> set = new TreeSet<>();
+
+           set.add("r");
+           set.add("a");
+           set.add("g");
+           set.add("i");
+           set.add("r");
+
+           System.out.println(set);
+
+           TreeSet<Student> set1 = new TreeSet<>();
+           set1.add(new Student("Bob",17,9));
+           set1.add(new Student("Amy",18,70));
+           set1.add(new Student("Tom",16,85));
+           set1.add(new Student("Sam",16,60));
+           for(Student s : set1){
+               System.out.println(s);
+           }
+       }
+   }
+
+   class Student implements Comparable<Student>{
+       private String name;
+       private int age;
+       private int score;
+
+       public Student(String name,int age,int score){
+           this.name = name;
+           this.age = age;
+           this.score = score;
+       }
+
+       @Override
+       public String toString() {
+           return "Student{" +
+           "name='" + name + '\'' +
+                  ", age=" + age +
+                  ", score=" + score +
+                  '}';
+
+       }
+
+
+       //决定排序顺序
+       //需要指定要根据哪个属性进行排序
+       //根据分数降序排序
+       //降序排序：o - this
+       //升序排序：this - o
+       @Override
+       public int compareTo(Student o) {
+           //根据分数降序排序
+           //return o.score - this.score;
+           //根据年龄升序排序
+           //排序的时候，如果值相减为0，则会认为是重复元素
+           //Set不会存储重复的元素
+           return this.age - o.age;
+       }
+   }
+   #+END_SRC
 6. Queue：队列，遵循先进先出的原则
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.collection;
+
+   import java.util.LinkedList;
+   import java.util.Queue;
+
+   public class QueueDemo {
+       public static void main(String[] args) {
+
+           //创建了一个队列
+           Queue<String> queue = new LinkedList<>();
+
+           //添加元素
+           queue.add("a");
+           queue.add("a");
+           queue.add("a");
+
+           //往外拿元素
+           System.out.println(queue.poll());
+           System.out.println(queue);
+
+       }
+   }
+
+   #+END_SRC
 ** 和集合相关的类
 1. Iterator：迭代器。实际上是利用迭代的方式去遍历一个集合。迭代器在迭代过程中不允许直接增删原集合，而是需要通过迭代器提供的remove方法移除。增强for循环本质上是一个简化版的迭代器，增强for循环底层也是利用迭代器来迭代遍历的。要求能够被迭代的元素对应的类必须实现Iterable接口。
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.collection;
+
+   import java.util.HashSet;
+   import java.util.Iterator;
+   import java.util.Set;
+
+   public class IteratorDemo {
+       public static void main(String[] args) {
+
+
+           Set<String> set = new HashSet<>();
+           set.add("a");
+           set.add("b");
+           set.add("d");
+           set.add("e");
+           set.add("f");
+
+           //利用迭代器遍历，需要先获取迭代器
+           Iterator<String> it = set.iterator();
+           //判断是否有下一个
+           while(it.hasNext()){
+               //挪动指针获取元素
+               String s = it.next();
+               System.out.println(s);
+               //迭代器在迭代过程中不允许直接增删原集合，而是需要通过迭代器提供的remove方法移除
+               //set.remove(s);
+               it.remove();
+           }
+
+           System.out.println(set);
+       }
+   }
+
+   #+END_SRC
 2. Collections：集合的工具类，提供了大量的操作集合的方法
 ** 泛型
 1. 泛型的学名是参数化类型 - ParameterizedType
 2. 在JDK1.5之前，没有泛型的概念，从JDK1.5开始，出现了泛型
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.type;
+
+   import java.util.ArrayList;
+   import java.util.List;
+
+   public class TypeDemo {
+       public static void main(String[] args) {
+
+           //在JDK1.5之前，没有泛型的概念，此时集合中的元素类型可以是任意类型
+           //可以通过泛型规定元素类型，使得集合中的元素就统一了
+           //再去使用集合的时候就不需要考虑类型带来的问题
+           //List<String> list = new ArrayList<String>();
+           //从JDK1.7开始，允许后边可以不写泛型，会根据前边的类型进行自动的推导
+           //List<String> list = new ArrayList<>();
+
+           List list = new ArrayList();
+           list.add("a");
+           list.add(2);
+           list.add(true);
+
+           for (Object o : list) {
+               //需要判断类型之后才操作
+               if (o instanceof String) {
+                   System.out.println("这是一个字符串");
+                   String str = (String) o;
+               } else if (o instanceof Integer) {
+                   System.out.println("这是一个整数");
+                   Integer i = (Integer) o;
+
+               }
+           }
+       }
+   }
+   #+END_SRC
 3. 泛型的擦除：用具体类型来替换泛型的过程，反省的擦除发生在编译期间
 4. 如果需要定义一个泛型类，那么只需要在类名之后添加<泛型名>就可以声明一个泛型
 5. 通常情况下，只使用一个大写字母来给泛型命名，最常用的大写字母：T-type，E-Element,K-key,V-value,R-Result
+#+BEGIN_SRC java
+package cn.commandoptionesc.type;
+
+public class TypeDemo2 {
+    public static void main(String[] args) {
+
+        Demo<String,Double> d1 = new Demo<>();
+        d1.set("a");
+    }
+}
+
+//将位置的属性的类型以泛型的形式来体现
+//泛型的命名只要符合标识符的命名即可，但是通常状态下，一般使用1个大写字母来表示泛型
+class Demo<T,A>{
+
+    private  T t;
+    private  A a;
+
+    public T get(){
+        return t;
+    }
+
+    public void set(T t){
+        this.t = t;
+    }
+
+
+}
+
+#+END_SRC
 6. 在Java中，也允许给方法来单独定义一个泛型，此时这个方法称之为泛型方法
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.type;
+
+   public class TypeDemo3 {
+       public static void main(String[] args) {
+
+           TypeMethod t = new TypeMethod();
+           t.printString("ac");
+           t.printString(3);
+       }
+   }
+
+   class TypeMethod{
+
+       //需要传入一个参数，然后将参数转化为字符串打印出来
+       //需要给当前的方法来单独定义一个泛型
+       //此时这个泛型是这个方法独有的
+       public<T> void printString(T t){
+           System.out.println(t);
+       }
+   }
+
+   #+END_SRC
 7. ？extends类/接口，表示传入这个类/接口及其子类/子接口对象，此时称之为泛型的上限
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.type;
+
+   import java.util.ArrayList;
+   import java.util.List;
+
+   public class TypeDemo4 {
+
+       public static void main(String[] args) {
+           List<Cat> cats = new ArrayList<>();
+           List<Dog> dogs = new ArrayList<>();
+           List<Apple> apples = new ArrayList<>();
+
+           //假设向各个集合中添加了很多元素
+           //泛型没有向上造型
+           forEachAnimal(cats);
+           forEachAnimal(dogs);
+           //forEachAnimal(apples);
+       }
+
+       //提供一个方法来遍历元素类型是动物的集合
+       //泛型的上限就是Animal
+       //此时传入的参数就不能超过Animal，可以传入Animal及其子类对象
+       //public static void forEachAnimal(List <<? extends Animal> extends Object> animals){
+       public static void forEachAnimal(List<? extends Animal> animals){
+           for(Animal animal : animals){
+               System.out.println(animal);
+           }
+       }
+   }
+
+   class Animal{
+   }
+   class Cat extends Animal{
+
+   }
+   class Dog extends Animal{
+
+   }
+   class Apple{
+
+   }
+   #+END_SRC
 8. ？super类/接口，表示传入这个类/接口及其父类/父接口对象，此时称之为泛型的下限
 9. 上限和下限不能同时存在，即？extends XXX super XXX这种格式是不允许的
 ** Map<K,V>
 1. Map - 映射：需要由2组元素构成，一组元素称之为键，另一组元素称之为值
 2. 在Map中，每一个键必须对应一个值，把这种结构称之为键值对，即一个Map由多个键值对组成，键是唯一的
+   #+BEGIN_SRC java
+   package map;
+
+   import java.util.HashMap;
+   import java.util.Map;
+
+   public class MapDemo1 {
+       public static void main(String[] args) {
+
+           Map<String,Integer> map = new HashMap<>();
+           //添加元素
+           map.put("Bob",15);
+           map.put("Alex",17);
+           map.put("Helen",14);
+           map.put("Peter",16);
+           map.put("Mark",15);
+           //如果键重复,则对应的f值会被覆盖
+           //map.put("Bob",19);
+
+           /*
+           Map<String,Integer> map2 = new HashMap<>();
+           map2.put("Bob",15);
+           map2.put("Alex",17);
+           map2.put("Peter",16);
+           map2.put("Helen",14);
+           map2.put("Mark",15);
+           //判断内容是否一样，不是判断顺序
+           System.out.println(map.equals(map2));
+           */
+
+           //根据指定的键来获取值
+           //如果键不存在，则返回一个null
+           System.out.println(map.get("Lucy"));
+
+           //判断映射是否为空
+           System.out.println(map.isEmpty());
+
+           //移除指定的键对应的键值对
+           map.remove("Alex");
+
+           //返回映射中元素个数
+           System.out.println(map.size());
+
+
+
+           //清空映射
+           //map.clear();
+
+           //判断是否包含指定的键
+           //System.out.println(map.containsKey("Helen"));
+
+           //判断是否包含指定的值
+           System.out.println(map.containsValue(16));
+
+           System.out.println(map);
+       }
+   }
+
+   #+END_SRC
 3. 遍历映射：
    - 方式一：可以先获取映射中所有的键，然后遍历键，根据键获取值
    - 方式二：在Map中，将键值对封装成Entry对象，即每一个键值对实际上就是一个Entry，可以考虑直接获取所有的Entry
+   #+BEGIN_SRC java
+   package map;
+
+   import java.util.HashMap;
+   import java.util.Map;
+   import java.util.Set;
+
+   public class MapDemo2 {
+       public static void main(String[] args) {
+
+
+           Map<String,Integer> map = new HashMap<>();
+           map.put("Bob",15);
+           map.put("Alex",17);
+           map.put("Helen",14);
+           map.put("Peter",16);
+           map.put("Mark",15);
+
+           /*
+           //方式一：
+           //先获取所有的键 - 将所有的键放入一个Set集合中
+           Set<String> keys = map.keySet();
+           for(String key : keys){
+               System.out.println(key + "=" + map.get(key));
+           }
+           */
+
+           //方式二：
+           //可以考虑直接获取所有的键值对 - 将所有的键值对放入一个Set集合中
+           //此时Set中存放的是键值对，所以泛型应该表示键值对，即泛型应该是Entry类型
+           Set<Map.Entry<String,Integer>> entrys = map.entrySet();
+           for(Map.Entry<String,Integer> entry : entrys){
+               System.out.println(entry.getKey() + "=" + entry.getValue());
+           }
+       }
+   }
+
+   #+END_SRC
 4. Map不是集合，但是Map是Java集合框架的成员 - Java Collections Framework（Java集合框架），包含了数组、集合、映射以及相关的工具类，例如：Collection及其子类，Map及其子类，Arrays，Collections，Iterator，Comparable，Comparator等
 5. HashMap - 哈西映射：
    - 底层是基于数组 + 链表结构来存储数据。数组默认初始容量是16，数组的每一个位置都称之为是一个桶（bucket），每一个桶中维系一个链表
@@ -3690,11 +4413,286 @@ public class ListDemo {
    - Hashtable是Java中最早的映射之一
    - 底层是基于数组+链表结构来存储，默认初始容量是11，默认加载因子是0.75
    - Hashtable是一个同步线程安全的映射
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.map;
+
+   import java.util.HashMap;
+   import java.util.Map;
+   import java.util.Scanner;
+
+   /**
+   * 输入一个字符串，然后统计这个字符串哪种每一个字符出现的次数
+   */
+   public class MapExer {
+       public static void main(String[] args) {
+
+           //输入一个字符串
+           Scanner s = new Scanner(System.in);
+           String str = s.nextLine();
+
+           Map<Character,Integer> map = new HashMap<>();
+           //遍历这个字符串中的每一个字符，将每一个字符取出来进行次数计算
+           for(int i = 0;i < str.length();i++){
+               //获取指定下标位置上的字符
+               char c = str.charAt(i);
+               //先判断字符之前是否出现过
+               if(map.containsKey(c)){
+                   //如果出现过，那么需要在当前的次数上+1
+                   map.put(c,map.get(c) + 1);
+               }else{
+                   map.put(c,1);
+               }
+           }
+
+           //遍历映射，打印次数
+           for(Map.Entry<Character,Integer> entry : map.entrySet()){
+               System.out.println(entry.getKey() + ":" + entry.getValue());
+           }
+       }
+   }
+
+   #+END_SRC
 * API(三)
 ** File
 1. File是Java中提供的一套用于表示文件/目录(文件夹)的类
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.file;
+
+   import java.io.File;
+   import java.io.IOException;
+
+   public class FileDemo1 {
+       public static void main(String[] args) throws IOException {
+
+           //表示创建file对象指向Other文件下的ex.txt
+           //如果这个文件不存在，那么执行完成之后也不会创建这个文件，但是也不报错
+           //在底层只是将传入的字符串标记为一个文件
+           //只要不去使用，那么久不会去检查这个文件是否存在
+
+           /*
+           //Win系统下 "ex.txt"文件路径写法
+           //File file = new File("F:\\ex.txt");
+           */
+
+           //Mac系统下 "ex.txt"文件路径写法
+           //File file = new File("/Users/admin/Documents/BigData/Another/Java/Other/ex.txt");
+           //File file = new File("../Other/ex.txt");
+
+           File file = new File("../Other/ex");
+
+           //创建文件 - 在创建的时候要求制定的路径下没有同名文件
+           //返回值表示文件是否创建成功；
+           //这个方法只能创建文件不能创建目录
+           //boolean b = file.createNewFile();
+
+           //创建目录
+           //只能创建目录不能创建文件
+           //可以创建多层目录
+           //boolean b  = file.mkdirs();
+
+           //删除文件/目录
+           //如果利用代码去删除文件，这个文件不是挪到回收站中，而是直接从家计算机删除
+           //所以注意，这个操作是不可逆的
+           //在删除目录的时候需要目录为空 - 即这个目录中不能有字文件或者字目录
+           boolean b = file.delete();
+           System.out.println(b);
+           System.out.println("运行完成");
+       }
+   }
+
+   #+END_SRC
 2. 删除目录及其子目录和子文件 -> 获取这个目录下所有的子文件和子目录(listFiles)，如果是子文件可以直接删除，如果是子目录，那么得获取这个子目录中的子文件和子目录，后续功能和当前的功能是一致的 - 递归
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.file;
+
+   import java.io.File;
+
+   public class FileDemo2 {
+       public static void main(String[] args) {
+
+           File file = new File("../Other");
+
+           //获取other文件下所有的子文件和子目录
+           File[] files = file.listFiles();
+           for(File f : files){
+               System.out.println(f);
+           }
+
+           //判断是否是一个文件
+           System.out.println(file.isFile());
+           //判断是否是一个目录
+           System.out.println(file.isDirectory());
+       }
+   }
+
+   #+END_SRC
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.file;
+
+   import java.io.File;
+
+   public class FileExer1 {
+       public static void main(String[] args) {
+
+           File file = new File("../Other/ex");
+           deleteFile(file);
+       }
+       public static void deleteFile(File file){
+
+           //判断传入的参数是否为空
+           if(file == null){
+               throw new NullPointerException("传入的参数不能为空！！！");
+           }
+
+           //判断是否是一个目录
+           if(file.isDirectory()){
+               //如果是目录，那么需要获取子目录和子文件
+               File[] files = file.listFiles();
+               //遍历这个数组，再来一个个的一次处理
+               for(File f : files){
+                   deleteFile(f);
+               }
+           }
+
+           //无论是文件还是目录，都需要删除
+           file.delete();
+       }
+   }
+
+   #+END_SRC
 3. File提供了大量的操作文件/目录的方法
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.file;
+
+   import java.io.File;
+
+   public class FileDemo3 {
+       public static void main(String[] args) {
+
+           File file = new File("../Other/ex.txt");
+
+           //判断这个文件/目录是否是一个可执行文件/目录
+           //但是这个方法在windows中没有办法测试
+           //可执行：打开、读取、写入、删除
+           //boolean b = new file.canExecute();
+           //System.out.println(b);
+
+           //判断文件是否可写
+           //boolean b = file.canWrite();
+           //System.out.println(b);
+
+           //判断文件或者目录是否存在
+
+           //System.out.println(file.exists());
+
+           /*
+           //获取指定目录的可用空间，返回值是以字节来计数的，所以返回值类型是long
+           File file1 = new File("../Other");
+           System.out.println(file.getFreeSpace());
+           */
+       }
+   }
+
+   #+END_SRC
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.file;
+
+   import java.io.File;
+
+   public class FileDemo4 {
+       public static void main(String[] args) {
+
+           File file = new File("../Other/ex.txt");
+
+           /*
+           //这三个方法的特点，都不会去判断这个文件是否存在
+           //separatorChar - 路径分隔符，实际上就是 '/'
+           //获取文件名
+           System.out.println(file.getName());
+           //获取父目录
+           System.out.println(file.getParent());
+           //获取路径 - 在创建file的时候，传入什么路径，这儿获取的就是什么路径
+           System.out.println(file.getPath());
+           */
+
+           //判断是否是一个隐藏文件
+           //System.out.println(file.isHidden());
+
+           //获取文件的大小
+           //System.out.println(file.length());
+       }
+   }
+
+   #+END_SRC
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.file;
+
+   import java.io.File;
+   import java.io.FileFilter;
+
+   public class FileDemo5 {
+       public static void main(String[] args) {
+           File file = new File("../Other");
+
+           //获取所有的子文件和子目录
+           //File[] files = file.listFiles();
+           //for(File f : files){
+           //    System.out.println(f);
+           //}
+
+           //指向获取子文件
+           File[] files = file.listFiles(new FileFilter() {
+               @Override
+               //在这个方法中指定规则，如果符合规则，那么就会将文件/目录放入数组files中
+               public boolean accept(File pathname) {
+                   return pathname.isFile();
+               }
+           });
+           for(File f : files){
+               System.out.println(f);
+           }
+       }
+   }
+
+   #+END_SRC
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.file;
+
+   import java.io.File;
+
+   public class FileDemo6 {
+       public static void main(String[] args) {
+
+           File file = new File(".//Other/ex.txt");
+
+           //如果路径没有发生变化只是文件名改变，那么久执行重命名操作
+           //如果文件名没有发生变化但是路径改变，那么久执行剪切操作
+           //也可以路径和文件名同时变化
+           file.renameTo(new File("../Other/ex1.txt"));
+       }
+   }
+
+   #+END_SRC
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.file;
+
+   import java.io.File;
+
+   public class FileDemo7 {
+       public static void main(String[] args) {
+
+           File file = new File("../Other/ex.txt");
+
+           //将文件设置为只读模式
+           //只读的特点：文件可以读取但是不能写入
+           //file.setReadOnly();
+           //设置不可写
+           file.setWritable(false);
+           //setReadOnly和setable在windows中的效果是等价的
+       }
+   }
+
+   #+END_SRC
 ** IO
 1. IO -> IO流 - Input/Output Stream - 输入输出流
    - 输入流：数据从外部流向程序。例如读取文件 - 将数据从文件读取到程序中
@@ -3711,13 +4709,243 @@ public class ListDemo {
    |--------+-------------+--------------|
 4. 数据的来源/目的地：自盘、内存、网络、输入设备
 5. 向TXT文件中写入字符串 - 输出流、字符流、与文件相关的流 - FileWriter
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.io.file;
+
+   import java.io.FileWriter;
+   import java.io.IOException;
+
+   public class FileWriterDemo {
+       public static void main(String[] args) throws IOException {
+
+           //指定写入的文件
+           //如果文件不存在，会创建一个新文件
+           //如果文件存在，也会创建一个新文件将原来的文件覆盖掉
+           //FileWriter writer = new FileWriter("../Other/io/ex.txt");
+
+           //如果不想产生新文件将原来的文件覆盖，就需要在创建流对象的时候添加布尔值
+           FileWriter writer = new FileWriter("../Other/io/ex.txt",true);
+
+           //写数据
+           //数据并不是直接写到文件中，而是先写到缓冲区中
+           //等缓冲区满了，然后在将缓冲区中的数据放到文件中
+           //现在缓冲区没有塞满，程序结束了，数据没有写到文件中，而是死在了缓冲区中
+           writer.write("hello big data");
+
+           //冲刷缓冲区
+           writer.flush();
+
+           //需要关流，释放文件
+           //close之前，在底层会自动进行一次冲刷操作
+           writer.close();
+
+           System.out.println("运行完成");
+
+       }
+   }
+
+   #+END_SRC
 6. 流中的异常处理
    - 流对象需要放在try之外定义并且赋予null值，然后放到try之内进行初始化
    - 无论流写入数据成功与否，都需要灌流，所以close操作需要放到finally里面
    - 关流之前需要判断，判断流是否初始化成功，实际上就是判断流对象是否为空
    - 因为关流也存在失败的可能，所以需要最后将writer设置为null，那么无论如何这个writer都会被回收掉
-7. JDK1.7中，提供了try-with-resource方法来处理流中的异常，但是要求try()中的对象对应的类必须实现Closable接口或者是Closable的子接口AutoClosable;如果在方法中接收到了一个流对象处理，那么需要在定义一个变量单独接收这个流
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.io.file;
+
+   import java.io.FileWriter;
+   import java.io.IOException;
+
+   public class FileWriterDemo2 {
+       public static void main(String[] args) {
+
+           //需要将writer进行外置声明,并且赋予null值进行初始化
+           FileWriter writer = null;
+           try {
+               //放到try之内进行初始化去创建这个流对象
+               writer = new FileWriter("../Other/io/ex.txt");
+               writer.write("hello");
+           } catch (IOException e) {
+               e.printStackTrace();
+           } finally {
+               //在关流之前需要判断流是否初始化成功，实际上就是判断流是否为空
+               if(writer != null){
+
+                   try {
+                       //无论前面执行成功与否，这个流都需要进行关闭
+                       //如果close失败，那么这个流会依然占用文件，其他流就无法使用
+                       writer.close();
+                   } catch(IOException e){
+                       e.printStackTrace();
+                   }finally{
+                       //如果关流失败，那么久将writer的引用清空，这个writer就会被标记为垃圾对象
+                       //强制回收，释放文件
+                       //如果关流成功，也是将这个对象标记为垃圾对象
+                       writer = null;
+                   }
+               }
+           }
+       }
+   }
+
+   #+END_SRC
+7. JDK1.7中，提供了try-with-resource方法来处理流中的异常，但是要求try()中的对象对应的类必须实现Closable接口或者是Closable的子接口AutoClosable;如果在方法中接收到了一个流对象处理，那么需要在定义一个变量单独接收这个流.
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.io.file;
+
+   import java.io.File;
+   import java.io.FileWriter;
+   import java.io.IOException;
+
+   public class FileWriterDemo3 {
+       public static void main(String[] args) {
+
+           //正因为传统的流中的异常处理方式比较麻烦，所以在JDK1.7中，提供了一种更简单的处理方法
+           //try-with-resources
+           //要求放到try()中的数据必须实现closable接口
+           try(FileWriter writer = new FileWriter("../Other/io/ex.txt")){
+               writer.write("abc");
+               //这个close可写可不写，这种方式下，执行完成之后会自动关流
+               writer.close();
+           }catch(IOException e){
+               e.printStackTrace();
+           }
+       }
+
+       public void m(FileWriter writer){
+           //try-with-resources这种方式要求被处理对象的声明过程必须放在try()之中
+           try(FileWriter w = writer) {
+               writer.write("abc");
+           }catch(IOException e){
+               e.printStackTrace();
+           }
+       }
+   }
+
+   #+END_SRC
 8. FileReader：读取字符文件，结合FileWriter实现文件赋值的效果
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.io.file;
+
+   import java.io.FileNotFoundException;
+   import java.io.FileReader;
+   import java.io.IOException;
+
+   public class FileReaderDemo {
+       public static void main(String[] args) throws IOException {
+
+           //创建一个输入流，指向要读取的文件
+           FileReader reader = new FileReader("../Other/io/ex.txt");
+           //读取数据
+           //返回值表示的是读取的一个字节
+           //int i = reader.read();
+           //转化为字符打印出来
+           //System.out.println((char)i);
+
+           //需要将文件中所有的数据都读取出来
+           //定义一个变量来记录每次读取的数据
+           int i;
+           //如果读取到了文件的末尾，会返回-1
+           while((i = reader.read()) != -1){
+               System.out.println((char)i);
+           }
+
+           //关流
+           reader.close();
+       }
+   }
+
+   #+END_SRC
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.io.file;
+
+   import java.io.FileReader;
+   import java.io.FileWriter;
+   import java.io.IOException;
+
+   //将ex.txt文件赋值一份方法哦另外一个文件夹
+   public class CopyFileDemo {
+       public static void main(String[] args) throws IOException {
+
+           //创建输入流指向要读取的文件
+           FileReader reader = new FileReader("../Other/io/ex.txt");
+           //创建输出流指向要写出的文件
+           FileWriter writer = new FileWriter("../Other/io1/ex.txt");
+           //读取数据
+           //定义变量用于记录每次读取的数据
+           int i;
+           //定义循环来读取数据
+           while((i = reader.read()) != -1){
+               //需要将读取到的数据来写出
+               writer.write(i);
+           }
+           //关流
+           reader.close();
+           writer.close();
+       }
+   }
+
+   #+END_SRC
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.io.file;
+
+   import java.io.FileReader;
+   import java.io.IOException;
+
+   public class FileReaderDemo2 {
+       public static void main(String[] args) throws IOException {
+
+           //创建一个输入流指向要读取的文件
+           FileReader reader = new FileReader("../Other/io/ex.txt");
+           //准备缓冲区 - 输入流的缓冲区需要自己来定义
+           //准备了一个字符数组作为缓冲区来使用
+           char[] cs = new char[5];
+           //将数据线写到cs数组中，等数组写满了，再一次行的向外打印
+           //返回值表示的这次读取到的字符个数
+           //定义一个变量来记录每次读取到的字符个数
+           int len;
+           //第一次读取，读取了hello这5个字符，将5赋值给len
+           //第二次读取，读取了f这1个字符，将1赋值给len
+           //第三次读取，没有读取到数据，那么说明读到了末尾，那么僵-1赋值给len
+           while((len = reader.read(cs)) !=-1){
+               System.out.println(new String(cs,0,len));
+           }
+           //关流
+           reader.close();
+       }
+   }
+
+   #+END_SRC
+   #+BEGIN_SRC java
+   package cn.commandoptionesc.io.file;
+
+   import java.io.FileReader;
+   import java.io.FileWriter;
+   import java.io.IOException;
+
+   public class CopyFileDemo2 {
+       public static void main(String[] args) throws IOException {
+
+           //创建一个输入流指向要读取的文件
+           FileReader reader = new FileReader("../Other/io/ex.txt");
+           //创建一个输出流指向要写入的文件
+           FileWriter writer = new FileWriter("../Other/io1/ex1.txt");
+           //准备一个字符数组作为缓冲区
+           char[] cs = new char[10];
+           //定义一个变量来记录每次读取到的字符个数
+           int len;
+           //读取数据
+           while((len = reader.read(cs)) != -1){
+               //将读取到的数据写出
+               writer.write(cs,0,len);
+           }
+           //关流
+           writer.close();
+           reader.close();
+       }
+   }
+
+   #+END_SRC
 9. 缓冲流：
    - BufferedReader：提供了缓冲区，允许在读取数据的时候实现按行读取的效果 - 在实际过程中，一行实际上就是一个自然段
    - BufferedWriter：本身比其他的字符输出流提供了更大的缓冲区
