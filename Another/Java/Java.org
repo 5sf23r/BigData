@@ -5386,6 +5386,82 @@ class Demo<T,A>{
     - 只有输入流没有输出
     - 合并多个字节流，将这多个字节流中的数据合并到一块，实际过程中作用往往是将多个文件合并成一个文件。在创建合并流的时候，需要获取一个Enumeration对象，所以往往是利用Vector先来存储多个字节流，然后在利用这个Vector生成一个Enumeration对象，最后再构建合并流
     #+BEGIN_SRC java
+    package cn.commandoptionesc.io.other;
+
+    import java.io.FileInputStream;
+    import java.io.FileOutputStream;
+    import java.io.IOException;
+
+    public class UnionFileDemo {
+        public static void main(String[] args) throws IOException {
+
+            copy("../Other/io/a.txt","../Other/io/union.txt");
+            copy("../Other/io/b.txt","../Other/io/union.txt");
+            copy("../Other/io/c.txt","../Other/io/union.txt");
+            copy("../Other/io/d.txt","../Other/io/union.txt");
+        }
+
+        public static void copy(String inpath,String outpath) throws IOException{
+
+            //创建一个输入流来指向输入路径
+            FileInputStream in = new FileInputStream(inpath);
+            //创建一个输出流来指向输出路径
+            FileOutputStream out = new FileOutputStream(outpath,true);
+            //读取数据
+            byte[] data = new byte[10];
+            int len;
+            while((len = in.read(data)) != -1){
+                //将读取到的数据写出
+                out.write(data,0,len);
+            }
+            //关流
+            in.close();
+            out.close();
+        }
+    }
+
+    #+END_SRC
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.other;
+
+    import java.io.*;
+    import java.util.Enumeration;
+    import java.util.Vector;
+
+    public class SequenceInputStreamDemo {
+        public static void main(String[] args) throws IOException {
+
+            //创建字节流指向要读取的文件
+            FileInputStream in1 = new FileInputStream("../Other/io/a.txt");
+            FileInputStream in2 = new FileInputStream("../Other/io/b.txt");
+            FileInputStream in3 = new FileInputStream("../Other/io/c.txt");
+            FileInputStream in4 = new FileInputStream("../Other/io/d.txt");
+
+            //创建一个Vector对象存储FileInputStream
+            //Vector是一个集合
+            Vector<InputStream> v = new Vector<>();
+            v.add(in1);
+            v.add(in1);
+            v.add(in1);
+            //利用合格集合产生一个迭代器
+            //Enumeration是最古老的迭代器，出现在Iterator之前
+            Enumeration<InputStream> e = v.elements();
+            //创建合并流
+            SequenceInputStream sis = new SequenceInputStream(e);
+            //创建输出流
+            FileOutputStream out = new FileOutputStream("../Other/io/union.txt");
+            //读取数据
+            byte[] data = new byte[10];
+            int len;
+            while((len = sis.read(data)) != -1){
+                //将读取到的数据写出
+                out.write(data,0,len);
+            }
+            //关流
+            out.close();
+            sis.close();
+        }
+    }
 
     #+END_SRC
 18. 序列化/反序列化流：
@@ -5396,6 +5472,114 @@ class Demo<T,A>{
       + 被static、transien修饰的属性不会被序列化出去
       + 当一个类实现Serializable借口之后，这个类中如果没有指定SerialVersionUID（版本号），那么在运行的时候会根据类中的属性和方法自动计算一个版本号。如果类中的属性或者方法改变，那么就会自动重新计算一个新的版本号。在序列化的时候，版本号会随着对象一起呗序列化出去。在反序列化的时候，会先校验版本号是否一致，如果一致才能反序列化
       + 实际过程中，序列化和反序列化会被大量的应用，只要涉及到数据的传输和存储的问题，都会考虑序列化
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.serial;
+
+    import java.io.Serializable;
+
+    public class Student implements Serializable {
+        private String name;
+        private int age;
+        //static String classroom;
+        //transient修饰的属性是强制不被序列化
+        private transient double height;
+        private String gender;
+        private static final long serialVersionUID = 234255L;
+        private String no;
+
+        public String getNo() {
+            return no;
+        }
+
+        public void setNo(String no) {
+            this.no = no;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        public double getHeight() {
+            return height;
+        }
+
+        public void setHeight(double height) {
+            this.height = height;
+        }
+    }
+
+    #+END_SRC
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.serial;
+
+    import java.io.FileOutputStream;
+    import java.io.IOException;
+    import java.io.ObjectOutputStream;
+
+    public class ObjectOutputStreamDemo {
+        public static void main(String[] args) throws IOException {
+
+            //准备一个Student对象
+            Student s = new Student();
+            s.setName("Alex");
+            s.setAge(15);
+            //s.classroom = "302";
+            s.setHeight(144.8);
+
+            //创建一个序列化流
+            //表示序列化产生的数据写到"../Other/io/ex.txt中
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("../Other/io/ex.txt"));
+            //序列化对象
+            out.writeObject(s);
+            //关流
+            out.close();
+        }
+    }
+
+    #+END_SRC
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.serial;
+
+    import java.io.FileInputStream;
+    import java.io.IOException;
+    import java.io.ObjectInputStream;
+
+    public class ObjectInputStreamDemo{
+        public static void main(String[] args) throws IOException,ClassNotFoundException {
+
+            //创建反序列化对象
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("../Other/io/ex.txt"));
+            //反序列化对象
+            Student s = (Student) in.readObject();
+            //关流
+            in.close();
+            System.out.println(s.getName());
+            System.out.println(s.getAge());
+        }
+    }
+
+
+    #+END_SRC
 19. 其他：
 ** 线程
 1. 进程和线程
