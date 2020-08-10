@@ -4948,20 +4948,355 @@ class Demo<T,A>{
    #+END_SRC
 9. 缓冲流：
    - BufferedReader：提供了缓冲区，允许在读取数据的时候实现按行读取的效果 - 在实际过程中，一行实际上就是一个自然段
+     #+BEGIN_SRC java
+     package cn.commandoptionesc.io.buffer;
+
+     import java.io.BufferedReader;
+     import java.io.FileReader;
+     import java.io.IOException;
+
+     public class BufferedReaderDemo {
+         public static void main(String[] args) throws IOException {
+
+             //实际上是利用这个流去读取数据
+             FileReader fr = new FileReader("../Other/io/ex.txt");
+             //创建一个缓冲流 - 在构建缓冲流的时候需要传入一个其他的字符输入流
+             //这个流失提供缓冲区的FileReader读取出数据之后，会利用这个BufferedReader
+             BufferedReader reader = new BufferedReader(fr);
+             //按行读取
+             //String line = reader.readLine();
+             //System.out.println(line);
+             //定义变量来记录每一行数据
+             String line;
+             //如果读取到文件末尾，返回一个null
+             while((line = reader.readLine()) != null){
+                 System.out.println(line);
+             }
+             //关流
+             //可以只关外层流 - 会顺带着将里层的流关掉
+             reader.close();
+         }
+     }
+
+     #+END_SRC
+     #+BEGIN_SRC java
+     package cn.commandoptionesc.io.buffer;
+
+     import java.io.BufferedReader;
+     import java.io.File;
+     import java.io.FileReader;
+     import java.io.IOException;
+
+     //统计Java代码的行数
+     //思路拆分：
+     // 1. 先遍历，从目录中先找到所有的Java文件 ---
+     // 2. 读取Java文件然后统计Java代码的行数
+     public class BufferedReaderDemo2 {
+
+         //记录行数
+         private static int count = 0;
+
+         /*
+         //记录行数
+         private static int lineCount = 0;
+         //记录字数
+         private static int letterCount = 0;
+         */
+
+         public static void main(String[] args) throws IOException {
+
+             //创建File指向要读取的文件
+             File file = new File(".");
+             countLine(file);
+             System.out.println("额外添加，验证是否正确");
+             //System.out.println("Java代码总的行数:" + lineCount);
+             //System.out.println("字符的个数：" + letterCount);
+             System.out.println("Java代码总的行数：" + count);
+         }
+
+         private static void countLine(File file) throws IOException {
+
+             //判断这个参数是否为空
+             if(file == null)
+                 throw new NullPointerException("路径不能为空!!!!");
+
+             //判断是否目录还是文件
+             if(file.isDirectory()){
+                 //如果是目录，要获取这个目录下所有的子目录和子文件
+                 File[] fs = file.listFiles();
+                 //遍历数组，一次处理每一个子目录或者子文件
+                 for(File f : fs){
+                     countLine(f);
+                 }
+             }else if(file.getName().endsWith(".java")){
+                 //在计算机中，file如果不是目录那么就是文件
+                 //如果是文件要考虑是Java文件
+                 //如果是Java文件，那么读取这个Java文件来统计行数
+                 FileReader fr = new FileReader(file);
+                 //创建缓冲流对象
+                 BufferedReader br = new BufferedReader(fr);
+
+                 //判断是否读取到了文件的末尾
+                 /*
+                 String line;
+                 while((line = br.readLine()) != null){
+
+                     //每读取一行，统计的行数就需要+1
+                     lineCount++;
+                     //记录字符个数
+                     letterCount += line.length();
+                 }
+                 */
+                 while(br.readLine() != null){
+                     count++;
+                 }
+                 //关流
+                 br.close();
+             }
+         }
+     }
+
+     #+END_SRC
    - BufferedWriter：本身比其他的字符输出流提供了更大的缓冲区
 10. 文件的字节流
     - FileOutputStream：文件字节输出流，以字节的形式将数据写出到文件中 - 字节流没有缓冲区
     - FileInputStream：文件字节输入流，以字节的形式将数据从文件中读取出来
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.filestream;
+
+    import java.io.FileOutputStream;
+    import java.io.IOException;
+
+    public class FileOutputStreamDemo {
+        public static void main(String[] args) throws IOException {
+
+            //创建一个文件字节输出流
+            FileOutputStream out = new FileOutputStream("../Other");
+            //写出数据
+            //字节流没有缓冲区，会将数据直接写到文件中
+            out.write("hello".getBytes());
+            //关流
+            out.close();
+        }
+    }
+
+    #+END_SRC
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.filestream;
+
+    import java.io.FileInputStream;
+    import java.io.IOException;
+
+    public class FileInputStreamDemo {
+        public static void main(String[] args) throws IOException {
+
+            //穿件文件字节输出流
+            FileInputStream in = new FileInputStream("../Other/io/ex.txt");
+            //创建一个字节数组作为缓冲区
+            byte[] bs = new byte[10];
+            //定义一个变量记录每次读取到的字节个数
+            int len;
+            //读取数据
+            while((len = in.read(bs)) != -1){
+                System.out.println(new String(bs,0,len));
+            }
+            //关流
+            in.close();
+        }
+    }
+
+    #+END_SRC
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.filestream;
+
+    import java.io.FileInputStream;
+    import java.io.FileOutputStream;
+    import java.io.IOException;
+
+    public class CopyFileDemo {
+        public static void main(String[] args) throws IOException {
+
+            //创建输入流指向要读取的源文件
+            FileInputStream in = new FileInputStream("../Other/io/test.png");
+            //创建输出流指向要写出的文件
+            FileOutputStream out = new FileOutputStream("../Other/test.png");
+            //创建一个字节数组作为缓冲区
+            byte[] bs = new byte[10];
+            //定义一个变量来记录每次读到的字节个数
+            int len;
+            //读取数据
+            while((len = in.read(bs)) != -1){
+                //将读取到的数据写出
+                out.write(bs,0,len);
+            }
+            //关流
+            in.close();
+            out.close();
+        }
+    }
+
+    #+END_SRC
 11. 凡是字符流可以完成的操作，字节流都可以完成，只是传输的时候，字符流传输字符文件会比字节流要快一些
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.string;
+
+    import java.io.IOException;
+    import java.io.StringReader;
+
+    public class CopyFileDemo {
+        public static void main(String[] args) throws IOException {
+
+            //这个字符串在运行的时候是存储在内存中
+            String str = "hello big data";
+            //创建一个流对象指向这个字符串
+            StringReader reader = new StringReader(str);
+            //定义变量来记录每次读取到的字符
+            int i;
+            while((i = reader.read()) != -1){
+                System.out.println((char) i);
+            }
+            //关流
+            reader.close();
+
+        }
+    }
+
+    #+END_SRC
 12. 字符串流 - 用于读写字符串
     - StringReader：从内存中将字符串读取出来
     - StringWriter：将字符串写到内存中
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.string;
+
+    import java.io.IOException;
+    import java.io.StringWriter;
+
+    public class StringWriterDemo {
+        public static void main(String[] args) throws IOException {
+
+            //创建一个流
+            //这个流底层实际上是使用了StringBuffer来拼接字符串
+            StringWriter writer = new StringWriter();
+            //写数据
+            //将数据写到内存中
+            writer.write("hello");
+            writer.write("big data");
+            //关流
+            writer.close();
+        }
+    }
+
+    #+END_SRC
 13. 字节数组流 - 用于读写字节数组
     - ByteArrayOutputStream：产生字节数组，将这个字节数组放到内存中
+      #+BEGIN_SRC java
+      package cn.commandoptionesc.io.bytearray;
+
+      import java.io.ByteArrayOutputStream;
+      import java.io.IOException;
+
+      class ByteArrayOutputStreamDemo {
+          public static void main(String[] args) throws IOException {
+
+              //创建一个字节数组输出流
+              ByteArrayOutputStream out = new ByteArrayOutputStream();
+              //写出数据
+              //产生一个字节数组放到内存中
+              out.write("hello".getBytes());
+              //关流
+              out.close();
+              byte[] data = out.toByteArray();
+              System.out.println(new String(data));
+          }
+      }
+
+      #+END_SRC
     - ByteArrayInputStream：将字节数组从内存中读取出来
+      #+BEGIN_SRC java
+      package cn.commandoptionesc.io.bytearray;
+
+      import java.io.ByteArrayInputStream;
+      import java.io.IOException;
+
+      public class ByteArrayInputStreamDemo {
+          public static void main(String[] args) throws IOException {
+
+              //准备字节数组
+              byte[] data = "hello big data".getBytes();
+              //创建一个字节数组输入流
+              ByteArrayInputStream in = new ByteArrayInputStream(data);
+              //读取数据
+              byte[] bs = new byte[5];
+              int len;
+              while((len = in.read(bs)) != -1){
+                  System.out.println(new String(bs,0,len));
+              }
+              //关流
+              in.close();
+          }
+      }
+
+      #+END_SRC
 14. 转换流：字节流和字符流之间进行转换的桥梁，在这个过程中注意编码的转换问题
     - ByteputStreamWriter：将字符转化为字节，在底层将数据以字节形式来写出
+      #+BEGIN_SRC java
+      package cn.commandoptionesc.io.transform;
+
+      import java.io.FileOutputStream;
+      import java.io.IOException;
+      import java.io.OutputStreamWriter;
+
+      public class OutputStreamWriterDemo {
+          public static void main(String[] args) throws IOException {
+
+              //创建字节流
+              FileOutputStream fout = new FileOutputStream("../Other/io/ex.txt");
+              //创建转换输出流
+              //实际底层依然是利用FileOutputStream来写出，但是对外提供确实以字符流形式来提供
+              //在底层将字符转化为字节，然后以字节形式来写出
+              //如果没有指定编码，那么数据和当前工程的编码一致
+              OutputStreamWriter out = new OutputStreamWriter(fout);
+              //OutputStreamWriter out = new OutputStreamWriter(fout,"gbk");
+              //写出数据
+              out.write("什么东西");
+              //关流
+              out.close();
+          }
+      }
+
+      #+END_SRC
     - InputStreamReader：将字节转化为字符，在底层将数据已字节形式来读出来
+      #+BEGIN_SRC java
+      package cn.commandoptionesc.io.transform;
+
+      import java.io.FileInputStream;
+      import java.io.IOException;
+      import java.io.InputStreamReader;
+
+      public class InputStreamReaderDemo {
+          public static void main(String[] args) throws IOException {
+
+              //创建一个字节流
+              FileInputStream fin = new FileInputStream("../Other/io/ex.txt");
+              //创建转化输入流
+              //在底层是使用FileenputStream来读取数据
+              //读出来的数据是字节形式，但是却以字符形式来提供
+              //转换输入流在底层实际上是将字节流转化为字符流
+              InputStreamReader in = new InputStreamReader(fin);
+              //InputStreamReader in = new InputStreamReader(fin,"gbk");
+
+              //读取数据
+              char[] cs = new char[10];
+              int len;
+              while((len = in.read(cs)) != -1){
+                  System.out.println(new String(cs,0,len));
+              }
+              //关流
+              in.close();
+          }
+      }
+
+      #+END_SRC
 15. 系统流：
     - 本质是System类中提供的静态常量，作用是从控制台来获取数据或者将数据打印到控制台上
     - 分类
@@ -4973,13 +5308,86 @@ class Demo<T,A>{
       |------------+------------|
     - 系统流全部都是字节流
     - 系统流用完之后不需要关闭
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.system;
+
+    import java.io.IOException;
+
+    public class SystemDemo {
+        public static void main(String[] args) throws IOException {
+
+            //标准输入流
+            //Scanner
+            int i = System.in.read();
+            //标准输出流和标准错误流在底层实现上一模一样
+            //只有颜色不一样
+            //实际过程中，正常结果用标准输入流来打印
+            //错误结果或者异常信息一般使用的是标准错误流
+            //标准输出流
+            System.out.println(i);
+            //标准错误流
+            System.out.println(i);
+
+        }
+    }
+
+    #+END_SRC
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.system;
+
+    import java.io.BufferedReader;
+    import java.io.IOException;
+    import java.io.InputStreamReader;
+
+    public class GetLineDemo {
+        public static void main(String[] args) throws IOException {
+
+            //从控制台来获取一行数据
+            //从控制台读取数据 --- System.in
+            //读取一行数据 --- BufferedReader
+            //BufferedReader在构建的时候需要传入一个字符流，但是System.in是字节流
+            //将字节流转化为字符流 - InputStreamReader
+            InputStreamReader in = new InputStreamReader((System.in));
+            BufferedReader reader = new BufferedReader(in);
+            //读取一行数据
+            String line = reader.readLine();
+            System.out.println(line);
+            //系统流用完之后不需要关闭
+        }
+    }
+
+    #+END_SRC
 16. 打印流 - PrintStream/PrintWriter：
     - 是Java提供的一套能够进行辩解打印的机制，并且提供了辩解的换行方式
     - 标准输出流/标准错误流本质上都是打印流
     - 打印流只有输出流
+    #+BEGIN_SRC java
+    package cn.commandoptionesc.io.print;
+
+    import java.io.FileNotFoundException;
+    import java.io.PrintStream;
+
+    public class PrintStreamDemo {
+        public static void main(String[] args) throws FileNotFoundException {
+
+            //创建打印流
+            PrintStream ps = new PrintStream("../Other/io/ex.txt");
+            //写出数据
+            //写出一行数据并且换行
+            ps.print("hello");
+            ps.print("big data");
+            //关流
+            ps.close();
+        }
+    }
+
+    #+END_SRC
 17. 合并流 - SequenceInputStream：
     - 只有输入流没有输出
     - 合并多个字节流，将这多个字节流中的数据合并到一块，实际过程中作用往往是将多个文件合并成一个文件。在创建合并流的时候，需要获取一个Enumeration对象，所以往往是利用Vector先来存储多个字节流，然后在利用这个Vector生成一个Enumeration对象，最后再构建合并流
+    #+BEGIN_SRC java
+
+    #+END_SRC
 18. 序列化/反序列化流：
     - 序列化：将数据按照指定格式进行转化
     - 反序列化：将数据按照指定格式转化回来
