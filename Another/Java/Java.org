@@ -5581,6 +5581,79 @@ class Demo<T,A>{
 
     #+END_SRC
 19. 其他：
+    1. RandomAccessFile:用于操作文件的类，在操作文件的时候，将文件看做是一个大型的字节数组，可以根据下标操作文件中指定的位置
+
+       #+BEGIN_SRC java
+         package cn.commandoptionesc.other;
+
+         import java.io.IOException;
+         import java.io.RandomAccessFile;
+
+         public class RandomAccessFileDemo {
+             public static void main(String[] args) throws IOException {
+
+                 //“r”以只读模式打开文件，对文件进行任何的写操作都是不被允许的
+                 //"rw"以读写模式打开文件，允许对文件进行读写
+                 //"rwd"/"rws"以读写模式打开文件，并且要求每次对数据更新都需要同步更新到底层的存储设备上
+                 //如果数据比较重要不允许丢失，那么可以考虑使用rwd/rws，但是同时意味着这种模式会比较慢
+                 RandomAccessFile raf = new RandomAccessFile("../Other/io/ex.txt","rw");
+
+                 //挪动下标
+                 raf.seek(10);
+                 //在读写数据的时候将文件看做是一个大型的字节数组来操作的
+                 raf.write("abcdef".getBytes());
+                 System.out.println(raf.read());
+                 //关流
+                 raf.close();
+             }
+         }
+       #+END_SRC
+    2. Properties：
+       1. Properties是一个可持久化（持久化是一种特殊的序列化，将数据序列化到磁盘上就称之为持久化）的映射，继承了Hashtable
+       2. Properties中的键和值默认是String
+       3. Properties要求文件的后缀必须是.properties
+       #+BEGIN_SRC java
+       package cn.commandoptionesc.other;
+
+       import java.io.FileOutputStream;
+       import java.io.IOException;
+       import java.util.Properties;
+
+       public class PropertiesDemo {
+           public static void main(String[] args) throws IOException {
+               Properties prop = new Properties();
+               //添加元素
+               prop.setProperty("name","Helen");
+               prop.setProperty("gender","female");
+               //序列化
+               //Properties提供了store方法来直接序列号华
+               FileOutputStream out = new FileOutputStream("../Other/io/ex.txt");
+               //第二个参数实际上是在文件中添加注释
+               prop.store(out,null);
+           }
+       }
+       #+END_SRC
+       #+BEGIN_SRC java
+       package cn.commandoptionesc.other;
+
+       import java.io.FileInputStream;
+       import java.io.IOException;
+       import java.util.Properties;
+
+       public class PropertiesDemo2 {
+           public static void main(String[] args) throws IOException {
+               Properties prop = new Properties();
+               //反序列化
+               FileInputStream in = new FileInputStream("../Other/io/ex.txt");
+               prop.load(in);
+               in.close();
+
+               //System.out.println(prop.getProperty("name"));
+               //遍历Properties
+               prop.list(System.out);
+           }
+       }
+       #+END_SRC
 ** 线程
 1. 进程和线程
    - 进程是计算机在执行的任务
@@ -5588,8 +5661,82 @@ class Demo<T,A>{
 2. 多线程：计算机执行多个任务
 3. 定义线程
    - 继承Thread类，然后覆盖run方法，将线程要执行的逻辑写到方法中，然后调用start方法来启动线程
+     #+BEGIN_SRC java
+       package cn.commandoptionesc.thread;
+
+       public class ThreadDemo {
+           public static void main(String[] args) {
+
+               //创建线程对象
+               TDemo t = new TDemo();
+               //启动线程，启动之后自动调用run方法来执行逻辑
+               t.start();
+
+               for(int i = 0;i < 5;i++){
+                   System.out.println("main");
+               }
+           }
+       }
+
+       //继承Thread
+       class TDemo extends Thread{
+
+           //线程的执行逻辑卸载这个方法中
+           @Override
+           public void run() {
+               for(int i = 0;i < 10;i++){
+                   System.out.println("TDemo");
+               }
+           }
+       }
+     #+END_SRC
    - 实现Runnable接口，然后覆盖run方法，在启动之前需要将Runnable对象传递到Thread中，然后利用Thread调用start方法来启动执行 - 现阶段要求掌握
+     #+BEGIN_SRC java
+       package cn.commandoptionesc.thread;
+
+       public class RunnableDemo {
+           public static void main(String[] args) {
+
+               RDemo r = new RDemo();
+               //将Runnable对象构建成Thread对象启动
+               Thread t = new Thread(r);
+               t.start();
+           }
+       }
+
+       //实现Runnable
+       class RDemo implements Runnable{
+           @Override
+           public void run() {
+               for(int i = 0;i < 5;i++){
+                   System.out.println("RDemo");
+               }
+           }
+       }
+     #+END_SRC
    - 实现Callable接口，覆盖call方法，需要利用执行器服务来启动 - 先阶段仅做了接，后续课程中会讲解
+     #+BEGIN_SRC java
+       package cn.commandoptionesc.thread;
+
+       import java.util.concurrent.*;
+
+       public class CallableDemo {
+           public static void main(String[] args) throws ExecutionException,InterruptedException {
+
+               ExecutorService es = Executors.newCachedThreadPool();
+               Future<String> f = es.submit(new CDemo());
+               System.out.println(f.get());
+               es.shutdown();
+           }
+       }
+
+       class CDemo implements Callable<String> {
+           @Override
+           public String call() throws Exception {
+               return "Success";
+           }
+       }
+     #+END_SRC
 4. 多线程的并发安全问题：多个线程同时执行的时候，这多个线程之间是相互抢占执行，并且抢占会发生在线程执行的每一个步骤中。由于线程之间的抢占导致出现不合理的数据的现象称之为多线程的并发安全
    [[./Img/6.png]]
 5. 并发：多个线程同时执行，这种方式称之为并发
@@ -5601,9 +5748,257 @@ class Demo<T,A>{
 9. 线程安全和线程不安全
    - 线程安全：多个线程同时执行的时候，结果是正常的
    - 线程不安全：多个线程同时执行的说会后，结果不符合常理
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.thread;
+
+     //总票数为100，四个人共卖100张票
+     public class SellTicketDemo1 {
+         public static void main(String[] args) {
+
+             Ticket t = new Ticket();
+             t.setCount(100);
+             new Thread(new Seller(t),"A").start();
+             new Thread(new Seller(t),"B").start();
+             new Thread(new Seller(t),"C").start();
+             new Thread(new Seller(t),"D").start();
+         }
+     }
+
+     class Seller implements Runnable{
+
+         private Ticket t;
+         public Seller(Ticket t) {
+             this.t = t;
+         }
+
+         @Override
+         public  void run(){
+             while(true){
+                 //synchronized(t) {
+                 synchronized(Seller.class) {
+                     if (t.getCount() <= 0)
+                         break;
+                     try {
+                         //参数表示沉睡时间，单位是毫秒
+                         //sleep不影响执行结果，只是将执行时间拉长
+                         Thread.sleep(5);
+                     } catch (InterruptedException e) {
+                         e.printStackTrace();
+                     }
+                     //卖了一张票
+                     t.setCount(t.getCount() - 1);
+                     //获取线程名字
+                     String name = Thread.currentThread().getName();
+                     System.out.println(name + "卖出了一张票，剩余" + t.getCount());
+                 }
+             }
+         }
+     }
+
+     class Ticket{
+
+         private int count;
+
+         public int getCount() {
+             return count;
+         }
+
+         public void setCount(int count) {
+             this.count = count;
+         }
+     }
+   #+END_SRC
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.thread;
+
+     public class SellTicketDemo2 {
+         public static void main(String[] args) {
+             Ticket t = new Ticket();
+             t.setCount(100);
+             SellSystem ss = new SellSystem(t);
+             //用四个线程表示售票员
+             //这4个售票员应该使用的是同一个售票系统
+             new Thread(ss,"A").start();
+             new Thread(ss,"B").start();
+             new Thread(ss,"C").start();
+             new Thread(ss,"D").start();
+         }
+     }
+
+     //售票系统
+     class SellSystem implements Runnable{
+
+         private Ticket t;
+         public SellSystem(Ticket t){
+             this.t = t;
+         }
+
+         @Override
+         public void run() {
+             while(true){
+                 synchronized (this){
+                     if(t.getCount() <= 0) {
+                         break;
+                     }
+                     t.setCount(t.getCount() - 1);
+                     System.out.println(Thread.currentThread().getName() + "卖了一张票，剩余" + t.getCount());
+                 }
+             }
+         }
+     }
+   #+END_SRC
+
 10. 死锁：锁之间相互嵌套导致代码无法继续向下执行。死锁形成条件：锁形成嵌套，现成之间还需要相互的锁。死锁不是逻辑错误或者代码错误，所以思索一旦出现无法处理。实际过程中，一般会尽量避免死锁，那么这个时候就会根据业务要求检测死锁，如果产生死锁，会考虑打破一个锁来释放其他的锁。
+    #+BEGIN_SRC java
+      package cn.commandoptionesc.thread;
+
+      public class Demo {
+          private static Printer p = new Printer();
+          private static Scanner s = new Scanner();
+
+          public static void main(String[] args) {
+              //第一个员工
+              new Thread(new Runnable(){
+                  @Override
+                  public void run() {
+                      try {
+                          synchronized (p) {
+                              p.print();
+                              Thread.sleep(100);
+                              synchronized (s){
+                                  s.scan();
+                              }
+                          }
+                      }catch(InterruptedException e){
+                          e.printStackTrace();
+                      }
+                  }
+              }).start();
+              //第二个员工
+              new Thread(new Runnable(){
+                  @Override
+                  public void run() {
+                      try{
+                          synchronized (s){
+                              s.scan();
+                              Thread.sleep(100);
+                              synchronized (p){
+                                  p.print();
+                              }
+                          }
+
+                      }catch(Exception e){
+                          e.printStackTrace();
+                      }
+                  }
+              }).start();
+
+          }
+      }
+
+      //打印机
+      class Printer{
+          public void print(){
+              System.out.println("这台打印机在哼哧哼哧的打印~~~");
+          }
+      }
+
+      class Scanner{
+          public void scan(){
+              System.out.println("这部扫描仪在吱呦吱呦的扫描~~~");
+          }
+      }
+
+    #+END_SRC
+
 11. 虽然锁可以有效的避免多线程并发产生的安全问题，但是实际过程中尽量减少使用锁机制。锁机制如果滥用会导致死锁的产生，会导致程序执行效率的降低。如果实在需要使用锁，那么只有将有危险的片段锁起来就可以，不需要将整个类或者整个方法锁起来
 12. 等待唤醒机制：wait/notify/notifyAll通过现成等待让线程不再执行而是让其他线程执行，通过这种方法调节了线程之间的执行顺序。注意，在notify的时候，是随机唤醒一个线程。
+    #+BEGIN_SRC java
+      package cn.commandoptionesc.thread;
+
+      //生产消费模型
+      //生产者 消费者 商品
+      public class WaitNotifyDemo {
+          public static void main(String[] args) {
+              Product p = new Product();
+              new Thread((new Producer(p))).start();
+              new Thread((new Consumer(p))).start();
+          }
+      }
+
+      //商品
+      class Product{
+          private int count;
+          //标记位
+          //规定：true就让生产者生产，如果为false让消费者消费
+          boolean flag = true;
+
+          public int getCount(){
+              return count;
+          }
+          public void setCount(int count){
+              this.count = count;
+          }
+      }
+
+      //生产者
+      class Producer implements Runnable{
+
+          private Product p;
+          public Producer(Product p){
+              this.p = p;
+          }
+
+          @Override
+          public void run() {
+              while(true){
+                  synchronized (p){
+                      try {
+                          //生产者生产了一次，如果再次抢到执行权不能执行，而是需要放开执行权等待
+                          if(p.flag == false)
+                              p.wait();
+                          //模拟生产的商品数量
+                          //表示每一次商品的数量都不相等
+                          int count = (int) (Math.random() * 1000);
+                          p.setCount(count);
+                          System.out.println("生产者生产了：" + count);
+                          p.flag = false;
+                          p.notify();
+                      }catch (InterruptedException e){
+                          e.printStackTrace();
+                      }
+                  }
+              }
+          }
+      }
+      //消费者
+      class Consumer implements Runnable{
+          private Product p;
+          public Consumer(Product p){
+              this.p = p;
+          }
+
+          @Override
+          public void run() {
+              while(true){
+                  synchronized (p){
+                      try{
+                          //消费者消费完成之后，需要让生产者生产
+                          if(p.flag == true)
+                              p.wait();
+                          System.out.println("消费者消费了：" + p.getCount());
+                          p.setCount(0);
+                          //唤醒在等待的线程
+                          p.flag = true;
+                          p.notify();
+                      }catch(InterruptedException e){
+                          e.printStackTrace();
+                      }
+                  }
+              }
+          }
+      }
+    #+END_SRC
 13. wait和sleep区别
     - sleep：在使用的时候需要指定睡眠时间，到了指定时间之后会自动醒过来；如果没有锁，那么线程在沉睡期间释放执行权；如果有锁，那么线程在沉睡期间不会释放执行权。sleep是被设计在Thread类上，本身还是一个静态方法。
     - wait：在使用的时候可以指定等待时间也可以不指定，如果不指定等待时间那么需要唤醒。wait必须结合锁来使用，线程在wait期间会释放执行权。wait是设计在了Object类上。

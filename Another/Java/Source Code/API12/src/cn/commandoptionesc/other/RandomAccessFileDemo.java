@@ -12,11 +12,13 @@ public class RandomAccessFileDemo {
         //如果数据比较重要不允许丢失，那么可以考虑使用rwd/rws，但是同时意味着这种模式会比较慢
         RandomAccessFile raf = new RandomAccessFile("../Other/io/ex.txt","rw");
 
-        raf.seek(3);
+        //挪动下标
+        raf.seek(10);
         //在读写数据的时候将文件看做是一个大型的字节数组来操作的
         raf.write("abcdef".getBytes());
-        //挪动下标
         System.out.println(raf.read());
+        //关流
+        raf.close();
 
     }
 }
