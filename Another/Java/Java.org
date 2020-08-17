@@ -6023,6 +6023,79 @@ class Demo<T,A>{
     - 守护线程用于守护其他线程的，当被守护的线程结束，那么守护线程无论执行完成与否，都会随之结束
     - 一个线程要么是守护线程要么是非守护线程
     - 如果存在多个线程，那么只要这个线程不是守护线程，那么这个线程就是被守护。例如一共有10个线程，其中有7个守护线程，其他3个就是被守护的线程。如果存在多个被守护线程，那么守护线程要以最后一个被守护的线程的结束作为结束信号。
+#+BEGIN_SRC java
+  package cn.commandoptionesc;
+
+  public class PriorityDemo {
+      public static void main(String[] args) {
+
+          Thread t1 = new Thread(new PDemo(),"A");
+          Thread t2 = new Thread(new PDemo(),"B");
+
+          t1.setPriority(4);
+          t2.setPriority(5);
+
+          t1.start();
+          t2.start();
+      }
+  }
+
+  class PDemo implements Runnable{
+      @Override
+      public void run() {
+
+          //获取线程的名字
+          String name = Thread.currentThread().getName();
+          for(int i = 0;i < 9;i++){
+              System.out.println(name + ":" + i);
+          }
+      }
+  }
+
+#+END_SRC
+#+BEGIN_SRC java
+  package cn.commandoptionesc;
+
+  public class DaemonDemo {
+      public static void main(String[] args) throws InterruptedException {
+          Thread t1 = new Thread(new Monster(),"A");
+          Thread t2 = new Thread(new Monster(),"B");
+          Thread t3 = new Thread(new Monster(),"C");
+          Thread t4 = new Thread(new Monster(),"D");
+
+          //设置守护线程
+          t1.setDaemon(true);
+          t2.setDaemon(true);
+          t3.setDaemon(true);
+          t4.setDaemon(true);
+
+          t1.start();
+          t2.start();
+          t3.start();
+          t4.start();
+
+          for(int i = 10; i > 0;i--){
+              System.out.println("Boss掉了一滴血，剩余" + i);
+              Thread.sleep(500);
+          }
+      }
+  }
+
+  class Monster implements Runnable{
+      @Override
+      public void run() {
+          String name = Thread.currentThread().getName();
+          for(int i = 1000;i > 0;i--){
+              System.out.println(name + "掉了一地血，剩余" + i);
+              try{
+                  Thread.sleep(50);
+              }catch(InterruptedException e){
+                  e.printStackTrace();
+              }
+          }
+      }
+  }
+#+END_SRC
 ** 网络编程
 1. 网络编程实际上是一套基于网络进行数据传输的流
 2. 网络模型：物理层、数据链条层、网络层、传输层、会话层、表示层、应用层
@@ -6033,6 +6106,24 @@ class Demo<T,A>{
 7. DNS解析服务器：就是将域名和IP进行映射。在万维网上存在一个最大的DNS服务器。当在浏览器地址栏指定域名之后，在底层，DNS服务器就会将这个域名解析为IP，然后才会去访问对应的IP地址。如果当前DNS服务器无法解析这个域名，向高一层的DNS服务器来请求解析域名
 8. localhost或者127.0.0.1表示本机，255.255.255.255表示的是一个广播地址（只要在这个局域网范围内的主机都会接收到这个数据）
 9. InetSocketAddress：是Java提供一个用于表示IP和端口和类
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.net;
+
+     import java.net.InetSocketAddress;
+
+     public class InetSocketAffressDemo {
+         public static void main(String[] args) {
+
+             //表示创建了InetSocketAddress，指向了www.baidu.com这个地址
+             InetSocketAddress isa = new InetSocketAddress("www.baidu.com",8090);
+             //获取端口号
+             System.out.println(isa.getPort());
+             //获取主机名 - 在网络中，主机名往往是域名；如果是单台主机名，主机名指的就是计算机名
+             System.out.println(isa.getHostName());
+         }
+     }
+
+   #+END_SRC
 10. UDP：
     - 特点：
       + 基于网络进行数据传输的流
@@ -6043,12 +6134,150 @@ class Demo<T,A>{
       + 将数据封包，并且还需要制定接收地址和端口号
       + 发送数据包
       + 关流
+        #+BEGIN_SRC java
+          package cn.commandoptionesc.udp;
+
+          import java.io.IOException;
+          import java.net.DatagramPacket;
+          import java.net.DatagramSocket;
+          import java.net.InetSocketAddress;
+
+          //发送端
+          public class Sender {
+              public static void main(String[] args) throws IOException {
+                 //创建发送端对象
+                 DatagramSocket ds = new DatagramSocket();
+                 //对数据进行封包
+                  //第一个参数表示数据
+                  //第二个参数表示是数据的大小
+                  //第三个参数表示的接收的地址和端口号
+                  byte[] data = "hello receiver".getBytes();
+                  DatagramPacket dp = new DatagramPacket(
+                    data,data.length,new InetSocketAddress("localhost",8090)
+                  );
+                  //发送数据
+                  ds.send(dp);
+                  //关流
+                  ds.close();
+              }
+          }
+
+        #+END_SRC
     - 接收端：
       + 创建UDP接收端对象，绑定监听的端口号
       + 准备数据包
       + 接收数据
       + 解析数据
+        #+BEGIN_SRC java
+          package cn.commandoptionesc.udp;
+
+          import java.io.IOException;
+          import java.net.DatagramPacket;
+          import java.net.DatagramSocket;
+
+          //接收端
+          public class Receiver {
+              public static void main(String[] args) throws IOException {
+
+                  //创建接收端对象，绑定监听的端口
+                  DatagramSocket ds = new DatagramSocket(8090);
+                  //准备数据包接收数据
+                  DatagramPacket dp = new DatagramPacket(new byte[1024],1024);
+                  //接收数据
+                  ds.receive(dp);
+                  //关流
+                  ds.close();
+                  //解析数据
+                  byte[] data = dp.getData();
+                  //获取数据的实际长度
+                  int len = dp.getLength();
+                  System.out.println(new String(data,0,len));
+              }
+          }
+
+        #+END_SRC
     - 案例：担任聊天室
+      #+BEGIN_SRC java
+        package cn.commandoptionesc.udp;
+
+        import java.io.IOException;
+        import java.net.DatagramPacket;
+        import java.net.DatagramSocket;
+        import java.net.InetSocketAddress;
+        import java.util.Scanner;
+
+        public class ChatDemo {
+            public static void main(String[] args) {
+                new Thread(new MessageSender()).start();
+                new Thread(new MessageReceiver()).start();
+            }
+        }
+
+        //消息发送端
+        class MessageSender implements Runnable{
+            @Override
+            public void run() {
+
+                try {
+                    //创建发送端对象
+                    DatagramSocket ds = new DatagramSocket();
+                    //创建Scanner对象
+                    Scanner s = new Scanner(System.in);
+                    while(true){
+                        //从控制台来接收数据
+                        String message = s.nextLine();
+                        //就需要将接收到的数据进行封包
+                        DatagramPacket dp = new DatagramPacket(
+                                message.getBytes(),message.getBytes().length,
+                                new InetSocketAddress("localhost",8070)
+                        );
+                        //发送数据
+                        ds.send(dp);
+                        //如果输入的数据是over~，表示结束聊天
+                        if(message.equals("over~"))
+                            break;
+                    }
+                    //关流
+                    ds.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        //消息接收端
+        class MessageReceiver implements Runnable {
+            @Override
+            public void run() {
+                try {
+                    //创建接收端对象，绑定监听的端口号
+                    DatagramSocket ds = new DatagramSocket(8070);
+                    //准备数据包
+                    DatagramPacket dp = new DatagramPacket(new byte[1024], 1024);
+                    while (true) {
+                        //接收数据
+                        ds.receive(dp);
+                        //解析数据
+                        //获取底层的字节数组
+                        byte[] data = dp.getData();
+                        //获取数据长度
+                        int length = dp.getLength();
+                        String message = new String(data, 0, length);
+                        //如果收到对方的over~表示对方结束了聊天
+                        if(message.equals("over~")){
+                            System.out.println("对方结束了聊天");
+                            break;
+                        }
+                        System.out.println(message);
+                    }
+                    //关流
+                    ds.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+      #+END_SRC
 11. TCP：
     - 特点：
       + 基于网络进行数据传输的流
@@ -6062,6 +6291,34 @@ class Demo<T,A>{
       + 获取输出流，写出数据
       + 通知服务器端数据已经写完
       + 关流
+        #+BEGIN_SRC java
+          package cn.commandoptionesc.tcp;
+
+          import java.io.IOException;
+          import java.io.OutputStream;
+          import java.net.InetSocketAddress;
+          import java.net.Socket;
+
+          public class Client {
+              public static void main(String[] args) throws IOException {
+
+                  //创建客户端套接子对象
+                  Socket s = new Socket();
+                  //发起连接，绑定连接地址和端口号
+                  s.connect(new InetSocketAddress("localhost",8090));
+                  //连接之后，获取自带输出流
+                  OutputStream out = s.getOutputStream();
+                  //写出数据
+                  out.write("hello server".getBytes());
+                  //通知服务器端，数据已经写出完毕
+                  //输出流一旦关闭不能启动
+                  s.shutdownOutput();
+                  //关流
+                  s.close();
+              }
+          }
+
+        #+END_SRC
     - 服务器端
       + 创建服务器端套接字对象 - ServerSocket
       + 绑定监听的端口号
@@ -6069,7 +6326,118 @@ class Demo<T,A>{
       + 获取输入流，读取数据
       + 通知客户端数据已经读完
       + 关流
+        #+BEGIN_SRC java
+          package cn.commandoptionesc.tcp;
+
+          import java.io.IOException;
+          import java.io.InputStream;
+          import java.net.InetSocketAddress;
+          import java.net.ServerSocket;
+          import java.net.Socket;
+
+          public class Server {
+              public static void main(String[] args) throws IOException {
+
+                  //创建服务器端套接字对象
+                  ServerSocket ss = new ServerSocket();
+                  //绑定监听的端口号
+                  ss.bind(new InetSocketAddress(8090));
+                  //接收连接
+                  Socket s = ss.accept();
+                  //获取输入流
+                  InputStream in = s.getInputStream();
+                  //读取数据
+                  byte[] data = new byte[1024];
+                  int len;
+                  while((len = in.read(data)) != -1){
+                      System.out.println(new String(data,0,len));
+                  }
+                  //读取完成之后，需要通知客户端数据一定读完
+                  //输入流一旦关闭不能开启
+                  s.shutdownInput();
+                  //关流
+                  ss.close();
+              }
+          }
+
+        #+END_SRC
     - 案例：文件上传
+      #+BEGIN_SRC java
+        package cn.commandoptionesc.tcp;
+
+        import java.io.FileInputStream;
+        import java.io.IOException;
+        import java.io.OutputStream;
+        import java.net.InetSocketAddress;
+        import java.net.Socket;
+
+        //文件上传客户端
+        public class FileUploadClient {
+            public static void main(String[] args) throws IOException {
+
+                //创建客户端的套接字对象
+                Socket s = new Socket();
+                //发起连接
+                s.connect(new InetSocketAddress("localhost",8090));
+                //获取输入流来读取文件
+                FileInputStream in = new FileInputStream("../Other/tcp/b.txt");
+                //获取输出流
+                OutputStream out = s.getOutputStream();
+                //读取文件
+                byte[] data = new byte[1024];
+                int len;
+                while((len = in.read(data)) != -1){
+                    //将读取到的数据写出
+                    out.write(data,0,len);
+                }
+                //通知服务器端数据已经写完
+                s.shutdownOutput();
+                //关流
+                in.close();
+                s.close();
+            }
+        }
+      #+END_SRC
+      #+BEGIN_SRC java
+        package cn.commandoptionesc.tcp;
+
+        import java.io.FileOutputStream;
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.net.InetSocketAddress;
+        import java.net.ServerSocket;
+        import java.net.Socket;
+
+        //文件上传服务器
+        public class FileUploadServer {
+            public static void main(String[] args) throws IOException {
+
+                //创建服务器端套接字对象
+                ServerSocket ss = new ServerSocket();
+                //绑定坚挺的端口号
+                ss.bind(new InetSocketAddress(8090));
+                //接收连接
+                Socket s = ss.accept();
+                //创建输出流将数据写出
+                FileOutputStream out = new FileOutputStream("../Other/tcp/a.txt");
+                //获取输入流
+                InputStream in = s.getInputStream();
+                //读取数据
+                byte[] data = new byte[1024];
+                int len;
+                while((len = in.read(data)) !=-1){
+                    //将读取到的数据写到文件中
+                    out.write(data,0,len);
+                }
+                //通知客户端数据已经读取完毕
+                s.shutdownInput();
+                //关流
+                out.close();
+                ss.close();
+            }
+        }
+
+      #+END_SRC
 12. 反射
     1. 反射是去剖析一个类，获取这个类的字节码对象以及实例对象
     2. 如果将字节码看做对象，对这一类对象进行总结，总结出代表字节码的类 - Class
@@ -6086,6 +6454,264 @@ class Demo<T,A>{
        - 通过类名.class方式来获取指定类的字节码对象
        - 通过对象.getClass()方式来获取对象对应的实际类型的字节码对象
        - 通过Class.forName("全路径名")方式来获取指定类型的字节码
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.reflect;
+
+           import java.util.List;
+           import java.util.Scanner;
+
+           public class ClassDemo1 {
+               public static void main(String[] args) throws ClassNotFoundException {
+
+                   //获取Class对象
+                   //方式一：通过类型.class的方式获取
+                   //c1z1表示String类对应的字节码
+                   Class<String> c1z1 = String.class;
+                   System.out.println(c1z1);
+                   //c1z2表示List接口对应的字节码
+                   Class<List> c1z2 = List.class;
+                   System.out.println(c1z1);
+                   //c1z3表示double基本类型对应的字节码
+                   Class c1z3 = double.class;
+                   System.out.println(c1z3);
+
+                   //方式二：通过对象.getClass(）来获取
+                   Object o = "abc";
+                   Class<String> c1z4 = (Class<String>) o.getClass();
+                   System.out.println(c1z4);
+
+                   //方式三：Class.forName
+                   //表示获取Scanner类型对应的字节码
+                   Class<Scanner> c1z5 = (Class< Scanner>) Class.forName("java.util.Scanner");
+                   System.out.println(c1z5);
+               }
+           }
+
+         #+END_SRC
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.reflect;
+
+           import java.lang.reflect.Constructor;
+           import java.lang.reflect.InvocationTargetException;
+
+           public class ClassDemo2 {
+               public static void main(String[] args) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+
+                   //c1z1表示String类的字节码
+                   Class<String> c1z1 = String.class;
+                   //创建对象
+                   //等价于：String str = new String();
+                   //要求这个类中必须提供无参构造
+                   String str = c1z1.newInstance();
+                   System.out.println(str);
+
+                   //c1z2表示Integer类的字节码
+                   Class<Integer> c1z2 = Integer.class;
+                   //Integer in = c1z2.newInstance();
+                   //System.out.println(in);
+                   //如果需要利用含参构造来创建对象，那么需要先获取对应的构造函数
+                   Constructor<Integer> c = c1z2.getDeclaredConstructor(int.class);
+                   //执行这个构造函数来创建对象
+                   //等价于：Integer in = new Integer(5);
+                   Integer in = c.newInstance(5);
+                   System.out.println(c);
+               }
+           }
+
+         #+END_SRC
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.reflect;
+
+           import java.lang.reflect.InvocationTargetException;
+           import java.lang.reflect.Method;
+
+           public class ClassDemo3 {
+               public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+                   Class<String> c1z = String.class;
+                   String str = "abcdefg";
+
+                   ////获取String中charAt方法
+                   //Method m = c1z.getDeclaredMethod("charAt",int.class);
+                   ////执行charAt方法
+                   ////等价于：char c = str.charAt(3);
+                   //char c = (char) m.invoke(str,3);
+                   //System.out.println(c);
+
+                   //m代表getChars(char[],int)方法
+                   Method m = c1z.getDeclaredMethod("getChars", char[].class, int.class);
+                   //暴力破解 - 可以打破权限修饰符的范围
+                   m.setAccessible(true);
+                   char[] cs = new char[10];
+                   //等价于：str.getChars(cs,0);
+                   m.invoke(str,cs,0);
+               }
+           }
+
+         #+END_SRC
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.reflect;
+
+           import java.lang.reflect.Field;
+
+           public class ClassDemo4 {
+               public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
+
+                   Class<String> c1z = String.class;
+                   String str = "hello";
+                   //f代表了String类中的hash属性
+                   Field f = c1z.getDeclaredField("hash");
+                   f.setAccessible(true);
+                   //改变属性的值
+                   //等价于：str.hash = 135;
+                   f.set(str,135);
+                   System.out.println(f.get(str));
+               }
+           }
+
+         #+END_SRC
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.reflect;
+
+           import java.lang.reflect.Constructor;
+
+           public class ClassDemo5 {
+               public static void main(String[] args) throws NoSuchMethodException {
+
+                   Class<String> c1z = String.class;
+                   ////获取String类中所有的构造方法
+                   //Constructor<String>[] cs = (Constructor<String>[]) c1z.getDeclaredConstructors();
+                   //for(Constructor<String> c:cs){
+                   //    System.out.println(c);
+                   //}
+
+                   //获取String类实现的接口
+                   Class<?>[] is = c1z.getInterfaces();
+                   for(Class<?> i:is){
+                       System.out.println(i);
+                   }
+
+                   //获取类的修饰符
+                   int m = c1z.getModifiers();
+                   System.out.println(m);
+
+                   //获取类的全路径名
+                   System.out.println(c1z.getName());
+                   //获取类名
+                   System.out.println(c1z.getSimpleName());
+
+                   //获取包
+                   System.out.println(c1z.getPackage());
+
+                   //获取父类
+                   System.out.println(c1z.getSuperclass());
+               }
+           }
+
+         #+END_SRC
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.reflect;
+
+           public class ClassDemo6 {
+               public static void main(String[] args) {
+
+                   Class<String> c1z = String.class;
+
+                   //判断是否是一个注解
+                   System.out.println(c1z.isAnnotation());
+
+                   //判断是否是一个匿名内部类
+                   System.out.println(c1z.isAnonymousClass());
+                   //判断是否是一个方法内部类/局部内部类
+                   System.out.println(c1z.isLocalClass());
+                   //判断是否是一个成员内部类
+                   System.out.println(c1z.isMemberClass());
+                   //判断是否是一个基本类型
+                   System.out.println(c1z.isPrimitive());
+
+                   Object str = "hello";
+                   //str是否是一个String对象
+                   System.out.println(c1z.isInstance(str));
+               }
+           }
+
+         #+END_SRC
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.reflect;
+
+           public class ClassDemo7 {
+               public static void main(String[] args) {
+
+                   Class<String> c1z1 = String.class;
+                   Class<Object> c1z2 = Object.class;
+                   Class<Comparable> c1z3 = Comparable.class;
+                   //判断String类是否继承了Object类
+                   System.out.println(c1z2.isAssignableFrom(c1z1));
+                   //判断String类是否实现了Comparable接口
+                   System.out.println(c1z3.isAssignableFrom(c1z1));
+               }
+           }
+
+         #+END_SRC
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.reflect;
+
+           import java.lang.reflect.Method;
+
+           public class MethodDemo {
+               public static void main(String[] args) throws NoSuchMethodException {
+
+                   Class<String> c1z = String.class;
+
+                   //获取String中charAt(int)方法
+                   Method m = c1z.getDeclaredMethod("charAt",int.class);
+
+                   //获取String中getByte(String)方法
+                   Method n = c1z.getDeclaredMethod("getBytes",String.class);
+
+                   //获取这个方法锁对应的类
+                   System.out.println(m.getDeclaringClass());
+                   System.out.println(n.getDeclaringClass());
+
+                   //获取这个方法抛出的异常
+                   Class<Exception>[] es = (Class<Exception>[]) m.getExceptionTypes();
+                   for(Class<Exception> e:es){
+                       System.out.println(e);
+                   }
+
+                   //
+                   Class<?>[] ps = m.getParameterTypes();
+                   for(Class<?> p:ps){
+                       System.out.println(p);
+                   }
+
+                   //获取方法的返回值类型
+                   Class<?> r = m.getReturnType();
+                   System.out.println(r);
+               }
+           }
+
+         #+END_SRC
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.reflect;
+
+           import java.lang.reflect.Field;
+
+           public class FieldDemo {
+               public static void main(String[] args) throws NoSuchFieldException {
+
+                   Class<String> c1z = String.class;
+                   Field f = c1z.getDeclaredField("hash");
+
+                   //获取属性所在的类的类型
+                   System.out.println(f.getDeclaringClass());
+
+                   //获取属性的声明类型
+                   System.out.println(f.getType());
+               }
+           }
+
+         #+END_SRC
     6. 修饰符
        |--------------+--------+------------|
        | 修饰符       | 十进制 |   十六进制 |
@@ -6102,7 +6728,170 @@ class Demo<T,A>{
        | abstract     |   1024 | 0x00000400 |
        | strictfp     |   2048 | 0x00000800 |
        |--------------+--------+------------|
+
     7. 案例：模拟一个clone方法 - 可以在不知道对象的类型的情况下就创建这个对象并且可以对属性进行赋值
+       #+BEGIN_SRC java
+         package cn.commandoptionesc.reflect;
+
+         import java.lang.reflect.Constructor;
+         import java.lang.reflect.Field;
+         import java.lang.reflect.InvocationTargetException;
+         import java.lang.reflect.Modifier;
+
+         public class ReflectDemo {
+             public static void main(String[] args) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+
+                 Student s1 = new Student();
+                 s1.setAge(17);
+                 s1.setName("Alex");
+                 s1.setGender("male");
+
+                 Car c1 = new Car();
+                 c1.setColor("red");
+                 c1.setPrice(100000);
+
+                 Driver d1 = new Driver("Helen",25,"G23434");
+
+                 Student s2 = (Student) clone(s1);
+                 System.out.println(s2);
+                 Car c2 = (Car) clone(c1);
+                 System.out.println(c2);
+                 Driver d2 = (Driver) clone(d1);
+                 System.out.println(d2);
+             }
+             //参数类型不确定的情况下，创建一个一模一样的对象
+             public static Object clone(Object o) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+
+                 //获取参数类型
+                 Class c1z = o.getClass();
+                 //获取构造函数
+                 Constructor c = c1z.getDeclaredConstructors()[0];
+                 c.setAccessible(true);
+                 //获取构造函数中参数的类型
+                 Class[] ps = c.getParameterTypes();
+                 //存储构造函数的参数
+                 Object[] os = new Object[ps.length];
+                 for(int i = 0;i < ps.length;i++){
+                     if(ps[i] == boolean.class) {
+                         os[i] = false;
+                     }else if(ps[i] == char.class) {
+                         os[i] = '\u0000';
+                     }else if(ps[i].isPrimitive()){
+                         os[i] = (byte)  0;
+                     }else{
+                         os[i] = null;
+                     }
+                 }
+
+                 //构造对象
+                 Object newObj = c.newInstance(os);
+                 //获取对象所有的属性
+                 Field[] fs = c1z.getDeclaredFields();
+                 for(Field f:fs){
+                     //暴力破解
+                     f.setAccessible(true);
+                     //判断属性是否是final修饰
+                     if((f.getModifiers() & Modifier.FINAL) == Modifier.FINAL)
+                         continue;
+                     //从传入的对象中将属性值获取出来
+                     Object value = f.get(o);
+                     //赋值给新创建的对象
+                     f.set(newObj,value);
+                 }
+                 return newObj;
+             }
+         }
+
+         class Driver{
+             private String name;
+             private int age;
+             private String no;
+
+             public Driver(String name, int age, String no) {
+                 this.name = name;
+                 this.age = age;
+                 this.no = no;
+             }
+
+             @Override
+             public String toString() {
+                 return "Driver{" +
+                         "name='" + name + '\'' +
+                         ", age=" + age +
+                         ", no='" + no + '\'' +
+                         '}';
+             }
+         }
+
+         class Student{
+
+             private String name;
+             private int age;
+             private String gender;
+
+             public String getName() {
+                 return name;
+             }
+
+             public void setName(String name) {
+                 this.name = name;
+             }
+
+             public int getAge() {
+                 return age;
+             }
+
+             public void setAge(int age) {
+                 this.age = age;
+             }
+
+             public String getGender() {
+                 return gender;
+             }
+
+             public void setGender(String gender) {
+                 this.gender = gender;
+             }
+
+             @Override
+             public String toString() {
+                 return "Student{" +
+                         "name='" + name + '\'' +
+                         ", age=" + age +
+                         ", gender='" + gender + '\'' +
+                         '}';
+             }
+         }
+         class Car{
+             private String color;
+             private double price;
+
+             public String getColor() {
+                 return color;
+             }
+
+             public void setColor(String color) {
+                 this.color = color;
+             }
+
+             public double getPrice() {
+                 return price;
+             }
+
+             public void setPrice(double price) {
+                 this.price = price;
+             }
+
+             @Override
+             public String toString() {
+                 return "Car{" +
+                         "color='" + color + '\'' +
+                         ", price=" + price +
+                         '}';
+             }
+         }
+
+       #+END_SRC
     8. 在后续学习过程中，会大量的应用反射，例如数据库的JDBC操作等 - 也正是因为有反射的存在，所以才能够更好的实现解耦过程，并且能够更好的分工工作
     9. 在试驾开发过程中，强调"高内聚低耦合" - 高内聚就是尽量提高自己的东西的利用率，低耦合就是尽量减少使用别人的东西
 ** JDK1.5的特性
