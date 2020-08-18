@@ -6899,16 +6899,131 @@ class Demo<T,A>{
 2. 静态导入：
    - 在使用一个类中的静态方法的时候，可以在导入语句中单独导入这一个方法而不是导入整个类，这样可以一定程度上提高加载效率
    - 实际过程中这种方式很少使用，这种方式容易和已有的方法产生冲突，同事降低了可读性
+     #+BEGIN_SRC java
+       package cn.commandoptionesc.jdk5;
+
+       //import java.util.Arrays;
+       import java.util.Scanner;
+       import static java.util.Arrays.sort;
+
+       public class StaticImportDemo {
+           public static void main(String[] args) {
+
+               Scanner s = new Scanner(System.in);
+               int len = s.nextInt();
+
+               int[] arr = new int[len];
+               for(int i = 0;i < arr.length;i++){
+                   arr[i] = s.nextInt();
+               }
+               //数组排序
+               sort(arr);
+               //System.out.println(toString(arr));
+           }
+       }
+     #+END_SRC
 3. 可变参数：
    - 在调用方法的时候可以传入任意多个参数（可以传入0个参数，可以传入一个参数，也可以传入多个参数），也可以传入一个数组
    - 可变参数本质上就是一个数组，所以可以通过操作数组的方式来操作可变参数
    - 可变在使用的时候只能定义一个，并且必须放在参数列表的末尾
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.jdk5;
+
+     public class VarArgsDemo {
+         public static void main(String[] args) {
+
+             System.out.println(sum());
+             System.out.println(sum(3,6));
+             System.out.println(sum(3,4,8));
+             System.out.println(sum(3,4,5,6,6,3));
+             int[] arr = {3,7,9,4};
+             System.out.println(sum(arr));
+         }
+
+         //用 ... 定义可一个可变参数
+         public static int sum(int... arr){
+             int sum = 0;
+             for(int i = 0;i < arr.length;i++){
+                 sum += arr[i];
+             }
+             return sum;
+         }
+     }
+
+   #+END_SRC
 4. 枚举：
    - 用于表示选项固定并且能够一一列举的场景，例如季节、等级、星期、月份等
    - 枚举中，构造函数默认是私有的而且不许是私有的
    - 枚举常量必须定义在枚举类的首行
    - 在枚举类中可以顶一个任何的属性和方法
    - 在Java中，枚举的顶级父类是java.lang.Enum
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.jdk5;
+
+     public class Enumdemo {
+         public static void main(String[] args) {
+             Season s = Season.Spring;
+             //Season.Spring = Season.Autumn;
+         }
+     }
+
+     //特殊的类 - 枚举
+     enum Season{
+         //枚举常量
+         //枚举常量必须放在枚举类的首行
+         Spring,Summer,Autumn,Winter;
+     }
+
+     ////定义一个类表示季节
+     ////因为一年就只有4个季节，所以season类智能对外提供4个对象
+     //class Season{
+     //
+     //    //这个类的构造方法不能对外提供
+     //    private Season(){
+     //
+     //    }
+     //    public static final Season Spring = new Season();
+     //    public static final Season Summer = new Season();
+     //    public static final Season Autumn = new Season();
+     //    public static final Season Winter = new Season();
+
+     //}
+   #+END_SRC
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.jdk5;
+
+     public class EnumDemo2 {
+         public static void main(String[] args) {
+
+         }
+     }
+     enum Level{
+
+         //public static final Level A = new Level();
+         //public static final Level B = new Level(80);
+
+         A,B(80),C,D,E;
+
+         //默认是私有的
+         Level(){
+
+         }
+
+         private Level(int score){
+             this.score = score;
+         }
+
+         private int score;
+
+         public int getScore(){
+             return score;
+         }
+
+         public void setScore(int score){
+             this.score = score;
+         }
+     }
+   #+END_SRC
 5. 注解：
    - 注解乐意理解为给机器看的解释说明性的文字
    - 在Java中，注解的顶级父类是Annotation
@@ -6922,9 +7037,82 @@ class Demo<T,A>{
      + @Retention：用于限制注解的生命周期的
      + @Document：表示生成在文档中
      + @Inherited：表示当前注解要作用在子类上
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.jdk5;
+
+     import java.lang.annotation.ElementType;
+     import java.lang.annotation.Retention;
+     import java.lang.annotation.RetentionPolicy;
+     import java.lang.annotation.Target;
+
+     //@FirstAnnotation(i = 3,d = 4.6,arr = 'e')
+     @SecondAnnotation("demo")
+     public class AnnotationDemo {
+
+         @FirstAnnotation(i = 3,d = 4.6,arr = {'e','a'})
+         int i = 5;
+         public static void main(String[] args) {
+
+         }
+     }
+
+     @Target(ElementType.FIELD)
+     @Retention(RetentionPolicy.RUNTIME)
+     @interface FirstAnnotation{
+
+         //表示给i这个属性一个默认值
+         int i() default 5;
+
+         double d();
+
+         char[] arr();
+     }
+
+     @interface SecondAnnotation{
+         String value();
+     }
+   #+END_SRC
 ** 其他
 1. Debug模式/断点调试：允许通过断点来一行行调试代码
 2. 单元测试/Junit测试：
    - 要求测试方法必须在公共类
    - 需要选中要测试的方法的方法名，如果不选中方法名，则测试的时候会将所有的方法都进行测试
    - 要求被测试的方法必须没有参数，没有返回值以及是一个非静态方法
+     #+BEGIN_SRC java
+       package cn.commandoptionesc.jdk5;
+
+       import org.junit.After;
+       import org.junit.Before;
+       import org.junit.Test;
+
+       import java.io.FileWriter;
+       import java.io.IOException;
+
+       public class JunitDemo {
+
+           FileWriter writer;
+           @Before
+           public void init() throws IOException {
+               writer = new FileWriter("../Other/d.txt",true);
+           }
+
+           @Test
+           public void write1() throws IOException{
+               System.out.println("测试方法1");
+               writer.write("abc");
+
+           }
+
+           @Test
+           public void write2() throws IOException{
+               System.out.println("测试方法2");
+               writer.write("def");
+           }
+
+           @After
+           public void close() throws IOException{
+               System.out.println("关流");
+               writer.close();
+           }
+       }
+     #+END_SRC
