@@ -292,7 +292,7 @@
 #+END_SRC
 ** 添加元素
 
-#+BEGIN_SRC python
+#+BEGIN_SRC python :results output
   lst = list(range(10))
   # 生成的是一个新的列表
   print(lst + [1,2,3])
@@ -303,12 +303,20 @@
   a = [1,2,3]
   b = [3,4,5]
   a.append(b)
+  print(a)
 
   m = [1,3,4]
   n = [3,4,5]
-  a.extend(n)
+  m.extend(n)
   print(m)
 #+END_SRC
+
+#+RESULTS:
+: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3]
+: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a']
+: [1, 2, 3, [3, 4, 5]]
+: [1, 3, 4, 3, 4, 5]
+
 ** 删除元素
 
    #+BEGIN_SRC python :results output
@@ -411,6 +419,7 @@
   # -*- coding:utf-8 -*-
   # python2.7写法
   # python3可以省略开头注释
+
   tup1 = ('physics','chemistry',1997,2000);
   tup2 = (1,2,3,4,5);
   # 可以不加括号
@@ -443,3 +452,110 @@
 : (50, 50, 50)
 : (5, 1)
 : (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+* 文本序列str常用操作
+** 字符串引号
+#+BEGIN_SRC python :results output
+  # -*- coding:utf-8 -*-
+  # python3可以省略开头注释
+
+  # 字符串引号
+
+  str1 = "abc"
+  str2 = 'abc'
+  # 双引号单引号无区别，但文本中有引号的时候要相互交替使用
+  str3 = 'my name is "fatbird"'
+  # 需要多行字符串时候用三引号''' ''' """ """
+  str4 = '''hello ! how are you ?
+            I`m fine,thank you.'''
+  print(str1)
+  print(str2)
+  print(str3)
+  print(str4)
+  #+END_SRC
+
+  #+RESULTS:
+  : abc
+  : abc
+  : my name is "fatbird"
+  : hello ! how are you ?
+  :           I`m fine,thank you.
+** 转义字符
+#+BEGIN_SRC python :results output
+  # -*- coding:utf-8 -*-
+  # python3可以省略开头注释
+
+  # 转义字符
+  # \' \" 分别输出单引号，双引号
+  print('\'','\"')
+
+  # \n 空行
+  print('hello\nhow do you do ?')
+
+  # 输出\, 所以文件路径用"/"或者"\\"
+  print('\\')
+#+END_SRC
+
+#+RESULTS:
+: ' "
+: hello
+: how do you do ?
+: \
+** 序列通用功能
+
+#+BEGIN_SRC python :results output
+  # -*- coding:utf-8 -*-
+  # python3可以胜率开头注释
+
+  # 序列通用功能
+  # in/not in 判断是否存在
+  print('a' in 'abc')
+  # 文本连接
+  print('我很帅' + '没错')
+  # 文本复制
+  print('handsome' * 4)
+
+  # 索引、切片、步长
+  st = 'abcdefg'
+  print(st[2],st[-1])
+  print(st[:2])
+  print(st[::2])
+
+  # .index()方法
+  print(st.index('g'))
+
+  # 计算字符串长度（思考这里能否把逗号换位"+"）
+  print('st长度为：',len(st))
+#+END_SRC
+
+#+RESULTS:
+: True
+: 我很帅没错
+: handsomehandsomehandsomehandsome
+: c g
+: ab
+: aceg
+: 6
+: st长度为： 7
+** 字符串常用功能
+
+#+BEGIN_SRC python
+  # -*- coding:utf-8 -*-
+  # python3可以省略开头注释
+
+  # 字符串常用功能
+  st = "I`m handsome!"
+  st2 = st.replace('handsome','ugly')
+  print(st)
+  print(st2)
+  st = 'hahaha'
+  st2 = st.replace('ha','ha',2)
+  print(st2)
+  # 修改字符串，count要更换几个
+  # str.replace(old,new,count)
+
+  st = 'poi01,116.446238,39.940166'
+  lst = st.split(',')
+  print(lst)
+
+  # str.split(obj)
+#+END_SRC
