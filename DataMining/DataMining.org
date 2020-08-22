@@ -1,6 +1,17 @@
+#+OPTIONS: toc: nil
+- [[数据类型]]
+  - [[基础数据类型]]
+    - [[1. Number数字]]
+    - [[2. String字符串]]
+    - [[3. bool布尔型]]
+    - [[4. List列表]]
+    - [[5. tuple元组]]
+    - [[6. dict字典]]
+  - [[数据类型转换方法]]
+
 * 数据类型
 ** 基础数据类型
-1. Number数字
+*** 1. Number数字
    #+BEGIN_SRC python
      # Number:int,float
      x1 = 10
@@ -9,7 +20,7 @@
      print(type(x1),type(x2))
      # print()
    #+END_SRC
-2. String字符串
+*** 2. String字符串
    #+BEGIN_SRC python
      # string
      x3 = 'hello world'
@@ -25,7 +36,7 @@
      # ' ' " " ''' '''
      print(type(x3))
    #+END_SRC
-3. bool布尔型
+*** 3. bool布尔型
 
    #+BEGIN_SRC python
      # bool
@@ -36,7 +47,7 @@
      print(2 > 3)
      print(3 < 5)
    #+END_SRC
-4. List列表
+*** 4. List列表
 
    #+BEGIN_SRC python
      # list
@@ -45,7 +56,7 @@
      lst2 = [1,2.5,4,'hello',[1,2,3]]
      print(lst2[2],type(lst2[2]))
    #+END_SRC
-5. tuple元祖
+*** 5. tuple元组
 
    #+BEGIN_SRC python
      # tuple
@@ -56,7 +67,7 @@
      # 元祖不可改
      # tup[0] = 100
    #+END_SRC
-6. dict字典
+*** 6. dict字典
 
    #+BEGIN_SRC python
      # dict
