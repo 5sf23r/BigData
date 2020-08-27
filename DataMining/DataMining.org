@@ -1,4 +1,4 @@
-#+TITLE: Beginners Tutorial
+#+TITLE: DataMining
 #+OPTIONS: toc: nil
 * 目录
 - [[数据类型]]
