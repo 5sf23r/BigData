@@ -1,6 +1,5 @@
-#+TITLE: DataMining
 #+OPTIONS: toc: nil
-* 目录
+
 - [[数据类型]]
   - [[基础数据类型]]
     - [[1. Number数字]]
