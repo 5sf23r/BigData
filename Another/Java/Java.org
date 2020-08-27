@@ -1,3 +1,50 @@
+#+TITLE:Java
+#+OPTIONS: TOC: nil
+* 目录
+- [[Java简介]]
+  - [[简介]]
+- [[面向对象]]
+  - [[面向对象简介]]
+    - [[面向对象与面向过程的比较]]
+    - [[类与对象的关系]]
+    - [[对象的内存处理]]
+  - [[基本概念]]
+    - [[成员变量和局部变量]]
+    - [[匿名对象]]
+    - [[构造方法]]
+    - [[this关键字]]
+    - [[构造代码块]]
+    - [[权限修饰符]]
+  - [[基本概念2]]
+    - [[static]]
+    - [[final]]
+    - [[abstract]]
+    - [[接口interface]]
+    - [[内部类]]
+    - [[包]]
+    - [[垃圾分代回收机制
+]]- [[面向对象的特征]]
+- [[API(一)]]
+  - [[Object]]
+  - [[String]]
+  - [[正则表达式]]
+  - [[包装类]]
+  - [[数字运算]]
+  - [[日期]]
+- [[API(二)]]
+  - [[异常]]
+  - [[集合]]
+  - [[和集合相关的类]]
+  - [[泛型]]
+  - [[Map<K,V>]]
+- [[API(三)]]
+  - [[File]]
+  - [[IO]]
+  - [[线程]]
+  - [[网络编程]]
+  - [[JDK1.5的特性]]
+  - [[其他]]
+
 * Java简介
 ** 简介
 1. Java是1995年有SUN(Stanford University Network,斯坦福大学校园网)公司正式推出的一门编程语言
@@ -1967,7 +2014,7 @@ class Student1 {
 6. String str = "a";String str2 = new String("a");这两句话产生了2个对象
 7. 因为+在底层是调用StringBuilder中append，所以如果需要进行大量的字符串拼接的时候，建议直接使用StringBuilder,因为在底层要进行多次转换。
 8. String类中提供了大量的操作字符串，但是不改变原字符串的方法
-*** + 拼接与StringBuilder类的appen方法
+*** + 拼接与StringBuilder类的append方法
 #+BEGIN_SRC java
 package cn.commandoptionesc.stringx;
 
