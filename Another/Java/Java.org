@@ -1,3 +1,75 @@
+* 目录                                                                          :TOC_5:QUOTE:
+#+BEGIN_QUOTE
+- [[#java简介][Java简介]]
+  - [[#简介][简介]]
+- [[#面向对象][面向对象]]
+  - [[#面向对象简介][面向对象简介]]
+    - [[#面向对象与面向过程的比较][面向对象与面向过程的比较]]
+    - [[#类与对象的关系][类与对象的关系]]
+    - [[#对象的内存处理][对象的内存处理]]
+  - [[#基本概念][基本概念]]
+    - [[#成员变量和局部变量][成员变量和局部变量]]
+    - [[#匿名对象][匿名对象]]
+    - [[#构造方法][构造方法]]
+    - [[#this关键字][this关键字]]
+    - [[#构造代码块][构造代码块]]
+      - [[#构造代码块-1][构造代码块]]
+      - [[#局部代码块][局部代码块]]
+    - [[#权限修饰符][权限修饰符]]
+  - [[#基本概念2][基本概念2]]
+    - [[#static][static]]
+      - [[#静态变量][静态变量：]]
+      - [[#静态方法][静态方法：]]
+      - [[#静态代码块][静态代码块]]
+    - [[#final][final]]
+    - [[#abstract][abstract]]
+    - [[#接口interface][接口interface]]
+    - [[#内部类][内部类]]
+    - [[#包][包]]
+    - [[#垃圾分代回收机制][垃圾分代回收机制]]
+- [[#面向对象的特征][面向对象的特征]]
+  - [[#封装][封装]]
+  - [[#继承][继承]]
+  - [[#多态][多态]]
+- [[#api一][API(一)]]
+  - [[#object][Object]]
+  - [[#string][String]]
+    - [[#-拼接与stringbuilder类的append方法][+ 拼接与StringBuilder类的append方法]]
+    - [[#-拼接与stringbuilder类的appen方法的验证][+ 拼接与StringBuilder类的appen方法的验证]]
+    - [[#charattochararray][charAt、toCharArray]]
+    - [[#comparetocomparetoignorecaseconcatcaontains][compareTo、compareToIgnoreCase、concat、caontains]]
+    - [[#endswithstartswithequalsinstanceofequalsignorecase][endsWith、startsWith、equals、instanceof、equalsIgnoreCase]]
+    - [[#getbytesstring][getBytes、String]]
+    - [[#hashcodeindexofinternisempty][hashCode、indexOf、intern、isEmpty]]
+    - [[#lastindexofreplacesubstringtouppercasetolowercasetrim][lastIndexOf、replace、substring、toUpperCase、toLowerCase、trim]]
+    - [[#tostring与stringvalueof的区别][toString与String.valueOf的区别]]
+  - [[#正则表达式][正则表达式]]
+    - [[#正则表达式举例][正则表达式举例]]
+    - [[#空括号][空括号]]
+    - [[#-][. \]]
+    - [[#--][+ ？ *]]
+    - [[#n-n-nm][{n} {n,} {n,m}]]
+    - [[#捕获编号][捕获编号]]
+    - [[#n][$n]]
+    - [[#切分split][切分split]]
+  - [[#包装类][包装类]]
+  - [[#数字运算][数字运算]]
+  - [[#日期][日期]]
+- [[#api二][API(二)]]
+  - [[#异常][异常]]
+  - [[#集合][集合]]
+  - [[#和集合相关的类][和集合相关的类]]
+  - [[#泛型][泛型]]
+  - [[#mapkv][Map<K,V>]]
+- [[#api三][API(三)]]
+  - [[#file][File]]
+  - [[#io][IO]]
+  - [[#线程][线程]]
+  - [[#网络编程][网络编程]]
+  - [[#jdk15的特性][JDK1.5的特性]]
+  - [[#其他][其他]]
+#+END_QUOTE
+
 * Java简介
 ** 简介
 1. Java是1995年有SUN(Stanford University Network,斯坦福大学校园网)公司正式推出的一门编程语言
@@ -1967,7 +2039,7 @@ class Student1 {
 6. String str = "a";String str2 = new String("a");这两句话产生了2个对象
 7. 因为+在底层是调用StringBuilder中append，所以如果需要进行大量的字符串拼接的时候，建议直接使用StringBuilder,因为在底层要进行多次转换。
 8. String类中提供了大量的操作字符串，但是不改变原字符串的方法
-*** + 拼接与StringBuilder类的appen方法
+*** + 拼接与StringBuilder类的append方法
 #+BEGIN_SRC java
 package cn.commandoptionesc.stringx;
 
@@ -2385,7 +2457,8 @@ public class RegexDemo1 {
     }
 }
 #+END_SRC
-*** [xyz]、[^abc]
+*** 空括号
+[xyz]、[^abc]
 #+BEGIN_SRC java
 package cn.commandoptionesc.regex;
 
