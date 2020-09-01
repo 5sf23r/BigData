@@ -39,6 +39,9 @@
   - [[#5-拓展][5. 拓展]]
     - [[#51-index--match--vlookup][5.1 Index + match = vlookup]]
     - [[#52-快捷键学习][5.2 快捷键学习]]
+- [[#二-python基础][二. Python基础]]
+  - [[#1-注释][1. 注释]]
+  - [[#2-变量的定义][2. 变量的定义]]
 #+END_QUOTE
 
 * 数据分析步骤
@@ -170,7 +173,7 @@
   [[./img/24.png]]
 *** 3.2 数据的计算
 **** 3.2.1 函数的总结
-[[./img/25]]
+[[./img/25.png]]
 **** 3.2.2 函数引入
 利用函数解答
 [[./img/26.png]]
@@ -351,3 +354,61 @@
 - Ctrl + ； 获取当前日期
 - Shift + Enter 同时打开多个工作簿
 - Shift + F8 激活“多个单元格选项”
+* 二. Python基础
+** 1. 注释
+对代码的解释和说明，可以提供代码的可读性。
+#+BEGIN_EXAMPLE
+注释分为单行注释和多行注释
+单行注释是以#开始
+多行注释，可以使用三个双引号或者三个单引号''' ''' """ """
+#+END_EXAMPLE
+#+BEGIN_SRC python
+  # 定义字符串变量name
+  name = "李四"
+
+  '''
+  我是多行注释
+  我是多行注释
+  我是多行注释
+  '''
+
+  age = 19
+
+  """
+  我也是多行注释
+  我也是多行注释
+  我也是多行注释
+  """
+  sex = '男'
+#+END_SRC
+
+** 2. 变量的定义
+
+#+BEGIN_SRC python
+  # 定义了一个变量名字叫做score,存储的数据是100
+  score = 100
+  print(score)
+
+  name = "张三"
+  print(name)
+
+  pi = 3.14
+  print(pi)
+
+  is_ok = True
+  print(is_ok)
+
+  # 提示：在python里面不需要指定数据的类型，会根据数据自动推导出数据类型
+
+  # 通过type查看变量的类型
+  score_type = type(score)
+  print(score_type)
+
+  name_type = type(name)
+  print(name_type)
+
+  pi_type = type(pi)
+  print(pi_type)
+
+  print(type(is_ok))
+#+END_SRC
