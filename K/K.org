@@ -44,6 +44,7 @@
   - [[#2-变量的定义][2. 变量的定义]]
   - [[#3-变量的命名规则][3. 变量的命名规则]]
     - [[#变量命名][变量命名]]
+  - [[#4-关键字][4. 关键字]]
 #+END_QUOTE
 
 * 数据分析步骤
@@ -418,7 +419,6 @@
 *总结：* 常用的数据类型 int，str，float，bool，list，tuple，dict，set
 ** 3. 变量的命名规则
 变量名：是由字母、数字、下划线组成，注意是只有这三种，但是不能以数字开头。
-#+BEGIN_EXAMPLE
 *** 变量命名
 驼峰命名法和下划线命名法
 - 1. 驼峰命名法：
@@ -438,3 +438,9 @@
     MyName = '赵六'
     print(myName)
   #+END_SRC
+
+** 4. 关键字
+关键字：在python里面具有特殊功能的标识符（理解成变量名、函数名），关键字不能作为变量名使用。
+#+BEGIN_EXAMPLE
+['False','None','True','and','as','assert','async','await','break','class','continue','def','del','elif','except','finally','for','from','global','if','import','in','is','lambda','nonlocal','not','or','pass','raise','return','try','while','with','yield']
+#+END_EXAMPLE
