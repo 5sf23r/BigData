@@ -1,0 +1,45 @@
+<!DOCtype html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
+    <title>div盒子模型+css层叠样式表</title>
+    <style type="text/css">
+      a:link{
+      color:#DDAA11;
+      background:#FFAADD;
+      }
+      a:visited{
+      color:#AABB21;
+      background:#FDFADD;
+      }
+      a:hover{
+      color:#AFFB21;
+      background:#AAFADD;
+      }
+      a:active{
+      color:#BBFF21;
+      background:#BBFADD;
+      }
+      div:hover{
+      color:#AFFB21;
+      background:#AAFADD;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1">我是父级div
+      <div id="test" class="test" name="ll">
+        我是儿子div
+      </div>
+      <span class="test">我是div儿子span1</span>
+      <span class="test">我是div儿子span2</span>
+      <p>
+        <span class="test">我是p儿子span3</span>
+      </p>
+    </div>
+    <div idi="test" class="test" name="ll">
+      单独div
+    </div>
+    <a href="#">点击跳转</a>
+  </body>
+</html>

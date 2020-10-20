@@ -1,0 +1,35 @@
+<HTML>
+  <HEAD>
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="TEXT/HTML";CHARSET="UTF-8" />
+    <TITLE>表单标签</TITLE>
+  </HEAD>
+  <BODY>
+    <FORM ACTION="HTTP://WWW.BAIDU.COM" METHOD="GET">
+      姓名：<INPUT TYPE="TEXT" NAME="USERNAME" />
+      密码：<INPUT TYPE="PASSWORD" NAME="PASSWORD"/>
+      确认密码：<INPUT TYPE="PASSWORD" NAME="REPASSWORD"/>
+      性别：<INPUT TYPE="RADIO" NAME="GENDER" VALUE="MALE"/>男
+      <INPUT TYPE="RADIO" NAME="GENDER" VALUE="FEMALE"/>女
+      爱好：<INPUT TYPE="CHECKBOX" NAME="LIKE" VALUE="EAT"/>吃
+           </BR>
+           <INPUT TYPE="CHECKBOX" NAME="LIKE" VALUE="DRINK"/>喝
+           <INPUT TYPE="CHECKBOX" NAME="LIKE" VALUE="SLEEP"/>睡
+           头像：<INPUT TYPE="FILE" NAME="HEAD" />
+           <INPUT TYPE="BUTTON" VALUE="点击爆炸" ONCLICK=""/>
+           <INPUT TYPE="SUBMIT" />
+           <input type="reset" />
+
+           <input type="image" src="../image/5.jpg" />
+           <input type="hidden" value="123" />
+
+           <select name="city">
+             <option>---请选择---</option>
+             <option>北京</option>
+             <option>上海</option>
+             <option>深圳</option>
+             <option selected="selected" value="wuhan">武汉</option>
+           </select>
+           <textarea name="test" rows="10" cols="10">我是一个textarea</textarea>
+    </form>
+  </BODY>
+</HTML>
