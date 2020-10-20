@@ -39,7 +39,7 @@
   - [[#7-定义变量][7. 定义变量]]
   - [[#8-js语法--语句][8. js语法--语句]]
   - [[#9-js语法--函数][9. js语法--函数]]
-  - [[#10-js语法--数组--array--][10. js语法--数组--Array--]]
+  - [[#10-js语法--数组][10. js语法--数组]]
   - [[#10-js语法-对象][10. js语法-对象]]
   - [[#11-json][11. JSON]]
 - [[#dhtml-动态html][DHTML-动态html]]
@@ -1597,7 +1597,7 @@ Client - Server
         </html>
       #+END_SRC
       [[./SourceCode/40.html]]
-** 10. js语法--数组--Array--
+** 10. js语法--数组
     js中的数组，本质上就是一个用中括号括起来用逗号分割内容的字符串
     #+BEGIN_SRC js
       var arr = new Array();//定义一个长度为0的空数组
@@ -1658,6 +1658,8 @@ Client - Server
           <script type="text/javascript">
             var arr = new Array(1,"a",true,new Object());
             console.log(arr);
+            arr[4]="b";
+            console.log(arr);
           </script>
         </head>
         <body>
@@ -1666,9 +1668,37 @@ Client - Server
     #+END_SRC
     [[./SourceCode/43.html]]
 
+    #+BEGIN_SRC html
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+          <title>js数组</title>
+          <script type="text/javascript">
+            var arr = [2,"c",true,false,new Object()];
+            console.log(arr);
+            arr[999]=0;
+            console.log(arr);
+            arr.push(2);
+            console.log(arr);
+            var r = arr.pop();
+            console.log(r);
+            console.log(arr);
+            var s = arr.shift();
+            console.log(s);
+            console.log(arr);
+            for(var i=0;i<arr.length;i++){
+              console.log(arr[i]);
+            }
+          </script>
+        </head>
+        <body>
+        </body>
+      </html>
+    #+END_SRC
     - 特点：
-      1. 可以存储不同类型的数据
-      2. 长度可以变化
+      1. 数组存储的元素类型是任意的
+      2. 长度可以是任意的
     - 案例：
       1. 添加元素push()
       2. 删除最后一个元素pop()
@@ -1676,6 +1706,35 @@ Client - Server
       4. 遍历打印数组
 ** 10. js语法-对象
     - js的内置对象
+      #+BEGIN_SRC html
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+            <title>js对象</title>
+            <script type="text/javascript">
+              console.log(Math.random()*10);
+              console.log(Math.floor(3.4));
+              console.log(Math.ceil(3.4));
+              console.log(Math.round(3.4));
+              var date = new Date();
+              console.log(date.toLocaleString());
+              console.log(parseInt("123"));
+              //解释执行js语句
+              eval(alert("aaa"));
+              //RegExp正则对象
+              var reg = /^\w+@\w+(\.\w+)+$/;
+              var reg1 = new RegExp("\\w+@\\w+(\\.\\w+)+");
+              var email = "lishuai@tedu.cn";
+              console.log(reg.test(email));
+              console.log(reg1.test(email));
+            </script>
+          </head>
+          <body>
+          </body>
+        </html>
+      #+END_SRC
+      [[./SourceCode/45.html]]
       1. String--基本数据类型，字符串类型的包装对象
       2. Boolean--基本数据类型，布尔类型的包装对象
       3. Number--基本数据类型，数值类型的包装对象
@@ -1686,9 +1745,9 @@ Client - Server
          + 思考：parseInt("123abc123");打印结果
       8. RegExp--正则对象，保存有关正则表达式模式匹配信息的固有全局对象。Partten邮箱正则
     - 自定义对象
+      js中对象的本质就是一个大括号，其中包含任意多个键值对，键值对直接使用逗号隔开，这种形式组成的字符串就是对象。所以对象的本质也是一个字符串
       构造函数模拟了Java中类的功能，js中的对象可以动态增加/删除属性和函数。--js对象的本质就是用大括号起来的键值的集合，本质是一段字符串，有点类似于java中的map。
       + 方法一：构造函数创建对象1
-
         #+BEGIN_SRC js
           function Person(){}
           var p = new Person();
@@ -1705,8 +1764,35 @@ Client - Server
           delete p.say
           console.log(p);
         #+END_SRC
-      + 方法二：构造函数构造对象2
 
+        #+BEGIN_SRC html
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+              <title>js对象</title>
+              <script type="text/javascript">
+                function Person(){
+                }
+                var p = new Person();
+                p.name="ls";
+                p.age=18;
+                p.gender="male";
+                p.say = function(){
+                  return this.name+"say...";
+                }
+                console.log(p);
+                console.log(p.say());
+                delete p.name;
+                console.log(p);
+              </script>
+            </head>
+            <body>
+            </body>
+          </html>
+        #+END_SRC
+        [[./SourceCode/46.html]]
+      + 方法二：构造函数构造对象2
         #+BEGIN_SRC js
           function Person(name,age){
             this.name = name;
@@ -1718,8 +1804,30 @@ Client - Server
           alert(p["age"]);
           p.say();
         #+END_SRC
-      + 方法三：对象直接量定义对象
 
+        #+BEGIN_SRC html
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+              <title>js对象</title>
+              <script type="text/javascript">
+                function Person(name,age){
+                  this.name=name;
+                  this.age=age;
+                }
+                var p = new Person("ls",18);
+                p.addr="bj";
+                delete p.name;
+                console.log(p);
+              </script>
+            </head>
+            <body>
+            </body>
+          </html>
+        #+END_SRC
+        [[./SourceCode/47.html]]
+      + 方法三：对象直接量定义对象
         #+BEGIN_SRC js
           var p = {name:"liubei",age:19,sleep:function(){alert(this.name+"sleep....")}};
           alert(p.name);
@@ -1727,6 +1835,54 @@ Client - Server
           p.sleep();
 
         #+END_SRC
+
+        #+BEGIN_SRC html
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+              <title>js对象</title>
+              <script type="text/javascript">
+                function Person(name,age){
+                  this.name=name;
+                  this.age=age;
+                }
+                var p = new Person("ls",18);
+                p.addr="bj";
+                delete p.name;
+                console.log(p);
+              </script>
+            </head>
+            <body>
+            </body>
+          </html>
+        #+END_SRC
+        [[./SourceCode/48.html]]
+
+        #+BEGIN_SRC html
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+              <title>js对象</title>
+              <script type="text/javascript">
+                var data = {
+                  name:"pq",
+                  age:18,
+                  addr:"bj",
+                  girlfriends:[
+                    {name:"dc",age:16,job:"sbd"},
+                    {name:"xs",age:18,job:"sdfg"}
+                  ]
+                }
+                console.log(data["girlfriends"][1]["job"]);
+              </script>
+            </head>
+            <body>
+            </body>
+          </html>
+        #+END_SRC
+        [[./SourceCode/49.html]]
     - 对象操作
       1. with语句：with语句定义了某个对象的作用域，在该域中可以直接调用该对象的成员
 
@@ -1776,11 +1932,40 @@ Client - Server
    - 通过操作代表html元素的js对象来操作html中的元素
    - 通过操作js对象组成树来操作html文档的结构。从而实现了html和js的结合，实现了可以通过js来操作html
    - DHTML可以分为由BOM(Browser Object Model)和DOM(Document Object Model)两个部分组成
+   - 可以对节点进行增删改的操作
 ** 2. BOM和DOM
    [[./Img/2.png]]
 ** 3. BOM--浏览器对象模型
    bom--browser object model
    - window：代表一个浏览器窗口的对象
+
+     #+BEGIN_SRC html
+       <!DOCTYPE html>
+       <html>
+         <head>
+           <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+           <title>js对象</title>
+           <script type="text/javascript">
+             /*window.onblur=function(){
+               alert(123);
+               }*/
+             /*window.onfocus=function(){
+               alert(321);
+               }*/
+             window.onload=function(){
+               var div = document.getElementById("test");
+               div.innerText="bbb";
+             }
+           </script>
+         </head>
+         <body>
+           <div id="test" class="test">
+             aa
+           </div>
+         </body>
+       </html>
+     #+END_SRC
+     [[./SourceCode/50.html]]
      + 其中包含的方法：
        1. onblur:失去焦点
        2. onfocus：获得焦点

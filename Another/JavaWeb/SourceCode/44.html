@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <title>js数组</title>
+    <script type="text/javascript">
+      var arr = [2,"c",true,false,new Object()];
+      console.log(arr);
+      arr[999]=0;
+      console.log(arr);
+      arr.push(2);
+      console.log(arr);
+      var r = arr.pop();
+      console.log(r);
+      console.log(arr);
+      var s = arr.shift();
+      console.log(s);
+      console.log(arr);
+      for(var i=0;i<arr.length;i++){
+        console.log(arr[i]);
+      }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

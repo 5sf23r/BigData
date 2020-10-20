@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <title>js对象</title>
+    <script type="text/javascript">
+      function Person(){
+      }
+      var p = new Person();
+      p.name="ls";
+      p.age=18;
+      p.gender="male";
+      p.say = function(){
+        return this.name+"say...";
+      }
+      console.log(p);
+      console.log(p.say());
+      delete p.name;
+      console.log(p);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

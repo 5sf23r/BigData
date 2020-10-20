@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <title>js对象</title>
+    <script type="text/javascript">
+      console.log(Math.random()*10);
+      console.log(Math.floor(3.4));
+      console.log(Math.ceil(3.4));
+      console.log(Math.round(3.4));
+      var date = new Date();
+      console.log(date.toLocaleString());
+      console.log(parseInt("123"));
+      //解释执行js语句
+      eval(alert("aaa"));
+      //RegExp正则对象
+      var reg = /^\w+@\w+(\.\w+)+$/;
+      var reg1 = new RegExp("\\w+@\\w+(\\.\\w+)+");
+      var email = "lishuai@tedu.cn";
+      console.log(reg.test(email));
+      console.log(reg1.test(email));
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
