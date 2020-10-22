@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <title>jQuery的引入</title>
+    <script type="text/javascript" src="../other/jquery-1.4.2.js">
+    </script>
+    <script type="text/javascript">
+      window.onload = function(){
+        //jQuery对象->js对象和jquery对象
+        //第一种
+        var div = $("div")[0];
+        div.innerText = "ccc";
+      }
+    </script>
+  </head>
+  <body>
+    <div id="test" class="test">
+    </div>
+  </body>
+</html>
