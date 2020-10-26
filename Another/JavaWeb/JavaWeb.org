@@ -56,9 +56,15 @@
   - [[#5-jquery的使用方式][5. jQuery的使用方式]]
   - [[#6-js对象和jquery对象的相互转换][6. js对象和jQuery对象的相互转换]]
 - [[#git][Git]]
-  - [[#1-版本控制概念][1. 版本控制概念]]
-  - [[#2-版本控制软件分类][2. 版本控制软件分类]]
-  - [[#3-git基本概念][3. Git基本概念]]
+- [[#mysql][MySQL]]
+  - [[#1-数据库概述][1. 数据库概述]]
+  - [[#2-sql语句---库表操作][2. SQL语句---库、表操作]]
+  - [[#3-数据库的crud][3. 数据库的CRUD]]
+  - [[#4-备份回复数据库][4. 备份、回复数据库]]
+  - [[#5-多表设计][5. 多表设计]]
+  - [[#6-外键约束][6. 外键约束]]
+  - [[#7-多表查询][7. 多表查询]]
+  - [[#8-扩展][8. 扩展]]
 #+END_QUOTE
 
 * Web概述
@@ -2778,74 +2784,607 @@ Client - Server
       #+END_SRC
       [[./SourceCode/60.html]]
 * Git
-** 1. 版本控制概念
-     在代码开发过程中，往往需要对源码进行多次的修改操作，这样一来同一份代码就产生了多个版本，在开发过程中通常需要对这些多个版本代码进行管理，以便于在需要时进行代码回滚、多版本间比较、多人协作开发、代码分支、分支合并等操作。这样的需求大量的存在，而随着软件越来越复杂、代码越来越多、参与开发者越来越多，版本管理也变的越来越有难度，此时就需要专业的软件对版本进行管理，这个过程就就称之为版本控制，实现版本控制的软件就称之为版本控制软件。
-** 2. 版本控制软件分类
-     1. 集中式版本控制
-        在集中式版本控制中，版本库是集中存放在中央服务器的，开发者在开发之前要先从中央服务器取得最新的版本，然后开始工作，工作完成后，再把自己的代码推送给中央服务器。中央服务器就好比一个图书馆，你要一本书，必须先从图书馆借出来，然后回到家自己改，改完了，再放回图书馆。
+file:./other/Git.pdf
+* MySQL
+** 1. 数据库概述
+    1. 数据库的概念
+       数据路：存储数据的仓库
+       数据路类型：层次式数据路，网络式数据路，关系型数据库
+    2. 关系型数据路
+       - 使用关系模型来存储的数据的数据路叫做关系型数据路
+         常见数据库
+         - 商业数据路
+           Oracle、SQLServer、DB2、Sybase
+         - 开源数据路
+           MySQL、SQLLite
+    3. MySQL数据路的安装和配置
+       [[./Img/18.png]]
+       [[./Img/19.png]]
+    4. MySQL数据库服务器、数据库和表的关系
+       所谓安装数据库服务器，只是在机器上装可一个数据库管理程序，这个管理程序可以管理多个数据库，一般开发人员会针对每一个应用创建一个数据库。为保存应用中实体的数据，一般会在数据路创建多个表，以保存程序中实体的数据。
 
-        [[./Img/4.jpg]]
-        - 优点：
-          + 便于集中式的代码管理
-          + 便于进行权限控制
-        - 缺点：
-          + 需要联网才可以工作，而且项目庞大的情况下对带宽的要求比较高
-          + 中心服务器存在单节点故障风险
-        - 常见的几种版本控制软件：
-          CVS、SVN
-     2. 分布式版本控制
-        在分布式版本控制系统中，没有“中央服务器”的概念，每个人的电脑上都是一个完整的版本库。而在多人协同工作时，通过推送各自的修改，保证多人间的版本一致。但其实，在实际开发中，很少真的在两个电脑间进行修改的推送，而是选择一台充当“中央服务器”，但这个服务器仅仅是为了使用便利，本质上和其他机器没有任何区别，即使宕机，整个分布式版本控制仍然可以工作。
+       数据库服务器、数据库和表的关系如图所示：
+       [[./Img/20.png]]
+    5. 数据在数据库中的存储方式
+       [[./Img/21.png]]
+    6. SQL语言
+       - Structured Query Language,结构化查询语言
+       - 非过程性语言
+       - 美国国家标准局（ANSI）与国际标准化组织（ISO）已经制定了SQL标准
+       - 为加强SQL的语言能力，各厂商增强了过程性语言的特征
+         - 如Oracle的PL/SQL过程性处理能力
+         - SQL Server、Sybase的T-SQL
+       - SQL是用来存取关系数据库的语言，具有查询、操纵、定义和控制关系型数据库的四方面功能。
+** 2. SQL语句---库、表操作
+    1. 创建数据库
+       #+BEGIN_SRC sql
+         CREATE DATABASE [IF NOT EXISTS] db_name [create_specification[,create_specification]...] create_specification:    7
+         [DEFAULT] CHARACTER SET charset_name  |  [DEFAULT] COLLATE collation_name
+       #+END_SRC
+       CHARACTER SET:指定数据库采用的字符集
 
-        [[./Img/5.jpg]]
-        - 优点：
-          + 不需要联网也可以工作
-          + 不存在单节点故障风险
-        - 缺点：
-          无法实现严格的权限控制
-        - 常见的分布式版本控制软件：
-          Git
-     3. git历史
-        Linus在1991年创建了开源的Linux，从此，Linux系统不断发展，已经成为最大的服务器系统软件了。
+       COLLATE：指定数据库字符集的比较方式
 
-        Linus虽然创建了Linux，但Linux的壮大是靠全世界热心的志愿者参与的，这么多人在世界各地为Linux编写代码，那Linux的代码是如何管理的呢？
-        - 在2002年以前，世界各地的志愿者把袁大妈文件通过diff的方式发给Linus，然后由Linus本人通过手工方式合并代码！
-          你也许会想，为什么Linus不把Linux代码放到版本控制系统里呢？不是有CVS、SVN这些免费的版本控制系统呢？因为Linus鉴定地反对CVS和SVN，这些集中式的版本控制系统不但速度慢，而且必须联网才能使用。有一些商用的版本控制系统，虽然比CVS、SVN好用，但那时付费的，和Linux的开源精神不符。不过，到了2002年，Linux系统已经发展了十年了，代码库之大让Linus很难继续通过手工方式管理了，社区的弟兄们也对这种方式表达了强烈不满，于是Linus选择了一个商业的版本控制系统BitKeeper，BitKeeper的东家BitMover公司出于人道主义精神，授权Linux社区免费使用这个版本控制系统。
+       （查看mysql存储位置：show global variables like "%datadir%";）
 
-          安定团结的大号局面在2005年就被打破了，原因是Linux社区牛人聚集，不免沾染了一些梁山好汉得劲江湖习气。开发Samba的Andrew试图破解BitKeeper的协议（这么干的起始也不止他一个），被BitMover公司发现了（监控工作做的不错！），于是BitMover公司怒了，要收回Linux社区的免费使用权。Linus可以向BitMover公司道个歉，保证以后严格管教弟兄们，嗯，这是不可能的。实际情况是这样的：Linus花了两周时间自己用C写了一个分布式版本控制系统，这就是Git！一个月之内，Linux系统的源码已经有Git管理了！牛是怎么定义的呢？大家可以体会一下。Git迅速成为最流行的分布式版本控制系统，尤其是2008年，GitHub网站上线了，它为开源项目免费提供Git存储，无数开源项目开始迁移至GitHub，包括jQuery，PHP，Ruby等等。
+       #+BEGIN_SRC
+         练习：
+             1. 创建一个名称为mydb1的数据库
+                create database mydb1;
+             2. 创建一个使用utf8字符集的mydb2数据库
+                create database mydb2 character set gbk;
+             3. 创建一个使用utf8字符集，并带校对规则的mydb3数据库
+                create database mydb3 character utf8 collate utf8_bin
+       #+END_SRC
+    2. 查看、删除数据库
+       - 显示数据库语句：
+         #+BEGIN_SRC sql
+           SHOW databases
+         #+END_SRC
+       - 显示数据库创建语句：
+         #+BEGIN_SRC sql
+           SHOW CREATE DATABASE db_name
+         #+END_SRC
+       - 数据库删除语句：
+         #+BEGIN_SRC sql
+           DROP DATABASE [IF EXISTS] db_name
+         #+END_SRC
+       #+BEGIN_SRC
+         练习：
+             1. 查看当前数据库服务器中的所有数据库
+                show databases;
+             2. 查看当前创建mydb2数据库的定义信息
+                show create database mydb2;
+             3. 删除前面创建的mydb1数据库
+                drop database mydb1
+       #+END_SRC
+    3. 修改数据库
+       #+BEGIN_SRC sql
+         ALTER DATABASE [IF NOT EXISTS] db_name [alter_specification [,alter_specification]...]alter_specification
+         [DEFAULT] CHARACTER SET charset_name | [DEFAULT] COLLATE collation_name
+       #+END_SRC
+    4. 选择数据库
+       #+BEGIN_SRC sql
+         use db_name;
+       #+END_SRC
+       查看当前使用的数据库：
+       #+BEGIN_SRC sql
+         select database();
+       #+END_SRC
+    5. 创建表（基本语句）
+       #+BEGIN_SRC sql
+         CREATE TABLE table_name(
+         column_name column_type,
+         column_name column_type,
+         column_name column_type,
+         )[character set 字符集][collate 校对规则]
+       #+END_SRC
+       + 注意：创建表时，要根据需保存的数据创建相应的列，并根据数据的类型定义相应的列类型。例：user对象
+         [[./Img/22.png]]
+    6. MySQL常用数据类型
+       - 字符串型
+         + VARCHAR、CHAR
+       - 大数据类型
+         BLOB、TEXT
+       - 数值型
+         TINYINT、SMALLINT、INT、BIGINT、FLOAT、DOUBLE
+       - 逻辑型
+         BIT
+       - 日期型
+         DATE、TIME、DATETIME、TIMESTAMP
+    7. 创建表练习
+       创建员工表employee---查看表结构：desc表名;
+       #+BEGIN_SRC
+         字段：id、name、gender、birthday、entry_date、job、salary、resume
+         属性：整型、字符型、字符型、日期型、日期型、字符型、小数型、大文本型
+         创建完毕之后利用desc employee来查看表结构
+       #+END_SRC
+    8. 定义表单字段的约束
+       - 定义主键约束
+         + primary key：不允许为空，不允许重复
+         + 删除主键：alter table tablename drop primary key;
+         + 主键自动增长：auto_increment
+       - 定义唯一约束
+         + unique
+         + 例如：name varchar(20)unique
+       - 定义非空约束
+         + not null
+         + 例如：salary double not null
+       - 外键约束
+    9. 查看表信息
+       查看表结构：
+       #+BEGIN_SRC sql
+         desc tabName
+       #+END_SRC
+       查看当前所有表：
+       #+BEGIN_SRC sql
+         show tables
+       #+END_SRC
+       查看当前数据库表键表语句
+       #+BEGIN_SRC sql
+         show create table tabName;
+       #+END_SRC
+    10. 修改表
+        使用ALTER TABLE语句追加，修改，或删除列的语法
+        #+BEGIN_SRC sql
+          ALTER TABLE table ADD column column_type [DEFAULT expr] [,column column_type]...;
+          ALTER TABLE table MODIFY column column_type [DEFAULT expr] [,column column_type]...;
+          ALTER TABLE table DROP column;
+        #+END_SRC
+        修改表的名称：
+        #+BEGIN_SRC sql
+          rename table 表名 to 新表名;
+        #+END_SRC
+        修改表的名称：
+        #+BEGIN_SRC sql
+          ALTER TABLE table change old_column new_column column_type;
+        #+END_SRC
+        修改表的字符集：
+        #+BEGIN_SRC sql
+          alter table user character set utf8;
+        #+END_SRC
+        - 练习：
+          #+BEGIN_SRC
+            在上面员工表的基本上增加一个image列
+            修改job列，使其长度为60
+            删除gender列
+            表名改为user
+            修改表的字符集为utf8
+            列名name修改为username
+          #+END_SRC
+    11. 删除表
+        #+BEGIN_SRC sql
+          drop table tabName;
+        #+END_SRC
+** 3. 数据库的CRUD
+    1. 数据库表记录CRUD语句
+       - insert语句（增加数据）
+       - Update语句（更新数据）
+       - Delete语句（删除数据）
+       - Select语句（查找数据）
+       - Insert语句
+    2. 使用INSERT语句向表中插入数据
+       #+BEGIN_SRC sql
+         INSERT INTO table_name [(column [,column...])] VALUES (value [,value...]);
+       #+END_SRC
+       - 插入的数据应与字段的数据类型相同
+       - 数据的大小应在列的规定范围内，例如：不能将一个长度为80的字符串加入到长度为40的列中
+       - 在values中列出的数据位置必须与被加入的列的排列位置相对应
+       - 字符和日期型数据应包含在单引号中
+       - 插入空值：不指定或insert into table value（null）
+       - 如果要插入所有字段可以省写列列表，直接按表中字段顺序写值列表
+       #+BEGIN_SRC
+         insert语句练习
+             使用insert语句向employee表中插入三个员工的信息
+             字段名：id、name、gender、birthday、salary、entry_date、resume
+             字段类型：整型、字符串型、字符串型、日期型、浮点型、日期型、大文本型
+       #+END_SRC
+       - TIP：mysql中文乱码
+         - mysql有六处使用了字符集，分别为：client、connection、database、results、server、system
+         - client是客户端使用的字符集
+         - connection是连接数据库的字符集设置类型，如果程序没有指明连接数据库使用的字符集类型就按照服务器默认的字符集设置
+         - database是数据库服务器中某个库使用的字符集设定，如果建库时没有指明，将使用服务器安装时指定的字符集设置
+         - results是数据库给客户端返回时使用的字符集设定，如果没有指明，使用服务器默认的字符集
+         - server是服务器安装时指定的默认字符集设定
+         - system是数据库系统使用的字符集设定（utf-8不可修改）
+           show variables like'character%';
 
-          历史就是这么偶然，如果不是当年BitMover公司威胁Linux社区，可能现在我们就没有免费而超级好用的Git了。
-** 3. Git基本概念
-     1. Git原理
-        1. Git基于版本快照工作
-           Git更像是把数据看作是对小型文件系统的一组快照。每次你提交更新，或在Git中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。为了搞笑，如果文件没有修改，Git不再重新存储该文件，而是只保留一个链接指向之前存储的文件。Git对待数据更像是一个快照流。
+           set names gbk;临时修改当前CMD窗口和mysql的通信编码字符集
+         - 通过修改my.ini修改字符集编码
+           请到mysql安装目录下面找到my.ini文件
 
-           [[./Img/6.png]]
-        2. Git保证数据完整性
-           Git中所有数据在存储前都计算校验和，然后以校验和来引用。这个功能建构在Git底层，是构成Git哲学不可或缺的部分。若你在传送过程中丢失信息或损坏文件，Git就能发现。
+           修改default-character-set=utf8为default-character-set=gbk
 
-           Git用以计算校验和的机制叫做SHA-1散列（hash，哈希）。这是一个由40个十六进制字符（0-9和a-f）组成字符串，基于Git中文件的内容或目录结构计算出来。SHA-1哈希看来是这样：24b9da6552252987aa493b52f8696cd6d3b00373
+           有两个地方都要改
 
-           Git中使用这种哈希值的情况很多，你将经常看到这种哈希值。实际上，Git数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名。
-        3. Git一般只添加数据，因此不用担心版本丢失
-           你执行的Git操作，几乎只往Git数据库中添加数据。很难让Git执行任何不可逆操作，或者让它以任何方式清楚数据。同别的版本控制工具一样，未提交更新时有可能丢失或弄乱修改的内容；但是一旦你提交快照到Git中，就难以再丢失数据，特别是如果你定期的推送数据库到其它仓库的话。这使得我们使用Git成为一个安心预约的过程，因为我们深知可以尽情做各种尝试，而没有把事情弄糟的危险。
-     2. 版本库（仓库）工作区 暂存区 分支区
-        [[./Img/7.jpg]]
+           修改文件前，先停止mysql服务，等修改后再重新启动
 
-        1. 版本库（仓库）
-           版本库又名仓库，英文名repository，你可以简单理解成员一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以"还原"。
-        2. 工作区
-           存放要管理的文件的位置
-        3. 暂存区
-           版本库中包含暂存区git add命令或git rm命令加入的操作被记录在暂存区内
-        4. 分支区
-           版本库中包含分支区是最终版本信息保存的位置git commit命令将暂存区内记录的操作提交到分支中，可以配置多个分支，如果不指定则默认master分支，并有一个head指针指向master分支的最新位置
-     3. Git的安装配置
-        1. 下载Git
-           Git最早只支持Linux平台，目前已经能够支持Linux、Unix、Windows、OS系统智商。下载地址：https://git-scm.com/
-        2. 安装Git
-        3. 初始配置Git
-           因为Git是一款分布式的版本控制软件，多用户之间的互相通信需要确定身份，所以安装Git后需要先配置当前用户的名称和邮箱，才可以使用
-           #+BEGIN_src
-           git config --global user.name "YourName"
-           git config --global user.email "email@example.com"
-           #+END_src
+           使用dos命令：net stop mysql 来停止服务 net start mysql来启动
+    3. Update语句
+       使用update语句修改表中数据
+       #+BEGIN_SRC sql
+         update tbl_name
+         set col_name1=expr1 [,col_name2=expr2 ...] [where where_definition]
+       #+END_SRC
+       update语法可以用新值更新原有表行中的各列
+
+       set子句指示要修改哪些列和要给予哪些值
+
+       where子句指定更新哪些行，如没有where子句，则更新所有的行
+       #+BEGIN_SRC
+         update语句练习：
+             在上面创建的employee表中修改表中的记录
+             要求：
+                 将所有员工薪水修改为5000元
+                 将姓名为'zs'的员工薪水修改为3000元
+                 将姓名为'lisi'的员工薪水修改为4000元，job改为ccc
+                 将'wu'的薪水在原有基础上增加1000元
+       #+END_SRC
+    4. Delete语句
+       使用delete语句删除表中数据
+       #+BEGIN_SRC sql
+         delete from tbl_name [where where definition]
+       #+END_SRC
+       - 如果不使用where子句，将删除表中所有数据
+       - delete语句不能删除某一列的值（可使用update）
+         + update table_name set 字段名='';
+       - 使用delete语句仅删除记录，不删除表本身，如要删除表，使用drop table语句
+         + drop table table_name;
+       - 同insert和update一样，从一个表中删除记录将引起其它表的参照完整性问题，在修改数据库数据时，头脑中应该始终不要忘记这个潜在的问题
+       - 外键约束
+       - 删除表中数据也可使用truncate table语句，它和delete有所不同，参看mysql文档
+       #+BEGIN_SRC
+         删除表中名称为'zs'的记录
+         删除表中所有记录
+         使用truncate删除表中记录
+       #+END_SRC
+    5. select语句（1）
+       基本select语句
+       #+BEGIN_SRC sql
+         select [distinct] *| {column1,column2,column3...}from table;
+       #+END_SRC
+       select指定查询哪些列的数据
+
+       column指定列名
+
+       *号代表查询所有列
+
+       from指定查询哪张表
+
+       DISTINCT可选，指显示结果时，是否剔除重复数据
+       #+BEGIN_SRC
+         查询表中所有学生的信息
+         查询表中所有学生的姓名和对应的英语成绩
+         过滤表中重复数据，distinct去重
+       #+END_SRC
+    6. select语句（2）
+       在select语句中可使用表达式对查询的列进行运算
+       #+BEGIN_SRC sql
+         select * | {column1 | expression,column2 | expression,..} from table;
+       #+END_SRC
+       在select语句中可使用as语句
+       #+BEGIN_SRC sql
+         select column as 别名 from 表名;
+       #+END_SRC
+       #+BEGIN_SRC
+         在所有学生分数上加10分特长分显示
+         统计每个学生的总分
+         使用别名表示学生总分
+       #+END_SRC
+    7. select语句（3）
+       #+BEGIN_SRC
+         使用where子句，进行过滤查询：
+             查询姓名为xxx的学生成绩
+             查询英语成绩大于90分的同学
+             查询总分大于200分的所有同学
+       #+END_SRC
+    8. select语句（4）
+       在where子句中经常使用的运算符
+       [[./Img/23.png]]
+       [[./Img/24.png]]
+       [[./Img/25.png]]
+       [[./Img/26.png]]
+       [[./Img/27.png]]
+       [[./Img/28.png]]
+       like语句中，%代表零个或多个任意字符，_代表一个字符，例first_name like '_a%';
+       #+BEGIN_SRC
+         查询英语分数在80~100之间的同学
+         查询数学分数为75，76，77的同学
+         查询所有姓张的学生成绩
+         查询数学分>70,语文分>80的同学
+       #+END_SRC
+    9. select语句（5）
+       使用order by子句排序查询结果
+       #+BEGIN_SRC sql
+         select column1,column2,column3.. from table;
+         order by column asc|desc
+       #+END_SRC
+       Order by指定排序的列，排序的列既可是表中的列名，也可以是select语句后指定的列名
+
+       Asc升序（默认）、Desc降序
+
+       order by子句应位于select语句的结尾
+       #+BEGIN_SRC
+         对语文成绩排序后输出
+         对总分排序按从高到低的顺序输出
+         对姓李的学生成绩排序输出
+       #+END_SRC
+    10. 聚集函数 - count
+        count(列名)返回某一列，行的总数
+        #+BEGIN_SRC sql
+          select count(*) | count(列名) from table_name [where where_definition]
+        #+END_SRC
+        #+BEGIN_SRC
+          练习：
+              统计一个班级共有多少学生？
+              统计数学成绩大于90的学生有多少人？
+              统计总分大于250的人数有多少？
+        #+END_SRC
+    11. 聚集函数 - sum
+        sum函数返回满足where条件的行的和
+        #+BEGIN_SRC sql
+          select sum(列名) {,sum(列名)...} from table_name[where where_definition]
+        #+END_SRC
+        #+BEGIN_SRC
+          练习：
+              统计一个班级数学总成绩？
+              统计一个班级语文、英语、数学各科的总成绩
+              统计一个班级语文、英语、数学的成绩总和
+              统计一个班级语文成绩平均分
+        #+END_SRC
+        注意：sum仅对数值起作用，否则会报错
+
+        注意：对多列求和，","号不能少
+    12. 聚集函数 - AVG
+        AVG函数返回满足where条件的一列的平均值
+        #+BEGIN_SRC sql
+          select avg(列名) {,avg(列名)...} from table_name [where where_definition]
+        #+END_SRC
+        #+BEGIN_SRC
+          练习：
+              求一个班级数学平均分？
+              求一个班级总分平均分？
+        #+END_SRC
+    13. 聚集函数 - max/min
+        max/min函数返回满足where条件的一列的最大/最小值
+        #+BEGIN_SRC sql
+          select max(列名) from table_name [where where_definition]
+        #+END_SRC
+        #+BEGIN_SRC
+          练习：
+              求班级最高分和最低分（数值范围在统计中特别有用）
+        #+END_SRC
+    14. select语句（6）分组操作
+        [[./Img/29.png]]
+        使用group by子句对列进行分组
+        #+BEGIN_SRC sql
+          select column1,column2,column3... from table
+          group by column having ...
+        #+END_SRC
+        #+BEGIN_SRC
+          练习：对订单表中商品归类后，显示每一类商品的总价
+              使用having子句，对分组结果进行过滤
+        #+END_SRC
+        #+BEGIN_SRC
+          练习：查询购买了几类商品，并且每类总价大于100的商品
+        #+END_SRC
+        - where和having区别：
+          where在分组前进行条件过滤，having在分组后进行条件过滤。使用where的地方都可以用having替换。但是having可以使用分组函数，而where后不可以使用
+** 4. 备份、回复数据库
+    1. 备份数据库表中的数据
+       cmd>mysqlump -u 用户名 -p 数据库名> 文件名.sql
+
+       mysqldump -uroot -p db_name > d:/1.sql
+    2. 恢复数据库
+       （注意：如果数据库已经删除，先创建数据库在回复数据）
+       - 方式一：在cmd中
+         mysql -u用户名 -p 数据库名 < 文件名.sql
+
+         mysql -uroot -p db_name < d:/1.sql
+
+         mysql -uroot -p mydb3 < d:/1.sql
+       - 方式二：在mysql客户端中
+         source 文件名.sql
+         source d:/1.sql
+    3. 练习
+       备份test库中的数据，并恢复
+** 5. 多表设计
+    1. 多表设计--外键约束
+       定义外键约束
+       #+BEGIN_SRC sql
+         foreign key(ordersid) references orders(id)
+       #+END_SRC
+    2. 多表设计中三种实体关系
+       1. M:N的联系引入关系表
+          联系的属性及两个实体的主标识形成关系表
+
+          关系表的主键为两个实体主标识的组合
+          [[./Img/30.png]]
+       2. 1:N的联系可不引入关系表
+          将关系的属性及非多方的主标识加入到多方表
+
+          多方表的外键是非多方实体的主标识
+          [[./Img/31.png]]
+       3. 1:1的联系不必引入关系表
+          [[./Img/32.png]]
+** 6. 外键约束
+    1. 外键
+       - 用来通知数据库表与表字段之间的对应关系，并让数据库帮我们维护这样关系的键叫做外键
+       - 外键作用：维护数据的完整性、一致性
+       - 定义外键约束
+         #+BEGIN_SRC sql
+           foreign key(ordersid) references orders(id)
+         #+END_SRC
+    2. 案例
+       新建部门表dept(id,name),通过外键约束建立与员工表emp关系
+       #+BEGIN_SRC sql
+         create table dept(
+         id int primary key auto_increment,
+         name varchar(20)
+         );
+       #+END_SRC
+       #+BEGIN_SRC sql
+         insert into dept values(null,'财务部');
+         insert into dept values(null,'人事部');
+         insert into dept values(null,'科技部');
+         insert into dept values(null,'销售部');
+       #+END_SRC
+       #+BEGIN_SRC sql
+         create table emp(
+         id int primary key auto_increment,
+         name varchar(20),
+         dept_id int,
+         foreign key(dept_id) references dept(id)
+         );
+       #+END_SRC
+       #+BEGIN_SRC sql
+         insert into emp values(null,'张三',1);
+         insert into emp values(null,'李四',2);
+         insert into emp values(null,'老王',3);
+         insert into emp values(null,'赵四',4);
+         insert into emp values(null,'刘能',4);
+       #+END_SRC
+** 7. 多表查询
+    1. 多表查询
+       案例：
+       #+BEGIN_SRC sql
+         create table dept(
+         id int primary key auto_increment,
+         name varchar(20)
+         );
+       #+END_SRC
+       #+BEGIN_SRC sql
+         insert into dept values(null,'财务部');
+         insert into dept values(null,'人事部');
+         insert into dept values(null,'科技部');
+         insert into dept values(null,'销售部');
+       #+END_SRC
+       #+BEGIN_SRC sql
+         create table emp(
+         id int primary key auto_increament,
+         name varchar(20),
+         dept_id int
+         );
+       #+END_SRC
+       #+BEGIN_SRC sql
+         insert into emp values(null,'张三',1);
+         insert into emp values(null,'李四',2);
+         insert into emp values(null,'老王',3);
+         insert into emp values(null,'刘能',5);
+       #+END_SRC
+       - 需求：查询出部门信息和部门所对应的员工信息
+         #+BEGIN_SRC sql
+           select * from dept,emp;
+         #+END_SRC
+    2. 笛卡尔积查询
+       - 概念
+         两张表相乘得出来的结果，如果左边表有m条记录，右边有n条记录，则查询出来的结果就是m*n条。这些查询结果中包含大量错误的结果，通常不会使用这种查询
+         [[./Img/33.png]]
+         #+BEGIN_SRC sql
+           select * from dept,emp;
+           select * from dept,emp where emp.dept_id=dept.id;
+           select * from dept d,emp e where e.dept_id=d.id;
+         #+END_SRC
+    3. 内连接查询
+       内连接查询概念：左边表有且右边表也有的记录
+       [[./Img/34.png]]
+       #+BEGIN_SRC sql
+         select * from dept d inner join emp e on e.dept_id=d.id;
+       #+END_SRC
+    4. 左、右连接查询以及全连接查询
+       - 左连接查询：在内连接查询的基础上，加上左边表有而右边表没有的记录
+         **查询出部门所对应的员工信息，同时列出那些没有员工的部门
+         #+BEGIN_SRC sql
+           select * from dept d left join emp e on e.dept_id=d.id;
+         #+END_SRC
+       - 右外连接查询：在内连接查询的基础上，加上右边表有而左边表没有的记录
+         **查询出部门所对应的员工信息，同时列出那些没有部门的员工
+         #+BEGIN_SRC sql
+           select * from dept d right join emp e on e.dept_id=d.id;
+         #+END_SRC
+       - 全外连接查询：在内连接查询的基础上，加上左边表有而右边表没有的记录和右边表而左边表没有的记录
+         **查询出部门所对应的员工信息，同时列出那些没有员工的部门及那些没有部门的员工
+         #+BEGIN_SRC sql
+           select * from dept d full join emp e on e.dept_id=d.id;
+           ## mysql不支持全外连接查询
+         #+END_SRC
+         **通过union关键字来模拟全外连接查询
+         #+BEGIN_SRC sql
+           select * from dept left join emp on emp.dept_id=dept.id
+           union
+           select * from dept right join emp on emp.dept_id=dept.id;
+         #+END_SRC
+** 8. 扩展
+    1. mysql查询关键字执行顺序
+       查询中用到的关键字主要包含六个，并且他们的顺序依次为：
+
+       select--from--where--group by--having--order by
+
+       其中select和from是必须的，其他关键词是可选则，这六个关键字的执行顺序，与sql语句的书写顺序并不是一样的，而是按照下面的顺序来执行
+
+       from--where--group by--having--select--order by
+       + 注意：
+         1. 虽然select在having后执行，但是mysql中仍然可以在having中使用select语句定义的别名。
+
+            原因分析：mysql在查询的时候会产生一个临时表，所有的字段名称（别名）在临时表中已经产生，产生了临时表之后才会进行having操作。也就是说mysql内部有一定的解析顺序，解析顺序select优先于having。
+         2. Oracle中having无法使用select语句内的别名
+    2. insert into和replace into和merge into
+       1. insert into是mysql的基本插入语句
+       2. replace into是mysql中的代替插入语句，可以理解为insert into的升级版。replace into在执行的时候，首先会根据指定的主键或者唯一索引判断当前表中是否存在指定的主键或索引，如果主键或唯一索引已经存在，则先将对应的索引的数据删除，然后在索引位置插入replace into中包含的数据。如果主键和唯一索引没有存在，则直接在索引位置插入replace into中包含的数据
+       3. merge into是oracle数据库中的代替插入语句。实现方式和replace into类似
+       4. 执行效率
+          1. 如果指定索引位置没有数据，insert into和replace into执行效率相差无几，二者效率相同
+          2. 如果指定位置索引已经存在，insert into语句不能正常执行，replace into语句可以正常执行
+       5. 注意：
+          虽然replace into比较好实用，但是也存在一定风险：
+          1. replace每次要重新分配自增id;
+          2. replace中执行delete时，在有外键的情况下会很麻烦;
+          3. 如果delete时定义的有触发器，则会被执行
+          4. 副作用也会被传播到replica slave
+       6. 推荐使用insert into ... on duplicate key update
+          on duplicate key update是mysql特有的一个sql关键字，只能在mysql中使用。在mysql数据库中，如果在insert语句后面带上on duplicate key update子句，而要插入的行与表中现有记录的唯一索引或主键中产生重复值，那么就会发生旧行的更新；如果插入的行数据与现有表中记录的唯一索引或者主键不重复，则执行新记录插入操作。比如有这样一张表：
+          #+BEGIN_SRC sql
+            cteate table func(id int primary key,count int,birthday date);
+            insert into func values(1,1,'1990-09-09');
+          #+END_SRC
+          [[./Img/35.png]]
+          #+BEGIN_SRC sql
+            insert into func values(1,1,'1990-09-09')onduplicate key update count=count+1;
+          #+END_SRC
+          删除元表数据，将新数据插入
+          [[./Img/36.png]]
+          提示两行收到影响，说明先执行的删除操作，然后插入新的数据
+          [[./Img/37.png]]
+          观察到没有任何新数据插入，count字段被更新。（count字段更新是因为刚刚的插入语句中书写了update count=count+1;）
+
+          如果不希望任何字段更新，可以写成如下格式：
+          #+BEGIN_SRC sql
+            insert into func values(1,1,'1990-09-09')on duplicate key update=values(count);
+          #+END_SRC
+          再次执行，没有新数据插入到数据库中
+    3. mysql内置函数
+    4. 在已经存在的表中添加外键
+       #+BEGIN_SRC sql
+         alter table tb_name add constraint fk_name foreign key(tb_name.id)references tb_stu(id);
+       #+END_SRC
+       例如:
+           #+BEGIN_SRC sql
+           alter table emp add constraint forkey foreign key(dept_id)references dept(id);
+           #+END_SRC
+           该语句是在tb_name表上添加一个外键约束，引用tb_stu的主键，fk_name是约束的名字
+
+           删除约束：
+           #+BEGIN_SRC sql
+             alter table tb_name drop constraint fk_name;
+           #+END_SRC
+    5. 外键的使用情景：
+       在不要求吞吐速度而对数据的正确性和安全性，推荐使用外键
+
+       如果面对高吞吐量，要求优先保证读取效率时，则不推荐使用外键
+    6. 删除的时候使用别名
+       原句：
+       #+BEGIN_SRC sql
+         delete from employee where id=1;
+       #+END_SRC
+       别名：
+       delete e fromemployee as e where id=1;
