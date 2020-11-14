@@ -55,6 +55,15 @@
   - [[#4-jquery引入][4. jQuery引入]]
   - [[#5-jquery的使用方式][5. jQuery的使用方式]]
   - [[#6-js对象和jquery对象的相互转换][6. js对象和jQuery对象的相互转换]]
+  - [[#7-jquery主要用法][7. jQuery主要用法：]]
+- [[#jquery选择器][jQuery选择器]]
+  - [[#1-基本选择器selector案例一][1. 基本选择器(selector案例一)]]
+  - [[#2-层级选择器selector案例二][2. 层级选择器(selector案例二)]]
+  - [[#3-基本过滤选择器selector案例三][3. 基本过滤选择器(selector案例三)]]
+  - [[#4-内容选择器selector案例四][4. 内容选择器(selector案例四)]]
+  - [[#5-属性选择器selector案例五][5. 属性选择器(selector案例五)]]
+  - [[#6-表单选择器selector案例六][6. 表单选择器(selector案例六)]]
+  - [[#更多操作][更多操作]]
 - [[#git][Git]]
 - [[#mysql][MySQL]]
   - [[#1-数据库概述][1. 数据库概述]]
@@ -65,6 +74,10 @@
   - [[#6-外键约束][6. 外键约束]]
   - [[#7-多表查询][7. 多表查询]]
   - [[#8-扩展][8. 扩展]]
+- [[#jdbc][JDBC]]
+  - [[#jdbc概述][JDBC概述]]
+  - [[#详解jdbc六步][详解JDBC六步]]
+  - [[#jdbcutils工具类][JDBCUtils工具类]]
 #+END_QUOTE
 
 * Web概述
@@ -2734,7 +2747,7 @@ Client - Server
 ** 5. jQuery的使用方式
     $就是jQuery的意思$("div") <==> jQuery("div")
 ** 6. js对象和jQuery对象的相互转换
-    - js对象->jQuery对爱那个
+    - js对象->jQuery对象
       将已有的js对象使用$()包起来即可由js对象变为jQuery对象
       #+BEGIN_SRC html
         <html>
@@ -2760,6 +2773,10 @@ Client - Server
       [[./SourceCode/60.html]]
     - jQuery对象->js对象
       jQuery对象一般利用选择器选中页面
+      #+BEGIN_SRC
+        var div = $("div")[0];
+        var div = $("div").get(0);
+      #+END_SRC
       #+BEGIN_SRC html
         <html>
           <head>
@@ -2783,6 +2800,1284 @@ Client - Server
         </html>
       #+END_SRC
       [[./SourceCode/60.html]]
+    - 注意：
+      #+BEGIN_SRC
+        var $div = $("div");
+        var div = $("div");
+      #+END_SRC
+      此处$div和div表示的内容是同一个jQuery对象，$div这种命名的方式只是想表示当前值是一个jQuery的对象。
+** 7. jQuery主要用法：
+    1. 在jQuery中书写一个CSS选择器 --- $("div")，这种就可以将这种形式作为jQuery选择器来使用
+    2. 动态创建dom元素---直接书写html元素名称来创建代表html元素的jQuery对象
+       #+BEGIN_SRC
+         $("<div><p>Hello</p></div>").appendTo("body");
+       #+END_SRC
+    3. 利用jQuery控制css样式
+       #+BEGIN_SRC
+         $(document.body).css("background","black");
+            选中的元素     .css    属性名称     属性值
+       #+END_SRC
+    4. 文档就绪事件 --- 在整个html页面加载完成之后在执行其中的js代码
+       js:
+       #+BEGIN_SRC
+         window.onload = function(){}
+       #+END_SRC
+       jQuery:ready()函数就是文档就绪事件
+       #+BEGIN_SRC
+         $(document).ready(function(){
+         });
+
+         <==>
+
+         $().ready(function(){
+         })
+       #+END_SRC
+       #+BEGIN_SRC
+         $(function(){
+         });
+       #+END_SRC
+* jQuery选择器
+** 1. 基本选择器(selector案例一)
+    元素名选择器，类选择器，id选择器，多元素选择器，*选择器
+    1. 元素名选择器
+       #+BEGIN_SRC
+         $("div") - 匹配所有的div元素
+       #+END_SRC
+    2. class选择器
+       #+BEGIN_SRC
+         $(".c1") - 匹配所有class值为c1的元素
+         $("div.c1") - 匹配所有class值为c1的div元素
+       #+END_SRC
+    3. id选择器
+       #+BEGIN_SRC
+         $("#d1") - 匹配所有id值为d1的元素
+         $("div#d1") - 匹配所有id值为d1的div元素
+       #+END_SRC
+    4. *号匹配符
+       #+BEGIN_SRC
+         $("*") - 匹配所有的元素
+       #+END_SRC
+    5. 多元素选择器
+       #+BEGIN_SRC
+         $("div,span,#d1,.c1") - 匹配所有的div/span元素以及id值为d1的元素和class值为c1的元素
+       #+END_SRC
+    #+BEGIN_SRC html
+      <!DOCTYPE>
+      <html>
+        <head>
+          <title>基本选择器练习</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <style type="text/css">
+            body{
+                font-family: "微软雅黑"
+            }
+            div,span {
+                width: 140px;
+                height: 140px;
+                margin: 20px;
+                background: #9999CC;
+                border: #000 1px solid;
+                float: left;
+                font-size: 17px;
+                font-family: Roman;
+            }
+            div.mini {
+                width: 40px;
+                height: 43px;
+                background: #CC66FF;
+                border: #000 1px solid;
+                font-size: 12px;
+                font-family: Roman;
+            }
+            input{ margin: 5px 5px; }
+          </style>
+          <!--引入jquery的js库-->
+          <script src="../other/jquery-1.4.2.js"></script>
+          <script type="text/javascript">
+            //让整个页面加载完成
+            $(document).ready(function() {
+              /* ---------基本选择器练习--------- */
+              //改变元素名为 <div> 的所有元素的背景色为 #FF69B4"  id="b1"
+              $("#b1").click(function(){
+                //点击事件中添加一个函数，用来实现改变背景颜色的操作
+                //1.选中元素
+                //2.修改选中元素背景颜色
+                $("div").css("background","#FF69B4");
+              });
+              //改变 id 为 one 的元素的背景色为 #9ACD32"  id="b2"
+              $("#b2").click(function(){
+                $("#one").css("background","#9ACD32");
+              });
+              //改变 class 为 mini 的所有元素的背景色为 #FF0033"  id="b3"
+              $("#b3").click(function(){
+                $(".mini").css("background","#FF0033");
+              });
+              //改变所有元素的背景色为 #FDF5E6"  id="b4"
+              $("#b4").click(function(){
+                $("*").css("background","#FDF5E6");
+              });
+              //改变所有的<span>元素和 id 为 two 的元素的背景色为 #FF1493"  id="b5"
+              $("#b5").click(function(){
+                $("span,#two").css("background","#FF1493");
+              });
+              //改变所有的<span>元素和 id 为 two 的,id为one的，class为 mini的所有的元素的背景色为 #006400"  id="b6"
+              $("#b6").click(function(){
+                $("span,#two,#one,.mini").css("background","#006400");
+              });
+            });
+          </script>
+        </head>
+        <body>
+          <input type="button" value=" 改变元素名为 <div> 的所有元素的背景色为 #FF69B4" id="b1" />
+          <input type="button" value=" 改变 id 为 one 的元素的背景色为 #9ACD32" id="b2" />
+          <input type="button" value=" 改变 class 为 mini 的所有元素的背景色为 #FF0033" id="b3" />
+          <input type="button" value=" 改变所有元素的背景色为 #FDF5E6" id="b4" />
+          <input type="button" value=" 改变所有的<span>元素和 id 为 two 的元素的背景色为 #FF1493"
+                 id="b5" />
+          <input type="button"
+                 value=" 改变所有的<span>元素和 id 为 two 的,id为one的，class为 mini的所有的元素的背景色为 #006400"
+                 id="b6" />
+          <h1>天气冷了</h1>
+          <h2>天气又冷了</h2>
+          <div id="one">id为one</div>
+          <div id="two" class="mini">
+            id为two class是 mini
+            <div class="mini"> class是 mini</div>
+          </div>
+          <div class="one">
+            class是 one
+            <div class="mini"> class是 mini</div>
+            <div class="mini"> class是 mini</div>
+          </div>
+          <div class="one">
+            class是 one
+            <div class="mini01"> class是 mini01</div>
+            <div class="mini"> class是 mini</div>
+          </div>
+          <br>
+          <div id="mover">动画</div>
+          <br>
+          <span class="spanone"> span </span>
+          <span class="mini"> span class是mini </span>
+        </body>
+      </html>
+    #+END_SRC
+    [[./SourceCode/61.html]]
+** 2. 层级选择器(selector案例二)
+    如果想通过dom元素之间的层次关系来获取特定元素，例如子元素、兄弟元素等。则需要通过层次选择器
+    1. 后代选择器
+       #+BEGIN_SRC
+         $("div span") - 匹配div下所有的span元素
+       #+END_SRC
+    2. span子元素选择器
+       #+BEGIN_SRC
+         $("div > span") - 匹配div下所有的span子元素
+       #+END_SRC
+    3. div后面紧邻span兄弟选择器
+       #+BEGIN_SRC
+         $("div + span") - 匹配div后面紧邻的span兄弟元素
+       #+END_SRC
+    4. div后面所有的span
+       #+BEGIN_SRC
+         $("div~span") - 匹配div后面所有的span兄弟元素
+       #+END_SRC
+    #+BEGIN_SRC html
+      <!DOCTYPE HTML>
+      <html>
+        <head>
+          <title>层级选择器</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <style type="text/css">
+            div,span {
+                width: 140px;
+                height: 140px;
+                margin: 20px;
+                background: #9999CC;
+                border: #000 1px solid;
+                float: left;
+                font-size: 17px;
+                font-family: Roman;
+            }
+            div.mini {
+                font-size: 14px;
+                height: 53px;
+                width: 47px;
+                background: #CC66FF;
+                border: #000 1px solid;
+                font-family: Roman;
+            }
+            input{ margin: 5px 5px; }
+          </style>
+          <!--引入jquery的js库-->
+          <script src="../other/jquery-1.4.2.js"></script>
+          <script type="text/javascript">
+            $().ready(function() {
+              /* ---------层级选择器练习--------- */
+              //改变 <body> 内所有 <div> 的背景色为 #F08080"  id="b1"
+              $("#b1").click(function(){
+                $("body div").css("background","#F08080");
+              });
+              //改变 <body> 内子 <div> 的背景色为 #FF0033"  id="b2"
+              $("#b2").click(function(){
+                $("body>div").css("background","#FF0033");
+              });
+              //改变 id 为 one 的下一个 <div> 的背景色为 #0000FF"  id="b3"
+              $("#b3").click(function(){
+                $("#one+div").css("background","#0000FF");
+              });
+              //改变 id 为 two 的元素后面的所有兄弟<div>的元素的背景色为 #9ACD32"  id="b4"
+              $("#b4").click(function(){
+                $("#two~div").css("background","#9ACD32");
+              });
+              //改变 id 为 two 的元素所有 <div> 兄弟元素的背景色为 #FF6347"  id="b5"
+              $("#b5").click(function(){
+                $("#two").siblings("div").css("background","#FF6347");
+              });
+            });
+            </script>
+        </head>
+        <body>
+          <input type="button" value=" 改变 <body> 内所有 <div> 的背景色为 #F08080" id="b1" onclick="fn()"/>
+          <input type="button" value=" 改变 <body> 内子 <div> 的背景色为 #FF0033" id="b2" />
+          <input type="button" value=" 改变 id 为 one 的下一个 <div> 的背景色为 #0000FF"
+                 id="b3" />
+          <input type="button"
+                 value=" 改变 id 为 two 的元素后面的所有兄弟<div>的元素的背景色为 #9ACD32" id="b4" />
+          <input type="button" value=" 改变 id 为 two 的元素所有 <div> 兄弟元素的背景色为 #FF6347"
+                 id="b5" />
+          <h1>天气冷了</h1>
+          <div id="one">id为one</div>
+          <div id="two">
+            id为two
+            <div class="mini"> class是 mini</div>
+          </div>
+          <div class="one">
+            class是 one
+            <div class="mini"> class是 mini</div>
+            <div class="mini"> class是 mini</div>
+          </div>
+          <div class="one">
+            class是 one
+            <div class="mini01"> class是 mini01</div>
+            <div class="mini"> class是 mini</div>
+          </div>
+          <br>
+          <div id="mover">动画</div>
+          <br>
+        </body>
+      </html>
+    #+END_SRC
+    [[./SourceCode/62.html]]
+** 3. 基本过滤选择器(selector案例三)
+    过滤选择器主要是通过特定的过滤规则筛选出所需的dom元素，该选择器都以":"开头
+    - 匹配所有div中的第一个div元素
+      #+BEGIN_SRC
+        $("div:first")
+      #+END_SRC
+    - 匹配所有div中的最后一个div元素
+      #+BEGIN_SRC
+        $("div:last")
+      #+END_SRC
+    - 匹配所有div中索引值为偶数的div元素，0开始
+      #+BEGIN_SRC
+        $("div:even")
+      #+END_SRC
+    - 匹配所有div中索引值为奇数的div元素，0开始
+      #+BEGIN_SRC
+        $("div:odd")
+      #+END_SRC
+    - 匹配所有div中索引值为n的div元素，0开始
+      #+BEGIN_SRC
+        $("div:eq(n)")
+      #+END_SRC
+    - 匹配所有div中索引值小于n的div元素，0开始
+      #+BEGIN_SRC
+        $("div:lt(n)")
+      #+END_SRC
+    - 匹配所有div中索引值大于n的div元素，0开始
+      #+BEGIN_SRC
+        $("div:gt(n)")
+      #+END_SRC
+    - 匹配所有class值不为one的div元素
+      #+BEGIN_SRC
+        $("div:not(.one)")
+      #+END_SRC
+    #+BEGIN_SRC html
+      <!DOCTYPE HTML>
+      <html>
+        <head>
+          <title>基本过滤选择器</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <style type="text/css">
+            div,span {
+                width: 140px;
+                height: 140px;
+                margin: 20px;
+                background: #9999CC;
+                border: #000 1px solid;
+                float: left;
+                font-size: 17px;
+                font-family: Roman;
+            }
+            div.mini {
+                font-size: 14px;
+                height: 53px;
+                width: 47px;
+                background: #CC66FF;
+                border: #000 1px solid;
+                font-family: Roman;
+            }
+            input{ margin: 5px 5px; }
+          </style>
+
+          <!--引入jquery的js库-->
+          <script src="../other/jquery-1.4.2.js"></script>
+          <script type="text/javascript">
+            $(function() {
+              /* ---------基本过滤选择器练习--------- */
+              //改变第一个 div 元素的背景色为 #FF6347"  id="b1"
+              $("#b1").click(function(){
+                $("div:first").css("background","#FF6347");
+              })
+              //改变最后一个 div 元素的背景色为 #9ACD32" id="b2"
+              $("#b2").click(function(){
+                $("div:last").css("background","#9ACD32");
+              });
+              //改变class不为 one 的所有 div 元素的背景色为 #FF0033" id="b3"
+              $("#b3").click(function(){
+                $("div:not(.one)").css("background","#FF0033");
+              });
+              //改变索引值为等于 3 的 div 元素的背景色为 #006400"  id="b4"
+              $("#b4").click(function(){
+                $("div:eq(3)").css("background","#006400")
+              })
+              //改变索引值为小于 3 的 div 元素的背景色为 #FF69B4"  id="b5"/>
+              $("#b5").click(function(){
+                $("div:lt(3)").css("background","#FF69B4");
+              })
+              //改变索引值为大于 3 的 div 元素的背景色为 #F08080"  id="b6"
+              $("#b6").click(function(){
+                $("div:gt(3)").css("background","#F08080");
+              });
+              //改变索引值为偶数的 div 元素的背景色为 #FF6347" id="b7"
+              $("#b7").click(function(){
+                $("div:even").css("background","#FF6347");
+              });
+              //改变索引值为奇数的 div 元素的背景色为 #FF1493" id="b8"
+              $("#b8").click(function(){
+                $("div:odd").css("background","#FF1493");
+              });
+            });
+          </script>
+        </head>
+        <body>
+          <input type="button" value=" 改变第一个 div 元素的背景色为 #FF6347" id="b1" />
+          <input type="button" value=" 改变最后一个 div 元素的背景色为 #9ACD32" id="b2" />
+          <input type="button" value=" 改变class不为 one 的所有 div 元素的背景色为 #FF0033" id="b3" />
+          <input type="button" value=" 改变索引值为等于 3 的 div 元素的背景色为 #006400" id="b4" />
+          <input type="button" value=" 改变索引值为小于 3 的 div 元素的背景色为 #FF69B4" id="b5" />
+          <input type="button" value=" 改变索引值为大于 3 的 div 元素的背景色为 #F08080" id="b6" />
+          <input type="button" value=" 改变索引值为偶数的 div 元素的背景色为 #FF6347" id="b7" />
+          <input type="button" value=" 改变索引值为奇数的 div 元素的背景色为 #FF1493" id="b8" />
+          <h1>天气冷了</h1>
+          <div id="one">id为one</div>
+          <div id="two">
+            id为two
+            <div class="mini"> class是 mini</div>
+          </div>
+          <div class="one" title="aa">
+            class是 one
+            <div class="mini"> class是 mini</div>
+            <div class="mini"> class是 mini</div>
+          </div>
+          <div class="one">
+            class是 one
+            <div class="mini01"> class是 mini01</div>
+            <div class="mini"> class是 mini</div>
+          </div>
+          <br>
+          <div id="mover">动画</div>
+          <br>
+        </body>
+      </html>
+    #+END_SRC
+    [[./SourceCode/63.html]]
+** 4. 内容选择器(selector案例四)
+    - 匹配所有div中包含abc内容的div元素
+      #+BEGIN_SRC
+        $("div:contains('abc)")
+      #+END_SRC
+      如：<div>xxxabcxxx</div>
+    - 匹配所有包含p元素的div元素
+      #+BEGIN_SRC
+        $("div:has(p)")
+      #+END_SRC
+      如：<div><p></p></div>
+    - 匹配所有内容为空的div元素
+      #+BEGIN_SRC
+        $("div:empty")
+      #+END_SRC
+      如：<div></div>
+    - 匹配所有内容不为空的div元素
+      #+BEGIN_SRC
+        $("div:parent")
+      #+END_SRC
+      如：<div>xxxxx</div>
+    - 可见选择器
+      - 匹配所有隐藏的div元素
+        #+BEGIN_SRC
+          $("div:hidden")
+        #+END_SRC
+      - 匹配所有可见的div元素
+        #+BEGIN_SRC
+          $("div:visible")
+        #+END_SRC
+    #+BEGIN_SRC html
+      <!DOCTYPE HTML>
+      <html>
+        <head>
+          <title>内容选择器</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <style type="text/css">
+            div,span {
+                width: 140px;
+                height: 140px;
+                margin: 20px;
+                background: #9999CC;
+                border: #000 1px solid;
+                float: left;
+                font-size: 17px;
+                font-family: Roman;
+            }
+            div.mini {
+                font-size: 14px;
+                height: 53px;
+                width: 47px;
+                background: #CC66FF;
+                border: #000 1px solid;
+                font-family: Roman;
+            }
+            input{ margin: 5px 5px; }
+          </style>
+
+          <!--引入jquery的js库-->
+          <script src="../other/jquery-1.4.2.js"></script>
+          <script type="text/javascript">
+            $(function() {
+              /* ---------内容选择器--------- */
+              //改变含有文本 ‘id’ 的 div 元素的背景色为 #FF6347" id="b1" <div>xxidxx</div>
+              $("#b1").click(function(){
+                $("div:contains('id')").css("background-color","#FF6347");
+              });
+              //改变空元素div(既不包含文本也不包含子元素)的背景色为 #9ACD32" id="b2"
+              $("#b2").click(function(){
+                $("div:empty").css("background-color","#9ACD32");
+              });
+              //改变包含div子元素的div元素的背景色为 #FF0033" id="b3"
+              $("#b3").click(function(){
+                $("div:has(div)").css("background-color","#FF0033");
+              });
+              //改变非空div元素的背景色为 #006400" id="b4"
+              $("#b4").click(function(){
+                $("div:parent").css("background-color","#006400");
+              });
+
+              //====================================================
+              /* ---------可见选择器练习--------- */
+              //改变所有可见 div 元素背景色为 #F08080" id="b5"
+              $("#b5").click(function(){
+                $("div:visible").css("background-color","#F08080");
+              });
+              //让所有隐藏的div元素显示, 并改变背景色为 #FF69B4" id="b6"
+              $("#b6").click(function(){
+                $("div:hidden").css("background-color","red").show();
+              });
+            })
+          </script>
+        </head>
+        <body>
+          <input type="button" value=" 改变含有文本 ‘id’ 的 div 元素的背景色为 #FF6347" id="b1" />
+          <input type="button" value=" 改变空元素div(既不包含文本也不包含子元素)的背景色为 #9ACD32" id="b2" />
+          <input type="button" value=" 改变包含div子元素的div元素的背景色为 #FF0033" id="b3" />
+          <input type="button" value=" 改变非空div元素的背景色为 #006400" id="b4" />
+          <hr/>
+          <hr/>
+          <input type="button" value=" 改变所有可见 div 元素背景色为 #F08080" id="b5" />
+          <input type="button" value=" 让所有隐藏元素显示, 并改变背景色为 #FF69B4" id="b6" />
+          <h1>天气冷了</h1>
+          <div id="one">id为one</div>
+          <div id="two">
+            id为two
+            <div class="mini"> class是 mini</div>
+          </div>
+          <div class="one" title="aa">
+            class是 one
+            <div class="mini"></div>
+            <div class="mini"> class是 mini</div>
+          </div>
+          <br>
+          <div id="mover"></div>
+          <br>
+          <div style="display:none">看不见我...,看不见我....</div>
+        </body>
+      </html>
+    #+END_SRC
+    [[./SourceCode/64.html]]
+** 5. 属性选择器(selector案例五)
+    - 匹配所有具有id属性的div元素
+      #+BEGIN_SRC
+        $("div[id]")
+      #+END_SRC
+    - 匹配所有具有id属性并且值为d1的div元素
+      #+BEGIN_SRC
+        $("div[id='d1]")
+      #+END_SRC
+    - 匹配所有id属性值不为d1的div元素
+      #+BEGIN_SRC
+        $("div[id!='d1']")
+      #+END_SRC
+    - 匹配所有id属性以d1开头的div元素
+      #+BEGIN_SRC
+        $("div[id^='d1]")
+      #+END_SRC
+    - 匹配所有id属性值以d1结尾的div元素
+      #+BEGIN_SRC
+        $("div[id$='d1]")
+      #+END_SRC
+    - 子元素选择器
+      - n从1开始，匹配div中第n个子元素。
+          $("div:nth-child(n)")
+      - 匹配div中第1个子元素
+          $("div:first-child")
+      - 匹配div中最后一个子元素
+          $("div:last-child")
+    #+BEGIN_SRC html
+      <!DOCTYPE HTML>
+      <html>
+        <head>
+          <title>基本过滤选择器</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <style type="text/css">
+            div,span {
+                width: 140px;
+                height: 140px;
+                margin: 20px;
+                background: #9999CC;
+                border: #000 1px solid;
+                float: left;
+                font-size: 17px;
+                font-family: Roman;
+            }
+
+            div.mini {
+                font-size: 14px;
+                height: 53px;
+                width: 47px;
+                background: #CC66FF;
+                border: #000 1px solid;
+                font-family: Roman;
+            }
+            input{ margin: 5px 5px; }
+          </style>
+
+          <!--引入jquery的js库-->
+          <script src="../other/jquery-1.4.2.js"></script>
+          <script type="text/javascript">
+            $(function() {
+              /* ---------属性选择器练习--------- */
+              //改变包含id属性的 div 元素的背景色为 #FF6347" id="b1"
+              $("b1").click(function(){
+                $("div[id]").css("background","#FF6347");
+              });
+              //改变包含属性title='aa' 的div 元素的背景色为 #9ACD32" id="b2"
+              $("#b2").click(function(){
+                $("div[title='aa]").css("background","#9ACD32");
+              });
+              //改变type属性不等于button的input 元素的背景色为 #FF0033" id="b3"
+              $("#b3").click(function(){
+                $("input[type!='button']").css("background","#FF0033");
+              });
+              //=================================================
+              /* ---------子元素选择器练习--------- */
+              //改变div 第二个子元素的背景色为 #006400"  id="b4"
+              $("div:nth-child(2)").css("background-color","#006400");
+              //改变div 第一个子元素的背景色为 #FF69B4"  id="b5"
+              $("div:first-child").css("background-color","#FF69B4");
+            })
+          </script>
+        </head>
+        <body>
+          <input type="button" value=" 改变包含id属性的 div 元素的背景色为 #FF6347" id="b1" />
+          <input type="button" value=" 改变包含属性title='aa' 的div 元素的背景色为 #9ACD32" id="b2" />
+          <input type="button" value=" 改变type属性不等于button的input 元素的背景色为 #FF0033" id="b3" />
+          <hr/>
+          <hr/>
+          <input type="button" value=" 改变div 第二个子元素的背景色为 #006400"  id="b4" />
+          <input type="button" value=" 改变div 第一个子元素的背景色为 #FF69B4"  id="b5" />
+          <h1>天气冷了</h1>
+          <div id="one">id为one</div>
+          <div id="two">
+            id为two
+            <div class="mini"> class是 mini</div>
+          </div>
+          <div class="one" title="aa">
+            class是 one title为aa
+            <div class="mini"> class是 mini</div>
+            <div class="mini"> class是 mini</div>
+          </div>
+          <div class="one" title="bb">
+            class是 one title为bb
+            <div class="mini01"> class是 mini01</div>
+            <div class="mini"> class是 mini</div>
+          </div>
+          <br>
+          <div id="mover">id为mover 动画</div>
+          <br>
+          <input type="submit"/>
+        </body>
+      </html>
+    #+END_SRC
+    [[./SourceCode/65.html]]
+** 6. 表单选择器(selector案例六)
+    - 匹配所有的input文本框、密码框、单选框、复选框、select框、textarea、button
+        $(":input")
+    - 匹配所有的密码框
+        $(":password")
+    - 匹配所有的单选框
+        $(":radio")
+    - 匹配所有的复选框
+        $(":checkbox")
+    - 匹配所有被选中的单选框/复选框/option
+        $(":checked")
+    - 匹配所有的被选中的单选框/复选框
+        $("input:checked")
+    - 匹配所有被选中的option选项
+        $(":selected")
+    #+BEGIN_SRC html
+      <!DOCTYPE HTML>
+      <html>
+        <head>
+          <title>表单选择器</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <style type="text/css">
+            div,span {
+                width: 140px;
+                height: 140px;
+                margin: 20px;
+                background: #9999CC;
+                border: #000 1px solid;
+                float: left;
+                font-size: 17px;
+                font-family: Roman;
+            }
+            div.mini {
+                font-size: 14px;
+                height: 53px;
+                width: 47px;
+                background: #CC66FF;
+                border: #000 1px solid;
+                font-family: Roman;
+            }
+            input{ margin: 5px 5px; }
+          </style>
+
+          <!--引入jquery的js库-->
+          <script src="../other/jquery-1.4.2.js"></script>
+          <script type="text/javascript">
+            $(function() {
+              /* ---------表单选择器练习--------- */
+              //改变所有:input 元素的背景色为 #F08080" id="b1"
+              $("#b1").click(function(){
+                $("input").css("background","#F08080");
+              });
+              //改变:password 元素的背景色为 #9ACD32" id="b2"
+              $("#b2").click(function(){
+                $(":password").css("background","#9ACD32")
+              })
+              //弹出 :radio 元素的个数" id="b3"
+              $("#b3").click(function(){
+                alert($(":radio").length);
+              })
+              //弹出所有 :checked 元素的value值" id="b4"
+              $("#b4").click(function(){
+                $(":checked").each(function(){
+                  alert($(this).val())
+                })
+              })
+              //弹出所有 :selected 元素的value值" id="b5"
+              $("#b5").click(function(){
+                alert($(":selected").val());
+              })
+            })
+          </script>
+        </head>
+        <body>
+          <input type="button" value=" 改变所有input 元素的背景色为 #F08080" id="b1" />
+          <input type="button" value=" 改变:password 元素的背景色为 #9ACD32" id="b2" />
+          <input type="button" value=" 打印 :radio 元素的个数" id="b3" />
+          <input type="button" value=" 打印所有 :checked 元素的value值" id="b4" />
+          <input type="button" value=" 打印所有 :selected 元素的value值" id="b5" />
+          <h1>天气冷了</h1>
+          用户名：<input type="text" disabled="disabled" name="username" value="被禁用了"/>
+          密码：<input type="password" name="password" value="123"/>
+          性别：<input type="radio" name="gender" value="man"/> 男
+          <input type="radio" name="gender" value="woman" checked="checked" />女
+          <br>
+          <br>
+          爱好：
+          <input type="checkbox" name="like" value="lanqiu"  checked="checked" /> 篮球
+          <input type="checkbox" name="like" value="taiqiu"/> 台球
+          <input type="checkbox" name="like" value="zuqiu"/> 足球
+          出生地：
+          <select name="city">
+            <option value="beijing">北京</option>
+            <option value="shanghai" selected="selected">上海</option>
+            <option value="guangzhou">广州</option>
+          </select>
+          简介：
+          <textarea name="discription" rows="2" cols="10">请求输入个人描述...</textarea>
+        </body>
+      </html>
+    #+END_SRC
+    [[./SourceCode/66.html]]
+** 更多操作
+1. 文档操作
+   - 获取id为d1元素的父元素
+     parent()
+     #+BEGIN_SRC
+       $("#d1").parent()
+     #+END_SRC
+   - 获取id为d1元素的祖先元素
+     parents()
+     #+BEGIN_SRC
+       $("#d1").parents()
+       $("#d1").parents("tr") - 获取id为d1元素的tr祖先元素
+     #+END_SRC
+   - 获取所匹配后面紧邻的兄弟元素
+     next()
+     #+BEGIN_SRC
+       $("div").next()
+       $("div").next("span") - 获取所匹配元素后面紧邻的span兄弟元素
+     #+END_SRC
+   - 获取所匹配元素后面所有的兄弟元素
+     nextAll()
+     #+BEGIN_SRC
+       $("div").nextAll()
+       $("div").nextAll("span") - 获取所匹配元素后面所有的span兄弟元素
+     #+END_SRC
+   - 获取所匹配元素前面紧邻的兄弟元素
+     prev()
+     #+BEGIN_SRC
+       $("div").prev()
+       $("div").prev("span") - 获取所匹配元素前面紧邻的span兄弟元素
+     #+END_SRC
+   - 获取所匹配元素前面所有的兄弟元素
+     prevAll()
+     #+BEGIN_SRC
+       $("div").prevAll()
+       $("div").prevAll("span") - 获取所匹配元素前面所有的span兄弟元素
+     #+END_SRC
+   - 获取所匹配元素前后所有的兄弟元素
+     siblings()
+     #+BEGIN_SRC
+       $("div").siblings()
+       $("div").siblings("span") - 获取所匹配元素前后所有的span兄弟元素
+     #+END_SRC
+   - 为所匹配元素追加一个span子元素
+     append()
+     #+BEGIN_SRC
+       $("div").append("<span></span>")
+     #+END_SRC
+   - 删除所匹配元素
+     remove()
+     #+BEGIN_SRC
+       $("div").remove("<span></span>")
+     #+END_SRC
+   - 获取所匹配元素的html内容
+     html()
+     #+BEGIN_SRC
+       $("div").html()
+       $("div").html("xxx") - 为所匹配元素设置html内容
+     #+END_SRC
+   - 获取所匹配元素的文本内容
+     text()
+     #+BEGIN_SRC
+       $("div").text()
+       $("div").text("xxx") - 为所匹配元素设置文本内容
+     #+END_SRC
+   - 获取所匹配元素的id属性值
+     attr()
+     #+BEGIN_SRC
+       $("div").attr("id")
+       $("div").attr("id","xx") - 为所匹配元素设置id属性
+     #+END_SRC
+   - 获取所匹配元素的width样式属性值
+     css
+     #+BEGIN_SRC
+       $("div").css("width")
+       $("div").css("width","200px") - 为所匹配元素设置width样式属性
+       $("div").css({"width":"200px","color":"red","font-size":"24px"}); - 为所匹配元素设置width样式属性
+     #+END_SRC
+2. 事件
+   - 为所匹配元素绑定点击事件
+     click()
+     #+BEGIN_SRC
+       $("div").click(function(){})
+     #+END_SRC
+   - 为所匹配元素绑定失去输入焦点事件
+     blur()
+     #+BEGIN_SRC
+       $("input").blur(function(){})
+     #+END_SRC
+   - 为所匹配元素绑定获取输入焦点事件
+     focus()
+     #+BEGIN_SRC
+       $("input").focus(function(){})
+       #+END_SRC
+   - 为所匹配元素绑定选项切换事件
+     change()
+     #+BEGIN_SRC
+       $("select").change(function(){})
+     #+END_SRC
+   - 文档就绪时间
+     ready()
+     #+BEGIN_SRC
+       $(document).ready(function(){})
+     #+END_SRC
+     其作用相当于：window.onload=function(){}
+
+     简写形式为：
+     #+BEGIN_SRC
+       $(function(){}) - 在整个文档加载完成后立即执行
+     #+END_SRC
+3. 效果
+   - 将隐藏元素设置为限时(底层操作的是display);
+     show()
+     #+BEGIN_SRC
+       $("div").show()
+     #+END_SRC
+   - 将显示元素设置为隐藏(底层操作的是display);
+     hide()
+     #+BEGIN_SRC
+       $("div").hide()
+     #+END_SRC
+   - 切换元素的课件状态，如果元素显示则设置为隐藏，如果元素隐藏则设置为可见
+     toggle()
+     #+BEGIN_SRC
+       $("div").toggle()
+     #+END_SRC
+#+BEGIN_SRC html
+  <!DOCTYPE HTML>
+  <html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>好友列表</title>
+      <style type="text/css">
+        body{
+            font-family: "微软雅黑";
+        }
+        table {
+            border:#0099FF 1px solid;
+            width:100px;
+            border-collapse:collapse;
+            margin:15px 10px;
+            width:10%;
+        }
+        table td{
+            border:#0066FF 1px solid;
+            background-color:#6f5f3e;
+            text-align:center;
+            padding: 5px 0px;
+        }
+
+        table td div {
+            background-color:#FFFF99;
+            text-align:left;
+            line-height: 24px;
+            padding-left: 14px;
+        }
+        table td a:link, table td a:visited {
+            color:#00ffFF;
+            text-decoration:none;
+        }
+        table td a:hover {
+            color:#00CC00;
+        }
+        /*
+          使用display属性:如果取值为none就是隐藏标签。
+       ,*/
+        table td div { display:none; }
+
+        .open { display:block; }
+
+        .close { display:none; }
+
+      </style>
+      <!--引入jquery的js库-->
+      <script src="../other/jquery-1.4.2.js"></script>
+      <script type="text/javascript">
+        /* --通过jQuery实现访QQ列表好友分组-- */
+        function openDiv(thisobj){
+          //1. 当前点击的a标签的兄弟div展示，其他的div都隐藏
+          //获取当前点击的a标签的祖先元素tr，找到其他兄弟tr，将找到的兄弟tr内包含的div隐藏即可
+          //find在当前对象身上寻找某一个元素
+          $(thisobj).parents("tr").siblings().find("div").hide();
+          //2. 当前点击的a标签的兄弟div是展示状态，则切换为隐藏，如果是隐藏则切换为展示
+          $(thisobj).next().toggle();
+        }
+        /* --通过js实现访QQ列表好友分组--
+         function openDiv(thisobj){
+         var oDiv = thisobj.parentNode.getElementsByTagName("div")[0];
+         var aDiv = document.getElementsByTagName("div");
+
+         //判断当前分组div是展开还是关闭
+         if(oDiv.style.display == "block"){
+         //如果当前div是打开的, 只需关闭该div即可
+         oDiv.style.display = "none";
+         }else{
+         //如果当前div是关闭的, 先关闭其他分组的div, 再打开当前的
+         for(var i=0;i<aDiv.length; i++){
+         aDiv[i].style.display = "none";
+         }
+         oDiv.style.display = "block";
+         }
+         }
+        ,*/
+      </script>
+    </head>
+    <body>
+      <table>
+        <tr>
+          <td>
+            <a href="javascript:void(0)" onclick="openDiv(this)">君王好友</a>
+            <div>
+              秦始皇<br />
+              刘邦<br />
+              李世民<br />
+              康熙<br />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="javascript:void(0)" onclick="openDiv(this)">三国好友</a>
+            <div>
+              刘备<br />
+              关羽<br />
+              张飞<br />
+              赵云<br />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="javascript:void(0)" onclick="openDiv(this)">美女好友</a>
+            <div>
+              西施<br />
+              貂蝉<br />
+              杨贵妃<br />
+              王昭君<br />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="javascript:void(0)" onclick="openDiv(this)">IT好友</a>
+            <div>
+              马云<br />
+              李开复<br />
+              俞敏洪<br />
+              黎活明<br />
+            </div>
+          </td>
+        </tr>
+      </table>
+    </body>
+  </html>
+#+END_SRC
+[[./SourceCode/67.html]]
+#+BEGIN_SRC html
+  <!DOCTYPE HTML>
+  <html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>二级联动下拉框</title>
+      <!--引入jquery的js库-->
+      <script src="../other/jquery-1.4.2.js"></script>
+      <script>
+        var data = {
+          "北京市": ["海淀区","朝阳区","丰台区"],
+          "河北省": ["石家庄","唐山","秦皇岛"],
+          "辽宁省": ["沈阳","大连","鞍山"],
+          "山东省": ["青岛","济南","烟台"]
+        }
+        /* --通过jQuery实现二级联动下拉框 -- */
+        function selectCity(thisobj){
+          //根据省市信息获取对应城市信息，然后一个一个的拼接到第二个下拉框中。
+          var province = $("#province").val();
+          var citys = data[province];
+          //清空
+          $("#city").html("<option>--请选择--</option>")
+          //循环添加到第二个下拉框
+          for(var i=0;i<citys.length;i++){
+            $("#city").append("<option>"+citys[i]+"</option>")
+          }
+        }
+        /* --通过js实现二级联动下拉框--
+         function selectCity(thisobj){
+         //获取用户选中的省份
+         var prov = thisobj.value;
+         //再根据省份获取对应的市区
+         var citys = data[prov];
+         //获取第二个下拉列表
+         var oCitySele = document.getElementById("city");
+         //清空之前的数据
+         oCitySele.innerHTML = "<option>--选择城市--</option>";
+         //循环遍历, 将每一个城市依次填充到第二个下拉列表中
+         for(var i=0; i<citys.length; i++){
+         var oOption = document.createElement("option");
+         oOption.innerHTML = citys[i];
+         //将option挂载到select上
+         oCitySele.appendChild(oOption);
+         }
+         }
+        ,*/
+        </script>
+      <!--
+          js实现注意问题:
+          ie10以下的浏览器不支持 select,table上的innerHTML属性
+          删除option时，由于删除后，options长度发生了变化，所以直接用for循环会有漏删的情况，可以由后向前删除，可以避免这样的问题
+        -->
+    </head>
+    <body>
+      <select name="country" onchange="getCountry()"  >
+        <option value="none">--选择国家--</option>
+        <option value="中国">中国</option>
+        <option value="美国">美国</option>
+        <option value="日本">日本</option>
+      </select>
+      <br><br>
+      <hr/>
+      <br>
+      <div id="seleDiv">
+        <select id="province" onchange="selectCity(this)">
+          <option>--选择省市--</option>
+          <option>北京市</option>
+          <option>河北省</option>
+          <option>辽宁省</option>
+          <option>山东省</option>
+        </select>
+        <span id="citySpan">
+          <select id="city">
+            <option>--选择城市--</option>
+          </select>
+        </span>
+      </div>
+    </body>
+  </html>
+#+END_SRC
+[[./SourceCode/68.html]]
+#+BEGIN_SRC html
+  <!DOCTYPE HTML>
+  <html>
+    <head>
+      <title>table练习</title>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <style type="text/css">
+        body{
+            font-family: "微软雅黑"
+        }
+        h2, h4{ text-align: center; }
+        div#box1, div#box2 {
+            text-align:center;
+        }
+        hr{
+            margin: 20px 0;
+        }
+        table{
+            margin: 0 auto;
+            width: 70%;
+            text-align: center;
+            border-collapse:collapse;
+        }
+        td, th{padding: 7px; width:20%;}
+        th{
+            background-color: #DCDCDC;
+        }
+      </style>
+
+      <!--引入jquery的js库-->
+      <script src="../other/jquery-1.4.2.js"></script>
+      <script type="text/javascript">
+        //html文档加载完执行
+        $(function(){
+          //为"添加"按钮绑定点击事件(点击按钮添加员工信息到table中)
+          $("#add").click(function(){
+            //获取输入员工信息
+            //拓展：$.trim()清除用户输入内容前后的空格
+            var id = $.trim($("#box1 input[name='id']").val());
+            var name = $.trim($("#box1 input[name='name']").val());
+            var email = $.trim($("#box1 input[name='email']").val());
+            var salary = $.trim($("#box1 input[name='salary']").val());
+            //校验员工信息
+            //员工信息不能为空
+            if(id == "" || name == "" || email == "" || salary == ""){
+              alert("员工信息不能为空");
+              //打断代码，防止继续添加数据
+              return;
+            }
+
+            //邮箱格式校验
+            //lishuai@tedu.cn
+            var reg = /\w+@\w+(\.\w)+/;
+            if(!reg.test(email)){
+              alert("邮箱格式不正确！");
+              return;
+            }
+
+            //id重复校验
+            //如何获取页面中已有的id，将用户输入的id与页面中已有的id比较，如果id相同则证明id已经存在，反之则不存在
+            var flag = false;
+            $("table tr").each(function(){
+              //获取第二个td的文本内容，注意：不是val()当前td不包含value
+              //判断id是否等于每行第二个td内的文本, 即id
+              if($(this).find("td:eq(1)").text() == id){
+                alert("ID已存在！");
+                flag = true;
+                return false;
+              }
+            });
+            if(flag){
+              return;
+            }
+
+            //将新员工的信息插入到员工列表中
+            var $tab = $("table");
+            var $tr = $("<tr></tr>");
+            var $td0 = $("<td><input type='checkbox'></td>");
+            var $td1 = $("<td>"+id+"</td>");
+            var $td2 = $("<td>"+name+"</td>");
+            var $td3 = $("<td>"+email+"</td>");
+            var $td4 = $("<td>"+salary+"</td>");
+            //将td添加到tr中
+            $tr.append($td0).append($td1).append($td2).append($td3).append($td4);
+            $tab.append($tr);
+          });
+
+          //为全选按钮绑定点击事件
+          $("#all").click(function(){
+            //所有的checkbox与第一行的checkbox的选中属性保持一致
+            //先获取第一行的checkbox选中属性
+            //获取全选状态
+            var check = $(this).attr("checked");
+            //使全部的checkbox选中属性与第一行的选中属性相同
+            $("table input[type='checkbox']").attr("checked",check);
+          });
+
+          //为"删除"绑定点击事件(点击"删除",删除所选员工信息)
+          $("#del").click(function(){
+            //不能删除第一行
+            //删除选中行
+            //1. 找到选中行
+            $("input:checked:not(#all)").parents("tr").remove();
+          });
+
+          //为"修改"绑定点击事件(点击"修改",修改指定ID的员工信息)
+          $("#upd").click(function(){
+            //在页面中寻找所有的id，然后与用户输入的id相比较，如果有则修改数据，如果没有则提示错误
+            //获取修改的员工信息
+            var id = $.trim($("#box2 input[name='id']").val());
+            var name = $.trim($("#box2 input[name='name']").val());
+            var email = $.trim($("#box2 input[name='email']").val());
+            var salary = $.trim($("#box2 input[name='salary']").val());
+            //非空校验
+            if(id == "" || name == "" || email == "" || salary == ""){
+              alert("修改的信息不能为空!");
+              //打断代码，防止继续添加数据
+              return;
+            }
+            //根据ID修改对应的信息
+            var flag = true;
+            $("table tr").each(function(){
+              //在页面中寻找所有的id，然后与用户输入的id相比较，如果有则更新，如果没有则提示错误
+              if($(this).find("td:eq(1)").text() == id){
+                //进行修改
+                $(this).find("td:eq(2)").text(name);
+                $(this).find("td:eq(3)").text(email);
+                $(this).find("td:eq(4)").text(salary);
+                flag = false;
+                return false;
+              }
+            })
+            if(flag){
+              alert("修改的员工ID不存在！");
+            }
+          });
+        })
+      </script>
+    </head>
+    <body>
+      <h2>添加新员工</h2>
+      <div id="box1">
+        ID：<input type="text" name="id"/>
+        姓名：<input type="text" name="name"/>
+        邮箱：<input type="text" name="email"/>
+        工资：<input type="text" name="salary"/>
+        <input type="button" id="add" value="添加"/>
+      </div>
+      <hr/>
+      <table border="1">
+        <tr>
+          <th>
+            <input type="checkbox" id="all"/>
+            <!--全选-->
+          </th>
+          <th>ID</th>
+          <th>姓名</th>
+          <th>邮箱</th>
+          <th>工资</th>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox"/>
+          </td>
+          <td>1</td>
+          <td>宋江</td>
+          <td>sj@163.com</td>
+          <td>12000</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox"/>
+          </td>
+          <td>2</td>
+          <td>武松</td>
+          <td>ws@163.com</td>
+          <td>10500</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox"/>
+          </td>
+          <td>3</td>
+          <td>孙二娘</td>
+          <td>sen@163.com</td>
+          <td>11000</td>
+        </tr>
+      </table>
+      <h4><a href="#" id="del">删除选中</a></h2>
+  <hr/>
+  <div id="box2">
+    ID：<input type="text" name="id"/>
+    姓名：<input type="text" name="name"/>
+    邮箱：<input type="text" name="email"/>
+    工资：<input type="text" name="salary"/>
+    <input type="button" id="upd" value="修改"/>
+  </div>
+  </body>
+  </html>
+#+END_SRC
+[[./SourceCode/69.html]]
 * Git
 file:./other/Git.pdf
 * MySQL
@@ -2807,6 +4102,7 @@ file:./other/Git.pdf
        [[./Img/20.png]]
     5. 数据在数据库中的存储方式
        [[./Img/21.png]]
+       列也称之为字段或者域
     6. SQL语言
        - Structured Query Language,结构化查询语言
        - 非过程性语言
@@ -2832,7 +4128,7 @@ file:./other/Git.pdf
              1. 创建一个名称为mydb1的数据库
                 create database mydb1;
              2. 创建一个使用utf8字符集的mydb2数据库
-                create database mydb2 character set gbk;
+                create database mydb2 character set utf8;
              3. 创建一个使用utf8字符集，并带校对规则的mydb3数据库
                 create database mydb3 character utf8 collate utf8_bin
        #+END_SRC
@@ -2879,13 +4175,22 @@ file:./other/Git.pdf
          column_name column_type,
          )[character set 字符集][collate 校对规则]
        #+END_SRC
+       #+BEGIN_SRC sql
+         create table user(
+                id int,
+                name varchar(10),
+                password varchar(15),
+                birthday date
+         );
+       #+END_SRC
        + 注意：创建表时，要根据需保存的数据创建相应的列，并根据数据的类型定义相应的列类型。例：user对象
          [[./Img/22.png]]
     6. MySQL常用数据类型
        - 字符串型
          + VARCHAR、CHAR
-       - 大数据类型
-         BLOB、TEXT
+           varchar(20)存储的数据内容长度是可变的,char(20)存储的数据内容长度是固定的；char的查询速度快，因不会判断字段实际的长度。varchar最长能存255的长度，varchar(255)
+       - 大数据类型BLOB、TEXT
+         blob将图片以机器码的形式存入到数据库字段内
        - 数值型
          TINYINT、SMALLINT、INT、BIGINT、FLOAT、DOUBLE
        - 逻辑型
@@ -2899,6 +4204,18 @@ file:./other/Git.pdf
          属性：整型、字符型、字符型、日期型、日期型、字符型、小数型、大文本型
          创建完毕之后利用desc employee来查看表结构
        #+END_SRC
+       #+BEGIN_SRC sql
+         create table employee(
+                id int,
+                name varchar(10),
+                gender char(2),
+                birthday date,
+                entry_date date,
+                job varchar(20),
+                salary double,
+                resumen text
+         );
+       #+END_SRC
     8. 定义表单字段的约束
        - 定义主键约束
          + primary key：不允许为空，不允许重复
@@ -2911,14 +4228,31 @@ file:./other/Git.pdf
          + not null
          + 例如：salary double not null
        - 外键约束
+       #+BEGIN_SRC sql
+         create table employee(
+                id int primary key auto_incement,
+                name varchar(10),
+                gender char(2),
+                birthday date,
+                entry_date date,
+                job varchar(20),
+                salary double,
+                resumen text
+         );
+        #+END_SRC
+       #+BEGIN_SRC
+         设置主键可以提升查询效率，依赖主键可以利用其身上的索引进行查询，利用索引查询较快。
+         一般情况下，一张表都会有一个主键，且这个主键一般都是int类型。
+         如果一个主键设置上auto_increment尚需经则这个字段一定会是一个主键字段，且这个字段的数据不需要数据库管理员来维护，这个字段的值会自动添加，并增长。
+       #+END_SRC
     9. 查看表信息
        查看表结构：
        #+BEGIN_SRC sql
-         desc tabName
+         desc tabName;
        #+END_SRC
        查看当前所有表：
        #+BEGIN_SRC sql
-         show tables
+         show tables;
        #+END_SRC
        查看当前数据库表键表语句
        #+BEGIN_SRC sql
@@ -2927,9 +4261,9 @@ file:./other/Git.pdf
     10. 修改表
         使用ALTER TABLE语句追加，修改，或删除列的语法
         #+BEGIN_SRC sql
-          ALTER TABLE table ADD column column_type [DEFAULT expr] [,column column_type]...;
-          ALTER TABLE table MODIFY column column_type [DEFAULT expr] [,column column_type]...;
-          ALTER TABLE table DROP column;
+          ALTER TABLE table_name ADD column column_type [DEFAULT expr] [,column column_type]...;
+          ALTER TABLE table_name MODIFY column column_type [DEFAULT expr] [,column column_type]...;
+          ALTER TABLE table_name DROP column;
         #+END_SRC
         修改表的名称：
         #+BEGIN_SRC sql
@@ -2946,11 +4280,17 @@ file:./other/Git.pdf
         - 练习：
           #+BEGIN_SRC
             在上面员工表的基本上增加一个image列
+            alter table employee add image blob;
             修改job列，使其长度为60
+            alter table employee modify job varchar(60);
             删除gender列
-            表名改为user
+            alter table employee drop gender;
+            表名改为emp
+            rename table employee to emp;
             修改表的字符集为utf8
+            alter table emp character set utf8;
             列名name修改为username
+            alter table emp change name username;
           #+END_SRC
     11. 删除表
         #+BEGIN_SRC sql
@@ -2962,8 +4302,7 @@ file:./other/Git.pdf
        - Update语句（更新数据）
        - Delete语句（删除数据）
        - Select语句（查找数据）
-       - Insert语句
-    2. 使用INSERT语句向表中插入数据
+    2. INSERT语句
        #+BEGIN_SRC sql
          INSERT INTO table_name [(column [,column...])] VALUES (value [,value...]);
        #+END_SRC
@@ -2971,15 +4310,50 @@ file:./other/Git.pdf
        - 数据的大小应在列的规定范围内，例如：不能将一个长度为80的字符串加入到长度为40的列中
        - 在values中列出的数据位置必须与被加入的列的排列位置相对应
        - 字符和日期型数据应包含在单引号中
+       - 如果一个字段是自增字段，则这个字段不需要用户添加数据，填写一个null值即可自动增长。
        - 插入空值：不指定或insert into table value（null）
        - 如果要插入所有字段可以省写列列表，直接按表中字段顺序写值列表
+       - 由于在表名之后没有指定要插入的字段，所以在values后需要添加上全部字段的值，并且这些值必须按照表中字段顺序书写
+         #+BEGIN_SRC sql
+           insert into employee(id,name) values(2,'lg');
+         #+END_SRC
+         在插入数据的时候可以在表名之后添加上指定的字段名称，values书写的数据必须按照指定的字段名称顺序书写数据。
+       - 使用包含主键的表中插入数据时，请注意如下内容：
+         1. 创建一个包含主键的表
+            #+BEGIN_SRC sql
+              create table zhujian(
+                                   id int primary key auto_increment,name varchar(10),
+                                   gender char(2),
+                                   birthday date,
+                                   entry_date date,
+                                   job varchar(20),
+                                   salary double,
+                                   resumen text
+                                   );
+            #+END_SRC
+         2. 插入数据
+            设置主键的字段在插入数据是要输入null
+            #+BEGIN_SRC sql
+              insert into zhujian values(null,'ks','m','1999-09-09','2000-09-09','eat',5000.0,'can eat');
+            #+END_SRC
        #+BEGIN_SRC
          insert语句练习
              使用insert语句向employee表中插入三个员工的信息
-             字段名：id、name、gender、birthday、salary、entry_date、resume
-             字段类型：整型、字符串型、字符串型、日期型、浮点型、日期型、大文本型
+             字段名：id、name、gender、birthday、entry_date、job、salary、resume
+             字段类型：整型、字符串型、字符串型、日期型、日期型、字符串型、浮点型、大文本型
+       #+END_SRC
+       #+BEGIN_SRC sql
+         insert into employee values(1,'ls','m','1999-09-09','2000-09-09','eat',5000.0,'can eat');
        #+END_SRC
        - TIP：mysql中文乱码
+         修改当前窗口字符集的方式：
+         #+BEGIN_SRC sql
+           set names gbk;
+         #+END_SRC
+         - 查看是否修改成功
+           #+BEGIN_SRC sql
+             show variables like "%char%";
+           #+END_SRC
          - mysql有六处使用了字符集，分别为：client、connection、database、results、server、system
          - client是客户端使用的字符集
          - connection是连接数据库的字符集设置类型，如果程序没有指明连接数据库使用的字符集类型就按照服务器默认的字符集设置
@@ -3000,10 +4374,11 @@ file:./other/Git.pdf
            修改文件前，先停止mysql服务，等修改后再重新启动
 
            使用dos命令：net stop mysql 来停止服务 net start mysql来启动
+         [[./Img/38.gif]]
     3. Update语句
        使用update语句修改表中数据
        #+BEGIN_SRC sql
-         update tbl_name
+         update table_name
          set col_name1=expr1 [,col_name2=expr2 ...] [where where_definition]
        #+END_SRC
        update语法可以用新值更新原有表行中的各列
@@ -3020,10 +4395,16 @@ file:./other/Git.pdf
                  将姓名为'lisi'的员工薪水修改为4000元，job改为ccc
                  将'wu'的薪水在原有基础上增加1000元
        #+END_SRC
+       #+BEGIN_SRC sql
+         update employee set salary = 5000;
+         update employee set salary = 3000 where name = 'zs';
+         update employee set salary = 4000,job='ccc' where name = 'ls';
+         update employee set salary = salary + 1000 where name = 'wu';
+       #+END_SRC
     4. Delete语句
        使用delete语句删除表中数据
        #+BEGIN_SRC sql
-         delete from tbl_name [where where definition]
+         delete from table_name [where where definition]
        #+END_SRC
        - 如果不使用where子句，将删除表中所有数据
        - delete语句不能删除某一列的值（可使用update）
@@ -3033,29 +4414,43 @@ file:./other/Git.pdf
        - 同insert和update一样，从一个表中删除记录将引起其它表的参照完整性问题，在修改数据库数据时，头脑中应该始终不要忘记这个潜在的问题
        - 外键约束
        - 删除表中数据也可使用truncate table语句，它和delete有所不同，参看mysql文档
+       - delete from只删除当前表中的数据，对表结构不产生影响。
+         truncate会将整个表摧毁，然后依赖原有的表结构创建整张表；
+         + 注意：truncate删除单表没有问题，而且删除效率较高，但是可能对表与表之间的关系产生不可恢复的影响。如果多表操作不建议使用truncate。
        #+BEGIN_SRC
          删除表中名称为'zs'的记录
          删除表中所有记录
          使用truncate删除表中记录
+       #+END_SRC
+       #+BEGIN_SRC sql
+         delete from employee where name = 'zs';
+         delete from employee;
+         truncate employee;
        #+END_SRC
     5. select语句（1）
        基本select语句
        #+BEGIN_SRC sql
          select [distinct] *| {column1,column2,column3...}from table;
        #+END_SRC
-       select指定查询哪些列的数据
-
-       column指定列名
-
-       *号代表查询所有列
-
-       from指定查询哪张表
-
-       DISTINCT可选，指显示结果时，是否剔除重复数据
+       select指定查询哪些列的数据,column指定列名,*号代表查询所有列,from指定查询哪张表,DISTINCT可选，指显示结果时，是否剔除重复数据
+       + 注意：书写全部字段名称比书写*查询效率要高。
+       #+BEGIN_SRC sql
+         select distinct name from employee;
+       #+END_SRC
        #+BEGIN_SRC
          查询表中所有学生的信息
          查询表中所有学生的姓名和对应的英语成绩
          过滤表中重复数据，distinct去重
+       #+END_SRC
+       #+BEGIN_SRC sql
+         create table exam(id int primary key auto_increment,name varchar(20) not null,chinese double,math double,english double);
+         insert into exam values(null,'关羽',85,76,70);
+         insert into exam values(null,'张飞',70,75,70);
+         insert into exam values(null,'赵云',90,65,95);
+
+         select * from exam;
+         select name,english from exam;
+         select distinct english from exam;
        #+END_SRC
     6. select语句（2）
        在select语句中可使用表达式对查询的列进行运算
@@ -3071,6 +4466,12 @@ file:./other/Git.pdf
          统计每个学生的总分
          使用别名表示学生总分
        #+END_SRC
+       #+BEGIN_SRC sql
+         select name,math+10,chinese+10,english+10 from exam;
+         select name,math+chinese+english from exam;
+         select name,math+chinese+english as sum  from exam;
+         select name,math+chinese+english sum from exam;
+       #+END_SRC
     7. select语句（3）
        #+BEGIN_SRC
          使用where子句，进行过滤查询：
@@ -3078,6 +4479,14 @@ file:./other/Git.pdf
              查询英语成绩大于90分的同学
              查询总分大于200分的所有同学
        #+END_SRC
+       #+BEGIN_SRC sql
+         select * from exam where name='张飞';
+         select * from exam where english>90;
+         select * from exam where math+chinese+english >230;
+         select name,math+chinese+english as sum from exam where math+chinese+english >230;
+       #+END_SRC
+       + 注意：关键字查询顺序
+         form > where > select
     8. select语句（4）
        在where子句中经常使用的运算符
        [[./Img/23.png]]
@@ -3087,38 +4496,67 @@ file:./other/Git.pdf
        [[./Img/27.png]]
        [[./Img/28.png]]
        like语句中，%代表零个或多个任意字符，_代表一个字符，例first_name like '_a%';
+       #+BEGIN_SRC sql
+         select * from user where id is null;
+         select ifnull(score,0) from exam;
+         select ifnull(math,0) from exam;
+       #+END_SRC
        #+BEGIN_SRC
          查询英语分数在80~100之间的同学
          查询数学分数为75，76，77的同学
          查询所有姓张的学生成绩
          查询数学分>70,语文分>80的同学
+         查询数学分>70或者英语分<70的同学
+         查询语文成绩不大于80的同学
+         查询数学成绩为空(null)的同学
+         查询所有同学的成绩，如果成绩中出现null则使用0分来代替
+       #+END_SRC
+       #+BEGIN_SRC sql
+         select english from exam where english between 80 and 100;
+         select name,math from exam where math in(75,76,80);
+         select * from exam where name like '张%';
+         select * from exam where math > 70 and chinese > 80;
+         select * from exam where math>70 or english < 70;
+         select * from exam where not (chinese > 80);
+         select * from exam where math is null;
+         select name,ifnull(math,0),ifnull(chinese,0),ifnull(english,0) from exam;
        #+END_SRC
     9. select语句（5）
        使用order by子句排序查询结果
        #+BEGIN_SRC sql
-         select column1,column2,column3.. from table;
-         order by column asc|desc
+         select column1,column2,column3.. from table order by column asc|desc
        #+END_SRC
-       Order by指定排序的列，排序的列既可是表中的列名，也可以是select语句后指定的列名
-
-       Asc升序（默认）、Desc降序
-
-       order by子句应位于select语句的结尾
+       Order by指定排序的列，排序的列既可是表中的列名，也可以是select语句后指定的列名,Asc升序（默认）、Desc降序,order by子句应位于select语句的结尾
        #+BEGIN_SRC
          对语文成绩排序后输出
          对总分排序按从高到低的顺序输出
          对姓李的学生成绩排序输出
        #+END_SRC
+       #+BEGIN_SRC sql
+         select chinese from exam order by chinese asc;
+         select name,ifnull(math,0)+ifnull(chinese,0)+ifnull(english,0) as sum from exam order by sum;
+         select name,ifnull(math,0)+ifnull(chinese,0)+ifnull(english,0) as sum from where name like '李%' order by sum;
+       #+END_SRC
+       + 注意：数据库关键字执行顺序
+         from > where > select > order by
     10. 聚集函数 - count
         count(列名)返回某一列，行的总数
         #+BEGIN_SRC sql
           select count(*) | count(列名) from table_name [where where_definition]
         #+END_SRC
+        #+BEGIN_SRC sql
+          select count(math) from exam;
+        #+END_SRC
         #+BEGIN_SRC
           练习：
               统计一个班级共有多少学生？
               统计数学成绩大于90的学生有多少人？
-              统计总分大于250的人数有多少？
+              统计总分大于230的人数有多少？
+        #+END_SRC
+        #+BEGIN_SRC sql
+          select count(*) from exam;
+          select count(math) from exam where math > 90;
+          select count(name) from exam where ifnull(math,0)+ifnull(chinese,0)+ifnull(english,0) > 230;
         #+END_SRC
     11. 聚集函数 - sum
         sum函数返回满足where条件的行的和
@@ -3132,9 +4570,14 @@ file:./other/Git.pdf
               统计一个班级语文、英语、数学的成绩总和
               统计一个班级语文成绩平均分
         #+END_SRC
-        注意：sum仅对数值起作用，否则会报错
-
-        注意：对多列求和，","号不能少
+        #+BEGIN_SRC sql
+          select sum(math) from exam;
+          select sum(chinese),sum(english),sum(math) from exam;
+          select sum(ifnull(chinese,0)+ifnull(math,0)+ifnull(english,0)) from exam;
+          select sum(ifnull(chinese,0)+ifnull(math,0)+ifnull(english,0)) / count(name) from exam;
+        #+END_SRC
+        + 注意：sum仅对数值起作用，否则会报错
+        + 注意：对多列求和，","号不能少
     12. 聚集函数 - AVG
         AVG函数返回满足where条件的一列的平均值
         #+BEGIN_SRC sql
@@ -3145,6 +4588,10 @@ file:./other/Git.pdf
               求一个班级数学平均分？
               求一个班级总分平均分？
         #+END_SRC
+        #+BEGIN_SRC sql
+          select avg(math) from exam;
+          select avg(ifnull(math,0)+ifnull(chinese,0)+ifnull(english,0)) from exam;
+        #+END_SRC
     13. 聚集函数 - max/min
         max/min函数返回满足where条件的一列的最大/最小值
         #+BEGIN_SRC sql
@@ -3153,13 +4600,31 @@ file:./other/Git.pdf
         #+BEGIN_SRC
           练习：
               求班级最高分和最低分（数值范围在统计中特别有用）
+              选择表中语文成绩最高分的同学的姓名和成绩
+        #+END_SRC
+        #+BEGIN_SRC sql
+          select max(ifnull(math,0)+ifnull(chinese,0)+ifnull(english,0)) from exam;
+          select min(ifnull(math,0)+ifnull(chinese,0)+ifnull(english,0)) from exam;
+          select name,max(chinese) from exam where chinese in (select max(chinese) from exam);
         #+END_SRC
     14. select语句（6）分组操作
         [[./Img/29.png]]
-        使用group by子句对列进行分组
+        使用group by子句对列进行分组,在根据某一个字段分组之后，表中其他字段的数据会只显示第一条，其他的数据都会被隐藏，但是仍然可以通过聚集函数捕获到这样隐藏起来的值。在分组过程中可以使用多个分组字段，会一次根据分组条件进行划分。
         #+BEGIN_SRC sql
           select column1,column2,column3... from table
           group by column having ...
+        #+END_SRC
+        创建表：
+        #+BEGIN_SRC sql
+          create table c (id int,cdate date,camount int);
+          insert into c values(1,'2007-07-09',7);
+          insert into c values(2,'2007-07-09',3);
+          insert into c values(2,'2007-07-10',3);
+          insert into c values(2,'2007-07-11',1);
+        #+END_SRC
+        #+BEGIN_SRC sql
+          select id,camount
+          select id,count(*),camount from c group by id,camount;
         #+END_SRC
         #+BEGIN_SRC
           练习：对订单表中商品归类后，显示每一类商品的总价
@@ -3168,13 +4633,27 @@ file:./other/Git.pdf
         #+BEGIN_SRC
           练习：查询购买了几类商品，并且每类总价大于100的商品
         #+END_SRC
+        创建表
+        #+BEGIN_SRC sql
+          create table orders(id int,product varchar(20),price float);
+          insert into orders(id,product,price) values(1,'电视',900);
+          insert into orders(id,product,price) values(2,'洗衣机',100);
+          insert into orders(id,product,price) values(3,'洗衣粉',90);
+          insert into orders(id,product,price) values(4,'桔子',9);
+          insert into orders(id,product,price) values(5,'洗衣粉',90);
+        #+END_SRC
+        #+BEGIN_SRC sql
+          select product,sum(price) from orders group by product having sum(price)>100;
+        #+END_SRC
         - where和having区别：
-          where在分组前进行条件过滤，having在分组后进行条件过滤。使用where的地方都可以用having替换。但是having可以使用分组函数，而where后不可以使用
+          在分组之前条件判断使用where，在分组之后条件判断使用having，使用having的位置不能用where替换，而使用where的位置可以使用having替换。
+          ---分组之前可以使用where或者having
+          ---分组之后只能使用having
 ** 4. 备份、回复数据库
     1. 备份数据库表中的数据
        cmd>mysqlump -u 用户名 -p 数据库名> 文件名.sql
 
-       mysqldump -uroot -p db_name > d:/1.sql
+       mysqldump -uroot -p db_name >/Users/admin/Desktop/1.sql
     2. 恢复数据库
        （注意：如果数据库已经删除，先创建数据库在回复数据）
        - 方式一：在cmd中
@@ -3215,13 +4694,14 @@ file:./other/Git.pdf
          #+BEGIN_SRC sql
            foreign key(ordersid) references orders(id)
          #+END_SRC
+       - 外键在面对高并发和高吞吐的时候不推荐使用。，如果使用外键会影响数据进入数据库，在面对大量数据的时候应该先保证数据入库，在处理数据的正确性，也可以通过后期的代码保证。
     2. 案例
        新建部门表dept(id,name),通过外键约束建立与员工表emp关系
        #+BEGIN_SRC sql
          create table dept(
-         id int primary key auto_increment,
-         name varchar(20)
-         );
+                           id int primary key auto_increment,
+                           name varchar(20)
+                          );
        #+END_SRC
        #+BEGIN_SRC sql
          insert into dept values(null,'财务部');
@@ -3231,11 +4711,11 @@ file:./other/Git.pdf
        #+END_SRC
        #+BEGIN_SRC sql
          create table emp(
-         id int primary key auto_increment,
-         name varchar(20),
-         dept_id int,
-         foreign key(dept_id) references dept(id)
-         );
+                          id int primary key auto_increment,
+                          name varchar(20),
+                          dept_id int,
+                          foreign key(dept_id) references dept(id)
+                         );
        #+END_SRC
        #+BEGIN_SRC sql
          insert into emp values(null,'张三',1);
@@ -3249,9 +4729,9 @@ file:./other/Git.pdf
        案例：
        #+BEGIN_SRC sql
          create table dept(
-         id int primary key auto_increment,
-         name varchar(20)
-         );
+                           id int primary key auto_increment,
+                           name varchar(20)
+                          );
        #+END_SRC
        #+BEGIN_SRC sql
          insert into dept values(null,'财务部');
@@ -3261,10 +4741,10 @@ file:./other/Git.pdf
        #+END_SRC
        #+BEGIN_SRC sql
          create table emp(
-         id int primary key auto_increament,
-         name varchar(20),
-         dept_id int
-         );
+                          id int primary key auto_increament,
+                          name varchar(20),
+                          dept_id int
+                         );
        #+END_SRC
        #+BEGIN_SRC sql
          insert into emp values(null,'张三',1);
@@ -3286,23 +4766,36 @@ file:./other/Git.pdf
            select * from dept d,emp e where e.dept_id=d.id;
          #+END_SRC
     3. 内连接查询
-       内连接查询概念：左边表有且右边表也有的记录
+       - 卸载inner join左侧的表称之为左边表，右侧的表称之为右边表。
+       - 内连接查询概念：左边表有且右边表也有的记录;
        [[./Img/34.png]]
        #+BEGIN_SRC sql
          select * from dept d inner join emp e on e.dept_id=d.id;
+         select emp.name,dept.name from dept inner join emp on dept.id=emp.dept_id;
+         select emp.name as 姓名,dept.name as 部门 from dept inner join emp on dept.id = emp.dept_id;
+         select e.name as 姓名,d.name as 部门 from dept d inner join emp e on d.id = e.dept_id;
        #+END_SRC
     4. 左、右连接查询以及全连接查询
        - 左连接查询：在内连接查询的基础上，加上左边表有而右边表没有的记录
+         **添加数据
+         #+BEGIN_SRC sql
+           insert into dept values(null,'市场部');
+         #+END_SRC
          **查询出部门所对应的员工信息，同时列出那些没有员工的部门
          #+BEGIN_SRC sql
            select * from dept d left join emp e on e.dept_id=d.id;
          #+END_SRC
        - 右外连接查询：在内连接查询的基础上，加上右边表有而左边表没有的记录
+         **添加数据
+         #+BEGIN_SRC sql
+           insert into emp values(null,'路飞',6);
+         #+END_SRC
          **查询出部门所对应的员工信息，同时列出那些没有部门的员工
          #+BEGIN_SRC sql
            select * from dept d right join emp e on e.dept_id=d.id;
          #+END_SRC
        - 全外连接查询：在内连接查询的基础上，加上左边表有而右边表没有的记录和右边表而左边表没有的记录
+         union是一个联合查询的关键字，在这个关键字结果中，如果有相同的结果数据，则只会保留一份相同的数据。
          **查询出部门所对应的员工信息，同时列出那些没有员工的部门及那些没有部门的员工
          #+BEGIN_SRC sql
            select * from dept d full join emp e on e.dept_id=d.id;
@@ -3388,3 +4881,592 @@ file:./other/Git.pdf
        #+END_SRC
        别名：
        delete e fromemployee as e where id=1;
+* JDBC
+** JDBC概述
+1. 知识回顾
+    [[./Img/39.png]]
+2. 概述
+    [[./Img/40.png]]
+   - 驱动
+     - 为了能让程序员利用java程序操作数据库，数据库厂商提供了一套jar包，通过导入这个jar包就可以直接调用其中的方法操作数据库，这个jar包称之为驱动。
+       + 两个数据路驱动互不兼容
+     - 行业中有很多中的数据库，要使用这么多数据库需要学习很多数据库驱动，对于程序员来说学习成本非常高。
+     - 想要让java程序兼容数据库，所有的数据库驱动都实现了jdbc这套接口。
+   - JDBC简介：
+     - JDBC全称为：Java Data Base Connectivity(java数据库连接)，它主要由接口组成。
+       + 组成JDBC的2个包：
+         java.sql包、javax.sql包
+       + 开发JDBC应用需要以上2个包的支持外，还需要导入相应JDBC的数据库实现(即数据库驱动)
+         [[./Img/41.png]]
+       + 不仅需要jdbc接口，还需要驱动这个实现，驱动中就是对jdbc接口的一些实现。
+3. java程序中引入mysql数据库驱动包
+   1. 课前资料找到mysql-connector-java-5.0.8-bin.jar文件
+   2. 在项目下创建一个新的lib目录
+      [[./Img/42.png]]
+   3. 将jar包复制粘贴到项目中的lib目录下
+      [[./Img/43.png]]
+   4. 右键点击lib下的包，选择Build Path -> add to build path
+      [[./Img/44.png]]
+** 详解JDBC六步
+1. 程序详解--DriverManager
+   - JDBC程序中的DriverManager用于加载驱动，并创建于数据库的链接，这个API的常用方法：
+     #+BEGIN_SRC java
+       DriverManager.registerDriver(new Driver());
+       DriverManager.getConnection(url,user,password);
+     #+END_SRC
+   - 注意：在实际开发中并不推荐采用registerDriver方法注册驱动，原因有二：
+     + 查看Driver的源代码可以看到，如果采用此种方式，会导致驱动程序注册两次，也就是在内存中会有两个Driver对象。
+     + 程序依赖mysql的API，脱离mysql的jar包，程序将无法编译，将来程序切换底层数据库将会非常麻烦。
+   - 推荐方式：
+     #+BEGIN_SRC java
+       //mysql5版本用
+       Class.forName("com.mysql.jdbc.Driver");
+       //mysql8版本用
+       Class.forName("com.mysql.cj.jdbc.Driver");
+     #+END_SRC
+     + 采用此种方式不会导致驱动对象在内存中重复出现，并且采用此种方式，程序仅仅只需要一个字符串，不需要依赖具体的驱动，使程序的灵活性更高。
+     + 同样，在开发中也不建议采用具体的驱动类型指向getConnection方法返回的connection对象。
+2. 数据库URL
+   URL用于标识数据库的位置，程序员通过URL地址告诉JDBC程序连接哪个数据库，URL的写法为：
+
+   [[./Img/45.png]]
+3. 常用数据库URL地址的写法：
+   - Oracle写法：jdbc:oracle:thin:@localhost:1521:sid
+   - SQLServer：jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=sid
+   - MySql:jdbc:mysql://localhost:3306/sid
+   - MySql简写:jdbc:mysql:///sid
+   常用属性：useUnicode=true&characterEncoding=UTF-8
+4. 程序详解--Connection
+   - jdbc程序中的Connection，它用于代表数据库的链接，Connection是数据库编程中最重要的一个对象，客户端与数据库所有交互都是通过connection对象完成的，这个对象的常用方法：
+     + createStatement():创建向数据库发送sql的statement对象。
+     + prepareStatement(sql):创建向数据库发送预编译sql的PrepareSatement对象。
+     + prepareCall(sql):创建执行存储过程的callableStatement对象。
+     + setAutoCommit(boolean autoCommit):设置事务是否自动提交。
+     + commit():在链接上提交事务。
+     + rollback():在此链接上回滚事务。
+5. 程序详解--Statement
+   - jdbc程序中的Statement对象用于向数据库发送SQL语句，Statement对象常用方法：
+     + executeQuery(String sql):用于向数据发送查询语句。
+     + executeUpdate(String sql):用于向数据库发送insert、update或delete语句。
+     + execute(String sql):用于向数据库发送任意sql语句、
+     + addBatch(String sql):把多余sql语句放到一个批处理中。
+     + executeBatch():想数据库发送一批sql语句执行。
+   - 子接口-preparedStatement
+     有预编译功能，可以防止sql注入攻击
+6. 程序详解--ResultSet
+   - jdbc程序中的ResultSet用于代表sql语句的执行结果。ResultSet封装执行结果时，采用的类似于表格的方式。ResultSet对象维护了一个指向表格数据行的游标，初始的时候，游标在第一行之前，调用ResultSet.next()方法，可以使游标指向具体的数据行，进行调用方法获取该行的数据。
+   - ResultSet既然用于封装执行结果的，所以该对象提供的都是用于获取数据的get方法：
+   - 获取任意类型的数据
+     + getObject(int index)
+     + getObject(String columnName)
+   - 提问：数据库中列的类型是varchar，获取该列的数据调用什么方法？int类型呢？bigInt类型呢？Boolean类型？
+7. 常用数据类型转换表
+   [[./Img/46.png]]
+8. ResultSet中的api
+   - ResultSet还提供了对结果集进行滚动的方法：
+     + next():移动到下一行
+     + previous():移动到前一行
+     + absolute(int row):移动到指定行
+     + beforeFirst():移动resultSet的最前面
+     + afterLast():移动到resultSet的最后面
+9. 程序详解--释放资源
+   - 为什么关闭资源？
+     + 在安装数据库的时候，设置过最大连接数量，如果用了不还连接，别人就无法使用了。
+     + rs对象中可能包含很多的一个数据，对象保存在内存中，这样就十分占用内存。需要将它关闭。
+     + 最晚创建的对象，最先关闭。
+   - jdbc程序运行完后，切记要释放程序在运行过程中，创建的那些与数据库进行交互的对象，这些对象通常是ResultSet，Statement和Connection对象。
+   - 特别是Connection对象，它是非常稀有的资源，用完后必须马上释放，如果Connection不能及时、正常的关闭，极易导致系统宕机。Connection的使用原则是尽量晚创建，尽量早的释放。
+   - 为确保资源释放代码能运行，资源释放代码也一定要放在finally语句中。
+10. 释放资源
+    - 在关闭过程中可能会出现异常，为了能够关闭资源，需要将资源在finally中关闭。
+    - 如果在finally中关闭资源则需要将conn,stat,rs三个对象定义成全局的变量。
+    - 在conn,stat,rs三个变量出现异常的时候可能会关闭不成功，我们需要将他们在finally中置为null。conn,stat,rs这三个对象是引用，将引用置为null，它引用的对象就会被JVM回收，也能保证资源的释放。
+#+BEGIN_SRC java
+  package cn.commandoptionesc.jdbc;
+
+  import java.sql.*;
+
+  public class Demo2 {
+
+      public static void main(String[] args){
+          Connection conn = null;
+          Statement stat = null;
+          ResultSet rs = null;
+          try {
+              //注册数据库驱动
+              //1. 引入的驱动对象使用的是mysql驱动包中具体的类型，这样代码就和包名绑死在一起，如果需要更换数据库，则还需要修改代码中的包名
+              //2. 用户手动注册一次数据库驱动，底层也注册一次数据库驱动，一共注册两次，两次注册可能会出现不必要的风险，所以只需要注册一次
+              //DriverManager.registerDriver(new Driver());
+              Class.forName("com.mysql.cj.jdbc.Driver");
+
+              //获取数据库连接
+              conn = DriverManager.getConnection
+                  ("jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC", "root", null);
+              //DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC&user=root&password=null");
+
+              //创建传输器
+              stat = conn.createStatement();
+
+              //传输sql并返回结果
+              rs = stat.executeQuery("select * from exam");
+
+              //遍历结果
+              while(rs.next()){
+                  //next()调用的时候会先将光标向下移动一行
+                  //如果向下移动的一行有效则返回true
+                  //如果向下移动的一行无效则返回false
+                  //利用返回值可以遍历整张则返回false
+                  //利用返回值可以遍历整张表的数据
+                  int id = rs.getInt(1);
+                  String name = rs.getString("name");
+                  System.out.println("id:"+id+">>>>name:"+name);
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }finally{
+              //关闭资源
+              //后创建的先关闭
+              if(rs != null) {
+                  try {
+                      rs.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      rs = null;
+                  }
+              }
+              if(stat != null) {
+                  try {
+                      stat.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      stat = null;
+                  }
+              }
+              if(stat != null) {
+                  try {
+                      conn.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      conn = null;
+                  }
+              }
+          }
+
+      }
+  }
+#+END_SRC
+#+BEGIN_SRC java
+  package cn.commandoptionesc.jdbc;
+
+  import org.junit.Test;
+
+  import java.sql.Connection;
+  import java.sql.SQLException;
+  import java.sql.Statement;
+  import java.sql.DriverManager;
+
+  /**
+   ,* 向数据路mydb1.exam表插入和更新数据
+   ,*/
+  public class Demo3 {
+      @Test
+      public void add(){
+          Connection conn = null;
+          Statement stat = null;
+
+          try {
+              Class.forName("com.mysql.cj.jdbc.Driver");
+              conn = DriverManager.getConnection
+                  ("jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC&user=root");
+              stat = conn.createStatement();
+              int count = stat.executeUpdate("insert into exam values(null,'鸣人',10,20,30)");
+              if(count >0){
+                  System.out.println("恭喜插入成功，受到影响的行数为："+count);
+              }
+          }catch(Exception e) {
+              e.printStackTrace();
+          }finally {
+              if (stat != null) {
+                  try {
+                      stat.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      stat = null;
+                  }
+              }
+              if (conn != null) {
+                  try {
+                      conn.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      conn = null;
+                  }
+              }
+          }
+      }
+      @Test
+      public void update(){
+          Connection conn = null;
+          Statement stat = null;
+          try {
+              Class.forName("com.mysql.cj.jdbc.Driver");
+              conn = DriverManager.getConnection
+                  ("jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC&user=root");
+              stat = conn.createStatement();
+              int count = stat.executeUpdate("update exam set chinese = 90 where id = 2");
+              if(count >0){
+                  System.out.println("更新成功，受到影响的行数为："+count);
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }finally{
+              if(stat != null) {
+                  try {
+                      stat.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      stat = null;
+                  }
+              }
+              if(conn != null) {
+                  try {
+                      conn.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      conn = null;
+                  }
+              }
+          }
+      }
+  }
+#+END_SRC
+** JDBCUtils工具类
+在类加载器启动的时候，可以读取当前类所在的工程的src目录，通过getClassLoader()方法获取类加载器，在使用getResource()获取src目录，在参数位置书写要获取的文件名称，最后通过getPath()方法获取String类型的路径返回值。
+#+BEGIN_SRC java
+  Properties prop = new Properties();
+  prop.load(new FileInputStream(new File(JDBCUtils.class.getClassLoader().getResource("conf.properties").getPath())));
+#+END_SRC
+#+BEGIN_SRC
+  driver = com.mysql.cj.jdbc.Driver
+  url = jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC
+  user = root
+#+END_SRC
+
+#+BEGIN_SRC java
+  package cn.commandoptionesc.jdbc;
+
+  import cn.commandoptionesc.utils.JDBCUtils;
+  import org.junit.Test;
+  import java.sql.*;
+
+  /**
+   ,* 向数据路mydb1.exam表插入和更新数据
+   ,*/
+  public class Demo4 {
+      @Test
+      public void add(){
+          Connection conn = null;
+          Statement stat = null;
+
+          try {
+              conn = JDBCUtils.getConnection();
+              stat = conn.createStatement();
+              int count = stat.executeUpdate("insert into exam values(null,'鸣人',10,20,30)");
+              if(count >0){
+                  System.out.println("恭喜插入成功，受到影响的行数为："+count);
+              }
+          }catch(Exception e) {
+              e.printStackTrace();
+          }finally {
+              JDBCUtils.close(null,stat,conn);
+          }
+      }
+      @Test
+      public void update(){
+          Connection conn = null;
+          Statement stat = null;
+          try {
+              conn = JDBCUtils.getConnection();
+              stat = conn.createStatement();
+              int count = stat.executeUpdate("update exam set chinese = 80 where id = 2");
+              if(count >0){
+                  System.out.println("更新成功，受到影响的行数为："+count);
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }finally{
+              JDBCUtils.close(null,stat,conn);
+          }
+      }
+      @Test
+      public void delete()  {
+          Connection conn = null;
+          Statement stat = null;
+          try {
+              conn = JDBCUtils.getConnection();
+              stat = conn.createStatement();
+              int count = stat.executeUpdate("delete from exam where id = 6");
+              if(count >0){
+                  System.out.println("删除成功，受到影响的行数为："+count);
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }finally{
+              JDBCUtils.close(null,stat,conn);
+          }
+      }
+      @Test
+      public void select(){
+          Connection conn = null;
+          Statement stat = null;
+          ResultSet rs = null;
+          try {
+              conn = JDBCUtils.getConnection();
+              stat = conn.createStatement();
+              rs = stat.executeQuery("select * from exam");
+              while(rs.next()){
+                  //next()调用的时候会先将光标向下移动一行
+                  //如果向下移动的一行有效则返回true
+                  //如果向下移动的一行无效则返回false
+                  //利用返回值可以遍历整张则返回false
+                  //利用返回值可以遍历整张表的数据
+                  int id = rs.getInt(1);
+                  String name = rs.getString("name");
+                  System.out.println("id:"+id+">>>>name:"+name);
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }finally{
+              JDBCUtils.close(rs,stat,conn);
+          }
+      }
+  }
+#+END_SRC
+#+BEGIN_SRC java
+  package cn.commandoptionesc.utils;
+
+  import java.sql.*;
+
+  /**
+   ,* 创建连接和关闭资源的工具类
+   ,* 工具类中一般是通过类名.方法的形式来调用其中的方法的
+   ,*/
+  public class JDBCUtils {
+      private JDBCUtils(){
+
+      }
+      /**
+       ,* 创建连接
+       ,* @throws Exception
+       ,*/
+      public static Connection getConnection() throws Exception {
+          Class.forName("com.mysql.cj.jdbc.Driver");
+          return DriverManager.getConnection
+              ("jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC&user=root");
+      }
+      /**
+       ,* 关闭资源
+       ,*/
+      public static void close(ResultSet rs, Statement stat, Connection conn){
+          if(rs != null) {
+              try {
+                  rs.close();
+              } catch (SQLException e) {
+                  e.printStackTrace();
+              }finally{
+                  rs = null;
+              }
+          }
+          if(stat != null) {
+              try {
+                  stat.close();
+              } catch (SQLException e) {
+                  e.printStackTrace();
+              }finally{
+                  stat = null;
+              }
+          }
+          if(stat != null) {
+              try {
+                  conn.close();
+              } catch (SQLException e) {
+                  e.printStackTrace();
+              }finally{
+                  conn = null;
+              }
+          }
+      }
+  }
+
+#+END_SRC
+
+#+BEGIN_SRC java
+  package cn.commandoptionesc.jdbc;
+
+  import cn.commandoptionesc.utils.JDBCUtils1;
+  import org.junit.Test;
+  import java.sql.*;
+
+  /**
+   ,* 向数据路mydb1.exam表插入和更新数据
+   ,*/
+  public class Demo5 {
+      @Test
+      public void add(){
+          Connection conn = null;
+          Statement stat = null;
+          try {
+              conn = JDBCUtils1.getConnection();
+              stat = conn.createStatement();
+              int count = stat.executeUpdate("insert into exam values(null,'鸣人',10,20,30)");
+              if(count >0){
+                  System.out.println("恭喜插入成功，受到影响的行数为："+count);
+              }
+          }catch(Exception e) {
+              e.printStackTrace();
+          }finally {
+              JDBCUtils1.close(null,stat,conn);
+          }
+      }
+      @Test
+      public void update(){
+          Connection conn = null;
+          Statement stat = null;
+          try {
+              conn = JDBCUtils1.getConnection();
+              stat = conn.createStatement();
+              int count = stat.executeUpdate("update exam set chinese = 80 where id = 2");
+              if(count >0){
+                  System.out.println("更新成功，受到影响的行数为："+count);
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }finally{
+              JDBCUtils1.close(null,stat,conn);
+          }
+      }
+      @Test
+      public void delete()  {
+          Connection conn = null;
+          Statement stat = null;
+          try {
+              conn = JDBCUtils1.getConnection();
+              stat = conn.createStatement();
+              int count = stat.executeUpdate("delete from exam where id = 8");
+              if(count >0){
+                  System.out.println("删除成功，受到影响的行数为："+count);
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }finally{
+              JDBCUtils1.close(null,stat,conn);
+          }
+      }
+      @Test
+      public void select(){
+          Connection conn = null;
+          Statement stat = null;
+          ResultSet rs = null;
+          try {
+              conn = JDBCUtils1.getConnection();
+              stat = conn.createStatement();
+              rs = stat.executeQuery("select * from exam");
+              while(rs.next()){
+                  //next()调用的时候会先将光标向下移动一行
+                  //如果向下移动的一行有效则返回true
+                  //如果向下移动的一行无效则返回false
+                  //利用返回值可以遍历整张则返回false
+                  //利用返回值可以遍历整张表的数据
+                  int id = rs.getInt(1);
+                  String name = rs.getString("name");
+                  System.out.println("id:"+id+">>>>name:"+name);
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }finally{
+              JDBCUtils1.close(rs,stat,conn);
+          }
+      }
+  }
+
+#+END_SRC
+#+BEGIN_SRC java
+  package cn.commandoptionesc.utils;
+
+  import java.io.File;
+  import java.io.FileInputStream;
+  import java.io.FileNotFoundException;
+  import java.io.IOException;
+  import java.sql.*;
+  import java.util.Properties;
+
+  /**
+   ,* 创建连接和关闭资源的工具类
+   ,* 工具类中一般是通过类名.方法的形式来调用其中的方法的
+   ,*/
+  public class JDBCUtils1 {
+      private JDBCUtils1(){
+
+      }
+      private static Properties prop = null;
+      //由于配置文件只需要读取一次即可，所以将读取配置文件的过程书写在一个静态代码块中，这样在类加载的时候就会读取一个配置信息，并且保留在内存中，可以避免重复读取
+      static{
+          prop = new Properties();
+          try {
+              prop.load(new FileInputStream
+                        (new File(JDBCUtils1.class.getClassLoader().getResource("conf.properties").getPath())));
+          } catch (FileNotFoundException e) {
+              e.printStackTrace();
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+      }
+      /**
+       ,* 创建连接
+       ,* @throws Exception
+       ,*/
+      public static Connection getConnection() throws Exception {
+          Class.forName(prop.getProperty("driver"));
+          return DriverManager.getConnection(prop.getProperty("url"),prop.getProperty("user"),null);
+      }
+      /**
+       ,* 关闭资源
+       ,*/
+      public static void close(ResultSet rs, Statement stat, Connection conn){
+          if(rs != null) {
+              try {
+                  rs.close();
+              } catch (SQLException e) {
+                  e.printStackTrace();
+              }finally{
+                  rs = null;
+              }
+          }
+          if(stat != null) {
+              try {
+                  stat.close();
+              } catch (SQLException e) {
+                  e.printStackTrace();
+              }finally{
+                  stat = null;
+              }
+          }
+          if(stat != null) {
+              try {
+                  conn.close();
+              } catch (SQLException e) {
+                  e.printStackTrace();
+              }finally{
+                  conn = null;
+              }
+          }
+      }
+  }
+#+END_SRC
