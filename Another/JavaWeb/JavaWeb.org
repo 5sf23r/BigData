@@ -78,6 +78,13 @@
   - [[#jdbc概述][JDBC概述]]
   - [[#详解jdbc六步][详解JDBC六步]]
   - [[#jdbcutils工具类][JDBCUtils工具类]]
+- [[#登陆功能实现][登陆功能实现]]
+- [[#sql注入攻击][SQL注入攻击]]
+- [[#批处理][批处理]]
+- [[#数据库连接池][数据库连接池]]
+  - [[#1-c3p0连接池][1. C3P0连接池]]
+  - [[#2-实现][2. 实现：]]
+  - [[#3-手写mypool连接池][3. 手写MyPool连接池：]]
 #+END_QUOTE
 
 * Web概述
@@ -5469,4 +5476,449 @@ file:./other/Git.pdf
           }
       }
   }
+#+END_SRC
+* 登陆功能实现
+1. 创建数据库
+   #+BEGIN_SRC sql
+     create table user(id int,name varchar(10),password varchar(10));
+     insert into user values(1,'ls','123');
+     insert into user values(2,'lg','qwe');
+     insert into user values(3,'pq','qaz');
+   #+END_SRC
+2. 在控制台输入用户名和密码之后实现登陆操作：
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.jdbc;
+
+     import cn.commandoptionesc.utils.JDBCUtils1;
+
+     import java.sql.Connection;
+     import java.sql.ResultSet;
+     import java.sql.Statement;
+     import java.util.Scanner;
+
+     /**
+      ,* 登陆功能 --- jdbc实现
+      ,*
+      ,*/
+     public class Login {
+         public static void main(String[] args) {
+             //要求用户输入用户名和密码
+             Scanner sc = new Scanner(System.in);
+             System.out.println("请输入用户名");
+             String name = sc.nextLine();
+             System.out.println("请输入密码");
+             String password = sc.nextLine();
+             loginTest(name,password);
+         }
+
+         private static void loginTest(String name, String password) {
+             //将获取到的值和数据库中的数据作比对
+             Connection conn = null;
+             Statement stat = null;
+             ResultSet rs = null;
+             try {
+                 conn = JDBCUtils1.getConnection();
+                 stat = conn.createStatement();
+                 rs = stat.executeQuery("select * from user where name = '"+name+"' and password = '"+password+"'");
+                 if(rs.next()){
+                     System.out.println("登陆成功");
+                 }else{
+                     System.out.println("登陆失败");
+                 }
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }finally{
+                 JDBCUtils1.close(rs,stat,conn);
+             }
+
+         }
+     }
+
+   #+END_SRC
+   + 注意：这样书写的话，在控制台输入用户名是输入：用户名'#就会成功登入，因#号在数据库中是注释的意思。
+     #+BEGIN_SRC sql
+       select * from user where name = '用户名'#' and password = 'password'
+     #+END_SRC
+* SQL注入攻击
+由于sql语句中的参数是由前台传输而来，后台是对sql语句的拼接，在参数传递的过程中，用户可能输入一些数据库的关键字，这些关键字可能会导致sql的语义发生改变从而执行一些特殊的操作，像这样呃操作就称之为sql注入攻击。
+1. preparedStatement的使用
+      预编译
+2. 预编译如何保证sql语句语义不改变：
+      - 在PreparedStatement中，会先将sql语句发送到数据库，发送的语句到达数据库服务器之后，会在服务器中保留一份，并将这个语句转换成一个机器码，这个机器码是不允许也不能够被修改的，这个就保证了sql语句不会被改变。
+      - 在sql语句中如果有参数需要传入，则在sql语句的主干部分用?来代替参数。这时用户传入参数，传入的参数还会被当做纯文本来使用。第二次保证sql语句语义不会被改变。
+      - 总结：利用preparedStatement只需操作两步：
+        1. 发送sql语句的主干部分，如果有参数用?预留。
+        2. 发送当前sql语句的参数
+#+BEGIN_SRC java
+  package cn.commandoptionesc.jdbc;
+
+  import cn.commandoptionesc.utils.JDBCUtils1;
+  import java.sql.Connection;
+  import java.sql.PreparedStatement;
+  import java.sql.ResultSet;
+
+  public class PreparedDemo1 {
+      public static void main(String[] args) {
+          Connection conn = null;
+          PreparedStatement ps = null;
+          ResultSet rs = null;
+          try {
+              conn = JDBCUtils1.getConnection();
+              //发送sql语句的主干部分
+              ps = conn.prepareStatement("select * from user where name = ?");
+              //发送参数
+              //setString(第几个问号的下标,对应下标的出入值);
+              ps.setString(1,"ls");
+              //此句表示sql语句的主干和参数部分都已经传递完成，继续执行当前sql语句。
+              ps.executeQuery();
+              while(rs.next()){
+                  String password = rs.getString("password");
+                  System.out.println("password:"+password);
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }finally{
+              JDBCUtils1.close(rs,ps,conn);
+          }
+      }
+  }
+#+END_SRC
+#+BEGIN_SRC java
+  package cn.commandoptionesc.jdbc;
+
+  import cn.commandoptionesc.utils.JDBCUtils1;
+  import java.sql.Connection;
+  import java.sql.PreparedStatement;
+  import java.sql.ResultSet;
+  import java.util.Scanner;
+
+  /**
+   ,* 登陆功能 --- jdbc实现
+   ,*
+   ,*/
+  public class Login1 {
+      public static void main(String[] args) {
+          //要求用户输入用户名和密码
+          Scanner sc = new Scanner(System.in);
+          System.out.println("请输入用户名");
+          String name = sc.nextLine();
+          System.out.println("请输入密码");
+          String password = sc.nextLine();
+          loginTestPrepared(name,password);
+      }
+      //Prepared实现jdbc
+      private static void loginTestPrepared(String name, String password) {
+          Connection conn = null;
+          PreparedStatement ps = null;
+          ResultSet rs = null;
+          try {
+              conn = JDBCUtils1.getConnection();
+              ps = conn.prepareStatement("select * from user where name = ? and password = ?");
+              ps.setString(1,name);
+              ps.setString(2,password);
+              rs = ps.executeQuery();
+              if (rs.next()) {
+                  System.out.println("登陆成功");
+              }else{
+                  System.out.println("登陆失败");
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }finally{
+              JDBCUtils1.close(rs,ps,conn);
+          }
+      }
+  }
+#+END_SRC
+* 批处理
+1. 使用情景：
+   如果有多条sql语句需要执行，一条书写一个jdbc的完整过程十分浪费资源，和编码的时间，所以希望使用一种方案一次性执行多条sql语句，那么像这样的方法数据库当红称之为批处理操作。
+2. 批处理实现
+   原理：一次性发送多条sql语句到数据库执行。减少diamante量以及多次发送sql的过程。
+3. 批处理中的api
+   | Statement.addBatch()     | 添加一条批处理语句 |
+   | Statement.executeBatch() | 执行当前批处理     |
+   | Statement.clearBatch()   | 清楚批处理中的语句 |
+   + 注意：PreparedStatement在添加批处理的时候操作的都是统一语义的sql，所以传输sql的参数即可。
+4. Statement批处理
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.batch;
+
+     import cn.commandoptionesc.utils.JDBCUtils1;
+     import java.sql.Connection;
+     import java.sql.Statement;
+
+     /**
+      ,* PreparedStatement批处理
+      ,* 优点：可以处理不同语义的sql语句
+      ,* 缺点：1. 执行效率低下
+      ,*       2. sql语句无法预留在数据库服务器中，每次都是发送一条sql语句到达数据库。数据库需要重新解读sql语句。
+      ,*       3. 没有预编译功能。
+      ,*/
+     public class StatementBatchDemo1 {
+         /*
+           create table t1(id int,name varchar(20));
+           insert into v1 values(1,'阿一');
+           insert into t1 values(2,'阿二');
+           insert into t1 values(3,'阿三');
+           insert into t1 values(4,'阿四');
+         ,*/
+         public static void main(String[] args) {
+             Connection conn = null;
+             Statement stat = null;
+             try {
+                 conn = JDBCUtils1.getConnection();
+                 stat = conn.createStatement();
+                 //批处理
+                 stat.addBatch("create table v1(id int,name varchar(20))");
+                 stat.addBatch("insert into v1 values(1,'阿一')");
+                 stat.addBatch("insert into v1 values(2,'阿二')");
+                 stat.addBatch("insert into v1 values(3,'阿三')");
+                 stat.addBatch("insert into v1 values(4,'阿四')");
+                 //通知数据库服务器sql语句已经准备完成
+                 //请执行当前批处理
+                 stat.executeBatch();
+                 System.out.println("执行成功！");
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }finally{
+                 JDBCUtils1.close(null,stat,conn);
+             }
+         }
+     }
+
+   #+END_SRC
+4. PreparedStatement批处理：
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.batch;
+
+     import cn.commandoptionesc.utils.JDBCUtils1;
+     import java.sql.Connection;
+     import java.sql.PreparedStatement;
+
+     /**
+      ,* Statement批处理
+      ,* 优点：1. 执行效率较高
+      ,*       2. sql语句已经预留在内存中可以重复使用。
+      ,*       3. 有预编译功能。
+      ,* 缺点：不能处理不同语义的sql语句
+      ,*/
+     public class PreparedBatchDemo1 {
+         public static void main(String[] args) {
+             Connection conn = null;
+             PreparedStatement ps = null;
+             try {
+                 conn = JDBCUtils1.getConnection();
+                 ps = conn.prepareStatement("insert into v1 values(?,?)");
+                 for(int i = 0;i<100199;i++){
+                     ps.setInt(1,i);
+                     ps.setString(2,"name"+i);
+                     ps.addBatch();
+                     if(i%1000 == 0){
+                         //满1000条执行批处理
+                         ps.executeBatch();
+                         //将执行完成的数据库释放，避免内存溢出
+                         ps.clearBatch();
+                         System.out.println("第"+i/1000+"次成功");
+                     }
+                 }
+                 //如果数据中有不满1000的，为了保证数据都可以执行需要最后执行一遍executeBatsh()
+                 ps.executeBatch();
+                 System.out.println("全部处理成功");
+             } catch (Exception e) {
+                 e.printStackTrace();
+             } finally{
+                 JDBCUtils1.close(null,ps,conn);
+             }
+         }
+     }
+   #+END_SRC
+* 数据库连接池
+** 1. C3P0连接池
+[[./Img/47.png]]
+- 缺点：用户每次请求都需要向数据库获得连接，而数据库创建连接通畅性乣消耗相对较大的资源，创建时间也较长。假设网站一天10万访问量，数据库服务器就需要创建10万次连接，极大的浪费数据库的资源，并且极易造成上护具库服务器内存溢出、宕机。
+[[./Img/48.png]]
+- 它是将那些已连接的数据库连接存放在一个容器里（连接池），这样以后别人要连接数据库的时候，将不会重新建立数据库连接，会直接从连接池里取出可用的链接，用户使用完毕后，连接又重新还回到连接池中。
++ 注意：连接池路里的链接将会一直保存在内存里，即使你没用也是一样。所以这个时候你得权衡一下连接池的接连数量了。
++ 连接池又叫做数据源。
+** 2. 实现：
+- 编写连接池需实现  javax.sql.DataSource  接口。DataSource接口中定义了两个重载的getConnection方法：
+  Connection getConnection()、Connection getConnection(String username,String password)
+  + 在DataSource构造函数中批量创建于数据库的连接，并把创建的连接保存到一个集合对象中。
+  + 实现getConnection方法，让getConnection返回给用户
+  + 当用户使用完Connection，调用Connection.close()方法时，Connection对象应保证将自己返回到连接池的集合对象中，而不要把conn还给数据库。
+  + 扩展Connection的close()方法。
+  + 在关闭数据库连接时，将connection存回连接池中，而并非真正的关闭。
+** 3. 手写MyPool连接池：
+
+#+BEGIN_SRC java
+  package cn.commandoptionesc.pool;
+
+  import javax.sql.DataSource;
+  import java.io.PrintWriter;
+  import java.sql.Connection;
+  import java.sql.DriverManager;
+  import java.sql.SQLException;
+  import java.sql.SQLFeatureNotSupportedException;
+  import java.util.LinkedList;
+  import java.util.List;
+  import java.util.logging.Logger;
+
+  /**
+   ,* 作为连接池上使用
+   ,*/
+  public class MyPool implements DataSource {
+      //主要目的：为了存储初始化的5个链接
+      public static List<Connection> pool = new LinkedList<Connection>();
+      static {
+          try {
+              Class.forName("com.mysql.cj.jdbc.Driver");
+              for(int i = 0;i<5;i++) {
+                  //由于每次都会执行getConnecton方法所以一定会有五个不同的对象存储在pool中。
+                  Connection conn = DriverManager.getConnection
+                      ("jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC&user=root");
+                  pool.add(conn);
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+      }
+      /**
+       ,*
+       ,* 获取一个链接
+       ,*/
+      @Override
+      public Connection getConnection() throws SQLException {
+          Connection conn1 = null;
+          //利用pool.size()获取连接池数量，如果位零则证明已经取空，需要在初始化一批连接。
+          if(pool.size()>0) {
+              //remove会将当前指定下标的元素删除，并且作为返回值返回
+              conn1 = pool.remove(0);
+          }else{
+              for(int i = 0;i<5;i++) {
+                  //由于每次都会执行getConnecton方法所以一定会有五个不同的对象存储在pool中。
+                  Connection conn = DriverManager.getConnection
+                      ("jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC&user=root");
+                  pool.add(conn);
+              }
+              conn1 = pool.remove(0);
+          }
+          System.out.println("已经从池中取出一个连接，现在池中生下："+pool.size()+"个链接");
+          return conn1;
+      }
+
+      /**
+       ,*
+       ,* 归还连接
+       ,* conn:用户归还的连接对象
+       ,*/
+      public void returnConnection(Connection conn) throws SQLException{
+          //归还连接时要保证连接是正常使用开着的，而且不能为null。
+          if(conn != null && !conn.isClosed())
+              pool.add(conn);
+          System.out.println("归还成功,当前连接池中还剩："+pool.size()+"个连接");
+      }
+
+      @Override
+      public Connection getConnection(String username, String password) throws SQLException {
+          return null;
+      }
+
+      @Override
+      public <T> T unwrap(Class<T> iface) throws SQLException {
+          return null;
+      }
+
+      @Override
+      public boolean isWrapperFor(Class<?> iface) throws SQLException {
+          return false;
+      }
+
+      @Override
+      public PrintWriter getLogWriter() throws SQLException {
+          return null;
+      }
+
+      @Override
+      public void setLogWriter(PrintWriter out) throws SQLException {
+
+      }
+
+      @Override
+      public void setLoginTimeout(int seconds) throws SQLException {
+
+      }
+
+      @Override
+      public int getLoginTimeout() throws SQLException {
+          return 0;
+      }
+
+      @Override
+      public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+          return null;
+      }
+  }
+#+END_SRC
+
+#+BEGIN_SRC java
+  package cn.commandoptionesc.pool;
+
+  import java.sql.Connection;
+  import java.sql.PreparedStatement;
+  import java.sql.ResultSet;
+  import java.sql.SQLException;
+
+  public class TestMyPool {
+      public static void main(String[] args) {
+          Connection conn = null;
+          PreparedStatement ps = null;
+          ResultSet rs = null;
+          //从连接池中取出连接
+          MyPool pool = new MyPool();
+          //利用连接池对象获取连接
+          try {
+              conn = pool.getConnection();
+              ps = conn.prepareStatement("select * from exam");
+              rs = ps.executeQuery();
+              while(rs.next()){
+                  int id = rs.getInt("id");
+                  String name = rs.getString("name");
+                  System.out.println("id:"+id+">>>>name:"+name);
+              }
+          } catch (SQLException e) {
+              e.printStackTrace();
+          }finally{
+              if(rs != null) {
+                  try {
+                      rs.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      rs = null;
+                  }
+              }
+              if(ps != null) {
+                  try {
+                      ps.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      ps = null;
+                  }
+              }
+              if(conn != null) {
+                  try {
+                      //利用连接池对象归还对象
+                      pool.returnConnection(conn);
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      conn = null;
+                  }
+              }
+          }
+      }
+  }
+
 #+END_SRC
