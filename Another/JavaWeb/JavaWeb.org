@@ -85,6 +85,17 @@
   - [[#1-c3p0连接池][1. C3P0连接池]]
   - [[#2-实现][2. 实现：]]
   - [[#3-手写mypool连接池][3. 手写MyPool连接池：]]
+  - [[#4-开源连接池][4. 开源连接池]]
+- [[#web开发][Web开发]]
+  - [[#web应用的配置][web应用的配置]]
+    - [[#缺省web应用的配置][缺省web应用的配置]]
+    - [[#缺省web应用的虚拟路径有优先级][缺省web应用的虚拟路径有优先级]]
+- [[#servlet][Servlet]]
+  - [[#1-servlet概述][1. Servlet概述]]
+  - [[#2-手写servlet][2. 手写Servlet]]
+  - [[#3-配置servlet映射][3. 配置servlet映射]]
+  - [[#4-servlet调用过程和生命周期][4. Servlet调用过程和生命周期]]
+  - [[#5-servlet继承结构][5. Servlet继承结构]]
 #+END_QUOTE
 
 * Web概述
@@ -5750,7 +5761,6 @@ file:./other/Git.pdf
   + 扩展Connection的close()方法。
   + 在关闭数据库连接时，将connection存回连接池中，而并非真正的关闭。
 ** 3. 手写MyPool连接池：
-
 #+BEGIN_SRC java
   package cn.commandoptionesc.pool;
 
@@ -5860,7 +5870,6 @@ file:./other/Git.pdf
       }
   }
 #+END_SRC
-
 #+BEGIN_SRC java
   package cn.commandoptionesc.pool;
 
@@ -5922,3 +5931,441 @@ file:./other/Git.pdf
   }
 
 #+END_SRC
+** 4. 开源连接池
+现在很多web服务器都提供了DataSource的实现，即连接池的实现。通常我们把DataSource的实现，按其英文含义称之为数据源，数据源中都包含了数据库连接池的实现。也有一些开源组织提供了数据源的独立实现：DBCP数据库连接池、C3P0数据库连接池。
+
+实际应用时不需要编写连接数据库代码，直接从数据源获得数据库的链接。程序员变成时也应尽量使用这些数据源的实现，以提升程序的数据库访问性能。
+- DBCP
+  DBCP是Apache软件基金组织下的开源连接池实现，使用DBCP数据源，应用程序应在系统中增加如下两个jar文件：Commons-dbcp.jar：连接池的实现、Commons-pool.jar：连接池实现的依赖库
+- DBCP示例代码：
+  #+BEGIN_SRC java
+    static{
+        InputStream in = JDBCUtil.class.getClassLoader().getResourceAsStream("dbcpconfig.properties");
+        Properties prop = new Properties();
+        prop.load(in);
+        BasicDataSourceFactory factory = new BasicDataSourceFactory();
+        dataSource = factory.createDataSource(prop);
+    }
+  #+END_SRC
+- c3p0配置：
+  + 第一种方式：c3p0-config.xml
+    #+BEGIN_SRC xml
+      <?xml version="1.0" encoding="UTF-8" ?>
+      <c3p0-config>
+        <default-config>
+          <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+          <property name="jdbcUrl">jdbc:mysql://localhost:3306/mydb1</property>
+          <property name="userSSL">false</property>
+          <property name="servertimezont">UTC</property>
+          <property name="user">root</property>
+          <property name="password"></property>
+        </default-config>
+      </c3p0-config>
+    #+END_SRC
+  + 第二种方式：c3p0.properties
+    #+BEGIN_SRC
+      c3p0.driverClass=com.mysql.cj.jdbc.Driver
+      c3p0.jdbcUrl=jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC
+      c3p0.user=root
+    #+END_SRC
+- DBCPDemo1.java
+  #+BEGIN_SRC java
+    package cn.commandoptionesc.pool;
+
+    import org.apache.commons.dbcp2.BasicDataSource;
+    import java.sql.Connection;
+    import java.sql.ResultSet;
+    import java.sql.SQLException;
+    import java.sql.Statement;
+
+    /**
+     ,* DBCP连接池的使用
+     ,*/
+    public class DBCPDemo1 {
+        public static void main(String[] args) {
+            Connection conn = null;
+            Statement stat = null;
+            ResultSet rs = null;
+            //利用DBCP获取连接
+            BasicDataSource source = new BasicDataSource();
+            //手动设置配置信息
+            source.setDriverClassName("com.mysql.cj.jdbc.Driver");
+            source.setUrl("jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC");
+            source.setUsername("root");
+            source.setPassword(null);
+            try {
+                conn = source.getConnection();
+                stat = conn.createStatement();
+                rs = stat.executeQuery("select * from exam");
+                while(rs.next()){
+                    int id = rs.getInt("id");
+                    int chinese = rs.getInt("chinese");
+                    System.out.println("id:"+id+">>>>chinese:"+chinese);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally{
+                if(rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        rs = null;
+                    }
+                }
+                if(stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        stat = null;
+                    }
+                }
+                if(conn != null) {
+                    try {
+                        //此处不是关闭连接，是归还连接
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        conn = null;
+                    }
+                }
+            }
+        }
+    }
+  #+END_SRC
+- DBCPDemo2.java、dbcp.properties
+  #+BEGIN_SRC java
+    package cn.commandoptionesc.pool;
+
+    import org.apache.commons.dbcp2.BasicDataSourceFactory;
+
+    import javax.sql.DataSource;
+    import java.io.File;
+    import java.io.FileReader;
+    import java.sql.Connection;
+    import java.sql.ResultSet;
+    import java.sql.SQLException;
+    import java.sql.Statement;
+    import java.util.Properties;
+
+    /**
+     ,* DBCP连接池的使用
+     ,*/
+    public class DBCPDemo2 {
+        public static void main(String[] args) throws Exception {
+            Connection conn = null;
+            Statement stat = null;
+            ResultSet rs = null;
+            Properties prop = new Properties();
+            prop.load(new FileReader(new File(DBCPDemo2.class.getClassLoader().getResource("dbcp.properties").getPath())));
+            BasicDataSourceFactory factory = new BasicDataSourceFactory();
+            DataSource source = factory.createDataSource(prop);
+            try {
+                conn = source.getConnection();
+                stat = conn.createStatement();
+                rs = stat.executeQuery("select * from exam");
+                while(rs.next()){
+                    int id = rs.getInt("id");
+                    int chinese = rs.getInt("chinese");
+                    System.out.println("id:"+id+">>>>chinese:"+chinese);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally{
+                if(rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        rs = null;
+                    }
+                }
+                if(stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        stat = null;
+                    }
+                }
+                if(conn != null) {
+                    try {
+                        //此处不是关闭连接，是归还连接
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        conn = null;
+                    }
+                }
+            }
+        }
+    }
+  #+END_SRC
+  #+BEGIN_SRC
+    driverClassName = com.mysql.cj.jdbc.Driver
+    url = jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC
+    username = root
+  #+END_SRC
+- C3P0Demo1.java
+  #+BEGIN_SRC java
+    package cn.commandoptionesc.pool;
+
+    import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+    import java.beans.PropertyVetoException;
+    import java.sql.Connection;
+    import java.sql.ResultSet;
+    import java.sql.SQLException;
+    import java.sql.Statement;
+
+    /**
+     ,*
+     ,*/
+    public class C3P0Demo1 {
+        public static void main(String[] args) {
+            Connection conn = null;
+            Statement stat = null;
+            ResultSet rs = null;
+            //创建一个C3P0数据源的对象
+            ComboPooledDataSource source = new ComboPooledDataSource();
+            //利用对象读取配置信息
+            try {
+                source.setDriverClass("com.mysql.cj.jdbc.Driver");
+                source.setJdbcUrl("jdbc:mysql://localhost:3306/mydb1?useSSL=false&servertimezone=UTC");
+                source.setUser("root");
+                source.setPassword(null);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                conn = source.getConnection();
+                stat = conn.createStatement();
+                rs = stat.executeQuery("select * from exam");
+                while(rs.next()){
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    System.out.println("id:"+id+">>>>name:"+name);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally{
+                if(rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        rs = null;
+                    }
+                }
+                if(stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        stat = null;
+                    }
+                }
+                if(conn != null) {
+                    try {
+                        //此处不是关闭连接，是归还连接
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        conn = null;
+                    }
+                }
+            }
+
+        }
+    }
+
+  #+END_SRC
+- C3P0Demo2.java、c3p0-config.xml
+  #+BEGIN_SRC java
+    package cn.commandoptionesc.pool;
+
+    import com.mchange.v2.c3p0.ComboPooledDataSource;
+    import java.sql.Connection;
+    import java.sql.ResultSet;
+    import java.sql.SQLException;
+    import java.sql.Statement;
+
+    /**
+     ,*
+     ,*/
+    public class C3P0Demo2 {
+        public static void main(String[] args) {
+            Connection conn = null;
+            Statement stat = null;
+            ResultSet rs = null;
+            //创建一个C3P0数据源的对象
+            ComboPooledDataSource source = new ComboPooledDataSource();
+            //利用对象读取配置信息
+            try {
+                conn = source.getConnection();
+                stat = conn.createStatement();
+                rs = stat.executeQuery("select * from exam");
+                while(rs.next()){
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    System.out.println("id:"+id+">>>>name:"+name);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally{
+                if(rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        rs = null;
+                    }
+                }
+                if(stat != null) {
+                    try {
+                        stat.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        stat = null;
+                    }
+                }
+                if(conn != null) {
+                    try {
+                        //此处不是关闭连接，是归还连接
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }finally{
+                        conn = null;
+                    }
+                }
+            }
+
+        }
+    }
+
+  #+END_SRC
+  #+BEGIN_SRC xml
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <c3p0-config>
+      <default-config>
+        <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/mydb1</property>
+        <property name="userSSL">false</property>
+        <property name="servertimezont">UTC</property>
+        <property name="user">root</property>
+        <property name="password"></property>
+      </default-config>
+    </c3p0-config>
+  #+END_SRC
+* Web开发
+[[file:../笔记/第二阶段JavaWEB/课后资料/day08-tomcat/笔记/day08-tomcat.pdf]]
+** web应用的配置
+1. 第一种配置方式
+   在电脑创建一个news的文件夹，另外在创建一个1.html文件放入news文件夹
+   #+BEGIN_SRC html
+     <!DOCTYPE HTML>
+     <html xmls="http://www.w3.org/1999/xhtml" xml:lang="en">
+       <head>
+         <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+       </head>
+       <body>
+         这是news的页面。
+       </body>
+     </html>
+
+   #+END_SRC
+   在server.xml中的<Host>标签内部，添加如下内容：
+   #+BEGIN_SRC xml
+     <Host name="localhost"  appBase="webapps"unpackWARs="true" autoDeploy="true">
+       <Context path="/news1" docBase="/Users/admin/Desktop/news/" />
+     </Host>
+   #+END_SRC
+   在浏览器访问地址:localhost:8080/news1/1.html
+2. 第二种配置方式
+   在电脑桌面创建一个email文件夹，另外在创建一个1.html文件放入email文件夹
+   在tomcat/conf/Catalina/localhost目录中添加一个.xml文件，这个文件的名称就是web应用的虚拟路径，在文件中添加内容如下：
+   #+BEGIN_SRC xml
+     <?xml version="1.0" encoding="UTF-8"?>
+     <Context docBase="/Users/admin/Desktop/email/" />
+   #+END_SRC
+   其中docBase="真是web应用的目录",在浏览器访问为：localhost:8080/email/1.html
+   + 第二种配置方式中如果要求虚拟路径有多级，例如:/email/aaa，在系统中文件命名时将/用#来代替，表示将虚拟路径分级的意思，在地址栏中山呼入对应分级后路径即可。
+     浏览器访问地址为：localhost:8080/email/aaa/1.html
+3. 第三种配置方式
+   在localhost虚拟主机管理的webapps目录中添加一个目录，这个目录的名称就是web应用的虚拟路径，同时这个目录也是真实的web应用。所以只需添加此处一个web应用即完成全部配置。配置如下：
+
+   [[./Img/53.png]]
+*** 缺省web应用的配置
+一个路径被配置为缺省的路径之后，在地址栏中间就不需要书写当前web应用的虚拟路径
+1. 第一种配置方式
+   将path中包含的路径完全删除，只留下一对引号，这就表示当前web应用的虚拟路径
+   #+BEGIN_SRC xml
+     <Context path="" docBase="/User/admin/Desktop/news/"/>
+   #+END_SRC
+2. 第二种配置方式
+   将Catalina/虚拟主机名称/email.xml文件名称修改为ROOT.xml，这是当前文件的名称就是一个缺省web应用的虚拟路径。
+
+   [[./Img/54.png]]
+3. 第三种配置方式
+   将webapps目录中的search目录名称修改为ROOT，则当前目录的名称就会变成一个web应用的缺省路径
+*** 缺省web应用的虚拟路径有优先级
+server.xml > Catalina/虚拟主机名称/ROOT.xml文件 > webapps目录中的ROOT目录
+
+* Servlet
+[[file:../笔记/第二阶段JavaWEB/课后资料/day09servlet/笔记/day09-servlet.pdf]]
+** 1. Servlet概述
+- Servlet是Sun公司提供的一门动态资源开发的奇数。本质就是一个java文件。将编译后的文件放入servlet容器中方可使用servlet提供服务。
+- Servlet容器是存储并运行servlet的环境，称之为servlet的环境。
+- web容器是存储并运行web资源的环境。
+** 2. 手写Servlet
+1. 编写一个类，让这个类实现servlet接口，那么这个类就会变为一个servlet文件
+2. 编译写好的文件，并且将其加入到servlet容器中去运行。
+3. 将servlet文件添加到任意一个web应用的classes目录中。
+** 3. 配置servlet映射
+在添加servlet文件web应用中配置web.xml文件，内容如下：
+#+BEGIN_SRC xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+           version="4.0">
+    <servlet>
+      <servlet-name>FirstServlet</servlet-name>
+      <servlet-class>cn.commandoptionesc.servlet.FirstServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>Firstservlet</servlet-name>
+      <url-pattern>/servlet/Firstservlet</url-pattern>
+    </servlet-mapping>
+  </web-app>
+#+END_SRC
+** 4. Servlet调用过程和生命周期
+1. 确认ip地址对应的服务器。
+2. 确认服务器中的虚拟机主机名称
+3. 确认虚拟主机中对应的web应用
+4. 确认web应用中的资源虚拟路径
+5. 根据web.xml文件寻找对应的真是Servlet
+6. servlet执行声明周期的过程
+7. servlet的service方法提供服务，将所有数据写入response缓冲区
+8. 服务器中的service缓冲区中的数据组织成一定机构后相应给浏览器
+[[./Img/55.png]]
+** 5. Servlet继承结构
+Servlet --- 包含五个最基础的方法 init() destory() service()
+  |
+  |---GenericServlet --- service()  通用servlet
+           |
+           |---HttpServlet ---在通用Servlet基础上，添加了包含大量和HTTP协议相关的方法。
