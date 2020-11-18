@@ -6364,8 +6364,10 @@ server.xml > Catalina/虚拟主机名称/ROOT.xml文件 > webapps目录中的ROO
 8. 服务器中的service缓冲区中的数据组织成一定机构后相应给浏览器
 [[./Img/55.png]]
 ** 5. Servlet继承结构
+#+BEGIN_SRC
 Servlet --- 包含五个最基础的方法 init() destory() service()
   |
   |---GenericServlet --- service()  通用servlet
            |
            |---HttpServlet ---在通用Servlet基础上，添加了包含大量和HTTP协议相关的方法。
+#+END_SRC
