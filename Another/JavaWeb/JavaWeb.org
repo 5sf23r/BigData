@@ -95,7 +95,14 @@
   - [[#2-手写servlet][2. 手写Servlet]]
   - [[#3-配置servlet映射][3. 配置servlet映射]]
   - [[#4-servlet调用过程和生命周期][4. Servlet调用过程和生命周期]]
-  - [[#5-servlet继承结构][5. Servlet继承结构]]
+    - [[#1-servlet继承结构][1. Servlet继承结构]]
+    - [[#2-图片如何被加载][2. 图片如何被加载？]]
+    - [[#3-拓展request对象和response对象][3. 拓展：request对象和response对象]]
+  - [[#5-servlet细节讨论][5. Servlet细节讨论]]
+- [[#request][Request]]
+  - [[#1-request概述与功能一-----api操作][1. request概述与功能一 --- API操作]]
+  - [[#2-http请求][2. HTTP请求]]
+  - [[#3-request当中的api操作][3. Request当中的API操作：]]
 #+END_QUOTE
 
 * Web概述
@@ -6363,7 +6370,7 @@ server.xml > Catalina/虚拟主机名称/ROOT.xml文件 > webapps目录中的ROO
 7. servlet的service方法提供服务，将所有数据写入response缓冲区
 8. 服务器中的service缓冲区中的数据组织成一定机构后相应给浏览器
 [[./Img/55.png]]
-** 5. Servlet继承结构
+*** 1. Servlet继承结构
 #+BEGIN_SRC
 Servlet --- 包含五个最基础的方法 init() destory() service()
   |
@@ -6371,3 +6378,132 @@ Servlet --- 包含五个最基础的方法 init() destory() service()
            |
            |---HttpServlet ---在通用Servlet基础上，添加了包含大量和HTTP协议相关的方法。
 #+END_SRC
+*** 2. 图片如何被加载？
+#+BEGIN_SRC
+news
+  |--- 1.jpg
+localhost/news/1.jpg
+localhost/news/servlet/FirstServlet
+注意：所有的静态资源都是有缺省servlet--defaultServlet加载而来
+#+END_SRC
+*** 3. 拓展：request对象和response对象
+1. 接口为什么可以创建对象？
+   - HttpServletRequest是一个接口，为什么request对象依然可以用来发送请求数据？
+   - HttpServletResponse是一个接口，为什么response对象依然可以用来发送相应数据？
+   原因：真正创建对象的并不是这两个接口而是这两个接口下的子实现类。HttpServletRequestWrapper、HttpServletResponseWrapper两个子实现类创建了request和response对象。
+2. request对象和response对象何时创建？
+   servlet完成初始化操作之后，service方法身上的request和response对象也会被创建出来。
+** 5. Servlet细节讨论
+1. Servlet标签问题
+   #+BEGIN_SRC xml
+     <servlet>
+       <servlet-name></servlet-name>
+       <sevlet-class>cn.commandoptionesc.FirstServlet</sevlet-class>
+     </servlet>
+     <servlet-mapping>
+       <servlet-name></servlet-name>
+       <url-pattern>/servlet/FirstServlet</url-pattern>
+     </servlet-mapping>
+   #+END_SRC
+   - <servlet>注册servlet标签
+   - <servlet-mapping>servlet映射标签
+   - 标签由两部分组成的原因：为了便于多个不同的映射路径映射到同一个servlet身上。这种方式只需要重写servlet-mapping部分配置并修改url-pattern即可。
+2. servlet映射路径通配形式
+   如果有大量相似的路径都映射到同一个servlet身上，多次重写servlet-mapping配置代码量仍然很大，这是可以使用映射中通配的形式来定义url-pattern
+   - 定义方式
+     1. *.后缀
+        #+BEGIN_SRC xml
+          <servlet-mapping>
+            <servlet-name>FirstServlet</servlet-name>
+            <url-pattern>*.do</url-pattern>
+          </servlet-mapping>
+        #+END_SRC
+     2. 以 / 开头以 /* 结束
+        #+BEGIN_SRC xml
+          <servlet-mapping>
+            <servlet-name>FirstServlet</servlet-name>
+            <url-pattern>/servlet/*</url-pattern>
+          </servlet-mapping>
+        #+END_SRC
+3. Servlet的一些细节(3)
+   1. 对于如下的一些映射关系：
+      - Servlet1映射到 /abc/*
+      - Servlet2映射到 /*
+      - Servlet3映射到 /abc
+      - Servlet4映射到 *.do  （永远匹配级级最低）
+   2. 问题：
+      1. 当请求URL为 /abc/a.html、/abc* 和 /* 都匹配，哪个servlet响应
+         Servlet引擎将调用Servlet1
+      2. 当请求URL为 /abc时，/abc/* 和 /abc 都匹配，哪个servlet响应
+         Servlet引擎将调用Servlet3
+      3. 当请求URL为 /a/a.do 时，/a/* 和 *.do 都匹配，哪个servlet响应
+         Servlet引擎将调用Servlet1
+      4. 当请求URL为 /a.do 时，/*和 *.do 都匹配，哪个servlet响应
+         Servlet引擎将调用Servlet2
+      5. 当请求URL为 /xxx/yyy/a.do 时，/*和*.do都匹配，哪个servlet响应
+         Servlet引擎将调用Servlet2
+4. Servlet的一些细节(4)
+   1. Servlet是一个供其他Java程序(Servlet引擎)调用的Java类，它不能独立运行，它的运行完全由Servlet引擎来控制和调度
+   2. 针对客户端的多次Servlet请求，通常情况下，服务器只会创建一个Servlet实例对象，也就是说Servlet实例对象一旦创建，它就会驻留在内存中，为后续的其它请求服务，直至web容器退出，servlet实例对象才会销毁
+   3. 在Servlet的整个生命周期内，Servlet的init方法只被调用一次。而对一个Servlet的每次访问请求都导致Servlet引擎调用一次servlet的service方法。对于每次访问请求，Servlet引擎都会创建一个新的HttpServletRequest请求对象和一个新的HttpServletResponse响应对象，然后将这两个对象作为参数传递给它调用的Servlet的service()方法，service方法再根据请求方式分别调用doXXX方法。
+   4. 在servlet被访问到时会创建一个servlet对象驻留在内存中，如果有多个servlet资源被访问，则每个servlet在被初次访问的时候都会创建一个各自的servlet对象保存在tomcat内存当中。
+5. Load-on-startup标签
+   #+BEGIN_SRC xml
+     <servlet>
+       <servlet-name>default</servlet-name>
+       <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+       <init-param>
+         <param-name>debug</param-name>
+         <param-value>0</param-value>
+       </init-param>
+       <init-param>
+         <param-name>listings</param-name>
+         <param-value>false</param-value>
+       </init-param>
+       <load-on-startup>1</load-on-startup>
+     </servlet>
+   #+END_SRC
+   1. 如果一个servlet标签中配置了load-on-startup标签，则在tomcat服务器启动的时候就会自动访问一次这个servlet，让这个servlet的对象驻留在内存中一份，为后边的请求提供访问。
+   2. load-on-startup标签中间可以配置一个数字，这个数字可以采用0及其以上的数字，一般采用1及其以上的数字。如果这个数字越小，则优先级越高，如果数字越大则优先级越低。注意：尽管各个servlet之间存在优先级关系，但是仍然都是随着tomcat服务器的启动而加载。
+6. 缺省servlet
+   1. 如果某个Servlet的映射路径仅仅为一个正斜杠/，那么这个Servlet就成为当前Web应用程序的缺省Servlet
+   2. 凡是在web.xml文件中找不到匹配的<servlet-mapping>元素的URL，它们的访问请求都将交给缺省Servlet处理，也就是说，缺省Servlet用于处理所有其他Servlet都不处理的访问请求。
+   3. 在<tomcat的安装目录>\conf\web.xml文件中，注册了一个名称为org.apache.catalina.servlets.Default的Servlet，并将这个Servlet设置为了缺省Servlet。
+   4. 当访问Tomcat服务器中的某个静态HTML文件和图片时，实际上是在访问这个缺省Servlet
+   5. 如果访问的资源虚拟路径不存在，依然是交给缺省servlet处理。
+7. servlet多线程并发安全的问题
+   1. 在面对局部变量的时候，所有线程操作的都是各自独立的变量，这些变量之间是没有联系的，相互不产生影响。
+   2. 面对全局变量的时候存在线程并发安全问题，这个问题可以通过加锁来解决，但是添加锁的时候要注意：锁对象一定要统一。锁住部分的代码一定尽可能的少，只锁住必要部分代码，如果锁住过多的代码则会导致程序的运行效率。
+   3. 尝试利用sun公司提供的SingThreadModel接口解决多线程并发安全问题。发现一个一个servlet的对象，这些对象会同时为所有的用户提供服务，所以导致了用户初次访问闲置的servlet提供服务的线程，按照接口思路应该为每一个新的用户都提供一个新的servlet对象，但是结果表明事实是调用内存中已有的一个ervlet对象提供的服务。显然结果不正确，当前接口如果被实现会导致线程安全问题更加复杂，不要使用当前接口。
+
+      [[./Img/56.png]]
+   4. 解决线程安全问题：
+      1. 加锁：合理添加锁，锁住关键部分代码，尽可能少的降低代码的执行效率。
+      2. 尽可能多定义局部变量少定义全局变量，因为全局变量不可避免的会出现多线程并发安全问题。
+* Request
+** 1. request概述与功能一 --- API操作
+1. 回顾：HTTP协议
+   - HTTP数据交互模型：
+     请求响应模型、一次请求对应一次响应、请求只能由浏览器发出，服务器可以根据请求作出响应
+** 2. HTTP请求
+1. 继承结构
+   #+BEGIN_SRC
+   ServletRequest 提供servletrequest对象必要的方法
+         |
+         |--- HttpServletRequest 包含和HTTP协议操作的一些API，可以通过这些API来开发浏览器和服务器之间的功能。
+   #+END_SRC
+2. HTTP请求的组成
+   #+BEGIN_SRC
+   一个请求行   请求方式   请求资源的路径   HTTP协议版本
+   多个请求头   Host:虚拟主机名称
+   一个空行
+   请求实体内容   用户发送请求时携带的请求参数
+   #+END_SRC
+** 3. Request当中的API操作：
+1. 获取客户端相关的信息
+   - getRequestURL方法 --- 返回客户端发出请求完整URL
+   - getRequestURI方法 --- 返回请求行中的资源名部分
+   - getQueryString方法 --- 返回请求行中的参数部分
+   - getRemoteAddr方法 --- 返回发出请求的客户机的IP地址
+   - getMethod --- 得到客户机请求方式
+   - ！！ getContextPath --- 获取当前web应用虚拟目录名称 -- 在写路径时不要将web应用的虚拟路径的名称写死，应该在需要些web应用的名称的地方通过getContextPath方法动态获取
