@@ -7390,7 +7390,11 @@ localhost/news/servlet/FirstServlet
           </Host>
         #+END_SRC
      2. 在Engine标签身上修改缺省的虚拟主机为www.easymall.com
-
         #+BEGIN_SRC xml
           <Engine name="Catalina" defaultHost="www.easymall.com">
         #+END_SRC
+     3. 配置hosts文件：
+        在hosts文件设置 127.0.0.1  www.easymall.com
+2. 发布一个web应用到虚拟主机中
+   - 实现过程：
+     1.
