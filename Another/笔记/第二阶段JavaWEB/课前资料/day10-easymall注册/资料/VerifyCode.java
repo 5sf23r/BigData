@@ -11,60 +11,60 @@ import java.io.OutputStream;
 import java.util.Random;
 import javax.imageio.ImageIO;
 /**
- * ¶¯Ì¬Éú³ÉÍ¼Æ¬
+ * åŠ¨æ€ç”Ÿæˆå›¾ç‰‡
  */
 public class VerifyCode {
-	// {"ËÎÌå", "»ªÎÄ¿¬Ìå", "ºÚÌå", "»ªÎÄĞÂÎº", "»ªÎÄÁ¥Êé", "Î¢ÈíÑÅºÚ", "¿¬Ìå_GB2312"}
-	private static String[] fontNames = { "ËÎÌå", "»ªÎÄ¿¬Ìå", "ºÚÌå", "Î¢ÈíÑÅºÚ",  "¿¬Ìå_GB2312" };
-	// ¿ÉÑ¡×Ö·û
+	// {"å®‹ä½“", "åæ–‡æ¥·ä½“", "é»‘ä½“", "åæ–‡æ–°é­", "åæ–‡éš¶ä¹¦", "å¾®è½¯é›…é»‘", "æ¥·ä½“_GB2312"}
+	private static String[] fontNames = { "å®‹ä½“", "åæ–‡æ¥·ä½“", "é»‘ä½“", "å¾®è½¯é›…é»‘",  "æ¥·ä½“_GB2312" };
+	// å¯é€‰å­—ç¬¦
 	//"23456789abcdefghjkmnopqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ";
 	private static String codes = "23456789abcdefghjkmnopqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ";
-	// ±³¾°É«
+	// èƒŒæ™¯è‰²
 	private Color bgColor = new Color(255, 255, 255);
-	// »ùÊı(Ò»¸öÎÄ×ÖËùÕ¼µÄ¿Õ¼ä´óĞ¡)
+	// åŸºæ•°(ä¸€ä¸ªæ–‡å­—æ‰€å çš„ç©ºé—´å¤§å°)
 	private int base = 30;
-	// Í¼Ïñ¿í¶È
+	// å›¾åƒå®½åº¦
 	private int width = base * 4;
-	// Í¼Ïñ¸ß¶È
+	// å›¾åƒé«˜åº¦
 	private int height = base;
-	// ÎÄ×Ö¸öÊı
+	// æ–‡å­—ä¸ªæ•°
 	private int len = 4;
-	// ÉèÖÃ×ÖÌå´óĞ¡
+	// è®¾ç½®å­—ä½“å¤§å°
 	private int fontSize = 22;
-	// ÑéÖ¤ÂëÉÏµÄÎÄ±¾
+	// éªŒè¯ç ä¸Šçš„æ–‡æœ¬
 	private String text;
 
 	private BufferedImage img = null;
 	private Graphics2D g2 = null;
 
 	/**
-	 * Éú³ÉÑéÖ¤ÂëÍ¼Æ¬
+	 * ç”ŸæˆéªŒè¯ç å›¾ç‰‡
 	 */
 	public void drawImage(OutputStream outputStream) {
-		// 1.´´½¨Í¼Æ¬»º³åÇø¶ÔÏó, ²¢ÉèÖÃ¿í¸ßºÍÍ¼ÏñÀàĞÍ
+		// 1.åˆ›å»ºå›¾ç‰‡ç¼“å†²åŒºå¯¹è±¡, å¹¶è®¾ç½®å®½é«˜å’Œå›¾åƒç±»å‹
 		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		// 2.µÃµ½»æÖÆ»·¾³
+		// 2.å¾—åˆ°ç»˜åˆ¶ç¯å¢ƒ
 		g2 = (Graphics2D) img.getGraphics();
-		// 3.¿ªÊ¼»­Í¼
-		// ÉèÖÃ±³¾°É«
+		// 3.å¼€å§‹ç”»å›¾
+		// è®¾ç½®èƒŒæ™¯è‰²
 		g2.setColor(bgColor);
 		g2.fillRect(0, 0, width, height);
 
-		StringBuffer sb = new StringBuffer();// ÓÃÀ´×°ÔØÑéÖ¤ÂëÉÏµÄÎÄ±¾
+		StringBuffer sb = new StringBuffer();// ç”¨æ¥è£…è½½éªŒè¯ç ä¸Šçš„æ–‡æœ¬
 
 		for (int i = 0; i < len; i++) {
-			// ÉèÖÃ»­±ÊÑÕÉ« -- Ëæ»ú
+			// è®¾ç½®ç”»ç¬”é¢œè‰² -- éšæœº
 			// g2.setColor(new Color(255, 0, 0));
 			g2.setColor(new Color(getRandom(0, 150), getRandom(0, 150),getRandom(0, 150)));
 
-			// ÉèÖÃ×ÖÌå
+			// è®¾ç½®å­—ä½“
 			g2.setFont(new Font(fontNames[getRandom(0, fontNames.length)], Font.BOLD, fontSize));
 
-			// Ğı×ªÎÄ×Ö(-45~+45)
+			// æ—‹è½¬æ–‡å­—(-45~+45)
 			int theta = getRandom(-45, 45);
 			g2.rotate(theta * Math.PI / 180, 7 + i * base, height - 8);
 
-			// Ğ´×Ö
+			// å†™å­—
 			String code = codes.charAt(getRandom(0, codes.length())) + "";
 			g2.drawString(code, 7 + i * base, height - 8);
 			sb.append(code);
@@ -73,29 +73,29 @@ public class VerifyCode {
 
 		this.text = sb.toString();
 
-		// »­¸ÉÈÅÏß
+		// ç”»å¹²æ‰°çº¿
 		for (int i = 0; i < len + 2; i++) {
-			// ÉèÖÃ»­±ÊÑÕÉ« -- Ëæ»ú
+			// è®¾ç½®ç”»ç¬”é¢œè‰² -- éšæœº
 			// g2.setColor(new Color(255, 0, 0));
 			g2.setColor(new Color(getRandom(0, 150), getRandom(0, 150),
 					getRandom(0, 150)));
 			g2.drawLine(getRandom(0, 120), getRandom(0, 30), getRandom(0, 120),
 					getRandom(0, 30));
 		}
-		// 4.±£´æÍ¼Æ¬µ½Ö¸¶¨µÄÊä³öÁ÷
+		// 4.ä¿å­˜å›¾ç‰‡åˆ°æŒ‡å®šçš„è¾“å‡ºæµ
 		try {
 			 ImageIO.write(this.img, "JPEG", outputStream);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}finally{
-			// 5.ÊÍ·Å×ÊÔ´
+			// 5.é‡Šæ”¾èµ„æº
 			g2.dispose();
 		}
 	}
 	
 	/**
-	 * »ñÈ¡ÑéÖ¤Âë×Ö·û´®
+	 * è·å–éªŒè¯ç å­—ç¬¦ä¸²
 	 * @return
 	 */
 	public String getCode() {
@@ -103,7 +103,7 @@ public class VerifyCode {
 	}
 
 	/*
-	 * Éú³ÉËæ»úÊıµÄ·½·¨
+	 * ç”Ÿæˆéšæœºæ•°çš„æ–¹æ³•
 	 */
 	private static int getRandom(int start, int end) {
 		Random random = new Random();
@@ -113,6 +113,6 @@ public class VerifyCode {
 	public static void main(String[] args) throws Exception {
 		VerifyCode vc = new VerifyCode();
 		vc.drawImage(new FileOutputStream("d:/vc.jpg"));
-		System.out.println("Ö´ĞĞ³É¹¦~!");
+		System.out.println("æ‰§è¡ŒæˆåŠŸ~!");
 	}
 }

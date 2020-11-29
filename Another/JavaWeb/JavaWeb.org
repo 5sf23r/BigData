@@ -113,7 +113,14 @@
   - [[#4-response功能二-----定时刷新][4. response功能二 --- 定时刷新]]
   - [[#5-response功能三-----控制浏览器缓存][5. response功能三 --- 控制浏览器缓存]]
 - [[#easymall注册功能][EasyMall注册功能]]
-  - [[#1-搭建环境][1. 搭建环境]]
+- [[#servletconfigservletcontext][ServletConfig、ServletContext]]
+  - [[#servletconfig][ServletConfig]]
+  - [[#servletcontext][ServletContext]]
+- [[#ajax][AJAX]]
+- [[#修改easymall][修改EasyMall]]
+- [[#会话技术----cookie][会话技术 -- cookie]]
+- [[#会话技术----session][会话技术 -- session]]
+  - [[#session特点][session特点：]]
 #+END_QUOTE
 
 * Web概述
@@ -5507,6 +5514,9 @@ file:./other/Git.pdf
   }
 #+END_SRC
 * 登陆功能实现
+:PROPERTIES:
+:ID:       4731AB9A-BE44-47BA-AD2B-624481D8F3D2
+:END:
 1. 创建数据库
    #+BEGIN_SRC sql
      create table user(id int,name varchar(10),password varchar(10));
@@ -5569,6 +5579,9 @@ file:./other/Git.pdf
        select * from user where name = '用户名'#' and password = 'password'
      #+END_SRC
 * SQL注入攻击
+:PROPERTIES:
+:ID:       1C30AF1D-28E6-4733-93CD-D19882ED706C
+:END:
 由于sql语句中的参数是由前台传输而来，后台是对sql语句的拼接，在参数传递的过程中，用户可能输入一些数据库的关键字，这些关键字可能会导致sql的语义发生改变从而执行一些特殊的操作，像这样呃操作就称之为sql注入攻击。
 1. preparedStatement的使用
       预编译
@@ -6817,7 +6830,7 @@ localhost/news/servlet/FirstServlet
      3. 请求转发之前和之后的语句依然会正常执行，执行的顺序就是请求转发的顺序。
      4. 请求转发可以多重转发，但是不能再同一个servlet中多次转发。如果多次转发会造成多次响应必然不符合一次请求一次响应的模型，发生异常。
      #+BEGIN_SRC java
-       package cn.commandoptionesc.request;
+     package cn.commandoptionesc.request;
 
        import javax.servlet.ServletException;
        import javax.servlet.http.HttpServlet;
@@ -7002,7 +7015,7 @@ localhost/news/servlet/FirstServlet
         }
 
       #+END_SRC
-      #+BEGIN_SRC
+      #+BEGIN_SRC xml
         <%@ page import="java.util.*" pageEncoding="UTF-8" language="java" %>
         <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
         <html>
@@ -7380,21 +7393,1484 @@ localhost/news/servlet/FirstServlet
      }
    #+END_SRC
 * EasyMall注册功能
-** 1. 搭建环境
 1. 搭建虚拟主机
    搭建一台www.easymall.com的虚拟主机，并且将这台虚拟主机配置成一个缺省的虚拟主机。
-   - 实现过程：
-     1. 修改[tomcat]/conf目录中的server.xml文件添加内容如下：
-        #+BEGIN_SRC xml
-          <Host name="www.easymall.com" appBase="/Users/admin/Desktop/EasyMall">
-          </Host>
-        #+END_SRC
-     2. 在Engine标签身上修改缺省的虚拟主机为www.easymall.com
-        #+BEGIN_SRC xml
-          <Engine name="Catalina" defaultHost="www.easymall.com">
-        #+END_SRC
-     3. 配置hosts文件：
-        在hosts文件设置 127.0.0.1  www.easymall.com
+   1. 修改[tomcat]/conf目录中的server.xml文件添加内容如下：
+      #+BEGIN_SRC xml
+        <Host name="www.easymall.com" appBase="/Users/coe/commandoptionesc/idea-workspace/EasyMall">
+        </Host>
+      #+END_SRC
+   2. 在Engine标签身上修改缺省的虚拟主机为www.easymall.com
+      #+BEGIN_SRC xml
+        <Engine name="Catalina" defaultHost="www.easymall.com">
+      #+END_SRC
+   3. 配置hosts文件：
+      在hosts文件设置 127.0.0.1  www.easymall.com
 2. 发布一个web应用到虚拟主机中
-   - 实现过程：
-     1.
+   创建一个名称为EasyMall的web应用，并且将web应用作为缺省web应用部署到www.easymall.com网站中
+3. 添加页面到EasyMall中
+4. 组合页面
+   1. 首页的构成分为三部分，头部，身体和尾部
+   2. 在身体index.jap页面中引入头部和尾部
+      代码实现：在body标签中添加头部和尾部
+      <%@include file="_foot.jsp"%>
+      #+BEGIN_SRC
+        <BODY>
+        <!--添加首部和尾部-->
+            <!--添加首部-->
+            <%--<%request.getRequestDispatcher("/_head.jsp").include(request,response);%>--%>
+            <%@include file="_head.jsp"%>
+        <!--引入尾部-->
+            <%--<%request.getRequestDispatcher("/_foot.jsp").include(request,response);%>--%>
+            <%@include file="_foot.jsp"%>
+        </BODY>
+      #+END_SRC
+5. 引入regist.jsp页面
+   1. 将课前资料中的regist目录所有内容复制粘贴到webroot目录中
+   2. 修改regist.html页面为regist.jsp方式和上方修改方式一样。
+   3. 删除regist.html页面。
+   4. 修改_head.jsp页面中内容
+      #+BEGIN_SRC
+        <div id="content">
+            <a href="#">登陆</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="<%=request.getContextPath()%>/regist.jsp">注册</a>
+        </div>
+      #+END_SRC
+6. 修改regist.jsp页面代码
+   #+BEGIN_SRC
+     <form action="<%=request.getContextPath()%>/RegistServlet" method="POST">
+     </form>
+   #+END_SRC
+7. 创建一个注册功能的RegistServlet
+   #+BEGIN_SRC java
+     package com.easymall.servlet;
+
+     import com.easymall.utils.JDBCUtils;
+     import com.easymall.utils.WebUtils;
+     import javax.servlet.ServletException;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.sql.Connection;
+     import java.sql.PreparedStatement;
+     import java.sql.ResultSet;
+
+     /**
+      ,* 注册功能
+      ,*/
+     public class RegistServlet extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             doGet(request, response);
+             //乱码处理
+             //处理请求参数乱码
+             request.setCharacterEncoding("utf-8");
+             //处理响应乱码
+             response.setContentType("text/html;charset=utf-8");
+
+             //获取用户发送的参数信息
+             String username = request.getParameter("username");
+             String password = request.getParameter("password");
+             String password2 = request.getParameter("password2");
+             String nickname = request.getParameter("nickname");
+             String email = request.getParameter("email");
+             String valistr = request.getParameter("valistr");
+             //非空校验
+             if(WebUtils.isNULL(username)){
+                 //注册页面提示：用户名称不能为空
+                 request.setAttribute("msg","用户名称不能为空");
+                 //请求转发之后当前servlet与regist.jsp页面看到的是同一块域，可以共享数据
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             if(WebUtils.isNULL(password)){
+                 //注册页面提示：用户名称不能为空
+                 request.setAttribute("msg","密码不能为空");
+                 //请求转发之后当前servlet与regist.jsp页面看到的是同一块域，可以共享数据
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             if(WebUtils.isNULL(password2)){
+                 //注册页面提示：用户名称不能为空
+                 request.setAttribute("msg","确认密码不能为空");
+                 //请求转发之后当前servlet与regist.jsp页面看到的是同一块域，可以共享数据
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             if(WebUtils.isNULL(nickname)){
+                 //注册页面提示：用户名称不能为空
+                 request.setAttribute("msg","昵称不能为空");
+                 //请求转发之后当前servlet与regist.jsp页面看到的是同一块域，可以共享数据
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             if(WebUtils.isNULL(email)){
+                 //注册页面提示：用户名称不能为空
+                 request.setAttribute("msg","邮箱不能为空");
+                 //请求转发之后当前servlet与regist.jsp页面看到的是同一块域，可以共享数据
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             if(WebUtils.isNULL(valistr)){
+                 //注册页面提示：用户名称不能为空
+                 request.setAttribute("msg","验证码不能为空");
+                 //请求转发之后当前servlet与regist.jsp页面看到的是同一块域，可以共享数据
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             //邮箱格式校验
+             //lishuai@tide.com
+             String reg = "\\w+@\\w+(\\.\\w+)+$";
+             if (!email.matches(reg)) {
+                 request.setAttribute("msg","邮箱格式错误");
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             //密码一致性校验
+             if(!password.equals(password2)){
+                 request.setAttribute("msg","两次密码不一致");
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             //验证码校验
+             //TODO:session
+
+             //完成注册
+             //用户名存在校验
+             Connection conn = null;
+             PreparedStatement ps = null;
+             ResultSet rs = null;
+             try {
+                 conn = JDBCUtils.getConnection();
+                 ps = conn.prepareStatement("select * from user where username = ?");
+                 ps.setString(1,username);
+                 rs = ps.executeQuery();
+                 //如果能欧冠查询到结果则证明用户已经存在不允许注册，并且在前台页面做出提示
+                 if (rs.next()) {
+                     request.setAttribute("msg","用户名已经存在");
+                     request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                     return;
+                 }else{
+                     //用户名不存在就可以将用户信息插入到数据库中
+                     ps = conn.prepareStatement("insert into user values(null,?,?,?,?)");
+                     ps.setString(1,username);
+                     ps.setString(2,password);
+                     ps.setString(3,nickname);
+                     ps.setString(4,email);
+                     ps.executeUpdate();
+                 }
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }finally{
+                 JDBCUtils.close(conn,ps,rs);
+             }
+             //跳转回首页
+             //定时刷新
+             response.getWriter().write("<h1 align='center'><font color='red'>恭喜注册成功，3秒之后跳转回首页</font></h1>");
+             response.setHeader("refresh","3;url=http://www.easymall.com");
+         }
+
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+         }
+     }
+
+     ,#+END_SR
+         8. 创建WebUtiles工具类
+         ,#+BEGIN_SRC java
+         package com.easymall.utils;
+
+     /**
+      ,* 判断是否为空的工具类
+      ,*/
+     public class WebUtils {
+         private WebUtils() {
+
+         }
+         public static boolean isNULL(String name){
+             //return name.trim().equals("") || name == null;
+             //如果用户名为空的话 null.trim()...就会造成空指针异常
+             //""双引号放在前面可以避免
+             return "".equals(name.trim()) || name == null;
+         }
+     }
+   #+END_SRC
+9. 在regist.jsp页面中添加错误信息提示信息、回显操作
+   1. 获取后台传递来的错误消息提示信息
+      #+BEGIN_SRC
+        <table>
+          <tr>
+            <td class="tds" colspan=2 style="color:red;text-align:center">
+              <%=request.getAttribute("msg")==null?"":request.getAttribute("msg")%>
+            </td>
+          </tr>
+        </table>
+      #+END_SRC
+   2. 数据回显操作
+      在<input name="username" />添加value属性：
+      #+BEGIN_SRC
+        <input type="text" name="username" value="<%=request.getParameter("username")==null?"":request.getParameter("username")%>"/>
+        <input type="text" name="nickname" value="<%=request.getParameter("nickname")==null?"":request.getParameter("nickname")%>"/>
+        <input type="text" name="email" value="<%=request.getParameter("email")==null?"":request.getParameter("email")%>"/>
+      #+END_SRC
+10. 创建数据库
+    #+BEGIN_SRC sql
+      create database easymall;
+      use easymall;
+      create table user(id int primary key auto_increment,username varchar(100),password varchar(100),nickname varchar(100),email varchar(100));
+      insert into user values(null,'admin','123','超级管理员','admin@tedu.cn');
+      insert into user values(null,'张飞','123','管理员','admin@tedu.cn');
+    #+END_SRC
+11. 连接数据库
+    1. 在当前web应用中添加数据库连接所需jar包，和c3p0的jar包。将两个包放入WEB-INF中的lib目录下。
+    2. 导入之前使用的c3p0.properties配置文件，在其中修改配置如下：（将该配置文件放入src目录下）
+       #+BEGIN_SRC
+         c3p0.driverClass=com.mysql.cj.jdbc.Driver
+         c3p0.jdbcUrl=jdbc:mysql://localhost:3306/easymall?useSSL=false&servertimezone=UTC
+         c3p0.user=root
+         c3p0.password=password
+       #+END_SRC
+12. 添加一个JDBCUtils工具类---获取连接、关闭资源
+    #+BEGIN_SRC java
+      package com.easymall.utils;
+
+      import com.mchange.v2.c3p0.ComboPooledDataSource;
+      import java.sql.*;
+      /**
+       ,* 获取连接和关闭资源
+       ,*/
+      public class JDBCUtils {
+          private JDBCUtils(){
+
+          }
+          private static ComboPooledDataSource source = new ComboPooledDataSource();
+          //获取连接
+          public static Connection getConnection() throws SQLException {
+              return source.getConnection();
+          }
+          //关闭资源
+          /*连接写死，检测是否可以成功获取连接
+
+            public static Connection getConnection() throws Exception{
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            return DriverManager.getConnection
+            ("jdbc:mysql://localhost:3306/easymall?useSSL=false&servertimezone=UTC&user=root&password=Root*0201");
+            }
+          ,*/
+          public static void close(Connection conn, Statement stat, ResultSet rs){
+              if(rs != null) {
+                  try {
+                      rs.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      rs = null;
+                  }
+              }
+              if(stat != null) {
+                  try {
+                      stat.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      stat = null;
+                  }
+              }
+              if(conn != null) {
+                  try {
+                      conn.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }finally{
+                      conn = null;
+                  }
+              }
+          }
+      }
+    #+END_SRC
+13. 页面中添加前台校验
+    在用户访问一个可提交的页面的时候，可能会频繁点击提交按钮，造成大量无效访问，让服务器的访问产生无意义的压力，应该通过一个前台校验避免这种情况。
+    1. 在regist.jsp的head标签中添加如下代码
+       在用户访问一个可提交的页面的时候，可能会频繁点击提交按钮，造成大量无效访问，让服务器的访问产生无意义的压力，应该通过一个前台校验避免这种情况。
+       #+BEGIN_SRC java
+         <!--引入jQuery函数库-->
+             <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.js">
+              </script>
+              <script type="text/javascript">
+              /*前台校验操作*/
+              var formObj= {
+              checkForm : function() {
+                  var canSub = true;
+                  //调用checkNull把它当做一个函数使用
+                  canSub = this.checkNull("username","用户名称不能为空") && canSub;
+                  canSub = this.checkNull("password","密码不能为空") && canSub;
+                  canSub = this.checkNull("password2","确认密码不能为空") && canSub;
+                  canSub = this.checkNull("email","邮箱不能为空不能为空") && canSub;
+                  canSub = this.checkNull("nickname","昵称不能为空") && canSub;
+                  canSub = this.checkNull("valistr","验证码不能为空") && canSub;
+                  canSub = this.checkEmail() && canSub;
+                  canSub = this.checkPassword() && canSub;
+
+                  return canSub;
+              },
+              checkPassword : function () {
+                  //密码一致性校验
+                  var password = $("input[name='password']").val();
+                  var password2 = $("input[name='password2']").val();
+                  if(password!="" && password2!="" && password != password2){
+                      this.setMsg("password2","两次密码不一致");
+                      return false;
+                  }
+                  return true;
+              }
+              ,
+              checkEmail : function(){
+                  //邮箱格式校验
+                  var reg = /\w+@\w+(\.\w+)+/;
+                  var email = $("input[name='email']").val();
+                  //在邮箱不为空的情况下进行校验
+                  if(email!="" && !reg.test(email)){
+                      this.setMsg("email","邮箱格式不正确");
+                      return false;
+                  }
+                  return true;
+              }
+              ,
+              //非空校验
+              checkNull : function (name,msg) {
+                  var tag= $("input[name='"+name+"']").val();
+                  //清空操作
+                  //$("input[name='"+name+"']").val();
+                  this.setMsg(name,"");
+                  //去当前参数前后空格
+                  if($.trim(tag) == ""){
+                      //$("input[name='"+name+"']").nextAll("span").text(msg);
+                      this.setMsg(name,msg);
+                      return false;
+                  }
+                  return true;
+              },
+              setMsg : function (name,msg) {
+                  //设置信息
+                  $("input[name='"+name+"']").nextAll("span").text(msg).css("color","red");
+              }
+          };
+         #+END_SRC
+    2. 在form标签身上添加onsubmit属性：
+       #+BEGIN_SRC
+         <form action="<%=request.getContextPath()%>/RegistServlet" method="POST" onsubmit="return formObj.checkForm()">
+         </form>
+       #+END_SRC
+       注意：前台的js校验只是为了降低无效访问，并不能真正阻拦用户提交错误数据到数据库中。后台Servlet代码才会真正的验证数据是否有效，阻拦错误数据进入数据库中。
+14. 添加jQuery离开焦点校验
+    #+BEGIN_SRC java
+      //鼠标离开焦点事件
+      //文档就绪时间
+      $(function(){
+              //鼠标离开焦点事件
+              $("input[name='username']").blur(function() {
+                      //非空校验操作，此处不需要重新写，调用就可以
+                      //此处没有用户动态的传入的参数，只能手写参数名
+                      formObj.checkNull("username", "用户名称不能为空");
+              });
+              $("input[name='username']").blur(function() {
+                      formObj.checkNull("password", "密码不能为空");
+              });
+              $("input[name='username']").blur(function() {
+                      formObj.checkNull("password2", "确认密码名称不能为空");
+                      formObj.checkPassword();
+              });
+              $("input[name='username']").blur(function(){
+                      formObj.checkNull("nickname","昵称不能为空");
+              });
+              $("input[name='username']").blur(function(){
+                      formObj.checkNull("emial","邮箱不能为空");
+                      formObj.checkEmail();
+              });
+      });
+    #+END_SRC
+15. 连接数据库判断用户名是否存在
+    #+BEGIN_SRC java
+      //完成注册
+      //用户名存在校验
+      Connection conn = null;
+      PreparedStatement ps = null;
+      ResultSet rs = null;
+      try {
+          conn = JDBCUtils.getConnection();
+          ps = conn.prepareStatement("select * from user where username = ?");
+          ps.setString(1,username);
+          rs = ps.executeQuery();
+          //如果能欧冠查询到结果则证明用户已经存在不允许注册，并且在前台页面做出提示
+          if (rs.next()) {
+              request.setAttribute("msg","用户名已经存在");
+              request.getRequestDispatcher("/regist.jsp").forward(request,response);
+              return;
+          }else{
+              //用户名不存在就可以将用户信息插入到数据库中
+              ps = conn.prepareStatement("insert into user values(null,?,?,?,?)");
+              ps.setString(1,username);
+              ps.setString(2,password);
+              ps.setString(3,nickname);
+              ps.setString(4,email);
+              ps.executeUpdate();
+          }
+      } catch (Exception e) {
+          e.printStackTrace();
+      }finally{
+          JDBCUtils.close(conn,ps,rs);
+      }
+      //跳转回首页
+      //定时刷新
+      response.getWriter().write("<h1 align='center'><font color='red'>恭喜注册成功，3秒之后跳转回首页</font></h1>");
+      response.setHeader("refresh","3;url=http://www.easymall.com");
+      }
+    #+END_SRC
+* ServletConfig、ServletContext
+** ServletConfig
+#+BEGIN_SRC xml
+  <servlet>
+    <servlet-name>SConfigDemo1</servlet-name>
+    <servlet-class>cn.commandoptionesc.sconfig.SConfigDemo1</servlet-class>
+    <!--在当前servlet配置中添加初始化配置信息-->
+    <init-param>
+      <param-name>username</param-name>
+      <param-value>root</param-value>
+    </init-param>
+  </servlet>
+  <servlet>
+    <servlet-name>SConfigDemo2</servlet-name>
+    <servlet-class>cn.commandoptionesc.sconfig.SConfigDemo2</servlet-class>
+    <init-param>
+      <param-name>key</param-name>
+      <param-value>value1</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SConfigDemo1</servlet-name>
+    <url-pattern>/servlet/SConfigDemo1</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SConfigDemo2</servlet-name>
+    <url-pattern>/servlet/SConfigDemo2</url-pattern>
+  </servlet-mapping>
+#+END_SRC
+如果有任何参数在servlet启动的时候需要被加载，且这个参数可能仅在web应用每次重启的时候读取，那么这个参数就可以添加在servlet标签身上，作为一个初始化信息参数使用
+1. ServletConfig代表当前servlet的初始化信息的对象
+   可以通过这个对象来获取配置在web.xml中某一个servlet的初始化配置信息。
+2. 获取ServletConfig对象的方法：
+   #+BEGIN_SRC java
+     this.getServletConfig();
+   #+END_SRC
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.sconfig;
+
+     import javax.servlet.ServletConfig;
+     import javax.servlet.ServletException;
+     import java.io.IOException;
+     //ServletConfig 可以获取servlet中的初始化配置信息
+
+     public class SConfigDemo1 extends javax.servlet.http.HttpServlet {
+         ServletConfig config = null;
+         //1. 获取ServletConfig对象
+         //获取方式：通过init方法
+         @Override
+         public void init(ServletConfig config) throws ServletException {
+             //如果config对象需要被doGet方法使用
+             //则应该将config对象提取成一个成员变量
+             //将局部变量的config赋值到全局变量身上
+             this.config = config;
+             //super.init(config);
+         }
+         protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+             doGet(request, response);
+         }
+         protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+             //从当前servlet身上获取指定名称的初始化配置信息
+             String username = config.getInitParameter("username");
+             System.out.println("username:"+username);
+         }
+     }
+   #+END_SRC
+   通过init方法获取十分繁琐，所以通过当前servlet对象自带的成员变量config去操作
+3. 功能一：获取初始化配置信息的方式：
+   #+BEGIN_SRC java
+     config.getInitParameter(String name);
+     config.getInitParameterNames();
+   #+END_SRC
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.sconfig;
+
+     import javax.servlet.ServletConfig;
+     import javax.servlet.ServletException;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.util.Enumeration;
+
+     public class SConfigDemo2 extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             doGet(request, response);
+         }
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             //当前方法可以获取一个ServletConfig类型的对象
+             ServletConfig config = this.getServletConfig();
+             //获取当前SConfgDemo2的初始化配置信息
+             String key = config.getInitParameter("key");
+             System.out.println("key:"+key);
+             Enumeration<String> names = config.getInitParameterNames();
+             while(names.hasMoreElements()){
+                 String name = names.nextElement();
+                 System.out.println("name:"+name);
+             }
+         }
+     }
+   #+END_SRC
+4. 功能二：用来获取ServletContext对象
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.sconfig;
+
+     import javax.servlet.ServletContext;
+     import javax.servlet.ServletException;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+
+     public class SConfigDemo3 extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             doGet(request, response);
+         }
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             ServletContext sc = this.getServletConfig().getServletContext();
+         }
+     }
+   #+END_SRC
+** ServletContext
+ServletContext就是一个代表web应用的对象。
+1. 如果有多个servlet需要使用同一段初始化配置信息，那么这个信息就可以配置成一个web应用的配置信息，通过代表web应用的对象来获取。
+2. 代表web应用的对象可以被web应用的所有servlet访问，也可以通过这个web应用的对象获取到web应用的配置信息
+3. 获取web应用对象方式：
+   1. this.getServletConfig().getServletContext();
+      #+BEGIN_SRC java
+        package cn.commandoptionesc.scontext;
+
+        import javax.servlet.ServletContext;
+        import javax.servlet.ServletException;
+        import javax.servlet.http.HttpServlet;
+        import javax.servlet.http.HttpServletRequest;
+        import javax.servlet.http.HttpServletResponse;
+        import java.io.IOException;
+        //1. 获取ServletContext对象
+        public class SContextDemo1 extends HttpServlet {
+            protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                doGet(request, response);
+            }
+            protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                //获取ServletContext对象
+                ServletContext sc = this.getServletConfig().getServletContext();
+                //获取web应用的配置信息
+                String user = sc.getInitParameter("user");
+                System.out.println("user:"+user);
+            }
+        }
+
+      #+END_SRC
+   2. this.getServletContext();
+      #+BEGIN_SRC java
+        package cn.commandoptionesc.scontext;
+
+        import javax.servlet.ServletContext;
+        import javax.servlet.ServletException;
+        import javax.servlet.http.HttpServlet;
+        import javax.servlet.http.HttpServletRequest;
+        import javax.servlet.http.HttpServletResponse;
+        import java.io.IOException;
+
+        public class SContextDemo2 extends HttpServlet {
+            protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                doGet(request, response);
+            }
+            protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                ServletContext sc = this.getServletContext();
+                String user = sc.getInitParameter("user");
+                System.out.println("user:"+user);
+            }
+        }
+
+      #+END_SRC
+4. 功能一：获取web应用的配置信息操作
+   #+BEGIN_SRC java
+     context.getInitParameter(String name);//获取指定名称的参数
+     context.getInitParameterNames();//获取全部web应用的配置信息的参数名
+   #+END_SRC
+5. 功能二：作为域对象来使用
+   1. 操作域对象
+      #+BEGIN_SRC
+        getAttribute(String name,Object obj);
+        getAttribute(String name);
+        removeAttribute(String name);
+        getAttrubuteNames();
+      #+END_SRC
+   2. 生命周期
+      web应用加载代表web应用的对线创建，web应用销毁代表web应用的对象也会被销毁
+   3. 作用范围
+      当前web应用范围内
+   4. 主要功能
+      当前web应用范围内实现资源共享
+      #+BEGIN_SRC java
+        package cn.commandoptionesc.scontext;
+
+        import javax.servlet.ServletContext;
+        import javax.servlet.ServletException;
+        import javax.servlet.http.HttpServlet;
+        import javax.servlet.http.HttpServletRequest;
+        import javax.servlet.http.HttpServletResponse;
+        import java.io.IOException;
+        //ServletContext作为域对象使用
+        public class SContextDemo3 extends HttpServlet {
+            protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                doGet(request, response);
+            }
+            protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                //获取ServletContext
+                ServletContext sc = this.getServletContext();
+                //作为域对象使用
+                sc.setAttribute("name","兰芳");
+            }
+        }
+
+      #+END_SRC
+      #+BEGIN_SRC java
+        package cn.commandoptionesc.scontext;
+
+        import javax.servlet.ServletContext;
+        import javax.servlet.ServletException;
+        import javax.servlet.http.HttpServlet;
+        import javax.servlet.http.HttpServletRequest;
+        import javax.servlet.http.HttpServletResponse;
+        import java.io.IOException;
+        //获取ServletContextDemo中的域属性
+        public class SContextDemo4 extends HttpServlet {
+            protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                doGet(request, response);
+            }
+            protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                ServletContext sc = this.getServletContext();
+                String name = (String)sc.getAttribute("name");
+                System.out.println("name:"+name);
+            }
+        }
+
+      #+END_SRC
+6. 功能三：获取web资源
+   1. 文件的路径的获取方式
+      1. 相对路径 config.properties
+         在问件加载的服务器启动目录去寻找指定文件名称的文件。
+      2. 绝对路径 /config.properties
+         会到项目启动的磁盘根目录下寻找指定名称的文件
+      3. 书写全部路径名称
+         确实可以找到指定路径的文件，但是这种书写方式过于死板，一旦对路径上任意一个级别的名称做出修改，则这个配置文件就会加载不到。不推荐使用。
+      4. ServletContext
+         #+BEGIN_SRC java
+           context.getRealPath(String pathname)
+         #+END_SRC
+         获取当前web应用的全路径，在当前路径下寻找指定名称的文件。如果文件位于web应用目录内部，则仍需要在参数位置书写基于web应用目录下的子级目录名称和资源文件名称才可以找到文件。
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.scontext;
+
+           import javax.servlet.ServletContext;
+           import javax.servlet.ServletException;
+           import javax.servlet.http.HttpServlet;
+           import javax.servlet.http.HttpServletRequest;
+           import javax.servlet.http.HttpServletResponse;
+           import java.io.File;
+           import java.io.IOException;
+           //路径问题
+           public class SContextDemo5 extends HttpServlet {
+               protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                   doGet(request, response);
+               }
+               protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                   //相对路径
+                   //String path = "config.properties";
+                   //绝对路径(不推荐使用)
+                   //String path = "D:\\......";
+                   ServletContext sc = this.getServletContext();
+                   String path = sc.getRealPath("WEB-INF/web.xml");
+                   File file = new File(path);
+                   System.out.println(file.getAbsolutePath());
+               }
+           }
+
+         #+END_SRC
+      5. 类加载器获取路径
+         通过当前类的类加载器可以获取当前web应用src目录下的资源文件。
+         getClassLoader().getResource("文件名称").getPath();
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.scontext;
+
+           import javax.servlet.ServletException;
+           import javax.servlet.http.HttpServlet;
+           import javax.servlet.http.HttpServletRequest;
+           import javax.servlet.http.HttpServletResponse;
+           import java.io.File;
+           import java.io.IOException;
+
+           public class SContextDemo6 extends HttpServlet {
+               protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                   doGet(request, response);
+               }
+               protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                   String path = SContextDemo6.class.getClassLoader().getResource("config.properties").getPath();
+                   File file = new File(path);
+                   System.out.println(file.getAbsolutePath());
+               }
+           }
+
+         #+END_SRC
+         + 在使用web工程并发布的时候，这种获取路径的方式会自动调整到classes目录中去获取指定名称的文件。
+* AJAX
+1. AJAX是什么？
+   asynchronous js and xml 异步的js和xml；通过ajax给服务器发送请求，并让服务器根据请求作出响应实现ajax，只是这个过程是一个异步请求的过程，作出的操作作为局部刷新。
+
+   [[./Img/63.png]]
+2. 异步交互和同步交互
+   - 异步交互：
+     - 如果一个ajax实现的是同步交互，发出请求之后，浏览器会等待响应结束之后才允许继续操作。一次请求必须要等待一次响应结束，在这期间不允许进行任何操作。
+     - 刷新范围：整体刷新。必须等待页面中的请求加载完毕才能继续操作。
+   - 异步交互：
+     - 如果一个ajax实现的是异步交互，发出请求之后，浏览器仍然可以继续操作。多次请求直接互不干扰，可以连续多次发送请求，服务器会针对各个请求作出响应。
+     - 刷新范围：局部刷新。不必等待页面完全加载完成即可以继续操作页面。
+3. 使用情景：
+   异步交互：
+   1. 搜索框中书写内容是异步交互
+   2. 点击搜索按钮是同步交互
+4. 异步交互的特点：
+   1. 优点：用户体验靓号，如果用户合理使用ajax，会降低服务器的访问压力。
+   2. 缺点：会无端产生很多无效的请求，增加服务器访问的压力。
+5. javascript实现ajax四步
+   1. 第一步，获取XMLHttpRequest对象
+      #+BEGIN_SRC java
+        var xmlHttp = ajaxFunction();
+        function ajaxFunction(){
+            var xmlHttp;
+            try{
+                //现代浏览器(IE7+、Firefox、Chrome、Safari和Opera)都有内建的XMLHttpRequest对象
+                xmlHttp = new XMLHttpRequest();
+            }catch(e){
+                try{
+                    //IE6.0
+                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                }catch(e){
+                    try{
+                        //IE5.0及更早版本
+                        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }catch(e){
+                        alert("...");
+                        throw e;
+                    }
+                }
+            }
+            return xmlHttp;
+        }
+      #+END_SRC
+   2. 第二步，打开与服务器的连接
+      #+BEGIN_SRC
+        xmlHttp.open(method,url,async);
+            > method: 请求方式，可以是GET或POST
+            > url: 所要访问的服务器中资源的路径 如：/Day10/servlet/AServlet
+            > async: 是否为异步传输，true表示为异步传输，一般都是true false表示同步传输
+      #+END_SRC
+   3. 第三步，发送请求
+      #+BEGIN_SRC
+        xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");//通知服务器发送的数据是请求参数
+        xmlHttp.send("xxxx");//注意，如果不给参数可能会造成部分浏览器无法发送请求
+          > 参数：
+              如果是GET请求，可以是null，因为GET提交参数会拼接在url后面
+              如果是POST请求，传入的就是请求参数
+                "username = 张飞&psw=123"
+      #+END_SRC
+   4. 第四部，注册监听
+      1. 在XMLHttpRequest对象的一个时间上注册监听器：
+         onreadystatechange
+      2. 一共有五个状态：(XMLHttp.readyState)
+         - 0状态：表示刚创建XMLHttpRequest对象，还未调用open()方法
+         - 1状态：表示刚调用open()方法，但是还没有调用send()方法发送请求
+         - 2状态：调用完了send()方法了，请求已经开始
+         - 3状态：服务器已经开始响应，但是不代表响应结束
+         - 4状态：服务器响应结束（通常我们只关心这个状态）
+      3. 获取xmlHttp对象的状态：
+         #+BEGIN_SRC java
+           var state = xmlHttp.readyState;//可能得到0，1，2，3，4
+         #+END_SRC
+      4. 获取服务器响应的状态码
+         #+BEGIN_SRC java
+           var status = xmlHttp.status;
+         #+END_SRC
+      5. 获取服务器响应的内容
+         #+BEGIN_SRC java
+           var data = xmlHttp.responseText;//得到服务器响应的文本格式的数据
+           xmlHttp.onreadystatechange = function(){
+               //服务器已经处理完请求之后
+               if(xmlHttp.readyState == 4){
+                   if(xmlHttp.status == 200){
+                       //获取响应数据
+                       var result = xmlHttp.responseText;
+                       result = xmlHttp.responseXML;
+                   }
+               }
+           }
+         #+END_SRC
+6. jQuery实现AJAX
+   1. load方法
+      1. $(selector).load(url,data,callback);
+         #+BEGIN_SRC
+           selector -- 选择器，将从服务器获取到的数据加载到指定的元素中
+           url -- 发送请求的URL地址
+           data -- 可选，向服务器发送的数据key/value数据 如：{"username":"张飞","psw":"123"}
+           callback -- 可选，load方法完成后所执行的函数
+         #+END_SRC
+         实例：
+         #+BEGIN_SRC js
+           $("#username_msg").load("<%=request.getContextPath()%>/AjaxCheckUsernameServlet",{"username":username});
+         #+END_SRC
+      2. $.get方法
+         #+BEGIN_SRC
+           %.get(url,[data],[callback]);
+           url -- 发送请求的URL地址
+           data -- 可选，向服务器发送的数据
+           callback -- 可选，请求成功后所执行的函数
+         #+END_SRC
+         实例：
+         #+BEGIN_SRC js
+           $.get("<%=request.getContextPath()%>/AjaxCheckUsernameServlet",{"username":username},function(result){
+             $("#username_msg").html("<font style='color:red>"+result+"</font>");
+           });
+         #+END_SRC
+   2. $ajax方法
+      #+BEGIN_SRC
+        $.ajax(url,[data],[async],[callback]);
+        url -- 发送请求的URL地址
+        data -- 可选，发送至服务器的key/value数据
+        async -- 可选，默认为true，表示异步交互
+        type -- 可选，请求方式，默认为"GET"
+        success -- 可选，请求成功后执行的函数，函数参数
+        result --- 服务器返回的数据
+      #+END_SRC
+      实例：
+      #+BEGIN_SRC js
+        $.ajax({
+          "url":"<%=request.getContextPath()%>/AjaxCheckUsernameServlet",
+          "data":{"username":username},
+          "async":"POST",
+          "success":function(result){
+            $("#username_msg").html("<font style='color:red'>"+result+"</font>")
+          },
+          error:function(){
+
+          }
+        });
+      #+END_SRC
+* 修改EasyMall
+1. 添加ajax用户名是否存在校验
+   1. 需求：
+      在用户鼠标离开用户输入框的时候发生ajax校验，校验的内容是访问数据库，查看数据库中是否包含用户名所输入的用户名称，如果存在就在span中提示用户名已存在，如果不存在提示用户名可以使用。
+   2. 代码实现：
+      1. 修改regist.jsp页面：在鼠标离开焦点事件中添加ajax校验
+         #+BEGIN_SRC js
+           //鼠标离开焦点事件
+           //文档就绪时间
+           $(function(){
+             //鼠标离开焦点事件
+             $("input[name='username']").blur(function() {
+               //非空校验操作，此处不需要重新写，调用就可以
+               //此处没有用户动态的传入的参数，只能手写参数名
+               formObj.checkNull("username", "用户名称不能为空");
+               //获取用户名框中的数据，作为ajax请求的参数传递。
+               var username = $("input[name='username']").val();
+               //如果用户名为空则不应该发生ajax校验
+               if($.trim(username)==""){
+                 return ;
+               }
+               //ajax的实现
+               //鼠标离开用户名输入框之后去数据库完成查重操作
+               $("#username_msg").load("<%=request.getContextPath()%>/AjaxCheckUsernameServlet",{"username":username});
+           });
+         #+END_SRC
+         #+BEGIN_SRC html
+           <tr>
+             <td class="tds">用户名：</td>
+             <td>
+               <input type="text" name="username" value="<%=request.getParameter("username")==null?"":request.getParameter("username")%>"/>
+               <span id="username_msg"></span>
+             </td>
+           </tr>
+         #+END_SRC
+      2. 创建AjaxCheckUsernameServlet：添加如下代码
+         #+BEGIN_SRC java
+           package com.easymall.servlet;
+
+           import com.easymall.utils.JDBCUtils;
+           import javax.servlet.ServletException;
+           import javax.servlet.http.HttpServlet;
+           import javax.servlet.http.HttpServletRequest;
+           import javax.servlet.http.HttpServletResponse;
+           import java.io.IOException;
+           import java.sql.Connection;
+           import java.sql.PreparedStatement;
+           import java.sql.ResultSet;
+
+           //ajax用户名查重检验
+           public class AjaxCheckUsernameServlet extends HttpServlet {
+               protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                   doGet(request, response);
+               }
+               protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                   //乱码处理
+                   request.setCharacterEncoding("utf-8");
+                   response.setContentType("text/html;charset=utf-8");
+                   //获取ajax中的请求参数
+                   String username = request.getParameter("username");
+                   //连接数据库查重
+                   Connection conn = null;
+                   PreparedStatement ps = null;
+                   ResultSet rs = null;
+                   try {
+                       conn = JDBCUtils.getConnection();
+                       ps = conn.prepareStatement("select * from user where username = ?");
+                       ps.setString(1,username);
+                       rs = ps.executeQuery();
+                       //如果rs.next()为true则标签用户名已经存在
+                       if (rs.next()) {
+                           //向response缓冲区写入数据，待服务器组成一定结果结构之后在打给浏览器
+                           response.getWriter().write("用户名已存在");
+                       }else{
+                           //返回一个用户名不存在提示到页面中
+                           response.getWriter().write("恭喜，用户名可以使用");
+                       }
+                   } catch (Exception e) {
+                       e.printStackTrace();
+                   }finally{
+                       JDBCUtils.close(conn,ps,rs);
+                   }
+               }
+           }
+
+         #+END_SRC
+2. 验证码实现
+   用户输入的数据可以由一段代码自动填写实现，所以添加上一个验证码访问自动注册用户，保证垃圾数据不进入数据库当中。
+   - 代码实现：
+      1. 修改regist.jsp页面：
+         图片在加载资源的时候是通过src访问的，所以src可以指向一个动态资源，这个动态资源生成一张图片。
+         #+BEGIN_SRC js
+           //修改验证码图片
+           $("#img").click(function(){
+             $(this).attr("src","<%=request.getContextPath()%>/ValidateServlet?time="+new Date().getTime());
+           });
+         #+END_SRC
+         #+BEGIN_SRC html
+           <tr>
+             <td class="tds">验证码：</td>
+             <td>
+               <input type="text" name="valistr" />
+               <img id="img" src="<%=request.getContextPath()%>/ValidateServlet" width="" height="" alt="" />
+               <span></span>>
+             </td>
+           </tr>
+         #+END_SRC
+      2. 创建ValidateServlet
+         #+BEGIN_SRC java
+           package com.easymall.servlet;
+
+           import com.easymall.utils.VerifyCode;
+
+           import javax.servlet.ServletException;
+           import javax.servlet.http.HttpServlet;
+           import javax.servlet.http.HttpServletRequest;
+           import javax.servlet.http.HttpServletResponse;
+           import java.io.IOException;
+           //生成验证码
+           public class ValidateServlet extends HttpServlet {
+               protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                   doGet(request, response);
+               }
+               protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                   //调用工具类产生一个验证码的图片
+                   VerifyCode vc = new VerifyCode();
+                   vc.drawImage(response.getOutputStream());
+                   //获取验证码的纯文本内容
+                   String code = vc.getCode();
+                   System.out.println(code);
+               }
+           }
+
+         #+END_SRC
+      3. 动态生成图片工具类
+         #+BEGIN_SRC java
+           package com.easymall.utils;
+
+           import java.awt.Color;
+           import java.awt.Font;
+           import java.awt.Graphics2D;
+           import java.awt.image.BufferedImage;
+           import java.io.OutputStream;
+           import java.util.Random;
+           import javax.imageio.ImageIO;
+           /**
+            ,* 动态生成图片
+            ,*/
+           public class VerifyCode {
+               // {"宋体", "华文楷体", "黑体", "华文新魏", "华文隶书", "微软雅黑", "楷体_GB2312"}
+               private static String[] fontNames = { "宋体", "华文楷体", "黑体", "微软雅黑",  "楷体_GB2312" };
+               // 可选字符
+               //"23456789abcdefghjkmnopqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ";
+               private static String codes = "23456789abcdefghjkmnopqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ";
+               // 背景色
+               private Color bgColor = new Color(255, 255, 255);
+               // 基数(一个文字所占的空间大小)
+               private int base = 30;
+               // 图像宽度
+               private int width = base * 4;
+               // 图像高度
+               private int height = base;
+               // 文字个数
+               private int len = 4;
+               // 设置字体大小
+               private int fontSize = 22;
+               // 验证码上的文本
+               private String text;
+
+               private BufferedImage img = null;
+               private Graphics2D g2 = null;
+
+               /**
+                ,* 生成验证码图片
+                ,*/
+               public void drawImage(OutputStream outputStream) {
+                   // 1.创建图片缓冲区对象, 并设置宽高和图像类型
+                   img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+                   // 2.得到绘制环境
+                   g2 = (Graphics2D) img.getGraphics();
+                   // 3.开始画图
+                   // 设置背景色
+                   g2.setColor(bgColor);
+                   g2.fillRect(0, 0, width, height);
+
+                   StringBuffer sb = new StringBuffer();// 用来装载验证码上的文本
+
+                   for (int i = 0; i < len; i++) {
+                       // 设置画笔颜色 -- 随机
+                       // g2.setColor(new Color(255, 0, 0));
+                       g2.setColor(new Color(getRandom(0, 150), getRandom(0, 150),getRandom(0, 150)));
+
+                       // 设置字体
+                       g2.setFont(new Font(fontNames[getRandom(0, fontNames.length)], Font.BOLD, fontSize));
+
+                       // 旋转文字(-45~+45)
+                       int theta = getRandom(-45, 45);
+                       g2.rotate(theta * Math.PI / 180, 7 + i * base, height - 8);
+
+                       // 写字
+                       String code = codes.charAt(getRandom(0, codes.length())) + "";
+                       g2.drawString(code, 7 + i * base, height - 8);
+                       sb.append(code);
+                       g2.rotate(-theta * Math.PI / 180, 7 + i * base, height - 8);
+                   }
+
+                   this.text = sb.toString();
+
+                   // 画干扰线
+                   for (int i = 0; i < len + 2; i++) {
+                       // 设置画笔颜色 -- 随机
+                       // g2.setColor(new Color(255, 0, 0));
+                       g2.setColor(new Color(getRandom(0, 150), getRandom(0, 150),
+                                             getRandom(0, 150)));
+                       g2.drawLine(getRandom(0, 120), getRandom(0, 30), getRandom(0, 120),
+                                   getRandom(0, 30));
+                   }
+                   // 4.保存图片到指定的输出流
+                   try {
+                       ImageIO.write(this.img, "JPEG", outputStream);
+                   } catch (Exception e) {
+                       e.printStackTrace();
+                       throw new RuntimeException(e);
+                   }finally{
+                       // 5.释放资源
+                       g2.dispose();
+                   }
+               }
+
+               /**
+                ,* 获取验证码字符串
+                ,* @return
+                ,*/
+               public String getCode() {
+                   return this.text;
+               }
+
+               /*
+                ,* 生成随机数的方法
+                ,*/
+               private static int getRandom(int start, int end) {
+                   Random random = new Random();
+                   return random.nextInt(end - start) + start;
+               }
+               /*
+                 public static void main(String[] args) throws Exception {
+                 VerifyCode vc = new VerifyCode();
+                 vc.drawImage(new FileOutputStream("d:/vc.jpg"));
+                 System.out.println("执行成功~!");
+                 }
+               ,*/
+           }
+
+         #+END_SRC
+* 会话技术 -- cookie
+1. 会话是什么？
+   为了完成某一个功能，浏览器和服务器建立连接之后，进行一次或多次请求和响应操作，这些请求和响应构成了浏览器和服务器之间的一次会话操作。
+2. 会话的作用：
+   会话主要是解决在浏览器请求中数据的共享问题而出现的奇数。
+
+   http是一个无状态协议。 -- 请求与请求之间是没有关联的。
+                        -- 请求与请求之间是没有关联的。
+                        -- 利用会话技术可以解决请求之间没有关联的问题。
+3. 会话技术 -- cookie
+   [[./Img/64.png]]
+   1. Cookie实现原理：
+      在第一次请求过后，由服务器发出一个携带set-Cookie响应头的响应，到达浏览器之后，会将其中的数据在浏览器端保存一份，以备下次发送请求时自动携带。在下一次发送请求时，请求中自动包含一个请求头cookie其中包含的值是set-cookie在浏览器端保存的值。
+   2. 浏览器请求服务器，服务器响应的结果数据会保留在浏览器端一份，这个数据可以通过cookie技术来使用。所以cookie技术是一门浏览器端的技术。
+4. 用户上次访问页面的时间
+   在set-cookie中保存的时间是用户本次的访问时间，这个访问时间会在下一次请求中包含，并且通过请求头cookie获取，展示在浏览器端。
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.cookie;
+
+     import java.io.IOException;
+     import java.util.Date;
+
+     //在浏览器中回显用户上次访问页面的时间
+     public class CookieDemo1 extends javax.servlet.http.HttpServlet {
+         protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+             doGet(request, response);
+         }
+         protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+             response.setContentType("text/html;charset=utf-8");
+             //产生一个时间值
+             Date date = new Date();
+             String time = date.toLocaleString();
+             //实现cookie
+             //1. 设置setcookie响应头
+             response.setHeader("set-cookie",time);
+             //2. 获取一个请求头cookie
+             String cookie = request.getHeader("cookie");
+             //用户是第一次访问当前页面，则在浏览器中没有cookie请求头，所以无法获取到上次访问的时间
+             if(cookie == null){
+                 response.getWriter().write("您是初次访问这个页面");
+             }else{
+                 //如果不是初次访问，则在cookie请求中会读取浏览器中保留的set-ciikie响应头中上次访问到时间
+                 response.getWriter().write("您上次访问本页面的时间是："+cookie);
+             }
+         }
+     }
+   #+END_SRC
+5. Cookie类型
+   Sun公司提供的Cookie类，便于开发者创建、使用cookie。
+   1. 创建cookie
+      #+BEGIN_SRC java
+        Cookie cookie = new Cookie(String name,String value);
+      #+END_SRC
+   2. 发送cookie到浏览器
+      #+BEGIN_SRC java
+        response.addCookie(cookie);
+      #+END_SRC
+   3. 设置最大值生命时长
+      #+BEGIN_SRC java
+        cookie.setMaxAge();//单位为秒
+      #+END_SRC
+      如果不设置cookie的最大生命时长，则cookie是一个会话级别的cookie，在浏览器关闭之后就会销毁，如果定义的了cookie的生命时长，则cookie会以文件的形式保存在本地磁盘一份(浏览器的临时文件目录)，在到达执行生命时长之后cookie会自动失效，销毁。
+   4. 设置有效路径
+      #+BEGIN_SRC java
+        cookie.setPath();
+      #+END_SRC
+      所谓有效路径就是cookie可以被问的路径级别。如果不指定cookie的有效路径级别，则只在当前资源的映射路径下有效。如果指定cookie的有效路径，则在指定路径及其级别下可以获取到当前cookie。
+      - 推荐在设置路径时加上一个/ 如果web应用的虚拟路径为缺省路径，则此时将会以/作为有效路径，可以避免缺省路径带来的不必要的错误。
+   5. 获取cookie
+      #+BEGIN_SRC java
+        Cookie[] cs = request.getCookies();
+      #+END_SRC
+      结果是一个cookie数据，将数组中的数据遍历使用。
+
+   6. 删除cookie
+      cookie中没有删除cookie的方法。
+      1. 创建一个名称要和删除的cookie名称相同的cookie，并且要设置这个cookie的path与要删除的相同，然后将新发送的cookie生命时长设置为0，这样就可以删除一个cookie。
+      2. 原因：
+         浏览器在判断两个cookie是否相同时，判断三个内容：
+         - Name
+         - Path
+         - domain
+         默认情况下每一个cookie的domain都相同的，所以只需要发送一个name和path与要删除的cookie相同的cookie到浏览器就可以完成删除操作了。
+         #+BEGIN_SRC java
+           package cn.commandoptionesc.cookie;
+
+           import javax.servlet.ServletException;
+           import javax.servlet.http.Cookie;
+           import javax.servlet.http.HttpServlet;
+           import javax.servlet.http.HttpServletRequest;
+           import javax.servlet.http.HttpServletResponse;
+           import java.io.IOException;
+           //删除cookie
+           public class CookieDemo4 extends HttpServlet {
+               protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                   doGet(request, response);
+               }
+               protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                   //创建一个name和path与要删除的完全一致的coolie，并且设置生命时长为0
+                   //创建cookie
+                   Cookie cookie = new Cookie("time","");
+                   //path一致
+                   cookie.setPath(request.getContextPath()+"/");
+                   //设置生命时长为0
+                   cookie.setMaxAge(0);
+                   //将cookie发送到浏览器
+                   response.addCookie(cookie);
+               }
+           }
+
+         #+END_SRC
+   7. cookieAPI
+      cookie.getName() --- 获取cookie的名称
+
+      cookie.getValue() --- 获取cookie中包含的值
+   8. cookie小细节
+      一个cookie标识一种信息。同一个cookie信息可以在多个浏览器中保存。一个浏览器中可以保存不同网站的cookie。
+6. Cookie类型使用cookie：
+   #+BEGIN_SRC java
+     package cn.commandoptionesc.cookie;
+
+     import javax.servlet.ServletException;
+     import javax.servlet.http.Cookie;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.net.URLDecoder;
+     import java.net.URLEncoder;
+     import java.text.SimpleDateFormat;
+     import java.util.Date;
+     //cookie生命时长、有效路径设置
+     public class CookieDemo3 extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             doGet(request, response);
+         }
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             response.setContentType("text/html;charset=utf-8");
+             Date date = new Date();
+             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+             String time = format.format(date);
+             //创建cookie
+             Cookie cookie = new Cookie("time", URLEncoder.encode(time,"UTF-8"));
+             //修改cookie生命时长、有效路径
+             //设置cookie生命时长（以秒值为单位
+             cookie.setMaxAge(60*60*24);
+             //设置路径
+             //修改为web应用的虚拟路径
+             //如果是缺省web应用，则在request.getContextPath中获取到一个空的返回值
+             //这个值不能作为setPath的值，需要在其后加上一个"/"，来表明是当前web应用的路径
+             cookie.setPath(request.getContextPath()+"/");
+             //发送cookie
+             response.addCookie(cookie);
+             //获取cookie
+             Cookie[] cs = request.getCookies();
+             Cookie timeC = null;
+             if(cs != null){
+                 for(Cookie c:cs){
+                     if("time".equals(c.getName())){
+                         timeC = c;
+                     }
+                 }
+             }
+             if(timeC != null){
+                 //timeC.getValue()获取cookie中的value时间值
+                 //通过URLDecoder.decode(String s,String enc)进行解码
+                 response.getWriter().write("您上次访问页面的时间为："+ URLDecoder.decode(timeC.getValue(),"UTF-8"));
+             }else{
+                 response.getWriter().write("您是初次访问本页面");
+             }
+         }
+     }
+   #+END_SRC
+7. 修改EasyMall：添加登陆功能-记住用户名
+   1. 添加login.jsp页面
+      1. 在课前资料中有login页面的全部资源，粘贴到webRoot目录下。
+      2. 修改login.html为login.jsp页面
+      3. 删除login.html
+   2. 添加LoginServlet：
+      代码如下：
+      #+BEGIN_SRC java
+        package com.easymall.servlet;
+
+        import com.easymall.utils.JDBCUtils;
+
+        import javax.servlet.ServletException;
+        import javax.servlet.http.Cookie;
+        import javax.servlet.http.HttpServlet;
+        import javax.servlet.http.HttpServletRequest;
+        import javax.servlet.http.HttpServletResponse;
+        import java.io.IOException;
+        import java.sql.Connection;
+        import java.sql.PreparedStatement;
+        import java.sql.ResultSet;
+        import java.sql.SQLException;
+
+        //登陆功能
+        public class LoginServlet extends HttpServlet {
+            protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                doGet(request,response);
+            }
+            protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                //1. 乱码处理
+                request.setCharacterEncoding("utf-8");
+                response.setContentType("text/html;charset=UTF-8");
+                //2. 获取用户信息
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                String remname = request.getParameter("remname");
+                //如果remname值为true则要求记住用户名
+                if("true".equals(remname)){
+                    //为true要求保存用户名
+                    Cookie cookie = new Cookie("remname",username);
+                    cookie.setMaxAge(60*60*24*30);
+                    cookie.setPath(request.getContextPath()+"/");
+                    response.addCookie(cookie);
+                }else{
+                    //如果不为true则应该销毁cookie
+                    Cookie cookie = new Cookie("remname","");
+                    cookie.setMaxAge(0);
+                    cookie.setPath(request.getContextPath()+"/");
+                    response.addCookie(cookie);
+                }
+                //3. 访问数据库，比对用户信息
+                Connection conn = null;
+                PreparedStatement ps = null;
+                ResultSet rs = null;
+                try {
+                    conn = JDBCUtils.getConnection();
+                    ps = conn.prepareStatement("select * from user where username = ? and password = ?");
+                    ps.setString(1,username);
+                    ps.setString(2,password);
+                    rs = ps.executeQuery();
+                    if(rs.next()){
+                        //登陆操作
+                        //TODO:session
+                        //4. 回到首页
+                        response.sendRedirect("http://www.easymall.com");
+                    }else{
+                        //如果不一致则在页面中提示用户名或密码不正确
+                        request.setAttribute("msg","用户名或者密码不正确");
+                        request.getRequestDispatcher("/login.jsp").forward(request,response);
+                        return;
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }finally{
+                    JDBCUtils.close(conn,ps,rs);
+                }
+            }
+        }
+
+      #+END_SRC
+   3. 修改login.jsp页面
+      1. 修改form标签
+         #+BEGIN_SRC html
+           <form action="<%=request.getContextPath()%>/LoginServlet" method="POST">
+         #+END_SRC
+      2. 添加错误信息回显
+         #+BEGIN_SRC html
+           <tr>
+             <td class="tds" colspan=2 style="color:red;text-align:center">
+               <%=request.getAttribute("msg")==null?"":request.getAttribute("msg")%>
+           </td>
+           </tr>
+         #+END_SRC
+      3. table中添加
+         #+BEGIN_SRC
+           <%
+               Cookie remnameC = null;
+               Cookie[] cs = request.getCookies();
+               if(cd != null){
+                   for(Cookie c:cs){
+                       if("remname".equals(c.getName())){
+                           remnameC = c;
+                       }
+                   }
+               }
+               String username = "";
+               if(remnameC != null){
+               username = URLDecoder.decode(remnameC.getValue(),"utf-8");
+               }
+           %>
+         #+END_SRC
+      4. 在input[name='username']标签中添加
+         #+BEGIN_SRC html
+           <input type="text" name="username" value="<%=username%>"/>
+         #+END_SRC
+   4. 回显选中记住用户名的对勾
+      在cookie中如果有用户的登陆名称，则代表用户要求记住用户名，这时应该将记住用户名选框的对象勾选上。
+      #+BEGIN_SRC html
+        <input type="checkbox" name="remname" value="true" <%=username==""?"":"checked='checked'"%>/>
+        记住用户名
+      #+END_SRC
+* 会话技术 -- session
+  1. 在浏览器端存储数据的弊端:
+     如果一个数据非常重要这个数据存储在浏览器端可以被任何一个用户查看到，无法保证当前数据的安全性，所以可以将数据由浏览器保存转向让服务器保存数据。
+  2. session实现原理：
+     1. 在浏览器访问服务器的时候，会在服务器内部创建一个与当前浏览器相关的session对象，在本次会话中如果用户多次请求服务器，都是操作的同一个session对象。不同浏览器会拥有各自的session对象。
+     2. session的实现原理是通过一个JSESSIONID的cookie实现的。
+  3. session的使用
+     1. request.getSession(); //如果服务器中已有浏览器对应的session，则这个方法会直接将session对象获取到拿来使用，如果服务器中没有对应的session，则这个方法会创建一个新的session对象使用。
+     2. request.getSession(true);//如果服务器中已有浏览器对应的session，则这个方法会直接将session对象获取到拿来使用，如果服务器中没有对应的session，则这个方法会创建一个新的session对象使用。
+     3. request.getSession(false);//如果服务器中没有浏览器对应的session，则会返回一个null的结果，如果有则拿过来使用。
+  4. session功能一:域对象
+     在一个对象身上有一个可以被看见的范围，在这个范围内利用对象身上的map实现资源的共享，这样的对象就称之为域对象。
+     1. 操作方法:
+        #+BEGIN_SRC java
+          setAttribute(String name,Object obj);
+          getAttribute(String name);
+          removeAttribute(String name);
+          getAttributeNames();
+        #+END_SRC
+     2. 生命周期
+        request.getSession()方法调用的时候session对象创建。
+        - session对象的销毁:
+          1. 超时死亡:session在默认情况下回会在服务器中存储30分钟，超过30会被 服务器认为是一个无效session而销毁。超时时间可以在web.xml中配置一 个<session-config>标签来指定。
+          2. 自杀:当调用session.invalidate();会主动将session对象释放。
+          3. 意外身亡:在非常关闭状态下，session会直接销毁。如果服务器正常关 闭，则session对象会序列化到磁盘上成为一个文件，这个过程称之为钝化。在服务器下次启动的时候再将这个文件，读取到服务器当中，这个过程称之为活化。
+     3. 作用范围
+        当前会话范围内。
+     4. 主要功能
+        当前会话范围内实现资源共享。
+  5. session案例：购物车
+     1. 需求:创建一个购物车的Servlet，和一个结账的Servlet，使两者可以实现购物车、购买商品结账的需求.
+     2. 实现内容:在本次会话范围内实现用户购买商品数据的共享。
+        代码实现:
+        #+BEGIN_SRC java
+        #+END_SRC
+  6. EasyMall页面功能
+     1. 登陆功能的实现：
+        1. 修改login.jsp页面：在<div id="content">中添加如下代码
+        2. 修改LoginServlet
+     2. 注销功能能实现：
+        修改head.jsp页面
+        创建注销Servlet --- LogOutServlet
+     3. 验证码的实现：
+        1. request中存储验证码仅在当前request中有效，在下一次的去请求中会失效。保存数据的范围太小。
+        2. ServletContext存储验证码,会在整个web应用的范围内，如果多个用户同时存储多个不同的验证码在web应用中，那么只有最后一个验证码会保存下来，会导致其他用户看到的图片验证码是真实验证码是不匹配。保存数据的范围过大。
+        3. session将验证码存储在当前会话的范围内，可以在多次请求中使用，符合验证码的使用范围，而且session在多个浏览器直接也互补影响。
+           1. 修改RegistServlet；在//TODO:session位置添加如下代码
+           2. 修改ValidateServlet:
+** session特点：
+1. cookie特点：
+   cookie是浏览器端的技术，保存在浏览器的数据可能会被其他人读取，造成数据丢失，数据安全性较差。cookie可以存储长期保存的数据。cookie适合存储安全性要求较低，而存储时间较长的数据。
+2. session服务器端的技术，数据保存在服务器端安全性较高，普通用户无法读取服务器上的数据。session不善于长期存储数据，如果存储数据时间过长，会导致服务器长时间存储一个无人使用的对象，造成内存的浪费。session适合存储安全性较高，而存储时间较短的数据。
