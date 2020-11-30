@@ -19,20 +19,36 @@
         <servlet-name>CookieDemo4</servlet-name>
         <servlet-class>cn.commandoptionesc.cookie.CookieDemo4</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuyServlet</servlet-name>
+        <servlet-class>cn.commandoptionesc.session.BuyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PayServlet</servlet-name>
+        <servlet-class>cn.commandoptionesc.session.PayServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CookieDemo1</servlet-name>
-        <url-pattern>/iDay13cookiesession/CookieDemo1</url-pattern>
+        <url-pattern>/servlet/CookieDemo1</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CookieDemo2</servlet-name>
-        <url-pattern>/iDay13cookiesession/CookieDemo2</url-pattern>
+        <url-pattern>/servlet/CookieDemo2</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CookieDemo3</servlet-name>
-        <url-pattern>/iDay13cookiesession/CookieDemo3</url-pattern>
+        <url-pattern>/servlet/CookieDemo3</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CookieDemo4</servlet-name>
-        <url-pattern>/iDay13cookiesession/CookieDemo4</url-pattern>
+        <url-pattern>/servlet/CookieDemo4</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyServlet</servlet-name>
+        <url-pattern>/servlet/BuyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PayServlet</servlet-name>
+        <url-pattern>/servlet/PayServlet</url-pattern>
     </servlet-mapping>
 </web-app>

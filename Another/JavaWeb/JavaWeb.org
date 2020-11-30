@@ -8577,6 +8577,7 @@ ServletContext就是一个代表web应用的对象。
    #+END_SRC
 5. Cookie类型
    Sun公司提供的Cookie类，便于开发者创建、使用cookie。
+
    1. 创建cookie
       #+BEGIN_SRC java
         Cookie cookie = new Cookie(String name,String value);
@@ -8823,6 +8824,7 @@ ServletContext就是一个代表web应用的对象。
         记住用户名
       #+END_SRC
 * 会话技术 -- session
+  [[./Img/65.png]]
   1. 在浏览器端存储数据的弊端:
      如果一个数据非常重要这个数据存储在浏览器端可以被任何一个用户查看到，无法保证当前数据的安全性，所以可以将数据由浏览器保存转向让服务器保存数据。
   2. session实现原理：
