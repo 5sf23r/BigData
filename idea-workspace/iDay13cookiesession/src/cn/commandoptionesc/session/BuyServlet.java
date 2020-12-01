@@ -14,7 +14,7 @@ public class BuyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         String prod = request.getParameter("prod");
-        //windows系统
+        //中文系统乱码
         //prod = new String(prod.getBytes("iso8859-1"), "utf-8");
         prod = new String(prod.getBytes());
         //向session域中添加数据 --- 在当前会话范围内实现商品数据的共享

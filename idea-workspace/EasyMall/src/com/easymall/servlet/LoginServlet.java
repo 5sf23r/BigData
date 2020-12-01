@@ -3,10 +3,7 @@ package com.easymall.servlet;
 import com.easymall.utils.JDBCUtils;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.Connection;
@@ -53,7 +50,10 @@ public class LoginServlet extends HttpServlet {
             rs = ps.executeQuery();
             if(rs.next()){
                 //登陆操作
-                //TODO:session
+                //如果一致则保存用户登录信息
+                //将用户的登陆信息登陆到session当中
+                HttpSession session = request.getSession();
+                session.setAttribute("username",username);
                 //4. 回到首页
                 response.sendRedirect("http://www.easymall.com");
             }else{

@@ -13,8 +13,21 @@
 <div id="common_head">
     <div id="line1">
         <div id="content">
+            <!--如果有session且session中包含username域属性则证明用户已经登录-->
+            <!--可以从session域中取出用户名-->
+            <%
+                if(request.getSession(false)!=null && request.getSession().getAttribute("username") != null){
+            %>
+            <a href="#">欢迎&nbsp;<%=request.getSession().getAttribute("username")%>&nbsp;回来</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="<%=request.getContextPath()%>/LogoutServlet">注销</a>
+            <%
+                }else{
+            %>
             <a href="<%=request.getContextPath()%>/login.jsp">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
             <a href="<%=request.getContextPath()%>/regist.jsp">注册</a>
+            <%
+                }
+            %>
         </div>
     </div>
     <div id="line2">

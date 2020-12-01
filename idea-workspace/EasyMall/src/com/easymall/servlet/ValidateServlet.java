@@ -21,6 +21,8 @@ public class ValidateServlet extends HttpServlet {
         vc.drawImage(response.getOutputStream());
         //获取验证码的纯文本内容
         String code = vc.getCode();
+        //将创建出来的验证码加入到session域中
+        request.getSession().setAttribute("code",code);
         System.out.println(code);
     }
 }

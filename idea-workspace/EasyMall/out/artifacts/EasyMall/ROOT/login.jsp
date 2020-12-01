@@ -1,11 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: coe
-  Date: 2020/11/24
-  Time: 10:13 AM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page language="java" import="java.util.*"   pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLDecoder" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -29,7 +24,7 @@
             }
             String username = "";
             if(remnameC != null){
-                username = remnameC.getValue();
+                username = URLDecoder.decode(remnameC.getValue(),"utf-8");
             }
         %>
         <tr>
@@ -47,7 +42,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="checkbox" name="remname" value="true"/>记住用户名
+                <input type="checkbox" name="remname" value="true" <%= username==""?"":"checked='checked'"%>/>记住用户名
                 <input type="checkbox" name="autologin" value="true"/>30天内自动登陆
             </td>
         </tr>

@@ -2,10 +2,13 @@ package com.easymall.servlet;
 
 import com.easymall.utils.JDBCUtils;
 import com.easymall.utils.WebUtils;
+import com.mysql.cj.Session;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -88,8 +91,12 @@ public class RegistServlet extends HttpServlet {
             return;
         }
         //验证码校验
-        //TODO:session
-
+        String code = (String) request.getSession().getAttribute("code");
+        if(!valistr.equalsIgnoreCase(code)){
+            request.setAttribute("msg","验证码错误");
+            request.getRequestDispatcher("/regist.jsp").forward(request,response);
+            return;
+        }
         //完成注册
         //用户名存在校验
         Connection conn = null;

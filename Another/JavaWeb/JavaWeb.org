@@ -120,7 +120,17 @@
 - [[#修改easymall][修改EasyMall]]
 - [[#会话技术----cookie][会话技术 -- cookie]]
 - [[#会话技术----session][会话技术 -- session]]
-  - [[#session特点][session特点：]]
+  - [[#cookie和session特点][cookie和session特点：]]
+- [[#jsp][JSP]]
+  - [[#1-概述][1. 概述]]
+  - [[#2-jsp语法][2. JSP语法]]
+  - [[#3-四大作用域][3. 四大作用域]]
+  - [[#4-jsp标签技术][4. JSP标签技术]]
+  - [[#5-jstl标签库概述][5. JSTL标签库概述]]
+- [[#el表达式][EL表达式]]
+- [[#javaee开发模式][javaEE开发模式]]
+- [[#重构easymall项目][重构EasyMall项目]]
+- [[#修改easymall页面][修改EasyMall页面]]
 #+END_QUOTE
 
 * Web概述
@@ -8857,22 +8867,971 @@ ServletContext就是一个代表web应用的对象。
      1. 需求:创建一个购物车的Servlet，和一个结账的Servlet，使两者可以实现购物车、购买商品结账的需求.
      2. 实现内容:在本次会话范围内实现用户购买商品数据的共享。
         代码实现:
+        #+BEGIN_SRC html
+          <%@ page pageEncoding="UTF-8" language="java" import="java.util.*" session="false"%>
+          <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+          <html>
+            <head>
+              <title>$Title$</title>
+            </head>
+            <body>
+              <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=皮鞋">皮鞋</a>
+              <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=牙刷">牙刷</a>
+              <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=毛巾">毛巾</a>
+              <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=篮球">篮球</a>
+              <a href="<%=request.getContextPath()%>/servlet/PayServlet">付款</a>
+            </body>
+          </html>
+        #+END_SRC
         #+BEGIN_SRC java
+          package cn.commandoptionesc.session;
+
+          import javax.servlet.ServletException;
+          import javax.servlet.http.*;
+          import java.io.IOException;
+          import java.nio.charset.StandardCharsets;
+
+          //购物车servlet
+          //商品添加的操作
+          public class BuyServlet extends HttpServlet {
+              protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                  doGet(request, response);
+              }
+              protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                  response.setContentType("text/html;charset=utf-8");
+                  String prod = request.getParameter("prod");
+                  //中文系统乱码
+                  //prod = new String(prod.getBytes("iso8859-1"), "utf-8");
+                  prod = new String(prod.getBytes());
+                  //向session域中添加数据 --- 在当前会话范围内实现商品数据的共享
+                  //创建session
+                  HttpSession session = request.getSession();
+                  session.setAttribute("prod",prod);
+                  //创建一个JSESSION的cookie，将session保存在本地，使浏览器多次关闭打开都能获取到同一个session
+                  Cookie cookie = new Cookie("JSESSIONID",session.getId());
+                  cookie.setMaxAge(60*60*24);
+                  cookie.setPath(request.getContextPath()+"/");
+                  response.addCookie(cookie);
+
+                  //向页面显示商品添加信息
+                  response.getWriter().write("已经将商品「"+prod+"」加入购物车");
+              }
+          }
+        #+END_SRC
+        #+BEGIN_SRC java
+          package cn.commandoptionesc.session;
+
+          import javax.servlet.ServletException;
+          import javax.servlet.http.HttpServlet;
+          import javax.servlet.http.HttpServletRequest;
+          import javax.servlet.http.HttpServletResponse;
+          import javax.servlet.http.HttpSession;
+          import java.io.IOException;
+
+          public class PayServlet extends HttpServlet {
+              protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                  doGet(request, response);
+              }
+              protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                  response.setContentType("text/html;charset=utf-8");
+                  //获取session对象
+                  HttpSession session = request.getSession();
+                  //获取session域中的属性
+                  String prod = (String)session.getAttribute("prod");
+                  if(prod == null){
+                      response.getWriter().write("您还未选择任何商品");
+                  }else{
+                      //向浏览器提示付款信息
+                      response.getWriter().write("已付款商品「"+prod+"」,价格￥10000000");
+                  }
+              }
+          }
         #+END_SRC
   6. EasyMall页面功能
      1. 登陆功能的实现：
         1. 修改login.jsp页面：在<div id="content">中添加如下代码
+           #+BEGIN_SRC html
+             <%@ page language="java" import="java.util.*"   pageEncoding="UTF-8"%>
+             <%@ page import="java.net.URLDecoder" %>
+             <!DOCTYPE HTML>
+             <html>
+               <head>
+                 <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+                 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css"/>
+                 <title>EasyMall欢迎您登陆</title>
+               </head>
+               <body>
+                 <h1>欢迎登陆EasyMall</h1>
+                 <form action="<%=request.getContextPath()%>/LoginServlet" method="POST">
+                   <table>
+                     <%
+                       Cookie remnameC = null;
+                       Cookie[] cs = request.getCookies();
+                       if(cs != null){
+                       for(Cookie c:cs){
+                       if("remname".equals(c.getName())){
+                       remnameC = c;
+                       }
+                       }
+                       }
+                       String username = "";
+                       if(remnameC != null){
+                       username = URLDecoder.decode(remnameC.getValue(),"utf-8");
+                       }
+                       %>
+                     <tr>
+                       <td class="tds" colspan=2 style="color:red;text-align:center">
+                         <%=request.getAttribute("msg")==null?"":request.getAttribute("msg")%>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td class="tdx">用户名：</td>
+                       <td><input type="text" name="username" value="<%=username%>"/></td>
+                     </tr>
+                     <tr>
+                       <td class="tdx">密&nbsp;&nbsp; 码：</td>
+                       <td><input type="password" name="password"/></td>
+                     </tr>
+                     <tr>
+                       <td colspan="2">
+                         <input type="checkbox" name="remname" value="true" <%= username==""?"":"checked='checked'"%>/>记住用户名
+                         <input type="checkbox" name="autologin" value="true"/>30天内自动登陆
+                       </td>
+                     </tr>
+                     <tr>
+                       <td colspan="2" style="text-align:center">
+                         <input type="submit" value="登 陆"/>
+                       </td>
+                     </tr>
+                   </table>
+                 </form>
+               </body>
+             </html>
+           #+END_SRC
         2. 修改LoginServlet
+           #+BEGIN_SRC java
+             package com.easymall.servlet;
+
+             import com.easymall.utils.JDBCUtils;
+             import javax.servlet.ServletException;
+             import javax.servlet.http.*;
+             import java.io.IOException;
+             import java.net.URLEncoder;
+             import java.sql.Connection;
+             import java.sql.PreparedStatement;
+             import java.sql.ResultSet;
+             import java.sql.SQLException;
+             //登陆功能
+             public class LoginServlet extends HttpServlet {
+                 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                     doGet(request,response);
+                 }
+                 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                     //1. 乱码处理
+                     request.setCharacterEncoding("utf-8");
+                     response.setContentType("text/html;charset=UTF-8");
+                     //2. 获取用户信息
+                     String username = request.getParameter("username");
+                     String password = request.getParameter("password");
+                     String remname = request.getParameter("remname");
+                     //如果remname值为true则要求记住用户名
+                     if("true".equals(remname)){
+                         //为true要求保存用户名
+                         Cookie cookie = new Cookie("remname", URLEncoder.encode(username,"utf-8"));
+                         cookie.setMaxAge(60*60*24*30);
+                         cookie.setPath(request.getContextPath()+"/");
+                         response.addCookie(cookie);
+                     }else{
+                         //如果不为true则应该销毁cookie
+                         Cookie cookie = new Cookie("remname","");
+                         cookie.setMaxAge(0);
+                         cookie.setPath(request.getContextPath()+"/");
+                         response.addCookie(cookie);
+                     }
+                     //3. 访问数据库，比对用户信息
+                     Connection conn = null;
+                     PreparedStatement ps = null;
+                     ResultSet rs = null;
+                     try {
+                         conn = JDBCUtils.getConnection();
+                         ps = conn.prepareStatement("select * from user where username = ? and password = ?");
+                         ps.setString(1,username);
+                         ps.setString(2,password);
+                         rs = ps.executeQuery();
+                         if(rs.next()){
+                             //登陆操作
+                             //如果一致则保存用户登录信息
+                             //将用户的登陆信息登陆到session当中
+                             HttpSession session = request.getSession();
+                             session.setAttribute("username",username);
+                             //4. 回到首页
+                             response.sendRedirect("http://www.easymall.com");
+                         }else{
+                             //如果不一致则在页面中提示用户名或密码不正确
+                             request.setAttribute("msg","用户名或者密码不正确");
+                             request.getRequestDispatcher("/login.jsp").forward(request,response);
+                             return;
+                         }
+                     } catch (SQLException e) {
+                         e.printStackTrace();
+                     }finally{
+                         JDBCUtils.close(conn,ps,rs);
+                     }
+                 }
+             }
+
+           #+END_SRC
      2. 注销功能能实现：
-        修改head.jsp页面
+        修改_head.jsp页面
+        #+BEGIN_SRC html
+          <div id="common_head">
+            <div id="line1">
+              <div id="content">
+                <!--如果有session且session中包含username域属性则证明用户已经登录-->
+                <!--可以从session域中取出用户名-->
+                <%
+                  if(request.getSession(false)!=null && request.getSession().getAttribute("username") != null){
+                  %>
+                <a href="#">欢迎&nbsp;<%=request.getSession().getAttribute("username")%>&nbsp;回来</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="<%=request.getContextPath()%>/LogoutServlet">注销</a>
+                <%
+                  }else{
+                  %>
+                <a href="<%=request.getContextPath()%>/login.jsp">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="<%=request.getContextPath()%>/regist.jsp">注册</a>
+                <%
+                  }
+                  %>
+              </div>
+            </div>
+          </dic>
+        #+END_SRC
         创建注销Servlet --- LogOutServlet
+        #+BEGIN_SRC java
+          package com.easymall.servlet;
+
+          import javax.servlet.ServletException;
+          import javax.servlet.http.HttpServlet;
+          import javax.servlet.http.HttpServletRequest;
+          import javax.servlet.http.HttpServletResponse;
+          import java.io.IOException;
+          //注销用户登录状态
+          public class LogoutServlet extends HttpServlet {
+              protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                  doGet(request, response);
+              }
+              protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                  //注销用户登陆状态可以将session删除，删除session后其中的属性值也会注销
+                  //实现用户注销的功能
+                  request.getSession(false).invalidate();
+                  response.sendRedirect("http://www.easymall.com");
+              }
+          }
+        #+END_SRC
      3. 验证码的实现：
         1. request中存储验证码仅在当前request中有效，在下一次的去请求中会失效。保存数据的范围太小。
         2. ServletContext存储验证码,会在整个web应用的范围内，如果多个用户同时存储多个不同的验证码在web应用中，那么只有最后一个验证码会保存下来，会导致其他用户看到的图片验证码是真实验证码是不匹配。保存数据的范围过大。
         3. session将验证码存储在当前会话的范围内，可以在多次请求中使用，符合验证码的使用范围，而且session在多个浏览器直接也互补影响。
            1. 修改RegistServlet；在//TODO:session位置添加如下代码
+              #+BEGIN_SRC java
+                //验证码校验
+                String code = (String) request.getSession().getAttribute("code");
+                if(!valistr.equalsIgnoreCase(code)){
+                    request.setAttribute("msg","验证码错误");
+                    request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                    return;
+                }
+              #+END_SRC
            2. 修改ValidateServlet:
-** session特点：
+              #+BEGIN_SRC java
+                package com.easymall.servlet;
+
+                import com.easymall.utils.VerifyCode;
+
+                import javax.servlet.ServletException;
+                import javax.servlet.http.HttpServlet;
+                import javax.servlet.http.HttpServletRequest;
+                import javax.servlet.http.HttpServletResponse;
+                import java.io.IOException;
+                //生成验证码
+                public class ValidateServlet extends HttpServlet {
+                    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                        doGet(request, response);
+                    }
+                    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                        //控制缓存，防止浏览器使用图片
+                        response.setDateHeader("Expires",-1);
+                        response.setHeader("Cache-control","no-cache");
+                        //调用工具类产生一个验证码的图片
+                        VerifyCode vc = new VerifyCode();
+                        vc.drawImage(response.getOutputStream());
+                        //获取验证码的纯文本内容
+                        String code = vc.getCode();
+                        //将创建出来的验证码加入到session域中
+                        request.getSession().setAttribute("code",code);
+                        System.out.println(code);
+                    }
+                }
+
+              #+END_SRC
+** cookie和session特点：
 1. cookie特点：
    cookie是浏览器端的技术，保存在浏览器的数据可能会被其他人读取，造成数据丢失，数据安全性较差。cookie可以存储长期保存的数据。cookie适合存储安全性要求较低，而存储时间较长的数据。
 2. session服务器端的技术，数据保存在服务器端安全性较高，普通用户无法读取服务器上的数据。session不善于长期存储数据，如果存储数据时间过长，会导致服务器长时间存储一个无人使用的对象，造成内存的浪费。session适合存储安全性较高，而存储时间较短的数据。
+* JSP
+** 1. 概述
+1. JSP概述 由于在servlet中书写前台页面代码非常复杂，于是Sun提出一门新的技术--jsp，将 所有的页面内容重新书写到一个文件中，在这个文件中还可以书写java语句，这 样的一个文件就称之为一个jsp文件。 在jsp页面内开发HTML代码十分便利，还可以在其中嵌入java语句，使开发变得非 常简洁，直接在页面中就完成了页面构建和代码逻辑的全部内容。
+2. JSP原理 在jsp页面被初次访问的时候，会被jsp翻译引擎翻译成一个servlet文件，这个文件 是一个普通java文件，继承了一个具有servlet接口的类，所以当前文件才会成为 一个servlet文件。
+   实验:寻找如下文件 --> 在[tomcat]/work/localhost/day14/index_jsp.java文件
+** 2. JSP语法
+1. 语法
+   1. 模板元素
+      jsp页面中的HTML内容会在浏览器发生访问的时候，被jsp翻译引擎翻译为 Servlet文件的模板元素。
+      #+BEGIN_SRC html
+        <body>
+          <div>aaaa</div>
+        </body>
+      #+END_SRC
+      #+BEGIN_SRC java
+        out.write("<body>\r\n");
+        out.write("  <div>aaaa</div>\r\n");
+        out.write("<body>\r\n");
+      #+END_SRC
+      其实就是将HTML内容使用out.write()输出.
+   2. 脚本表达式
+      语法:<%= 脚本表达式(具有返回值的表达式，或一个直接量) %> 在jsp页面被访问的时候，jsp翻译引擎将脚本表达式中的内容翻译为了原封不动 的表达式结果值。
+      #+BEGIN_SRC html
+        <h3>脚本表达式</h3>
+        <%=request.getContextPath()%>
+      #+END_SRC
+      #+BEGIN_SRC java
+        out.write("   ");
+        out.print(request.getContextPath());
+        out.write("\r\n");
+      #+END_SRC
+      翻译后的结果值直接放在servlet文件的对应位置，并使用out.print()输出表达式的值。
+   3. 脚本片段
+      语法:<% 脚本片段(java语句) %> ；在JSP页面被访问的时候，其中脚本片段中的内容会原封不动的放在翻译后的 servlet文件制定位置。
+      #+BEGIN_SRC html
+        <h3>脚本表达式</h3>
+        <%=request.getContextPath()%>
+        <h3>脚本片段</h3>
+        <%
+          for(int i = 0;i<5;i++){
+                           %>
+          <font color='red'>I am li shuai;</font>
+          <%
+            }
+            %>
+      #+END_SRC
+      #+BEGIN_SRC java
+        for(int i=0;i<5;i++){
+            out.write("\r\n");
+            out.write("\t\t\r\n");
+            out.write("\t\t<font color='red'>I am li shuai;</font>\r\n");
+            out.write("\t\t\r\n");
+            out.write("\t\t");
+        }
+      #+END_SRC
+      在jsp页面中脚本片段可以分开书写，分开书写脚不片段必须要保证java语法完整，因为在jsp页面中的java语句会被翻译到servlet文件中，需要保证java语句在servlet文件中的完整性。
+   4. JSP声明
+      语法:<%! JSP声明 %> ；在jsp页面被访问的时候，其中的jsp声明会被jsp翻译引擎翻译为当前servlet的成 员变量，成员方法，静态代码块等内容。被翻译后的成员内容都会出现在类内方法外，作为成员内容使用。
+      #+BEGIN_SRC html
+        <h3>JSP声明</h3>
+        <%! int i=0;%>
+        <%! public void m(){}%>
+        <%!static{}%>
+      #+END_SRC
+      #+BEGIN_SRC java
+        public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase implements org.apache.jasper.runtime.JspSourceDependent{
+            int i = 0;
+            public void m(){}
+            static{}
+        }
+      #+END_SRC
+   5. JSP注释
+
+      | <%//abc%>   | 被翻译成java注释内容，由于是注释内容所以不会输出任何内容                                 |
+      | <!-- def--> | HTML注释被翻译成模板元素，由于是HTML注释，所以不会输出任何内容，但是仍然会出现在页面中。 |
+      | <%--ghi--%> | 在翻译过程中直接被抛弃，不会出现在翻译后的servlet文件中。                                |
+   6. JSP指令
+      - 语法:<%@指令名称 %>
+      - 指令
+        指令本身不会产生任何的输出内容，是用来控制jsp翻译引擎如何来翻译jsp页面 的。
+        + 指令内容:
+          | page    | <%@page%>    | 用户指定当前页面依赖哪些配置翻译页面。 |
+          | include | <%@include%> | 在当前jsp页面引入其他jsp页面           |
+          | taglib  | <%@taglib%>  | 标签技术                               |
+          + page指令：
+            1. language="java"
+               当前JSP使用的开发语言
+            2. extends="package.class"
+               当前jsp翻译成servlet后要继承的类，注意此值必须是一个servlet的子类，一般情况 下不要改
+            3. import="{package.class | package.*}, ..."
+               导入需要使用到的包 java.lang.*;javax.servlet.*;javax.servlet.jsp. *;javax.servlet.http.*;
+            4. session="true | false"
+               用来指定当前页面是否使用session，如果设置为true，则翻译过来的servlet中将会 有对session对象的引用，于是可以直接在jsp中使用session隐式对象。但是这将导 致一旦访问jsp就会调用request.getSession()方法，可能导致不必要的空间浪费。如 果确定jsp中不需要session可以设为false
+            5. [ buffer="none | 8kb | sizekb" ]
+               out隐式对象所使用的缓冲区的大小
+            6. [autoFlush="true | false"]
+               out隐式对象是否自动刷新缓冲区，默认为true，不需要更改
+            7. [ isThreadSafe="true | false" ]
+               翻译过来的servlet是否实现SingleThreadModel
+            8. [ errorPage="relative_url" ]
+               如果页面出错，将要跳转到的页面，除了在jsp中使用此属性指定错误页面外也可以在web.xml中配置整个web应用的错误页面，如果两个都设置则jsp中的此属性起作用
+               #+BEGIN_SRC html
+                 <error-page>
+                     <error-code>404</error-code>
+                     <location>/error/404.jsp</location>
+                 </error-page>
+                 <error-page>
+                     <error-code>500</error-code>
+                     <location>/error/500.jsp</location>
+                 </error-page>
+               #+END_SRC
+            9. *[ isErrorPage="true | false" ]*
+               如果设置此属性为true,翻译过来的servlet中将含有Exception隐式对象,其中封装的就 是上一个页面中抛出的异常对象
+            10. *[ contentType="mimeType [ ;charset=characterSet ]" | "text/html ; charset=ISO-8859-1" ]*
+                和jsp乱码相关的指令,用来指定jsp输出时,设置的Content -Type响应头用来指定浏览 器打开的编码
+            11. /[ *pageEncoding="characterbSet | ISO-8859-1"* ]/
+                服务器翻译jsp时使用的编码集.如果向防止jsp乱码,应该保证文件的保存编码和jsp翻 译成servlet用的编码以及输出到浏览器后浏览器打开的编码一致.此属性一旦设置好, 翻译引擎会间接帮我们设置content-type属性.
+          + include指令
+            在当前的jsp页面中引入其他的jsp页面，将组合之后的页面输出在浏览器。 <%@include file=""%>
+          + taglib指令
+            标签技术 <%@taglib %>
+2. 九大隐式对象
+   在jsp翻译成一个servlet后，其中都可以包含9大隐式对象，其中Exception、session 需要手动开启。在每一个jsp页面中都会有自己独立的9大隐式对象，每一个隐式对 象所具有的变量名可以直接使用，在自行定义新的变量时 应避免与已有隐式对象 名称重复。
+   - 面试题经常考:
+     九大隐式对象:
+     1. page --- 代表当前Servlet的对象
+     2. request --- 代表当前请求的对象
+     3. response --- 代表当前响应的对象
+     4. session --- 代表当前会话的对象
+     5. application --- 代表当前web应用的对象
+     6. config --- 代表当前servlet配置信息的对象 exception--- 代表当前页面产生的异常信息对象
+     7. out --- 代表当前jsp页面向浏览器输出数据的对象 pageContext --- 代表当前jsp页面上下文的对象
+3. PageContext详解
+   1. 功能一:可以作为其他八大隐式对象的入口。
+      1. getException方法返回exception隐式对象
+      2. getPage方法返回page隐式对象
+      3. getRequest方法返回request隐式对象
+      4. getResponse方法返回response隐式对象
+      5. getServletConfig方法返回config隐式对象
+      6. getServletContext方法返回application隐式对象
+      7. getSession方法返回session隐式对象
+      8. getOut方法返回out隐式对象
+   2. 功能二:域对象
+      1. 相关的方法:
+         setAttribute() getAttribute() removeAttribute() getAttributeNames()
+      2. 生命周期: 当前jsp页面被访问的时候创建，当前jsp访问结束的时候销毁。
+      3. 作用范围: 当前jsp页面。
+      4. 主要功能: 当前jsp页面内共享数据。
+   3. 功能三:可以作为其他三大作用域的入口对象使用:
+      scope是int类型的一个值，代表作用域.
+      setAttribute(String name,Obejct obj,int scope);
+      getAttribute(String name,int scope);
+      removeAttribute(String name,int scope);
+      getAttributeNamesInScope(int scope);
+      #+BEGIN_SRC
+        PageContext.APPLICATION_SCOPE ServletContext
+        PageContext.SESSION_SCOPE Session
+        PageContext.REQUEST_SCOPE request
+        PageContext.PAGE_SCOPE page
+      #+END_SRC
+      获取指定域中的数据:
+      #+BEGIN_SRC
+
+      #+END_SRC
+      直接获取pageContext域属性:
+      #+BEGIN_SRC html
+        <h4>直接书写pageContext获取的是pageContext域</h4>
+        <%=pageContext.getAttribute("country")%>
+      #+END_SRC
+      删除指定域中属性:
+      #+BEGIN_SRC
+        <h4>删除指定域中属性</h4>
+            <%
+                pageContext.removeAttribute("country",PageContext.PAGE_SCOPE);
+            %>
+      #+END_SRC
+   4. 功能四:便捷的请求转发
+      #+BEGIN_SRC java
+        pageContext.forward("path");
+      #+END_SRC
+** 3. 四大作用域
+1. 域对象概念
+   一个对象身上有一个可以被看见的范围,在这个范围内利用对象身上的map实 现资源的共享,像这样一个对象就称之为域对象.
+2. 四个域对象
+   由大到小的顺序排列:
+   #+BEGIN_SRC
+     ServletContext > Session > Request > PageContext
+          web应用        会话       请求       jsp页面
+   #+END_SRC
+   1. ServletContext
+      代表web应用的对象
+      1. 生命周期:
+         web应用加载的时候ServletContext对象创建，web应用被移出容器，ServletContext对象销毁。
+      2. 作用范围:
+         整个web应用的范围。
+      3. 主要功能:
+         在整个web应用的范围内实现资源的共享。
+   2. Session
+       代表session会话的对象
+       1. 生命周期:
+          调用request.getSession()方法是session对象创建。
+          - 超时死亡:如果一个session在30分钟内没有任何操作，则服务器认为 这个session无人认领，可以销毁。
+          - 自杀:session对象主动调用invalidate()，自行释放。
+          - 意外身亡:服务器非正常关闭的时候session对象也会销毁。如果服务器正常关闭是仍有session对象没有释放，则session中的数据会序列化 到本次磁盘上，作为一个文件保存，这个过程叫做钝化，在服务器再 次启动的时候会将这个文件读取，这个过程称之为活化。
+       2. 作用范围:
+          整个会话范围。
+       3. 主要功能:
+          在整个会话范围内共享数据。
+   3. request
+      代表request请求的对象
+      1. 生命周期:
+         请求链开始的时候request对象创建，请求链结束的时候request对象销毁。
+      2. 作用范围:
+         整个请求链。
+      3. 主要功能:
+         在整个请求链中实现数据的共享。
+   4. pageContext
+      代表当前jsp页面上下文的对象
+      1. 生命周期:
+         当前jsp页面加载的时候pageContext创建，访问结束时pageContext对象销毁
+      2. 作用范围:
+         当前jsp页面。
+      3. 主要功能:
+         在当前jsp页面内实现数据的共享。
+** 4. JSP标签技术
+1. JSP标签技术概述
+   Jsp当前可以书写HTML内容和Java语句，便于开发，但是面对大量逻辑需要处理和 复杂的页面构成的时候，HTML和java的结合就无法做到合理维护和高效开发。这 时可以将页面中的java语句都变成标签内容，让标签处理java语句对应的逻辑，也 就是说利用标签代替java，这样就可以保证页面内只出现标签内容，这样的页面只 有一种语言，相比之前便于维护和关闭，可以提升开发效率。
+2. 常用的JSP标签技术
+   1. jsp标签技术
+      Sun公司开发
+   2. el表达式
+      便捷易用 - 使用广泛 - 只能获取值 不能设置值。
+   3. jstl标签技术
+      标签库数据庞大，可以覆盖多数的开发需求。
+   4. 自定义标签
+   5. 其他第三方标签
+** 5. JSTL标签库概述
+* EL表达式
+1. EL表达式概述
+   EL 全名为Expression Language，用来替代<%= %>脚本表达式；EL具有获取数据、执行运算、获取常用开发对象、调用java方法这四方面的功能；javaEE目前内置了EL表达式，可以在jsp页面中直接使用
+2. EL表达式使用方式
+   ${el表达式}
+3. EL表达式的特点
+   只能获取数据
+   不能设置数据
+   不能遍历数据
+4. 功能一:获取数据
+   1. 获取常量
+      #+BEGIN_SRC
+        <h4>获取常量</h4>
+          脚本片段书写:<br/>
+          <%=123 %>
+          <%="abc"%>
+            <%=true%>
+            <%=1.1%>
+            <br/>el表达式书写:<br/>
+            ${123}
+            ${"abc" }
+            ${true }
+            ${1.1 }
+        #+END_SRC
+   2. 自动搜寻域
+      所谓自动搜寻域就是从最小范围的域中开始检索一个指定名称的域属性，如 果在较小范围内找到了这个域属性，则直接将找到的域属性返回，当前范围 的域中如果没有指定名称的域属性，则向更大的域中去搜寻，直到找到指定 名称的域属性。
+      总结:由小到大的搜索域中的属性。
+      #+BEGIN_SRC
+        <h4>自动搜寻域</h4>
+        <%
+            application.setAttribute("name", "兰刚");
+            session.setAttribute("name","朴乾");
+            request.setAttribute("name","李帅");
+            //pageContext.setAttribute("name","张三");
+        %>
+        <%=pageContext.findAttribute("name") %>
+        ${name }
+        #+END_SRC
+        el表达式自动搜寻域，只需要指定一个域属性的名称即可，它会自动在四个 作用域中寻找指定名称的域属性。
+   3. 获取指定域中的数据
+      #+BEGIN_SRC
+        <h4>获取指定域中的属性</h4>
+            <%
+              application.setAttribute("job", "IT");
+              session.setAttribute("job", "teacher");
+              request.setAttribute("job", "doctor");
+              pageContext.setAttribute("job", "work");
+            %>
+            <%=pageContext.getAttribute("job", PageContext.APPLICATION_SCOPE) %>
+              el表达式获取指定域的属性:
+              ${applicationScope.job}
+              ${sessionScope.job }
+              ${requestScope.job } ${pageScope.job }
+      #+END_SRC
+      el表达式中域名称书写形式:
+      | 脚本片段           | el表达式         |
+      | APPLICATION_SCOPE | applicationScope |
+      | SESSION_SCOPE     | sessionScope     |
+      | REQUEST_SCOPE     | requestScope     |
+      | PAGE_SCOPE        | pageScope        |
+   4. 获取数组中的元素
+      el表达式可以获取数组中指定下标的元素，但是数据必须要在某一个域中， 才可以获取其中的数据。
+      #+BEGIN_SRC
+        <h4>el表达式数组中获取数据</h4>
+        <%
+            String[] names={"殷正天","黛绮丝","谢逊","韦一笑"};
+            pageContext.setAttribute("names",names);
+        %>
+        ${names[1]}
+      #+END_SRC
+      获取一个元素的时候，需要指定元素的下标。
+   5. 获取集合中的元素
+      #+BEGIN_SRC
+        <h4>获取集合中的元素</h4>
+        <%
+            List<String> list=new ArrayList<String>();
+            list.add("大数据");
+            list.add("小数据");
+            list.add("中数据");
+            pageContext.setAttribute("list",list);
+        %>
+        ${list[0]}
+      #+END_SRC
+      集合中获取元素和数组中获取元素的方式类似，都可以通过指定一个下标来获取元素。
+   6. 获取Map中的元素
+      #+BEGIN_SRC
+        <h4>获取Map中的元素</h4 >
+        <%
+            Map<String,String> map = new HashMap<String,String>();
+            map.put("name", "李帅");
+            map.put("武功","黯然销魂掌");
+            map.put("wife","姑姑");
+            map.put("wife.one","小龙女");
+            pageContext.setAttribute("map", map);
+            /* 书写一个字符串数据添加到域中，即可获取变量名中包含的数据 */
+            pageContext.setAttribute("wife", "wife");
+        %>
+        ${map["name"]}
+        ${map.武功}
+        ${map[wife]}
+        ${map["wife.one"]}
+   7. 获取javabean中属性
+      #+BEGIN_SRC
+        <h3>获取javabean中的元素</h3>
+        <%
+            Person p = new Person();
+            p.setName("lishuai");
+            p.setAge(18);
+            p.setAddr("bj");
+            pageContext.setAttribute("p", p);
+        %>
+        ${p.name}
+        ${p.age}
+        ${p.addr}
+      #+END_SRC
+5. 执行运算
+   1. 算术运算:
+      #+BEGIN_SRC
+        <h3>el表达式功能二:运算</h3>
+            <h4>算术运算</h4>
+            ${2+3 }
+            ${2-3 }
+            ${3/2 }
+            ${3%2 }
+            <hr>
+            ${2+"3" }
+            <hr>
+            ${"2"+"3" }
+            在加法中如果有字符串类型的数据，尝试将这个数据转换成一个数值类型，如果能够转换则 转换过后执行运算，如果不能转换则会报错。
+            <%-- ${2+"a" } --%>
+   2. 关系运算:
+      #+BEGIN_SRC
+        <h4>关系运算</h4>
+            ${3>2}
+            ${3<2}
+            ${3>=2}
+            ${3<=2}
+            ${3!=2 }
+      #+END_SRC
+   3. 逻辑运算:
+      #+BEGIN_SRC
+        <h4>逻辑运算</h4>
+            ${true and false }
+          ${true or false }
+          ${not(true) }
+          ${true && false }
+          ${true || false }
+          ${!true }
+          ${!true }
+   4. Empty运算:
+      如果对象为null，字符串保存的值为""，数组和集合以及map中没有数据，使用 empty运算的结构都为true，其他任何形式都为false.
+      #+BEGIN_SRC
+        <h4>empty运算</h4>
+        <%
+            String a = null;
+            String str = "aaaa";
+            String[] arr = {"1"};
+            ArrayList list = new ArrayList();
+            list.add("abc");
+            Map map = new HashMap();
+            pageContext.setAttribute("a",a);
+            pageContext.setAttribute("str",str);
+            pageContext.setAttribute("arr",arr);
+            pageContext.setAttribute("list",list);
+            pageContext.setAttribute("map", map);
+        %>
+        ${empty a}
+        ${empty str}
+        ${empty arr}
+        ${empty list}
+        ${empty map}
+   5. 三元表达式:
+      #+BEGIN_SRC
+        <h4>三元表达式</h4>
+        <%
+            Map<String,String> mapx = new HashMap<String,String>();
+            mapx.put("a","aa");
+            mapx.put("b","bb");
+            mapx.put("c","cc");
+            pageContext.setAttribute("mapx", mapx);
+        %>
+        ${empty mapx.b?"yes":"no" }
+      #+END_SRC
+6. 获取常用开发对象
+   EL内置的11个内置对象。
+   1. 代表域的内置对象
+      | pageScope        | 代表pageContext域    |
+      | requestScope     | 代表request域        |
+      | sessionScope     | 代表session域        |
+      | applicationScope | 代表ServletContext域 |
+   2. 代表请求参数的内置对象
+      | param       | 代表当前请求中的请求参数信息，获取的结果组成Map<String,String>     |
+      | paramValues | 代表当前你请求中的请求参数信息，获取的结果组成Map<String,String[]> |
+   3. 代表请求头的内置对象
+      | header       | 代表请求中的请求头信息，获取的结果组成Map<String,String>   |
+      | headerValues | 代表请求中的请求头信息，获取的结果组成Map<String,String[]> |
+   4. 代表web应用初始化配置信息的内置对象
+      | initParam | 代表当前web应用的初始化配置信息的对象 |
+   5. 代表当前请求头中的cookie组成的内置对象
+      | cookie | 代表当前请求头中的cookie，获取的结果组成Map<String,String[]> |
+   6. 代表pageContext(页面中的上下文)的内置对象
+      pageContext
+7. 调用java方法
+   略
+* javaEE开发模式
+1. 纯Servlet开发 单纯的servlet开发，如果面对复杂页面将会难于处理，所以前台HTML内容还是应 该放在页面中书写。
+2. 纯JSP开发
+   相比servlet开发，纯jsp开发比较简单，但是面对复杂页面构成和代码逻辑的时 候，HTML内容和Java语句内容相互嵌套，如果书写有误则会造成完全无法使用， 代码可读性低，可维护性需求较高，便捷性较低。
+3. JSP+JSP标签库
+   利用JSP+JSP标签库的确简化了页面内容，但是面对复杂的逻辑需求是，在JSP页 面中标签库可能无法处理，需要自行设计标签，而且这些标签域HTML标签相互 嵌套，对于页面代码的可读性来说还是较低，由于逻辑代码和页面展示代码耦合 在一起所以管理起来十分不便。
+4. java+javaBean (Model One 模式一)
+   在模式一中JSP页面负责展示页面内容和调用javaBean中的方法。在javaBean中负 责提供封装数据和提供方法。在JSP页面中既展示HTML内容也书写java代码逻辑， 一个模块进行两个模块的工作，导致如果出现问题，模块之间会相互影响，所以 应该将JSP页面中的两部分工作，拆分成两个模块，降低模块之内的耦合性。
+5. Servlet+javaBean+JSP Model Two模式二
+   模式二将javaEE处理的数据分成了三部分。在Servlet中主要负责接收请求，和根 据请求调用javabean中的方法。在javaBean中主要负责封装数据和提供方法。杂 JSP页面中只负责数据和页面的展示。在这样的模型下，摸一个模块都进行各自模
+   分区 day15-javaEEDesignModel 的第 1 页
+   JSP页面中只负责数据和页面的展示。在这样的模型下，摸一个模块都进行各自模 块功能，各个模块之间已经很大程度的降低了耦合性，各自执行各自的工作，当 前模块产生异常，只需寻找当前模块的异常问题，无序寻找其他模块的问题。
+   #+BEGIN_SRC
+     三个模块之间:
+        相互独立。虽然存在耦合，但是这个耦合是必要的存在，如果抛弃这个耦合将会使每个模块完全独立，导致无法一起工作。
+        模块之间相互协作，可读性已经最大程度的提升，代码量虽然有所上升，但是更加便于代码的维护和管理。
+   #+END_SRC
+6. MVC设计思想
+   MVC设计思想并不是javaEE特有的设计思想，而是在设计程序代码的时候，一个 通用的设计思想，在其他语言和程序中同样也适用。
+   MVC设计思想一共分为三个部分，第一是负责接收用户发送请求的Controller(控 制器),接收请求之后，根据用户请求的内容，调用对应模型中的方法。第二是负 责提供封装数据和方法的Model(模型),模型中有用户请求发送来的数据，以及数 据处理的方法，model处理完用户数据之后，将结果数据再次范围到Controller 中。第三是负责展示用户结果数据View(视图),View中，将Controller传递的结 果数据不做任何处理直接展示到页面当中。
+   特点:
+       MVC中三个模块都各自执行各自模块的功能，模块之间相互独立。 正是因为模块之间相互独立，所以代码的管理更加便捷，可维护性更强。
+7. JavaEE经典三层架构
+* 重构EasyMall项目
+1. 创建EasyMall web应用
+2. 将原有EasyMall的静态资源引入
+   将原有web应用全部静态资源复制到新的EasyMallweb应用中
+3. 导入开发包以及配置文件 在WEB-INF的lib中有开发所需包
+4. 复制web.xml文件内容 将原有web应用的web.xmln内容复制到新的EasyMall 的web.xml中
+5. 根据经典架构---构建新的目录结构
+6. 导入动态资源和工具类
+7. 修改web.xml文件中的配置信息
+   将原有的com.easymall.servlet 更改为com.easymall.web
+8. 创建JavaBean--User 用来存储用户信息数据
+   #+BEGIN_SRC java
+   #+END_SRC
+9. 实现登录功能:
+   1. 修改LoginServlet
+   2. 创建UserService
+   3. 创建异常类MsgException
+   4. 创建UserDao
+   5. head.jsp修改:
+10. 实现注册功能
+    1. 修改 RegistServlet:
+    2. 修改UserService:
+    3. 修改UserDao:
+11. 注销功能
+12. 作业:
+    a. 配置一个错误友好提示页面。<error-page></error-page>
+1. JSTL标签库概述
+   JSTL全称为JavaServerPages Standard Tag Library。由JCP(Java Community Process)指定标准。是提供给 Java Web 开发人员一个标准通用的标签函数库。可以和 EL 配合来取代传统直接在页面上嵌入 Java 程序(Scripting)的做法，以提高程 序可读性、维护性和方便性。
+2. 在页面中引入jstl标签库
+   java EE 5包及其以上版本都已经支持jstl标签库，所以在页面中直接书写指令引入使用即可。
+   #+BEGIN_SRC
+     <%@taglib uri="" prefix=""%>
+   #+END_SRC
+3. JSTL标签库的子库
+   核心标签库 core - c
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    国际化标签 fmt
+    数据库标签 sql
+    XML标签 xml
+    JSTL函数(EL函数)
+4. 命名空间或名称空间概念
+   在uri中包含两部分内容，一个是url，是常见的location地址保存形式。还有一个URN保存 的内容是一个名称，这个名称看起来像是一个地址，但是本质存储的是一个Naming，所 以把这中命名方式称之为名称空间或者命名空间。
+5. 核心函数库
+   1. c:set标签
+      设置或修改域中的值，设置或修改map中的值，设置修改javaBean中的数据
+      #+BEGIN_SRC
+        <h4>c:set标签，设置或修改值</h4>
+            <c:set var="a" value="bj" scope="request"></c:set>
+            ${a}
+            <c:set var="a" value="sh" scope="request"></c:set>
+            ${a}
+        <h3>c:set设置或修改map中的值</h3>
+            <%
+                Map<String,String> map = new HashMap<String,String>();
+                pageContext.setAttribute("map", map);
+            %>
+            <c:set target="${map }" property="addr" value="重庆"></c:set> ${map }
+            ${map.addr}
+            ${map.addr}
+            <c:set target="${map }" property="addr" value="宝安"></c:set> ${map.addr }
+        <h4>c:set设置或修改javabean中的属性</h4>
+            <%
+                Person p = new Person("李帅",18,"北京");
+                pageContext.setAttribute("p",p);
+            %>
+            <c:set target="${p }" property="name" value="朴乾"></c:set>
+            ${p.name }
+            ${p.age }
+              <!-- javabean中不存在的属性不能直接设置值 -->
+              <%-- <c:set target="${p }" property="gender" value="男"></c:set>--%>
+              <%-- ${p.gender } --%>
+        #+END_SRC
+   2. c:remove 删除指定域中的域属性
+      #+BEGIN_SRC
+        <h3>c:remove</h3>
+            <h4>c:remove删除指定域中的域属性</h4>
+            <c:set var="name" value="张三丰" scope="request"></c:set>
+            ${name}
+            <br>
+                <c:remove var="name" scope="request"></c:remove>
+                调用remove:${name }
+        <h4>删除全部域中的域属性</h4>
+        <%
+            application.setAttribute("namex", "大一");
+            session.setAttribute("namex", "大二");
+            request.setAttribute("namex", "大三");
+            pageContext.setAttribute("namex", "大四");
+        %>
+        <%-- <c:remove var="namex"></c:remove> --%>
+        <c:remove var="namex" scope="request"></c:remove>
+        ${applicationScope.namex }
+        ${sessionScope.namex }
+        ${requestScope.namex }
+        ${pageScope.namex }
+   3. c:if判断
+      #+BEGIN_SRC
+       <h3>c:if</h3>
+           <h4>c:if判断</h4>
+            <c:set var="i" value="10" scope="request"></c:set>
+            <c:if test="${i<=10 }" var="flag">
+                no~~~
+            </c:if>
+            <c:if test="${i>10 }" var="f">
+                yes
+            </c:if> ${flag }
+            ${f }
+      #+END_SRC
+   4. c:catch 捕获异常
+      #+BEGIN_SRC
+        <h3>c:catch</h3>
+            <h4>c:catch捕获异常信息</h4>
+            <c:catch var="e">
+                <%
+                    String str = null;
+                    str.toUpperCase();
+                %>
+            </c:catch>
+            ${e }
+      #+END_SRC
+   5. c:choose 多重判断
+      可以实现一个类似于if else的判断结构。
+      #+BEGIN_SRC
+        <h3>c:choose</h3>
+            <h4>c:choose实现多重判断</h4>
+            <c:set var="b" value="18" scope="request"></c:set>
+            <c:choose >
+                <c:when test="${b<10 }" >小于10</c:when>
+                <c:when test="${b<100 }">大于10小于100</c:when>
+                <c:when test="${b<1000 }">大于100小于1000</c:when>
+                <c:other w is e>大 于 10 00</c:other w is e>
+            </c:choose>
+    #+END_SRC
+    多重判断的结果不需要使用变量展示，满足c:when或者从c:otherwise结果会打印在页面当中。
+   6. c:forEach 遍历循环
+      可以循环指定数据内容，也可以遍历一个数据结构。
+      forEach中有varStatus属性，属性可以引用的内容如下:
+      1. 如果是利用自身数据遍历:
+         #+BEGIN_SRC
+           <c:forEach begin="10" end="100" step="1" var="o" varStatus="stat">
+               ${stat.index }
+           </c:forEach>
+         循环中会认为10即为第十个下标。打印结果为 10 11 12
+      2. 如果是遍历其他数据结构:
+         #+BEGIN_SRC
+         <%
+            List<String> list = new LinkedList<String>();
+            list.add("danny");
+            list.add("jenny");
+            list.add("liming");
+            list.add("laowang");
+            pageContext.setAttribute("list", list);
+         %>
+         <c:forEach items="${list }" var="h" varStatus="stat">
+         ${h }
+         ${stat.index }
+         </c:forEach>
+         #+END_SRC
+         循环中下标会从0开始计数,打印结果为 danny 0 jenny1 .....
+         #+BEGIN_SRC
+           <h3>c:forEach实现循环</h3>
+               <h4>c:forEach循环数字</h4>
+               <c:forEach begin="1" end="100" step="1" var="q">
+                   ${q }
+               </c:forEach>
+               <h4>c:forEach遍历链表</h4>
+               <%
+                  List<String> list = new LinkedList<String>();
+                  list.add("danny");
+                  list.add("jenny");
+                  list.add("liming");
+                  list.add("laowang");
+                  pageContext.setAttribute("list", list);
+               %>
+               <c:forEach items="${list }" var="h">
+                   ${h}
+               </c:forEach>
+               <c:forEach begin="10" end="100" step="1" var="o" varStatus="stat">
+                   ${stat.index }
+               </c:forEach>
+               <br>
+         #+END_SRC
+         问题:遍历一个10到100的全部偶数，如果当前总数的下标为3的倍数，则将这个数据变为红色。
+         #+BEGIN_SRC
+           <c:forEach begin="10" end="100" step="2" var="r" varStatus="s">
+               <c:if test="${s.count%3 == 0}">
+                   <font color="red">${r }</font> </c:if>
+               <c:if test="${s.count%3 != 0 }">
+                   <font color="blue">${r }</font>
+               </c:if>
+           </c:forEach>
+         #+END_SRC
+* 修改EasyMall页面
+1. 将页面中的java代码替换为el表达式和jstl标签
