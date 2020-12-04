@@ -1,0 +1,93 @@
+1.HttpServlet的继承关系
+
+    HttpServlet 的诞生 是专门为了HTTP请求而服务的！！！
+
+    HttpServlet  extends  GenericServlet  implements Servlet
+
+2.HttpServlet的方法详解
+
+ protected  void doDelete(HttpServletRequest req, HttpServletResponse resp)
+              Called by the server (via the service method) to allow a servlet to handle a DELETE request.
+              由服务器（通过服务方法）调用，以允许servlet处理删除请求。
+    protected  void doGet(HttpServletRequest req, HttpServletResponse resp)
+              Called by the server (via the service method) to allow a servlet to handle a GET request.
+              服务器（通过服务方法）允许servlet处理GET请求。
+    protected  void doHead(HttpServletRequest req, HttpServletResponse resp)
+              Receives an HTTP HEAD request from the protected service method and handles the request.
+              从受保护的服务方法接收HTTP HEAD请求并处理该请求。
+    protected  void doOptions(HttpServletRequest req, HttpServletResponse resp)
+              Called by the server (via the service method) to allow a servlet to handle a OPTIONS request.
+              由服务器（通过服务方法）调用，以允许servlet处理选项请求。
+    protected  void doPost(HttpServletRequest req, HttpServletResponse resp)
+              Called by the server (via the service method) to allow a servlet to handle a POST request.
+              由服务器（通过服务方法）调用，以允许servlet处理POST请求。
+    protected  void doPut(HttpServletRequest req, HttpServletResponse resp)
+              Called by the server (via the service method) to allow a servlet to handle a PUT request.
+              由服务器（通过服务方法）调用，以允许servlet处理PUT请求。
+    protected  void doTrace(HttpServletRequest req, HttpServletResponse resp)
+              Called by the server (via the service method) to allow a servlet to handle a TRACE request.
+              由服务器（通过服务方法）调用，以允许servlet处理跟踪请求。
+    protected  long getLastModified(HttpServletRequest req)
+              Returns the time the HttpServletRequest object was last modified, in milliseconds since midnight January 1, 1970 GMT.
+              返回HttpServletRequest对象上次修改的时间，以自1970年1月1日格林尼治标准时间午夜起的毫秒为单位。
+    protected  void service(HttpServletRequest req, HttpServletResponse resp)
+              Receives standard HTTP requests from the public service method and dispatches them to the doXXX methods defined in this class.
+               接收来自公共服务方法的标准HTTP请求，并将它们分派给该类中定义的doXXX方法。
+    void service(ServletRequest req, ServletResponse res)
+              Dispatches client requests to the protected service method.
+               将客户端请求分派到受保护的服务方法。
+
+3.  HttpServlet的方法：service()方法
+
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String method = req.getMethod();
+        long lastModified;
+        if (method.equals("GET")) {
+            ...
+            this.doGet(req, resp);
+        } else if (method.equals("HEAD")) {
+            lastModified = this.getLastModified(req);
+            this.maybeSetLastModified(resp, lastModified);
+            this.doHead(req, resp);
+        } else if (method.equals("POST")) {
+            this.doPost(req, resp);
+        } else if (method.equals("PUT")) {
+            this.doPut(req, resp);
+        } else if (method.equals("DELETE")) {
+            this.doDelete(req, resp);
+        } else if (method.equals("OPTIONS")) {
+            this.doOptions(req, resp);
+        } else if (method.equals("TRACE")) {
+            this.doTrace(req, resp);
+        } else {
+            String errMsg = lStrings.getString("http.method_not_implemented");
+            Object[] errArgs = new Object[]{method};
+            errMsg = MessageFormat.format(errMsg, errArgs);
+            resp.sendError(501, errMsg);
+        }
+
+    }
+
+4. 模拟一个场景：用户的一个注册提交的场景
+
+    需要一个注册页面：【day07课前资料】
+        【课前资料\课前资料day07-servlet+request\day07-servlet+request\资料\param.html】
+
+    把页面复制到【day10-servlet/web/param.html】
+
+    代码的编写步骤：
+    4.1. 修改param.html中form表单的action路径：是一个请求的url
+            /web虚拟路径的名称/请求的名称
+            action="/day10_servlet_war_exploded/demo03"
+
+    4.2 配置web.xml，完成url路径 与 servlet类 的映射关系
+
+    4.3 编写后台的servlet的代码
+        找到doGet()与doPost()方法
+
+
+
+
+
+
+

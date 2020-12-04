@@ -1,0 +1,4 @@
+1. 请求转发的流程图
+
+    该技术使用的一个API就是 HttpServletRequest去进行转发！！！
+

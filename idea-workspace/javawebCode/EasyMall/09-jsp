@@ -1,0 +1,73 @@
+准备工作：
+
+    资料下载【D:\javaweb\课后资料\day15-session-AM\思维导图】
+
+课程目标：
+
+    能够使用jsp的标签技术，完成一个网站的商城主界面的开发！！！！
+
+课程大纲：
+
+    jsp的原理
+    jsp的原生态脚本技术：原理性的内容
+    jsp的标签技术 ： el表达式   jstl标准标签库
+
+1.JSP的入门
+
+    JSP：Java  Server  Page ，服务器端的java代码的页面
+
+         底层其实是 一段java代码，是一段servlet代码！！！
+
+    JSP的演变过程：
+
+    1.早期：只有servlet ， 没有jsp时
+
+        业务场景：商城主界面，浏览器发送一个主界面的请求，
+                  服务器端的servlet给浏览器一个响应，
+                  响应的内容是： HTML+JS+CSS+数据！！！这样一个完整的页面。
+
+        PrintWriter pw = response.getWriter();
+        pw.write("hello servlet");
+        pw.write(<!DOCTYPE HTML>);
+        pw.write(<html>);
+        pw.write(<head>);
+        pw.write(<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+                 		);
+        pw.write();
+        pw.write();
+        for (int i = 0; i < array.length;i++) {
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+        }
+        pw.write();
+        pw.write();
+        pw.write();
+
+
+        缺点：只有servlet的时候，响应的页面 java代码与HTML标签强耦合！！！
+              不利于程序员的开发 与 运维工作！！
+              因为，如果要修改HTML页面，那么就会动到原有的java！！！
+
+    2.JSP : HTML+CSS+JS+JQEUERY+java代码
+
+        优点：是实现了java代码与HTML页面的一个耦合度大大的降低
+              程序员比较的方便的开发与测试
+        缺点：JSP当数据量的太庞大的时候，因为底层是java代码，所以会给服务器造成很大压力
+
+    JSP的原理展示：
+        1.JSP页面，最终加载到tomcat服务器中进行运行时，会编译成两个文件：
+            【regist_jsp.java】java文件
+            【regist_jsp.class】字节码文件，最终jsp执行的是 .class的字节码文件
+
+        2.JSP页面底层是一个servlet代码，其中存在常见的对象：request对象，response对象......
+
+2. JSP的入门代码编写：
+
+    创建一个文件夹：web\jspdemo
+    创建一个jspDemo01.jsp页面
+

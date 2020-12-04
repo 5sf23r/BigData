@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js08-json对象</title>
+    <script>
+        /*1.json本质上就是一段字符串，解析时特别方便  {}的形式  */
+        /*2.json格式的数据：是目前web数据传输格式的最流行的方式*/
+        var data = {
+            name:"李白",
+            age:10,
+            wife:[ //数组中每一个元素都是一个对象
+                {name:"张飞1",age:10,job:["打架1","喝酒1"]},
+                {name:"张飞2",age:11,job:["打架2","喝酒2"]},
+                {name:"张飞3",age:12,job:["打架3","喝酒3"]}
+            ]
+        };
+        //调用json对象，输出其中的某个字段
+        console.log(data["wife"][1]["job"][0]);
+    </script>
+</head>
+<body>
+</body>
+</html>

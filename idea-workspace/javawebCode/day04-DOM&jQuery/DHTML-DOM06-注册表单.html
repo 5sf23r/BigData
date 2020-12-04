@@ -1,0 +1,161 @@
+<html>
+	<head>
+		<title>表单页面</title>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		
+		<script>
+
+			function checkData(){
+				var result = false;
+				//1.调用非空检验的函数
+				result = checkNull("username","用户名不能为空");
+				result = checkNull("password","密码不能为空") && result;
+                result = checkNull("password2","确认密码不能为空") && result;
+				result = checkNull("nickname","昵称不能为空") && result;
+				result = checkNull("email","邮箱不能为空") && result;
+				result = checkNull("type","客户类型不能为空") && result;
+				result = checkNull("img","头像不能为空") && result;
+				result = checkNull("valistr","验证码不能为空") && result;
+				result = checkNull("desc","描述信息不能为空") && result;
+				//2.性别的校验
+				var genders = document.getElementsByName("gender");//数组
+				var statu = false;
+				for (var i = 0; i<genders.length; i++) {
+					//当两个radio都没选时，提示 不能为空
+					//只要有一个radio选中了，证明已选择
+					if (genders[i].checked == true) {//选中了
+						statu = true;
+						break;
+					}
+				}
+				if (!statu) {//这是没选时，应该给出提示信息
+					document.getElementById("gender_msg").innerText="性别不能为空";
+					return false;
+				} else {
+					document.getElementById("gender_msg").innerText="";
+					result = statu && result;
+				}
+				//3.爱好的校验： 留做课后作业
+				//4.邮箱的校验：格式是否正确  werwer123_@qq.com
+				var email = document.getElementsByName("email")[0];
+				if (email.value != "") {
+					var r1= /^\w+@\w+(\.\w+)+$/;
+					if (!r1.test(email.value)) {//校验不通过
+						document.getElementById("email_msg").innerText="邮箱格式不正确";
+						return false;
+					}
+				}
+
+				return result;
+			}
+
+			/*专门提供一个方法，验证所有的文本框的内容是否为空！！！*/
+			function checkNull(name,msg){
+				//1.先获取文本框的对象
+				var tagName = document.getElementsByName(name)[0];
+				document.getElementById(name+"_msg").innerText="";
+				//2.判断value是否为空
+				if (tagName.value == "") {//3.如果为空，提示：不能为空！返回值false
+					document.getElementById(name+"_msg").innerText=msg;
+					return false;
+				} else {// 如果不为空，直接放行即可
+					return true;
+				}
+			}
+
+		</script>
+		<style type="text/css">
+			span{
+				color:red;
+				font-size:12px;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="#" method="POST" onsubmit="return checkData()">
+			<table border="1px" align="center" cellpadding="10px" cellspacing="0px" borderColor="red" bgcolor="pink">
+				<caption><font color="red" size="6">注册表单</font></caption>
+				<input type="hidden" name="id" value="9527"/>
+				<tr>
+					<td>用户名:</td>
+					<td><input type="text" name="username" /> <span id="username_msg"></span></td>
+				</tr>
+				<tr>
+					<td>密码:</td>
+					<td><input type="password" name="password"/> <span id="password_msg"></span></td>
+				</tr>
+				<tr>
+					<td>确认密码:</td>
+					<td><input type="password" name="password2"/> <span id="password2_msg"></span></td>
+				</tr>
+				<tr>
+					<td>性别：</td>
+					<td>
+						<input type="radio" name="gender" value="男"/>男
+						<input type="radio" name="gender" value="女"/>女 <span id="gender_msg"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>昵称：</td>
+					<td><input type="text" name="nickname"/> <span id="nickname_msg"></span></td>
+				</tr>
+				<tr>
+					<td>邮箱：</td>
+					<td><input type="text" name="email"/> <span id="email_msg"></span></td>
+				</tr>
+				<tr>
+					<td>爱好：</td>
+					<td>
+						<input type="checkbox" name="like" value="lq"/>篮球
+						<input type="checkbox" name="like" value="zq"/>足球
+						<input type="checkbox" name="like" value="qq"/>铅球
+						<input type="checkbox" name="like" value="blq"/>玻璃球
+						 <span id="like_msg"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>客户类型：</td>
+					<td>
+						<select name="type">
+							<option value="pm">平民</option>
+							<option value="sxdy">少先队员</option>
+							<option value="gqty">共青团员</option>
+							<option value="ybdy">预备党员</option>
+							<option value="zsdy">正式党员</option>
+						</select>
+						 <span id="type_msg"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>头像：</td>
+					<td>
+						<input type="file" name="img"/> <span id="img_msg"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>描述信息：</td>
+					<td>
+						<textarea placeholder="请输入描述信息~！" id="desc"
+								  rows="5" cols="45" name="desc"
+								  onfocus="descFocus(this)"
+								  onblur="descBlur(this)"  ></textarea> <br/><span id="desc_msg"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>验证码：</td>
+					<td>
+						<input type="text" name="valistr"/>
+						<img src="1.jpg" width="100px" height="20px"/>
+						 <span id="valistr_msg"></span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right">
+						<input type="submit" value="提 交"/>
+						<input type="reset" value="重 置"/>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

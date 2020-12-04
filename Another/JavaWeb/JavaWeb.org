@@ -19,35 +19,44 @@
 - [[#表单][表单]]
   - [[#1-表单][1. 表单]]
   - [[#2-表单中的项][2. 表单中的项]]
-  - [[#3-注册表单练习][3. 注册表单练习]]
+- [[#注册表单练习][注册表单练习]]
+- [[#注册表单联系2][注册表单联系2]]
 - [[#css][CSS]]
   - [[#1-网页组织的两种常用方式][1. 网页组织的两种常用方式]]
   - [[#2-容器标签][2. 容器标签]]
   - [[#3-css的概念][3. CSS的概念]]
   - [[#4-css的四种引入方式][4. CSS的四种引入方式]]
   - [[#5-css引入顺序][5. CSS引入顺序]]
-  - [[#6-css基本选择器][6. CSS基本选择器]]
-  - [[#7-css扩展选择器][7. CSS扩展选择器]]
+  - [[#6-css选择器的分类][6. CSS选择器的分类]]
+    - [[#1-基本选择器][1. 基本选择器]]
+    - [[#2-扩展选择器][2. 扩展选择器]]
   - [[#8-拓展css中的常用属性简介][8. 拓展：CSS中的常用属性简介]]
-- [[#javascript][JavaScript]]
-  - [[#1-js概述][1. js概述]]
-  - [[#2-javascript不得不说的历史][2. JavaScript不得不说的历史]]
-  - [[#3-js和html的结合][3. js和html的结合]]
-  - [[#4-consolelog使用][4. console.log使用：]]
-  - [[#5-js的语法-数据类型][5. js的语法-数据类型]]
-  - [[#6-js语法--运算符][6. Js语法--运算符]]
-  - [[#7-定义变量][7. 定义变量]]
-  - [[#8-js语法--语句][8. js语法--语句]]
-  - [[#9-js语法--函数][9. js语法--函数]]
-  - [[#10-js语法--数组][10. js语法--数组]]
-  - [[#10-js语法-对象][10. js语法-对象]]
-  - [[#11-json][11. JSON]]
-- [[#dhtml-动态html][DHTML-动态html]]
-  - [[#1-dhtml概述][1. DHTML概述]]
-  - [[#2-bom和dom][2. BOM和DOM]]
-  - [[#3-bom--浏览器对象模型][3. BOM--浏览器对象模型]]
-  - [[#4-dom--文档对象模型][4. DOM--文档对象模型]]
-  - [[#5-问题][5. 问题：]]
+- [[#jsdhtml][JS、DHTML]]
+  - [[#javascript][JavaScript]]
+    - [[#1-js概述][1. js概述]]
+    - [[#2-javascript不得不说的历史][2. JavaScript不得不说的历史]]
+    - [[#3-js和html的结合][3. js和html的结合]]
+    - [[#4-js输出方式][4. js输出方式]]
+    - [[#5-js的语法-数据类型][5. js的语法-数据类型]]
+      - [[#1-基本数据类型共六种][1. 基本数据类型：共六种]]
+      - [[#2-复杂数据类型][2. 复杂数据类型]]
+        - [[#1-js语法--函数][1. js语法--函数]]
+        - [[#2-js语法--数组][2. js语法--数组]]
+        - [[#3-js语法--对象][3. js语法--对象]]
+      - [[#3-数据类型的自动转化][3. 数据类型的自动转化]]
+    - [[#6-js语法--运算符][6. Js语法--运算符]]
+    - [[#7-定义变量][7. 定义变量]]
+    - [[#8-js语法--语句][8. js语法--语句]]
+      - [[#1-if语句][1. if语句：]]
+      - [[#2-switch-case][2. switch case]]
+      - [[#3-whiledowhilefor][3. while、dowhile、for]]
+    - [[#9-json][9. JSON]]
+  - [[#dhtml-动态html][DHTML-动态html]]
+    - [[#1-dhtml概述][1. DHTML概述]]
+    - [[#2-bom和dom][2. BOM和DOM]]
+    - [[#3-bom--浏览器对象模型][3. BOM--浏览器对象模型]]
+    - [[#4-dom--文档对象模型][4. DOM--文档对象模型]]
+    - [[#5-问题][5. 问题：]]
 - [[#jquery][jQuery]]
   - [[#1-jquery概述][1. jQuery概述]]
   - [[#2-jquery的优势][2. jQuery的优势]]
@@ -56,14 +65,14 @@
   - [[#5-jquery的使用方式][5. jQuery的使用方式]]
   - [[#6-js对象和jquery对象的相互转换][6. js对象和jQuery对象的相互转换]]
   - [[#7-jquery主要用法][7. jQuery主要用法：]]
-- [[#jquery选择器][jQuery选择器]]
-  - [[#1-基本选择器selector案例一][1. 基本选择器(selector案例一)]]
-  - [[#2-层级选择器selector案例二][2. 层级选择器(selector案例二)]]
-  - [[#3-基本过滤选择器selector案例三][3. 基本过滤选择器(selector案例三)]]
-  - [[#4-内容选择器selector案例四][4. 内容选择器(selector案例四)]]
-  - [[#5-属性选择器selector案例五][5. 属性选择器(selector案例五)]]
-  - [[#6-表单选择器selector案例六][6. 表单选择器(selector案例六)]]
-  - [[#更多操作][更多操作]]
+  - [[#8-jquery选择器][8. jQuery选择器]]
+    - [[#1-基本选择器selector案例一][1. 基本选择器(selector案例一)]]
+    - [[#2-层级选择器selector案例二][2. 层级选择器(selector案例二)]]
+    - [[#3-基本过滤选择器selector案例三][3. 基本过滤选择器(selector案例三)]]
+    - [[#4-内容选择器selector案例四][4. 内容选择器(selector案例四)]]
+    - [[#5-属性选择器selector案例五][5. 属性选择器(selector案例五)]]
+    - [[#6-表单选择器selector案例六][6. 表单选择器(selector案例六)]]
+    - [[#更多操作][更多操作]]
 - [[#git][Git]]
 - [[#mysql][MySQL]]
   - [[#1-数据库概述][1. 数据库概述]]
@@ -122,12 +131,17 @@
 - [[#会话技术----session][会话技术 -- session]]
   - [[#cookie和session特点][cookie和session特点：]]
 - [[#jsp][JSP]]
-  - [[#1-概述][1. 概述]]
+  - [[#1-概述与原理][1. 概述与原理]]
   - [[#2-jsp语法][2. JSP语法]]
-  - [[#3-四大作用域][3. 四大作用域]]
-  - [[#4-jsp标签技术][4. JSP标签技术]]
-  - [[#5-jstl标签库概述][5. JSTL标签库概述]]
+  - [[#3-九大隐式对象][3. 九大隐式对象]]
+  - [[#4-pagecontext详解][4. PageContext详解]]
+  - [[#5-四大作用域][5. 四大作用域]]
+  - [[#6-示例][6. 示例]]
+  - [[#7-jsp标签技术][7. JSP标签技术]]
 - [[#el表达式][EL表达式]]
+- [[#jstl标签库][JSTL标签库]]
+  - [[#1-概述][1. 概述]]
+  - [[#2-在页面中引入jstl标签库][2. 在页面中引入JSTL标签库]]
 - [[#javaee开发模式][javaEE开发模式]]
 - [[#重构easymall项目][重构EasyMall项目]]
 - [[#修改easymall页面][修改EasyMall页面]]
@@ -151,6 +165,7 @@ Client - Server
 ** web概述
 [[./Img/1.png]]
 * HTML
+[[./Img/html流程图.pdf]]
 ** 1. HTML是什么
    - HTML（Hyper Text Mark-up Language）超文本标记语言，最基础的网页语言 W3C
    - HTML 不是一门编程语言，而是一门标记语言
@@ -169,11 +184,11 @@ Client - Server
        </BODY>
      </HTML>
    #+END_SRC
-   - <!DOCTYPE HTML>用来指定当前页面所遵循的html的版本
-   - <head></head>头部文件用来存放html页面的基本属性信息，优先被加载
-   - <body></body>体部分用来存放页面数据，是可见的页面内容
-     + <tittle></tittle>指定网页的标题
-     + <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>其中的charset的值用来指定浏览器用什么编码解析当前页面
+   | <!DOCTYPE HTML>                                                     | 用来指定当前页面所遵循的html的版本                    |
+   | *<head></head>                                                      | 头部文件用来存放html页面的基本属性信息，优先被加载    |
+   | *<body></body>                                                      | 体部分用来存放页面数据，是可见的页面内容              |
+   | *<tittle></tittle>                                                  | 指定网页的标题                                        |
+   | <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/> | 其中的charset的值用来指定浏览器用什么编码解析当前页面 |
    + 页面中的标签自上而下的加载。head中的内容会在body之前加载。
 ** 3. HTML语法
    - HTML标签分为开始标签和结束标签，如果标签内没有修饰的内容，开始标签和结束标签可以合并为一个自闭标签。如：<br/>换行；<hr/>在当前行画一条线
@@ -192,8 +207,6 @@ Client - Server
        | '    | &apos;   |
        | 空格 | &nbsp;   |
        |------+----------|
-
-
    #+BEGIN_SRC html
      <!DOCTYPE HTML>
      <HTML>
@@ -222,7 +235,6 @@ Client - Server
      </HTML>
    #+END_SRC
    [[./Source Code/1.html]]
-
 ** 4. font标签
    用来指定文本的字体/大小/颜色
    + color：指定字体的颜色
@@ -523,35 +535,35 @@ Client - Server
      [[./Source Code/10.html]]
 
 * 表单
-   #+BEGIN_SRC html
-     <!DOCTYPE HTML>
-     <HTML>
-       <HEAD>
-         <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="TEXT/HTML";CHARSET="UTF-8" />
-         <TITLE>表单标签</TITLE>
-       </HEAD>
-       <BODY>
-         <FORM ACTION="HTTP://WWW.BAIDU.COM" METHOD="GET">
-           姓名：<INPUT TYPE="TEXT" NAME="USERNAME" />
-           密码：<INPUT TYPE="PASSWORD" NAME="PASSWORD"/>
-           确认密码：<INPUT TYPE="PASSWORD" NAME="REPASSWORD"/>
-           性别：<INPUT TYPE="RADIO" NAME="GENDER" VALUE="MALE"/>男
-           <INPUT TYPE="RADIO" NAME="GENDER" VALUE="FEMALE"/>女
-           爱好：<INPUT TYPE="CHECKBOX" NAME="LIKE" VALUE="EAT"/>吃
-           </BR>
-           <INPUT TYPE="CHECKBOX" NAME="LIKE" VALUE="DRINK"/>喝
-           <INPUT TYPE="CHECKBOX" NAME="LIKE" VALUE="SLEEP"/>睡
-           头像：<INPUT TYPE="FILE" NAME="HEAD" />
-           <INPUT TYPE="BUTTON" VALUE="点击爆炸" ONCLICK=""/>
-           <INPUT TYPE="SUBMIT" />
-           <input type="reset" />
+#+BEGIN_SRC html
+  <!DOCTYPE HTML>
+  <HTML>
+    <HEAD>
+      <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="TEXT/HTML";CHARSET="UTF-8" />
+      <TITLE>表单标签</TITLE>
+    </HEAD>
+    <BODY>
+      <FORM ACTION="HTTP://WWW.BAIDU.COM" METHOD="GET">
+        姓名：<INPUT TYPE="TEXT" NAME="USERNAME" />
+        密码：<INPUT TYPE="PASSWORD" NAME="PASSWORD"/>
+        确认密码：<INPUT TYPE="PASSWORD" NAME="REPASSWORD"/>
+        性别：<INPUT TYPE="RADIO" NAME="GENDER" VALUE="MALE"/>男
+        <INPUT TYPE="RADIO" NAME="GENDER" VALUE="FEMALE"/>女
+        爱好：<INPUT TYPE="CHECKBOX" NAME="LIKE" VALUE="EAT"/>吃
+        </BR>
+        <INPUT TYPE="CHECKBOX" NAME="LIKE" VALUE="DRINK"/>喝
+        <INPUT TYPE="CHECKBOX" NAME="LIKE" VALUE="SLEEP"/>睡
+        头像：<INPUT TYPE="FILE" NAME="HEAD" />
+        <INPUT TYPE="BUTTON" VALUE="点击爆炸" ONCLICK=""/>
+        <INPUT TYPE="SUBMIT" />
+        <input type="reset" />
 
-           <input type="image" src="../image/5.jpg" />
-           <input type="hidden" value="123" />
-         </form>
-       </BODY>
-     </HTML>
-   #+END_SRC
+        <input type="image" src="../image/5.jpg" />
+        <input type="hidden" value="123" />
+      </form>
+    </BODY>
+  </HTML>
+#+END_SRC
 ** 1. 表单
    - 浏览器向服务器发送数据的方式，有两种：
      1. 利用超链接向服务器发送数据 -- 请求参数
@@ -612,201 +624,351 @@ Client - Server
 
 #+END_SRC
 [[./SourceCode/12.html]]
-   表单中可以有多个输入项，输入项必须有name属性才可以被提交，如果输入项没有name属性，则表单在提交时会忽略它
-   - <input>输入框
-     + 重要属性
-       1. type属性
-          |----------------+--------------------------------------------------------------|
-          | 文本框text     | 输入的文本信息直接显示在框中                                 |
-          | 密码框password | 输入的文本以圆点或者星号的形式显示                           |
-          | 单选框radio    | 进行单项的选择如性别选择，多个radio的name属性相同会被当作一  |
-          |                | 来使用，必须yongcalue为选项指定提交的值                      |
-          | 复选框checkbox | 进行多项选择，爱好的选择。多个checkbox具有相同的name属性时   |
-          |                | 会被当作一组类使用必须用value为选项指定提交的值              |
-          | 隐藏字段hidden | 如果有一些信息，不希望用户看见，又希望表单能够提交，就可以用 |
-          |                | 隐藏字段隐含在表单中                                         |
-          | 提交按钮submit | 实现表单提交操作的按钮，可以通过value属性指定按钮显示的文字  |
-          | 重置按钮reset  | 重置表单到初始状态                                           |
-          | 按钮button     | 普通按钮，没有任何功能，需要配合JavaScript为按钮指定具体的   |
-          |                | 行为。可以用value属性指定按钮显示的文字                      |
-          | 文件上传项file | 提供选择文件进行上传的功能                                   |
-          | 图像image      | 利用一张图片替代提交按钮的功能，不常用                       |
-          |----------------+--------------------------------------------------------------|
-       2. name属性
-          表单中可以有多个输入项，输入项必须有name属性才可以被提交，如果输入项没有name属性，则表单在提交时会忽略它，另外name属性的值是可以重复的
-       3. value属性：
-          可以给input输入框设置一个初始值
-       4. readonly属性：
-          使当前输入项变为只读，不能修改，但是提交时仍会被提交
-       5. disabled：
-          使当前输入项不可用，不能修改值，也不会被提交
-       6. size属性：
-          指定当前输入框的宽度
-       7. checked属性；
-          指定单选框/复选框被选中
-   - <textarea>文本域
-     |----------+--------------------------|
-     | 属性     |                          |
-     | raws     | 指定文本域的行数（高度） |
-     | cols     | 指定文本域的列数（宽度） |
-     | readonly | 只读                     |
-     | disabled | 禁用                     |
-     |----------+--------------------------|
-   - <select><option>
-     |--------+-------------------------------------------------------------------------------|
-     | 属性   |                                                                               |
-     | select | 提供下拉选择功能                                                              |
-     | option | 下拉选框中的选项可以用value属性指定提交的值，如果不指定，将会提交标签内的文本 |
-     |--------+-------------------------------------------------------------------------------|
+表单中可以有多个输入项，输入项必须有name属性才可以被提交，如果输入项没有name属性，则表单在提交时会忽略它
+1. <input>输入框
+   1. 重要属性
+      1. type属性
+         | 文本框text     | 输入的文本信息直接显示在框中                                 |
+         | 密码框password | 输入的文本以圆点或者星号的形式显示                           |
+         | 单选框radio    | 进行单项的选择如性别选择，多个radio的name属性相同会被当作一  |
+         |                | 来使用，必须yongcalue为选项指定提交的值                      |
+         | 复选框checkbox | 进行多项选择，爱好的选择。多个checkbox具有相同的name属性时   |
+         |                | 会被当作一组类使用必须用value为选项指定提交的值              |
+         | 隐藏字段hidden | 如果有一些信息，不希望用户看见，又希望表单能够提交，就可以用 |
+         |                | 隐藏字段隐含在表单中                                         |
+         | 提交按钮submit | 实现表单提交操作的按钮，可以通过value属性指定按钮显示的文字  |
+         | 重置按钮reset  | 重置表单到初始状态                                           |
+         | 按钮button     | 普通按钮，没有任何功能，需要配合JavaScript为按钮指定具体的   |
+         |                | 行为。可以用value属性指定按钮显示的文字                      |
+         | 文件上传项file | 提供选择文件进行上传的功能                                   |
+         | 图像image      | 利用一张图片替代提交按钮的功能，不常用                       |
+      2. name属性
+         表单中可以有多个输入项，输入项必须有name属性才可以被提交，如果输入项没有name属性，则表单在提交时会忽略它，另外name属性的值是可以重复的
+      3. value属性：
+         可以给input输入框设置一个初始值
+      4. readonly属性：
+         使当前输入项变为只读，不能修改，但是提交时仍会被提交
+      5. disabled：
+         使当前输入项不可用，不能修改值，也不会被提交
+      6. size属性：
+         指定当前输入框的宽度
+      7. checked属性；
+         指定单选框/复选框被选中
+2. <textarea>文本域
+   | 属性     |                          |
+   | raws     | 指定文本域的行数（高度） |
+   | cols     | 指定文本域的列数（宽度） |
+   | readonly | 只读                     |
+   | disabled | 禁用                     |
+3. <select><option>
+   | 属性   |                                                                               |
+   | select | 提供下拉选择功能                                                              |
+   | option | 下拉选框中的选项可以用value属性指定提交的值，如果不指定，将会提交标签内的文本 |
 
-     |----------+----------------|
-     | 重要属性 |                |
-     | name     | 下拉列表的名称 |
-     | disabled | 禁用下拉选框   |
-     |----------+----------------|
+   | 重要属性 |                |
+   | name     | 下拉列表的名称 |
+   | disabled | 禁用下拉选框   |
 
-     |---------------------+--------------------------------------------------------------------|
-     | 其他属性            |                                                                    |
-     | size                | 设置下拉选项中可见选项的个数                                       |
-     | multiple            | 是否支持多选                                                       |
-     | selected="selected" | 下拉框默认选中                                                     |
-     | value="wuhan"       | option中传递参数的值如果不设置value,则默认传递option标签中间的内容 |
-     |---------------------+--------------------------------------------------------------------|
-** 3. 注册表单练习
-   [[./image/img/zy.png]]
-
-   #+BEGIN_SRC html
-     <!DOCTYPE HTML>
-     <html>
-       <head>
-         <meta http-equiv="content-type" content="text/heml";charset="GBK">
-         <title>注册表单练习</title>
-       </head>
-       <body>
-         <form action="http://localhost:8090" method="post">
-           <table align="center" border="1px" cellpadding="7px" cellspacing="0px" borderColor="#FF1493" bgcolor="#F5DEB3">
-             <caption>
-               <h1><font color="#FF1493">注册表单</font></h1>
-             </caption>
-             <tr>
-               <td>用户名:</td>
-               <td><input type="text" name="username" /></td>
-             </tr>
-             <tr>
-               <td>密码:</td>
-               <td><input type="password" name="password1 /"></td>
-             </tr>
-             <tr>
-               <td>确认密码:</td>
-               <td><input type="password" name="password2" /></td>
-             </tr>
-             <tr>
-               <td>昵称:</td>
-               <td><input type="text" name="nickname" /></td>
-             </tr>
-             <tr>
-               <td>邮箱:</td>
-               <td><input type="text" name="email" /></td>
-             </tr>
-             <tr>
-               <td>头像:</td>
-               <td><input type="file" name="fx" /></td>
-             </tr>
-             <tr>
-               <td>性别:</td>
-               <td>
-                 <input type="radio" name="gender" value="male" />男
-                 <input type="radio" name="gender" value="female" />女
-               </td>
-             </tr>
-             <tr>
-               <td>爱好:</td>
-               <td>
-                 <input type="checkbox" name="like" value="eat" />吃饭
-                 <input type="checkbox" name="like" value="sleep" />睡觉
-                 <input type="checkbox" name="like" value="beat" />打豆豆
-               </td>
-             </tr>
-             <tr>
-               <td>
-                 <select name="city">
-                   <option value="bj">北京</option>
-                   <option value="sh">上海</option>
-                   <option value="gz">广州</option>
-                   <option value="sz">深圳</option>
-                   <option value="tl" selected="selected">铁岭</option>
-                 </select>
-               </td>
-             </tr>
-             <tr>
-               <td>自我介绍:</td>
-               <td>
-                 <textarea name="desc" rows="5" cols="45">请描述个人描述!</textarea>
-               </td>
-             </tr>
-             <tr>
-               <td>验证码:</td>
-               <td>
-                 <input type="text" name="valistr" />
-                 <img src="../image/img/2.gif" width="80px" height="18px" />
-                 <input type="button" value="点我换一张"/>
-               </td>
-             </tr>
-             <tr>
-               <td colspan="2" align="center">
-                 <input type="submit" value="提交"/>
-                 <input type="reset" value="重置"/>
-               </td>
-             </tr>
-           </table>
-         </form>
-       </body>
-     </html>
-   #+END_SRC
-   [[./SourceCode/13.html]]
+   | 其他属性            |                                                                    |
+   | size                | 设置下拉选项中可见选项的个数                                       |
+   | multiple            | 是否支持多选                                                       |
+   | selected="selected" | 下拉框默认选中                                                     |
+   | value="wuhan"       | option中传递参数的值如果不设置value,则默认传递option标签中间的内容 |
+* 注册表单练习
+[[./image/img/zy.png]]
+#+BEGIN_SRC html
+  <!DOCTYPE HTML>
+  <html>
+    <head>
+      <meta http-equiv="content-type" content="text/heml";charset="GBK">
+      <title>注册表单练习</title>
+    </head>
+    <body>
+      <form action="http://localhost:8090" method="post">
+        <table align="center" border="1px" cellpadding="7px" cellspacing="0px" borderColor="#FF1493" bgcolor="#F5DEB3">
+          <caption>
+            <h1><font color="#FF1493">注册表单</font></h1>
+          </caption>
+          <tr>
+            <td>用户名:</td>
+            <td><input type="text" name="username" /></td>
+          </tr>
+          <tr>
+            <td>密码:</td>
+            <td><input type="password" name="password1 /"></td>
+          </tr>
+          <tr>
+            <td>确认密码:</td>
+            <td><input type="password" name="password2" /></td>
+          </tr>
+          <tr>
+            <td>昵称:</td>
+            <td><input type="text" name="nickname" /></td>
+          </tr>
+          <tr>
+            <td>邮箱:</td>
+            <td><input type="text" name="email" /></td>
+          </tr>
+          <tr>
+            <td>头像:</td>
+            <td><input type="file" name="fx" /></td>
+          </tr>
+          <tr>
+            <td>性别:</td>
+            <td>
+              <input type="radio" name="gender" value="male" />男
+              <input type="radio" name="gender" value="female" />女
+            </td>
+          </tr>
+          <tr>
+            <td>爱好:</td>
+            <td>
+              <input type="checkbox" name="like" value="eat" />吃饭
+              <input type="checkbox" name="like" value="sleep" />睡觉
+              <input type="checkbox" name="like" value="beat" />打豆豆
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <select name="city">
+                <option value="bj">北京</option>
+                <option value="sh">上海</option>
+                <option value="gz">广州</option>
+                <option value="sz">深圳</option>
+                <option value="tl" selected="selected">铁岭</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>自我介绍:</td>
+            <td>
+              <textarea name="desc" rows="5" cols="45">请描述个人描述!</textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>验证码:</td>
+            <td>
+              <input type="text" name="valistr" />
+              <img src="../image/img/2.gif" width="80px" height="18px" />
+              <input type="button" value="点我换一张"/>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <input type="submit" value="提交"/>
+              <input type="reset" value="重置"/>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </body>
+  </html>
+#+END_SRC
+[[./SourceCode/13.html]]
+* 注册表单联系2
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Title</title>
+      <style>
+        #center{
+        width: 40%;
+        height: 750px;
+        /*border: 2px solid #FF1493;*//*边框*/
+        margin: 0 auto;/*外边距，上下距离0px 左右距离自动居中*/
+        text-align: center;/*文本居中*/
+        }
+        h1{
+        color: #FF1493;
+        }
+        #register{
+        width: 100%;/*相对于上一级div来说的*/
+        height: 660px;
+        border: 2px solid #FF1493;
+        border-bottom: 0px;/*为了解决底部线条重合问题*/
+        background-color: #F5DEB3;/*注册表单的背景色*/
+        }
+        .rows{
+        width: 100%;
+        height: 53px;/*每一个行的高度*/
+        border-bottom: 2px solid #FF1493;/*每一行的底边显示*/
+        line-height: 53px;/*行高垂直居中*/
+        }
+        .cols1{
+        width: 30%;
+        height: 53px;
+        border-right: 2px solid #FF1493;
+        float: left;/*div飘逸到左边*/
+        }
+        .cols2{
+        width: 68%;
+        height: 53px;
+        /*border: 2px solid black;*//*做测试使用*/
+        float: right;/*div飘逸到右边*/
+        }
+        textarea{
+        resize: none;/*进制拖拽文本域的大小*/
+        }
+      </style>
+    </head>
+    <body>
+      <div id="center">
+        <h1>注册表单</h1>
+        <div id="register">
+          <form>
+            <div class="rows">
+              <div class="cols1">
+                用户名:
+              </div>
+              <div class="cols2">
+                <input type="text" name="username" />
+              </div>
+            </div>
+            <div class="rows">
+              <div class="cols1">
+                密码:
+              </div>
+              <div class="cols2">
+                <input type="password" name="password" />
+              </div>
+            </div>
+            <div class="rows">
+              <div class="cols1">
+                确认密码:
+              </div>
+              <div class="cols2">
+                <input type="password" name="password1" />
+              </div>
+            </div>
+            <div class="rows">
+              <div class="cols1">
+                昵称:
+              </div>
+              <div class="cols2">
+                <input type="text" name="name" />
+              </div>
+            </div>
+            <div class="rows">
+              <div class="cols1">
+                邮箱:
+              </div>
+              <div class="cols2">
+                <input type="text" name="email" />
+              </div>
+            </div>
+            <div class="rows">
+              <div class="cols1">
+                上传头像:
+              </div>
+              <div class="cols2">
+                <input type="file" name="file" />
+              </div>
+            </div>
+            <div class="rows">
+              <div class="cols1">
+                性别:
+              </div>
+              <div class="cols2">
+                <input type="radio" name="gender" value="male" />男
+                <input type="radio" name="gender" value="female" />女
+              </div>
+            </div>
+            <div class="rows">
+              <div class="cols1">
+                爱好:
+              </div>
+              <div class="cols2">
+                <input type="checkbox" name="hobby" value="eat" />吃饭
+                <input type="checkbox" name="hobby" value="sleep" />睡觉
+                <input type="checkbox" name="hobby" value="play" />打豆豆
+              </div>
+            </div>
+            <div class="rows">
+              <div class="cols1">
+                所在城市:
+              </div>
+              <div class="cols2">
+                <select>
+                  <option> 上海</option>
+                  <option> 北京</option>
+                  <option> 广州</option>
+                </select>
+              </div>
+            </div>
+            <div class="rows">
+              <div class="cols1">
+                自我介绍:
+              </div>
+              <div class="cols2">
+                <textarea maxlength="50" cols="33" rows="3">最多写50个字符</textarea>
+              </div>
+            </div>
+            <div class="rows">
+              <div class="cols1">
+                验证码:
+              </div>
+              <div class="cols2">
+                <input type="text" name="check" />
+                <img src="" alt="" />
+                <input type="button" value="点我" />
+              </div>
+            </div>
+            <div class="rows">
+              <div class="cols3">
+                <input type="submit" />
+                <input type="reset" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </body>
+  </html>
+#+END_SRC
+[[./SourceCode/70.html]]
 * CSS
+[[./Img/day02css&js.png]]
 ** 1. 网页组织的两种常用方式
-   - 表格套表格定义网页结构 -- 目前不只是主流，只在一些结构简单的页面中有所使用
-   - DIV+CSS方式定义网页结构 -- 目前主流的网页开发方法，可以非常灵活的定义网页
+1. 表格套表格定义网页结构 -- 目前不只是主流，只在一些结构简单的页面中有所使用
+2. DIV+CSS方式定义网页结构 -- 目前主流的网页开发方法，可以非常灵活的定义网页
 ** 2. 容器标签
-   本身没有任何特殊的能力，最主要的功能是用来包含其他标签组成一个整体
-   |----------------+----------+----------------------------------------------|
-   | 常用的容器标签 |          |                                              |
-   | <div>          | 块级元素 | 内容自动的开始一个新行                       |
-   | <span>         | 行内元素 | 多个行内元素不会要求独占一行                 |
-   | <p>            | 块级元素 | 声明一个段落，会在当前段落前后多出额外的空行 |
-   |----------------+----------+----------------------------------------------|
-
-   #+BEGIN_SRC html
-     <!DOCTYPE html>
-     <html>
-       <head>
-         <meta http="equiv=Content-type" content="text/html" charset="UTF-8" />
-         <title>div盒子模型</title>
-       </head>
-       <body>
-         <div>我是div</div>
-         <div>我是div</div>
-         <p>我是一个p标签</p>
-         <p>我是一个p标签</p>
-         <span>我是一个span</span>
-         <span>我是一个span</span>
-         <span>我是一个span</span>
-       </body>
-     </html>
-
-   #+END_SRC
-
+本身没有任何特殊的能力，最主要的功能是用来包含其他标签组成一个整体
+|----------------+----------+----------------------------------------------|
+| 常用的容器标签 |          |                                              |
+| <div>          | 块级元素 | 内容自动的开始一个新行                       |
+| <span>         | 行内元素 | 多个行内元素不会要求独占一行                 |
+| <p>            | 块级元素 | 声明一个段落，会在当前段落前后多出额外的空行 |
+|----------------+----------+----------------------------------------------|
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta http="equiv=Content-type" content="text/html" charset="UTF-8" />
+      <title>div盒子模型</title>
+    </head>
+    <body>
+      <div>我是div</div>
+      <div>我是div</div>
+      <p>我是一个p标签</p>
+      <p>我是一个p标签</p>
+      <span>我是一个span</span>
+      <span>我是一个span</span>
+      <span>我是一个span</span>
+    </body>
+  </html>
+#+END_SRC
 ** 3. CSS的概念
-   层叠样式表：实现了网页中数据和样式的分离，是网页结构更加明晰，解决了样式重复定义的问题，提高了开发效率和后期代码的可维护性，另外还增强了网页的没画能力。
+层叠样式表：实现了网页中数据和样式的分离，是网页结构更加明晰，解决了样式重复定义的问题，提高了开发效率和后期代码的可维护性，另外还增强了网页的没画能力。
 ** 4. CSS的四种引入方式
-   - 方式一：通过style属性指定元素的样式
+1. 方式一：通过style属性指定元素的样式
      #+BEGIN_SRC html
        <p style="background-color:#FF0000; color:#FFFFFF">
          p标签段落内容
        </p>
      #+END_SRC
-   - 方式二：通过<style>定义样式，可以在html的<hesd>标签中定义<style>标签，在其中为当前页面设定样式
+2. 方式二：通过<style>定义样式，可以在html的<hesd>标签中定义<style>标签，在其中为当前页面设定样式
      #+BEGIN_SRC html
        <!DOCtype html>
        <html>
@@ -827,7 +989,7 @@ Client - Server
        </html>
      #+END_SRC
      [[./SourceCode/14.html]]
-   - 方式三：引入外部样式文件，可以在html的<head>标签中定义<link>标签，引入外部的css文件来修饰当前页面
+3. 方式三：引入外部样式文件，可以在html的<head>标签中定义<link>标签，引入外部的css文件来修饰当前页面
      #+BEGIN_SRC html
        <!DOCtype html>
        <html>
@@ -855,7 +1017,7 @@ Client - Server
            background:#FFAADD;
        }
      #+END_SRC
-   - 方式四：可以通过@import url(xxx.css)在css的内部引入一个css文件钟定一的css样式片段。可以实现css代码的引入从而实现css代码的复用
+4. 方式四：可以通过@import url(xxx.css)在css的内部引入一个css文件钟定一的css样式片段。可以实现css代码的引入从而实现css代码的复用
      #+BEGIN_SRC html
        <!DOCtype html>
        <html>
@@ -880,81 +1042,203 @@ Client - Server
        }
      #+END_SRC
 ** 5. CSS引入顺序
-   a. 样式引入的位置距离标签越近，就优先生效
-   b. 样式修改选择器书写越具体，越优先生效
-** 6. CSS基本选择器
-   - 标签选择器
-     通过html标签的名字来选择标签的选择器；标签名{}
-     #+BEGIN_SRC css
-       div{
-       color:red;
-       }
-       ,*{
-       color:red;
-       }
-     #+END_SRC
-   - 类选择器
-     html的所有标签都具有一个通用的属性叫做class,通过它可以为标签指定类名，通过类选择器可以选择指定类名的元素；.类名{}
-     #+BEGIN_SRC html
-       <!DOCtype html>
-       <html>
-         <head>
-           <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
-           <title>div盒子模型+css层叠样式表</title>
-           <style type="text/css">
-             #div1{
-             color:#ABC123;
-             background:#123ABC;
-             }
-             .class1{
-             color:#DDC123;
-             background:#12FFBC;
-             }
-           </style>
-         </head>
-         <body>
-           <div id="div1">我是第一个div</div>
-           <div id="div2" class="class1">我是第二个div</div>
-           <div>我是一个div</div>
-           <span class="class1">我是一个span</span>
-           <span>我是一个span</span>
-           <span>我是一个span</span>
-         </body>
-       </html>
-     #+END_SRC
-     [[./SourceCode/18.html]]
-   - id选择器
-     html的所有标签都具有一个通用的属性叫做id，通过它可以为标签指定id，id必须在整个html中唯一，通过id选择器可以选择出指定id的元素；#id{}
-     #+BEGIN_SRC html
-       <!DOCtype html>
-       <html>
-         <head>
-           <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
-           <title>div盒子模型+css层叠样式表</title>
-           <style type="text/css">
-             @import url('./17.css');
-             #div1{
-             color:#ABC123;
-             background:#123ABC;
-             }
-             #div2{
-             color:#CDA124;
-             background:#124CDA;
-             }
-           </style>
-         </head>
-         <body>
-           <div id="div1">我是第一个div</div>
-           <div id="div2">我是第二个div</div>
-           <div>我是一个div</div>
-         </body>
-       </html>
-     #+END_SRC
-     [[./SourceCode/17.html]]
-** 7. CSS扩展选择器
-   - 后代选择器
-     选择父元素中的后代元素；父元素选择器 后代元素选择器{}
-     #+BEGIN_SRC html
+1. 样式引入的位置距离标签越近，就优先生效
+2. 样式修改选择器书写越具体，越优先生效
+** 6. CSS选择器的分类
+*** 1. 基本选择器
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>css01-css选择器</title>
+      <style>/*内嵌样式表*/
+
+        /* 1.元素选择器：根据标签名，选择同一类型呃标签 */
+        /* 语法格式：  标签名{}   */
+        div{
+        color:pink;
+        background-color:yellow;
+        }
+
+        /* 2.id选择器：每一个html标签都一个id属性，id是标签的唯一表示 */
+        /*  语法格式: #id属性的值{}  */
+        #d1{
+        color:while;
+        background-color:black;
+        }
+
+        /* 3.class选择器:类选择器，根据标签中的class属性选择，可选多个 */
+        /* 语法格式： .class属性的值{}  */
+        .c1{
+        color:red;
+        }
+      </style>
+    </head>
+    <body>
+      <!--容器标签-->
+      <div>我是一个块级元素，测试元素选择器</div>
+      <div>我是一个块级元素，测试元素选择器</div>
+      <div id="d1">我是一个块级元素，测试元素选择器</div>
+      <div>我是一个块级元素，测试元素选择器</div>
+      <div class="c1">我是一个块级元素，测试元素选择器</div>
+      <div class="c1">我是一个块级元素，测试元素选择器</div>
+      <div class="c1">我是一个块级元素，测试元素选择器</div>
+    </body>
+  </html>
+#+END_SRC
+1. 标签选择器(内嵌样式表)
+   通过html标签的名字来选择标签的选择器；标签名{}
+   #+BEGIN_SRC css
+     div{
+         color:red;
+         }
+         ,*{
+         color:red;
+         }
+   #+END_SRC
+2. 类选择器
+   html的所有标签都具有一个通用的属性叫做class,通过它可以为标签指定类名，通过类选择器可以选择指定类名的元素；.类名{}
+   #+BEGIN_SRC html
+     <!DOCtype html>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
+         <title>div盒子模型+css层叠样式表</title>
+         <style type="text/css">
+           #div1{
+           color:#ABC123;
+           background:#123ABC;
+           }
+           .class1{
+           color:#DDC123;
+           background:#12FFBC;
+           }
+         </style>
+       </head>
+       <body>
+         <div id="div1">我是第一个div</div>
+         <div id="div2" class="class1">我是第二个div</div>
+         <div>我是一个div</div>
+         <span class="class1">我是一个span</span>
+         <span>我是一个span</span>
+         <span>我是一个span</span>
+       </body>
+     </html>
+   #+END_SRC
+   [[./SourceCode/18.html]]
+3. id选择器
+   html的所有标签都具有一个通用的属性叫做id，通过它可以为标签指定id，id必须在整个html中唯一，通过id选择器可以选择出指定id的元素；#id{}
+   #+BEGIN_SRC html
+     <!DOCtype html>
+        <html>
+          <head>
+            <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
+            <title>div盒子模型+css层叠样式表</title>
+            <style type="text/css">
+              @import url('./17.css');
+              #div1{
+              color:#ABC123;
+              background:#123ABC;
+              }
+              #div2{
+              color:#CDA124;
+              background:#124CDA;
+              }
+            </style>
+          </head>
+          <body>
+            <div id="div1">我是第一个div</div>
+            <div id="div2">我是第二个div</div>
+            <div>我是一个div</div>
+          </body>
+        </html>
+   #+END_SRC
+   [[./SourceCode/17.html]]
+*** 2. 扩展选择器
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>css01-css选择器</title>
+      <style>/*内嵌样式表*/
+        /* 1.后代选择器：html标签由多层嵌套关系，不止有子节点，还有孙子节点等等 */
+        div span{
+        color:blue;
+        }
+
+        /* 2.子元素选择器：选择特定的标签的子节点，不包含孙子节点 */
+        /* 语法格式： 父节点
+        #d2>p{
+        color:red;
+        }
+
+        /* 6.分组选择器：可以同时选择多个不同的标签，分成一组设置样式 */
+        span,p{
+        color:green;
+        }
+
+        /* 7.属性选择器 */
+        /* 包含所有属性type的标签 */
+        ,*[type]{
+        background-color:yellow;
+        }
+
+        /* 可以选择指定标签的某个属性 */
+        input[value]{
+        background-color:green;
+        }
+
+        /* 可以选择指定标签的某个 属性='值'的形式 */
+        input[name='password']{
+        background-color:pink;
+        }
+
+        /* 可以选择指定标签的 多个 属性键值对 的形式 */
+        input[type][name][value]{
+        background-color:black;
+
+        /* 8.伪元素选择器："伪" 指的是html已经为我们提供好的选择器*/
+        a:link{
+        /*未被点击的状态*/
+        background-color:brown;
+        }
+        a:visited{
+        /*被点击过的状态 */
+        background-color:yellow;
+        }
+        a:hover{
+        /* 鼠标停留的状态 */
+        background-color:green;
+        }
+        a:active{
+        /* 鼠标正在点击的状态 */
+        bakcground-color:red;
+        }
+      </style>
+    </head>
+    <body>
+      <!--页面的布局是嵌套的形式-->
+      <div id="d2">
+        测试后代选择器
+        <div>这是子节点div
+          <span>这是孙子节点span</span>
+          <p>这是孙子子节点</p>
+        </div>
+        <span>这是子节点span</span>
+        <p>这是子节点P</p>
+      </div>
+      <input type="text" name="username" value="测试"/>
+      <input type="text" name="password" />
+      <input type="text" name="email" />
+      <a href="#">测试伪元素选择器</a>
+    </body>
+  </html>
+#+END_SRC
+1. 后代选择器
+   选择父元素中的后代元素；父元素选择器 后代元素选择器{}
+   #+BEGIN_SRC html
        <!DOCtype html>
        <html>
          <head>
@@ -977,135 +1261,133 @@ Client - Server
            </div>
          </body>
        </html>
-     #+END_SRC
-     [[./SourceCode/19.html]]
-   - 子元素选择器
-     选择父元素中的子元素；父元素选择器>子元素的选择器{}
-     #+BEGIN_SRC html
-       <!DOCtype html>
-       <html>
-         <head>
-           <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
-           <title>div盒子模型+css层叠样式表</title>
-           <style type="text/css">
-             div>span{
-             color:#DDAA11;
-             background:#FFAADD;
-             }
-           </style>
-         </head>
-         <body>
-           <div id="div1">我是父级div
-             <span class="test">我是div儿子span1</span>
-             <span class="test">我是div儿子span2</span>
-             <p>
-               <span class="test">我是p儿子span3</span>
-             </p>
+   #+END_SRC
+   [[./SourceCode/19.html]]
+2. 子元素选择器
+   选择父元素中的子元素；父元素选择器>子元素的选择器{}
+   #+BEGIN_SRC html
+     <!DOCtype html>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
+         <title>div盒子模型+css层叠样式表</title>
+         <style type="text/css">
+           div>span{
+           color:#DDAA11;
+           background:#FFAADD;
+           }
+         </style>
+       </head>
+       <body>
+         <div id="div1">我是父级div
+           <span class="test">我是div儿子span1</span>
+           <span class="test">我是div儿子span2</span>
+           <p>
+             <span class="test">我是p儿子span3</span>
+           </p>
+         </div>
+       </body>
+     </html>
+   #+END_SRC
+   [[./SourceCode/20.html]]
+3. 相邻兄弟选择器
+   选择选择器选择到的元素的相邻的兄弟元素;选择器+兄弟元素名{}
+   #+BEGIN_SRC html
+     <!DOCtype html>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
+         <title>div盒子模型+css层叠样式表</title>
+         <style type="text/css">
+           div+span{
+           color:#DDAA11;
+           background:#FFAADD;
+           }
+         </style>
+       </head>
+       <body>
+         <div id="div1">我是父级div
+           <div id="test" class="test">
+             我是儿子div
            </div>
-         </body>
-       </html>
-     #+END_SRC
-     [[./SourceCode/20.html]]
-   - 相邻兄弟选择器
-     选择选择器选择到的元素的相邻的兄弟元素
-     选择器+兄弟元素名{}
-     #+BEGIN_SRC html
-       <!DOCtype html>
-       <html>
-         <head>
-           <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
-           <title>div盒子模型+css层叠样式表</title>
-           <style type="text/css">
-             div+span{
-             color:#DDAA11;
-             background:#FFAADD;
-             }
-           </style>
-         </head>
-         <body>
-           <div id="div1">我是父级div
-             <div id="test" class="test">
-               我是儿子div
-             </div>
-             <span class="test">我是div儿子span1</span>
-             <span class="test">我是div儿子span2</span>
-             <p>
-               <span class="test">我是p儿子span3</span>
-             </p>
-           </div>
-         </body>
-       </html>
-     #+END_SRC
-     [[./SourceCode/21.html]]
-   - 属性选择器
-     选择具有指定属性，或指定属性的值等于指定值的选择器；
-     1. 选择器[属性名]{}
-        div[name]{}
-        #+BEGIN_SRC html
-          <!DOCtype html>
-          <html>
-            <head>
-              <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
-              <title>div盒子模型+css层叠样式表</title>
-              <style type="text/css">
-                div[name]{
-                color:#DDAA11;
-                background:#FFAADD;
-                }
-              </style>
-            </head>
-            <body>
-              <div id="div1">我是父级div
-                <div id="test" class="test" name="ll">
-                  我是儿子div
-                </div>
-                <span class="test">我是div儿子span1</span>
-                <span class="test">我是div儿子span2</span>
-                <p>
-                  <span class="test">我是p儿子span3</span>
-                </p>
+           <span class="test">我是div儿子span1</span>
+           <span class="test">我是div儿子span2</span>
+           <p>
+             <span class="test">我是p儿子span3</span>
+           </p>
+         </div>
+       </body>
+     </html>
+   #+END_SRC
+   [[./SourceCode/21.html]]
+4. 属性选择器
+   选择具有指定属性，或指定属性的值等于指定值的选择器；
+   1. 选择器[属性名]{}
+      div[name]{}
+      #+BEGIN_SRC html
+        <!DOCtype html>
+        <html>
+          <head>
+            <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
+            <title>div盒子模型+css层叠样式表</title>
+            <style type="text/css">
+              div[name]{
+              color:#DDAA11;
+              background:#FFAADD;
+              }
+            </style>
+          </head>
+          <body>
+            <div id="div1">我是父级div
+              <div id="test" class="test" name="ll">
+                我是儿子div
               </div>
-              <div idi="test" class="test" name="ll">
-                单独div
+              <span class="test">我是div儿子span1</span>
+              <span class="test">我是div儿子span2</span>
+              <p>
+                <span class="test">我是p儿子span3</span>
+              </p>
+            </div>
+            <div idi="test" class="test" name="ll">
+              单独div
+            </div>
+          </body>
+        </html>
+      #+END_SRC
+      [[./SourceCode/22.html]]
+   2. 选择器[属性名='属性值']{}
+      div[name='ll']{}
+      #+BEGIN_SRC html
+        <!DOCtype html>
+        <html>
+          <head>
+            <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
+            <title>div盒子模型+css层叠样式表</title>
+            <style type="text/css">
+              div[name='ll']{
+              color:#DDAA11;
+              background:#FFAADD;
+              }
+            </style>
+          </head>
+          <body>
+            <div id="div1">我是父级div
+              <div id="test" class="test" name="ll">
+                我是儿子div
               </div>
-            </body>
-          </html>
-        #+END_SRC
-        [[./SourceCode/22.html]]
-     2. 选择器[属性名='属性值']{}
-        div[name='ll']{}
-        #+BEGIN_SRC html
-          <!DOCtype html>
-          <html>
-            <head>
-              <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
-              <title>div盒子模型+css层叠样式表</title>
-              <style type="text/css">
-                div[name='ll']{
-                color:#DDAA11;
-                background:#FFAADD;
-                }
-              </style>
-            </head>
-            <body>
-              <div id="div1">我是父级div
-                <div id="test" class="test" name="ll">
-                  我是儿子div
-                </div>
-                <span class="test">我是div儿子span1</span>
-                <span class="test">我是div儿子span2</span>
-                <p>
-                  <span class="test">我是p儿子span3</span>
-                </p>
-              </div>
-              <div idi="test" class="test" name="ll">
-                单独div
-              </div>
-            </body>
-          </html>
-        #+END_SRC
-        [[./SourceCode/23.html]]
-
+              <span class="test">我是div儿子span1</span>
+              <span class="test">我是div儿子span2</span>
+              <p>
+                <span class="test">我是p儿子span3</span>
+              </p>
+            </div>
+            <div idi="test" class="test" name="ll">
+              单独div
+            </div>
+          </body>
+        </html>
+      #+END_SRC
+      [[./SourceCode/23.html]]
      如果希望把包含属性(tittile)的所有元素变为红色，可以写作：
      #+BEGIN_SRC html
        ,*[tittle]{color:red;}
@@ -1128,488 +1410,368 @@ Client - Server
        <planet moons="1">Earth</planet>
        <planet moons="2">Mars</planet>
      #+END_SRC
-   - 分组选择器
-     将多个选择器的选择结果进行一个或的操作;选择器1，选择器2...{}
-     #+BEGIN_SRC html
-       p,div{color:#FF0000;}
-       <p>P标签显示段落</p>
-       <div>DIV标签显示段落</div>
-     #+END_SRC
-     + 注：读个不同选择器要用都好分隔开
-        #+END_SRC
-   - 伪元素选择器
-     其实就在html中预先定义好的一些选择器，成为伪元素。是因为CSS的术语
-     |----------+------------------------------------------|
-     | :link    | 未点击的状态                             |
-     | :visited | 被点击的状态                             |
-     | :hover   | 鼠标移动到元素之上，但是仍然未点击的状态 |
-     | :active  | 被鼠标点击着的状态                       |
-     |----------+------------------------------------------|
-     + 注：在不设置visited状态时active生效，否则会出现visited覆盖active效果
-
-       #+BEGIN_SRC html
-         <!DOCtype html>
-         <html>
-           <head>
-             <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
-             <title>div盒子模型+css层叠样式表</title>
-             <style type="text/css">
-               a:link{
-               color:#DDAA11;
-               background:#FFAADD;
-               }
-               a:visited{
-               color:#AABB21;
-               background:#FDFADD;
-               }
-               a:hover{
-               color:#AFFB21;
-               background:#AAFADD;
-               }
-               a:active{
-               color:#BBFF21;
-               background:#BBFADD;
-               }
-               div:hover{
-               color:#AFFB21;
-               background:#AAFADD;
-               }
-             </style>
-           </head>
-           <body>
-             <div id="div1">我是父级div
-               <div id="test" class="test" name="ll">
-                 我是儿子div
-               </div>
-               <span class="test">我是div儿子span1</span>
-               <span class="test">我是div儿子span2</span>
-               <p>
-                 <span class="test">我是p儿子span3</span>
-               </p>
-             </div>
-             <div idi="test" class="test" name="ll">
-               单独div
-             </div>
-             <a href="#">点击跳转</a>
-           </body>
-         </html>
-       #+END_SRC
-       [[./SourceCode/24.html]]
+5. 分组选择器
+   将多个选择器的选择结果进行一个或的操作;选择器1，选择器2...{}
+   #+BEGIN_SRC html
+     p,div{color:#FF0000;}
+     <p>P标签显示段落</p>
+     <div>DIV标签显示段落</div>
+   #+END_SRC
+   + 注：读个不同选择器要用都好分隔开
+6. 伪元素选择器
+   其实就在html中预先定义好的一些选择器，成为伪元素。是因为CSS的术语
+   |----------+------------------------------------------|
+   | :link    | 未点击的状态                             |
+   | :visited | 被点击的状态                             |
+   | :hover   | 鼠标移动到元素之上，但是仍然未点击的状态 |
+   | :active  | 被鼠标点击着的状态                       |
+   |----------+------------------------------------------|
+   + 注：在不设置visited状态时active生效，否则会出现visited覆盖active效果
+   #+BEGIN_SRC html
+     <!DOCtype html>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html" charset="UTF-8" />
+         <title>div盒子模型+css层叠样式表</title>
+         <style type="text/css">
+           a:link{
+           color:#DDAA11;
+           background:#FFAADD;
+           }
+           a:visited{
+           color:#AABB21;
+           background:#FDFADD;
+           }
+           a:hover{
+           color:#AFFB21;
+           background:#AAFADD;
+           }
+           a:active{
+           color:#BBFF21;
+           background:#BBFADD;
+           }
+           div:hover{
+           color:#AFFB21;
+           background:#AAFADD;
+           }
+         </style>
+       </head>
+       <body>
+         <div id="div1">我是父级div
+           <div id="test" class="test" name="ll">
+             我是儿子div
+           </div>
+           <span class="test">我是div儿子span1</span>
+           <span class="test">我是div儿子span2</span>
+           <p>
+             <span class="test">我是p儿子span3</span>
+           </p>
+         </div>
+         <div idi="test" class="test" name="ll">
+           单独div
+         </div>
+         <a href="#">点击跳转</a>
+       </body>
+     </html>
+   #+END_SRC
+   [[./SourceCode/24.html]]
 ** 8. 拓展：CSS中的常用属性简介
-* JavaScript
-** 1. js概述
-   - 基于对象的一门语言
-   - 一门独立的语言
-   - 脚本语言，没有编译过程，解释运行
-   - 主要应用在客户端，在服务器也有应用（node.js）
-   - 特点：
-     1. 脚本语言没有编译过程
-     2. 基于对象
-     3. 弱类型
-   - 特性
-     1. 交互性
-     2. 安全性
-     3. 跨平台性
-** 2. JavaScript不得不说的历史
+* JS、DHTML
+[[./Img/day03js.png]]
+** JavaScript
+*** 1. js概述
+#+BEGIN_SRC
+  - 基于对象的一门语言
+  - 一门独立的语言
+  - 脚本语言，没有编译过程，解释运行
+  - 主要应用在客户端，在服务器也有应用（node.js）
+#+END_SRC
+1. 特点：
+   - 脚本语言没有编译过程
+   - 基于对象
+   - 弱类型
+2. 特性
+   - 交互性
+   - 安全性
+   - 跨平台性
+*** 2. JavaScript不得不说的历史
    - 和java的关系：语法十分相似，但毫无关系
    - 1995年5月，Netscape，LiveScript
    - 1995年12月，改名为JavaScript
    - 1996年8月，微软，Jscript
    - 1997-1999年，ECMA，ECMAScript，基于已有的JavaScript和Jscript，提出了标准的Script语法规则，JavaScript和Jscript都遵循这套标准
-** 3. js和html的结合
-   - 引入方式
-     1. 将javascript书写在head标签当中，书写格式如下：
-        <script type = "text/javascript"></script>
-        #+BEGIN_SRC html
-          <!DOCTYPE heml>
-          <html>
-            <head>
-              <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-              <title>js引入</title>
-              <!--js引入方式一:-->
-              <script type="text/javascript">
-                alert("aaaa");
-                console.log("aaa");
-              </script>
-            </head>
-            <body>
-            </body>
-          </html>
-         #+END_SRC
-        [[./SourceCode/25.html]]
-     2. 单独写一个js文件，然后导入
-        #+BEGIN_SRC html
-          <!DOCTYPE heml>
-          <html>
-            <head>
-              <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-              <title>js引入</title>
-              <!--js引入方式一:-->
-              <script type="text/javascript">
-                alert("aaaa");
-                alert("bbbb");
-                alert("cccc");
-                console.log("aaa");
-              </script>
-            </head>
-            <body>
-            </body>
-          </html>
-        #+END_SRC
-        [[./SourceCode/26.html]]
-   - 浏览器中内置一个js解析器，会对浏览器加载到的js语句逐行执行，如果当前js语句没有添加分号，则js解析器会自动拼接上一个分号。注意：在这里建议大家手动添加分号，避免以后js语言和java语言相互切换使用的时候出现一些不必要的错误
-   - 浏览器中内置的js解析器会逐行执行js代码，如果代码中书写有错误，则会导致js代码失效，可能全部的js代码效果无法正常执行
-   - script标签必须要书写成一个标签对，不可以写成一个自闭标签。如果写成一个自闭标签则会导致标签中的js代码无法正常执行
-** 4. console.log使用：
-   - 在script标签中添加console.log()语句，在括号中间可以添加要输出的数据，这些数据会最终显示在浏览器控制台中
-** 5. js的语法-数据类型
-   KS中的数据类型分为基本数据类型和复杂数据类型
-   - 基本数据类型：共五种
-     数值类型（Number）、字符串（String）、布尔类型（Boolean）、undefined、null
-     1. Number数值型
-        不仅是一个数据类型，还是js的一个包装对象
-        #+BEGIN_SRC html
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-              <title>js基本数据类型</title>
-              <script type="text/javascript">
-                //1.Number
-                console.log(Number.MAX_VALUE);
-                console.log(Number.MIN_VALUE);
-                console.log(Number.POSITIVE_INFINITY);
-                console.log(Number.NEGATIVE_INFINITY);
-                console.log(Infinity);
-                console.log(-Infinity);
-                console.log(NaN==NaN);
-                console.log(NaN=="abc");
-                console.log(NaN==123));
-                console.log(isNaN(123);
-                console.log(isNaN("abc"));
-              </script>
-            </head>
-            <body>
-            </body>
-          </html>
-        #+END_SRC
-        [[./SourceCode/27.html]]
-        - 数值类型中有如下几个特殊值
-          + Infinity无穷大
-            -Infinity负无穷大
-        - NaN非数字，非数字非常特殊，和任何职都不相等，包括自身，即NaN==NaN的值为false。可以通过isNaN()判断某值是否为数字，true彪啊是确实为非数字的值，false表示为数字的值
-        - 数值类型是基本数据类型，但JS本身提供了对应的包装对象Number，具有和数值处理相关的属性和方法
+*** 3. js和html的结合
+1. 将javascript书写在head标签当中，书写格式如下：
+2. 单独写一个js文件，然后导入
+3. 写在页面的底部
+- 浏览器中内置一个js解析器，会对浏览器加载到的js语句逐行执行，如果当前js语句没有添加分号，则js解析器会自动拼接上一个分号。注意：在这里建议大家手动添加分号，避免以后js语言和java语言相互切换使用的时候出现一些不必要的错误
+- 浏览器中内置的js解析器会逐行执行js代码，如果代码中书写有错误，则会导致js代码失效，可能全部的js代码效果无法正常执行
+- script标签必须要书写成一个标签对，不可以写成一个自闭标签。如果写成一个自闭标签则会导致标签中的js代码无法正常执行
+*** 4. js输出方式
+#+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html lang="en">
+       <head>
+         <meta charset="utf-8">
+         <title>js02-输出语句</title>
+         <!--四种输出写法-->
+         <script>
+           /* 1.弹窗打印 */
+           alert(1);
+           /* 2.浏览器的控制台打印：主要为了打桩测试 */
+           console.log("hahaha");
+           /* 3.向浏览器的body中输出信息 */
+           document.write("您好，JavaScript");
+         </script>
+       </head>
+       <body>
+         <p id="p1">测试段落</p>
+       </body>
+       <script>
+         /* 4.对html页面的某一个标签做修改 */
+         document.getElementById("p1").innerText="这是新的内容";
+       </script>
+     </html>
+#+END_SRC
+*** 5. js的语法-数据类型
+JS中的数据类型分为基本数据类型和复杂数据类型
+**** 1. 基本数据类型：共六种
+数值类型（Number）、字符串（String）、布尔类型（Boolean）、undefined、null、Symbol
+[[./SourceCode/71.html]]
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>js04-基本数据类型</title>
+      <script>
+        /* 1.Number类型：表示数值类型，并为数值之间的转换提供方法 */
+        //1.1 常用的属性
+        console.log(Number.MAX_VALUE);//最大值1.7976931348623157e+308
+        console.log(Number.MIN_VALUE);//最小值5e-324
+        console.log(Number.POSITIVE_INFINITY);//超出最大值是无穷大
+        console.log(Number.NEGATIVE_INFINITY);//无穷小
+        console.log(Number.NaN);//非数字
+
+        //1.2 Number的精度问题
+        var a = 0.9;
+        var b = 0.999999999999;
+        console.log(a);
+        console.log(b);
+        var a1 = 0.1;
+        var a2 = 0.2;
+        console.log(a1+a2);
+
+        //1.3 Number类型的数值：底层默认都是浮点型
+        var a3 = 10;
+        var a4 = 10.0;
+        console.log(typeof a3);
+        console.log(typeof a4);
+
+        //1.4 Number类型的八进制与十六进制
+        var n1 = 0o377;//前缀是0或者0o
+        var n2 = 0xddd;//十六进制前缀 0x
+
+        //1.5 判断一个数值是否为数字
+        console.log(isNaN(123));//false就是表示非数字，true表示数字
+      </script>
+      <script>
+        /* 2.String类型：字符串 */
+        //2.1 String的属性：length长度
+        var s1 = "这是一个字符串";
+        console.log(s1.length);
+        //2.2 String的常用方法:indexOf
+        console.log(s1.indexOf("个"));
+        //2.2 字符串的索引:s1[],返回结果是下标对应的某一个字符
+        console.log(s1[3]);
+        //2.3 字符串的匹配：s1.match()
+        // 返回结果如果匹配上返回匹配的结果对象
+        // 如果没有匹配上返回匹配的结果null
+        var s2 = s1.match("一");
+        console.log(s2);
+        //2.4 字符串的拆分,返回结果是一个数组
+        console.log(s1.split(""));
+        //2.5 字符串的大小写转化
+        var s3 = "asdfgsafSDSDFSFF";
+        console.log(s3.toLowerCase());//转为小写
+        console.log(s3.toUpperCase());//转为大写
+
+        /* 3.Boolean布尔类型：true、false */
+        var b1 = true;
+        var b2 = false;
+        console.log(b1 && b2);//并且，结果false
+        console.log(b1 || b2);//或者，结果true
+        console.log(b1 | b2);//结果 1 表示就是true
+        console.log(b1 & b2);//结果 0 表示就是false
+      </script>
+      <script>
+        /* 4.Null:空类型，什么都没有 */
+        var x1 = null;
+        console.log(x1);
+        /* 这里的方法IsNull是官方文档中提供的，如果位null返回true，如果不为null返回false */
+        console.log(isNull(x1));
+      </script>
+      <script>
+        /* 5.Undefined：未定义，声明变量时没有直接初始化 */
+        var x2;
+        console.log(x2);
+      </script>
+      <script>
+        /* 6.Symbol类型：唯一性，数值不相等 */
+        var m1 = Symbol(1);
+        var m2 = Symbol(1);
+        console.log(m1 === m2);//结果false
+      </script>
+    </head>
+    <body>
+    </body>
+  </html>
+#+END_SRC
+1. Number数值型
+   不仅是一个数据类型，还是js的一个包装对象
+   - 数值类型中有如下几个特殊值
+     + Infinity无穷大
+     - Infinity负无穷大
+   - NaN非数字，非数字非常特殊，和任何职都不相等，包括自身，即NaN==NaN的值为false。可以通过isNaN()判断某值是否为数字，true彪啊是确实为非数字的值，false表示为数字的值
+   - 数值类型是基本数据类型，但JS本身提供了对应的包装对象Number，具有和数值处理相关的属性和方法
           - Number提供的属性
             + Number.MAX_VALUE可表示最大数字
             + Number.MIN_VALUE可表示的最小数字
             + Number.NaN非数字值
             + Number.POSITIVE_INFINITY正无穷大
             + Number.NEGATIVE_INFINITY负无穷大
-        - 方法：查阅API文档
-     2. String字符串类型
-        String表示的数据必须使用双引号包含，这样才表示当前值为一个字符串
-        #+BEGIN_SRC html
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-              <title>js基本数据类型</title>
-              <script type="text/javascript">
-                //1.Number
-                console.log(Number.MAX_VALUE);
-                console.log(Number.MIN_VALUE);
-                console.log(Number.POSITIVE_INFINITY);
-                console.log(Number.NEGATIVE_INFINITY);
-                console.log(Infinity);
-                console.log(-Infinity);
-                console.log(NaN==NaN);
-                console.log(NaN=="abc");
-                console.log(NaN==123));
-                console.log(isNaN(123);
-                console.log(isNaN("abc"));
-              </script>
-            </head>
-            <body>
-            </body>
-          </html>
-        #+END_SRC
-        [[./Sourcecode/28.html]]
-        - Js中的字符串是基本数据类型，字符串常量必须用双引号引起来。
-        - Js中提供了字符串的包装对象String，提供了字符串处理相关的属性和方法
-          + String对象提供的属性
-            length：字符串中字符数
-          + String独享提供的方法：
-            参考JS文档
-        - 方法：查阅API文档
-     3. Boolean
-        Boolean类型只有两个值，true、false。Js中提供布尔类型的包装对象Boolean，提供了布尔类型处理的相关属性和方法
+   - 方法：查阅API文档
+2. String字符串类型
+   String表示的数据必须使用双引号包含，这样才表示当前值为一个字符串
+   - Js中的字符串是基本数据类型，字符串常量必须用双引号引起来。
+   - Js中提供了字符串的包装对象String，提供了字符串处理相关的属性和方法
+     + String对象提供的属性
+       length：字符串中字符数
+     + String独享提供的方法：
+       参考JS文档
+   - 方法：查阅API文档
+3. Boolean
+   Boolean类型只有两个值，true、false。Js中提供布尔类型的包装对象Boolean，提供了布尔类型处理的相关属性和方法
+4. Undefined
+   Undefined类型只有一个值就是undefined，表示变量未定义，当一个变量未初始化时，值为undefined
+5. Null
+   类型中值包含null一个值，这个值表示一个不存在值。常用作返回值使用。
+6. Symbol
+   唯一，不与任何其他的值相等
+**** 2. 复杂数据类型
+对象、数组、函数
+***** 1. js语法--函数
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>js05-函数</title>
+      <script>
 
-        #+BEGIN_SRC html
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-              <title>js基本数据类型</title>
-              <script type="text/javascript">
-                //3. boolean
-                console.log(true || false);//true
-                console.log(true && false);//false
-                console.log(true | false);//1
-                console.log(true & false);//0
-                console.log(!true);//false
-              </script>
-            </head>
-            <body>
-            </body>
-          </html>
-
-        #+END_SRC
-        [[./Sourcecode/29.html]]
-        - ||
-        - &&
-        - +
-        - &
-     4. Undefined
-        Undefined类型只有一个值就是undefined，表示变量未定义，当一个变量未初始化时，值为undefined
-        var a;console.log(a);//undefined
-     5. Null
-        类型中值包含null一个值，这个值表示一个不存在值。常用作返回值使用。
-
-        #+BEGIN_SRC html
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-              <title>js基本数据类型</title>
-              <script type="text/javascript">
-                //undefined
-                console.log(null == undefined);
-                console.log(null === undefined);
-              </script>
-            </head>
-            <body>
-            </body>
-          </html>
-        #+END_SRC
-        [[./Sourcecode/30.html]]
-   - 复杂数据类型
-     对象、数组、函数
-     + js中数据类型的自动转化
-       [[./Img/3.png]]
-       js在需要时会自动对类型进行转换，转换的规则：
-       1. 数字：
-          可以在需要时转换为对应的字符串形式，0会转换为false，其他数字会转换为true，在需要对象时可以自动转换为Number对象
-       2. 字符串：
-          可以在需要时转换为对应的数值，需要注意当数值和字符串进行加法运算时，会处理为字符串的拼接，所以需要通过parseInt或parseFolat将字符串强制转换为数值类型参与运算，非空字符串转换为true，空字符串转换为false，需要对象时自动转换为String对象
-       3. 布尔类型：
-          true转换为1，false转换为0，转换为字符串的true和false转换为boolean对象
-       4. 对象类型：
-          如果位null则转成字符串null，如果为null转换为false
-
-          #+BEGIN_SRC html
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-                <title>js数据类型自动转换</title>
-                <script type="text/javascript">
-                  console.log(1+"2");//12
-                  console.log(true+"2");//true2
-                </script>
-              </head>
-              <body>
-              </body>
-            </html>
-          #+END_SRC
-          [[./SourceCode/31.html]]
-** 6. Js语法--运算符
-   JavaScript中的运算符和Java大致相同
-   只是运算过程中需要注意几点：
-   #+BEGIN_SRC html
-     <!DOCTYPE html>
-     <html>
-       <head>
-         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-         <title>js语法运算符</title>
-         <script type="text/javascript">
-           console.log(1+2);
-           console.log(2-1);//1
-           console.log(21-"1");
-           console.log(3/2);//1.5
-           console.log(3/2*1000);//1500
-           //console.log(2.3+1.3);//3.599999999999996
-           var x = 3;
-           var y = "123";
-           var z = false;
-           typeof(x);//number
-           typeof(y);//string
-           typeof(z);//boolean
-         </script>
-       </head>
-       <body>
-       </body>
-     </html>
-   #+END_SRC
-   [[./SourceCode/32.html]]
-   - 加好对于字符串是连接符
-   - &&||是逻辑运算符&|是位运算符
-   - 也支持三元运算符?:
-     2+3>5?console.log("aaa"):console.log("bbb")
-   - 特殊运算符typeof:返回一个操作表达式的数据类型的字符串
-** 7. 定义变量
-   - 使用关键字var来定义变量
-     使用var定义的变量是没有数据类型的
-     Js中有数据类型，但是Js的引用不区分类型的，所以称JS为弱类型，即一个引用可以先指向数字类型，后在指向对象类型，如下的代码是没有问题的
-     #+BEGIN_SRC html
-       <!DOCTYPE html>
-       <html>
-         <head>
-           <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-           <title>js语句</title>
-           <script type="text/javascript">
-             var a = 1;
-             a = "abc";
-             a = true;
-             a = new Object();
-             console.log(a);
-           </script>
-         </head>
-         <body>
-         </body>
-       </html>
-
-     #+END_SRC
-     [[./SourceCode/34.html]]
-   - 局部变量和全局变量
-     JS中定义对象的时候可以不使用var来定义，这样定义的变量将成为全局变量，在任何一个位置都可以使用
-     #+BEGIN_SRC html
-       <!DOCTYPE html>
-       <html>
-         <head>
-           <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-           <title>js语句</title>
-           <script type="text/javascript">
-             function mx(){
-             x = 4;
-             }
-             mx();
-             console.log(x);
-           </script>
-         </head>
-         <body>
-         </body>
-       </html>
-     #+END_SRC
-     [[./SourceCode/35.html]]
-     + 全局变量
-       x = 4;
-     + 局部变量
-       var x = 4;
-** 8. js语法--语句
-   #+BEGIN_SRC html
-     <!DOCTYPE html>
-     <html>
-       <head>
-         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-         <title>js语句</title>
-         <script type="text/javascript">
-           var x=5;
-           if(4==x){
-           console.log("正确");
-           }else{
-           console.log("错误");
-           }
-         </script>
-       </head>
-       <body>
-       </body>
-     </html>
-
-   #+END_SRC
-   如果在if判断中只有一个等号，则，执行的操作为，先赋值，再运算的操作。操作过程为：先将x赋值为4，再判断if(x)，也就是if(4),即if(true),所以只会打印为true的部分代码。
-
-   - if语句：
-     var x = 3;
-     + 情况一：if(x==4)//可以进行比较运算
-     + 情况二：if(x=4)//可以进行赋值运算，而且可以痛仰进行判断，不报错
-       原因；因为在js中0或者null就是false，非0或者非null就是true。if(x=4)是先将x赋值为4，然后对值为4的x进行判断，4会被认为是true，所以结果是true。
-       + 可以通过if(4==y)来解决该问题，因为4=y不会进行判断，而是会报错
-   - switch case
-     与java 中使用方式一致
-   - while、dowhile、for
-     不支持增强for循环，与java中使用方式一致
-** 9. js语法--函数
-    1. js中的函数是一堆可执行代码的合集。在需要的时候可以通过函数的名字调用其中的代码。函数可以理解为一种特殊的对象，其实本质上就是一段可执行的字符串
-    2.  在函数中哟一个隐藏的属性arguments，其中保存的是用户输入的全部参数，可以通过arguments.length获取用户输入参数的长度。如果用户输入的参数数量大于函数现有的参数长度，多余的参数没有被抛弃，利用arguments依然可以获取用户输入全部参数。如果用户的输入参数数量小于函数现有的参数长度，则缺少的参数会使用undefined来赋值，通过arguments也可以获取用户传入的参数。
-    3. 在js的函数中可以认为函数是一个特殊的变量，这个变量可以作为参数使用，可以作为方法使用。作为参数使用时，直接书写方法名即可，这时书写的方法名就是代表当前方法的变量。作为方法使用，则需要在方法名之后添加上一对小括号，这时这个函数就会执行函数中的函数体。
-    4. 函数的定义
-       + 方法一：普通方法定义函数
-        #+BEGIN_SRC js
-          function fun1(参数列表){
-            函数体
+          /*js中的复杂数据类型：function*/
+          /*1.定义函数的语法格式：三种 ,第一种和第三种必须掌握！！！！第二种了解 */
+          //1.1 普通定义方式
+          function f1() {
+              console.log("无参的函数");
           }
-        #+END_SRC
+          function f2(a,b,x){
+              console.log(x);
+              return a-b;
+          }
+          //1.2 动态的定义一个函数
+          /*小括号中可以有N个参数，但是前N-1个是形参，最后一个是方法体  */
+          var f3 = new Function("a","b","return a-b");
+          console.log(f3);
+          //1.3 匿名函数的定义方式
+          var f4 = function(a,b){
+              return a-b;
+          }
 
-       #+BEGIN_SRC html
-         <!DOCTYPE html>
-         <html>
-           <head>
-             <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-             <title>js语句</title>
-             <script type="text/javascript">
-               function mx(a,b){
-                   //return a+b;
-                   for(var i=0;i<arguments.length;i++){
-                       console.log(arguments[i]);
-                   }
-               }
+          /*2.函数的调用*/
+          f1();
+          console.log(f2(1,2,3));
+          console.log(f3(4,5));
+          console.log(f4(6,7));
+          /*3.函数的调用：扩展*/
+          f1(1,2,3,4);/*参数列表可以随意定义长度，参数的个数不确定*/
+          f2(1,2);/*参数列表如果参数较少时，其他参数是undefined未定义的*/
+          console.log(typeof f4);//打印函数的类型
 
-               /*console.log(mx(1,2));
-               //在参数列表输入比定义函数时更多的参数，函数依然可以正常执行
-               console.log(mx(1,2,3));
-               console.log(mx(1));*/
-               mx(1,2);
-             </script>
-           </head>
-           <body>
-           </body>
-         </html>
+      </script>
+  </head>
+  <body>
 
-       #+END_SRC
-       + 方法二：动态函数
-         动态函数定义方式，参数列表中先书写全部参数，最后一个参数需要书写方法体。（动态函数最后一个参数位置是填写方法体的位置）
-         #+BEGIN_SRC js
-         var fun2 = nuew Function("a","b","方法体");
-         fun2("x","y")
-         var fun2x = fun1();
-         fun2x("t","u");
-         #+END_SRC
+  </body>
+  </html>
+#+END_SRC
+1. js中的函数是一堆可执行代码的合集。在需要的时候可以通过函数的名字调用其中的代码。函数可以理解为一种特殊的对象，其实本质上就是一段可执行的字符串
+2.  在函数中哟一个隐藏的属性arguments，其中保存的是用户输入的全部参数，可以通过arguments.length获取用户输入参数的长度。如果用户输入的参数数量大于函数现有的参数长度，多余的参数没有被抛弃，利用arguments依然可以获取用户输入全部参数。如果用户的输入参数数量小于函数现有的参数长度，则缺少的参数会使用undefined来赋值，通过arguments也可以获取用户传入的参数。
+3. 在js的函数中可以认为函数是一个特殊的变量，这个变量可以作为参数使用，可以作为方法使用。作为参数使用时，直接书写方法名即可，这时书写的方法名就是代表当前方法的变量。作为方法使用，则需要在方法名之后添加上一对小括号，这时这个函数就会执行函数中的函数体。
+4. 函数的定义
+   + 方法一：普通方法定义函数
+     #+BEGIN_SRC js
+       function fun1(参数列表){
+         函数体
+       }
+     #+END_SRC
+     #+BEGIN_SRC html
+       <!DOCTYPE html>
+       <html>
+         <head>
+           <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+           <title>js语句</title>
+           <script type="text/javascript">
+             function mx(a,b){
+                 //return a+b;
+                 for(var i=0;i<arguments.length;i++){
+                     console.log(arguments[i]);
+                 }
+             }
 
-         #+BEGIN_SRC html
-         <!DOCTYPE html>
-         <html>
-           <head>
-             <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-             <title>js语句</title>
-             <script type="text/javascript">
-               var mx = new Function("a","b","return a+b");
-               console.log(mx(2,3));
-             </script>
-           </head>
-           <body>
-           </body>
-         </html>
-         #+END_SRC
-         [[./SourceCode/37.html]]
-        + 方法三：匿名函数定义
-         #+BEGIN_SRC js
+             /*console.log(mx(1,2));
+             //在参数列表输入比定义函数时更多的参数，函数依然可以正常执行
+             console.log(mx(1,2,3));
+             console.log(mx(1));*/
+             mx(1,2);
+           </script>
+         </head>
+         <body>
+         </body>
+       </html>
+     #+END_SRC
+   + 方法二：动态函数
+     动态函数定义方式，参数列表中先书写全部参数，最后一个参数需要书写方法体。（动态函数最后一个参数位置是填写方法体的位置）
+     #+BEGIN_SRC js
+       var fun2 = nuew Function("a","b","方法体");
+       fun2("x","y")
+       var fun2x = fun1();
+       fun2x("t","u");
+     #+END_SRC
+     #+BEGIN_SRC html
+       <!DOCTYPE html>
+       <html>
+         <head>
+           <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+           <title>js语句</title>
+           <script type="text/javascript">
+             var mx = new Function("a","b","return a+b");
+             console.log(mx(2,3));
+           </script>
+         </head>
+         <body>
+         </body>
+       </html>
+     #+END_SRC
+     [[./SourceCode/37.html]]
+   + 方法三：匿名函数定义
+     #+BEGIN_SRC js
          var fun3 = function(参数列表){
            方法体
          }
          fun3();
          #+END_SRC
-
-         #+BEGIN_SRC html
+     #+BEGIN_SRC html
          <!DOCTYPE html>
          <html>
            <head>
@@ -1627,169 +1789,244 @@ Client - Server
          </html>
 
          #+END_SRC
-         [[./SourceCode/38.html]]
-    5. 案例
+     [[./SourceCode/38.html]]
+5. 案例
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+         <title>js函数</title>
+         <script type="text/javascript">
+           function eat(food){
+               if("羊肉串"==food){
+                   return "烤"+food;
+               }else if("煎饼"==food){
+                   return "摊"+food;
+               }
+           }
+           console.log(eat("煎饼"));
+         </script>
+       </head>
+       <body>
+       </body>
+     </html>
+   #+END_SRC
+   [[./SourceCode/39.html]]
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+         <title>js函数</title>
+         <script type="text/javascript">
+           function meau(e,food){
+             food = e(food);
+             return "吃"+food;
+           }
+           function eat(food){
+               if("羊肉串"==food){
+                   return "烤"+food;
+               }else if("煎饼"==food){
+                   return "摊"+food;
+               }
+           }
+           console.log(meau(eat,"羊肉串"));
+         </script>
+       </head>
+       <body>
+       </body>
+     </html>
+   #+END_SRC
+   [[./SourceCode/40.html]]
+***** 2. js语法--数组
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>js04-数组</title>
+      <script>
+          /*js中的复杂数据类型：数组*/
+          /*1.数组的定义：4种方式*/
+          var a1 = new Array();//定义一个空的数组
+          var a2 = new Array(3);//定义长度为3的数组
+          var a3 = new Array("123",true,3.14);//数组的初始化赋值
+          var a4 = [1,2,true,"qwer"];//直接量定义数组
+          /*2.数组的存取操作*/
+          a2[0]="1";
+          a2[1]="2";
+          a2[300]="3";/*js的数组是自动的扩容的，扩容时不会出现数组越界*/
+          console.log(a2);
+          console.log(a2[300]);/*数组取数时，根据下标取值*/
+          console.log(a2[400]);/*当下标超出长度时，不会报错，但是返回值是undefined未定义*/
+          /*3.数组的push方法：添加元素*/
+          a4.push("测试");
+          console.log(a4);
+          /*4.数组的删除元素的方法： pop()  shift() */
+          console.log(a4.pop());//删除并返回数组的最后一个元素
+          console.log(a4);
+          console.log(a4.shift());//删除并返回数组的第一个元素
+          console.log(a4);
+          /*5.数组的排序：sort()方法*/
+          var a5 = [1,2,3,10,100,33,22];
+          console.log(a5.sort());//默认按照字符的字典顺序从小到大排列
+          var a6 = a5.sort(function (a,b) { //内部是一个冒泡算法
+              return a-b; // a-b的一个结果：如果是负数，a与b不交换
+                          //如果是正数，a与b交换
+          });
+          console.log(a6);
+      </script>
+  </head>
+  <body>
 
-      #+BEGIN_SRC html
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-            <title>js函数</title>
-            <script type="text/javascript">
-              function eat(food){
-                  if("羊肉串"==food){
-                      return "烤"+food;
-                  }else if("煎饼"==food){
-                      return "摊"+food;
-                  }
-              }
-              console.log(eat("煎饼"));
-            </script>
-          </head>
-          <body>
-          </body>
-        </html>
-
-
-      #+END_SRC
-      [[./SourceCode/39.html]]
-      #+BEGIN_SRC html
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-            <title>js函数</title>
-            <script type="text/javascript">
-              function meau(e,food){
-                food = e(food);
-                return "吃"+food;
-              }
-              function eat(food){
-                  if("羊肉串"==food){
-                      return "烤"+food;
-                  }else if("煎饼"==food){
-                      return "摊"+food;
-                  }
-              }
-              console.log(meau(eat,"羊肉串"));
-            </script>
-          </head>
-          <body>
-          </body>
-        </html>
-      #+END_SRC
-      [[./SourceCode/40.html]]
-** 10. js语法--数组
-    js中的数组，本质上就是一个用中括号括起来用逗号分割内容的字符串
-    #+BEGIN_SRC js
-      var arr = new Array();//定义一个长度为0的空数组
-      var arr = new Array(3);//定义一个长度为3的数组
-      var arr = new Array(1,2,4,6,8);//定义具有指定初始值的数组
-      var arr = [2,3,5,7];//数组直接量定义数组
-
+  </body>
+  </html>
+#+END_SRC
+js中的数组，本质上就是一个用中括号括起来用逗号分割内容的字符串
+#+BEGIN_SRC js
+  var arr = new Array();//定义一个长度为0的空数组
+  var arr = new Array(3);//定义一个长度为3的数组
+  var arr = new Array(1,2,4,6,8);//定义具有指定初始值的数组
+  var arr = [2,3,5,7];//数组直接量定义数组
+#+END_SRC
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+      <title>js数组</title>
+      <script type="text/javascript">
+        var arr = new Array();
+        arr[0] = 1;
+        arr[0] = 1;
+        arr[1] = 2;
+        arr[999] = 3;
+        console.log(arr);
+      </script>
+    </head>
+    <body>
+    </body>
+  </html>
     #+END_SRC
-
-    #+BEGIN_SRC html
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-          <title>js数组</title>
-          <script type="text/javascript">
-            var arr = new Array();
-            arr[0] = 1;
-            arr[0] = 1;
-            arr[1] = 2;
-            arr[999] = 3;
-            console.log(arr);
-          </script>
-        </head>
-        <body>
-        </body>
-      </html>
+[[./SourceCode/41.html]]
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+      <title>js数组</title>
+      <script type="text/javascript">
+        var arr = new Array(3);
+        arr[0]=1;
+        arr[1]=2;
+        arr[2]="aaa";
+        arr[999]=true;
+        console.log(arr);
+      </script>
+    </head>
+    <body>
+    </body>
+  </html>
     #+END_SRC
-    [[./SourceCode/41.html]]
-
-    #+BEGIN_SRC html
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-          <title>js数组</title>
-          <script type="text/javascript">
-            var arr = new Array(3);
-            arr[0]=1;
-            arr[1]=2;
-            arr[2]="aaa";
-            arr[999]=true;
-            console.log(arr);
-          </script>
-        </head>
-        <body>
-        </body>
-      </html>
+[[./SourceCode/42.html]]
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+      <title>js数组</title>
+      <script type="text/javascript">
+        var arr = new Array(1,"a",true,new Object());
+        console.log(arr);
+        arr[4]="b";
+        console.log(arr);
+      </script>
+    </head>
+    <body>
+    </body>
+  </html>
     #+END_SRC
-    [[./SourceCode/42.html]]
-
-    #+BEGIN_SRC html
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-          <title>js数组</title>
-          <script type="text/javascript">
-            var arr = new Array(1,"a",true,new Object());
-            console.log(arr);
-            arr[4]="b";
-            console.log(arr);
-          </script>
-        </head>
-        <body>
-        </body>
-      </html>
+[[./SourceCode/43.html]]
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+      <title>js数组</title>
+      <script type="text/javascript">
+        var arr = [2,"c",true,false,new Object()];
+        console.log(arr);
+        arr[999]=0;
+        console.log(arr);
+        arr.push(2);
+        console.log(arr);
+        var r = arr.pop();
+        console.log(r);
+        console.log(arr);
+        var s = arr.shift();
+        console.log(s);
+        console.log(arr);
+        for(var i=0;i<arr.length;i++){
+          console.log(arr[i]);
+        }
+      </script>
+    </head>
+    <body>
+    </body>
+  </html>
     #+END_SRC
-    [[./SourceCode/43.html]]
+1. 特点：
+   1. 数组存储的元素类型是任意的
+   2. 长度可以是任意的
+2. 案例：
+   1. 添加元素push()
+   2. 删除最后一个元素pop()
+   3. 删除第一个元素shift()
+   4. 遍历打印数组
+***** 3. js语法--对象
+****** 1. js的内置对象
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>js06-内置对象</title>
+      <script>
+          /*内置对象：js已经为我们提供好的对象  */
+          /*已经学过的：String  Number  Boolean
+          ,*             Array  Function */
+          /*需要了解的常用的四种：Math对象  Global全局对象
+                                  Date日期对象   RegExp正则对象  */
+          /*1.Math对象：常用属性和方法，其他方法参考JS的API文档*/
+          console.log(Math.PI);
+          console.log(Math.E);
+          console.log(Math.round(3.14));//四舍五入
+          console.log(Math.pow(2,4));//2的4次方
+          console.log(Math.random());//随机数[0,1)
+          /*2.Global全局对象：主要是提供全局方法，直接使用即可  */
+          console.log(isNaN(123));
+          console.log(parseFloat("3.154"));//把字符串转为浮点数
+          console.log(parseInt("123"));//把字符串转为整数的十进制
+          /*3.Date日期对象*/
+          var d1 = new Date();//日期的创建
+          var d2 = new Date("2010/01/01");//把字符串转为日期
+          //注意：字符串的类型 不能随意定义，一般: 2010-01-01  2010/01/01
+          console.log(d1.getDate());//返回月份的第几天
+          console.log(d1.getDay())//星期的第几天
+          console.log(d1.getFullYear());//返回本地时间的年份
+          /*4.RegExp 正则表达式：作用匹配 特定格式的 字符串  */
+          //比如：邮箱地址：123SAFD@qq.com.cn
+          var r1 = /^\w+@\w+(\.\w+)+$/;
+          console.log(r1.test("123SAFD@qq.com.cn"));
+      </script>
+  </head>
+  <body>
+  </body>
+  </html>
+#+END_SRC
 
-    #+BEGIN_SRC html
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-          <title>js数组</title>
-          <script type="text/javascript">
-            var arr = [2,"c",true,false,new Object()];
-            console.log(arr);
-            arr[999]=0;
-            console.log(arr);
-            arr.push(2);
-            console.log(arr);
-            var r = arr.pop();
-            console.log(r);
-            console.log(arr);
-            var s = arr.shift();
-            console.log(s);
-            console.log(arr);
-            for(var i=0;i<arr.length;i++){
-              console.log(arr[i]);
-            }
-          </script>
-        </head>
-        <body>
-        </body>
-      </html>
-    #+END_SRC
-    - 特点：
-      1. 数组存储的元素类型是任意的
-      2. 长度可以是任意的
-    - 案例：
-      1. 添加元素push()
-      2. 删除最后一个元素pop()
-      3. 删除第一个元素shift()
-      4. 遍历打印数组
-** 10. js语法-对象
-    - js的内置对象
-      #+BEGIN_SRC html
+#+BEGIN_SRC html
         <!DOCTYPE html>
         <html>
           <head>
@@ -1817,20 +2054,82 @@ Client - Server
           </body>
         </html>
       #+END_SRC
-      [[./SourceCode/45.html]]
-      1. String--基本数据类型，字符串类型的包装对象
-      2. Boolean--基本数据类型，布尔类型的包装对象
-      3. Number--基本数据类型，数值类型的包装对象
-      4. Array--数组类型的包装对象
-      5. Math--数据对象，封装了很多数学常量和数学方法
-      6. Date--日期时间对象，封装了很多和日期实现相关的方法
-      7. Global--全局对象，js中有一些方法和属性经常使用，但归到哪个对象上都不合适，所以js中有一个Global对象整合了这些方法和属性。Global中定义的方法和属性特点是属于全局，可以直接使用
-         + 思考：parseInt("123abc123");打印结果
-      8. RegExp--正则对象，保存有关正则表达式模式匹配信息的固有全局对象。Partten邮箱正则
-    - 自定义对象
-      js中对象的本质就是一个大括号，其中包含任意多个键值对，键值对直接使用逗号隔开，这种形式组成的字符串就是对象。所以对象的本质也是一个字符串
-      构造函数模拟了Java中类的功能，js中的对象可以动态增加/删除属性和函数。--js对象的本质就是用大括号起来的键值的集合，本质是一段字符串，有点类似于java中的map。
-      + 方法一：构造函数创建对象1
+[[./SourceCode/45.html]]
+1. String--基本数据类型，字符串类型的包装对象
+2. Boolean--基本数据类型，布尔类型的包装对象
+3. Number--基本数据类型，数值类型的包装对象
+4. Array--数组类型的包装对象
+5. Math--数据对象，封装了很多数学常量和数学方法
+6. Date--日期时间对象，封装了很多和日期实现相关的方法
+7. Global--全局对象，js中有一些方法和属性经常使用，但归到哪个对象上都不合适，所以js中有一个Global对象整合了这些方法和属性。Global中定义的方法和属性特点是属于全局，可以直接使用
+   + 思考：parseInt("123abc123");打印结果
+8. RegExp--正则对象，保存有关正则表达式模式匹配信息的固有全局对象。Partten邮箱正则
+****** 2. 自定义对象
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>js07-自定义对象</title>
+      <script>
+          /* 创建自定义对象基本步骤：
+             1.创建一个构造函数
+             2.添加属性和方法
+             3.使用new关键字创建对象
+          ,* */
+          /*1.构造函数就是一个普通定义的function*/
+          //1.1 无参构造，没有属性和方法
+          function Person(){
+
+          }
+          //创建对象
+          var p = new Person();
+          console.log(p);
+          //添加属性
+          p.name="小明";
+          p.age=19;
+          //添加方法
+          p.say = function(){
+              alert("您好");
+          }
+          //调用属性和方法
+          console.log(p.age);
+          console.log(p["name"]);//特别注意：["key"]
+          p.say();
+
+          //2.有参构造函数
+          function Person(name,age) {
+              this.age = age;
+              this.name = name;
+              this.say = function(){
+                  alert("大家好");
+              }
+          }
+          var p = new Person("翠花",18);
+          console.log(p.name);
+          console.log(p["age"]);
+          p.say();
+          //3.直接量定义对象
+          console.log(p);
+          //语法格式：{key1:value1,key2:value2,key3:value3......}
+          var p = {
+              name:"小黄",
+              age:19,
+              say:function () {
+                  alert("我是小黄");
+              }
+          };
+          console.log(p);
+      </script>
+  </head>
+  <body>
+
+  </body>
+  </html>
+#+END_SRC
+js中对象的本质就是一个大括号，其中包含任意多个键值对，键值对直接使用逗号隔开，这种形式组成的字符串就是对象。所以对象的本质也是一个字符串
+构造函数模拟了Java中类的功能，js中的对象可以动态增加/删除属性和函数。--js对象的本质就是用大括号起来的键值的集合，本质是一段字符串，有点类似于java中的map。
+1. 方法一：构造函数创建对象1
         #+BEGIN_SRC js
           function Person(){}
           var p = new Person();
@@ -1847,7 +2146,6 @@ Client - Server
           delete p.say
           console.log(p);
         #+END_SRC
-
         #+BEGIN_SRC html
           <!DOCTYPE html>
           <html>
@@ -1875,7 +2173,7 @@ Client - Server
           </html>
         #+END_SRC
         [[./SourceCode/46.html]]
-      + 方法二：构造函数构造对象2
+2. 方法二：构造函数构造对象2
         #+BEGIN_SRC js
           function Person(name,age){
             this.name = name;
@@ -1910,7 +2208,7 @@ Client - Server
           </html>
         #+END_SRC
         [[./SourceCode/47.html]]
-      + 方法三：对象直接量定义对象
+3. 方法三：对象直接量定义对象
         #+BEGIN_SRC js
           var p = {name:"liubei",age:19,sleep:function(){alert(this.name+"sleep....")}};
           alert(p.name);
@@ -1966,9 +2264,8 @@ Client - Server
           </html>
         #+END_SRC
         [[./SourceCode/49.html]]
-    - 对象操作
-      1. with语句：with语句定义了某个对象的作用域，在该域中可以直接调用该对象的成员
-
+4. 对象操作
+   1. with语句：with语句定义了某个对象的作用域，在该域中可以直接调用该对象的成员
          #+BEGIN_SRC js
            var p = {name:"liubei",age:19,sleep:function(){alert(this.name+"sleep....")}};
            with(p){
@@ -1977,16 +2274,14 @@ Client - Server
              sleep();
            }
          #+END_SRC
-      2. for...in语句：用来遍历对象的所有属性的名称
-
+   2. for...in语句：用来遍历对象的所有属性的名称
          #+BEGIN_SRC js
            var p = {name:"liubei",age:19,sleep:function(){alert(this.name+"sleep....")}};
            for(var x in p){
              alert(x);
            }
          #+END_SRC
-      3. delete语句：删除对象的属性
-
+   3. delete语句：删除对象的属性
          #+BEGIN_SRC js
            var p = {name:"liubei",age:19}
            p.addr = "peixian";
@@ -1994,10 +2289,291 @@ Client - Server
            delete p.addr;
            alert(p.addr);
          #+END_SRC
-** 11. JSON
-    JSON本质上就是一段字符串，能够保存较复杂关系的数据，具有良好的数据保存格式，又极为轻量，加之多种代码平台都支持对字符串的处理，所以我们可以使用JSON字符串进行数据的传入，甚至跨平台传输
+**** 3. 数据类型的自动转化
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Title</title>
+      <script>
+        /*问题：小括号中的参数如何自动转换的*/
+        /*答案：js内部的函数在执行时，
+        会根据函数的参数以及函数的定义，
+        自动的尝试去转换为我们期望的类型 */
+        console.log(isNaN(1));//false 是数字
+        console.log(isNaN("1"));//false -->证明自动转换了
+        console.log(isNaN("123sfd")); // true --> 自动转换失败
+        console.log(isNaN(" "));//空格 --> 自动转为0  再判断是否为NaN
+        console.log(isNaN(null));//null --> 自动转为0  再判断是否为NaN
+        console.log(isNaN(true));//true --> 1
 
-    #+BEGIN_SRC js
+        /*通过js的函数进行强制类型转换*/
+        /*1.将数字转换为非数字*/
+        var a1 = 10;
+        console.log(String(a1));
+        console.log(a1.toString());
+        /*2.将非数字转换为数字：主要使用Number() */
+        var a2 = "          ";/*多个空格转为数字时，都成了0*/
+        var a3 = "123qweqwe";/*如果是一个非数字的字符串，会编程NaN，表示非数字*/
+        var a4 = false;/*true --> 1   false --> 0*/
+        var a5 = new Date();/* 结果1575339572824 ：日期的毫秒数  */
+        console.log(Number(a2));
+        console.log(Number(a3));
+        console.log(Number(a4));
+        console.log(Number(a5));
+      </script>
+    </head>
+    <body>
+    </body>
+  </html>
+#+END_SRC
+[[./Img/3.png]]
+js在需要时会自动对类型进行转换，转换的规则：
+1. 数字：
+   可以在需要时转换为对应的字符串形式，0会转换为false，其他数字会转换为true，在需要对象时可以自动转换为Number对象
+2. 字符串：
+   可以在需要时转换为对应的数值，需要注意当数值和字符串进行加法运算时，会处理为字符串的拼接，所以需要通过parseInt或parseFolat将字符串强制转换为数值类型参与运算，非空字符串转换为true，空字符串转换为false，需要对象时自动转换为String对象
+3. 布尔类型：
+   true转换为1，false转换为0，转换为字符串的true和false转换为boolean对象
+4. 对象类型：
+   如果位null则转成字符串null，如果为null转换为false
+*** 6. Js语法--运算符
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>js06-运算符</title>
+      <script>
+          /*1.算术运算符： + - * /  %  -- ++   */
+          /*2.逻辑运算符： ||  &&  !   */
+          /*3.位运算符： |  &   */
+          /*4.关系运算符：>  <  == ===  <=  >=  */
+          var a = 10;
+          /* if(a=20)  先进行赋值操作，那么a变成了20*/
+          /* if (a=20)  相当于  if (20)    */
+          /*原因  js中如果判断的值是 0或者null，代表的就是false
+          ,*           如果是 非0 或者  非null，代表的就是true */
+          if (a = 20) {
+              console.log(a);
+          } else {
+              console.log("不相等");
+          }
+          /*5.赋值运算符：+= -= *= /=  %=    */
+          /*6.三目运算符*/
+          var y = 10>20? "大":"小";
+          console.log(y);
+      </script>
+  </head>
+  <body>
+  </body>
+  </html>
+#+END_SRC
+JavaScript中的运算符和Java大致相同,只是运算过程中需要注意几点：
+#+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+         <title>js语法运算符</title>
+         <script type="text/javascript">
+           console.log(1+2);
+           console.log(2-1);//1
+           console.log(21-"1");
+           console.log(3/2);//1.5
+           console.log(3/2*1000);//1500
+           //console.log(2.3+1.3);//3.599999999999996
+           var x = 3;
+           var y = "123";
+           var z = false;
+           typeof(x);//number
+           typeof(y);//string
+           typeof(z);//boolean
+         </script>
+       </head>
+       <body>
+       </body>
+     </html>
+#+END_SRC
+[[./SourceCode/32.html]]
+- 加好对于字符串是连接符
+- &&||是逻辑运算符&|是位运算符
+- 也支持三元运算符?:
+  2+3>5?console.log("aaa"):console.log("bbb")
+- 特殊运算符typeof:返回一个操作表达式的数据类型的字符串
+*** 7. 定义变量
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>js05-变量的定义和使用</title>
+      <script>
+          var a = 0;
+          var b =1,c = 2;
+          /* 如果变量没有定义时，直接使用:写代码时不会报错，执行是报错 */
+          var x;
+          console.log(x);
+          /* 如果两个变量重名了，那么js中会：把上一个变量覆盖掉 */
+          var a = 1;
+          console.log(a);
+      </script>
+  </head>
+  <body>
+  </body>
+  </html>
+#+END_SRC
+1. 使用关键字var来定义变量
+   使用var定义的变量是没有数据类型的,Js中有数据类型，但是Js的引用不区分类型的，所以称JS为弱类型，即一个引用可以先指向数字类型，后在指向对象类型，如下的代码是没有问题的
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+         <title>js语句</title>
+         <script type="text/javascript">
+           var a = 1;
+           a = "abc";
+           a = true;
+           a = new Object();
+           console.log(a);
+         </script>
+       </head>
+       <body>
+       </body>
+     </html>
+   #+END_SRC
+   [[./SourceCode/34.html]]
+2. 局部变量和全局变量
+   JS中定义对象的时候可以不使用var来定义，这样定义的变量将成为全局变量，在任何一个位置都可以使用
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+         <title>js语句</title>
+         <script type="text/javascript">
+           function mx(){
+           x = 4;
+           }
+           mx();
+           console.log(x);
+         </script>
+       </head>
+       <body>
+       </body>
+     </html>
+   #+END_SRC
+   [[./SourceCode/35.html]]
+   + 全局变量
+     x = 4;
+   + 局部变量
+     var x = 4;
+*** 8. js语法--语句
+如果在if判断中只有一个等号，则，执行的操作为，先赋值，再运算的操作。操作过程为：先将x赋值为4，再判断if(x)，也就是if(4),即if(true),所以只会打印为true的部分代码。
+**** 1. if语句：
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>js01-分支结构</title>
+      <script>
+        /*分支结构的语法 与  java里面的完全一样*/
+        var a = 10;
+        if (a>10) {
+        alert("大于10");
+        } else if (a==10) {
+        alert("等于10");
+        } else {
+        alert("小于10");
+        }
+        var b = "周一";
+        switch (b) {
+        case "周一":
+        console.log("1");
+        break;
+        default:console.log("默认");
+        }
+      </script>
+    </head>
+    <body>
+    </body>
+  </html>
+#+END_SRC
+var x = 3;
++ 情况一：if(x==4)//可以进行比较运算
++ 情况二：if(x=4)//可以进行赋值运算，而且可以同样进行判断，不报错
+  原因；因为在js中0或者null就是false，非0或者非null就是true。if(x=4)是先将x赋值为4，然后对值为4的x进行判断，4会被认为是true，所以结果是true。
+  + 可以通过if(4==y)来解决该问题，因为4=y不会进行判断，而是会报错
+**** 2. switch case
+  与java 中使用方式一致
+**** 3. while、dowhile、for
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>js02-循环结构</title>
+      <script>
+          /*1.for循环*/
+          for (var i = 0;i<10;i++) {
+              console.log(i);
+          }
+          /*2.while循环*/
+          var a = 1;
+          while(a < 10){
+              a++;
+          }
+          /*3.do..while循环*/
+          do {
+              a++;
+          } while(a <20);
+          /*4.for/in循环：与java的foreach完全不同   */
+          /*因为js是弱类型的，所以数组定义时也是弱类型，其中的元素也是弱类型的*/
+          var arr = [1,"2",true,false,3.4,null];//js的数组使用中括号
+          for (var i in arr) {
+              /*特别注意，输出的i是 数组中的index下标*/
+              console.log(i);
+          }
+      </script>
+  </head>
+  <body>
+  </body>
+  </html>
+#+END_SRC
+不支持增强for循环，与java中使用方式一致
+*** 9. JSON
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>js08-json对象</title>
+      <script>
+          /*1.json本质上就是一段字符串，解析时特别方便  {}的形式  */
+          /*2.json格式的数据：是目前web数据传输格式的最流行的方式*/
+          var data = {
+              name:"李白",
+              age:10,
+              wife:[ //数组中每一个元素都是一个对象
+                  {name:"张飞1",age:10,job:["打架1","喝酒1"]},
+                  {name:"张飞2",age:11,job:["打架2","喝酒2"]},
+                  {name:"张飞3",age:12,job:["打架3","喝酒3"]}
+              ]
+          };
+          //调用json对象，输出其中的某个字段
+          console.log(data["wife"][1]["job"][0]);
+      </script>
+  </head>
+  <body>
+
+  </body>
+  </html>
+#+END_SRC
+JSON本质上就是一段字符串，能够保存较复杂关系的数据，具有良好的数据保存格式，又极为轻量，加之多种代码平台都支持对字符串的处理，所以我们可以使用JSON字符串进行数据的传入，甚至跨平台传输
+#+BEGIN_SRC js
       data = {
         name:"zs",
         age:19,
@@ -2007,196 +2583,313 @@ Client - Server
           {name:"建宁",age:20,job:["公主","小老婆"]},
         ]
       }
-    #+END_SRC
-    查看当前JSON中第二个wife的工作data["wife"][1]["job"];
-* DHTML-动态html
-** 1. DHTML概述
-   - DHTML将浏览器加载html文档中的所有的内容当做js对象来处理，最终就组成了一颗由js对象组成的对象树
-   - 通过操作代表html元素的js对象来操作html中的元素
-   - 通过操作js对象组成树来操作html文档的结构。从而实现了html和js的结合，实现了可以通过js来操作html
-   - DHTML可以分为由BOM(Browser Object Model)和DOM(Document Object Model)两个部分组成
-   - 可以对节点进行增删改的操作
-** 2. BOM和DOM
-   [[./Img/2.png]]
-** 3. BOM--浏览器对象模型
-   bom--browser object model
-   - window：代表一个浏览器窗口的对象
-     #+BEGIN_SRC html
-       <!DOCTYPE html>
-       <html>
-         <head>
-           <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-           <title>js对象</title>
-           <script type="text/javascript">
-             /*window.onblur=function(){
-               alert(123);
-               }*/
-             /*window.onfocus=function(){
-               alert(321);
-               }*/
-             /*window.onload=function(){
-               var div = document.getElementById("test");
-               div.innerText="bbb";
-               }*/
-             /*var flag = window.confirm("是否下课？");
-             if(flag){
-               alert("快点下课");
-             }else{
-               alert("一会下课");
-               }*/
-             /*var password=window.prompt("请输入密码");
-             if(password="007"){
-               alert("密码正确，立即爆炸");
-             }else{
-               alert("密码错误，哈市爆炸");
-               }*/
-             //window.clase();
-             /*window.setInterval(function(){
-               var div = document.getElementById("test");
-               var date = new Date();
-               var time = date.toLocaleString();
-               div.innerText = ;
-               },1000);*/
-             window.setTimeout(function(){
-               var div = document.getElementById("test");
-               div.innerText = "time out!";
-             },3000);
-           </script>
-         </head>
-         <body>
-           <div id="test" class="test">
-             waiting...
-           </div>
-         </body>
-       </html>
-     #+END_SRC
-     [[./SourceCode/50.html]]
-     + 其中包含的方法：
-       1. onblur:失去焦点
-       2. onfocus：获得焦点
-       3. !!!onload：当前浏览器页面装载完成后触发
-       4. !!!alert
-       5. !!!confirm
-       6. !!!prompt
-       7. !!!close(仅限ie浏览器，chrome和firefox需要解决浏览器禁止js关闭非js创建页面的问题)
-       8. !!!setInterval
-       9. !!!setTimeout
-       10. setInterval和setTimeout的不同?
-     + 其中包含的对象：（我们可以通过window引出这些对象）
-       1. location
-       2. screen
-       3. history
-       4. navigator
-       5. document
-   - location
-     !!!href：获取或设置地址栏上的地址。通过此属性js可以控制浏览器访问一个新的地址
-   - navigator
-   - history
-     #+BEGIN_SRC html
-       <!DOCTYPE html>
-       <html>
-         <head>
-           <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-           <title>js对象</title>
-           <script type="text/javascript">
-             /*function back(){
-             window.history.back();
+#+END_SRC
+查看当前JSON中第二个wife的工作data["wife"][1]["job"];
+** DHTML-动态html
+*** 1. DHTML概述
+- DHTML将浏览器加载html文档中的所有的内容当做js对象来处理，最终就组成了一颗由js对象组成的对象树
+- 通过操作代表html元素的js对象来操作html中的元素
+- 通过操作js对象组成树来操作html文档的结构。从而实现了html和js的结合，实现了可以通过js来操作html
+- DHTML可以分为由BOM(Browser Object Model)和DOM(Document Object Model)两个部分组成
+- 可以对节点进行增删改的操作
+[[./Img/67.png]]
+*** 2. BOM和DOM
+[[./Img/2.png]]
+*** 3. BOM--浏览器对象模型
+bom--browser object model
+1. window：代表一个浏览器窗口的对象
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html lang="en">
+     <head>
+         <meta charset="UTF-8">
+         <title>window窗口对象</title>
+         <script>
+
+             //向div中输出一句话
+             document.getElementById("d1").innerText="123";
+
+
+             /*1.BOM对象模型中，顶级的对象：window对象
+             ,* window对象指的是浏览器的窗口！！！*/
+             //1.1  window.onload指的是  页面加载完毕后，执行的代码，onload触发的事件
+             window.onload = function() {
+                 //向div中输出一句话
+                 document.getElementById("d1").innerText="123";
              }
-             function forward(){
-             window.history.forward();
+             //1.2  window.onblur指的是   鼠标移出页面，window对象失去焦点时触发
+             window.onblur = function(){
+                 document.getElementById("d1").innerText="页面失去焦点了";
+             }
+             //1.3 window.onfocus指的是  鼠标进入页面，焦点在当前window窗口中\
+             window.onfocus = function(){
+                 document.getElementById("d1").innerText="页面获取焦点了";
+             }
+             //1.4 window的prompt的弹出对话框，带有提示信息和输入框
+            /* var password = window.prompt("请输入您的密码");
+             alert(password);
+             if (password == "123") {
+                 alert("登录成功");
+             } else {
+                 alert("登录失败");
              }*/
-             function back(){
-             window.history.go(-1);
+             //1.5 window的confirm确认对话框，带有提示信息和确认/取消按钮
+             var check = window.confirm("确定要删除吗？");
+             if (check) {//true
+                 alert("删除成功");
+             } else {//false
+                 alert("取消删除");
              }
-             function forward(){
-             window.history.go(1);
-             }
-             console.lot(window.history.length);
-           </script>
-         </head>
-         <body>
-           <div id="test" class="test">
-             waiting...
-           </div>
-           <input type="button" onclick="back()" value="后退" />
-           <input type="button" onclick="forward()" value="前进" />
-         </body>
-       </html>
-     #+END_SRC
-     [[./SourceCode/51.html]]
-     1. length
-     2. back()
-     3. forward()
-     4. go()
-** 4. DOM--文档对象模型
-   dom--document object model
-   - 获取文档独享的方法
-     #+BEGIN_SRC html
-       <!DOCTYPE html>
-       <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-         <head>
-           <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-           <title>如何通过document获取数据</title>
-           <script type="text/javascript">
+         </script>
+     </head>
+     <body>
+     <div id="d1"></div>
+     </body>
+     </html>
+   #+END_SRC
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html lang="en">
+     <head>
+         <meta charset="UTF-8">
+         <title>bom02-window子对象</title>
+         <script>
+
+             /*1. history历史对象*/
              function demo1(){
-               //根据ID获取username文本中的值
-               var username = document.getElementById("username");
-               //获取当前对象的value值
-               alert(username.value);
+                 //前进的方式：forward
+                 //window.history.forward();
+                 //前进的方法：go
+                 window.history.go(1);//1表示前进
              }
              function demo2(){
-               //根据name获取input的对象
-               var password = document.getElementsByName("password");
-               //获取其中的value值
-               //因为getElementsByName获取两个对象，这两个对象存储在一个数组中，如果需要取出每一个对象的value值，可以使用for遍历来操作
-               for(var i=0;i<password.length;i++){
-                 alert(password[i].value);
-               }
+                 //后退的方法：back
+                 //window.history.back();
+                 //后退的方法：go
+                 window.history.go(-1);
              }
-             function demo3(){
-               //根据tagname(元素名)获取页面中的元素
-               arr_input = document.getElementsByTagName("input");
-               //获取元素的value值
-               //利用for循环遍历输出每一个input元素的value值
-               for(var i=0;i<arr_input.length;i++){
-                 alert(arr_input[i].value);
-               }
+
+             /*2.location对象：包含当前的URL的信息*/
+             /*
+             ,* hash 设置或获取 href 属性中在井号“#”后面的分段。
+             host 设置或获取 location 或 URL 的 hostname 和 port 号码。
+             hostname 设置或获取 location 或 URL 的主机名称部分。
+             href 设置或获取整个 URL 为字符串。
+             pathname 设置或获取对象指定的文件名或路径。
+             port 设置或获取与 URL 关联的端口号码。
+             protocol 设置或获取 URL 的协议部分。
+             search 设置或获取 href 属性中跟在问号后面的部分。
+             ,* */
+             console.log(window.location.href);
+             console.log(window.location.hostname);
+
+             /*3.navigator对象：包含web浏览器的信息*/
+             /*
+             ,* appCodeName 获取浏览器的代码名称。
+                 appMinorVersion 获取应用程序的次版本值。
+                 appName 获取浏览器的名称。
+                 appVersion 获取浏览器运行的平台和版本。
+                 browserLanguage 获取浏览器的当前语言。
+                 cookieEnabled 获取客户端的永久 cookie 是否在浏览器中启用。永久 cookies 是储存在客户端计算机上的。
+                 cpuClass 获取指示 CPU 等级的字符串。
+                 onLine 获取表明系统是否处于全局脱机模式的值。
+                 platform 获取用户的操作系统名称。
+                 systemLanguage 获取操作系统适用的默认语言。
+                 userAgent 获取等同于 HTTP 用户代理请求头的字符串。
+                 userLanguage 获取操作系统的自然语言设置。
+             ,* */
+             console.log(window.navigator.appVersion);
+
+             /*4.screen 屏幕对象：包含屏幕和渲染能力的对象*/
+             console.log(window.screen.width);
+             console.log(window.screen.height);
+
+         </script>
+     </head>
+     <body>
+         <input type="button" onclick="demo1()" value="前进按钮" />
+         <input type="button" onclick="demo2()" value="后退按钮" />
+         <a href="http://www.baidu.com">百度</a>
+     </body>
+     </html>
+   #+END_SRC
+
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+         <title>js对象</title>
+         <script type="text/javascript">
+           /*window.onblur=function(){
+             alert(123);
+             }*/
+           /*window.onfocus=function(){
+             alert(321);
+             }*/
+           /*window.onload=function(){
+             var div = document.getElementById("test");
+             div.innerText="bbb";
+             }*/
+           /*var flag = window.confirm("是否下课？");
+           if(flag){
+             alert("快点下课");
+           }else{
+             alert("一会下课");
+             }*/
+           /*var password=window.prompt("请输入密码");
+           if(password="007"){
+             alert("密码正确，立即爆炸");
+           }else{
+             alert("密码错误，哈市爆炸");
+             }*/
+           //window.clase();
+           /*window.setInterval(function(){
+             var div = document.getElementById("test");
+             var date = new Date();
+             var time = date.toLocaleString();
+             div.innerText = ;
+             },1000);*/
+           window.setTimeout(function(){
+             var div = document.getElementById("test");
+             div.innerText = "time out!";
+           },3000);
+         </script>
+       </head>
+       <body>
+         <div id="test" class="test">
+           waiting...
+         </div>
+       </body>
+     </html>
+   #+END_SRC
+   [[./SourceCode/50.html]]
+   + 其中包含的方法：
+     1. onblur:失去焦点
+     2. onfocus：获得焦点
+     3. !!!onload：当前浏览器页面装载完成后触发
+     4. !!!alert
+     5. !!!confirm
+     6. !!!prompt
+     7. !!!close(仅限ie浏览器，chrome和firefox需要解决浏览器禁止js关闭非js创建页面的问题)
+     8. !!!setInterval
+     9. !!!setTimeout
+     10. setInterval和setTimeout的不同?
+   + 其中包含的对象：（我们可以通过window引出这些对象）
+     1. location
+     2. screen
+     3. history
+     4. navigator
+     5. document
+2. location
+   !!!href：获取或设置地址栏上的地址。通过此属性js可以控制浏览器访问一个新的地址
+3. navigator
+4. history
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+         <title>js对象</title>
+         <script type="text/javascript">
+           /*function back(){
+           window.history.back();
+           }
+           function forward(){
+           window.history.forward();
+           }*/
+           function back(){
+           window.history.go(-1);
+           }
+           function forward(){
+           window.history.go(1);
+           }
+           console.lot(window.history.length);
+         </script>
+       </head>
+       <body>
+         <div id="test" class="test">
+           waiting...
+         </div>
+         <input type="button" onclick="back()" value="后退" />
+         <input type="button" onclick="forward()" value="前进" />
+       </body>
+     </html>
+   #+END_SRC
+   [[./SourceCode/51.html]]
+   1. length
+   2. back()
+   3. forward()
+   4. go()
+*** 4. DOM--文档对象模型
+[[./Img/day04DOM.png]]
+dom--document object model
+1. 获取文档独享的方法
+   #+BEGIN_SRC html
+     <!DOCTYPE html>
+     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+       <head>
+         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+         <title>如何通过document获取数据</title>
+         <script type="text/javascript">
+           function demo1(){
+             //根据ID获取username文本中的值
+             var username = document.getElementById("username");
+             //获取当前对象的value值
+             alert(username.value);
+           }
+           function demo2(){
+             //根据name获取input的对象
+             var password = document.getElementsByName("password");
+             //获取其中的value值
+             //因为getElementsByName获取两个对象，这两个对象存储在一个数组中，如果需要取出每一个对象的value值，可以使用for遍历来操作
+             for(var i=0;i<password.length;i++){
+               alert(password[i].value);
              }
-             function demo4(){
-               //获取页面中的p元素
-               var p = document.getElementById("pid");
-               //获取p元素中的文本内容
-               alert(p.innerText);
-               //设置p元素中的文本内容
-               //p.innerText = "10点多了";
-               p.innerHTML="<font color='red'>10点多了</font>";
+           }
+           function demo3(){
+             //根据tagname(元素名)获取页面中的元素
+             arr_input = document.getElementsByTagName("input");
+             //获取元素的value值
+             //利用for循环遍历输出每一个input元素的value值
+             for(var i=0;i<arr_input.length;i++){
+               alert(arr_input[i].value);
              }
-           </script>
-         </head>
-         <body>
-           用户名称：<input type="text" name="username" id="username"/><br />
-           用户密码：<input type="password" name="password" id="password" /><br />
-           用户密码2：<input type="password" name="password" id="password2" /><br />
+           }
+           function demo4(){
+             //获取页面中的p元素
+             var p = document.getElementById("pid");
+             //获取p元素中的文本内容
+             alert(p.innerText);
+             //设置p元素中的文本内容
+             //p.innerText = "10点多了";
+             p.innerHTML="<font color='red'>10点多了</font>";
+           }
+         </script>
+       </head>
+       <body>
+         用户名称：<input type="text" name="username" id="username"/><br />
+         用户密码：<input type="password" name="password" id="password" /><br />
+         用户密码2：<input type="password" name="password" id="password2" /><br />
 
-           <hr />
-           <input type="button" value="通过ID获取节点的值" onclick="demo1()"/>
-           <input type="button" value="通过NAME获取节点的值"  onclick="demo2()" />
-           <input type="button" value="通过TAG获取节点的值" onclick="demo3()" />
+         <hr />
+         <input type="button" value="通过ID获取节点的值" onclick="demo1()"/>
+         <input type="button" value="通过NAME获取节点的值"  onclick="demo2()" />
+         <input type="button" value="通过TAG获取节点的值" onclick="demo3()" />
 
-           <hr  />
-           <p id="pid"><font color="red">获取P标签中的文字</font></p>
-           <input type="button" value="获取P中文字" onclick="demo4()" />
-         </body>
-       </html>
-     #+END_SRC
-
-     1. getElementByld("id"):根据id获取一个元素
-     2. getElementsByName("name")：根据name获取一组元素
-     3. getElementsByTagName("tagname")根据元素名称获取一组元素
-     4. innerHTML()：设置或获取位于对象起始和结束标签内的HTML
-     5. innerText()：设置或获取位于对象起始或结束标签内的文本
-   - 对文档对象进行增删改查的操作
-     #+BEGIN_SRC html
+         <hr  />
+         <p id="pid"><font color="red">获取P标签中的文字</font></p>
+         <input type="button" value="获取P中文字" onclick="demo4()" />
+       </body>
+     </html>
+   #+END_SRC
+   1. getElementByld("id"):根据id获取一个元素
+   2. getElementsByName("name")：根据name获取一组元素
+   3. getElementsByTagName("tagname")根据元素名称获取一组元素
+   4. innerHTML()：设置或获取位于对象起始和结束标签内的HTML
+   5. innerText()：设置或获取位于对象起始或结束标签内的文本
+2. 对文档对象进行增删改查的操作
+   #+BEGIN_SRC html
        <html>
          <head>
            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -2304,10 +2997,10 @@ Client - Server
 
          </body>
        </html>
-     #+END_SRC
-     [[./SourceCode/54.html]]
+   #+END_SRC
+   [[./SourceCode/54.html]]
 
-     #+BEGIN_SRC html
+   #+BEGIN_SRC html
        <html>
          <head>
            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -2423,10 +3116,10 @@ Client - Server
            </table>
          </body>
        </html>
-     #+END_SRC
-     [[./SourceCode/55.html]]
+   #+END_SRC
+   [[./SourceCode/55.html]]
 
-     #+BEGIN_SRC html
+   #+BEGIN_SRC html
        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
        <html xmlns="http://www.w3.org/1999/xhtml">
          <head>
@@ -2470,10 +3163,10 @@ Client - Server
            </select>
          </body>
        </html>
-     #+END_SRC
-     [[./SourceCode/56.html]]
-   - 表单的非空校验
-     #+BEGIN_SRC html
+   #+END_SRC
+   [[./SourceCode/56.html]]
+3. 表单的非空校验
+   #+BEGIN_SRC html
        <html>
          <head>
            <title>表单页面</title>
@@ -2659,23 +3352,23 @@ Client - Server
            </form>
          </body>
        </html>
-     #+END_SRC
-     [[./SourceCode/57.html]]
-     1. 创建元素：
+   #+END_SRC
+   [[./SourceCode/57.html]]
+   1. 创建元素：
         document.createElement("节点类型");//为指定标签创建一个元素的实例
-     2. 挂载元素：
+   2. 挂载元素：
         - 要指定元素挂载到哪一个父节点身上
           parentNode.AppendChild(childNode);//在父元素最后位置添加子元素
         - 将新节点插入到旧节点之前
           parentNode.insertBefore(newNode,oldNode);//将元素作为父对象的子节点插入到文档层次结构中
-     3. 删除元素:将父节点身上的一个子节点移除，这个操作就是删除节点
+   3. 删除元素:将父节点身上的一个子节点移除，这个操作就是删除节点
         parentNode.removeChile(childNode)
-     4. 修改元素:使用新节点替换掉已有的节点
+   4. 修改元素:使用新节点替换掉已有的节点
         parentNode.replaceChile(newNode,oldNode);
-     5. 克隆节点：将当前元素再复制一份，并复制后的元素会作为返回值返回;在调用cloneNode()方法时，可以指定一个布尔值，如果指定为false，则表示仅复制div本身，div中的子元素或子内容全部放弃。如果指定为true，则表示完全复制div，包括其中的子元素或字内容。默认不写就是false
+   5. 克隆节点：将当前元素再复制一份，并复制后的元素会作为返回值返回;在调用cloneNode()方法时，可以指定一个布尔值，如果指定为false，则表示仅复制div本身，div中的子元素或子内容全部放弃。如果指定为true，则表示完全复制div，包括其中的子元素或字内容。默认不写就是false
         div = div.cloneNode(boolean);//如果位false或者不写(默认)，不复制克隆节点中的子节点，只复制指定克隆节点。//如果位true，复制当前节点及其子节点
-     6. 调整样式：
-        #+BEGIN_SRC html
+   6. 调整样式：
+      #+BEGIN_SRC html
           <html>
             <head>
               <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -2741,19 +3434,18 @@ Client - Server
               </div>
             </body>
           </html>
-        #+END_SRC
-
-        - 通过修改元素的class属性，使元素使用不同的类来启用不同的样式
+      #+END_SRC
+      - 通过修改元素的class属性，使元素使用不同的类来启用不同的样式
           div.className = "xxx";
-        - 通过元素的style属性来进行样式的修改
+      - 通过元素的style属性来进行样式的修改
           div.style.backgroundColor = "#f00";
-        - 通过修改元素display属性，调整节点展示方法：
+      - 通过修改元素display属性，调整节点展示方法：
           div.style.display = "none"|"block";
-     + 拓展：nextSibling获取对此对象的下一个兄弟对象的引用
-** 5. 问题：
-   dom解析时，在页面中写好一个function demo1(){},适用button按钮调用这个方法，执行却发现报错，错误：ncaught ReferenceError:demo1 is not defined(demo1未定义)
-   - 解决：
-     仔细检查<script></script>中的function demo1(){}代码，少了大括号，会出现未定义的错误
+   + 拓展：nextSibling获取对此对象的下一个兄弟对象的引用
+*** 5. 问题：
+dom解析时，在页面中写好一个function demo1(){},适用button按钮调用这个方法，执行却发现报错，错误：ncaught ReferenceError:demo1 is not defined(demo1未定义)
+- 解决：
+  仔细检查<script></script>中的function demo1(){}代码，少了大括号，会出现未定义的错误
 * jQuery
 ** 1. jQuery概述
     1. 由于用户在js中编写的内容十分繁多，将一些常用的操作和行为进行了封装，封装成很多个函数，这些函数就构成了一个js的函数库，用户在使用的时候直接调用函数库的函数即可，这个函数库就是jQuery
@@ -2889,134 +3581,134 @@ Client - Server
          $(function(){
          });
        #+END_SRC
-* jQuery选择器
-** 1. 基本选择器(selector案例一)
-    元素名选择器，类选择器，id选择器，多元素选择器，*选择器
-    1. 元素名选择器
-       #+BEGIN_SRC
+** 8. jQuery选择器
+*** 1. 基本选择器(selector案例一)
+元素名选择器，类选择器，id选择器，多元素选择器，*选择器
+1. 元素名选择器
+   #+BEGIN_SRC
          $("div") - 匹配所有的div元素
-       #+END_SRC
-    2. class选择器
-       #+BEGIN_SRC
+   #+END_SRC
+2. class选择器
+   #+BEGIN_SRC
          $(".c1") - 匹配所有class值为c1的元素
          $("div.c1") - 匹配所有class值为c1的div元素
-       #+END_SRC
-    3. id选择器
-       #+BEGIN_SRC
+   #+END_SRC
+3. id选择器
+   #+BEGIN_SRC
          $("#d1") - 匹配所有id值为d1的元素
          $("div#d1") - 匹配所有id值为d1的div元素
-       #+END_SRC
-    4. *号匹配符
-       #+BEGIN_SRC
+   #+END_SRC
+4. *号匹配符
+   #+BEGIN_SRC
          $("*") - 匹配所有的元素
-       #+END_SRC
-    5. 多元素选择器
-       #+BEGIN_SRC
+   #+END_SRC
+5. 多元素选择器
+   #+BEGIN_SRC
          $("div,span,#d1,.c1") - 匹配所有的div/span元素以及id值为d1的元素和class值为c1的元素
-       #+END_SRC
-    #+BEGIN_SRC html
-      <!DOCTYPE>
-      <html>
-        <head>
-          <title>基本选择器练习</title>
-          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-          <style type="text/css">
-            body{
-                font-family: "微软雅黑"
-            }
-            div,span {
-                width: 140px;
-                height: 140px;
-                margin: 20px;
-                background: #9999CC;
-                border: #000 1px solid;
-                float: left;
-                font-size: 17px;
-                font-family: Roman;
-            }
-            div.mini {
-                width: 40px;
-                height: 43px;
-                background: #CC66FF;
-                border: #000 1px solid;
-                font-size: 12px;
-                font-family: Roman;
-            }
-            input{ margin: 5px 5px; }
-          </style>
-          <!--引入jquery的js库-->
-          <script src="../other/jquery-1.4.2.js"></script>
-          <script type="text/javascript">
-            //让整个页面加载完成
-            $(document).ready(function() {
-              /* ---------基本选择器练习--------- */
-              //改变元素名为 <div> 的所有元素的背景色为 #FF69B4"  id="b1"
-              $("#b1").click(function(){
-                //点击事件中添加一个函数，用来实现改变背景颜色的操作
-                //1.选中元素
-                //2.修改选中元素背景颜色
-                $("div").css("background","#FF69B4");
-              });
-              //改变 id 为 one 的元素的背景色为 #9ACD32"  id="b2"
-              $("#b2").click(function(){
-                $("#one").css("background","#9ACD32");
-              });
-              //改变 class 为 mini 的所有元素的背景色为 #FF0033"  id="b3"
-              $("#b3").click(function(){
-                $(".mini").css("background","#FF0033");
-              });
-              //改变所有元素的背景色为 #FDF5E6"  id="b4"
-              $("#b4").click(function(){
-                $("*").css("background","#FDF5E6");
-              });
-              //改变所有的<span>元素和 id 为 two 的元素的背景色为 #FF1493"  id="b5"
-              $("#b5").click(function(){
-                $("span,#two").css("background","#FF1493");
-              });
-              //改变所有的<span>元素和 id 为 two 的,id为one的，class为 mini的所有的元素的背景色为 #006400"  id="b6"
-              $("#b6").click(function(){
-                $("span,#two,#one,.mini").css("background","#006400");
-              });
-            });
-          </script>
-        </head>
-        <body>
-          <input type="button" value=" 改变元素名为 <div> 的所有元素的背景色为 #FF69B4" id="b1" />
-          <input type="button" value=" 改变 id 为 one 的元素的背景色为 #9ACD32" id="b2" />
-          <input type="button" value=" 改变 class 为 mini 的所有元素的背景色为 #FF0033" id="b3" />
-          <input type="button" value=" 改变所有元素的背景色为 #FDF5E6" id="b4" />
-          <input type="button" value=" 改变所有的<span>元素和 id 为 two 的元素的背景色为 #FF1493"
-                 id="b5" />
-          <input type="button"
-                 value=" 改变所有的<span>元素和 id 为 two 的,id为one的，class为 mini的所有的元素的背景色为 #006400"
-                 id="b6" />
-          <h1>天气冷了</h1>
-          <h2>天气又冷了</h2>
-          <div id="one">id为one</div>
-          <div id="two" class="mini">
-            id为two class是 mini
-            <div class="mini"> class是 mini</div>
-          </div>
-          <div class="one">
-            class是 one
-            <div class="mini"> class是 mini</div>
-            <div class="mini"> class是 mini</div>
-          </div>
-          <div class="one">
-            class是 one
-            <div class="mini01"> class是 mini01</div>
-            <div class="mini"> class是 mini</div>
-          </div>
-          <br>
-          <div id="mover">动画</div>
-          <br>
-          <span class="spanone"> span </span>
-          <span class="mini"> span class是mini </span>
-        </body>
-      </html>
-    #+END_SRC
-    [[./SourceCode/61.html]]
-** 2. 层级选择器(selector案例二)
+   #+END_SRC
+   #+BEGIN_SRC html
+     <!DOCTYPE>
+     <html>
+       <head>
+         <title>基本选择器练习</title>
+         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+         <style type="text/css">
+           body{
+               font-family: "微软雅黑"
+           }
+           div,span {
+               width: 140px;
+               height: 140px;
+               margin: 20px;
+               background: #9999CC;
+               border: #000 1px solid;
+               float: left;
+               font-size: 17px;
+               font-family: Roman;
+           }
+           div.mini {
+               width: 40px;
+               height: 43px;
+               background: #CC66FF;
+               border: #000 1px solid;
+               font-size: 12px;
+               font-family: Roman;
+           }
+           input{ margin: 5px 5px; }
+         </style>
+         <!--引入jquery的js库-->
+         <script src="../other/jquery-1.4.2.js"></script>
+         <script type="text/javascript">
+           //让整个页面加载完成
+           $(document).ready(function() {
+             /* ---------基本选择器练习--------- */
+             //改变元素名为 <div> 的所有元素的背景色为 #FF69B4"  id="b1"
+             $("#b1").click(function(){
+               //点击事件中添加一个函数，用来实现改变背景颜色的操作
+               //1.选中元素
+               //2.修改选中元素背景颜色
+               $("div").css("background","#FF69B4");
+             });
+             //改变 id 为 one 的元素的背景色为 #9ACD32"  id="b2"
+             $("#b2").click(function(){
+               $("#one").css("background","#9ACD32");
+             });
+             //改变 class 为 mini 的所有元素的背景色为 #FF0033"  id="b3"
+             $("#b3").click(function(){
+               $(".mini").css("background","#FF0033");
+             });
+             //改变所有元素的背景色为 #FDF5E6"  id="b4"
+             $("#b4").click(function(){
+               $("*").css("background","#FDF5E6");
+             });
+             //改变所有的<span>元素和 id 为 two 的元素的背景色为 #FF1493"  id="b5"
+             $("#b5").click(function(){
+               $("span,#two").css("background","#FF1493");
+             });
+             //改变所有的<span>元素和 id 为 two 的,id为one的，class为 mini的所有的元素的背景色为 #006400"  id="b6"
+             $("#b6").click(function(){
+               $("span,#two,#one,.mini").css("background","#006400");
+             });
+           });
+         </script>
+       </head>
+       <body>
+         <input type="button" value=" 改变元素名为 <div> 的所有元素的背景色为 #FF69B4" id="b1" />
+         <input type="button" value=" 改变 id 为 one 的元素的背景色为 #9ACD32" id="b2" />
+         <input type="button" value=" 改变 class 为 mini 的所有元素的背景色为 #FF0033" id="b3" />
+         <input type="button" value=" 改变所有元素的背景色为 #FDF5E6" id="b4" />
+         <input type="button" value=" 改变所有的<span>元素和 id 为 two 的元素的背景色为 #FF1493"
+                id="b5" />
+         <input type="button"
+                value=" 改变所有的<span>元素和 id 为 two 的,id为one的，class为 mini的所有的元素的背景色为 #006400"
+                id="b6" />
+         <h1>天气冷了</h1>
+         <h2>天气又冷了</h2>
+         <div id="one">id为one</div>
+         <div id="two" class="mini">
+           id为two class是 mini
+           <div class="mini"> class是 mini</div>
+         </div>
+         <div class="one">
+           class是 one
+           <div class="mini"> class是 mini</div>
+           <div class="mini"> class是 mini</div>
+         </div>
+         <div class="one">
+           class是 one
+           <div class="mini01"> class是 mini01</div>
+           <div class="mini"> class是 mini</div>
+         </div>
+         <br>
+         <div id="mover">动画</div>
+         <br>
+         <span class="spanone"> span </span>
+         <span class="mini"> span class是mini </span>
+       </body>
+     </html>
+   #+END_SRC
+   [[./SourceCode/61.html]]
+*** 2. 层级选择器(selector案例二)
     如果想通过dom元素之间的层次关系来获取特定元素，例如子元素、兄弟元素等。则需要通过层次选择器
     1. 后代选择器
        #+BEGIN_SRC
@@ -3121,7 +3813,7 @@ Client - Server
       </html>
     #+END_SRC
     [[./SourceCode/62.html]]
-** 3. 基本过滤选择器(selector案例三)
+*** 3. 基本过滤选择器(selector案例三)
     过滤选择器主要是通过特定的过滤规则筛选出所需的dom元素，该选择器都以":"开头
     - 匹配所有div中的第一个div元素
       #+BEGIN_SRC
@@ -3255,7 +3947,7 @@ Client - Server
       </html>
     #+END_SRC
     [[./SourceCode/63.html]]
-** 4. 内容选择器(selector案例四)
+*** 4. 内容选择器(selector案例四)
     - 匹配所有div中包含abc内容的div元素
       #+BEGIN_SRC
         $("div:contains('abc)")
@@ -3376,7 +4068,7 @@ Client - Server
       </html>
     #+END_SRC
     [[./SourceCode/64.html]]
-** 5. 属性选择器(selector案例五)
+*** 5. 属性选择器(selector案例五)
     - 匹配所有具有id属性的div元素
       #+BEGIN_SRC
         $("div[id]")
@@ -3491,7 +4183,7 @@ Client - Server
       </html>
     #+END_SRC
     [[./SourceCode/65.html]]
-** 6. 表单选择器(selector案例六)
+*** 6. 表单选择器(selector案例六)
     - 匹配所有的input文本框、密码框、单选框、复选框、select框、textarea、button
         $(":input")
     - 匹配所有的密码框
@@ -3593,7 +4285,7 @@ Client - Server
       </html>
     #+END_SRC
     [[./SourceCode/66.html]]
-** 更多操作
+*** 更多操作
 1. 文档操作
    - 获取id为d1元素的父元素
      parent()
@@ -9179,127 +9871,124 @@ ServletContext就是一个代表web应用的对象。
    cookie是浏览器端的技术，保存在浏览器的数据可能会被其他人读取，造成数据丢失，数据安全性较差。cookie可以存储长期保存的数据。cookie适合存储安全性要求较低，而存储时间较长的数据。
 2. session服务器端的技术，数据保存在服务器端安全性较高，普通用户无法读取服务器上的数据。session不善于长期存储数据，如果存储数据时间过长，会导致服务器长时间存储一个无人使用的对象，造成内存的浪费。session适合存储安全性较高，而存储时间较短的数据。
 * JSP
-** 1. 概述
-1. JSP概述 由于在servlet中书写前台页面代码非常复杂，于是Sun提出一门新的技术--jsp，将 所有的页面内容重新书写到一个文件中，在这个文件中还可以书写java语句，这 样的一个文件就称之为一个jsp文件。 在jsp页面内开发HTML代码十分便利，还可以在其中嵌入java语句，使开发变得非 常简洁，直接在页面中就完成了页面构建和代码逻辑的全部内容。
-2. JSP原理 在jsp页面被初次访问的时候，会被jsp翻译引擎翻译成一个servlet文件，这个文件 是一个普通java文件，继承了一个具有servlet接口的类，所以当前文件才会成为 一个servlet文件。
-   实验:寻找如下文件 --> 在[tomcat]/work/localhost/day14/index_jsp.java文件
+** 1. 概述与原理
+由于在servlet中书写前台页面代码非常复杂，于是Sun提出一门新的技术--jsp，将所有的页面内容重新书写到一个文件中，在这个文件中还可以书写java语句，这样的一个文件就称之为一个jsp文件。 在jsp页面内开发HTML代码十分便利，还可以在其中嵌入java语句，使开发变得非 常简洁，直接在页面中就完成了页面构建和代码逻辑的全部内容。
+- JSP原理：在jsp页面被初次访问的时候，会被jsp翻译引擎翻译成一个servlet文件，这个文件是一个普通java文件，继承了一个具有servlet接口的类，所以当前文件才会成为一个servlet文件。
+- 实验:寻找如下文件 --> 在[tomcat]/work/localhost/day14/index_jsp.java文件
 ** 2. JSP语法
-1. 语法
-   1. 模板元素
-      jsp页面中的HTML内容会在浏览器发生访问的时候，被jsp翻译引擎翻译为 Servlet文件的模板元素。
-      #+BEGIN_SRC html
-        <body>
-          <div>aaaa</div>
-        </body>
-      #+END_SRC
-      #+BEGIN_SRC java
-        out.write("<body>\r\n");
-        out.write("  <div>aaaa</div>\r\n");
-        out.write("<body>\r\n");
-      #+END_SRC
-      其实就是将HTML内容使用out.write()输出.
-   2. 脚本表达式
-      语法:<%= 脚本表达式(具有返回值的表达式，或一个直接量) %> 在jsp页面被访问的时候，jsp翻译引擎将脚本表达式中的内容翻译为了原封不动 的表达式结果值。
-      #+BEGIN_SRC html
-        <h3>脚本表达式</h3>
-        <%=request.getContextPath()%>
-      #+END_SRC
-      #+BEGIN_SRC java
-        out.write("   ");
-        out.print(request.getContextPath());
-        out.write("\r\n");
-      #+END_SRC
-      翻译后的结果值直接放在servlet文件的对应位置，并使用out.print()输出表达式的值。
-   3. 脚本片段
-      语法:<% 脚本片段(java语句) %> ；在JSP页面被访问的时候，其中脚本片段中的内容会原封不动的放在翻译后的 servlet文件制定位置。
-      #+BEGIN_SRC html
-        <h3>脚本表达式</h3>
-        <%=request.getContextPath()%>
-        <h3>脚本片段</h3>
-        <%
-          for(int i = 0;i<5;i++){
-                           %>
-          <font color='red'>I am li shuai;</font>
-          <%
-            }
-            %>
-      #+END_SRC
-      #+BEGIN_SRC java
-        for(int i=0;i<5;i++){
-            out.write("\r\n");
-            out.write("\t\t\r\n");
-            out.write("\t\t<font color='red'>I am li shuai;</font>\r\n");
-            out.write("\t\t\r\n");
-            out.write("\t\t");
-        }
-      #+END_SRC
-      在jsp页面中脚本片段可以分开书写，分开书写脚不片段必须要保证java语法完整，因为在jsp页面中的java语句会被翻译到servlet文件中，需要保证java语句在servlet文件中的完整性。
-   4. JSP声明
-      语法:<%! JSP声明 %> ；在jsp页面被访问的时候，其中的jsp声明会被jsp翻译引擎翻译为当前servlet的成 员变量，成员方法，静态代码块等内容。被翻译后的成员内容都会出现在类内方法外，作为成员内容使用。
-      #+BEGIN_SRC html
-        <h3>JSP声明</h3>
-        <%! int i=0;%>
-        <%! public void m(){}%>
-        <%!static{}%>
-      #+END_SRC
-      #+BEGIN_SRC java
-        public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase implements org.apache.jasper.runtime.JspSourceDependent{
-            int i = 0;
-            public void m(){}
-            static{}
-        }
-      #+END_SRC
-   5. JSP注释
-
-      | <%//abc%>   | 被翻译成java注释内容，由于是注释内容所以不会输出任何内容                                 |
-      | <!-- def--> | HTML注释被翻译成模板元素，由于是HTML注释，所以不会输出任何内容，但是仍然会出现在页面中。 |
-      | <%--ghi--%> | 在翻译过程中直接被抛弃，不会出现在翻译后的servlet文件中。                                |
-   6. JSP指令
-      - 语法:<%@指令名称 %>
-      - 指令
-        指令本身不会产生任何的输出内容，是用来控制jsp翻译引擎如何来翻译jsp页面 的。
-        + 指令内容:
-          | page    | <%@page%>    | 用户指定当前页面依赖哪些配置翻译页面。 |
-          | include | <%@include%> | 在当前jsp页面引入其他jsp页面           |
-          | taglib  | <%@taglib%>  | 标签技术                               |
-          + page指令：
-            1. language="java"
-               当前JSP使用的开发语言
-            2. extends="package.class"
-               当前jsp翻译成servlet后要继承的类，注意此值必须是一个servlet的子类，一般情况 下不要改
-            3. import="{package.class | package.*}, ..."
-               导入需要使用到的包 java.lang.*;javax.servlet.*;javax.servlet.jsp. *;javax.servlet.http.*;
-            4. session="true | false"
-               用来指定当前页面是否使用session，如果设置为true，则翻译过来的servlet中将会 有对session对象的引用，于是可以直接在jsp中使用session隐式对象。但是这将导 致一旦访问jsp就会调用request.getSession()方法，可能导致不必要的空间浪费。如 果确定jsp中不需要session可以设为false
-            5. [ buffer="none | 8kb | sizekb" ]
-               out隐式对象所使用的缓冲区的大小
-            6. [autoFlush="true | false"]
-               out隐式对象是否自动刷新缓冲区，默认为true，不需要更改
-            7. [ isThreadSafe="true | false" ]
-               翻译过来的servlet是否实现SingleThreadModel
-            8. [ errorPage="relative_url" ]
-               如果页面出错，将要跳转到的页面，除了在jsp中使用此属性指定错误页面外也可以在web.xml中配置整个web应用的错误页面，如果两个都设置则jsp中的此属性起作用
-               #+BEGIN_SRC html
-                 <error-page>
-                     <error-code>404</error-code>
-                     <location>/error/404.jsp</location>
-                 </error-page>
-                 <error-page>
-                     <error-code>500</error-code>
-                     <location>/error/500.jsp</location>
-                 </error-page>
-               #+END_SRC
-            9. *[ isErrorPage="true | false" ]*
-               如果设置此属性为true,翻译过来的servlet中将含有Exception隐式对象,其中封装的就 是上一个页面中抛出的异常对象
-            10. *[ contentType="mimeType [ ;charset=characterSet ]" | "text/html ; charset=ISO-8859-1" ]*
-                和jsp乱码相关的指令,用来指定jsp输出时,设置的Content -Type响应头用来指定浏览 器打开的编码
-            11. /[ *pageEncoding="characterbSet | ISO-8859-1"* ]/
-                服务器翻译jsp时使用的编码集.如果向防止jsp乱码,应该保证文件的保存编码和jsp翻 译成servlet用的编码以及输出到浏览器后浏览器打开的编码一致.此属性一旦设置好, 翻译引擎会间接帮我们设置content-type属性.
-          + include指令
-            在当前的jsp页面中引入其他的jsp页面，将组合之后的页面输出在浏览器。 <%@include file=""%>
-          + taglib指令
-            标签技术 <%@taglib %>
-2. 九大隐式对象
+1. 模板元素
+   jsp页面中的HTML内容会在浏览器发生访问的时候，被jsp翻译引擎翻译为 Servlet文件的模板元素。
+   #+BEGIN_SRC html
+     <body>
+       <div>aaaa</div>
+     </body>
+   #+END_SRC
+   #+BEGIN_SRC java
+     out.write("<body>\r\n");
+     out.write("  <div>aaaa</div>\r\n");
+     out.write("<body>\r\n");
+   #+END_SRC
+   其实就是将HTML内容使用out.write()输出.
+2. 脚本表达式
+   语法:<%= 脚本表达式(具有返回值的表达式，或一个直接量) %> 在jsp页面被访问的时候，jsp翻译引擎将脚本表达式中的内容翻译为了原封不动 的表达式结果值。
+   #+BEGIN_SRC html
+     <h3>脚本表达式</h3>
+     <%=request.getContextPath()%>
+   #+END_SRC
+   #+BEGIN_SRC java
+     out.write("   ");
+     out.print(request.getContextPath());
+     out.write("\r\n");
+   #+END_SRC
+   翻译后的结果值直接放在servlet文件的对应位置，并使用out.print()输出表达式的值。
+3. 脚本片段
+   语法:<% 脚本片段(java语句) %> ；在JSP页面被访问的时候，其中脚本片段中的内容会原封不动的放在翻译后的 servlet文件制定位置。
+   #+BEGIN_SRC html
+     <h3>脚本表达式</h3>
+     <%=request.getContextPath()%>
+     <h3>脚本片段</h3>
+     <%
+       for(int i = 0;i<5;i++){
+                        %>
+       <font color='red'>I am li shuai;</font>
+       <%
+         }
+         %>
+   #+END_SRC
+   #+BEGIN_SRC java
+     for(int i=0;i<5;i++){
+         out.write("\r\n");
+         out.write("\t\t\r\n");
+         out.write("\t\t<font color='red'>I am li shuai;</font>\r\n");
+         out.write("\t\t\r\n");
+         out.write("\t\t");
+     }
+   #+END_SRC
+   在jsp页面中脚本片段可以分开书写，分开书写脚不片段必须要保证java语法完整，因为在jsp页面中的java语句会被翻译到servlet文件中，需要保证java语句在servlet文件中的完整性。
+4. JSP声明
+   语法:<%! JSP声明 %> ；在jsp页面被访问的时候，其中的jsp声明会被jsp翻译引擎翻译为当前servlet的成 员变量，成员方法，静态代码块等内容。被翻译后的成员内容都会出现在类内方法外，作为成员内容使用。
+   #+BEGIN_SRC html
+     <h3>JSP声明</h3>
+     <%! int i=0;%>
+     <%! public void m(){}%>
+     <%!static{}%>
+   #+END_SRC
+   #+BEGIN_SRC java
+     public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase implements org.apache.jasper.runtime.JspSourceDependent{
+         int i = 0;
+         public void m(){}
+         static{}
+     }
+   #+END_SRC
+5. JSP注释
+   | <%//abc%>   | 被翻译成java注释内容，由于是注释内容所以不会输出任何内容                                 |
+   | <!-- def--> | HTML注释被翻译成模板元素，由于是HTML注释，所以不会输出任何内容，但是仍然会出现在页面中。 |
+   | <%--ghi--%> | 在翻译过程中直接被抛弃，不会出现在翻译后的servlet文件中。                                |
+6. JSP指令
+   - 语法:<%@指令名称 %>
+   - 指令
+     指令本身不会产生任何的输出内容，是用来控制jsp翻译引擎如何来翻译jsp页面 的。
+     | page    | <%@page%>    | 用户指定当前页面依赖哪些配置翻译页面。 |
+     | include | <%@include%> | 在当前jsp页面引入其他jsp页面           |
+     | taglib  | <%@taglib%>  | 标签技术                               |
+     1. *language="java"*
+        当前JSP使用的开发语言
+     2. *extends="package.class"*
+        当前jsp翻译成servlet后要继承的类，注意此值必须是一个servlet的子类，一般情况下不要改
+     3. *import="{package.class | package.**}, ..."
+        导入需要使用到的包 /java.lang.*;javax.servlet.*;javax.servlet.jsp.*;javax.servlet.http.*;/
+     4. *session="true | false"*
+        用来指定当前页面是否使用session，如果设置为true，则翻译过来的servlet中将会 有对session对象的引用，于是可以直接在jsp中使用session隐式对象。但是这将导 致一旦访问jsp就会调用request.getSession()方法，可能导致不必要的空间浪费。如 果确定jsp中不需要session可以设为false
+     5. *[ buffer="none | 8kb | sizekb" ]*
+        out隐式对象所使用的缓冲区的大小
+     6. *[autoFlush="true | false"]*
+        out隐式对象是否自动刷新缓冲区，默认为true，不需要更改
+     7. *[ isThreadSafe="true | false" ]*
+        翻译过来的servlet是否实现SingleThreadModel
+     8. *[ errorPage="relative_url" ]*
+        如果页面出错，将要跳转到的页面，除了在jsp中使用此属性指定错误页面外也可以在web.xml中配置整个web应用的错误页面，如果两个都设置则jsp中的此属性起作用
+        #+BEGIN_SRC html
+          <error-page>
+              <error-code>404</error-code>
+              <location>/error/404.jsp</location>
+          </error-page>
+          <error-page>
+              <error-code>500</error-code>
+              <location>/error/500.jsp</location>
+          </error-page>
+        #+END_SRC
+     9. *[ isErrorPage="true | false" ]*
+        如果设置此属性为true,翻译过来的servlet中将含有Exception隐式对象,其中封装的就 是上一个页面中抛出的异常对象
+     [[./Img/66.png]]
+     10. *[ contentType="mimeType [ ;charset=characterSet ]" | "text/html ; charset=ISO-8859-1" ]*
+         和jsp乱码相关的指令,用来指定jsp输出时,设置的Content -Type响应头用来指定浏览 器打开的编码
+     11. *[ pageEncoding="characterbSet | ISO-8859-1"]*
+         服务器翻译jsp时使用的编码集.如果向防止jsp乱码,应该保证文件的保存编码和jsp翻 译成servlet用的编码以及输出到浏览器后浏览器打开的编码一致.此属性一旦设置好, 翻译引擎会间接帮我们设置content-type属性.
+     12. include指令
+         在当前的jsp页面中引入其他的jsp页面，将组合之后的页面输出在浏览器。 <%@include file=""%>
+     13. taglib指令
+         标签技术 <%@taglib %>
+** 3. 九大隐式对象
    在jsp翻译成一个servlet后，其中都可以包含9大隐式对象，其中Exception、session 需要手动开启。在每一个jsp页面中都会有自己独立的9大隐式对象，每一个隐式对 象所具有的变量名可以直接使用，在自行定义新的变量时 应避免与已有隐式对象 名称重复。
    - 面试题经常考:
      九大隐式对象:
@@ -9309,8 +9998,10 @@ ServletContext就是一个代表web应用的对象。
      4. session --- 代表当前会话的对象
      5. application --- 代表当前web应用的对象
      6. config --- 代表当前servlet配置信息的对象 exception--- 代表当前页面产生的异常信息对象
-     7. out --- 代表当前jsp页面向浏览器输出数据的对象 pageContext --- 代表当前jsp页面上下文的对象
-3. PageContext详解
+     7. exception --- 代表当前页面产生的异常信息对象
+     8. out --- 代表当前jsp页面向浏览器输出数据的对象 pageContext --- 代表当前jsp页面上下文的对象
+     9. pageContext --- 代表当前jsp页面上下文的对象
+** 4. PageContext详解
    1. 功能一:可以作为其他八大隐式对象的入口。
       1. getException方法返回exception隐式对象
       2. getPage方法返回page隐式对象
@@ -9328,39 +10019,43 @@ ServletContext就是一个代表web应用的对象。
       4. 主要功能: 当前jsp页面内共享数据。
    3. 功能三:可以作为其他三大作用域的入口对象使用:
       scope是int类型的一个值，代表作用域.
-      setAttribute(String name,Obejct obj,int scope);
-      getAttribute(String name,int scope);
-      removeAttribute(String name,int scope);
-      getAttributeNamesInScope(int scope);
       #+BEGIN_SRC
-        PageContext.APPLICATION_SCOPE ServletContext
-        PageContext.SESSION_SCOPE Session
-        PageContext.REQUEST_SCOPE request
-        PageContext.PAGE_SCOPE page
+        setAttribute(String name,Obejct obj,int scope);
+        getAttribute(String name,int scope);
+        removeAttribute(String name,int scope);
+        getAttributeNamesInScope(int scope);
       #+END_SRC
-      获取指定域中的数据:
-      #+BEGIN_SRC
-
-      #+END_SRC
-      直接获取pageContext域属性:
+      | PageContext.APPLICATION_SCOPE | ServletContext |
+      | PageContext.SESSION_SCOPE     | Session        |
+      | PageContext.REQUEST_SCOPE     | request        |
+      | PageContext.PAGE_SCOPE        | page           |
+      获取指定域中的数据：
       #+BEGIN_SRC html
-        <h4>直接书写pageContext获取的是pageContext域</h4>
-        <%=pageContext.getAttribute("country")%>
+        <h4>获取指定域当中的数据</h4>
+        page:<%=pageContext.getAttribute("country",PageContext.PAGE_SCOPE)%>
+        request:<%=pageContext.getAttribute("country",PageContext.REQUEST_SCOPE)%>
+        session:<%=pageContext.getAttribute("country",PageContext.SESSION_SCOPE)%>
+        application:<%=pageContext.getAttribute("country",APPLICATION_SCOPE)%>
       #+END_SRC
-      删除指定域中属性:
-      #+BEGIN_SRC
+      直接获取pageContext域属性
+      #+BEGIN_SRC html
+        <h4>直接书写pageCOntext获取的是pageContext域</h4>
+            <%=pageContext.getAttribute("country")%>
+      #+END_SRC
+      删除指定域中属性
+      #+BEGIN_SRC html
         <h4>删除指定域中属性</h4>
-            <%
-                pageContext.removeAttribute("country",PageContext.PAGE_SCOPE);
-            %>
+          <%
+              pageContext.removeAttribute("country",PageContext.PAGE_SCOPE);
+          %>
       #+END_SRC
    4. 功能四:便捷的请求转发
       #+BEGIN_SRC java
         pageContext.forward("path");
       #+END_SRC
-** 3. 四大作用域
+** 5. 四大作用域
 1. 域对象概念
-   一个对象身上有一个可以被看见的范围,在这个范围内利用对象身上的map实 现资源的共享,像这样一个对象就称之为域对象.
+   一个对象身上有一个可以被看见的范围,在这个范围内利用对象身上的map实现资源的共享,像这样一个对象就称之为域对象.
 2. 四个域对象
    由大到小的顺序排列:
    #+BEGIN_SRC
@@ -9402,7 +10097,56 @@ ServletContext就是一个代表web应用的对象。
          当前jsp页面。
       3. 主要功能:
          在当前jsp页面内实现数据的共享。
-** 4. JSP标签技术
+** 6. 示例
+#+BEGIN_SRC html
+  <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isErrorPage="true"%>
+  <!DOCTYPE HTML >
+  <html>
+    <head>
+      <title>pageContext详解</title>
+    </head>
+    <body>
+      <h3>功能一：作为其他八大隐式对象的入口</h3>
+      <%
+        pageContext.getPage();
+        %>
+      <h3>功能二：作为域对象使用</h3>
+      <%
+        pageContext.setAttribute("name", "lishuai");
+        %>
+      <br/>
+      pageContext域中取出数据：
+      <%=
+        pageContext.getAttribute("name")
+        %>
+      <h3>功能三：作为三大作用域的入口</h3>
+      <%
+        pageContext.setAttribute("country", "China", PageContext.APPLICATION_SCOPE);
+        pageContext.setAttribute("country", "US", PageContext.SESSION_SCOPE);
+        pageContext.setAttribute("country","UK",PageContext.REQUEST_SCOPE);
+        pageContext.setAttribute("country","Japan",PageContext.PAGE_SCOPE);
+        %>
+      <h4>获取指定域当中的数据</h4>
+      page：<%=pageContext.getAttribute("country", PageContext.PAGE_SCOPE) %>
+      request：<%=pageContext.getAttribute("country",PageContext.REQUEST_SCOPE) %>
+      session：<%=pageContext.getAttribute("country",PageContext.SESSION_SCOPE) %>
+      application:<%=pageContext.getAttribute("country",PageContext.APPLICATION_SCOPE) %>
+      <h4>直接书写pageContext获取的是pageContext域</h4>
+      <%=pageContext.getAttribute("country") %>
+      <h4>删除指定域中属性</h4>
+      <%
+        pageContext.removeAttribute("country", PageContext.PAGE_SCOPE);
+        %>
+      删除之后的page域：<%=pageContext.getAttribute("country") %>
+      <h4>便捷的请求转发</h4>
+      <%
+        //pageContext.forward("/2.jsp");
+        %>
+    </body>
+  </html>
+
+#+END_SRC
+** 7. JSP标签技术
 1. JSP标签技术概述
    Jsp当前可以书写HTML内容和Java语句，便于开发，但是面对大量逻辑需要处理和 复杂的页面构成的时候，HTML和java的结合就无法做到合理维护和高效开发。这 时可以将页面中的java语句都变成标签内容，让标签处理java语句对应的逻辑，也 就是说利用标签代替java，这样就可以保证页面内只出现标签内容，这样的页面只 有一种语言，相比之前便于维护和关闭，可以提升开发效率。
 2. 常用的JSP标签技术
@@ -9414,10 +10158,9 @@ ServletContext就是一个代表web应用的对象。
       标签库数据庞大，可以覆盖多数的开发需求。
    4. 自定义标签
    5. 其他第三方标签
-** 5. JSTL标签库概述
 * EL表达式
 1. EL表达式概述
-   EL 全名为Expression Language，用来替代<%= %>脚本表达式；EL具有获取数据、执行运算、获取常用开发对象、调用java方法这四方面的功能；javaEE目前内置了EL表达式，可以在jsp页面中直接使用
+   EL全名为Expression Language，用来替代<%=%>脚本表达式；EL具有获取数据、执行运算、获取常用开发对象、调用java方法这四方面的功能；javaEE目前内置了EL表达式，可以在jsp页面中直接使用
 2. EL表达式使用方式
    ${el表达式}
 3. EL表达式的特点
@@ -9426,7 +10169,7 @@ ServletContext就是一个代表web应用的对象。
    不能遍历数据
 4. 功能一:获取数据
    1. 获取常量
-      #+BEGIN_SRC
+      #+BEGIN_SRC html
         <h4>获取常量</h4>
           脚本片段书写:<br/>
           <%=123 %>
@@ -9440,9 +10183,9 @@ ServletContext就是一个代表web应用的对象。
             ${1.1 }
         #+END_SRC
    2. 自动搜寻域
-      所谓自动搜寻域就是从最小范围的域中开始检索一个指定名称的域属性，如 果在较小范围内找到了这个域属性，则直接将找到的域属性返回，当前范围 的域中如果没有指定名称的域属性，则向更大的域中去搜寻，直到找到指定 名称的域属性。
+      所谓自动搜寻域就是从最小范围的域中开始检索一个指定名称的域属性，如果在较小范围内找到了这个域属性，则直接将找到的域属性返回，当前范围的域中如果没有指定名称的域属性，则向更大的域中去搜寻，直到找到指定 名称的域属性。
       总结:由小到大的搜索域中的属性。
-      #+BEGIN_SRC
+      #+BEGIN_SRC html
         <h4>自动搜寻域</h4>
         <%
             application.setAttribute("name", "兰刚");
@@ -9452,10 +10195,10 @@ ServletContext就是一个代表web应用的对象。
         %>
         <%=pageContext.findAttribute("name") %>
         ${name }
-        #+END_SRC
-        el表达式自动搜寻域，只需要指定一个域属性的名称即可，它会自动在四个 作用域中寻找指定名称的域属性。
+      #+END_SRC
+      el表达式自动搜寻域，只需要指定一个域属性的名称即可，它会自动在四个 作用域中寻找指定名称的域属性。
    3. 获取指定域中的数据
-      #+BEGIN_SRC
+      #+BEGIN_SRC html
         <h4>获取指定域中的属性</h4>
             <%
               application.setAttribute("job", "IT");
@@ -9477,7 +10220,7 @@ ServletContext就是一个代表web应用的对象。
       | PAGE_SCOPE        | pageScope        |
    4. 获取数组中的元素
       el表达式可以获取数组中指定下标的元素，但是数据必须要在某一个域中， 才可以获取其中的数据。
-      #+BEGIN_SRC
+      #+BEGIN_SRC html
         <h4>el表达式数组中获取数据</h4>
         <%
             String[] names={"殷正天","黛绮丝","谢逊","韦一笑"};
@@ -9487,7 +10230,7 @@ ServletContext就是一个代表web应用的对象。
       #+END_SRC
       获取一个元素的时候，需要指定元素的下标。
    5. 获取集合中的元素
-      #+BEGIN_SRC
+      #+BEGIN_SRC html
         <h4>获取集合中的元素</h4>
         <%
             List<String> list=new ArrayList<String>();
@@ -9500,7 +10243,7 @@ ServletContext就是一个代表web应用的对象。
       #+END_SRC
       集合中获取元素和数组中获取元素的方式类似，都可以通过指定一个下标来获取元素。
    6. 获取Map中的元素
-      #+BEGIN_SRC
+      #+BEGIN_SRC html
         <h4>获取Map中的元素</h4 >
         <%
             Map<String,String> map = new HashMap<String,String>();
@@ -9516,8 +10259,9 @@ ServletContext就是一个代表web应用的对象。
         ${map.武功}
         ${map[wife]}
         ${map["wife.one"]}
+      #+END_SRC
    7. 获取javabean中属性
-      #+BEGIN_SRC
+      #+BEGIN_SRC html
         <h3>获取javabean中的元素</h3>
         <%
             Person p = new Person();
@@ -9532,7 +10276,7 @@ ServletContext就是一个代表web应用的对象。
       #+END_SRC
 5. 执行运算
    1. 算术运算:
-      #+BEGIN_SRC
+      #+BEGIN_SRC html
         <h3>el表达式功能二:运算</h3>
             <h4>算术运算</h4>
             ${2+3 }
@@ -9545,8 +10289,9 @@ ServletContext就是一个代表web应用的对象。
             ${"2"+"3" }
             在加法中如果有字符串类型的数据，尝试将这个数据转换成一个数值类型，如果能够转换则 转换过后执行运算，如果不能转换则会报错。
             <%-- ${2+"a" } --%>
+      #+END_SRC
    2. 关系运算:
-      #+BEGIN_SRC
+      #+BEGIN_SRC html
         <h4>关系运算</h4>
             ${3>2}
             ${3<2}
@@ -9555,7 +10300,7 @@ ServletContext就是一个代表web应用的对象。
             ${3!=2 }
       #+END_SRC
    3. 逻辑运算:
-      #+BEGIN_SRC
+      #+BEGIN_SRC html
         <h4>逻辑运算</h4>
             ${true and false }
           ${true or false }
@@ -9564,9 +10309,10 @@ ServletContext就是一个代表web应用的对象。
           ${true || false }
           ${!true }
           ${!true }
+      #+END_SRC
    4. Empty运算:
-      如果对象为null，字符串保存的值为""，数组和集合以及map中没有数据，使用 empty运算的结构都为true，其他任何形式都为false.
-      #+BEGIN_SRC
+      如果对象为null，字符串保存的值为""，数组和集合以及map中没有数据，使用empty运算的结构都为true，其他任何形式都为false.
+      #+BEGIN_SRC html
         <h4>empty运算</h4>
         <%
             String a = null;
@@ -9586,8 +10332,9 @@ ServletContext就是一个代表web应用的对象。
         ${empty arr}
         ${empty list}
         ${empty map}
+      #+END_SRC
    5. 三元表达式:
-      #+BEGIN_SRC
+      #+BEGIN_SRC html
         <h4>三元表达式</h4>
         <%
             Map<String,String> mapx = new HashMap<String,String>();
@@ -9617,8 +10364,47 @@ ServletContext就是一个代表web应用的对象。
       | cookie | 代表当前请求头中的cookie，获取的结果组成Map<String,String[]> |
    6. 代表pageContext(页面中的上下文)的内置对象
       pageContext
+   #+BEGIN_SRC html
+     <%@page import="java.util.Map"%>
+     <%@page import="java.util.HashMap"%>
+     <%@page import="java.util.ArrayList"%>
+     <%@ page language="java" pageEncoding="UTF-8"%>
+     <!DOCTYPE html >
+     <html>
+       <head>
+         <title>el表达式</title>
+       </head>
+       <body>
+         <h3>el表达式功能三：获取对象</h3>
+         <h4>四个作用域</h4>
+         ${pageContext.request.contextPath}
+         <h4>请求参数</h4>
+         <%=request.getParameter("username") %>
+         ${param.username }
+         <h4>请求头</h4>
+         ${header.host }
+         <h4>web应用初始化配置信息的对象</h4>
+         ${initParam.key01 }
+         <h4>cookie</h4>
+         ${cookie.JSESSIONID.name }
+         ${cookie.JSESSIONID.value }
+       </body>
+     </html>
+   #+END_SRC
+   #+BEGIN_SRC xml
+     <context-param>
+         <param-name>key01</param-name>
+           <param-value>value01</param-value>
+     </context-param>
+   #+END_SRC
 7. 调用java方法
    略
+* JSTL标签库
+** 1. 概述
+JSTL全程JavaServerPages Standard Tag Library。由JCP（Java Community Process）指定标准，是提供给Java Web开发人员一个标准通用的标签函数库。可以和EL配合来取代传统直接在页面上嵌入Java程序（Scripting）的做法，以提高程序可读性、维护性和方便性。
+** 2. 在页面中引入JSTL标签库
+Java EE 5包及其以上版本都已经支持jstl标签库，所以在页面中直接书写指令引入使用即可。
+<%@taglib uri="" prefix=""%>
 * javaEE开发模式
 1. 纯Servlet开发 单纯的servlet开发，如果面对复杂页面将会难于处理，所以前台HTML内容还是应 该放在页面中书写。
 2. 纯JSP开发

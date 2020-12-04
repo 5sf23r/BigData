@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js03-基础语法</title>
+    <script>
+        /*1.javascript是弱类型语言，所有数据类型统一使用var 声明*/
+        var a = 10;
+        var b = 10.1;
+        var c = true;
+        var d = "字符串";
+        var e = '字符串哈哈哈';
+        var f = '一';
+        var g = new Object();
+        console.log(a);
+        console.log(b);
+        console.log(c);
+        console.log(d);
+        console.log(e);
+        console.log(g);
+        /*2.JavaScript的语句结尾处可以不写分号  ，
+        *   因为 浏览器在解析时，js脚本中的解析器会自动添加分号
+        * 建议最好加上，良好习惯*/
+        console.log(a)
+        console.log(b)
+        /*3.单引号与双引号的区别*/
+        /* 单独成句的时候，没有区别，都是表示字符串
+           单引号与双引号混合使用时，一定要成对出现，
+           而且双引号里面不能直接再写双引号
+        * */
+        var x = "您好";
+        var y = '您好';
+        console.log(x == y);//结果为true，表示单引号与双引号没区别
+        console.log(x === y);//值相等，证明两者完全一样
+
+        var x1 = "'您好'";//输出结果：'您好'
+        var x2 = '"您好"';//输出结果："您好"
+        console.log(x1 == x2);//false
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

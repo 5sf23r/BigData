@@ -1,0 +1,30 @@
+//0.设置 接受的请求的编码格式，防止出现乱码
+//1.获取注册表单的数据
+//2.非空校验
+    //2.1 创建一个工具类： cn.tedu.utils.WebUtils类中
+            以后的公共代码放入其中，便于调用
+//3.密码一致性校验
+//4.邮箱的格式校验
+//5.数据库查询是否存在该用户
+////5.1 如果不存在，不执行插入操作
+////5.2 如果不存在，执行插入操作
+//6.登录的页面跳转
+
+//7.jsp页面的请求路径修改
+<form action="/register" method="POST">
+//8. 数据的回显
+注册页面的注册信息，如果其中一个出现错误，那么其他正确的信息需要保留显示
+    //8.1 确定一点：request对象在转发过程中，是同一个对象
+    //8.2 注册时的信息是存在于request请求对象中的
+            request.getParemeter("username");
+    //8.3 当请求转发到index.jsp页面时，request对象依然是同一个对象
+            那么获取之前输入的参数信息： request.getParemeter("username");
+    <input type="text"  name="username" value="<%=request.getParemeter("username")==null?"":request.getParemeter("username")%>"   >
+
+
+
+
+
+
+
+

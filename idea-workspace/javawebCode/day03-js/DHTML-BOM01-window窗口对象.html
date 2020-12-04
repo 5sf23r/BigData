@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>window窗口对象</title>
+    <script>
+
+        //向div中输出一句话
+        document.getElementById("d1").innerText="123";
+
+
+        /*1.BOM对象模型中，顶级的对象：window对象
+        * window对象指的是浏览器的窗口！！！*/
+        //1.1  window.onload指的是  页面加载完毕后，执行的代码，onload触发的事件
+        window.onload = function() {
+            //向div中输出一句话
+            document.getElementById("d1").innerText="123";
+        }
+        //1.2  window.onblur指的是   鼠标移出页面，window对象失去焦点时触发
+        window.onblur = function(){
+            document.getElementById("d1").innerText="页面失去焦点了";
+        }
+        //1.3 window.onfocus指的是  鼠标进入页面，焦点在当前window窗口中\
+        window.onfocus = function(){
+            document.getElementById("d1").innerText="页面获取焦点了";
+        }
+        //1.4 window的prompt的弹出对话框，带有提示信息和输入框
+       /* var password = window.prompt("请输入您的密码");
+        alert(password);
+        if (password == "123") {
+            alert("登录成功");
+        } else {
+            alert("登录失败");
+        }*/
+        //1.5 window的confirm确认对话框，带有提示信息和确认/取消按钮
+        var check = window.confirm("确定要删除吗？");
+        if (check) {//true
+            alert("删除成功");
+        } else {//false
+            alert("取消删除");
+        }
+
+    </script>
+</head>
+<body>
+
+<div id="d1"></div>
+
+</body>
+</html>

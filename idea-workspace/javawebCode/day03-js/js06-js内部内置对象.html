@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js06-内置对象</title>
+    <script>
+        /*内置对象：js已经为我们提供好的对象  */
+        /*已经学过的：String  Number  Boolean
+        *             Array  Function */
+        /*需要了解的常用的四种：Math对象  Global全局对象
+                                Date日期对象   RegExp正则对象  */
+        /*1.Math对象：常用属性和方法，其他方法参考JS的API文档*/
+        console.log(Math.PI);
+        console.log(Math.E);
+        console.log(Math.round(3.14));//四舍五入
+        console.log(Math.pow(2,4));//2的4次方
+        console.log(Math.random());//随机数[0,1)
+        /*2.Global全局对象：主要是提供全局方法，直接使用即可  */
+        console.log(isNaN(123));
+        console.log(parseFloat("3.154"));//把字符串转为浮点数
+        console.log(parseInt("123"));//把字符串转为整数的十进制
+        /*3.Date日期对象*/
+        var d1 = new Date();//日期的创建
+        var d2 = new Date("2010/01/01");//把字符串转为日期
+        //注意：字符串的类型 不能随意定义，一般: 2010-01-01  2010/01/01
+        console.log(d1.getDate());//返回月份的第几天
+        console.log(d1.getDay())//星期的第几天
+        console.log(d1.getFullYear());//返回本地时间的年份
+        /*4.RegExp 正则表达式：作用匹配 特定格式的 字符串  */
+        //比如：邮箱地址：123SAFD@qq.com.cn
+        var r1 = /^\w+@\w+(\.\w+)+$/;
+        console.log(r1.test("123SAFD@qq.com.cn"));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

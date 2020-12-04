@@ -1,0 +1,32 @@
+1.事务（Transaction）：数据库中保证交易可靠的机制。
+
+        模拟一个场景：用户A  与  用户B，发生了一笔交易
+        A 需要 给 B 10块钱，
+        得到的结果发生了两个变化：A的账户减少10元，B的账户增加10元
+        update account set money=money-10 where name='A';
+        update account set money=money+10 where name='B';
+
+        问题是：
+        如果第一条sql语句执行完毕后，在第二条sql语句执行之前，代码出现了异常
+        update account set money=money-10 where name='A';
+        int i = 1/0;
+        update account set money=money+10 where name='B';
+
+        如果给程序添加了事务管理，那么整个交易过程就是处在一个事务当中，
+        其中一个环节出现了异常，其他的代码执行的结果，会被还原的交易开始的状态。
+
+2.模拟一个事务的场景
+
+    使用teacher表，对age字段进行 加减的操作
+    完全模拟account的操作过程。
+
+    创建一个类：Demo04_事务.java
+
+    JDBC处理事务的通常模式：
+    	先将事务的自动提交关闭；
+    	执行事务中的若干SQL语句；
+    	事务提交；SQL失败则回滚；
+    	恢复JDBC的事务提交状态；释放资源。
+
+
+

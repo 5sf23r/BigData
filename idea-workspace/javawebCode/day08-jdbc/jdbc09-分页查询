@@ -1,0 +1,14 @@
+1.分页查询
+
+    JDBC实现MySQL分页查询
+不同数据库获取部分结果集的SQL是有区别的，在MySQL中的实现方式：
+ select * from t limit begin，pageSize;
+其中：
+
+	begin: 从第几条开始显示
+	pageSize:每页多少条
+
+在Java程序中，MySQL和Oracle分页的方式，仅限于SQL语句不同。
+
+
+
