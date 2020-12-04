@@ -66,7 +66,7 @@
   - [[#6-js对象和jquery对象的相互转换][6. js对象和jQuery对象的相互转换]]
   - [[#7-jquery主要用法][7. jQuery主要用法：]]
   - [[#8-jquery选择器][8. jQuery选择器]]
-    - [[#1-基本选择器selector案例一][1. 基本选择器(selector案例一)]]
+  - [[#-1-基本选择器selector案例一][* 1. 基本选择器(selector案例一)]]
     - [[#2-层级选择器selector案例二][2. 层级选择器(selector案例二)]]
     - [[#3-基本过滤选择器selector案例三][3. 基本过滤选择器(selector案例三)]]
     - [[#4-内容选择器selector案例四][4. 内容选择器(selector案例四)]]
@@ -3448,53 +3448,32 @@ dom解析时，在页面中写好一个function demo1(){},适用button按钮调�
   仔细检查<script></script>中的function demo1(){}代码，少了大括号，会出现未定义的错误
 * jQuery
 ** 1. jQuery概述
-    1. 由于用户在js中编写的内容十分繁多，将一些常用的操作和行为进行了封装，封装成很多个函数，这些函数就构成了一个js的函数库，用户在使用的时候直接调用函数库的函数即可，这个函数库就是jQuery
-    2. jQuery可以写的更少，但是做的更多
-    3. jQuery的本质是js
+1. 由于用户在js中编写的内容十分繁多，将一些常用的操作和行为进行了封装，封装成很多个函数，这些函数就构成了一个js的函数库，用户在使用的时候直接调用函数库的函数即可，这个函数库就是jQuery
+2. jQuery可以写的更少，但是做的更多
+3. jQuery的本质是js
 ** 2. jQuery的优势
-    1. 可以简化JavaScript代码
-    2. 可以像css选择器一样选择元素
-    3. 可以修改css一样修改页面中的样式
-    4. 可以兼容常用的浏览器
+1. 可以简化JavaScript代码
+2. 可以像css选择器一样选择元素
+3. 可以修改css一样修改页面中的样式
+4. 可以兼容常用的浏览器
 ** 3. jQuery版本支持
-    jQuery分为很多版本，还分为未压缩和压缩版，根据需要选择对应的版本进行下载
-    - 1.x 支持常用的浏览器和IE6+
-    - 2.x 支持常用的浏览器和IE9+
-    - 3.x 支持常用的浏览器和IE9+
-    注意jQuery不兼容老版本，因为jQuery升级除了会做一些内部优化之外，还会删除以前的一些代码，比如删除一些方法，或者是添加一些新的方法，所以在升级之后，以前的代码可能会无法执行
+jQuery分为很多版本，还分为未压缩和压缩版，根据需要选择对应的版本进行下载
+- 1.x 支持常用的浏览器和IE6+
+- 2.x 支持常用的浏览器和IE9+
+- 3.x 支持常用的浏览器和IE9+
+  注意jQuery不兼容老版本，因为jQuery升级除了会做一些内部优化之外，还会删除以前的一些代码，比如删除一些方法，或者是添加一些新的方法，所以在升级之后，以前的代码可能会无法执行
 ** 4. jQuery引入
-    需要在页面中引入一个js文件，这个js文件就是jQuery的函数库，只有引入函数库之后才能够使用jQuery代码
-    #+BEGIN_SRC html
+需要在页面中引入一个js文件，这个js文件就是jQuery的函数库，只有引入函数库之后才能够使用jQuery代码
+#+BEGIN_SRC html
       <script src = "js/jquery-1.4.2.js"></script>
-    #+END_SRC
-
-    #+BEGIN_SRC html
-      <html>
-        <head>
-          <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-          <title>jQuery的引入</title>
-          <script type="text/javascript" src="../other/jquery-1.4.2.js">
-          </script>
-          <script type="text/javascript">
-            window.onload = function(){
-              $("div").text("aaaaa");
-            }
-          </script>
-        </head>
-        <body>
-          <div id="test" class="test">
-          </div>
-      </body>
-      </html>
-    #+END_SRC
-    [[./SourceCode/58.html]]
-    jQuery类库其实就是一个普通的js文件，和之前在html中引入js文件方式一样的
+#+END_SRC
+jQuery类库其实就是一个普通的js文件，和之前在html中引入js文件方式一样的
 ** 5. jQuery的使用方式
-    $就是jQuery的意思$("div") <==> jQuery("div")
+$就是jQuery的意思$("div") <==> jQuery("div")
 ** 6. js对象和jQuery对象的相互转换
-    - js对象->jQuery对象
-      将已有的js对象使用$()包起来即可由js对象变为jQuery对象
-      #+BEGIN_SRC html
+1. js对象->jQuery对象
+   将已有的js对象使用$()包起来即可由js对象变为jQuery对象
+    #+BEGIN_SRC html
         <html>
           <head>
             <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
@@ -3516,8 +3495,8 @@ dom解析时，在页面中写好一个function demo1(){},适用button按钮调�
         </html>
       #+END_SRC
       [[./SourceCode/60.html]]
-    - jQuery对象->js对象
-      jQuery对象一般利用选择器选中页面
+2. jQuery对象->js对象
+   jQuery对象一般利用选择器选中页面
       #+BEGIN_SRC
         var div = $("div")[0];
         var div = $("div").get(0);
@@ -3545,24 +3524,24 @@ dom解析时，在页面中写好一个function demo1(){},适用button按钮调�
         </html>
       #+END_SRC
       [[./SourceCode/60.html]]
-    - 注意：
-      #+BEGIN_SRC
+3. 注意：
+   #+BEGIN_SRC
         var $div = $("div");
         var div = $("div");
-      #+END_SRC
-      此处$div和div表示的内容是同一个jQuery对象，$div这种命名的方式只是想表示当前值是一个jQuery的对象。
+   #+END_SRC
+   此处$div和div表示的内容是同一个jQuery对象，$div这种命名的方式只是想表示当前值是一个jQuery的对象。
 ** 7. jQuery主要用法：
-    1. 在jQuery中书写一个CSS选择器 --- $("div")，这种就可以将这种形式作为jQuery选择器来使用
-    2. 动态创建dom元素---直接书写html元素名称来创建代表html元素的jQuery对象
+1. 在jQuery中书写一个CSS选择器 --- $("div")，这种就可以将这种形式作为jQuery选择器来使用
+2. 动态创建dom元素---直接书写html元素名称来创建代表html元素的jQuery对象
        #+BEGIN_SRC
          $("<div><p>Hello</p></div>").appendTo("body");
        #+END_SRC
-    3. 利用jQuery控制css样式
+3. 利用jQuery控制css样式
        #+BEGIN_SRC
          $(document.body).css("background","black");
             选中的元素     .css    属性名称     属性值
        #+END_SRC
-    4. 文档就绪事件 --- 在整个html页面加载完成之后在执行其中的js代码
+4. 文档就绪事件 --- 在整个html页面加载完成之后在执行其中的js代码
        js:
        #+BEGIN_SRC
          window.onload = function(){}
@@ -3582,7 +3561,7 @@ dom解析时，在页面中写好一个function demo1(){},适用button按钮调�
          });
        #+END_SRC
 ** 8. jQuery选择器
-*** 1. 基本选择器(selector案例一)
+** * 1. 基本选择器(selector案例一)
 元素名选择器，类选择器，id选择器，多元素选择器，*选择器
 1. 元素名选择器
    #+BEGIN_SRC
@@ -3709,24 +3688,24 @@ dom解析时，在页面中写好一个function demo1(){},适用button按钮调�
    #+END_SRC
    [[./SourceCode/61.html]]
 *** 2. 层级选择器(selector案例二)
-    如果想通过dom元素之间的层次关系来获取特定元素，例如子元素、兄弟元素等。则需要通过层次选择器
-    1. 后代选择器
-       #+BEGIN_SRC
+如果想通过dom元素之间的层次关系来获取特定元素，例如子元素、兄弟元素等。则需要通过层次选择器
+1. 后代选择器
+   #+BEGIN_SRC
          $("div span") - 匹配div下所有的span元素
-       #+END_SRC
-    2. span子元素选择器
-       #+BEGIN_SRC
+   #+END_SRC
+2. span子元素选择器
+   #+BEGIN_SRC
          $("div > span") - 匹配div下所有的span子元素
-       #+END_SRC
-    3. div后面紧邻span兄弟选择器
-       #+BEGIN_SRC
+   #+END_SRC
+3. div后面紧邻span兄弟选择器
+   #+BEGIN_SRC
          $("div + span") - 匹配div后面紧邻的span兄弟元素
-       #+END_SRC
-    4. div后面所有的span
-       #+BEGIN_SRC
+   #+END_SRC
+4. div后面所有的span
+   #+BEGIN_SRC
          $("div~span") - 匹配div后面所有的span兄弟元素
-       #+END_SRC
-    #+BEGIN_SRC html
+   #+END_SRC
+   #+BEGIN_SRC html
       <!DOCTYPE HTML>
       <html>
         <head>
@@ -3811,8 +3790,8 @@ dom解析时，在页面中写好一个function demo1(){},适用button按钮调�
           <br>
         </body>
       </html>
-    #+END_SRC
-    [[./SourceCode/62.html]]
+   #+END_SRC
+   [[./SourceCode/62.html]]
 *** 3. 基本过滤选择器(selector案例三)
     过滤选择器主要是通过特定的过滤规则筛选出所需的dom元素，该选择器都以":"开头
     - 匹配所有div中的第一个div元素
@@ -7791,6 +7770,7 @@ localhost/news/servlet/FirstServlet
 
    #+END_SRC
 * Response
+
 ** 1. response对象
 1. 继承机构
    #+BEGIN_SRC
@@ -8531,6 +8511,7 @@ localhost/news/servlet/FirstServlet
     #+END_SRC
 * ServletConfig、ServletContext
 ** ServletConfig
+
 #+BEGIN_SRC xml
   <servlet>
     <servlet-name>SConfigDemo1</servlet-name>
@@ -8651,6 +8632,7 @@ localhost/news/servlet/FirstServlet
      }
    #+END_SRC
 ** ServletContext
+[[./Img/day13-ServletContext.png]]
 ServletContext就是一个代表web应用的对象。
 1. 如果有多个servlet需要使用同一段初始化配置信息，那么这个信息就可以配置成一个web应用的配置信息，通过代表web应用的对象来获取。
 2. 代表web应用的对象可以被web应用的所有servlet访问，也可以通过这个web应用的对象获取到web应用的配置信息
@@ -8835,6 +8817,7 @@ ServletContext就是一个代表web应用的对象。
          #+END_SRC
          + 在使用web工程并发布的时候，这种获取路径的方式会自动调整到classes目录中去获取指定名称的文件。
 * AJAX
+[[./Img/day13-AJAX.png]]
 1. AJAX是什么？
    asynchronous js and xml 异步的js和xml；通过ajax给服务器发送请求，并让服务器根据请求作出响应实现ajax，只是这个过程是一个异步请求的过程，作出的操作作为局部刷新。
 
@@ -9231,6 +9214,7 @@ ServletContext就是一个代表web应用的对象。
 
          #+END_SRC
 * 会话技术 -- cookie
+[[./Img/day14cookie.png]]
 1. 会话是什么？
    为了完成某一个功能，浏览器和服务器建立连接之后，进行一次或多次请求和响应操作，这些请求和响应构成了浏览器和服务器之间的一次会话操作。
 2. 会话的作用：
@@ -9871,6 +9855,7 @@ ServletContext就是一个代表web应用的对象。
    cookie是浏览器端的技术，保存在浏览器的数据可能会被其他人读取，造成数据丢失，数据安全性较差。cookie可以存储长期保存的数据。cookie适合存储安全性要求较低，而存储时间较长的数据。
 2. session服务器端的技术，数据保存在服务器端安全性较高，普通用户无法读取服务器上的数据。session不善于长期存储数据，如果存储数据时间过长，会导致服务器长时间存储一个无人使用的对象，造成内存的浪费。session适合存储安全性较高，而存储时间较短的数据。
 * JSP
+[[./Img/JSP.png]]
 ** 1. 概述与原理
 由于在servlet中书写前台页面代码非常复杂，于是Sun提出一门新的技术--jsp，将所有的页面内容重新书写到一个文件中，在这个文件中还可以书写java语句，这样的一个文件就称之为一个jsp文件。 在jsp页面内开发HTML代码十分便利，还可以在其中嵌入java语句，使开发变得非 常简洁，直接在页面中就完成了页面构建和代码逻辑的全部内容。
 - JSP原理：在jsp页面被初次访问的时候，会被jsp翻译引擎翻译成一个servlet文件，这个文件是一个普通java文件，继承了一个具有servlet接口的类，所以当前文件才会成为一个servlet文件。
