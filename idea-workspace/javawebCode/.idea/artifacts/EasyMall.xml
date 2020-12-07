@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="EasyMall">
+    <output-path>$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="EasyMall" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="EasyMall-lib" />
+        </element>
+      </element>
+      <element id="library" level="project" name="EasyMall-lib" />
+      <element id="dir-copy" path="$PROJECT_DIR$/EasyMall/web" />
+    </root>
+  </artifact>
+</component>

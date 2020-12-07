@@ -6,7 +6,6 @@ import javax.sql.DataSource;
 import java.sql.*;
 
 public class C3P0Util {
-
     public static void main(String[] args) {
         Connection connection = C3P0Util.getConnection();
         System.out.println(connection);

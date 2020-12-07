@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="EasyMall" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="575b66e8-7903-42d2-b752-affb16cc1cbe" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Another/JavaWeb/Img/day14cookie.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Another/JavaWeb/Img/html流程图.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Another/JavaWeb/JavaWeb.org" beforeDir="false" afterPath="$PROJECT_DIR$/../../Another/JavaWeb/JavaWeb.org" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/idea-workspace.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EasyMall/EasyMall.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../EasyMall/EasyMall.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/01-注册" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/02-参数的乱码的问题" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/03-请求的转发" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/04-response响应重定向" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/05-ajax的开发步骤" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/06-jquery-ajax" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/07-cookie&amp;session" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/08-session" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/09-jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/EasyMall.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/c3p0-config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/dao/UserDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/Request01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/Request02.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/Request03.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/Request04.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/Response01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/Response02.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/Response03.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/Response04.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/Response05.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/ServletConfig01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/ServletConfig02.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/ServletContext01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/demo/ServletContext02.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/filter/EncodingFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/filter/MyHttpServletRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/pojo/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/servlet/AjaxCheckUsername.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/servlet/LoginServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/servlet/RegisterServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/servlet/ValidateCodeServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/utils/C3P0Util.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/utils/VerifyCode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/src/cn/tedu/utils/WebUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/10-EasyMall的开发模式" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/10-easyMall项目重构" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/META-INF/EasyMall.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/WEB-INF/lib/c3p0-0.9.1.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/WEB-INF/lib/commons-dbcp-1.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/WEB-INF/lib/commons-pool-1.5.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/WEB-INF/lib/mysql-connector-java-5.1.45-bin.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/_foot.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/_head.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/c3p0-config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/dao/UserDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Request01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Request02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Request03.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Request04.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Response01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Response02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Response03.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Response04.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Response05.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/ServletConfig01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/ServletConfig02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/ServletContext01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/demo/ServletContext02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/filter/EncodingFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/filter/MyHttpServletRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/pojo/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/servlet/AjaxCheckUsername.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/servlet/LoginServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/servlet/RegisterServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/servlet/ValidateCodeServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/utils/C3P0Util.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/utils/VerifyCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/cn/tedu/utils/WebUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/css/foot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/css/head.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/css/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/css/regist.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/head/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/head/qr.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/217.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/adv1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/adv2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/adv3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/adv4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/adv_l1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/adv_l2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/adv_l3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/banner_big.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/icon_g1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/icon_g2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/icon_g3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/index/icon_g4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/regist/yzm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/regist/zc.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/regist/zc_btn01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/img/regist/zc_btn02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/js/ajax.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/js/jquery-1.4.2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/jspDemo01.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/jspdemo/errorPage.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/jspdemo/jspDemo01.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/jspdemo/jspDemo02.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/param.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/classes/regist.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/lib/c3p0-0.9.1.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/lib/commons-dbcp-1.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/lib/commons-pool-1.5.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/lib/mysql-connector-java-5.1.45-bin.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/_foot.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/_head.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/css/foot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/css/head.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/css/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/css/regist.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/head/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/head/qr.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/217.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/adv1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/adv2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/adv3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/adv4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/adv_l1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/adv_l2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/adv_l3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/banner_big.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/icon_g1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/icon_g2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/icon_g3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/index/icon_g4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/regist/yzm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/regist/zc.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/regist/zc_btn01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/img/regist/zc_btn02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/js/ajax.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/js/jquery-1.4.2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/jspDemo01.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/jspdemo/errorPage.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/jspdemo/jspDemo01.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/jspdemo/jspDemo02.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/param.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyMall/web/regist.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/day02-css&amp;js/day02-css&amp;js.iml" beforeDir="false" afterPath="$PROJECT_DIR$/day02-css&amp;js/day02-css&amp;js.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day03-js/day03-js.iml" beforeDir="false" afterPath="$PROJECT_DIR$/day03-js/day03-js.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day04-DOM&amp;jQuery/day04-DOM&amp;jQuery.iml" beforeDir="false" afterPath="$PROJECT_DIR$/day04-DOM&amp;jQuery/day04-DOM&amp;jQuery.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day05-jQuery/day05-jQuery.iml" beforeDir="false" afterPath="$PROJECT_DIR$/day05-jQuery/day05-jQuery.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day07-jdbc/day07-jdbc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/day07-jdbc/day07-jdbc.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day08-jdbc/day08-jdbc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/day08-jdbc/day08-jdbc.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day10-servlet/3.servlet的HttpServlet详解" beforeDir="false" afterPath="$PROJECT_DIR$/day10-servlet/3.servlet的HttpServlet详解" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day10-servlet/day10-servlet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/day10-servlet/day10-servlet.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Request01_获取客户机相关信息.java" beforeDir="false" afterPath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Request01_获取客户机相关信息.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Request02_获取请求头信息.java" beforeDir="false" afterPath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Request02_获取请求头信息.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Request03_获取请求中的参数.java" beforeDir="false" afterPath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Request03_获取请求中的参数.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Servlet01_servlet接口.java" beforeDir="false" afterPath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Servlet01_servlet接口.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Servlet02_GenericServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Servlet02_GenericServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Servlet03_HttpServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/day10-servlet/src/cn/tedu/servlet/Servlet03_HttpServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day10-servlet/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/day10-servlet/web/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day10-servlet/web/_head.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/day10-servlet/web/_head.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day10-servlet/web/param.html" beforeDir="false" afterPath="$PROJECT_DIR$/day10-servlet/web/param.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day14-01/day14-01.iml" beforeDir="false" afterPath="$PROJECT_DIR$/day14-01/day14-01.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day14-02/day14-02.iml" beforeDir="false" afterPath="$PROJECT_DIR$/day14-02/day14-02.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/day15-session/day15-session.iml" beforeDir="false" afterPath="$PROJECT_DIR$/day15-session/day15-session.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javawebCode.iml" beforeDir="false" afterPath="$PROJECT_DIR$/javawebCode.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProjectId" id="1l8RJwBCtgj1GDAT8qqQsfiWbNJ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last.edited.regexp" value="123@qq.com" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/EasyMall/src/cn/tedu" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/EasyMall/src/cn/tedu" />
+      <recent name="$PROJECT_DIR$/day08-jdbc/src/cn/tedu/utils" />
+      <recent name="$PROJECT_DIR$/EasyMall" />
+      <recent name="$PROJECT_DIR$/EasyMall/web/WEB-INF/lib" />
+      <recent name="$PROJECT_DIR$/EasyMall/src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/day09-tomcat/src" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.tedu.utils" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.EasyMall">
+    <configuration name="C3P0Util" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.tedu.utils.C3P0Util" />
+      <module name="EasyMall" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.tedu.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EasyMall" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.40" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="EasyMall">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="17c948da-b4d5-4bc2-a35e-c4b6d2df39c1" />
+        <option name="HTTP_PORT" value="9090" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="60950" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="day09-tomcat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.40" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
+      <deployment>
+        <artifact name="day09-tomcat">
+          <settings>
+            <option name="CONTEXT_PATH" value="/day09_tomcat_war_exploded" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="5dc3cb93-3e6e-4f12-a47e-be15666eeeff" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="53431" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="day09-webproject" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.40" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="day09-webproject">
+          <settings>
+            <option name="CONTEXT_PATH" value="/day09-webproject" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="79d76e3c-c383-4e12-a8c5-5a774edcc794" />
+        <option name="HTTP_PORT" value="9090" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="55370" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="day09-webproject" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="day10_servlet" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.40" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
+      <deployment>
+        <artifact name="day10_servlet">
+          <settings>
+            <option name="CONTEXT_PATH" value="/day10_servlet" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="660e65c1-f315-4f36-8d77-ef2b5981c2da" />
+        <option name="HTTP_PORT" value="9090" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="58992" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="day10_servlet" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.C3P0Util" />
+      <item itemvalue="Tomcat Server.day09-tomcat" />
+      <item itemvalue="Tomcat Server.day09-webproject" />
+      <item itemvalue="Tomcat Server.day10_servlet" />
+      <item itemvalue="Tomcat Server.EasyMall" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.C3P0Util" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="575b66e8-7903-42d2-b752-affb16cc1cbe" name="Default Changelist" comment="" />
+      <created>1606976663933</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606976663933</updated>
+      <workItem from="1606976665497" duration="7408000" />
+      <workItem from="1606999383598" duration="3106000" />
+      <workItem from="1607057744502" duration="1924000" />
+      <workItem from="1607073314124" duration="16968000" />
+      <workItem from="1607232975567" duration="772000" />
+      <workItem from="1607241114168" duration="1415000" />
+      <workItem from="1607243326325" duration="11784000" />
+      <workItem from="1607318192028" duration="3892000" />
+      <workItem from="1607329219126" duration="5948000" />
+      <workItem from="1607346870947" duration="3414000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>

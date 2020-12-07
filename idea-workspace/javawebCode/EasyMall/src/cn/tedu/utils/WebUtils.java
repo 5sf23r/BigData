@@ -9,6 +9,7 @@ public class WebUtils {
     }
     /*1. 非空校验*/
     public static boolean isNull(String value){
+        
         return value == null || "".equals(value) ? true:false;
     }
     /*2. 对字符集进行正确的编码，防止乱码出现*/

@@ -7,22 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/request03")
+@WebServlet("/Request03")
 public class Request03 extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.doPost(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("我接受到了request02转发过来的请求，");
         System.out.println("我需要做出响应");
-        //向浏览器发送一个响应
-        //resp.getWriter().write("。。。$10000");
         System.out.println("request03....start");
-        req.getRequestDispatcher("/request04").forward(req,resp);
+        request.getRequestDispatcher("/Request04").forward(request,response);
         System.out.println("request03....end");
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.doPost(request,response);
     }
 }

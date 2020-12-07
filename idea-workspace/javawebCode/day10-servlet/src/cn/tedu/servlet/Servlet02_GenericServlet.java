@@ -33,6 +33,5 @@ public class Servlet02_GenericServlet extends GenericServlet {
         } else if ("POST".equalsIgnoreCase(method)) {
             System.out.println("post方式的处理逻辑在这里写");
         }
-
     }
 }

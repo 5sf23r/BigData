@@ -16,7 +16,8 @@ public class Servlet01_servlet接口 implements Servlet {
     }
 
     @Override
-    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse)
+            throws ServletException, IOException {
         System.out.println("这是service服务方法，程序员编写业务逻辑（处理请求的代码）就在这里写！！！");
     }
 

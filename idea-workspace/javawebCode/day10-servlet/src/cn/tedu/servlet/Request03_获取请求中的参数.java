@@ -28,11 +28,11 @@ public class Request03_获取请求中的参数 extends HttpServlet {
         String password = req.getParameter("password");
         System.out.println(username);
         System.out.println(password);
-        if ("tony".equals(username)) {//如果注册用户名是tony
+        //如果注册用户名是tony
+        if ("tony".equals(username)) {
             resp.getWriter().write("注册失败，tony已经存在了");
         } else {
             resp.getWriter().write("注册成功了");
         }
-
     }
 }

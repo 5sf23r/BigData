@@ -31,32 +31,31 @@
     - [[#1-基本选择器][1. 基本选择器]]
     - [[#2-扩展选择器][2. 扩展选择器]]
   - [[#8-拓展css中的常用属性简介][8. 拓展：CSS中的常用属性简介]]
-- [[#jsdhtml][JS、DHTML]]
-  - [[#javascript][JavaScript]]
-    - [[#1-js概述][1. js概述]]
-    - [[#2-javascript不得不说的历史][2. JavaScript不得不说的历史]]
-    - [[#3-js和html的结合][3. js和html的结合]]
-    - [[#4-js输出方式][4. js输出方式]]
-    - [[#5-js的语法-数据类型][5. js的语法-数据类型]]
-      - [[#1-基本数据类型共六种][1. 基本数据类型：共六种]]
-      - [[#2-复杂数据类型][2. 复杂数据类型]]
+- [[#javascript][JavaScript]]
+  - [[#1-js概述][1. js概述]]
+  - [[#2-javascript不得不说的历史][2. JavaScript不得不说的历史]]
+  - [[#3-js和html的结合][3. js和html的结合]]
+  - [[#4-js输出方式][4. js输出方式]]
+  - [[#5-js的语法-数据类型][5. js的语法-数据类型]]
+    - [[#1-基本数据类型共六种][1. 基本数据类型：共六种]]
+    - [[#2-复杂数据类型][2. 复杂数据类型]]
         - [[#1-js语法--函数][1. js语法--函数]]
         - [[#2-js语法--数组][2. js语法--数组]]
         - [[#3-js语法--对象][3. js语法--对象]]
-      - [[#3-数据类型的自动转化][3. 数据类型的自动转化]]
-    - [[#6-js语法--运算符][6. Js语法--运算符]]
-    - [[#7-定义变量][7. 定义变量]]
-    - [[#8-js语法--语句][8. js语法--语句]]
-      - [[#1-if语句][1. if语句：]]
-      - [[#2-switch-case][2. switch case]]
-      - [[#3-whiledowhilefor][3. while、dowhile、for]]
-    - [[#9-json][9. JSON]]
-  - [[#dhtml-动态html][DHTML-动态html]]
-    - [[#1-dhtml概述][1. DHTML概述]]
-    - [[#2-bom和dom][2. BOM和DOM]]
-    - [[#3-bom--浏览器对象模型][3. BOM--浏览器对象模型]]
-    - [[#4-dom--文档对象模型][4. DOM--文档对象模型]]
-    - [[#5-问题][5. 问题：]]
+    - [[#3-数据类型的自动转化][3. 数据类型的自动转化]]
+  - [[#6-js语法--运算符][6. Js语法--运算符]]
+  - [[#7-定义变量][7. 定义变量]]
+  - [[#8-js语法--语句][8. js语法--语句]]
+    - [[#1-if语句][1. if语句：]]
+    - [[#2-switch-case][2. switch case]]
+    - [[#3-whiledowhilefor][3. while、dowhile、for]]
+  - [[#9-json][9. JSON]]
+- [[#dhtml-动态html][DHTML-动态html]]
+  - [[#1-dhtml概述][1. DHTML概述]]
+  - [[#2-bom和dom][2. BOM和DOM]]
+  - [[#3-bom--浏览器对象模型][3. BOM--浏览器对象模型]]
+  - [[#4-dom--文档对象模型][4. DOM--文档对象模型]]
+  - [[#5-问题][5. 问题：]]
 - [[#jquery][jQuery]]
   - [[#1-jquery概述][1. jQuery概述]]
   - [[#2-jquery的优势][2. jQuery的优势]]
@@ -88,6 +87,24 @@
   - [[#详解jdbc六步][详解JDBC六步]]
   - [[#jdbcutils工具类][JDBCUtils工具类]]
 - [[#登陆功能实现][登陆功能实现]]
+- [[#tomcat][Tomcat]]
+  - [[#课堂笔记][课堂笔记]]
+    - [[#1-服务器概述][1. 服务器概述]]
+    - [[#2-tomcat服务器的下载与安装][2. tomcat服务器的下载与安装]]
+      - [[#21-下载本地资源][2.1 下载本地资源]]
+      - [[#22-官方网站下载资源][2.2 官方网站下载资源]]
+      - [[#23-tomcat的运行环境][2.3 tomcat的运行环境]]
+      - [[#24-tomcat与jdk对应的版本][2.4 tomcat与jdk对应的版本]]
+      - [[#25-端口号被占用问题][2.5 端口号被占用问题]]
+      - [[#26-修改端口号][2.6 修改端口号]]
+      - [[#27-tomcat的目录结构][2.7 tomcat的目录结构：]]
+    - [[#3-tomcat的基本概念][3. tomcat的基本概念]]
+    - [[#4-web应用配置虚拟路径映射的三种方式][4. web应用配置虚拟路径映射的三种方式]]
+      - [[#方式一][方式一：]]
+      - [[#方式二-直接部署不需要重新启动tomcat][方式二： 直接部署，不需要重新启动tomcat]]
+      - [[#方式三][方式三：]]
+    - [[#5-配置一个虚拟主机][5. 配置一个虚拟主机]]
+    - [[#6-综合练习][6. 综合练习]]
 - [[#sql注入攻击][SQL注入攻击]]
 - [[#批处理][批处理]]
 - [[#数据库连接池][数据库连接池]]
@@ -95,33 +112,71 @@
   - [[#2-实现][2. 实现：]]
   - [[#3-手写mypool连接池][3. 手写MyPool连接池：]]
   - [[#4-开源连接池][4. 开源连接池]]
-- [[#web开发][Web开发]]
-  - [[#web应用的配置][web应用的配置]]
-    - [[#缺省web应用的配置][缺省web应用的配置]]
-    - [[#缺省web应用的虚拟路径有优先级][缺省web应用的虚拟路径有优先级]]
-- [[#servlet][Servlet]]
-  - [[#1-servlet概述][1. Servlet概述]]
-  - [[#2-手写servlet][2. 手写Servlet]]
-  - [[#3-配置servlet映射][3. 配置servlet映射]]
-  - [[#4-servlet调用过程和生命周期][4. Servlet调用过程和生命周期]]
+- [[#servletrequestresponse][Servlet、Request、Response]]
+  - [[#servlet][Servlet]]
+    - [[#1-servlet概述][1. Servlet概述]]
+    - [[#2-手写servlet][2. 手写Servlet]]
+    - [[#3-配置servlet映射][3. 配置servlet映射]]
+    - [[#4-servlet调用过程和生命周期][4. Servlet调用过程和生命周期]]
     - [[#1-servlet继承结构][1. Servlet继承结构]]
     - [[#2-图片如何被加载][2. 图片如何被加载？]]
     - [[#3-拓展request对象和response对象][3. 拓展：request对象和response对象]]
-  - [[#5-servlet细节讨论][5. Servlet细节讨论]]
-- [[#request][Request]]
-  - [[#1-request概述与功能一-----api操作][1. request概述与功能一 --- API操作]]
-  - [[#2-http请求][2. HTTP请求]]
-  - [[#3-request当中的api操作][3. Request当中的API操作：]]
-  - [[#4-request功能二-----请求转发][4. request功能二 --- 请求转发]]
-  - [[#5-request功能三-----作为域对象使用][5. request功能三 --- 作为域对象使用]]
-  - [[#6-request功能四-----请求包含][6. request功能四 --- 请求包含]]
-- [[#response][Response]]
-  - [[#1-response对象][1. response对象]]
-  - [[#2-response参数乱码处理][2. response参数乱码处理]]
-  - [[#3-response功能一-----请求重定向][3. response功能一 --- 请求重定向]]
-  - [[#4-response功能二-----定时刷新][4. response功能二 --- 定时刷新]]
-  - [[#5-response功能三-----控制浏览器缓存][5. response功能三 --- 控制浏览器缓存]]
+    - [[#5-servlet细节讨论][5. Servlet细节讨论]]
+  - [[#request][Request]]
+    - [[#1-request概述与功能一-----api操作][1. request概述与功能一 --- API操作]]
+    - [[#2-http请求][2. HTTP请求]]
+      - [[#1-继承结构][1. 继承结构]]
+      - [[#2-http请求的组成][2. HTTP请求的组成]]
+    - [[#3-request当中的api操作][3. Request当中的API操作：]]
+      - [[#1-获取客户端相关的信息][1. 获取客户端相关的信息]]
+      - [[#2-获取请求头信息][2. 获取请求头信息]]
+      - [[#3-获取请求参数][3. 获取请求参数]]
+      - [[#4-中文乱码问题][4. 中文乱码问题：]]
+    - [[#4-request功能二-----请求转发][4. request功能二 --- 请求转发]]
+      - [[#1-什么是请求转发][1. 什么是请求转发：]]
+      - [[#2-请求转发的特点][2. 请求转发的特点：]]
+      - [[#3-请求转发实现][3. 请求转发实现：]]
+      - [[#4-注意请求转发是web应用内部的资源跳转不可以在web应用之间跳转][4. 注意：请求转发是web应用内部的资源跳转，不可以在web应用之间跳转]]
+    - [[#5-request功能三-----作为域对象使用][5. request功能三 --- 作为域对象使用]]
+      - [[#1-域对象概述][1. 域对象概述]]
+      - [[#2-域对象的时候用方式][2. 域对象的时候用方式：]]
+      - [[#3-request域对象的特点][3. request域对象的特点]]
+      - [[#4-案例从servlet向首页输出数据][4. 案例：从servlet向首页输出数据]]
+    - [[#6-request功能四-----请求包含][6. request功能四 --- 请求包含]]
+      - [[#1-请求包含概念][1. 请求包含概念]]
+      - [[#2-请求包含的特点][2. 请求包含的特点]]
+      - [[#3-请求包含实现][3. 请求包含实现:]]
+  - [[#response][Response]]
+    - [[#1-response对象][1. response对象]]
+    - [[#2-response参数乱码处理][2. response参数乱码处理]]
+    - [[#3-response功能一-----请求重定向][3. response功能一 --- 请求重定向]]
+    - [[#4-response功能二-----定时刷新][4. response功能二 --- 定时刷新]]
+    - [[#5-response功能三-----控制浏览器缓存][5. response功能三 --- 控制浏览器缓存]]
+  - [[#课堂笔记-1][课堂笔记]]
+    - [[#1-概述][1. 概述]]
+      - [[#1-servlet是什么][1. servlet是什么？？？]]
+      - [[#2-servlet的主要作用][2. servlet的主要作用]]
+      - [[#3-servlet的api][3. servlet的API]]
+      - [[#4-编写一个servlet的程序入门案例][4. 编写一个servlet的程序：入门案例]]
+    - [[#2-servlet的genericservlet详解][2. servlet的GenericServlet详解]]
+      - [[#1-servlet是一个接口内部只有方法签名没有方法体][1. servlet是一个接口，内部只有方法签名，没有方法体]]
+      - [[#2-servlet的一个实现类genericservlet类][2. servlet的一个实现类：GenericServlet类]]
+      - [[#3-浏览器发送http请求的方式7种][3. 浏览器发送HTTP请求的方式：7种]]
+    - [[#3-servlet的httpservlet详解][3. servlet的HttpServlet详解]]
+      - [[#1httpservlet的继承关系][1.HttpServlet的继承关系]]
+      - [[#2httpservlet的方法详解][2.HttpServlet的方法详解]]
+      - [[#3-httpservlet的方法service方法][3. HttpServlet的方法：service()方法]]
+      - [[#4-模拟一个场景用户的一个注册提交的场景][4. 模拟一个场景：用户的一个注册提交的场景]]
+    - [[#4-servlet的httpservletrequest详解][4. servlet的HttpServletRequest详解]]
+      - [[#1-request的继承结构][1. Request的继承结构]]
+      - [[#2-httpservletrequest的常用方法][2. HttpServletRequest的常用方法]]
+        - [[#1-获取客户端相关信息][1. 获取客户端相关信息]]
+        - [[#2-获取请求头信息-1][2. 获取请求头信息]]
+        - [[#3-获取请求参数-1][3. 获取请求参数]]
 - [[#easymall注册功能][EasyMall注册功能]]
+  - [[#课堂笔记-2][课堂笔记]]
+    - [[#中文乱码][中文乱码]]
+    - [[#请求转发][请求转发]]
 - [[#servletconfigservletcontext][ServletConfig、ServletContext]]
   - [[#servletconfig][ServletConfig]]
   - [[#servletcontext][ServletContext]]
@@ -140,7 +195,7 @@
   - [[#7-jsp标签技术][7. JSP标签技术]]
 - [[#el表达式][EL表达式]]
 - [[#jstl标签库][JSTL标签库]]
-  - [[#1-概述][1. 概述]]
+  - [[#1-概述-1][1. 概述]]
   - [[#2-在页面中引入jstl标签库][2. 在页面中引入JSTL标签库]]
 - [[#javaee开发模式][javaEE开发模式]]
 - [[#重构easymall项目][重构EasyMall项目]]
@@ -165,7 +220,7 @@ Client - Server
 ** web概述
 [[./Img/1.png]]
 * HTML
-[[./Img/html流程图.pdf]]
+[[./Img/HTML.png]]
 ** 1. HTML是什么
    - HTML（Hyper Text Mark-up Language）超文本标记语言，最基础的网页语言 W3C
    - HTML 不是一门编程语言，而是一门标记语言
@@ -929,7 +984,7 @@ Client - Server
 #+END_SRC
 [[./SourceCode/70.html]]
 * CSS
-[[./Img/day02css&js.png]]
+[[./Img/CSS.png]]
 ** 1. 网页组织的两种常用方式
 1. 表格套表格定义网页结构 -- 目前不只是主流，只在一些结构简单的页面中有所使用
 2. DIV+CSS方式定义网页结构 -- 目前主流的网页开发方法，可以非常灵活的定义网页
@@ -1476,10 +1531,10 @@ Client - Server
    #+END_SRC
    [[./SourceCode/24.html]]
 ** 8. 拓展：CSS中的常用属性简介
-* JS、DHTML
 [[./Img/day03js.png]]
-** JavaScript
-*** 1. js概述
+* JavaScript
+[[./Img/JS.png]]
+** 1. js概述
 #+BEGIN_SRC
   - 基于对象的一门语言
   - 一门独立的语言
@@ -1494,20 +1549,20 @@ Client - Server
    - 交互性
    - 安全性
    - 跨平台性
-*** 2. JavaScript不得不说的历史
+** 2. JavaScript不得不说的历史
    - 和java的关系：语法十分相似，但毫无关系
    - 1995年5月，Netscape，LiveScript
    - 1995年12月，改名为JavaScript
    - 1996年8月，微软，Jscript
    - 1997-1999年，ECMA，ECMAScript，基于已有的JavaScript和Jscript，提出了标准的Script语法规则，JavaScript和Jscript都遵循这套标准
-*** 3. js和html的结合
+** 3. js和html的结合
 1. 将javascript书写在head标签当中，书写格式如下：
 2. 单独写一个js文件，然后导入
 3. 写在页面的底部
 - 浏览器中内置一个js解析器，会对浏览器加载到的js语句逐行执行，如果当前js语句没有添加分号，则js解析器会自动拼接上一个分号。注意：在这里建议大家手动添加分号，避免以后js语言和java语言相互切换使用的时候出现一些不必要的错误
 - 浏览器中内置的js解析器会逐行执行js代码，如果代码中书写有错误，则会导致js代码失效，可能全部的js代码效果无法正常执行
 - script标签必须要书写成一个标签对，不可以写成一个自闭标签。如果写成一个自闭标签则会导致标签中的js代码无法正常执行
-*** 4. js输出方式
+** 4. js输出方式
 #+BEGIN_SRC html
      <!DOCTYPE html>
      <html lang="en">
@@ -1533,9 +1588,9 @@ Client - Server
        </script>
      </html>
 #+END_SRC
-*** 5. js的语法-数据类型
+** 5. js的语法-数据类型
 JS中的数据类型分为基本数据类型和复杂数据类型
-**** 1. 基本数据类型：共六种
+*** 1. 基本数据类型：共六种
 数值类型（Number）、字符串（String）、布尔类型（Boolean）、undefined、null、Symbol
 [[./SourceCode/71.html]]
 #+BEGIN_SRC html
@@ -1658,7 +1713,7 @@ JS中的数据类型分为基本数据类型和复杂数据类型
    类型中值包含null一个值，这个值表示一个不存在值。常用作返回值使用。
 6. Symbol
    唯一，不与任何其他的值相等
-**** 2. 复杂数据类型
+*** 2. 复杂数据类型
 对象、数组、函数
 ***** 1. js语法--函数
 #+BEGIN_SRC html
@@ -2289,7 +2344,7 @@ js中对象的本质就是一个大括号，其中包含任意多个键值对，
            delete p.addr;
            alert(p.addr);
          #+END_SRC
-**** 3. 数据类型的自动转化
+*** 3. 数据类型的自动转化
 #+BEGIN_SRC html
   <!DOCTYPE html>
   <html lang="en">
@@ -2338,7 +2393,7 @@ js在需要时会自动对类型进行转换，转换的规则：
    true转换为1，false转换为0，转换为字符串的true和false转换为boolean对象
 4. 对象类型：
    如果位null则转成字符串null，如果为null转换为false
-*** 6. Js语法--运算符
+** 6. Js语法--运算符
 #+BEGIN_SRC html
   <!DOCTYPE html>
   <html lang="en">
@@ -2402,7 +2457,7 @@ JavaScript中的运算符和Java大致相同,只是运算过程中需要注意�
 - 也支持三元运算符?:
   2+3>5?console.log("aaa"):console.log("bbb")
 - 特殊运算符typeof:返回一个操作表达式的数据类型的字符串
-*** 7. 定义变量
+** 7. 定义变量
 #+BEGIN_SRC html
   <!DOCTYPE html>
   <html lang="en">
@@ -2470,9 +2525,9 @@ JavaScript中的运算符和Java大致相同,只是运算过程中需要注意�
      x = 4;
    + 局部变量
      var x = 4;
-*** 8. js语法--语句
+** 8. js语法--语句
 如果在if判断中只有一个等号，则，执行的操作为，先赋值，再运算的操作。操作过程为：先将x赋值为4，再判断if(x)，也就是if(4),即if(true),所以只会打印为true的部分代码。
-**** 1. if语句：
+*** 1. if语句：
 #+BEGIN_SRC html
   <!DOCTYPE html>
   <html lang="en">
@@ -2507,9 +2562,9 @@ var x = 3;
 + 情况二：if(x=4)//可以进行赋值运算，而且可以同样进行判断，不报错
   原因；因为在js中0或者null就是false，非0或者非null就是true。if(x=4)是先将x赋值为4，然后对值为4的x进行判断，4会被认为是true，所以结果是true。
   + 可以通过if(4==y)来解决该问题，因为4=y不会进行判断，而是会报错
-**** 2. switch case
+*** 2. switch case
   与java 中使用方式一致
-**** 3. while、dowhile、for
+*** 3. while、dowhile、for
 #+BEGIN_SRC html
   <!DOCTYPE html>
   <html lang="en">
@@ -2544,7 +2599,7 @@ var x = 3;
   </html>
 #+END_SRC
 不支持增强for循环，与java中使用方式一致
-*** 9. JSON
+** 9. JSON
 #+BEGIN_SRC html
   <!DOCTYPE html>
   <html lang="en">
@@ -2585,17 +2640,17 @@ JSON本质上就是一段字符串，能够保存较复杂关系的数据，具�
       }
 #+END_SRC
 查看当前JSON中第二个wife的工作data["wife"][1]["job"];
-** DHTML-动态html
-*** 1. DHTML概述
+* DHTML-动态html
+** 1. DHTML概述
 - DHTML将浏览器加载html文档中的所有的内容当做js对象来处理，最终就组成了一颗由js对象组成的对象树
 - 通过操作代表html元素的js对象来操作html中的元素
 - 通过操作js对象组成树来操作html文档的结构。从而实现了html和js的结合，实现了可以通过js来操作html
 - DHTML可以分为由BOM(Browser Object Model)和DOM(Document Object Model)两个部分组成
 - 可以对节点进行增删改的操作
 [[./Img/67.png]]
-*** 2. BOM和DOM
+** 2. BOM和DOM
 [[./Img/2.png]]
-*** 3. BOM--浏览器对象模型
+** 3. BOM--浏览器对象模型
 bom--browser object model
 1. window：代表一个浏览器窗口的对象
    #+BEGIN_SRC html
@@ -2821,7 +2876,7 @@ bom--browser object model
    2. back()
    3. forward()
    4. go()
-*** 4. DOM--文档对象模型
+** 4. DOM--文档对象模型
 [[./Img/day04DOM.png]]
 dom--document object model
 1. 获取文档独享的方法
@@ -3442,11 +3497,12 @@ dom--document object model
       - 通过修改元素display属性，调整节点展示方法：
           div.style.display = "none"|"block";
    + 拓展：nextSibling获取对此对象的下一个兄弟对象的引用
-*** 5. 问题：
+** 5. 问题：
 dom解析时，在页面中写好一个function demo1(){},适用button按钮调用这个方法，执行却发现报错，错误：ncaught ReferenceError:demo1 is not defined(demo1未定义)
 - 解决：
   仔细检查<script></script>中的function demo1(){}代码，少了大括号，会出现未定义的错误
 * jQuery
+[[./Img/jQuery.png]]
 ** 1. jQuery概述
 1. 由于用户在js中编写的内容十分繁多，将一些常用的操作和行为进行了封装，封装成很多个函数，这些函数就构成了一个js的函数库，用户在使用的时候直接调用函数库的函数即可，这个函数库就是jQuery
 2. jQuery可以写的更少，但是做的更多
@@ -4805,6 +4861,7 @@ $就是jQuery的意思$("div") <==> jQuery("div")
 * Git
 file:./other/Git.pdf
 * MySQL
+[[./Img/mysql.png]]
 ** 1. 数据库概述
     1. 数据库的概念
        数据路：存储数据的仓库
@@ -5606,11 +5663,12 @@ file:./other/Git.pdf
        别名：
        delete e fromemployee as e where id=1;
 * JDBC
+[[./Img/JDBC.png]]
 ** JDBC概述
 1. 知识回顾
-    [[./Img/39.png]]
+   [[./Img/39.png]]
 2. 概述
-    [[./Img/40.png]]
+   [[./Img/40.png]]
    - 驱动
      - 为了能让程序员利用java程序操作数据库，数据库厂商提供了一套jar包，通过导入这个jar包就可以直接调用其中的方法操作数据库，这个jar包称之为驱动。
        + 两个数据路驱动互不兼容
@@ -6195,9 +6253,6 @@ file:./other/Git.pdf
   }
 #+END_SRC
 * 登陆功能实现
-:PROPERTIES:
-:ID:       4731AB9A-BE44-47BA-AD2B-624481D8F3D2
-:END:
 1. 创建数据库
    #+BEGIN_SRC sql
      create table user(id int,name varchar(10),password varchar(10));
@@ -6259,10 +6314,216 @@ file:./other/Git.pdf
      #+BEGIN_SRC sql
        select * from user where name = '用户名'#' and password = 'password'
      #+END_SRC
+* Tomcat
+[[./other/tomcat完整笔记.pdf]]
+
+[[./Img/web应用与虚拟主机.png]]
+
+[[./Img/tomcat执行原理图.png]]
+** 课堂笔记
+*** 1. 服务器概述
+[[./Img/硬件服务器与软件服务器.png]]
+- 服务器的分类：
+  1. 硬件的服务器：oracle服务器（一台价值百万美金）;联想/微软的单片机（一个机房中有几百台单片机）;如果要进行学习使用,直接使用咱们的笔记本当做一台硬件服务器即可！
+     模拟硬件服务器：本地电脑
+  2. 软件的服务器：在这里特指web应用服务器！！！它是一个应用程序，该应用程序能够提供浏览器的访问！！
+     web应用服务器的常用的几种：
+     1. webLogic：收费，目前应用最广泛的Web服务器,服务器本身这个应用程序，很庞大，几十个G,一般是使用在大型的项目中，比如京东/淘宝
+     2. webSphere：收费,服务器本身这个应用程序，很庞大，几十个G,一般是使用在大型的项目中，比如京东/淘宝
+     3. tomcat：免费 ，体积很小，安装程序只有十几M，tomcat是在中小型企业中，或者学习中，应用最广泛的web服务器
+*** 2. tomcat服务器的下载与安装
+**** 2.1 下载本地资源
+#+BEGIN_SRC
+  【课前资料-tomcat/】
+  -->【课前资料day06-tomcat\day06-tomcat\资源】
+  --->【把这个压缩包复制到D:\software\】
+  --->【解压到当前文件，生成了apache-tomcat-7.0.62文件夹】
+  --->【重命名：tomcat7】
+#+END_SRC
+**** 2.2 官方网站下载资源
+tomcat官方网站：里面可以下载各个版本的tomcat
+#+BEGIN_SRC
+  Core:
+  zip (pgp, sha512)   window版本 免安装
+  tar.gz (pgp, sha512)   linux版本 免安装
+  32-bit Windows zip (pgp, sha512)   32位windows 免安装
+  64-bit Windows zip (pgp, sha512)   64位windows 免安装
+  32-bit/64-bit Windows Service Installer (pgp, sha512) 安装版
+
+  Source Code Distributions  tomcat应用服务器的源程序，程序员可以查看
+  tar.gz (pgp, sha512)
+  zip (pgp, sha512)
+#+END_SRC
+**** 2.3 tomcat的运行环境
+#+BEGIN_SRC
+  tomcat的运行环境：
+                  需要java-jdk的支持，必须要先安装jdk才可以
+                  验证操作1：删除了 jdk的环境变量，然后再运行tomcat就不可以
+                  验证操作2：找到了tomcat7/lib，里面都是.jar包，
+                  所以，tomcat需要java的jdk支持
+
+  举例：java的运行环境：JDK(JRE/JVM)
+#+END_SRC
+**** 2.4 tomcat与jdk对应的版本
+#+BEGIN_SRC
+tomcat版本与java版本的对应：
+
+tomcat6 需要 jdk5.0以上版本。
+tomcat7 需要 jdk6.0以上版本。
+tomcat8 需要 jdk7.0以上版本。
+tomcat9 最新的版本 -->不建议使用
+#+END_SRC
+**** 2.5 端口号被占用问题
+1. tomcat7在启动过程中，一闪而过，不能运行：
+   1. jdk没有安装
+   2. 已经启动过了，再次启动时，将不能启动,端口号被占用
+2. 端口号被占用的解决方案：
+   1. 先查出来是谁在占用 8080端口
+      cmd >>>>> netstat -ano
+      TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       13188
+   2. 把8080端口这个程序 直接'杀'掉
+      打开【启动任务管理器】 --> 【进程/服务】-->【查看PID 13188】
+      -->【右键单击 选择结束进程 】
+[[./Img/b.png]]
+**** 2.6 修改端口号
+tomcat服务器：修改端口号
+1. 打开配置文件【conf/server.xml文件】
+2. 找到代码的第70行：
+   <Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
+
+   post="端口号"
+3. 直接把port="8080" --->修改为 端口号port="80"
+4. 如果修改了端口号，那么必须要重新启动一次tomcat，【bin/startup.sh】
+   tomcat的80端口是一个默认的端口：访问tomcat时，浏览器地址栏中，直接输入 localhost就可以访问到
+**** 2.7 tomcat的目录结构：
+| bin     | 存放tomcat启动和关闭的.bat脚本文件                                                                          |
+| conf    | tomcat应用程序的核心配置文件                                                                                |
+| lib     | 是tomcat运行时，所需要的jar包                                                                               |
+| logs    | 这是一个tomcat运行时产生的日志文件                                                                          |
+| temp    | tomcat运行时产生的一些临时文件，不需要关注                                                                  |
+| webapps | 开发人员编写网站代码，存放的目录。                                                                          |
+| work    | tomcat运行的真正的目录，比如：.java文件，当tomcat加载运行时.class文件，是在work中，所以work是运行的真正目录 |
+*** 3. tomcat的基本概念
+#+BEGIN_SRC
+tomcat本身是一个web应用服务器，提供对外访问的接口和资源。
+localhost:80 去访问！！！
+模拟一个场景：
+           两个地址：fanyi.baidu.com
+                    tieba.baidu.com
+这两个百度的产品是在一个硬件服务器吗？？？答案：是在不同的虚拟主机中
+#+END_SRC
+[[./Img/c.png]]
+*** 4. web应用配置虚拟路径映射的三种方式
+虚拟主机的模拟场景：
+**** 方式一：
+1. 创建一个web应用：创建一个新的文件夹new1
+   #+BEGIN_SRC
+              new1 这个文件就是一个web应用
+                |
+                |---1.html
+                |---1.css
+                |---1.js
+                |---WEB-INF 文件夹
+                |       | classes 存放编译之后的java代码 .class文件
+                        | lib  存放项目需要的jar包
+                        | web.xml 名字不能改，核心的配置文件
+   #+END_SRC
+2. 找到localhost虚拟主机：
+   找到[tomcat7\conf\server.xml\125行]
+
+   [[./Img/d.png]]
+   #+BEGIN_SRC xml
+        <Host name="localhost"  appBase="webapps"
+              unpackWARs="true" autoDeploy="true">
+              <Context path="/aaa" docBase="/Users/coe/Desktop/news1" />
+        </Host>
+   #+END_SRC
+   这个host name="localhost" 就是一个tomcat7默认的虚拟主机
+3. 把new1 应用，添加到虚拟主机localhost中,path属性指定虚拟路径（浏览器访问的路径），docBase指向真实的web应用目录。
+   #+BEGIN_SRC xml
+     <Host>
+         <Context  docBase="/Users/coe/commandoptionesc/Another/JavaWeb/SourceCode/news1" path="/aaa"  />
+     </Host>
+   #+END_SRC
+4. 把new1 文件夹中的 [WEB-INF\web.xml]修改
+   #+BEGIN_SRC xml
+     <?xml version="1.0" encoding="ISO-8859-1"?>
+     <web-app xmlns="http://java.sun.com/xml/ns/javaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                           http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+       version="3.0">
+     </web-app>
+   #+END_SRC
+5. 重新启动 tomcat7 ，然后打开浏览器访问：
+   localhost/aaa/1.html
+**** 方式二： 直接部署，不需要重新启动tomcat
+1. 创建一个新的文件夹 news2
+   #+BEGIN_SRC
+            new2 这个文件就是一个web应用
+                |
+                |---1.html
+                |---1.css
+                |---1.js
+                |---WEB-INF 文件夹
+                |       | classes 存放编译之后的java代码 .class文件
+                        | lib  存放项目需要的jar包
+                        | web.xml 名字不能改，核心的配置文件
+   #+END_SRC
+2. [tomcat]/conf/[engin引擎]/[host虚拟主机]
+   #+BEGIN_SRC
+     tomcat7\conf\Catalina\localhost\news2.xml
+     tomcat会把news2.xml的文件名前缀当做  当前web应用的虚拟路径
+   #+END_SRC
+3. 打开【new2.xml】，编写配置 web应用new2的真实路径
+   #+BEGIN_SRC xml
+        <Context docBase="/Users/coe/commandoptionesc/Another/JavaWeb/SourceCode/news2" />
+   #+END_SRC
+4. 配置缺省的ROOT.xml文件
+   #+BEGIN_SRC
+     把"tomcat7\conf\Catalina\localhost\news2.xml""修改为"tomcat7\conf\Catalina\localhost\ROOT.xml"
+     优先级问题：【自己的应用news --> ROOT.xml】 >【Tomcat的ROOT】
+   #+END_SRC
+**** 方式三：
+1. 确定【tomcat：webapps】-->存放了所有的web应用,tomcat会自动管理webapps中的每一个web应用.以后，我们创建的所有web应用都要放在webapps下，交给tomcat管理即可！！
+2. 创建一个新的web应用：news3
+   #+BEGIN_SRC
+        new3 这个文件就是一个web应用
+                        |
+                        |---1.html
+                        |---1.css
+                        |---1.js
+                        |---WEB-INF 文件夹
+                        |       | classes 存放编译之后的java代码 .class文件
+                                | lib  存放项目需要的jar包
+                                | web.xml 名字不能改，核心的配置文件
+   #+END_SRC
+3. 把【news3】----> 【tomcat7\webapps中】
+   tomcat会自动发布，然后自动管理news3；通过路径进行测试：localhost/news3/1.html
+4. 默认缺省的方式【tomcat7\webapps\new3】
+   把文件夹的名字改为  ROOT即可
+5. 默认缺省的 访问页面【直接输入localhost，会显示1.html的内容】
+   1. 【先把第四部完成 news3 变为一个ROOT 应用】
+   2. 【把ROOT\WEB-INF\web.xml】，配置一个welcome-file-list文件
+      #+BEGIN_SRC xml
+                <welcome-file-list>
+                        <welcome-file>1.html</welcome-file>
+                </welcome-file-list>
+      #+END_SRC
+   3. 【浏览器输入:localhost】--->【直接进入欢迎页面 1.html】
+*** 5. 配置一个虚拟主机
+注意：如果要配置www.baidu.com，需要绕过 DNS域名解析器。DNS域名解析器 会把 输入的域名www.baidu.com 解析成IP地址
+- 基本步骤：
+  1. 找到【tomcat7\conf\server.xml】
+  2. 打开，在<Host name="localhost"></Host>下方并列的位置,添加一条 <Host name="www.baidu.com"  appBase="d:\software\baidu" >
+  3. baidu文件夹目录【d:\software\baidu】里面存在了一个web应用 ：news3
+  4. 找到【c:/windwos/system32/drivers/etc/hosts】，打开。新增一条信息：本机的IP地址  与  www.baidu.com的映射关系
+     127.0.0.1 www.baidu.com
+  5. 重新启动tomcat，然后浏览器输入【www.baidu.com/news3/1.html】
+     这样就访问成功了
+*** 6. 综合练习
+配置www.163.com虚拟主机,以三种方式配置web应用,并选择一种配置为缺省web应用,并且配置web应用的主页,最终实现,直接访问www.163.com时能够显示主页的内容。
 * SQL注入攻击
-:PROPERTIES:
-:ID:       1C30AF1D-28E6-4733-93CD-D19882ED706C
-:END:
 由于sql语句中的参数是由前台传输而来，后台是对sql语句的拼接，在参数传递的过程中，用户可能输入一些数据库的关键字，这些关键字可能会导致sql的语义发生改变从而执行一些特殊的操作，像这样呃操作就称之为sql注入攻击。
 1. preparedStatement的使用
       预编译
@@ -6983,71 +7244,17 @@ file:./other/Git.pdf
       </default-config>
     </c3p0-config>
   #+END_SRC
-* Web开发
-[[file:../笔记/第二阶段JavaWEB/课后资料/day08-tomcat/笔记/day08-tomcat.pdf]]
-** web应用的配置
-1. 第一种配置方式
-   在电脑创建一个news的文件夹，另外在创建一个1.html文件放入news文件夹
-   #+BEGIN_SRC html
-     <!DOCTYPE HTML>
-     <html xmls="http://www.w3.org/1999/xhtml" xml:lang="en">
-       <head>
-         <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
-       </head>
-       <body>
-         这是news的页面。
-       </body>
-     </html>
-
-   #+END_SRC
-   在server.xml中的<Host>标签内部，添加如下内容：
-   #+BEGIN_SRC xml
-     <Host name="localhost"  appBase="webapps"unpackWARs="true" autoDeploy="true">
-       <Context path="/news1" docBase="/Users/admin/Desktop/news/" />
-     </Host>
-   #+END_SRC
-   在浏览器访问地址:localhost:8080/news1/1.html
-2. 第二种配置方式
-   在电脑桌面创建一个email文件夹，另外在创建一个1.html文件放入email文件夹
-   在tomcat/conf/Catalina/localhost目录中添加一个.xml文件，这个文件的名称就是web应用的虚拟路径，在文件中添加内容如下：
-   #+BEGIN_SRC xml
-     <?xml version="1.0" encoding="UTF-8"?>
-     <Context docBase="/Users/admin/Desktop/email/" />
-   #+END_SRC
-   其中docBase="真是web应用的目录",在浏览器访问为：localhost:8080/email/1.html
-   + 第二种配置方式中如果要求虚拟路径有多级，例如:/email/aaa，在系统中文件命名时将/用#来代替，表示将虚拟路径分级的意思，在地址栏中山呼入对应分级后路径即可。
-     浏览器访问地址为：localhost:8080/email/aaa/1.html
-3. 第三种配置方式
-   在localhost虚拟主机管理的webapps目录中添加一个目录，这个目录的名称就是web应用的虚拟路径，同时这个目录也是真实的web应用。所以只需添加此处一个web应用即完成全部配置。配置如下：
-
-   [[./Img/53.png]]
-*** 缺省web应用的配置
-一个路径被配置为缺省的路径之后，在地址栏中间就不需要书写当前web应用的虚拟路径
-1. 第一种配置方式
-   将path中包含的路径完全删除，只留下一对引号，这就表示当前web应用的虚拟路径
-   #+BEGIN_SRC xml
-     <Context path="" docBase="/User/admin/Desktop/news/"/>
-   #+END_SRC
-2. 第二种配置方式
-   将Catalina/虚拟主机名称/email.xml文件名称修改为ROOT.xml，这是当前文件的名称就是一个缺省web应用的虚拟路径。
-
-   [[./Img/54.png]]
-3. 第三种配置方式
-   将webapps目录中的search目录名称修改为ROOT，则当前目录的名称就会变成一个web应用的缺省路径
-*** 缺省web应用的虚拟路径有优先级
-server.xml > Catalina/虚拟主机名称/ROOT.xml文件 > webapps目录中的ROOT目录
-
-* Servlet
-[[file:../笔记/第二阶段JavaWEB/课后资料/day09servlet/笔记/day09-servlet.pdf]]
-** 1. Servlet概述
+* Servlet、Request、Response
+** Servlet
+*** 1. Servlet概述
 - Servlet是Sun公司提供的一门动态资源开发的奇数。本质就是一个java文件。将编译后的文件放入servlet容器中方可使用servlet提供服务。
 - Servlet容器是存储并运行servlet的环境，称之为servlet的环境。
 - web容器是存储并运行web资源的环境。
-** 2. 手写Servlet
+*** 2. 手写Servlet
 1. 编写一个类，让这个类实现servlet接口，那么这个类就会变为一个servlet文件
 2. 编译写好的文件，并且将其加入到servlet容器中去运行。
 3. 将servlet文件添加到任意一个web应用的classes目录中。
-** 3. 配置servlet映射
+*** 3. 配置servlet映射
 在添加servlet文件web应用中配置web.xml文件，内容如下：
 #+BEGIN_SRC xml
   <?xml version="1.0" encoding="UTF-8"?>
@@ -7065,7 +7272,7 @@ server.xml > Catalina/虚拟主机名称/ROOT.xml文件 > webapps目录中的ROO
     </servlet-mapping>
   </web-app>
 #+END_SRC
-** 4. Servlet调用过程和生命周期
+*** 4. Servlet调用过程和生命周期
 1. 确认ip地址对应的服务器。
 2. 确认服务器中的虚拟机主机名称
 3. 确认虚拟主机中对应的web应用
@@ -7098,7 +7305,7 @@ localhost/news/servlet/FirstServlet
    原因：真正创建对象的并不是这两个接口而是这两个接口下的子实现类。HttpServletRequestWrapper、HttpServletResponseWrapper两个子实现类创建了request和response对象。
 2. request对象和response对象何时创建？
    servlet完成初始化操作之后，service方法身上的request和response对象也会被创建出来。
-** 5. Servlet细节讨论
+*** 5. Servlet细节讨论
 1. Servlet标签问题
    #+BEGIN_SRC xml
      <servlet>
@@ -7185,27 +7392,27 @@ localhost/news/servlet/FirstServlet
    4. 解决线程安全问题：
       1. 加锁：合理添加锁，锁住关键部分代码，尽可能少的降低代码的执行效率。
       2. 尽可能多定义局部变量少定义全局变量，因为全局变量不可避免的会出现多线程并发安全问题。
-* Request
-** 1. request概述与功能一 --- API操作
+** Request
+*** 1. request概述与功能一 --- API操作
 1. 回顾：HTTP协议
    - HTTP数据交互模型：
      请求响应模型、一次请求对应一次响应、请求只能由浏览器发出，服务器可以根据请求作出响应
-** 2. HTTP请求
-1. 继承结构
+*** 2. HTTP请求
+**** 1. 继承结构
    #+BEGIN_SRC
    ServletRequest 提供servletrequest对象必要的方法
          |
          |--- HttpServletRequest 包含和HTTP协议操作的一些API，可以通过这些API来开发浏览器和服务器之间的功能。
    #+END_SRC
-2. HTTP请求的组成
+**** 2. HTTP请求的组成
    #+BEGIN_SRC
    一个请求行   请求方式   请求资源的路径   HTTP协议版本
    多个请求头   Host:虚拟主机名称
    一个空行
    请求实体内容   用户发送请求时携带的请求参数
    #+END_SRC
-** 3. Request当中的API操作：
-1. 获取客户端相关的信息
+*** 3. Request当中的API操作：
+**** 1. 获取客户端相关的信息
    - getRequestURL方法 --- 返回客户端发出请求完整URL
    - getRequestURI方法 --- 返回请求行中的资源名部分
    - getQueryString方法 --- 返回请求行中的参数部分
@@ -7247,7 +7454,7 @@ localhost/news/servlet/FirstServlet
      }
 
    #+END_SRC
-2. 获取请求头信息
+**** 2. 获取请求头信息
    - getHeader(name)方法 --- String
    - getHeaders(String name)方法 --- Enumeration<String>
    - getheaderNames方法 --- Enumeration<String>
@@ -7297,7 +7504,7 @@ localhost/news/servlet/FirstServlet
          }
      }
    #+END_SRC
-3. 获取请求参数
+**** 3. 获取请求参数
    - getParameter(String name) --- String通过name获得值
    - getParameterValues(String name) --- String[] 通过name获得多值checkbox
    - getParameterMap() --- Map<String,string[]> key:name value:多值 将查询的参数保存在一个Map中
@@ -7416,7 +7623,7 @@ localhost/news/servlet/FirstServlet
      }
 
    #+END_SRC
-4. 中文乱码问题：
+**** 4. 中文乱码问题：
    [[./Img/57.png]]
    1. 获取请求参数乱码问题：
       乱码出现的原因:编解码不一致
@@ -7441,10 +7648,10 @@ localhost/news/servlet/FirstServlet
          #+BEGIN_SRC java
            username = new String(????.getBytes("iso8859-1"),"utf-8");
          #+END_SRC
-** 4. request功能二 --- 请求转发
-1. 什么是请求转发：
+*** 4. request功能二 --- 请求转发
+**** 1. 什么是请求转发：
    是一种资源跳转方式；是由一个动态资源跳转到另外一个动态资源，让第二个动态资源对浏览器做出相应的操作，这个过程就称之为请求转发。
-2. 请求转发的特点：
+**** 2. 请求转发的特点：
    [[./Img/58.png]]
    #+BEGIN_SRC
    一次请求一次相应
@@ -7454,8 +7661,8 @@ localhost/news/servlet/FirstServlet
 
    注意：请求转发是一个服务器内部的资源跳转，浏览器不会察觉到变化，最明显的反馈就是浏览器地址栏不发生变化。
    #+END_SRC
-3. 请求转发实现：
-   创建一个调度器，利用调度器实现请求转发，代码如下：
+**** 3. 请求转发实现：
+创建一个调度器，利用调度器实现请求转发，代码如下：
    #+BEGIN_SRC java
      package cn.commandoptionesc.request;
 
@@ -7639,11 +7846,11 @@ localhost/news/servlet/FirstServlet
        }
 
      #+END_SRC
-4. 注意：请求转发是web应用内部的资源跳转，不可以在web应用之间跳转
-** 5. request功能三 --- 作为域对象使用
-1. 域对象概述
+**** 4. 注意：请求转发是web应用内部的资源跳转，不可以在web应用之间跳转
+*** 5. request功能三 --- 作为域对象使用
+**** 1. 域对象概述
    域对象就是一个对象有一个可以被看见的范围，在这个范围内利用对象身上的map实现数据、资源的共享，像这样的一个对象称之为域对象。
-2. 域对象的时候用方式：
+**** 2. 域对象的时候用方式：
    1. setAttribute() 像域中添加数据
    2. setAttribute(String name) 获取指定名称的域属性
    3. removeAttribute(String name) 删除指定名称的域属性
@@ -7652,14 +7859,14 @@ localhost/news/servlet/FirstServlet
      request.getParameter("name"); //请求参数中包含的参数
      request.getAttribute("name"); //域中包含的属性
    #+END_SRC
-3. request域对象的特点
+**** 3. request域对象的特点
    1. 声明周期：
       在请求链开始的时候request对象创建，在请求链结束的时候request对象销毁。
    2. 作用范围：
       请求链的范围即为request域对象的作用范围。(整个请求链)
    3. 主要功能
       在请求链中共享数据。
-4. 案例：从servlet向首页输出数据
+**** 4. 案例：从servlet向首页输出数据
    1. 使用request域对象实现
    2. 代码如下：
       #+BEGIN_SRC java
@@ -7712,13 +7919,13 @@ localhost/news/servlet/FirstServlet
          </body>
         </html>
       #+END_SRC
-** 6. request功能四 --- 请求包含
-1. 请求包含概念
+*** 6. request功能四 --- 请求包含
+**** 1. 请求包含概念
    一个动态资源和另一个动态资源一起处理一个请求操作，并将两个Servlet的结果合并输出给浏览器，像这样的过程称作请求包含。
-2. 请求包含的特点
+**** 2. 请求包含的特点
    [[./Img/60.png]]
-3. 请求包含实现:
-   代码如下：
+**** 3. 请求包含实现:
+代码如下：
    #+BEGIN_SRC java
      package cn.commandoptionesc.request;
 
@@ -7769,9 +7976,8 @@ localhost/news/servlet/FirstServlet
      }
 
    #+END_SRC
-* Response
-
-** 1. response对象
+** Response
+*** 1. response对象
 1. 继承机构
    #+BEGIN_SRC
      ServletResponse
@@ -7806,7 +8012,7 @@ localhost/news/servlet/FirstServlet
       ServletOutputStream getOutputStream()
 
       PringWriter getWriter()
-** 2. response参数乱码处理
+*** 2. response参数乱码处理
 1. 字节流乱码处理
    #+BEGIN_SRC java
      response.getOutputStream().write("中文".getBytes());
@@ -7895,7 +8101,7 @@ localhost/news/servlet/FirstServlet
     2. 字节流和字符流是不可以同时使用的。会在第二个流身上发生异常
     3. 使用流之后不需要关闭，浏览器会自动帮助我们关闭流。千万不要手动关闭可能会发生异常。
     4. 将通知服务器与浏览器的使用字符集的语句书写在所有代码之前。
-** 3. response功能一 --- 请求重定向
+*** 3. response功能一 --- 请求重定向
 [[./Img/61.png]]
 1. 请求重定向
    是一种资源跳转方式，可以在不同的服务器之间跳转。
@@ -7949,7 +8155,7 @@ localhost/news/servlet/FirstServlet
      }
 
    #+END_SRC
-** 4. response功能二 --- 定时刷新
+*** 4. response功能二 --- 定时刷新
 [[./Img/62.png]]
 1. 定时刷新概念
    是一种资源跳转方式，可以在不同服务器之间跳转
@@ -7994,7 +8200,7 @@ localhost/news/servlet/FirstServlet
          }
      }
    #+END_SRC
-** 5. response功能三 --- 控制浏览器缓存
+*** 5. response功能三 --- 控制浏览器缓存
 由于不同的浏览器的缓存行为可能是不同的，我们可以在服务器中通过何止响应头来控制浏览器的缓存行为！！
 1. 控制浏览器不要缓存
    #+BEGIN_SRC java
@@ -8074,6 +8280,487 @@ localhost/news/servlet/FirstServlet
          }
      }
    #+END_SRC
+** 课堂笔记
+*** 1. 概述
+[[./Img/servlet的编写步骤和调用过程.png]]
+**** 1. servlet是什么？？？
+#+BEGIN_SRC
+  servlet是由sun公司提供的一套接口规范，是专门应用于javaweb网站的开发技术。
+  servlet = server + applet 服务端的应用程序。
+  servlet是web应用服务器实现了 这一套接口规范，tomcat实现了servlet的接口规范。
+#+END_SRC
+**** 2. servlet的主要作用
+#+BEGIN_SRC
+  处理客户端（浏览器）发送过来的HTTP请求，
+  响应给客户端（浏览器）一个请求的结果。
+  举例： 我百度搜索【手机】 --> 点击按钮搜之后 --> 得到【响应结果】
+#+END_SRC
+**** 3. servlet的API
+servlet的API在哪里？？？
+1. 如果要是使用servlet，那么必须要先导入 它的jar包
+   #+BEGIN_SRC
+      tomcat ---> lib库
+                    | --- servlet-api.jar
+   #+END_SRC
+**** 4. 编写一个servlet的程序：入门案例
+1. 在src目录下
+   - 创建一个package包：cn.tedu.servlet
+   - 创建一个java类：Servlet01_servlet接口
+2. 需要先实现 Servlet接口
+3. servlet程序如果要进行代码的执行，需要浏览器发送一个请求过来才可以
+   举例： servlet相当于餐厅服务员的觉得，只有当有客户过来用餐时，服务员才会执行起来。
+4. 需要在web.xml中配置一个文件：servlet的映射关系
+   举例： 就相当于客户点餐时，需要一个菜单，服务员看到菜单才知道客户要什么！！！
+   #+BEGIN_SRC xml
+     <!--servlet的映射关系：浏览器请求  与  servlet代码 的映射关系 -->
+     <servlet>
+         <!--servlet-name是程序员自定义的名字：相当于一个菜名-->
+         <servlet-name>hello</servlet-name>
+         <servlet-class>cn.tedu.servlet.Servlet01_servlet接口</servlet-class>
+     </servlet>
+     <servlet-mapping>
+         <!--必须与servlet标签的name对应-->
+         <servlet-name>hello</servlet-name>
+         <!--浏览器发送请求的资源路径：相当于 客户点菜-->
+         <url-pattern>/hello</url-pattern>
+     </servlet-mapping>
+   #+END_SRC
+   #+BEGIN_SRC java
+     package cn.tedu.servlet;
+
+     import javax.servlet.*;
+     import java.io.IOException;
+
+     public class Servlet01_servlet接口 implements Servlet {
+
+         @Override
+         public void init(ServletConfig servletConfig) throws ServletException {
+             System.out.println("这是一个初始化方法，先执行init（）方法");
+         }
+
+         @Override
+         public ServletConfig getServletConfig() {
+             return null;
+         }
+
+         @Override
+         public void service(ServletRequest servletRequest, ServletResponse servletResponse)
+                 throws ServletException, IOException {
+             System.out.println("这是service服务方法，程序员编写业务逻辑（处理请求的代码）就在这里写！！！");
+         }
+
+         @Override
+         public String getServletInfo() {
+             return null;
+         }
+
+         @Override
+         public void destroy() {
+             System.out.println("大哥....我快不行了...救救我，这是遗言！！");
+         }
+     }
+
+   #+END_SRC
+*** 2. servlet的GenericServlet详解
+[[./Img/抽象类GeneraicServlet.png]]
+**** 1. servlet是一个接口，内部只有方法签名，没有方法体
+如果要使用servlet就必须实现servlet接口，有以下方法：
+#+BEGIN_SRC
+  void destroy() ----常用
+  ServletConfig getServletConfig()
+  String getServletInfo()
+  void init(ServletConfig config)  ----常用
+  void service(ServletRequest req, ServletResponse res)  ---最常用
+#+END_SRC
+**** 2. servlet的一个实现类：GenericServlet类
+对Serlvet接口中的大部分方法都做了默认实现，只有service方法是一个抽象方法需要继承者自己实现。实现者只需要实现Service方法在其中写处理请求的代码即可。
+
+创建一个类：cn.tedu.servlet.Servlet02_GenericServlet
+#+BEGIN_SRC java
+  public class Servlet02_GenericServlet extends GenericServlet {
+      @Override
+      public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+          //主要的业务逻辑代码
+          //实现的功能如下：在浏览器中显示当前的日期时间
+          Date date = new Date();
+          //如何把data日期 返回给浏览器
+          System.out.println(date.toString());
+          //参数一：ServletRequest 是 接受浏览器的请求
+          //参数二：ServletResponse 是 响应给浏览器的结果
+          //servletResponse.getWriter();它只是通过response打开一个wirter流
+          servletResponse.getWriter().write(date.toString());
+      }
+  }
+#+END_SRC
+**** 3. 浏览器发送HTTP请求的方式：7种
+- 常用的有：
+  *GET* 方式和 *POST* 方式；
+- 不常用的有：
+  /PUT / 、 / DELETE / 和 / TARCE,HEAD / 、 / OPTIONS/
+#+BEGIN_SRC
+  问题是：GenericServlet.service()是专门接受请求的，那么它能接受多少中HTTP请求？？
+  答案：能接受以上7种所有的请求。接受请求后，不同的请求方式，比如get和post方式，那么service方法中的处理逻辑要分开执行，get方式的请求执行get的代码逻辑，post方式的请求执行post的代码逻辑
+#+END_SRC
+这种书写方式很繁琐，需要简化处理！！！！
+#+BEGIN_SRC java
+  package cn.tedu.servlet;
+
+  import javax.servlet.GenericServlet;
+  import javax.servlet.ServletException;
+  import javax.servlet.ServletRequest;
+  import javax.servlet.ServletResponse;
+  import javax.servlet.http.HttpServletRequest;
+  import java.io.IOException;
+  import java.util.Date;
+
+  public class Servlet02_GenericServlet extends GenericServlet {
+
+      @Override
+      public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+
+          //主要的业务逻辑代码
+          //实现的功能如下：在浏览器中显示当前的日期时间
+          Date date = new Date();
+          //如何把data日期 返回给浏览器
+          System.out.println(date.toString());
+          //参数一：ServletRequest 是 接受浏览器的请求
+          //参数二：ServletResponse 是 响应给浏览器的结果
+          //servletResponse.getWriter();它只是通过response打开一个wirter流
+          servletResponse.getWriter().write(date.toString());
+
+          //根据不同的请求，会执行不同的代码逻辑
+          //1.获取浏览器的请求方式
+          HttpServletRequest req = (HttpServletRequest) servletRequest;
+          String method = req.getMethod();//得到http的请求方式
+          System.out.println("请求方式："+method);
+          if ("GET".equalsIgnoreCase(method)) {
+              System.out.println("get方式的处理逻辑在这里写");
+          } else if ("POST".equalsIgnoreCase(method)) {
+              System.out.println("post方式的处理逻辑在这里写");
+          }
+      }
+  }
+
+#+END_SRC
+*** 3. servlet的HttpServlet详解
+**** 1.HttpServlet的继承关系
+HttpServlet 的诞生 是专门为了HTTP请求而服务的！！！
+
+HttpServlet  extends  GenericServlet  implements Servlet
+**** 2.HttpServlet的方法详解
+#+BEGIN_SRC java
+  protected  void doDelete(HttpServletRequest req, HttpServletResponse resp)
+      Called by the server (via the service method) to allow a servlet to handle a DELETE request.
+      由服务器（通过服务方法）调用，以允许servlet处理删除请求。
+  protected  void doGet(HttpServletRequest req, HttpServletResponse resp)
+      Called by the server (via the service method) to allow a servlet to handle a GET request.
+      服务器（通过服务方法）允许servlet处理GET请求。
+  protected  void doHead(HttpServletRequest req, HttpServletResponse resp)
+      Receives an HTTP HEAD request from the protected service method and handles the request.
+      从受保护的服务方法接收HTTP HEAD请求并处理该请求。
+  protected  void doOptions(HttpServletRequest req, HttpServletResponse resp)
+      Called by the server (via the service method) to allow a servlet to handle a OPTIONS request.
+      由服务器（通过服务方法）调用，以允许servlet处理选项请求。
+  protected  void doPost(HttpServletRequest req, HttpServletResponse resp)
+      Called by the server (via the service method) to allow a servlet to handle a POST request.
+      由服务器（通过服务方法）调用，以允许servlet处理POST请求。
+  protected  void doPut(HttpServletRequest req, HttpServletResponse resp)
+      Called by the server (via the service method) to allow a servlet to handle a PUT request.
+      由服务器（通过服务方法）调用，以允许servlet处理PUT请求。
+  protected  void doTrace(HttpServletRequest req, HttpServletResponse resp)
+      Called by the server (via the service method) to allow a servlet to handle a TRACE request.
+      由服务器（通过服务方法）调用，以允许servlet处理跟踪请求。
+  protected  long getLastModified(HttpServletRequest req)
+      Returns the time the HttpServletRequest object was last modified, in milliseconds since midnight January 1, 1970 GMT.
+      返回HttpServletRequest对象上次修改的时间，以自1970年1月1日格林尼治标准时间午夜起的毫秒为单位。
+  protected  void service(HttpServletRequest req, HttpServletResponse resp)
+      Receives standard HTTP requests from the public service method and dispatches them to the doXXX methods defined in this class.
+      接收来自公共服务方法的标准HTTP请求，并将它们分派给该类中定义的doXXX方法。
+  void service(ServletRequest req, ServletResponse res)
+      Dispatches client requests to the protected service method.
+      将客户端请求分派到受保护的服务方法。
+#+END_SRC
+**** 3. HttpServlet的方法：service()方法
+#+BEGIN_SRC java
+  protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      String method = req.getMethod();
+      long lastModified;
+      if (method.equals("GET")) {
+          ...
+              this.doGet(req, resp);
+      } else if (method.equals("HEAD")) {
+          lastModified = this.getLastModified(req);
+          this.maybeSetLastModified(resp, lastModified);
+          this.doHead(req, resp);
+      } else if (method.equals("POST")) {
+          this.doPost(req, resp);
+      } else if (method.equals("PUT")) {
+          this.doPut(req, resp);
+      } else if (method.equals("DELETE")) {
+          this.doDelete(req, resp);
+      } else if (method.equals("OPTIONS")) {
+          this.doOptions(req, resp);
+      } else if (method.equals("TRACE")) {
+          this.doTrace(req, resp);
+      } else {
+          String errMsg = lStrings.getString("http.method_not_implemented");
+          Object[] errArgs = new Object[]{method};
+          errMsg = MessageFormat.format(errMsg, errArgs);
+          resp.sendError(501, errMsg);
+      }
+
+  }
+#+END_SRC
+**** 4. 模拟一个场景：用户的一个注册提交的场景
+创建一个注册页面：param.html
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+    </head>
+    <body>
+      <h1>GET提交</h1>
+      <form action="/day10-servlet/demo3" method="GET">
+        用户名: <input type="text" name="username" />
+        昵称: <input type="text" name="nickname" />
+        <input type="submit" value="提交" />
+      </form>
+      <h1>POST提交</h1>
+      <form action="/day10-servlet/demo3" method="POST">
+        用户名: <input type="text" name="username" />
+        昵称: <input type="text" name="nickname" />
+        爱好: <input type="checkbox" name="like" value="lanqiu" />篮球
+        <input type="checkbox" name="like" value="zuqiu" />足球
+        <input type="checkbox" name="like" value="taiqiu" />台球
+        <input type="submit" value="提交" />
+      </form>
+    </body>
+  </html>
+#+END_SRC
+把页面复制到【day10-servlet/web/param.html】
+- 代码的编写步骤：
+  1. 修改param.html中form表单的action路径：是一个请求的url
+     #+BEGIN_SRC
+       /web虚拟路径的名称/请求的名称
+       action="/day10-servlet/demo03"
+     #+END_SRC
+  2. 配置web.xml，完成url路径与servlet类的映射关系
+     #+BEGIN_SRC xml
+       <?xml version="1.0" encoding="UTF-8"?>
+       <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+                version="4.0">
+         <!--这是案例02的映射关系-->
+         <servlet>
+           <servlet-name>demo02</servlet-name>
+           <servlet-class>cn.tedu.servlet.Servlet02_GenericServlet</servlet-class>
+         </servlet>
+         <servlet-mapping>
+           <servlet-name>demo02</servlet-name>
+           <url-pattern>/demo02</url-pattern>
+         </servlet-mapping>
+       </web-app>
+     #+END_SRC
+  3. 编写后台的servlet的代码,找到doGet()与doPost()方法
+     #+BEGIN_SRC java
+       package cn.tedu.servlet;
+
+       import javax.servlet.ServletException;
+       import javax.servlet.http.HttpServlet;
+       import javax.servlet.http.HttpServletRequest;
+       import javax.servlet.http.HttpServletResponse;
+       import java.io.IOException;
+
+       public class Servlet03_HttpServlet extends HttpServlet {
+
+           @Override
+           protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+               //程序员自己处理的代码逻辑，可以被重复的调用
+               String method = req.getMethod();
+               System.out.println("执行了do"+method+"方法："+method);
+           }
+
+           @Override
+           protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+               this.doGet(req, resp);
+               //String method = req.getMethod();
+               //System.out.println("执行了doPost方法："+method);
+           }
+       }
+     #+END_SRC
+*** 4. servlet的HttpServletRequest详解
+[[./Img/HTTP请求.png]]
+**** 1. Request的继承结构
+1. ServletRequest：接口
+   定义将客户端请求信息提供给某个servlet的对象。servlet容器(tomcat服务器中的一个组件)创建ServletRequest对象，并将该对象作为参数传递给该servlet的service方法。接受的请求不仅仅是HTTP类型的请求,还可能是其他类型的请求，
+   + 特别注意：javaweb课程，包括以后工作中，默认的都是HTTP协议的请求
+2. HttpServletRequest(以后写代码用),只接收HTTP协议的请求
+   主要作用：扩展javax.servlet.ServletRequest接口，为HttpServlet提供请求信息。
+   #+BEGIN_SRC
+   ServletRequest接口
+             |
+             | --- HttpServletRequest接口 （对ServletRequest的扩展）
+             |           |                  （提供了更多的方法，去操作HTTP协议）
+                         |
+                         |  --- HttpServletRquestWrapper （实现类）
+                         |    tomcat服务器会自动创建一个对象：HttpServletRequest类型的对象
+                         |      HttpServletRequest   req = new  HttpServletRquestWrapper();
+   #+END_SRC
+**** 2. HttpServletRequest的常用方法
+***** 1. 获取客户端相关信息
+      #+BEGIN_SRC java
+        /*("/request01") 代表的是 浏览器发送过来的请求信息  */
+        @WebServlet("/request01") /*完全代替了web.xml的配置文件映射关系*/
+        public class Request01_获取客户机相关信息 extends HttpServlet {
+            protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                this.doGet(request,response);
+            }
+            protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                //编写自己的业务逻辑
+                /**
+                 ,* getRequestURL方法 -- 返回客户端发出请求完整URL
+                 ,*    结果：http://localhost:80/day10_servlet_war_exploded/request01
+                 ,* getRequestURI方法 -- 返回请求行中的资源名部分
+                 ,*    结果： /request01
+                 ,* getQueryString方法 -- 返回请求行中的参数部分
+                 ,*     结果： username=...&password=...
+                 ,* getRemoteAddr方法 -- 返回发出请求的客户机的IP地址
+                 ,*     结果：127.0.0.1:80
+                 ,* getMethod方法 -- 返回客户机的请求方式
+                 ,*     结果：GET/POST
+                 ,* getContextPath方法 -- 获得当前web应用的虚拟目录名称
+                 ,*      结果：/day10_servlet_war_exploded
+                 ,*/
+                String url = request.getRequestURL().toString();
+                System.out.println("完整请求路径"+url);
+                String requestURI = request.getRequestURI();
+                System.out.println("资源路径："+requestURI);
+                String queryString = request.getQueryString();
+                System.out.println("请求行中参数："+queryString);
+                String remoteAddr = request.getRemoteAddr();
+                System.out.println("客户机的IP地址："+remoteAddr);
+                String contextPath = request.getContextPath();
+                System.out.println("虚拟目录名称："+contextPath);
+            }
+        }
+      #+END_SRC
+
+***** 2. 获取请求头信息
+#+BEGIN_SRC java
+  package cn.tedu.servlet;
+
+  import javax.servlet.ServletException;
+  import javax.servlet.annotation.WebServlet;
+  import javax.servlet.http.HttpServlet;
+  import javax.servlet.http.HttpServletRequest;
+  import javax.servlet.http.HttpServletResponse;
+  import java.io.IOException;
+  import java.util.Enumeration;
+
+  @WebServlet("/request02")
+  public class Request02_获取请求头信息 extends HttpServlet {
+
+      @Override
+      protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+          this.doPost(req,resp);
+      }
+
+      @Override
+      protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+          /**
+           ,* getHeader(name)方法 --- String
+           ,* getHeaders(String name)方法 --- Enumeration<String>
+           ,* getHeaderNames方法 --- Enumeration<String>
+           ,* getIntHeader(name)方法 --- int
+           ,* getDateHeader(name)方法 --- long(日期对应毫秒)
+           ,*/
+          //获取请求头中的信息
+          /*   Host: localhost
+           ,* getHeader(name) : name表示字符串类型的key ，返回值是字符串类型value
+           ,* */
+          String host = req.getHeader("Host");
+          System.out.println(host);
+          String accept = req.getHeader("Accept");
+          System.out.println(accept);
+
+          /*
+           ,*  getHeaders(String name)方法 --- Enumeration<String>
+           获取多个同名的请求头对应的内容
+           ,* */
+          Enumeration<String> headers = req.getHeaders("Host");
+          while(headers.hasMoreElements()){
+              String string = (String)headers.nextElement();
+              System.out.println("head:"+string);
+          }
+
+          //这是返回了一个所有的请求头信息，枚举类型的集合
+          Enumeration<String> headerNames = req.getHeaderNames();
+          //判断集合是否存在元素
+          while (headerNames.hasMoreElements()) {
+              //获取元素对象，返回值是 请求头的key
+              String headerName = headerNames.nextElement();
+              String value = req.getHeader(headerName);
+              System.out.println("head:"+headerName+"   value:"+value);
+          }
+
+          /* Upgrade-Insecure-Requests：1 value值是int类型
+           ,*  getIntHeader(name)  --- 返回值int
+           ,* */
+          int intHeader = req.getIntHeader("Upgrade-Insecure-Requests");
+          System.out.println("int类型的值："+intHeader);
+
+          /*
+           ,* getDateHeader(name)  --- 返回值 date的 long类型（毫秒数）
+           ,* */
+          long dateHeader = req.getDateHeader("Date");
+          System.out.println("测试："+dateHeader);
+      }
+  }
+#+END_SRC
+***** 3. 获取请求参数
+#+BEGIN_SRC java
+  package cn.tedu.servlet;
+
+  import javax.servlet.ServletException;
+  import javax.servlet.annotation.WebServlet;
+  import javax.servlet.http.HttpServlet;
+  import javax.servlet.http.HttpServletRequest;
+  import javax.servlet.http.HttpServletResponse;
+  import java.io.IOException;
+
+  @WebServlet("/request03")
+  public class Request03_获取请求中的参数 extends HttpServlet {
+
+      @Override
+      protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+          this.doGet(req,resp);
+      }
+
+      @Override
+      protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+          //设置请求对象 req的编码格式为 utf-8
+          req.setCharacterEncoding("utf-8");
+          //设置响应队形  resp的编码格式为 utf-8
+          resp.setContentType("text/html;charset=utf-8");
+
+          //获取请求中的参数信息：key=value ，获取结果为value
+          /*模拟一个场景：注册信息的获取*/
+          String username = req.getParameter("username");
+          String password = req.getParameter("password");
+          System.out.println(username);
+          System.out.println(password);
+          //如果注册用户名是tony
+          if ("tony".equals(username)) {
+              resp.getWriter().write("注册失败，tony已经存在了");
+          } else {
+              resp.getWriter().write("注册成功了");
+          }
+      }
+  }
+
+#+END_SRC
 * EasyMall注册功能
 1. 搭建虚拟主机
    搭建一台www.easymall.com的虚拟主机，并且将这台虚拟主机配置成一个缺省的虚拟主机。
@@ -8509,9 +9196,204 @@ localhost/news/servlet/FirstServlet
       response.setHeader("refresh","3;url=http://www.easymall.com");
       }
     #+END_SRC
+** 课堂笔记
+[[./Img/idea搭建EasyMall图片.png]]
+
+[[./Img/EasyMall项目搭建与项目开发.png]]
+*** 中文乱码
+1. 接受请求时，出现乱码的原因：
+   #+BEGIN_SRC
+     浏览器的编码格式 与 服务器的编码格式不一致
+     浏览器发送过来的参数 是 需要服务器进行解码，然后才能够获得数据。
+   #+END_SRC
+2. 浏览器页面设置了什么格式，那么页面传递的参数就是什么格式的
+   #+BEGIN_SRC
+     页面中：<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+            所以页面的格式是UTF-8的格式。
+     因此：输入的字符，比如：张 --> UTF-8的格式
+          UTF-8的格式 会把中文的一个字  转换为 3个字节的字节码
+   #+END_SRC
+   1. POST请求方式
+      [[./Img/中文乱码1.png]]
+      #+BEGIN_SRC java
+        req.setCharacterEncoding("utf-8");
+      #+END_SRC
+      - /该方法能够获取的信息是HTTP请求中的请求正文的内容，而POST方式是把所有的参数都放入到了请求正文中/
+      - /这句话一般放在代码的开头,该方法只能解析 请求正文的参数，也就是对地址栏的参数无效/
+   2. GET请求方式
+      [[./Img/中文乱码2.png]]
+      /以下的这种方式是对get方法做的专门的处理,要求是：要使用此方法，必须先拿到参数信息/
+      /此方法：无论get方法还是post方式都有效/
+      1. 第一种方式
+         #+BEGIN_SRC java
+           username.getBytes("iso-8859-1");
+           username = new String(bytes,utf-8);
+         #+END_SRC
+      2. 第二种方式
+         #+BEGIN_SRC java
+           String username = WebUtils.encoding(request.getParameter("username"),"utf-8");
+         #+END_SRC
+         写入工具类
+         #+BEGIN_SRC java
+           /*2. 对字符集进行正确的编码，防止乱码出现*/
+           public static String encoding(String value,String character){
+               try {
+                   if (value != null) {
+                       value = new String(value.getBytes("ISO-8859-1"),character);
+                   }
+
+               } catch (UnsupportedEncodingException e) {
+                   e.printStackTrace();
+               }
+               return value;
+           }
+         #+END_SRC
+*** 请求转发
+[[./Img/request转发.png]]
+该技术使用的一个API就是 HttpServletRequest去进行转发
+- 特点：
+  对于浏览器来说，我发送了一次请求，得到了一次响应
+  服务器内部，对请求的资源可以进行多次的转发
+- 案例demo
+
+  #+BEGIN_SRC java
+    package cn.tedu.demo;
+
+    import javax.servlet.RequestDispatcher;
+    import javax.servlet.ServletException;
+    import javax.servlet.annotation.WebServlet;
+    import javax.servlet.http.HttpServlet;
+    import javax.servlet.http.HttpServletRequest;
+    import javax.servlet.http.HttpServletResponse;
+    import java.io.IOException;
+
+    @WebServlet("/request01")
+    public class Request01 extends HttpServlet {
+
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            this.doPost(req, resp);
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            //模拟场景
+            System.out.println("浏览器发送的请求，我暂时处理不了");
+            System.out.println("需要交给另外一个servlet去处理");
+            //1.创建一个调度器：作用是把request请求指向了另一个servlet
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/request02");
+            //2. 把request对象 与 response对象 一并发送给request02
+            /*主要作用，在转发过程中，分别保证请求对象、响应对象是相同的*/
+            System.out.println("request01....start");
+            requestDispatcher.forward(req,resp);
+            System.out.println("request01....end");
+
+        }
+    }
+
+  #+END_SRC
+
+  #+BEGIN_SRC java
+    package cn.tedu.demo;
+
+    import javax.servlet.ServletException;
+    import javax.servlet.annotation.WebServlet;
+    import javax.servlet.http.HttpServlet;
+    import javax.servlet.http.HttpServletRequest;
+    import javax.servlet.http.HttpServletResponse;
+    import java.io.IOException;
+
+    @WebServlet("/request02")
+    public class Request02 extends HttpServlet {
+
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            this.doPost(req, resp);
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            System.out.println("我接受到了request01转发过来的请求，");
+            System.out.println("我需要做出响应");
+            //向浏览器发送一个响应
+            //resp.getWriter().write("。。。$10000");
+            System.out.println("request02....start");
+            req.getRequestDispatcher("/request01").forward(req,resp);
+            System.out.println("request02....end");
+        }
+    }
+
+  #+END_SRC
+
+  #+BEGIN_SRC java
+    package cn.tedu.demo;
+
+    import javax.servlet.ServletException;
+    import javax.servlet.annotation.WebServlet;
+    import javax.servlet.http.HttpServlet;
+    import javax.servlet.http.HttpServletRequest;
+    import javax.servlet.http.HttpServletResponse;
+    import java.io.IOException;
+
+    @WebServlet("/request03")
+    public class Request03 extends HttpServlet {
+
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            this.doPost(req, resp);
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            System.out.println("我接受到了request02转发过来的请求，");
+            System.out.println("我需要做出响应");
+            //向浏览器发送一个响应
+            //resp.getWriter().write("。。。$10000");
+            System.out.println("request03....start");
+            req.getRequestDispatcher("/request04").forward(req,resp);
+            System.out.println("request03....end");
+        }
+    }
+
+  #+END_SRC
+
+  #+BEGIN_SRC java
+    package cn.tedu.demo;
+
+    import javax.servlet.ServletException;
+    import javax.servlet.annotation.WebServlet;
+    import javax.servlet.http.HttpServlet;
+    import javax.servlet.http.HttpServletRequest;
+    import javax.servlet.http.HttpServletResponse;
+    import java.io.IOException;
+
+    @WebServlet("/request04")
+    public class Request04 extends HttpServlet {
+
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            this.doPost(req, resp);
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            System.out.println("我接受到了request03转发过来的请求，");
+            System.out.println("我需要做出响应");
+            //向浏览器发送一个响应
+            //resp.getWriter().write("。。。$10000");
+            System.out.println("request04....start");
+            /*最终这个请求转发到了 jsp中 */
+            req.getRequestDispatcher("/regist.jsp").forward(req,resp);
+            System.out.println("request04....end");
+        }
+    }
+
+  #+END_SRC
+
+
 * ServletConfig、ServletContext
 ** ServletConfig
-
+[[./Img/ServletConfig.png]]
 #+BEGIN_SRC xml
   <servlet>
     <servlet-name>SConfigDemo1</servlet-name>
@@ -9214,7 +10096,9 @@ ServletContext就是一个代表web应用的对象。
 
          #+END_SRC
 * 会话技术 -- cookie
-[[./Img/day14cookie.png]]
+[[./Img/cookie.png]]
+[[./SourceCode/login.jsp]]
+[[./SourceCode/loginServlet.java]]
 1. 会话是什么？
    为了完成某一个功能，浏览器和服务器建立连接之后，进行一次或多次请求和响应操作，这些请求和响应构成了浏览器和服务器之间的一次会话操作。
 2. 会话的作用：
@@ -9510,7 +10394,10 @@ ServletContext就是一个代表web应用的对象。
         记住用户名
       #+END_SRC
 * 会话技术 -- session
-  [[./Img/65.png]]
+[[./Img/day14.png]]
+[[./SourceCode/ValilmageServlet.java]]
+[[./SourceCode/VerifyCode.java]]
+[[./Img/65.png]]
   1. 在浏览器端存储数据的弊端:
      如果一个数据非常重要这个数据存储在浏览器端可以被任何一个用户查看到，无法保证当前数据的安全性，所以可以将数据由浏览器保存转向让服务器保存数据。
   2. session实现原理：
@@ -9856,6 +10743,22 @@ ServletContext就是一个代表web应用的对象。
 2. session服务器端的技术，数据保存在服务器端安全性较高，普通用户无法读取服务器上的数据。session不善于长期存储数据，如果存储数据时间过长，会导致服务器长时间存储一个无人使用的对象，造成内存的浪费。session适合存储安全性较高，而存储时间较短的数据。
 * JSP
 [[./Img/JSP.png]]
+[[./SourceCode/JspDemo1.jsp]]
+[[./SourceCode/JspDemo2.jsp]]
+[[./SourceCode/JspDemo3.jsp]]
+[[./SourceCode/JSPDemo4.jsp]]
+[[./SourceCode/ELDemo1.jsp]]
+[[./SourceCode/ELDemo2.jsp]]
+[[./SourceCode/ELDemo3.jsp]]
+[[./SourceCode/cout.jsp]]
+[[./SourceCode/cset.jsp]]
+[[./SourceCode/cremove.jsp]]
+[[./SourceCode/ccatch.jsp]]
+[[./SourceCode/cif.jsp]]
+[[./SourceCode/cforeach.jsp]]
+[[./SourceCode/cfortokends.jsp]]
+[[./SourceCode/cchoose.jsp]]
+[[./SourceCode/curl.jsp]]
 ** 1. 概述与原理
 由于在servlet中书写前台页面代码非常复杂，于是Sun提出一门新的技术--jsp，将所有的页面内容重新书写到一个文件中，在这个文件中还可以书写java语句，这样的一个文件就称之为一个jsp文件。 在jsp页面内开发HTML代码十分便利，还可以在其中嵌入java语句，使开发变得非 常简洁，直接在页面中就完成了页面构建和代码逻辑的全部内容。
 - JSP原理：在jsp页面被初次访问的时候，会被jsp翻译引擎翻译成一个servlet文件，这个文件是一个普通java文件，继承了一个具有servlet接口的类，所以当前文件才会成为一个servlet文件。

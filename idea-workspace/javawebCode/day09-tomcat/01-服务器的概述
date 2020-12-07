@@ -1,0 +1,242 @@
+1. 服务器概述
+
+    服务器的分类：
+        硬件的服务器：oracle服务器（一台价值百万美金）
+                      联想/微软的单片机（一个机房中有几百台单片机）
+
+            如果要进行学习使用,直接使用咱们的笔记本当做一台硬件服务器即可！
+            模拟硬件服务器：本地电脑
+
+        软件的服务器：在这里特指web应用服务器！！！
+                      它是一个应用程序，该应用程序能够提供浏览器的访问！！
+
+            web应用服务器的常用的几种：
+
+              webLogic：收费，目前应用最广泛的Web服务器
+                        服务器本身这个应用程序，很庞大，几十个G
+                        一般是使用在大型的项目中，比如京东/淘宝
+              webSphere：收费
+                        服务器本身这个应用程序，很庞大，几十个G
+                        一般是使用在大型的项目中，比如京东/淘宝
+              tomcat：免费 ，体积很小，安装程序只有十几M.
+                   tomcat是在中小型企业中，或者学习中，应用最广泛的web服务器
+
+2.tomcat服务器的下载与安装
+
+    2.1 下载本地资源
+    【课前资料-tomcat/】
+     -->【课前资料day06-tomcat\day06-tomcat\资源】
+     --->【把这个压缩包复制到D:\software\】
+     --->【解压到当前文件，生成了apache-tomcat-7.0.62文件夹】
+     --->【重命名：tomcat7】
+
+    2.2 官方网站下载资源
+       tomcat官方网站：里面可以下载各个版本的tomcat
+
+        Core:
+        zip (pgp, sha512)   window版本 免安装
+        tar.gz (pgp, sha512)   linux版本 免安装
+        32-bit Windows zip (pgp, sha512)   32位windows 免安装
+        64-bit Windows zip (pgp, sha512)   64位windows 免安装
+        32-bit/64-bit Windows Service Installer (pgp, sha512) 安装版
+
+        Source Code Distributions  tomcat应用服务器的源程序，程序员可以查看
+        tar.gz (pgp, sha512)
+        zip (pgp, sha512)
+
+    2.3 tomcat的运行环境
+
+        tomcat的运行环境：
+               需要java-jdk的支持，必须要先安装jdk才可以
+               验证操作1：删除了 jdk的环境变量，然后再运行tomcat就不可以
+               验证操作2：找到了tomcat7/lib，里面都是.jar包，
+               所以，tomcat需要java的jdk支持
+
+        举例：java的运行环境：JDK(JRE/JVM)
+
+    2.4 tomcat与jdk对应的版本
+        tomcat版本与java版本的对应：
+
+        tomcat6 需要 jdk5.0以上版本。
+        tomcat7 需要 jdk6.0以上版本。
+        tomcat8 需要 jdk7.0以上版本。
+        tomcat9 最新的版本 -->不建议使用
+
+    2.5 端口号被占用问题
+        tomcat7在启动过程中，一闪而过，不能运行：
+        1. jdk没有安装
+        2. 已经启动过了，再次启动时，将不能启动,端口号被占用
+
+        端口号被占用的解决方案：
+        1.先查出来是谁在占用 8080端口
+          cmd >>>>> netstat -ano
+        TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       13188
+        2.把8080端口这个程序 直接'杀'掉
+          打开【启动任务管理器】 --> 【进程/服务】-->【查看PID 13188】
+          -->【右键单击 选择结束进程 】
+
+    2.6 修改端口号
+        tomcat服务器：修改端口号
+        1.打开配置文件【conf/server.xml文件】
+        2.找到代码的第70行：
+                <Connector port="8080" protocol="HTTP/1.1"
+                               connectionTimeout="20000"
+                               redirectPort="8443" />
+                post="端口号"
+        3.直接把port="8080" --->修改为 端口号port="80"
+        4.如果修改了端口号，那么必须要重新启动一次tomcat，【bin/startup.sh】
+
+    tomcat的80端口是一个默认的端口：
+        访问tomcat时，浏览器地址栏中，直接输入 localhost就可以访问到
+
+    2.7 tomcat的目录结构：
+
+        bin：存放tomcat启动和关闭的.bat脚本文件
+        conf ： tomcat应用程序的核心配置文件
+        lib：是tomcat运行时，所需要的jar包
+        logs： 这是一个tomcat运行时产生的日志文件
+        temp：tomcat运行时产生的一些临时文件，不需要关注
+        webapps：开发人员编写网站代码，存放的目录。
+        work：tomcat运行的真正的目录，
+                比如：.java文件，当tomcat加载运行时
+                      .class文件，是在work中，所以work是运行的真正目录
+
+3.tomcat的基本概念
+
+    tomcat本身是一个web应用服务器，提供对外访问的接口和资源。
+
+    localhost:80 去访问！！！
+
+    模拟一个场景：
+
+    两个地址：fanyi.baidu.com
+              tieba.baidu.com
+    这两个百度的产品是在一个硬件服务器吗？？？答案：是在不同的虚拟主机中
+4. web应用配置虚拟路径映射的三种方式
+    虚拟主机的模拟场景：
+    1.创建一个web应用：创建一个新的文件夹new1
+           new1 这个文件就是一个web应用
+                |
+                |---1.html
+                |---1.css
+                |---1.js
+                |---WEB-INF 文件夹
+                |       | classes 存放编译之后的java代码 .class文件
+                        | lib  存放项目需要的jar包
+                        | web.xml 名字不能改，核心的配置文件
+    2.找到localhost虚拟主机：
+            找到[tomcat7\conf\server.xml\125行]
+            <Host name="localhost"  appBase="webapps"
+                        unpackWARs="true" autoDeploy="true">
+            </Host>
+
+            这个host name="localhost" 就是一个tomcat7默认的虚拟主机
+    3.把第一步的new1 应用，添加到 虚拟主机localhost中
+        <Host>
+            <Context  docBase="D:\software\news1" path="/aaa"  />
+        </Host>
+
+    4.把第一步的new1 文件夹中的 [WEB-INF\web.xml]修改
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <web-app xmlns="http://java.sun.com/xml/ns/javaee"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                              http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+          version="3.0">
+
+        </web-app>
+
+    5.重新启动 tomcat7 ，然后打开浏览器访问：
+
+        localhost/aaa/1.html
+
+
+方式二： 直接部署，不需要重新启动tomcat
+
+    1. 创建一个新的文件夹【software\news2】
+            new2 这个文件就是一个web应用
+                |
+                |---1.html
+                |---1.css
+                |---1.js
+                |---WEB-INF 文件夹
+                |       | classes 存放编译之后的java代码 .class文件
+                        | lib  存放项目需要的jar包
+                        | web.xml 名字不能改，核心的配置文件
+
+    2. [tomcat]/conf/[engin引擎]/[host虚拟主机]
+       tomcat7\conf\Catalina\localhost\news2.xml
+
+       tomcat会把news2.xml的文件名前缀当做  当前web应用的虚拟路径
+
+    3.打开【new2.xml】，编写配置 web应用new2的真实路径
+
+        <Context docBase="D:\software\news2" />
+
+    4.配置缺省的ROOT.xml文件
+           把  tomcat7\conf\Catalina\localhost\news2.xml
+           修改为 tomcat7\conf\Catalina\localhost\ROOT.xml
+
+    优先级问题：【自己的应用news --> ROOT.xml】
+            ---> 【把 tomcat中webapps文件夹的ROOT应用 取代】
+
+方式三：
+
+    1.确定【tomcat：webapps】-->存放了所有的 web应用
+        tomcat会自动管理 webapps中的 每一个web应用
+        以后，我们创建的所有web应用都要放在 webapps下，交给tomcat管理即可！！
+
+    2.创建一个新的web应用：news3
+        new3 这个文件就是一个web应用
+                        |
+                        |---1.html
+                        |---1.css
+                        |---1.js
+                        |---WEB-INF 文件夹
+                        |       | classes 存放编译之后的java代码 .class文件
+                                | lib  存放项目需要的jar包
+                                | web.xml 名字不能改，核心的配置文件
+
+    3.把【news3】----> 【tomcat7\webapps中】
+        tomcat会自动发布，然后自动管理news3
+
+        通过路径进行测试：localhost/news3/1.html
+
+    4.默认缺省的方式【tomcat7\webapps\new3】
+        把文件夹的名字改为  ROOT即可
+
+    5.默认缺省的 访问页面【直接输入localhost，会显示1.html的内容】
+        5.1 【先把第四部完成 news3 变为一个ROOT 应用】
+        5.2 【把ROOT\WEN-INF\web.xml】，配置一个welcome-file-list文件
+                <welcome-file-list>
+                        <welcome-file>1.html</welcome-file>
+                </welcome-file-list>
+        5.3 【浏览器输入:localhost】--->【直接进入欢迎页面 1.html】
+
+5.配置一个虚拟主机
+
+    注意：如果要配置www.baidu.com，需要绕过 DNS域名解析器
+
+    DNS域名解析器 会把 输入的域名www.baidu.com 解析成IP地址
+
+    基本步骤：
+    1.找到【tomcat7\conf\server.xml】
+    2.打开，在<Host name="localhost"></Host>下方并列的位置
+        添加一条 <Host name="www.baidu.com"  appBase="d:\software\baidu" >
+    3.baidu文件夹目录【d:\software\baidu】
+        里面存在了一个web应用 ：news3
+    4.找到【c:/windwos/system32/drivers/etc/hosts】，打开
+        新增一条信息：本机的IP地址  与  www.baidu.com的映射关系
+        【127.0.0.1 www.baidu.com】
+    5.重新启动tomcat，然后浏览器输入【www.baidu.com/news3/1.html】
+         这样就访问成功了
+
+
+【综合练习】
+配置www.163.com虚拟主机,以三种方式配置web应用,
+并选择一种配置为缺省web应用,并且配置web应用的主页,
+最终实现,直接访问www.163.com时能够显示主页的内容。
+
+
+
+

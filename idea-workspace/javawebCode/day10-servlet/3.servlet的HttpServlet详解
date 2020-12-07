@@ -78,7 +78,7 @@
     代码的编写步骤：
     4.1. 修改param.html中form表单的action路径：是一个请求的url
             /web虚拟路径的名称/请求的名称
-            action="/day10_servlet_war_exploded/demo03"
+            action="/day10-servlet/demo03"
 
     4.2 配置web.xml，完成url路径 与 servlet类 的映射关系
 

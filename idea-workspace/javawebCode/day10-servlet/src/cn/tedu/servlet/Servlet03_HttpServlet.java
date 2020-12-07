@@ -17,8 +17,8 @@ public class Servlet03_HttpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.doGet(req, resp);
-        //String method = req.getMethod();
-        //System.out.println("执行了doPost方法："+method);
+        //this.doGet(req, resp);
+        String method = req.getMethod();
+        System.out.println("执行了doPost方法："+method);
     }
 }

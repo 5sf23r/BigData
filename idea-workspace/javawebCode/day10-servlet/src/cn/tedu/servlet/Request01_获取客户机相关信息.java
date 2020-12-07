@@ -18,7 +18,7 @@ public class Request01_获取客户机相关信息 extends HttpServlet {
         //编写自己的业务逻辑
         /**
          * getRequestURL方法 -- 返回客户端发出请求完整URL
-         *    结果：http://localhost:80/day10_servlet_war_exploded/request01
+         *    结果：http://localhost:80/day10_servlet/request01
          * getRequestURI方法 -- 返回请求行中的资源名部分
          *    结果： /request01
          * getQueryString方法 -- 返回请求行中的参数部分

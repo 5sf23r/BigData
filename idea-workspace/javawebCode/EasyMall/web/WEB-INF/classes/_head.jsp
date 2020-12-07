@@ -6,27 +6,10 @@
 <div id="common_head">
 	<div id="line1">
 		<div id="content">
-			<%--
-				如果session的username为空，显示【登录】
-				如果session的username不为空，显示【欢迎：  回来】
-			--%>
-			<%
-				String username = (String) request.getSession().getAttribute("username");
-				if (username == null || "".equals(username)) {
-			%>
-					<a href="#">登录</a>&nbsp;&nbsp;|
-			<%
-				} else {
-			%>
-					<a href="#">欢迎：<%=username%> 回来</a>&nbsp;&nbsp;
-			<%
-				}
-			%>
-			&nbsp;&nbsp;
+			<a href="#">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			<!-- 由于当前项目是虚拟主机的默认web应用，因此项目映射的URL应该是“” -->
 			<!-- <a href="/EasyMall/regist.jsp">注册</a> -->
 			<a href="/regist.jsp">注册</a>
-
 		</div>
 	</div>
 	<div id="line2">
