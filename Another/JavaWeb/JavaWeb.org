@@ -177,13 +177,81 @@
   - [[#课堂笔记-2][课堂笔记]]
     - [[#中文乱码][中文乱码]]
     - [[#请求转发][请求转发]]
+    - [[#easymall的执行流程][easymall的执行流程]]
+    - [[#response重定向][response重定向]]
+    - [[#定时刷新][定时刷新]]
+    - [[#servletconfig][ServletConfig]]
 - [[#servletconfigservletcontext][ServletConfig、ServletContext]]
-  - [[#servletconfig][ServletConfig]]
+  - [[#servletconfig-1][ServletConfig]]
   - [[#servletcontext][ServletContext]]
+  - [[#课堂笔记-3][课堂笔记]]
 - [[#ajax][AJAX]]
+  - [[#课堂笔记-4][课堂笔记]]
+    - [[#原生态的js脚本开发步骤][原生态的js脚本开发步骤]]
+      - [[#确定开发思路][确定开发思路]]
+        - [[#确定js函数的触发时机用户名文本框失去焦点时触发][确定js函数的触发时机：用户名文本框失去焦点时触发]]
+        - [[#ajax发送的局部请求服务器端需要对应一个servlet处理请求][ajax发送的局部请求，服务器端需要对应一个servlet处理请求]]
+        - [[#服务器端返回的结果需要显示在前端html页面中][服务器端返回的结果需要显示在前端html页面中]]
+      - [[#开发步骤][开发步骤]]
+        - [[#导入ajax-js的脚本][导入ajax-js的脚本]]
+        - [[#打开jsajaxjs了解其中的函数内容][打开【js/ajax.js】,了解其中的函数内容]]
+        - [[#打开registjsp页面在其中编写js脚本实现ajax][打开【regist.jsp】页面，在其中编写js脚本实现ajax]]
+    - [[#框架版jquery的js脚本开发步骤][框架版jQuery的js脚本开发步骤]]
+      - [[#确定开发思路-1][确定开发思路]]
+        - [[#确定js函数的触发时机用户名文本框失去焦点时触发-1][确定js函数的触发时机：用户名文本框失去焦点时触发]]
+        - [[#ajax发送的局部请求服务器端需要对应一个servlet处理请求-1][ajax发送的局部请求，服务器端需要对应一个servlet处理请求]]
+        - [[#服务器返回的结果需要显示在-前端html页面中][服务器返回的结果，需要显示在 前端html页面中]]
+      - [[#开发步骤-1][开发步骤]]
+        - [[#导入jquery的包][导入jquery的包]]
+        - [[#jquery实现ajax][jQuery实现ajax]]
 - [[#修改easymall][修改EasyMall]]
-- [[#会话技术----cookie][会话技术 -- cookie]]
-- [[#会话技术----session][会话技术 -- session]]
+- [[#会话技术][会话技术]]
+  - [[#cookie][cookie]]
+    - [[#会话是什么][会话是什么？]]
+    - [[#q会话的作用][q会话的作用：]]
+    - [[#会话技术----cookie][会话技术 -- cookie]]
+    - [[#用户上次访问页面的时间][用户上次访问页面的时间]]
+    - [[#cookie类型][Cookie类型]]
+    - [[#创建cookie][创建cookie]]
+    - [[#发送cookie到浏览器][发送cookie到浏览器]]
+    - [[#设置最大值生命时长][设置最大值生命时长]]
+    - [[#设置有效路径][设置有效路径]]
+    - [[#获取cookie][获取cookie]]
+    - [[#删除cookie][删除cookie]]
+    - [[#cookieapi][cookieAPI]]
+    - [[#cookie小细节][cookie小细节]]
+    - [[#cookie类型使用cookie][Cookie类型使用cookie：]]
+    - [[#修改easymall添加登陆功能-记住用户名][修改EasyMall：添加登陆功能-记住用户名]]
+    - [[#课堂笔记-5][课堂笔记]]
+      - [[#会话技术-1][会话技术]]
+      - [[#cookie技术][Cookie技术]]
+      - [[#cookie的原理基于-set-cookie-与-cookie-对象实现的][Cookie的原理：基于 Set-cookie 与 cookie 对象实现的！！]]
+      - [[#cookie的细节问题][Cookie的细节问题：]]
+      - [[#cookie的特点和作用][Cookie的特点和作用：]]
+      - [[#cookie特点][Cookie特点：]]
+      - [[#cookie的作用][Cookie的作用：]]
+      - [[#综合案例使用cookie完成登录页面中的记住用户名的操作][综合案例：使用cookie完成登录页面中的【记住用户名】的操作]]
+        - [[#准备工作][准备工作：]]
+        - [[#项目分析][项目分析：]]
+        - [[#项目开发步骤][项目开发步骤：]]
+  - [[#session][session]]
+    - [[#在浏览器端存储数据的弊端][在浏览器端存储数据的弊端:]]
+    - [[#session实现原理][session实现原理：]]
+    - [[#session的使用][session的使用]]
+    - [[#session功能一域对象][session功能一:域对象]]
+    - [[#session案例购物车][session案例：购物车]]
+    - [[#easymall页面功能][EasyMall页面功能]]
+    - [[#注销功能能实现][注销功能能实现：]]
+    - [[#验证码的实现][验证码的实现：]]
+    - [[#课堂笔记-6][课堂笔记]]
+      - [[#session的概念][session的概念]]
+      - [[#session的基本操作][session的基本操作]]
+      - [[#session-的作用域][session 的作用域]]
+      - [[#session的原理-查看底层api源码][session的原理 ：查看底层API源码]]
+      - [[#session的细节][session的细节：]]
+      - [[#session与cookie的区别][session与cookie的区别]]
+      - [[#综合案例注册页面的验证码][综合案例：注册页面的【验证码】]]
+        - [[#准备工作需要的资源util工具类][准备工作：需要的资源Util工具类]]
   - [[#cookie和session特点][cookie和session特点：]]
 - [[#jsp][JSP]]
   - [[#1-概述与原理][1. 概述与原理]]
@@ -9197,6 +9265,8 @@ HttpServlet  extends  GenericServlet  implements Servlet
       }
     #+END_SRC
 ** 课堂笔记
+[[./Img/easymall.png]]
+
 [[./Img/idea搭建EasyMall图片.png]]
 
 [[./Img/EasyMall项目搭建与项目开发.png]]
@@ -9255,7 +9325,6 @@ HttpServlet  extends  GenericServlet  implements Servlet
   对于浏览器来说，我发送了一次请求，得到了一次响应
   服务器内部，对请求的资源可以进行多次的转发
 - 案例demo
-
   #+BEGIN_SRC java
     package cn.tedu.demo;
 
@@ -9267,7 +9336,7 @@ HttpServlet  extends  GenericServlet  implements Servlet
     import javax.servlet.http.HttpServletResponse;
     import java.io.IOException;
 
-    @WebServlet("/request01")
+    @WebServlet("/Request01")
     public class Request01 extends HttpServlet {
 
         @Override
@@ -9281,7 +9350,7 @@ HttpServlet  extends  GenericServlet  implements Servlet
             System.out.println("浏览器发送的请求，我暂时处理不了");
             System.out.println("需要交给另外一个servlet去处理");
             //1.创建一个调度器：作用是把request请求指向了另一个servlet
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/request02");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/Request02");
             //2. 把request对象 与 response对象 一并发送给request02
             /*主要作用，在转发过程中，分别保证请求对象、响应对象是相同的*/
             System.out.println("request01....start");
@@ -9292,7 +9361,6 @@ HttpServlet  extends  GenericServlet  implements Servlet
     }
 
   #+END_SRC
-
   #+BEGIN_SRC java
     package cn.tedu.demo;
 
@@ -9303,7 +9371,7 @@ HttpServlet  extends  GenericServlet  implements Servlet
     import javax.servlet.http.HttpServletResponse;
     import java.io.IOException;
 
-    @WebServlet("/request02")
+    @WebServlet("/Request02")
     public class Request02 extends HttpServlet {
 
         @Override
@@ -9315,16 +9383,13 @@ HttpServlet  extends  GenericServlet  implements Servlet
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             System.out.println("我接受到了request01转发过来的请求，");
             System.out.println("我需要做出响应");
-            //向浏览器发送一个响应
-            //resp.getWriter().write("。。。$10000");
             System.out.println("request02....start");
-            req.getRequestDispatcher("/request01").forward(req,resp);
+            req.getRequestDispatcher("/Request03").forward(req,resp);
             System.out.println("request02....end");
         }
     }
 
   #+END_SRC
-
   #+BEGIN_SRC java
     package cn.tedu.demo;
 
@@ -9335,7 +9400,7 @@ HttpServlet  extends  GenericServlet  implements Servlet
     import javax.servlet.http.HttpServletResponse;
     import java.io.IOException;
 
-    @WebServlet("/request03")
+    @WebServlet("/Request03")
     public class Request03 extends HttpServlet {
 
         @Override
@@ -9347,16 +9412,13 @@ HttpServlet  extends  GenericServlet  implements Servlet
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             System.out.println("我接受到了request02转发过来的请求，");
             System.out.println("我需要做出响应");
-            //向浏览器发送一个响应
-            //resp.getWriter().write("。。。$10000");
             System.out.println("request03....start");
-            req.getRequestDispatcher("/request04").forward(req,resp);
+            req.getRequestDispatcher("/Request04").forward(req,resp);
             System.out.println("request03....end");
         }
     }
 
   #+END_SRC
-
   #+BEGIN_SRC java
     package cn.tedu.demo;
 
@@ -9367,7 +9429,7 @@ HttpServlet  extends  GenericServlet  implements Servlet
     import javax.servlet.http.HttpServletResponse;
     import java.io.IOException;
 
-    @WebServlet("/request04")
+    @WebServlet("/Request04")
     public class Request04 extends HttpServlet {
 
         @Override
@@ -9379,18 +9441,24 @@ HttpServlet  extends  GenericServlet  implements Servlet
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             System.out.println("我接受到了request03转发过来的请求，");
             System.out.println("我需要做出响应");
-            //向浏览器发送一个响应
-            //resp.getWriter().write("。。。$10000");
             System.out.println("request04....start");
-            /*最终这个请求转发到了 jsp中 */
             req.getRequestDispatcher("/regist.jsp").forward(req,resp);
             System.out.println("request04....end");
         }
     }
 
   #+END_SRC
+- 注意：
+  请注意，同一个请求资源，不可以进行循环的转发
+*** easymall的执行流程
+[[./Img/easymall的执行流程.png]]
 
-
+[[./Img/easymall的执行流程png.png]]
+*** response重定向
+[[./Img/重定向.png]]
+*** 定时刷新
+[[./Img/response.png]]
+*** ServletConfig
 * ServletConfig、ServletContext
 ** ServletConfig
 [[./Img/ServletConfig.png]]
@@ -9421,7 +9489,7 @@ HttpServlet  extends  GenericServlet  implements Servlet
     <url-pattern>/servlet/SConfigDemo2</url-pattern>
   </servlet-mapping>
 #+END_SRC
-如果有任何参数在servlet启动的时候需要被加载，且这个参数可能仅在web应用每次重启的时候读取，那么这个参数就可以添加在servlet标签身上，作为一个初始化信息参数使用
+如果有任何参数在servlet启动的时候需要被加载，且这个参数可能仅在web应用每次重启的时候读取，那么这个参数就可以添加在servlet标签身上，作为一个初始化信息参数使用.
 1. ServletConfig代表当前servlet的初始化信息的对象
    可以通过这个对象来获取配置在web.xml中某一个servlet的初始化配置信息。
 2. 获取ServletConfig对象的方法：
@@ -9698,6 +9766,8 @@ ServletContext就是一个代表web应用的对象。
 
          #+END_SRC
          + 在使用web工程并发布的时候，这种获取路径的方式会自动调整到classes目录中去获取指定名称的文件。
+** 课堂笔记
+***
 * AJAX
 [[./Img/day13-AJAX.png]]
 1. AJAX是什么？
@@ -9841,6 +9911,194 @@ ServletContext就是一个代表web应用的对象。
           }
         });
       #+END_SRC
+** 课堂笔记
+*** 原生态的js脚本开发步骤
+**** 确定开发思路
+***** 确定js函数的触发时机：用户名文本框失去焦点时触发
+***** ajax发送的局部请求，服务器端需要对应一个servlet处理请求
+***** 服务器端返回的结果需要显示在前端html页面中
+**** 开发步骤
+***** 导入ajax-js的脚本
+***** 打开【js/ajax.js】,了解其中的函数内容
+创建了一个操作ajax的对象，各个浏览器都是存在该对象
+#+BEGIN_SRC java
+  var xmlHttp = new XMLHttpRequest();
+#+END_SRC
+***** 打开【regist.jsp】页面，在其中编写js脚本实现ajax
+****** 1
+#+BEGIN_SRC html
+  <input type="text" name="username"  onblur="ajaxCheckUsername(this)"  >
+  <span id="uid_msg">信息提示</span>
+#+END_SRC
+****** 引入ajax.js脚本
+<script src="js/ajax.js"></script>
+****** 编写一个函数：ajaxCheckUsername(this)
+#+BEGIN_SRC js
+    <script>
+    function ajaxCheckUsername(obj) {
+      //1.获取文本框输入的内容value值
+      var value = obj.value;
+      console.log(value);
+      //2.创建一个XMLHttpRequest对象
+      var xr = ajaxFunction();
+      //2.1 查看状态码： 0 表示对象刚刚创建，还没有使用
+      console.log(xr.readyState);
+      //3.使用xr对象，发送一个请求HttpRequest，会发送到服务器端
+      //open()方法是打开与服务器的连接
+      xr.open("post","/ajaxCheckUsername",true);
+      console.log(xr.readyState);//状态码： 1 表示open方法调用了
+      //4. 需要把参数添加到request请求中
+      xr.send("username="+value);
+      console.log(xr.readyState);//状态码： 2 表示发送了参数
+      //5. 等待request请求发送到服务器端，服务器端处理完毕，返回结果
+      //添加一个监听器，专门监听服务器端的响应
+      xr.onreadystatechange = function () {
+        console.log(xr.readyState);//状态码：3 表示开始响应，响应未结束
+        if (xr.readyState==4) {//状态码：4 表示响应结束
+          //判断：response对象响应的状态码：200 成功，404/500 错误
+          if (xr.status == 200) {//响应成功
+            console.log(xr.status);
+          } else if(xr.status==404) {//资源路径错误
+            console.log(xr.status);
+          } else {//服务器错误
+            console.log(xr.status);
+          }
+        }
+      }
+    }
+  </script>
+#+END_SRC
+****** 在服务器端，编写java代码，
+创建一个类：cn.tedu.servlet/AjaxCheckUsername.java类
+#+BEGIN_SRC java
+  @WebServlet("/ajaxCheckUsername") /*与regist.jsp页面中发送的请求一致*/
+  public class AjaxCheckUsername extends HttpServlet {
+      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+          //目标：检查用户名是否已经存在
+          //1.设置请求与响应的编码格式
+          request.setCharacterEncoding("utf-8");
+          response.setContentType("text/html;charset=utf-8");
+          //2.获取请求中的参数
+          String username = request.getParameter("username");
+          //2.1 非空校验
+          if (WebUtils.isNull(username)) {
+              //因为ajax是局部刷新页面，所以不能使用 转发、重定向
+              response.getWriter().write("用户名不能为空");
+              return;
+          }
+          //3.判断数据库中是否存在该用户
+          Connection connection = C3P0Util.getConnection();
+          PreparedStatement ps = null;
+          ResultSet rs = null;
+          String sql = "select * from user where username=? ";
+          try {
+              ps = connection.prepareStatement(sql);
+              ps.setString(1,username);
+              rs = ps.executeQuery();
+              if (rs.next()) {//用户名已存在
+                  //因为ajax是局部刷新页面，所以不能使用 转发、重定向
+                  response.getWriter().write("用户名已存在");
+              } else {//用户名可以使用
+                  //因为ajax是局部刷新页面，所以不能使用 转发、重定向
+                  response.getWriter().write("用户名可以使用");
+              }
+          } catch (SQLException e) {
+              e.printStackTrace();
+          } finally {
+              C3P0Util.close(rs,ps,connection);
+          }
+      }
+#+END_SRC
+****** 进一步完善regist.jsp页面中 ， js脚本
+目标：获取servlet响应给浏览器的 查询结果
+*** 框架版jQuery的js脚本开发步骤
+**** 确定开发思路
+***** 确定js函数的触发时机：用户名文本框失去焦点时触发
+***** ajax发送的局部请求，服务器端需要对应一个servlet处理请求
+***** 服务器返回的结果，需要显示在 前端html页面中
+**** 开发步骤
+***** 导入jquery的包
+#+BEGIN_SRC html
+  <script src="js/jquery.js"></script>
+#+END_SRC
+***** jQuery实现ajax
+****** 第一种方式
+#+BEGIN_SRC js
+  <script>
+      /* 使用jQuery实现ajax */
+      $(function (){
+          $("input[name='username']").blur(function (){
+              var value = $("input[name='username']").val();
+            console.log(value);
+            $("#uid_msg").load("/ajaxCheckUsername",{"username":value});
+          });
+      });
+  </script>
+#+END_SRC
+****** 第二种方式
+#+BEGIN_SRC js
+  <script>
+      /* 使用jQuery实现ajax */
+      $(function (){
+          $("input[name='username']").blur(function (){
+              var value = $("input[name='username']").val();
+              console.log(value);
+              //jQuery实现ajax第二种：get方法发送请求
+              //特别注意：get方法的编码格式问题
+              $.get("/ajaxCheckUsername",{"username":value},function(result){
+                  console.log(result);
+                //把result结果显示到span元素中
+                $("#uid_msg").text(result);
+              });
+          });
+      });
+  </script>
+#+END_SRC
+****** 第三种方式
+#+BEGIN_SRC js
+  <script>
+      /* 使用jQuery实现ajax */
+      $(function (){
+          $("input[name='username']").blur(function (){
+              var value = $("input[name='username']").val();
+              console.log(value);
+              //jQuery实现ajax第三种：post方法发送请求
+              $.post("/ajaxCheckUsername",{"username":value},function(result){
+                  console.log(result);
+                  //把result结果显示到span元素中
+                  $("#uid_msg").text(result);
+              });
+          });
+      });
+  </script>
+#+END_SRC
+****** 第四种方式
+#+BEGIN_SRC js
+  <script>
+      /* 使用jQuery实现ajax */
+      $(function (){
+          $("input[name='username']").blur(function (){
+              var value = $("input[name='username']").val();
+              console.log(value);
+              $.ajax({
+                  url:"/ajaxCheckUsername",
+                  data:"username="+value,
+                  type:"post",//请求的方式
+                  async:true,//异步的请求,可以省略
+                  //dataType:json,//数据格式json
+                  success:function(result){//成功后，响应结果
+                      //把result结果显示到span元素中
+                      $("#uid_msg").text(result);
+                  },
+                  error:function (){//url资源路径不存在
+                      $("uid_msg").text("服务器404错误");
+                  }
+              });
+          });
+      });
+  </script>
+#+END_SRC
+
 * 修改EasyMall
 1. 添加ajax用户名是否存在校验
    1. 需求：
@@ -10095,128 +10353,127 @@ ServletContext就是一个代表web应用的对象。
            }
 
          #+END_SRC
-* 会话技术 -- cookie
+* 会话技术
+** cookie
 [[./Img/cookie.png]]
 [[./SourceCode/login.jsp]]
 [[./SourceCode/loginServlet.java]]
-1. 会话是什么？
-   为了完成某一个功能，浏览器和服务器建立连接之后，进行一次或多次请求和响应操作，这些请求和响应构成了浏览器和服务器之间的一次会话操作。
-2. 会话的作用：
-   会话主要是解决在浏览器请求中数据的共享问题而出现的奇数。
+*** 会话是什么？
+为了完成某一个功能，浏览器和服务器建立连接之后，进行一次或多次请求和响应操作，这些请求和响应构成了浏览器和服务器之间的一次会话操作。
+*** q会话的作用：
+会话主要是解决在浏览器请求中数据的共享问题而出现的奇数。
+#+BEGIN_SRC
+  http是无状态协议  -- 请求与请求之间是没有关联的。
+                  -- 请求与请求之间是没有关联的。
+                  -- 利用会话技术可以解决请求之间没有关联的问题。
+#+END_SRC
+*** 会话技术 -- cookie
+[[./Img/64.png]]
+1. Cookie实现原理：
+   在第一次请求过后，由服务器发出一个携带set-Cookie响应头的响应，到达浏览器之后，会将其中的数据在浏览器端保存一份，以备下次发送请求时自动携带。在下一次发送请求时，请求中自动包含一个请求头cookie其中包含的值是set-cookie在浏览器端保存的值。
+2. 浏览器请求服务器，服务器响应的结果数据会保留在浏览器端一份，这个数据可以通过cookie技术来使用。所以cookie技术是一门浏览器端的技术。
+*** 用户上次访问页面的时间
+在set-cookie中保存的时间是用户本次的访问时间，这个访问时间会在下一次请求中包含，并且通过请求头cookie获取，展示在浏览器端。
+#+BEGIN_SRC java
+  package cn.commandoptionesc.cookie;
 
-   http是一个无状态协议。 -- 请求与请求之间是没有关联的。
-                        -- 请求与请求之间是没有关联的。
-                        -- 利用会话技术可以解决请求之间没有关联的问题。
-3. 会话技术 -- cookie
-   [[./Img/64.png]]
-   1. Cookie实现原理：
-      在第一次请求过后，由服务器发出一个携带set-Cookie响应头的响应，到达浏览器之后，会将其中的数据在浏览器端保存一份，以备下次发送请求时自动携带。在下一次发送请求时，请求中自动包含一个请求头cookie其中包含的值是set-cookie在浏览器端保存的值。
-   2. 浏览器请求服务器，服务器响应的结果数据会保留在浏览器端一份，这个数据可以通过cookie技术来使用。所以cookie技术是一门浏览器端的技术。
-4. 用户上次访问页面的时间
-   在set-cookie中保存的时间是用户本次的访问时间，这个访问时间会在下一次请求中包含，并且通过请求头cookie获取，展示在浏览器端。
+  import java.io.IOException;
+  import java.util.Date;
+
+  //在浏览器中回显用户上次访问页面的时间
+  public class CookieDemo1 extends javax.servlet.http.HttpServlet {
+      protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+          doGet(request, response);
+      }
+      protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+          response.setContentType("text/html;charset=utf-8");
+          //产生一个时间值
+          Date date = new Date();
+          String time = date.toLocaleString();
+          //实现cookie
+          //1. 设置setcookie响应头
+          response.setHeader("set-cookie",time);
+          //2. 获取一个请求头cookie
+          String cookie = request.getHeader("cookie");
+          //用户是第一次访问当前页面，则在浏览器中没有cookie请求头，所以无法获取到上次访问的时间
+          if(cookie == null){
+              response.getWriter().write("您是初次访问这个页面");
+          }else{
+              //如果不是初次访问，则在cookie请求中会读取浏览器中保留的set-ciikie响应头中上次访问到时间
+              response.getWriter().write("您上次访问本页面的时间是："+cookie);
+          }
+      }
+  }
+#+END_SRC
+*** Cookie类型
+Sun公司提供的Cookie类，便于开发者创建、使用cookie。
+*** 创建cookie
+#+BEGIN_SRC java
+  Cookie cookie = new Cookie(String name,String value);
+#+END_SRC
+*** 发送cookie到浏览器
+#+BEGIN_SRC java
+  response.addCookie(cookie);
+#+END_SRC
+*** 设置最大值生命时长
+#+BEGIN_SRC java
+  cookie.setMaxAge();//单位为秒
+#+END_SRC
+如果不设置cookie的最大生命时长，则cookie是一个会话级别的cookie，在浏览器关闭之后就会销毁，如果定义的了cookie的生命时长，则cookie会以文件的形式保存在本地磁盘一份(浏览器的临时文件目录)，在到达执行生命时长之后cookie会自动失效，销毁。
+*** 设置有效路径
+#+BEGIN_SRC java
+  cookie.setPath();
+#+END_SRC
+所谓有效路径就是cookie可以被问的路径级别。如果不指定cookie的有效路径级别，则只在当前资源的映射路径下有效。如果指定cookie的有效路径，则在指定路径及其级别下可以获取到当前cookie。
+- 推荐在设置路径时加上一个/ 如果web应用的虚拟路径为缺省路径，则此时将会以/作为有效路径，可以避免缺省路径带来的不必要的错误。
+*** 获取cookie
+#+BEGIN_SRC java
+  Cookie[] cs = request.getCookies();
+#+END_SRC
+结果是一个cookie数据，将数组中的数据遍历使用。
+*** 删除cookie
+cookie中没有删除cookie的方法。
+1. 创建一个名称要和删除的cookie名称相同的cookie，并且要设置这个cookie的path与要删除的相同，然后将新发送的cookie生命时长设置为0，这样就可以删除一个cookie。
+2. 原因：
+   浏览器在判断两个cookie是否相同时，判断三个内容：
+   - Name
+   - Path
+   - domain
+     默认情况下每一个cookie的domain都相同的，所以只需要发送一个name和path与要删除的cookie相同的cookie到浏览器就可以完成删除操作了。
    #+BEGIN_SRC java
      package cn.commandoptionesc.cookie;
 
+     import javax.servlet.ServletException;
+     import javax.servlet.http.Cookie;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
      import java.io.IOException;
-     import java.util.Date;
-
-     //在浏览器中回显用户上次访问页面的时间
-     public class CookieDemo1 extends javax.servlet.http.HttpServlet {
-         protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+     //删除cookie
+     public class CookieDemo4 extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
              doGet(request, response);
          }
-         protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-             response.setContentType("text/html;charset=utf-8");
-             //产生一个时间值
-             Date date = new Date();
-             String time = date.toLocaleString();
-             //实现cookie
-             //1. 设置setcookie响应头
-             response.setHeader("set-cookie",time);
-             //2. 获取一个请求头cookie
-             String cookie = request.getHeader("cookie");
-             //用户是第一次访问当前页面，则在浏览器中没有cookie请求头，所以无法获取到上次访问的时间
-             if(cookie == null){
-                 response.getWriter().write("您是初次访问这个页面");
-             }else{
-                 //如果不是初次访问，则在cookie请求中会读取浏览器中保留的set-ciikie响应头中上次访问到时间
-                 response.getWriter().write("您上次访问本页面的时间是："+cookie);
-             }
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             //创建一个name和path与要删除的完全一致的coolie，并且设置生命时长为0
+             //创建cookie
+             Cookie cookie = new Cookie("time","");
+             //path一致
+             cookie.setPath(request.getContextPath()+"/");
+             //设置生命时长为0
+             cookie.setMaxAge(0);
+             //将cookie发送到浏览器
+             response.addCookie(cookie);
          }
      }
-   #+END_SRC
-5. Cookie类型
-   Sun公司提供的Cookie类，便于开发者创建、使用cookie。
+#+END_SRC
+*** cookieAPI
+cookie.getName() --- 获取cookie的名称
 
-   1. 创建cookie
-      #+BEGIN_SRC java
-        Cookie cookie = new Cookie(String name,String value);
-      #+END_SRC
-   2. 发送cookie到浏览器
-      #+BEGIN_SRC java
-        response.addCookie(cookie);
-      #+END_SRC
-   3. 设置最大值生命时长
-      #+BEGIN_SRC java
-        cookie.setMaxAge();//单位为秒
-      #+END_SRC
-      如果不设置cookie的最大生命时长，则cookie是一个会话级别的cookie，在浏览器关闭之后就会销毁，如果定义的了cookie的生命时长，则cookie会以文件的形式保存在本地磁盘一份(浏览器的临时文件目录)，在到达执行生命时长之后cookie会自动失效，销毁。
-   4. 设置有效路径
-      #+BEGIN_SRC java
-        cookie.setPath();
-      #+END_SRC
-      所谓有效路径就是cookie可以被问的路径级别。如果不指定cookie的有效路径级别，则只在当前资源的映射路径下有效。如果指定cookie的有效路径，则在指定路径及其级别下可以获取到当前cookie。
-      - 推荐在设置路径时加上一个/ 如果web应用的虚拟路径为缺省路径，则此时将会以/作为有效路径，可以避免缺省路径带来的不必要的错误。
-   5. 获取cookie
-      #+BEGIN_SRC java
-        Cookie[] cs = request.getCookies();
-      #+END_SRC
-      结果是一个cookie数据，将数组中的数据遍历使用。
-
-   6. 删除cookie
-      cookie中没有删除cookie的方法。
-      1. 创建一个名称要和删除的cookie名称相同的cookie，并且要设置这个cookie的path与要删除的相同，然后将新发送的cookie生命时长设置为0，这样就可以删除一个cookie。
-      2. 原因：
-         浏览器在判断两个cookie是否相同时，判断三个内容：
-         - Name
-         - Path
-         - domain
-         默认情况下每一个cookie的domain都相同的，所以只需要发送一个name和path与要删除的cookie相同的cookie到浏览器就可以完成删除操作了。
-         #+BEGIN_SRC java
-           package cn.commandoptionesc.cookie;
-
-           import javax.servlet.ServletException;
-           import javax.servlet.http.Cookie;
-           import javax.servlet.http.HttpServlet;
-           import javax.servlet.http.HttpServletRequest;
-           import javax.servlet.http.HttpServletResponse;
-           import java.io.IOException;
-           //删除cookie
-           public class CookieDemo4 extends HttpServlet {
-               protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                   doGet(request, response);
-               }
-               protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                   //创建一个name和path与要删除的完全一致的coolie，并且设置生命时长为0
-                   //创建cookie
-                   Cookie cookie = new Cookie("time","");
-                   //path一致
-                   cookie.setPath(request.getContextPath()+"/");
-                   //设置生命时长为0
-                   cookie.setMaxAge(0);
-                   //将cookie发送到浏览器
-                   response.addCookie(cookie);
-               }
-           }
-
-         #+END_SRC
-   7. cookieAPI
-      cookie.getName() --- 获取cookie的名称
-
-      cookie.getValue() --- 获取cookie中包含的值
-   8. cookie小细节
-      一个cookie标识一种信息。同一个cookie信息可以在多个浏览器中保存。一个浏览器中可以保存不同网站的cookie。
-6. Cookie类型使用cookie：
+cookie.getValue() --- 获取cookie中包含的值
+*** cookie小细节
+一个cookie标识一种信息。同一个cookie信息可以在多个浏览器中保存。一个浏览器中可以保存不同网站的cookie。
+*** Cookie类型使用cookie：
    #+BEGIN_SRC java
      package cn.commandoptionesc.cookie;
 
@@ -10272,7 +10529,7 @@ ServletContext就是一个代表web应用的对象。
          }
      }
    #+END_SRC
-7. 修改EasyMall：添加登陆功能-记住用户名
+*** 修改EasyMall：添加登陆功能-记住用户名
    1. 添加login.jsp页面
       1. 在课前资料中有login页面的全部资源，粘贴到webRoot目录下。
       2. 修改login.html为login.jsp页面
@@ -10393,60 +10650,475 @@ ServletContext就是一个代表web应用的对象。
         <input type="checkbox" name="remname" value="true" <%=username==""?"":"checked='checked'"%>/>
         记住用户名
       #+END_SRC
-* 会话技术 -- session
+*** 课堂笔记
+**** 会话技术
+[[./Img/Cookie概念理解.png]]
+1. 会话技术的应用范畴：不仅仅是javaweb中存在，其他编程语言也存在,只不过写法不一样而已
+2. 会话的概念：一次会话中多次请求和多次响应的一个过程，叫做会话。
+   - 一次会话：打开浏览器，访问了某一个网站，直到你手动关闭浏览器或者网站服务器关闭时，会话才会断开
+3. 会话的功能：为什么会有会话这个技术？？？
+   一次会话中，多次请求与响应过程中，产生了大量的数据，会话技术是让这些数据，在不同的请求过程中，实现数据的共享。之前学习的request域对象、response域对象 范围不适用
+   - cookie：客户端（浏览器）的会话技术
+   - cookie负责的共享数据是：不需要安全加密的数据
+   - session：服务器端的会话技术
+   - session负责的共享数据是：跟用户的信息相关的加密的数据
+**** Cookie技术
+Cookie是在浏览器端存储，但是数据是在服务器端做处理！！
+
+快速入门：
+1. 创建一个cookie对象（服务器端的代码书写）
+   #+BEGIN_SRC java
+     package cn.tedu.cookie;
+
+     import javax.servlet.ServletException;
+     import javax.servlet.annotation.WebServlet;
+     import javax.servlet.http.Cookie;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+
+     @WebServlet("/Cookie01")
+     public class Cookie01 extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             request.setCharacterEncoding("utf-8");
+             response.setContentType("text/html;charset=utf-8");
+             //1.创建一个cookie对象，并设置数据
+             // 参数：是key=value的键值对
+             Cookie cookie = new Cookie("msg","hello cy");
+             //2. 把cookie响应给浏览器端，其中响应过程是服务器与浏览器自动完成的，不需要程序员干预
+             response.addCookie(cookie);
+         }
+
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             this.doPost(request, response);
+         }
+     }
+   #+END_SRC
+2. cookie对象设置一些共享数据（服务器端的代码书写）
+   #+BEGIN_SRC java
+     package cn.tedu.cookie;
+
+     import javax.servlet.ServletException;
+     import javax.servlet.annotation.WebServlet;
+     import javax.servlet.http.Cookie;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.net.URLDecoder;
+
+     @WebServlet("/Cookie02")
+     public class Cookie02 extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             request.setCharacterEncoding("utf-8");
+             response.setContentType("text/html;charset=utf-8");
+             //获取浏览器端的cookie数据
+             //通过request请求获取cookie
+             Cookie[] cookies = request.getCookies();
+             if (cookies!=null && cookies.length>0) {
+                 for (Cookie cookie : cookies) {
+                     String name = cookie.getName();//获取cookie中的key
+                     String value = cookie.getValue();//获取cookie中的value值
+                     System.out.println("解码之前："+value);
+                     value = URLDecoder.decode(value,"utf-8");
+                     System.out.println("解码之后："+value);
+                     //1.4 获取cookie的路径
+                     System.out.println("cookie的路径："+cookie.getPath());
+                     System.out.println("name:"+name+"   value:"+value);
+                 }
+             }
+         }
+
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             this.doPost(request, response);
+         }
+     }
+   #+END_SRC
+3. 浏览器负责把cookie保存起来（response响应给浏览器，浏览器才能保存）
+4. 获取cookie中的信息（服务器端的代码书写）
+**** Cookie的原理：基于 Set-cookie 与 cookie 对象实现的！！
+[[./Img/会话.png]]
+
+[[./Img/Cookie的原理.png]]
+1. response.addCookie(Cookie对象)
+   response响应头（HTTP协议）：Set-cookie : msg="hellocy"
+2. 浏览器接收到响应头：Set-cookie
+   意味着：浏览器知道Set-cookie的是意思：要把cookie存起来存储的位置是：谷歌浏览器的浏览器缓存中
+3. 浏览器发送了另外一个请求：http://localhost/Cookie02
+   request请求头（HTTP协议）：Cookie : msg="hello cy"
+
+   意味着：浏览器发送请求时，自动从cookie缓存中，拿到cookie的数据,然后封装到request请求头中，发送给服务器端！！！
+4. 服务器端获取数据：request.getCookies();
+   通过request请求获取请求中的cookie参数！！！
+5. 因此，cookie数据实现了不同请求之间的数据共享！！！
+**** Cookie的细节问题：
+[[./Img/Cookie的细节.png]]
+1. 浏览器关闭后，再次打开，直接获取cookie，能否获取到？？？
+   #+BEGIN_SRC
+     答案：不能
+     因为：浏览器关闭，本次会话结束，浏览器缓存中的cookie会默认清空
+     所以：再次打开浏览器http://localhost/Cookie02直接从浏览器拿不到数据
+   #+END_SRC
+2. 一次使用response发送多个cookie对象给浏览器？？
+   答案：可以
+
+   方案：
+   #+BEGIN_SRC java
+      //1.创建一个cookie对象，并设置数据
+     // 参数：是key=vaue的键值对
+     Cookie cookie1 = new Cookie("msg1","hello cy1");
+     Cookie cookie2 = new Cookie("msg2","hello cy2");
+     Cookie cookie3 = new Cookie("msg3","hello cy3");
+     Cookie cookie4 = new Cookie("msg4","hello cy4");
+     Cookie cookie5 = new Cookie("msg5","hello cy5");
+     //2. 把cookie响应给浏览器端，
+     // 其中响应过程是服务器与浏览器自动完成的，不需要程序员干预
+     response.addCookie(cookie1);
+     response.addCookie(cookie2);
+     response.addCookie(cookie3);
+     response.addCookie(cookie4);
+     response.addCookie(cookie5);
+   #+END_SRC
+3. Cookie可以在浏览器保存多长时间？
+   答案：默认情况下，浏览器关闭，cookie被销毁,cookie持久化技术：让cookie的生存时间变长，
+
+   比如：时间设置为24个小时，那么cookie就能存在24个小时，期间无论浏览器是否关闭，cookie一直存在
+
+   解决方案：
+   #+BEGIN_SRC java
+     cookie.setMaxAge(int seconds); //seconds 秒数
+     //1.1设置cookie的存活时间
+     cookie1.setMaxAge(60*2);//两分钟
+     cookie2.setMaxAge(60*60);//一小时
+     cookie3.setMaxAge(60*60*24);//一天
+   #+END_SRC
+   #+BEGIN_SRC java
+     package cn.tedu.cookie;
+
+     import javax.servlet.ServletException;
+     import javax.servlet.annotation.WebServlet;
+     import javax.servlet.http.Cookie;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+
+     @WebServlet("/Cookie03")
+     public class Cookie03 extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             request.setCharacterEncoding("utf-8");
+             response.setContentType("text/html;charset=utf-8");
+             //1.创建一个cookie对象，并设置数据
+             // 参数：是key=vaue的键值对
+             Cookie cookie1 = new Cookie("msg1","hello cy1");
+             Cookie cookie2 = new Cookie("msg2","hello cy2");
+             Cookie cookie3 = new Cookie("msg3","hello cy3");
+             Cookie cookie4 = new Cookie("msg4","hello cy4");
+             Cookie cookie5 = new Cookie("msg5","hello cy5");
+             //1.1设置cookie的存活时间
+             cookie1.setMaxAge(60*2);//两分钟
+             cookie2.setMaxAge(60*60);//一小时
+             cookie3.setMaxAge(60*60*24);//一天
+             cookie4.setMaxAge(-1);//默认值：不持久化数据，浏览器关闭直接清除
+             // 测试应该是：新的请求/Cookie04，设置为0，然后/Cookie02访问 获取是否删除勒
+             // cookie5.setMaxAge(0);//删除一个cookie
+             //2. 把cookie响应给浏览器端，
+             // 其中响应过程是服务器与浏览器自动完成的，不需要程序员干预
+             response.addCookie(cookie1);
+             response.addCookie(cookie2);
+             response.addCookie(cookie3);
+             response.addCookie(cookie4);
+             response.addCookie(cookie5);
+         }
+
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             this.doPost(request, response);
+         }
+     }
+
+   #+END_SRC
+   #+BEGIN_SRC
+     int secondes： 正数 ： 把数据持久化到硬盘中，存活多长时间
+                    负数 ： 默认-1，表示 不适用持久化存储cookie
+                    0    ： 如果是0 ， 表示 直接删除一个cookie
+   #+END_SRC
+   模拟删除cookie的场景：
+   1. 先添加一个cookie，并响应给浏览器也就是说cookie经过第一次请求访问，得到响应结果
+   2. 浏览器发送另一个请求，获取第一步中存储的cookie,并进行cookie的修改：cookie.setMaxAge(0);属性改变之后，cookie对象发生变化，需要重新响应给浏览器response.addCookie(cookie);
+   3. 重新发送请求：获取所有的cookie，发现 第二步的cookie没有了
+4. cookie对象中，设置键值对时，value能够为中文？？？
+   #+BEGIN_SRC
+     答案：能支持中文
+     支持版本的问题：tomcat 8之前，不包括8，直接使用中文报错500错误
+                   tomcat 8之后，包括8，可以直接使用中文
+     模拟500错误：创建类Cookie05.java，使用中文进行键值对赋值
+                HTTP Status 500 - Control character in cookie value or attribute.
+     出现的原因：cookie对象的value值默认只支持 英文，对中文不识别，编码格式的问题。
+   #+END_SRC
+   解决方案：
+   1. 对中文先进行utf-8的编码：URLEncoder.encode(value,charset);
+      编码之前：曹洋
+
+      编码之后：%E6%9B%B9%E6%B4%8B
+   2. 对cookie对象中的value值，获取之后，进行解码操作URLDecoder.decode(value,charset);
+      解码之前：%E6%9B%B9%E6%B4%8B
+
+      解码之后：曹洋
+   #+BEGIN_SRC java
+     package cn.tedu.cookie;
+
+     import javax.servlet.ServletException;
+     import javax.servlet.annotation.WebServlet;
+     import javax.servlet.http.Cookie;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.net.URLEncoder;
+
+     @WebServlet("/Cookie05")
+     public class Cookie05 extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             request.setCharacterEncoding("utf-8");
+             response.setContentType("text/html;charset=utf-8");
+             //1.创建一个cookie对象
+             Cookie cookie = new Cookie("username", "曹洋");
+             //1.1 获取cookie中的value值
+             System.out.println("编码之前："+cookie.getValue());
+             //1.2 对cookie的value值进行编码
+             String newvalue = URLEncoder.encode(cookie.getValue(),"utf-8");
+             System.out.println("编码之后："+newvalue);
+             //1.3 把newvalue赋值给cookie
+             cookie.setValue(newvalue);
+             //1.4 获取cookie的路径
+             System.out.println(cookie.getPath());
+             cookie.setPath("/");
+             //2.直接响应给浏览器
+             response.addCookie(cookie);
+
+         }
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             this.doPost(request, response);
+         }
+     }
+
+   #+END_SRC
+   #+BEGIN_SRC java
+     package cn.tedu.cookie;
+
+     import javax.servlet.ServletException;
+     import javax.servlet.annotation.WebServlet;
+     import javax.servlet.http.Cookie;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.net.URLDecoder;
+
+     @WebServlet("/Cookie02")
+     public class Cookie02 extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             request.setCharacterEncoding("utf-8");
+             response.setContentType("text/html;charset=utf-8");
+             //获取浏览器端的cookie数据
+             //通过request请求获取cookie
+             Cookie[] cookies = request.getCookies();
+             if (cookies!=null && cookies.length>0) {
+                 for (Cookie cookie : cookies) {
+                     String name = cookie.getName();//获取cookie中的key
+                     String value = cookie.getValue();//获取cookie中的value值
+                     System.out.println("解码之前："+value);
+                     value = URLDecoder.decode(value,"utf-8");
+                     System.out.println("解码之后："+value);
+                     //1.4 获取cookie的路径
+                     System.out.println("cookie的路径："+cookie.getPath());
+                     System.out.println("name:"+name+"   value:"+value);
+                 }
+             }
+         }
+
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             this.doPost(request, response);
+         }
+     }
+
+   #+END_SRC
+5. Cookie的范围有多大？？
+   1. 一个tomcat服务器中，有两个web工程，比如:day14-01，day14-02。day14-01中生成的cookie，被存在于浏览器端，那么day14-02中是否能够获取cookie？？？
+      答案：默认情况下，多个web应用之间不能共享数据
+      #+BEGIN_SRC
+        解决方案：
+        setPath("/");代表的是同一个域名下的所有的web应用都可以访问
+        比如:localhost中所以的web应用
+        http://localhost/day14_01_war_exploded/
+        http://localhost/day14_02_war_exploded/
+      #+END_SRC
+      1. 在day14-01中，找到Cookie05, 先打印输出：cookie.getPath();
+                        重新设置cookie的路径：cookie.setPath("/");
+      2. 在day14-02中，把01中的代码Cookie02.java复制到02项目中
+                        package:cookie/Cookie02
+      3. tomcat配置 deployment --> 01和02都配置
+   2. cookie可以跨服务器访问吗？？
+      答案：能
+
+      解决方案：
+      1. 前提条件：一级域名必须一致 : .baidu.com;fanyi.baidu.com;tieba.baidu.com
+      2. Cookie cookie = new Cookie("msg","hello");cookie.setDomain(".baidu.com");//设置cookie的一级域名
+**** Cookie的特点和作用：
+**** Cookie特点：
+1. Cookie的数据是存在于客户端浏览器中
+2. 浏览器对单个cookie的大小有限制4kb，浏览器对 同一个域名下能够最大存放20个cookie
+**** Cookie的作用：
+1. 存储少量的一般的非隐私的数据
+2. 在不登录的情况下，完成服务器端对客户端的身份识别
+   模拟：谷歌浏览器打开京东，存在购物车的信息，另外IE浏览器打开京东，不存在购物车的信息
+**** 综合案例：使用cookie完成登录页面中的【记住用户名】的操作
+***** 准备工作：
+1. 找到登录页面的资源 【day14-am资料中】-->【day14-cookie-AM\资源\页面】
+2. 把这两个页面复制到【EasyMall\web\中】
+***** 项目分析：
+[[./Img/Cookie0.png]]
+1. 【记住用户名】 点击勾选，选中复选框
+2. 【】
+***** 项目开发步骤：
+1. 服务器端代码：创建一个servlet，LoginServlet.java
+   #+BEGIN_SRC java
+     package cn.tedu.servlet;
+
+     import cn.tedu.utils.C3P0Util;
+     import cn.tedu.utils.WebUtils;
+
+     import javax.servlet.ServletException;
+     import javax.servlet.annotation.WebServlet;
+     import javax.servlet.http.Cookie;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.net.URLEncoder;
+     import java.sql.Connection;
+     import java.sql.PreparedStatement;
+     import java.sql.ResultSet;
+     import java.sql.SQLException;
+
+     @WebServlet("/LoginServlet")
+     public class LoginServlet extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             request.setCharacterEncoding("utf-8");
+             response.setContentType("text/html;charset=utf-8");
+             //1. 获取页面中的form表单的数据：username,password,remname
+             String username = request.getParameter("username");
+             String password = request.getParameter("password");
+             String remname = request.getParameter("remname");
+             System.out.println(username);
+             System.out.println(password);
+             System.out.println(remname);
+             //2. 判断remname是否勾选了，是否为null
+             if(WebUtils.isNull(remname)){
+                 // 2.1 如果为null，表示不记住用户名，删除原有的cookie或者如果没有，不需要生成新的cookie
+                 Cookie cookie = new Cookie("username","");
+                 cookie.setMaxAge(0);
+                 response.addCookie(cookie);
+             }else{
+                 //进行utf-8的编码，防止中文的出现错误
+                 String value = URLEncoder.encode(username, "utf-8");
+                 // 2.2 如果不为null，并且原来有cookie，需要把username重新复制给cookie；如果没有cookie，需要生成一个新的cookie，响应诶浏览器
+                 Cookie cookie = new Cookie("username",value);
+                 cookie.setValue(username);
+                 cookie.setMaxAge(60*60*24*30);//存活一个月
+                 cookie.setPath("/");
+                 response.addCookie(cookie);
+             }
+             //3. C3P0连接池：查询数据库是否存在该用户
+             Connection connection = C3P0Util.getConnection();
+             PreparedStatement ps = null;
+             ResultSet rs = null;
+             String sql = "select * from user where username=? and password=?";
+             try {
+                 ps = connection.prepareStatement(sql);
+                 ps.setString(1,username);
+                 ps.setString(2,password);
+                 rs = ps.executeQuery();
+                 // 3.1 如果存在，表示登陆成功，重定向到主界面【index.jsp】
+                 if(rs.next()){
+                     response.sendRedirect("/index.jsp");
+                 }else{
+                     // 3.2 如果不存在，表示登陆失败，请求转发到【login.jsp】，给出提示信息
+                     request.setAttribute("errorMsg","用户名或者密码不正确");
+                     request.getRequestDispatcher("/login.js").forward(request,response);
+                 }
+             }catch (SQLException e){
+                 e.printStackTrace();
+             }finally {
+                 C3P0Util.close(rs,ps,connection);
+             }
+         }
+
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             this.doPost(request, response);
+         }
+     }
+
+   #+END_SRC
+2. 客户端代码：编写login.jsp页面
+   1. 在login.jsp页面中，编写一部分java代码，主要目的是：从浏览器的cookies中获取 username
+   2. 把username的值 回显到 用户名文本框
+   3. 根据username是否为null，回显 【记住用户名】的复选框
+** session
 [[./Img/day14.png]]
 [[./SourceCode/ValilmageServlet.java]]
 [[./SourceCode/VerifyCode.java]]
 [[./Img/65.png]]
-  1. 在浏览器端存储数据的弊端:
-     如果一个数据非常重要这个数据存储在浏览器端可以被任何一个用户查看到，无法保证当前数据的安全性，所以可以将数据由浏览器保存转向让服务器保存数据。
-  2. session实现原理：
-     1. 在浏览器访问服务器的时候，会在服务器内部创建一个与当前浏览器相关的session对象，在本次会话中如果用户多次请求服务器，都是操作的同一个session对象。不同浏览器会拥有各自的session对象。
-     2. session的实现原理是通过一个JSESSIONID的cookie实现的。
-  3. session的使用
-     1. request.getSession(); //如果服务器中已有浏览器对应的session，则这个方法会直接将session对象获取到拿来使用，如果服务器中没有对应的session，则这个方法会创建一个新的session对象使用。
-     2. request.getSession(true);//如果服务器中已有浏览器对应的session，则这个方法会直接将session对象获取到拿来使用，如果服务器中没有对应的session，则这个方法会创建一个新的session对象使用。
-     3. request.getSession(false);//如果服务器中没有浏览器对应的session，则会返回一个null的结果，如果有则拿过来使用。
-  4. session功能一:域对象
-     在一个对象身上有一个可以被看见的范围，在这个范围内利用对象身上的map实现资源的共享，这样的对象就称之为域对象。
-     1. 操作方法:
-        #+BEGIN_SRC java
-          setAttribute(String name,Object obj);
-          getAttribute(String name);
-          removeAttribute(String name);
-          getAttributeNames();
-        #+END_SRC
-     2. 生命周期
-        request.getSession()方法调用的时候session对象创建。
-        - session对象的销毁:
-          1. 超时死亡:session在默认情况下回会在服务器中存储30分钟，超过30会被 服务器认为是一个无效session而销毁。超时时间可以在web.xml中配置一 个<session-config>标签来指定。
-          2. 自杀:当调用session.invalidate();会主动将session对象释放。
-          3. 意外身亡:在非常关闭状态下，session会直接销毁。如果服务器正常关 闭，则session对象会序列化到磁盘上成为一个文件，这个过程称之为钝化。在服务器下次启动的时候再将这个文件，读取到服务器当中，这个过程称之为活化。
-     3. 作用范围
-        当前会话范围内。
-     4. 主要功能
-        当前会话范围内实现资源共享。
-  5. session案例：购物车
-     1. 需求:创建一个购物车的Servlet，和一个结账的Servlet，使两者可以实现购物车、购买商品结账的需求.
-     2. 实现内容:在本次会话范围内实现用户购买商品数据的共享。
-        代码实现:
-        #+BEGIN_SRC html
-          <%@ page pageEncoding="UTF-8" language="java" import="java.util.*" session="false"%>
-          <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-          <html>
-            <head>
-              <title>$Title$</title>
-            </head>
-            <body>
-              <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=皮鞋">皮鞋</a>
-              <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=牙刷">牙刷</a>
-              <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=毛巾">毛巾</a>
-              <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=篮球">篮球</a>
-              <a href="<%=request.getContextPath()%>/servlet/PayServlet">付款</a>
-            </body>
-          </html>
-        #+END_SRC
-        #+BEGIN_SRC java
+*** 在浏览器端存储数据的弊端:
+如果一个数据非常重要这个数据存储在浏览器端可以被任何一个用户查看到，无法保证当前数据的安全性，所以可以将数据由浏览器保存转向让服务器保存数据。
+*** session实现原理：
+1. 在浏览器访问服务器的时候，会在服务器内部创建一个与当前浏览器相关的session对象，在本次会话中如果用户多次请求服务器，都是操作的同一个session对象。不同浏览器会拥有各自的session对象。
+2. session的实现原理是通过一个JSESSIONID的cookie实现的。
+*** session的使用
+1. request.getSession(); //如果服务器中已有浏览器对应的session，则这个方法会直接将session对象获取到拿来使用，如果服务器中没有对应的session，则这个方法会创建一个新的session对象使用。
+2. request.getSession(true);//如果服务器中已有浏览器对应的session，则这个方法会直接将session对象获取到拿来使用，如果服务器中没有对应的session，则这个方法会创建一个新的session对象使用。
+3. request.getSession(false);//如果服务器中没有浏览器对应的session，则会返回一个null的结果，如果有则拿过来使用。
+*** session功能一:域对象
+在一个对象身上有一个可以被看见的范围，在这个范围内利用对象身上的map实现资源的共享，这样的对象就称之为域对象。
+1. 操作方法:
+   #+BEGIN_SRC java
+     setAttribute(String name,Object obj);
+     getAttribute(String name);
+     removeAttribute(String name);
+     getAttributeNames();
+   #+END_SRC
+2. 生命周期
+   request.getSession()方法调用的时候session对象创建。
+   - session对象的销毁:
+     1. 超时死亡:session在默认情况下回会在服务器中存储30分钟，超过30会被 服务器认为是一个无效session而销毁。超时时间可以在web.xml中配置一 个<session-config>标签来指定。
+     2. 自杀:当调用session.invalidate();会主动将session对象释放。
+     3. 意外身亡:在非常关闭状态下，session会直接销毁。如果服务器正常关 闭，则session对象会序列化到磁盘上成为一个文件，这个过程称之为钝化。在服务器下次启动的时候再将这个文件，读取到服务器当中，这个过程称之为活化。
+3. 作用范围
+   当前会话范围内。
+4. 主要功能
+   当前会话范围内实现资源共享。
+*** session案例：购物车
+1. 需求:创建一个购物车的Servlet，和一个结账的Servlet，使两者可以实现购物车、购买商品结账的需求.
+2. 实现内容:在本次会话范围内实现用户购买商品数据的共享。
+   代码实现:
+   #+BEGIN_SRC html
+     <%@ page pageEncoding="UTF-8" language="java" import="java.util.*" session="false"%>
+     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+     <html>
+       <head>
+         <title>$Title$</title>
+       </head>
+       <body>
+         <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=皮鞋">皮鞋</a>
+         <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=牙刷">牙刷</a>
+         <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=毛巾">毛巾</a>
+         <a href="<%=request.getContextPath()%>/servlet/BuyServlet?prod=篮球">篮球</a>
+         <a href="<%=request.getContextPath()%>/servlet/PayServlet">付款</a>
+       </body>
+     </html>
+   #+END_SRC
+   #+BEGIN_SRC java
           package cn.commandoptionesc.session;
 
           import javax.servlet.ServletException;
@@ -10480,8 +11152,8 @@ ServletContext就是一个代表web应用的对象。
                   response.getWriter().write("已经将商品「"+prod+"」加入购物车");
               }
           }
-        #+END_SRC
-        #+BEGIN_SRC java
+   #+END_SRC
+   #+BEGIN_SRC java
           package cn.commandoptionesc.session;
 
           import javax.servlet.ServletException;
@@ -10509,234 +11181,480 @@ ServletContext就是一个代表web应用的对象。
                   }
               }
           }
-        #+END_SRC
-  6. EasyMall页面功能
-     1. 登陆功能的实现：
-        1. 修改login.jsp页面：在<div id="content">中添加如下代码
-           #+BEGIN_SRC html
-             <%@ page language="java" import="java.util.*"   pageEncoding="UTF-8"%>
-             <%@ page import="java.net.URLDecoder" %>
-             <!DOCTYPE HTML>
-             <html>
-               <head>
-                 <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-                 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css"/>
-                 <title>EasyMall欢迎您登陆</title>
-               </head>
-               <body>
-                 <h1>欢迎登陆EasyMall</h1>
-                 <form action="<%=request.getContextPath()%>/LoginServlet" method="POST">
-                   <table>
-                     <%
-                       Cookie remnameC = null;
-                       Cookie[] cs = request.getCookies();
-                       if(cs != null){
-                       for(Cookie c:cs){
-                       if("remname".equals(c.getName())){
-                       remnameC = c;
-                       }
-                       }
-                       }
-                       String username = "";
-                       if(remnameC != null){
-                       username = URLDecoder.decode(remnameC.getValue(),"utf-8");
-                       }
-                       %>
-                     <tr>
-                       <td class="tds" colspan=2 style="color:red;text-align:center">
-                         <%=request.getAttribute("msg")==null?"":request.getAttribute("msg")%>
-                       </td>
-                     </tr>
-                     <tr>
-                       <td class="tdx">用户名：</td>
-                       <td><input type="text" name="username" value="<%=username%>"/></td>
-                     </tr>
-                     <tr>
-                       <td class="tdx">密&nbsp;&nbsp; 码：</td>
-                       <td><input type="password" name="password"/></td>
-                     </tr>
-                     <tr>
-                       <td colspan="2">
-                         <input type="checkbox" name="remname" value="true" <%= username==""?"":"checked='checked'"%>/>记住用户名
-                         <input type="checkbox" name="autologin" value="true"/>30天内自动登陆
-                       </td>
-                     </tr>
-                     <tr>
-                       <td colspan="2" style="text-align:center">
-                         <input type="submit" value="登 陆"/>
-                       </td>
-                     </tr>
-                   </table>
-                 </form>
-               </body>
-             </html>
-           #+END_SRC
-        2. 修改LoginServlet
-           #+BEGIN_SRC java
-             package com.easymall.servlet;
+   #+END_SRC
+*** EasyMall页面功能
+登陆功能的实现：
+1. 修改login.jsp页面：在<div id="content">中添加如下代码
+   #+BEGIN_SRC html
+     <%@ page language="java" import="java.util.*"   pageEncoding="UTF-8"%>
+     <%@ page import="java.net.URLDecoder" %>
+     <!DOCTYPE HTML>
+     <html>
+       <head>
+         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css"/>
+         <title>EasyMall欢迎您登陆</title>
+       </head>
+       <body>
+         <h1>欢迎登陆EasyMall</h1>
+         <form action="<%=request.getContextPath()%>/LoginServlet" method="POST">
+           <table>
+             <%
+               Cookie remnameC = null;
+               Cookie[] cs = request.getCookies();
+               if(cs != null){
+               for(Cookie c:cs){
+               if("remname".equals(c.getName())){
+               remnameC = c;
+               }
+               }
+               }
+               String username = "";
+               if(remnameC != null){
+               username = URLDecoder.decode(remnameC.getValue(),"utf-8");
+               }
+               %>
+             <tr>
+               <td class="tds" colspan=2 style="color:red;text-align:center">
+                 <%=request.getAttribute("msg")==null?"":request.getAttribute("msg")%>
+               </td>
+             </tr>
+             <tr>
+               <td class="tdx">用户名：</td>
+               <td><input type="text" name="username" value="<%=username%>"/></td>
+             </tr>
+             <tr>
+               <td class="tdx">密&nbsp;&nbsp; 码：</td>
+               <td><input type="password" name="password"/></td>
+             </tr>
+             <tr>
+               <td colspan="2">
+                 <input type="checkbox" name="remname" value="true" <%= username==""?"":"checked='checked'"%>/>记住用户名
+                 <input type="checkbox" name="autologin" value="true"/>30天内自动登陆
+               </td>
+             </tr>
+             <tr>
+               <td colspan="2" style="text-align:center">
+                 <input type="submit" value="登 陆"/>
+               </td>
+             </tr>
+           </table>
+         </form>
+       </body>
+     </html>
+   #+END_SRC
+2. 修改LoginServlet
+   #+BEGIN_SRC java
+     package com.easymall.servlet;
 
-             import com.easymall.utils.JDBCUtils;
-             import javax.servlet.ServletException;
-             import javax.servlet.http.*;
-             import java.io.IOException;
-             import java.net.URLEncoder;
-             import java.sql.Connection;
-             import java.sql.PreparedStatement;
-             import java.sql.ResultSet;
-             import java.sql.SQLException;
-             //登陆功能
-             public class LoginServlet extends HttpServlet {
-                 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                     doGet(request,response);
-                 }
-                 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                     //1. 乱码处理
-                     request.setCharacterEncoding("utf-8");
-                     response.setContentType("text/html;charset=UTF-8");
-                     //2. 获取用户信息
-                     String username = request.getParameter("username");
-                     String password = request.getParameter("password");
-                     String remname = request.getParameter("remname");
-                     //如果remname值为true则要求记住用户名
-                     if("true".equals(remname)){
-                         //为true要求保存用户名
-                         Cookie cookie = new Cookie("remname", URLEncoder.encode(username,"utf-8"));
-                         cookie.setMaxAge(60*60*24*30);
-                         cookie.setPath(request.getContextPath()+"/");
-                         response.addCookie(cookie);
-                     }else{
-                         //如果不为true则应该销毁cookie
-                         Cookie cookie = new Cookie("remname","");
-                         cookie.setMaxAge(0);
-                         cookie.setPath(request.getContextPath()+"/");
-                         response.addCookie(cookie);
-                     }
-                     //3. 访问数据库，比对用户信息
-                     Connection conn = null;
-                     PreparedStatement ps = null;
-                     ResultSet rs = null;
-                     try {
-                         conn = JDBCUtils.getConnection();
-                         ps = conn.prepareStatement("select * from user where username = ? and password = ?");
-                         ps.setString(1,username);
-                         ps.setString(2,password);
-                         rs = ps.executeQuery();
-                         if(rs.next()){
-                             //登陆操作
-                             //如果一致则保存用户登录信息
-                             //将用户的登陆信息登陆到session当中
-                             HttpSession session = request.getSession();
-                             session.setAttribute("username",username);
-                             //4. 回到首页
-                             response.sendRedirect("http://www.easymall.com");
-                         }else{
-                             //如果不一致则在页面中提示用户名或密码不正确
-                             request.setAttribute("msg","用户名或者密码不正确");
-                             request.getRequestDispatcher("/login.jsp").forward(request,response);
-                             return;
-                         }
-                     } catch (SQLException e) {
-                         e.printStackTrace();
-                     }finally{
-                         JDBCUtils.close(conn,ps,rs);
-                     }
-                 }
+     import com.easymall.utils.JDBCUtils;
+     import javax.servlet.ServletException;
+     import javax.servlet.http.*;
+     import java.io.IOException;
+     import java.net.URLEncoder;
+     import java.sql.Connection;
+     import java.sql.PreparedStatement;
+     import java.sql.ResultSet;
+     import java.sql.SQLException;
+     //登陆功能
+     public class LoginServlet extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             doGet(request,response);
+         }
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             //1. 乱码处理
+             request.setCharacterEncoding("utf-8");
+             response.setContentType("text/html;charset=UTF-8");
+             //2. 获取用户信息
+             String username = request.getParameter("username");
+             String password = request.getParameter("password");
+             String remname = request.getParameter("remname");
+             //如果remname值为true则要求记住用户名
+             if("true".equals(remname)){
+                 //为true要求保存用户名
+                 Cookie cookie = new Cookie("remname", URLEncoder.encode(username,"utf-8"));
+                 cookie.setMaxAge(60*60*24*30);
+                 cookie.setPath(request.getContextPath()+"/");
+                 response.addCookie(cookie);
+             }else{
+                 //如果不为true则应该销毁cookie
+                 Cookie cookie = new Cookie("remname","");
+                 cookie.setMaxAge(0);
+                 cookie.setPath(request.getContextPath()+"/");
+                 response.addCookie(cookie);
              }
+             //3. 访问数据库，比对用户信息
+             Connection conn = null;
+             PreparedStatement ps = null;
+             ResultSet rs = null;
+             try {
+                 conn = JDBCUtils.getConnection();
+                 ps = conn.prepareStatement("select * from user where username = ? and password = ?");
+                 ps.setString(1,username);
+                 ps.setString(2,password);
+                 rs = ps.executeQuery();
+                 if(rs.next()){
+                     //登陆操作
+                     //如果一致则保存用户登录信息
+                     //将用户的登陆信息登陆到session当中
+                     HttpSession session = request.getSession();
+                     session.setAttribute("username",username);
+                     //4. 回到首页
+                     response.sendRedirect("http://www.easymall.com");
+                 }else{
+                     //如果不一致则在页面中提示用户名或密码不正确
+                     request.setAttribute("msg","用户名或者密码不正确");
+                     request.getRequestDispatcher("/login.jsp").forward(request,response);
+                     return;
+                 }
+             } catch (SQLException e) {
+                 e.printStackTrace();
+             }finally{
+                 JDBCUtils.close(conn,ps,rs);
+             }
+         }
+     }
+   #+END_SRC
+*** 注销功能能实现：
+1. 修改_head.jsp页面
+   #+BEGIN_SRC html
+     <div id="common_head">
+       <div id="line1">
+         <div id="content">
+           <!--如果有session且session中包含username域属性则证明用户已经登录-->
+           <!--可以从session域中取出用户名-->
+           <%
+             if(request.getSession(false)!=null && request.getSession().getAttribute("username") != null){
+             %>
+           <a href="#">欢迎&nbsp;<%=request.getSession().getAttribute("username")%>&nbsp;回来</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+           <a href="<%=request.getContextPath()%>/LogoutServlet">注销</a>
+           <%
+             }else{
+             %>
+           <a href="<%=request.getContextPath()%>/login.jsp">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+           <a href="<%=request.getContextPath()%>/regist.jsp">注册</a>
+           <%
+             }
+             %>
+         </div>
+       </div>
+     </dic>
+#+END_SRC
+2. 创建注销Servlet --- LogOutServlet
+   #+BEGIN_SRC java
+     package com.easymall.servlet;
 
-           #+END_SRC
-     2. 注销功能能实现：
-        修改_head.jsp页面
-        #+BEGIN_SRC html
-          <div id="common_head">
-            <div id="line1">
-              <div id="content">
-                <!--如果有session且session中包含username域属性则证明用户已经登录-->
-                <!--可以从session域中取出用户名-->
-                <%
-                  if(request.getSession(false)!=null && request.getSession().getAttribute("username") != null){
-                  %>
-                <a href="#">欢迎&nbsp;<%=request.getSession().getAttribute("username")%>&nbsp;回来</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="<%=request.getContextPath()%>/LogoutServlet">注销</a>
-                <%
-                  }else{
-                  %>
-                <a href="<%=request.getContextPath()%>/login.jsp">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="<%=request.getContextPath()%>/regist.jsp">注册</a>
-                <%
-                  }
-                  %>
-              </div>
-            </div>
-          </dic>
-        #+END_SRC
-        创建注销Servlet --- LogOutServlet
-        #+BEGIN_SRC java
-          package com.easymall.servlet;
+     import javax.servlet.ServletException;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     //注销用户登录状态
+     public class LogoutServlet extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             doGet(request, response);
+         }
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             //注销用户登陆状态可以将session删除，删除session后其中的属性值也会注销
+             //实现用户注销的功能
+             request.getSession(false).invalidate();
+             response.sendRedirect("http://www.easymall.com");
+         }
+     }
+   #+END_SRC
+*** 验证码的实现：
+1. request中存储验证码仅在当前request中有效，在下一次的去请求中会失效。保存数据的范围太小。
+2. ServletContext存储验证码,会在整个web应用的范围内，如果多个用户同时存储多个不同的验证码在web应用中，那么只有最后一个验证码会保存下来，会导致其他用户看到的图片验证码是真实验证码是不匹配。保存数据的范围过大。
+3. session将验证码存储在当前会话的范围内，可以在多次请求中使用，符合验证码的使用范围，而且session在多个浏览器直接也互补影响。
+   1. 修改RegistServlet；在//TODO:session位置添加如下代码
+      #+BEGIN_SRC java
+        //验证码校验
+        String code = (String) request.getSession().getAttribute("code");
+        if(!valistr.equalsIgnoreCase(code)){
+            request.setAttribute("msg","验证码错误");
+            request.getRequestDispatcher("/regist.jsp").forward(request,response);
+            return;
+        }
+      #+END_SRC
+   2. 修改ValidateServlet:
+      #+BEGIN_SRC java
+        package com.easymall.servlet;
 
-          import javax.servlet.ServletException;
-          import javax.servlet.http.HttpServlet;
-          import javax.servlet.http.HttpServletRequest;
-          import javax.servlet.http.HttpServletResponse;
-          import java.io.IOException;
-          //注销用户登录状态
-          public class LogoutServlet extends HttpServlet {
-              protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                  doGet(request, response);
-              }
-              protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                  //注销用户登陆状态可以将session删除，删除session后其中的属性值也会注销
-                  //实现用户注销的功能
-                  request.getSession(false).invalidate();
-                  response.sendRedirect("http://www.easymall.com");
-              }
+        import com.easymall.utils.VerifyCode;
+
+        import javax.servlet.ServletException;
+        import javax.servlet.http.HttpServlet;
+        import javax.servlet.http.HttpServletRequest;
+        import javax.servlet.http.HttpServletResponse;
+        import java.io.IOException;
+        //生成验证码
+        public class ValidateServlet extends HttpServlet {
+            protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                doGet(request, response);
+            }
+            protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                //控制缓存，防止浏览器使用图片
+                response.setDateHeader("Expires",-1);
+                response.setHeader("Cache-control","no-cache");
+                //调用工具类产生一个验证码的图片
+                VerifyCode vc = new VerifyCode();
+                vc.drawImage(response.getOutputStream());
+                //获取验证码的纯文本内容
+                String code = vc.getCode();
+                //将创建出来的验证码加入到session域中
+                request.getSession().setAttribute("code",code);
+                System.out.println(code);
+            }
+        }
+      #+END_SRC
+*** 课堂笔记
+**** session的概念
+域对象：request对象，servletContext对象，session对象
+#+BEGIN_SRC
+  tomcat服务器接收请求时，会自动创建一些对象：servlet、HttpServletRequest、HttpServletResponse；它们能够共享数据；
+  共同的特征：全都不是程序员自己创建的，都是由tomcat服务器创建的！！
+  session是一个域对象。
+  session是：服务器端数据存储技术，实现了一次会话中，多次请求多次响应之间的数据共享。
+  session存储的数据相对安全，不会泄露相关信息。
+  session的应用场景：一般用于记录，登录用户的相关信息：比如：用户的id或者是user对象
+#+END_SRC
+**** session的基本操作
+创建一个day15-session项目，创建一个package包：cn.tedu.session创建一个servlet类：Session01
+
+与request对象相似：
+#+BEGIN_SRC java
+    session.setAttribute(key,value);
+    session.getAttribute(key);
+    session.getAttributeNames();
+    session.removeAttribute();
+    session.invalidate();//清空session
+#+END_SRC
+#+BEGIN_SRC java
+  package cn.tedu.session;
+
+  import javax.servlet.ServletException;
+  import javax.servlet.annotation.WebServlet;
+  import javax.servlet.http.*;
+  import java.io.IOException;
+  import java.util.ArrayList;
+  import java.util.List;
+
+  @WebServlet("/Session01")
+  public class Session01 extends HttpServlet {
+      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+          request.setCharacterEncoding("utf-8");
+          response.setContentType("text/html;charset=utf-8");
+          //1. session对象是服务器自动创建的，直接获取即可
+          HttpSession session = request.getSession();
+          //2. session对象是一个域对象：一次会话中有效
+          // 域的范围： request  <  session   <  servletContext
+          session.setAttribute("username","张三");
+          session.setAttribute("list",new ArrayList<String>());
+          session.setAttribute("user",new String("test"));
+          session.setAttribute("array",new int[10]);
+          String testkey = (String) session.getAttribute("testkey");
+          System.out.println(testkey);
+          List<String> list = (List<String>) session.getAttribute("list");
+          System.out.println(list);
+      }
+
+      protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+          this.doPost(request, response);
+      }
+  }
+
+#+END_SRC
+#+BEGIN_SRC java
+  package cn.tedu.session;
+
+  import javax.servlet.ServletException;
+  import javax.servlet.annotation.WebServlet;
+  import javax.servlet.http.HttpServlet;
+  import javax.servlet.http.HttpServletRequest;
+  import javax.servlet.http.HttpServletResponse;
+  import javax.servlet.http.HttpSession;
+  import java.io.IOException;
+  import java.util.Enumeration;
+
+  @WebServlet("/Session02")
+  public class Session02 extends HttpServlet {
+      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+          request.setCharacterEncoding("utf-8");
+          response.setContentType("text/html;charset=utf-8");
+          //获取全部的session数据：attribute键值对
+          HttpSession session = request.getSession();
+          Enumeration<String> attributeNames = session.getAttributeNames();
+          while (attributeNames.hasMoreElements()) {
+              String name = attributeNames.nextElement();
+              Object obj = session.getAttribute(name);
+              System.out.println("name:"+name+"    value:"+obj);
           }
-        #+END_SRC
-     3. 验证码的实现：
-        1. request中存储验证码仅在当前request中有效，在下一次的去请求中会失效。保存数据的范围太小。
-        2. ServletContext存储验证码,会在整个web应用的范围内，如果多个用户同时存储多个不同的验证码在web应用中，那么只有最后一个验证码会保存下来，会导致其他用户看到的图片验证码是真实验证码是不匹配。保存数据的范围过大。
-        3. session将验证码存储在当前会话的范围内，可以在多次请求中使用，符合验证码的使用范围，而且session在多个浏览器直接也互补影响。
-           1. 修改RegistServlet；在//TODO:session位置添加如下代码
-              #+BEGIN_SRC java
-                //验证码校验
-                String code = (String) request.getSession().getAttribute("code");
-                if(!valistr.equalsIgnoreCase(code)){
-                    request.setAttribute("msg","验证码错误");
-                    request.getRequestDispatcher("/regist.jsp").forward(request,response);
-                    return;
-                }
-              #+END_SRC
-           2. 修改ValidateServlet:
-              #+BEGIN_SRC java
-                package com.easymall.servlet;
 
-                import com.easymall.utils.VerifyCode;
+      }
 
-                import javax.servlet.ServletException;
-                import javax.servlet.http.HttpServlet;
-                import javax.servlet.http.HttpServletRequest;
-                import javax.servlet.http.HttpServletResponse;
-                import java.io.IOException;
-                //生成验证码
-                public class ValidateServlet extends HttpServlet {
-                    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                        doGet(request, response);
-                    }
-                    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                        //控制缓存，防止浏览器使用图片
-                        response.setDateHeader("Expires",-1);
-                        response.setHeader("Cache-control","no-cache");
-                        //调用工具类产生一个验证码的图片
-                        VerifyCode vc = new VerifyCode();
-                        vc.drawImage(response.getOutputStream());
-                        //获取验证码的纯文本内容
-                        String code = vc.getCode();
-                        //将创建出来的验证码加入到session域中
-                        request.getSession().setAttribute("code",code);
-                        System.out.println(code);
-                    }
-                }
+      protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+          this.doPost(request, response);
+      }
+  }
 
-              #+END_SRC
+#+END_SRC
+#+BEGIN_SRC java
+  package cn.tedu.session;
+
+  import javax.servlet.ServletException;
+  import javax.servlet.annotation.WebServlet;
+  import javax.servlet.http.HttpServlet;
+  import javax.servlet.http.HttpServletRequest;
+  import javax.servlet.http.HttpServletResponse;
+  import java.io.IOException;
+
+  @WebServlet("/Session03")
+  public class Session03 extends HttpServlet {
+      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+          request.setCharacterEncoding("utf-8");
+          response.setContentType("text/html;charset=utf-8");
+          //删除一个session
+          request.getSession().removeAttribute("user");
+          //清空session
+          request.getSession().invalidate();
+      }
+
+      protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+          this.doPost(request, response);
+      }
+  }
+
+#+END_SRC
+总结：
+1. session是服务器端技术，它的操作以及生成都是后端代码
+2. session的存储 也是存在于 服务器端的
+3. request.getSession();  该方法是与request对象相关，与response响应无关
+**** session 的作用域
+request对象（请求转发中）  <  session对象（一次会话中）  < servletContext对象（整个web应用中）
+
+在一次会话中，多次请求多次响应，整个过程中，session一直存在。
+
+session是存在于服务器端的，存放的数据更加的隐私。
+**** session的原理 ：查看底层API源码
+[[./Img/session原理.png]]
+
+session对象时基于JSESSIONID的cookie工作的。
+
+第一次请求时：生成的session对象的id，会响应到cookie中Set-Cookie: JSESSIONID= 4365456SADA123;第N次请求时，通过JSESSIONID去匹配获取session对象。那么这多次请求中，因为JSESSIONID是相同的，所有sessin的数据是实现了共享
+**** session的细节：
+1. 当浏览器关闭后，重新打开访问服务器，那么访问的session是同一个对象吗？
+   #+BEGIN_SRC
+   答案：默认情况下不是
+   因为：每一次关闭浏览器。JSESSIONID会被清除。所有每一次重新打开浏览器，访问的都是不同的session对象，因为JSESSIONID是不同的
+        JSESSIONID=E74C80AD590A65B9F829397E549048C6
+        JSESSIONID=AFA36F25C64A2056E877712CD82B3D62
+   #+END_SRC
+   持久化解决方案：
+   #+BEGIN_SRC java
+     Cookie cookie = new Cookie("JSESSIONID",session.getId());
+     cookie.setMaxAge(60*60);
+     response.addCookie(cookie);
+
+     JSESSIONID=020831C4CB6935938FD604BFFBA13BFB
+     JSESSIONID=020831C4CB6935938FD604BFFBA13BFB
+   #+END_SRC
+   #+BEGIN_SRC java
+     package cn.tedu.session;
+
+     import javax.servlet.ServletException;
+     import javax.servlet.annotation.WebServlet;
+     import javax.servlet.http.*;
+     import java.io.IOException;
+     import java.util.ArrayList;
+     import java.util.List;
+
+     @WebServlet("/Session01")
+     public class Session01 extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             request.setCharacterEncoding("utf-8");
+             response.setContentType("text/html;charset=utf-8");
+             //1. session对象是服务器自动创建的，直接获取即可
+             HttpSession session = request.getSession();
+             //2. session对象是一个域对象：一次会话中有效
+             // 域的范围： request  <  session   <  servletContext
+             session.setAttribute("username","张三");
+             session.setAttribute("list",new ArrayList<String>());
+             session.setAttribute("user",new String("test"));
+             session.setAttribute("array",new int[10]);
+             String testkey = (String) session.getAttribute("testkey");
+             System.out.println(testkey);
+             List<String> list = (List<String>) session.getAttribute("list");
+             System.out.println(list);
+
+             //持久化的JSESSIONID
+             System.out.println(session.getId());
+             Cookie cookie = new Cookie("JSESSIONID",session.getId());
+             cookie.setMaxAge(60*60);
+             response.addCookie(cookie);
+         }
+
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             this.doPost(request, response);
+         }
+     }
+
+   #+END_SRC
+2. 当浏览器不关闭，服务器关闭时，服务器重启之后，访问是同一个sesison吗 ？
+   #+BEGIN_SRC
+     答案：默认情况不是
+     因为：session对象在服务器关闭后，会被从内存中清理掉下次的session对象 是一个新的session对象
+     session如何保证：服务器关闭前后，都是同一个session呢？？？
+     解决方案：tomcat已经给我们解决了。
+     技术支持：
+     对象的序列化 ： 把内存中的对象存储到硬盘中，相当于把内存中的对象保存起来
+     对象的反序列化 ：当下次使用这个对象的时候，可以把硬盘中的文件 解析到内存，那么我们的内存中 这个对象有存在了。
+   #+END_SRC
+   #+BEGIN_SRC
+     演示过程：tomcat的session的序列化与反序列化
+              1.找到day15-session这个项目，然后找到它的output输出路径：编译之后的项目
+              2. 把项目打包成war包：day15-session.war
+              3. 把这个war包，放入到tomcat服务器中（不适用IDEA,使用tomcat\bin）
+     演示过程：idea进行session的序列化与反序列化
+              问题：idea关闭tomcat时，会把session进行序列化
+              但是，当idea重新启动tomcat时，会自动的把序列化之后的文件删除，
+              所以，使用idea演示 浏览器不关闭，服务器关闭时 这个场景时，
+                并不能看到反序列化的过程，因为 序列化文件被删除了
+   #+END_SRC
+3. session不进行持久化工作时，session对象在内存中多长时间会失效？？
+   答案：默认情况是 30分钟 【tomcat7\conf\web.xml中】
+   #+BEGIN_SRC js
+     <session-config>
+         <session-timeout>30</session-timeout>
+     </session-config>
+   #+END_SRC
+   如果session失效了，会发生什么问题？？
+
+   比如：登录了一个网站，session存储了用户的登录信息。如果用户在半小时中，不进行任何操作（挂机）;过一段时间回来，会提示：请重新登录。
+**** session与cookie的区别
+1. session是存储在服务器端，cookie是存储在浏览器端
+2. session没有数据大小的显示，cookie是由大小限制
+3. session的数据保存是安全的，cooke的数据是相对不安全的
+**** 综合案例：注册页面的【验证码】
+***** 准备工作：需要的资源Util工具类
+【课后资料\day14-cookie-PMALL\资源\VerifyCode】:VerifyCode中的方法：drawImage:生成一张验证码图片,该图片最终是要显示到页面上的，给用户看到
+
+getCode() ：验证码中的图片的数字，一定是正确的验证码,该数字是专门用于对比用户输入的验证码,该数字是存储于 session 对象中，一次会话中生效
+
+regist.jsp页面：验证码的<img />
+#+BEGIN_SRC
+  <img src="img/regist/yzm.jpg" width="" height="" alt="" />
+#+END_SRC
+img/regist/yzm.jpg ： 是一个写死的静态的图片
+
+需要改造：当点击图片时，图片更换一张验证码，需要发送一个请求,当页面刷新时，图片更换一张验证码，需要发送一个请求
+
+创建一个Servlet类：cn.tedu.servlet/ValidateCodeServlet.java
+缓存【控制浏览器不适用缓存】
+接受【更换验证码的请求】
+获取【一张验证码图片】
+获取【验证码的正确code，存放到session中】
+响应【输出流输出图片】
+打开RegistServlet.java类：需要验证用户输入的验证码是否正确
 ** cookie和session特点：
 1. cookie特点：
    cookie是浏览器端的技术，保存在浏览器的数据可能会被其他人读取，造成数据丢失，数据安全性较差。cookie可以存储长期保存的数据。cookie适合存储安全性要求较低，而存储时间较长的数据。

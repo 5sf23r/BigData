@@ -30,7 +30,6 @@ public class Cookie05 extends HttpServlet {
         response.addCookie(cookie);
 
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request, response);
     }
