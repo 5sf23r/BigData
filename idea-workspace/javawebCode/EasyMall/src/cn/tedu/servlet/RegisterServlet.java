@@ -21,7 +21,7 @@ public class RegisterServlet extends javax.servlet.http.HttpServlet {
         /*0.2 这句话一般放在代码的开头*/
         /*0.3  该方法只能解析 请求正文的参数，也就是对地址栏的参数无效 */
         request.setCharacterEncoding("utf-8");
-        response.setContentType("utf-8");
+        response.setContentType("text/html;charset=utf-8");
         /*0.4 以下的这种方式是对get方法做的专门的处理*/
         /*要求是：要使用此方法，必须先拿到参数信息
         * 此方法：无论get方法还是post方式都有效
@@ -105,6 +105,17 @@ public class RegisterServlet extends javax.servlet.http.HttpServlet {
             //页面的转发：把请求转发到jsp页面中
             request.getRequestDispatcher("/regist.jsp").forward(request,response);
             return;
+        }else{
+            //验证码不为空时，需要判断验证码是否正确
+            //1. 从session中获取一个正确的code
+            String newcode = (String)request.getSession().getAttribute("valistr");
+            if(!valistr.equalsIgnoreCase(newcode)){
+                //错误信息的绑定
+                request.setAttribute("errorMsg5","验证码输入错误");
+                //把错误信息转发到注册页面中
+                request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                return ;
+            }
         }
         //5.数据库查询是否存在该用户
         Connection connection = C3P0Util.getConnection();
@@ -138,6 +149,7 @@ public class RegisterServlet extends javax.servlet.http.HttpServlet {
             e.printStackTrace();
         }finally {
             C3P0Util.close(rs,ps,connection);
+            System.out.println("释放连接池");
         }
         //6.登陆的页面跳转
         //response.sendRedirect("/index.jsp");

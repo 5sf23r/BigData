@@ -1,5 +1,4 @@
 package cn.tedu.utils;
-
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import javax.sql.DataSource;
@@ -38,11 +37,11 @@ public class C3P0Util {
         /**
          * 4.释放连接
          */
-        public static void close(PreparedStatement pstmt, Connection conn){
-            close(null,pstmt,conn);
+        public static void close(PreparedStatement ps, Connection conn){
+            close(null,ps,conn);
 
         }
-        public static void close(ResultSet rs, Statement pstmt, Connection conn){
+        public static void close(ResultSet rs, Statement ps, Connection conn){
             if(rs!=null){
                 try {
                     rs.close();
@@ -50,9 +49,9 @@ public class C3P0Util {
                     e.printStackTrace();
                 }
             }
-            if(pstmt!=null){
+            if(ps!=null){
                 try {
-                    pstmt.close();
+                    ps.close();
                 }catch(Exception e){
                     e.printStackTrace();
                 }

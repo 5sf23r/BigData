@@ -86,6 +86,15 @@
 						}
 					});
 				});
+				//验证码图片的其他换：点击图片触发函数
+				$("#img").click(function (){
+					console.log(123);
+					//这里改变src="xxx"路径即可
+					var d1 = new Date();
+					var time = d1.getTime();
+					$("#img").attr("src","/ValidateCodeServlet?time="+time);
+				});
+
 			});
 		</script>
 	</head>
@@ -142,7 +151,7 @@
 					<td class="tds">验证码：</td>
 					<td>
 						<input type="text" name="valistr" value="<%=request.getParameter("valistr")==null?"":request.getParameter("valistr")%>"/>
-						<img src="img/regist/yzm.jpg" width="" height="" alt="" />
+						<img id="img" src="/ValidateCodeServlet" width="" height="" alt="" />
 						<span style="color:red">
 							<%=request.getAttribute("errorMsg5")==null?"":request.getAttribute("errorMsg5")%>
 						</span>

@@ -56,6 +56,8 @@ public class LoginServlet extends HttpServlet {
             rs = ps.executeQuery();
             // 3.1 如果存在，表示登陆成功，重定向到主界面【index.jsp】
             if(rs.next()){
+                //使用session对象把用户名绑定
+                request.getSession().setAttribute("username",username);
                 response.sendRedirect("/index.jsp");
             }else{
                 // 3.2 如果不存在，表示登陆失败，请求转发到【login.jsp】，给出提示信息

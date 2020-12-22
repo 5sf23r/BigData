@@ -184,9 +184,8 @@
 - [[#servletconfigservletcontext][ServletConfig、ServletContext]]
   - [[#servletconfig-1][ServletConfig]]
   - [[#servletcontext][ServletContext]]
-  - [[#课堂笔记-3][课堂笔记]]
 - [[#ajax][AJAX]]
-  - [[#课堂笔记-4][课堂笔记]]
+  - [[#课堂笔记-3][课堂笔记]]
     - [[#原生态的js脚本开发步骤][原生态的js脚本开发步骤]]
       - [[#确定开发思路][确定开发思路]]
         - [[#确定js函数的触发时机用户名文本框失去焦点时触发][确定js函数的触发时机：用户名文本框失去焦点时触发]]
@@ -208,7 +207,7 @@
 - [[#会话技术][会话技术]]
   - [[#cookie][cookie]]
     - [[#会话是什么][会话是什么？]]
-    - [[#q会话的作用][q会话的作用：]]
+    - [[#会话的作用][会话的作用：]]
     - [[#会话技术----cookie][会话技术 -- cookie]]
     - [[#用户上次访问页面的时间][用户上次访问页面的时间]]
     - [[#cookie类型][Cookie类型]]
@@ -222,7 +221,7 @@
     - [[#cookie小细节][cookie小细节]]
     - [[#cookie类型使用cookie][Cookie类型使用cookie：]]
     - [[#修改easymall添加登陆功能-记住用户名][修改EasyMall：添加登陆功能-记住用户名]]
-    - [[#课堂笔记-5][课堂笔记]]
+    - [[#课堂笔记-4][课堂笔记]]
       - [[#会话技术-1][会话技术]]
       - [[#cookie技术][Cookie技术]]
       - [[#cookie的原理基于-set-cookie-与-cookie-对象实现的][Cookie的原理：基于 Set-cookie 与 cookie 对象实现的！！]]
@@ -243,7 +242,7 @@
     - [[#easymall页面功能][EasyMall页面功能]]
     - [[#注销功能能实现][注销功能能实现：]]
     - [[#验证码的实现][验证码的实现：]]
-    - [[#课堂笔记-6][课堂笔记]]
+    - [[#课堂笔记-5][课堂笔记]]
       - [[#session的概念][session的概念]]
       - [[#session的基本操作][session的基本操作]]
       - [[#session-的作用域][session 的作用域]]
@@ -254,17 +253,19 @@
         - [[#准备工作需要的资源util工具类][准备工作：需要的资源Util工具类]]
   - [[#cookie和session特点][cookie和session特点：]]
 - [[#jsp][JSP]]
-  - [[#1-概述与原理][1. 概述与原理]]
-  - [[#2-jsp语法][2. JSP语法]]
-  - [[#3-九大隐式对象][3. 九大隐式对象]]
-  - [[#4-pagecontext详解][4. PageContext详解]]
-  - [[#5-四大作用域][5. 四大作用域]]
-  - [[#6-示例][6. 示例]]
-  - [[#7-jsp标签技术][7. JSP标签技术]]
-- [[#el表达式][EL表达式]]
-- [[#jstl标签库][JSTL标签库]]
-  - [[#1-概述-1][1. 概述]]
-  - [[#2-在页面中引入jstl标签库][2. 在页面中引入JSTL标签库]]
+  - [[#jsp-1][JSP]]
+    - [[#1-概述与原理][1. 概述与原理]]
+    - [[#2-jsp语法][2. JSP语法]]
+    - [[#3-九大隐式对象][3. 九大隐式对象]]
+    - [[#4-pagecontext详解][4. PageContext详解]]
+    - [[#5-四大作用域][5. 四大作用域]]
+    - [[#6-示例][6. 示例]]
+    - [[#7-jsp标签技术][7. JSP标签技术]]
+  - [[#el表达式][EL表达式]]
+  - [[#jstl标签库][JSTL标签库]]
+    - [[#1-概述-1][1. 概述]]
+    - [[#2-在页面中引入jstl标签库][2. 在页面中引入JSTL标签库]]
+  - [[#课堂笔记-6][课堂笔记]]
 - [[#javaee开发模式][javaEE开发模式]]
 - [[#重构easymall项目][重构EasyMall项目]]
 - [[#修改easymall页面][修改EasyMall页面]]
@@ -9766,8 +9767,6 @@ ServletContext就是一个代表web应用的对象。
 
          #+END_SRC
          + 在使用web工程并发布的时候，这种获取路径的方式会自动调整到classes目录中去获取指定名称的文件。
-** 课堂笔记
-***
 * AJAX
 [[./Img/day13-AJAX.png]]
 1. AJAX是什么？
@@ -10360,7 +10359,7 @@ ServletContext就是一个代表web应用的对象。
 [[./SourceCode/loginServlet.java]]
 *** 会话是什么？
 为了完成某一个功能，浏览器和服务器建立连接之后，进行一次或多次请求和响应操作，这些请求和响应构成了浏览器和服务器之间的一次会话操作。
-*** q会话的作用：
+*** 会话的作用：
 会话主要是解决在浏览器请求中数据的共享问题而出现的奇数。
 #+BEGIN_SRC
   http是无状态协议  -- 请求与请求之间是没有关联的。
@@ -11622,39 +11621,277 @@ session对象时基于JSESSIONID的cookie工作的。
    #+END_SRC
 3. session不进行持久化工作时，session对象在内存中多长时间会失效？？
    答案：默认情况是 30分钟 【tomcat7\conf\web.xml中】
-   #+BEGIN_SRC js
+   #+BEGIN_SRC html
      <session-config>
          <session-timeout>30</session-timeout>
      </session-config>
    #+END_SRC
    如果session失效了，会发生什么问题？？
-
-   比如：登录了一个网站，session存储了用户的登录信息。如果用户在半小时中，不进行任何操作（挂机）;过一段时间回来，会提示：请重新登录。
+   - 比如：登录了一个网站，session存储了用户的登录信息。如果用户在半小时中，不进行任何操作（挂机）;过一段时间回来，会提示：请重新登录。
 **** session与cookie的区别
 1. session是存储在服务器端，cookie是存储在浏览器端
 2. session没有数据大小的显示，cookie是由大小限制
 3. session的数据保存是安全的，cooke的数据是相对不安全的
 **** 综合案例：注册页面的【验证码】
 ***** 准备工作：需要的资源Util工具类
-【课后资料\day14-cookie-PMALL\资源\VerifyCode】:VerifyCode中的方法：drawImage:生成一张验证码图片,该图片最终是要显示到页面上的，给用户看到
+1. VerifyCode中的方法：[[./SourceCode/VerifyCode.java]]
+   - drawImage:
+     生成一张验证码图片,该图片最终是要显示到页面上的，给用户看到
+   - getCode() ：
+     验证码中的图片的数字，一定是正确的验证码,该数字是专门用于对比用户输入的验证码,该数字是存储于session对象中，一次会话中生效
+2. regist.jsp页面：验证码的<img />
+   - img/regist/yzm.jpg ： 是一个写死的静态的图片
+     #+BEGIN_SRC
+       <img src="img/regist/yzm.jpg" width="" height="" alt="" />
+     #+END_SRC
+   需要改造：当点击图片时，图片更换一张验证码，需要发送一个请求,当页面刷新时，图片更换一张验证码，需要发送一个请求
+[[./Img/pic.png]]
+3. 创建一个Servlet类：cn.tedu.servlet/ValidateCodeServlet.java
+   1. 缓存【控制浏览器不适用缓存】
+   2. 接受【更换验证码的请求】
+   3. 获取【一张验证码图片】
+   4. 获取【验证码的正确code，存放到session中】
+   5. 响应【输出流输出图片】
+   #+BEGIN_SRC java
+     package cn.tedu.servlet;
 
-getCode() ：验证码中的图片的数字，一定是正确的验证码,该数字是专门用于对比用户输入的验证码,该数字是存储于 session 对象中，一次会话中生效
+     import cn.tedu.utils.VerifyCode;
 
-regist.jsp页面：验证码的<img />
-#+BEGIN_SRC
-  <img src="img/regist/yzm.jpg" width="" height="" alt="" />
-#+END_SRC
-img/regist/yzm.jpg ： 是一个写死的静态的图片
+     import javax.servlet.ServletException;
+     import javax.servlet.annotation.WebServlet;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
 
-需要改造：当点击图片时，图片更换一张验证码，需要发送一个请求,当页面刷新时，图片更换一张验证码，需要发送一个请求
+     @WebServlet("/ValidateCodeServlet")
+     public class ValidateCodeServlet extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             request.setCharacterEncoding("utf-8");
+             response.setContentType("text/html;charset=utf-8");
+             //控制浏览器不能使用缓存
+             response.setDateHeader("Expires",-1);
+             response.setHeader("Cache-control","no-cache");
+             //1. 使用工具类，生成一张验证码的图片
+             VerifyCode verifyCode = new VerifyCode();
+             //生成图片，把图片保存到输出流中，并且调用write方法
+             verifyCode.drawImage(response.getOutputStream());
+             //2. 获取验证的code
+             String code = verifyCode.getCode();
+             //3. 把code放入到session中
+             request.getSession().setAttribute("valuestr",code);
+         }
 
-创建一个Servlet类：cn.tedu.servlet/ValidateCodeServlet.java
-缓存【控制浏览器不适用缓存】
-接受【更换验证码的请求】
-获取【一张验证码图片】
-获取【验证码的正确code，存放到session中】
-响应【输出流输出图片】
-打开RegistServlet.java类：需要验证用户输入的验证码是否正确
+         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             this.doPost(request, response);
+         }
+     }
+   #+END_SRC
+   #+BEGIN_SRC java
+     package cn.tedu.servlet;
+
+     import cn.tedu.utils.C3P0Util;
+     import cn.tedu.utils.WebUtils;
+
+     import javax.servlet.ServletException;
+     import javax.servlet.annotation.WebServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.sql.Connection;
+     import java.sql.PreparedStatement;
+     import java.sql.ResultSet;
+     import java.sql.SQLException;
+
+     @WebServlet("/register") /* 页面发送过来的注册请求叫做 :register */
+     public class RegisterServlet extends javax.servlet.http.HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             //0.设置 接收请求的编码格式，防止出现乱码
+             /*0.1 以下这种方式只能对POST请求方式有效*/
+             /*0.2 这句话一般放在代码的开头*/
+             /*0.3  该方法只能解析 请求正文的参数，也就是对地址栏的参数无效 */
+             request.setCharacterEncoding("utf-8");
+             response.setContentType("text/html;charset=utf-8");
+             /*0.4 以下的这种方式是对get方法做的专门的处理*/
+             /*要求是：要使用此方法，必须先拿到参数信息
+             ,* 此方法：无论get方法还是post方式都有效
+             ,* */
+             //String username = WebUtils.encoding(request.getParameter("username"),"utf-8");
+             String username = request.getParameter("username");
+             //1.获取注册表单的数据
+             /*参数表示的是：页面 <input name="这是参数的值" />*/
+             //String username = request.getParameter("username");
+             String password = request.getParameter("password");
+             String password2 = request.getParameter("password2");
+             String nickname = request.getParameter("nickname");
+             String email = request.getParameter("email");
+             String valistr = request.getParameter("valistr");
+             /*打桩测试：输出获取的信息*/
+             System.out.println(username);
+             System.out.println(password);
+             System.out.println(password2);
+             System.out.println(nickname);
+             System.out.println(email);
+             System.out.println(valistr);
+             //2.非空校验
+             if(WebUtils.isNull(username)){
+                 //如果为空时，打印输出提示信息，不能为空
+                 System.out.println("用户名不能为空");
+                 //1.需要把错误提示信息添加到request对象中
+                 request.setAttribute("errorMsg1","用户名不能为空");
+
+                 //页面的转发：把请求转发到jsp页面中
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 //return 直接中断代码
+                 return;
+             }
+             if(WebUtils.isNull(password)){
+                 System.out.println("密码不能为空");
+                 request.setAttribute("errorMsg2","密码不能为空");
+
+                 //页面的转发：把请求转发到jsp页面中
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             //3.密码一致性校验
+             if(!password.equals(password2)){
+                 System.out.println("两次密码输入不一致");
+                 request.setAttribute("errorMsg6","确认密码不能为空");
+
+                 //页面的转发：把请求转发到jsp页面中
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             if(WebUtils.isNull(nickname)){
+                 System.out.println("昵称不能为空");
+                 request.setAttribute("errorMsg3","昵称不能为空");
+
+                 //页面的转发：把请求转发到jsp页面中
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             if(WebUtils.isNull(email)){
+                 System.out.println("邮箱不能为空");
+                 request.setAttribute("errorMsg4","邮箱不能为空");
+
+                 //页面的转发：把请求转发到jsp页面中
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             //4.邮箱的格式校验
+             String reg = "\\w+@+\\w+(\\.\\w+)+";
+             if(!email.matches(reg)){
+                 System.out.println("邮箱格式不正确");
+                 request.setAttribute("errorMsg4","邮箱格式不正确");
+
+                 //页面的转发：把请求转发到jsp页面中
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }
+             if(WebUtils.isNull(valistr)){
+                 System.out.println("验证码不能为空");
+                 request.setAttribute("errorMsg5","验证码不能为空");
+
+                 //页面的转发：把请求转发到jsp页面中
+                 request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                 return;
+             }else{
+                 //验证码不为空时，需要判断验证码是否正确
+                 //1. 从session中获取一个正确的code
+                 String newcode = (String)request.getSession().getAttribute("valistr");
+                 if(!valistr.equalsIgnoreCase(newcode)){
+                     //错误信息的绑定
+                     request.setAttribute("errorMsg5","验证码输入错误");
+                     //把错误信息转发到注册页面中
+                     request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                     return ;
+                 }
+             }
+             //5.数据库查询是否存在该用户
+             Connection connection = C3P0Util.getConnection();
+             PreparedStatement ps = null;
+             ResultSet rs = null;
+             String sql = "select * from user where username=?";
+             try {
+                 ps = connection.prepareStatement(sql);
+                 ps.setString(1,username);
+                 rs = ps.executeQuery();
+                 if(rs.next()){
+                     //  如果存在，不执行插入操作
+                     System.out.println("用户名已经注册了，注册失败");
+                     request.setAttribute("errorMsg1","用户名已经存在");
+
+                     //页面的转发：把请求转发到jsp页面中
+                     request.getRequestDispatcher("/regist.jsp").forward(request,response);
+                     return;
+                 }else{
+                     //  如果不存在，执行插入操作
+                     String sql1 = "insert into user values(null,?,?,?,?)";
+                     ps = connection.prepareStatement(sql1);
+                     ps.setString(1,username);
+                     ps.setString(2,password);
+                     ps.setString(3,nickname);
+                     ps.setString(4,email);
+                     ps.executeUpdate();
+                     System.out.println("用户注册成功");
+                 }
+             } catch (SQLException e) {
+                 e.printStackTrace();
+             }finally {
+                 C3P0Util.close(rs,ps,connection);
+                 System.out.println("释放连接池");
+             }
+             //6.登陆的页面跳转
+             //response.sendRedirect("/index.jsp");
+             //使用定时刷新
+             response.getWriter().write("<h1><font color='red'>注册成功，3秒后跳转主界面</font></h1>");
+             response.setHeader("refresh","3;url=http://www.easymall.com");
+         }
+
+         protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+             this.doPost(request, response);
+         }
+     }
+
+   #+END_SRC
+4. 打开RegistServlet.java类：需要验证用户输入的验证码是否正确
+   #+BEGIN_SRC js
+     <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+     <!DOCTYPE HTML>
+     <html>
+       <head>
+         <title>欢迎注册EasyMall</title>
+         <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+         <link rel="stylesheet" href="css/regist.css"/>
+         <script src="js/ajax.js"></script>
+         <script src="js/jquery-1.4.2.js"></script>
+         <script>
+           $(function (){
+               //验证码图片的其他换：点击图片触发函数
+               $("#img").click(function (){
+                   console.log(123);
+                   //这里改变src="xxx"路径即可
+                   var d1 = new Date();
+                   var time = d1.getTime();
+                   $("#img").attr("src","/ValidateCodeServlet?time="+time);
+               });
+           });
+         </script>
+         <tr>
+           <td class="tds">验证码：</td>
+           <td>
+             <input type="text" name="valistr" value="<%=request.getParameter("valistr")==null?"":request.getParameter("valistr")%>"/>
+             <img id="img" src="/ValidateCodeServlet" width="" height="" alt="" />
+             <span style="color:red">
+               <%=request.getAttribute("errorMsg5")==null?"":request.getAttribute("errorMsg5")%>
+             </span>
+           </td>
+         </tr>
+     </table>
+     </form>
+     </body>
+     </html>
+   #+END_SRC
 ** cookie和session特点：
 1. cookie特点：
    cookie是浏览器端的技术，保存在浏览器的数据可能会被其他人读取，造成数据丢失，数据安全性较差。cookie可以存储长期保存的数据。cookie适合存储安全性要求较低，而存储时间较长的数据。
@@ -11677,11 +11914,12 @@ img/regist/yzm.jpg ： 是一个写死的静态的图片
 [[./SourceCode/cfortokends.jsp]]
 [[./SourceCode/cchoose.jsp]]
 [[./SourceCode/curl.jsp]]
-** 1. 概述与原理
+** JSP
+*** 1. 概述与原理
 由于在servlet中书写前台页面代码非常复杂，于是Sun提出一门新的技术--jsp，将所有的页面内容重新书写到一个文件中，在这个文件中还可以书写java语句，这样的一个文件就称之为一个jsp文件。 在jsp页面内开发HTML代码十分便利，还可以在其中嵌入java语句，使开发变得非 常简洁，直接在页面中就完成了页面构建和代码逻辑的全部内容。
 - JSP原理：在jsp页面被初次访问的时候，会被jsp翻译引擎翻译成一个servlet文件，这个文件是一个普通java文件，继承了一个具有servlet接口的类，所以当前文件才会成为一个servlet文件。
 - 实验:寻找如下文件 --> 在[tomcat]/work/localhost/day14/index_jsp.java文件
-** 2. JSP语法
+*** 2. JSP语法
 1. 模板元素
    jsp页面中的HTML内容会在浏览器发生访问的时候，被jsp翻译引擎翻译为 Servlet文件的模板元素。
    #+BEGIN_SRC html
@@ -11794,7 +12032,7 @@ img/regist/yzm.jpg ： 是一个写死的静态的图片
          在当前的jsp页面中引入其他的jsp页面，将组合之后的页面输出在浏览器。 <%@include file=""%>
      13. taglib指令
          标签技术 <%@taglib %>
-** 3. 九大隐式对象
+*** 3. 九大隐式对象
    在jsp翻译成一个servlet后，其中都可以包含9大隐式对象，其中Exception、session 需要手动开启。在每一个jsp页面中都会有自己独立的9大隐式对象，每一个隐式对 象所具有的变量名可以直接使用，在自行定义新的变量时 应避免与已有隐式对象 名称重复。
    - 面试题经常考:
      九大隐式对象:
@@ -11807,7 +12045,7 @@ img/regist/yzm.jpg ： 是一个写死的静态的图片
      7. exception --- 代表当前页面产生的异常信息对象
      8. out --- 代表当前jsp页面向浏览器输出数据的对象 pageContext --- 代表当前jsp页面上下文的对象
      9. pageContext --- 代表当前jsp页面上下文的对象
-** 4. PageContext详解
+*** 4. PageContext详解
    1. 功能一:可以作为其他八大隐式对象的入口。
       1. getException方法返回exception隐式对象
       2. getPage方法返回page隐式对象
@@ -11859,7 +12097,7 @@ img/regist/yzm.jpg ： 是一个写死的静态的图片
       #+BEGIN_SRC java
         pageContext.forward("path");
       #+END_SRC
-** 5. 四大作用域
+*** 5. 四大作用域
 1. 域对象概念
    一个对象身上有一个可以被看见的范围,在这个范围内利用对象身上的map实现资源的共享,像这样一个对象就称之为域对象.
 2. 四个域对象
@@ -11903,7 +12141,7 @@ img/regist/yzm.jpg ： 是一个写死的静态的图片
          当前jsp页面。
       3. 主要功能:
          在当前jsp页面内实现数据的共享。
-** 6. 示例
+*** 6. 示例
 #+BEGIN_SRC html
   <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isErrorPage="true"%>
   <!DOCTYPE HTML >
@@ -11952,7 +12190,7 @@ img/regist/yzm.jpg ： 是一个写死的静态的图片
   </html>
 
 #+END_SRC
-** 7. JSP标签技术
+*** 7. JSP标签技术
 1. JSP标签技术概述
    Jsp当前可以书写HTML内容和Java语句，便于开发，但是面对大量逻辑需要处理和 复杂的页面构成的时候，HTML和java的结合就无法做到合理维护和高效开发。这 时可以将页面中的java语句都变成标签内容，让标签处理java语句对应的逻辑，也 就是说利用标签代替java，这样就可以保证页面内只出现标签内容，这样的页面只 有一种语言，相比之前便于维护和关闭，可以提升开发效率。
 2. 常用的JSP标签技术
@@ -11964,7 +12202,7 @@ img/regist/yzm.jpg ： 是一个写死的静态的图片
       标签库数据庞大，可以覆盖多数的开发需求。
    4. 自定义标签
    5. 其他第三方标签
-* EL表达式
+** EL表达式
 1. EL表达式概述
    EL全名为Expression Language，用来替代<%=%>脚本表达式；EL具有获取数据、执行运算、获取常用开发对象、调用java方法这四方面的功能；javaEE目前内置了EL表达式，可以在jsp页面中直接使用
 2. EL表达式使用方式
@@ -12205,12 +12443,166 @@ img/regist/yzm.jpg ： 是一个写死的静态的图片
    #+END_SRC
 7. 调用java方法
    略
-* JSTL标签库
-** 1. 概述
+** JSTL标签库
+*** 1. 概述
 JSTL全程JavaServerPages Standard Tag Library。由JCP（Java Community Process）指定标准，是提供给Java Web开发人员一个标准通用的标签函数库。可以和EL配合来取代传统直接在页面上嵌入Java程序（Scripting）的做法，以提高程序可读性、维护性和方便性。
-** 2. 在页面中引入JSTL标签库
+*** 2. 在页面中引入JSTL标签库
 Java EE 5包及其以上版本都已经支持jstl标签库，所以在页面中直接书写指令引入使用即可。
 <%@taglib uri="" prefix=""%>
+** 课堂笔记
+1. JSP的入门
+   JSP：Java Server Page,服务器端的java代码的页面;底层其实是一段java代码，是一段servlet代码！！！
+2. JSP的演变过程：
+   1. 早期：只有servlet,没有jsp时
+      业务场景：商城主界面，浏览器发送一个主界面的请求，服务器端的servlet给浏览器一个响应，响应的内容是：HTML+JS+CSS+数据！！！这样一个完整的页面。
+      #+BEGIN_SRC java
+        PrintWriter pw = response.getWriter();
+        pw.write("hello servlet");
+        pw.write(<!DOCTYPE HTML>);
+        pw.write(<html>);
+        pw.write(<head>);
+        pw.write(<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+                                );
+        pw.write();
+        pw.write();
+        for (int i = 0; i < array.length;i++) {
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+            pw.write(array[i].username);
+        }
+        pw.write();
+        pw.write();
+        pw.write();
+      #+END_SRC
+      缺点：只有servlet的时候，响应的页面 java代码与HTML标签强耦合，不利于程序员的开发与运维工作，因为，如果要修改HTML页面，那么就会动到原有的java！！！
+   2. JSP
+      HTML+CSS+JS+JQEUERY+java代码
+      - 优点：是实现了java代码与HTML页面的一个耦合度大大的降低，程序员比较的方便的开发与测试
+      - 缺点：JSP当数据量的太庞大的时候，因为底层是java代码，所以会给服务器造成很大压力
+      JSP的原理展示：
+      1. JSP页面，最终加载到tomcat服务器中进行运行时，会编译成两个文件：
+         举例如下：
+         - regist_jsp.java
+           java文件
+         - regist_jsp.class
+           字节码文件，最终jsp执行的是 .class的字节码文件
+      2. JSP页面底层是一个servlet代码，其中存在常见的对象：request对象，response对象等等~~
+3. JSP的基础语法编写：
+   - 创建一个jspDemo01.jsp,位置 web\jspdemo
+     访问：http://localhost/jspdemo/jspDemo01.jsp
+     #+BEGIN_SRC html
+       <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+       <html>
+       <head>
+           <title>JSP的基础语法</title>
+       </head>
+       <body>
+       <h1>1. JSP模板元素</h1>
+       <span>JSP页面中的所有的HTML元素，都是会被编译进入.java文件</span><br/>
+       <span>JSP页面中的所有的CSS+JS+数据，痛仰会被编译进入.java</span><br/>
+       <span>JSP页面中的所有的模板元素，最后会被编译进入servlet.java文件</span>
+       <hr>
+       <h1>2. JSP的标本表达式</h1>
+       <p>定义一个变量：<% int i = 0;%></p>
+       <p>常量：<%= 300 %></p>
+       <p>变量：<%= i %></p>
+       <p>表达式：<%= 1+1 %></p>
+       <p>关系运算：<%= true && false %></p>
+       <p>脚本表达式：会把执行的运算结果，通过out.print(值)打印到浏览器中</p>
+       <hr>
+       <h1>3. JSP的脚本片段</h1>
+       <p>
+           <%
+               for(int j = 0;j < 10;j++){
+                   System.out.println(j);
+           %>
+           <%= i %>
+           <span style="color:red"><%= i %></span><br/>
+           <%
+               }
+           %>
+       </p>
+       <p>jsp的脚本片段：可以进行阶段，阶段之后，中间可以书写HTML标签以及其他的任何样式</p>
+       <hr>
+       <h1>4. JSP的脚本声明</h1>
+       <p>"< %"是用于声明局部变量，在service方法有效 <% int j = 0; %></p>
+       <p>"< %!"是用于声明全局变量，在整个类中有效<%! int k = 0; %></p>
+       <p>定义成员方法：<%! public static void method(){}%></p>
+       <p>定义静态代码块：<%! static{}%></p>
+       <h1>5. JSP的注释</h1>
+       <p>第一种：jsp的注释，只是给程序员看的，浏览器中没有，java文件也没有，页面源代码中也没有
+           <%-- 这是一个信息被注释 --%>
+       </p>
+       <p>第二种：纯java注释，能够被java文件解析到
+           <%//java注释%>
+       </p>
+       <p>第三种：html注释，能够被java文件解析到，也能在浏览器源码中查看
+           <!-- 这是HTML页面的注释 -->
+           <!-- <%= k %> -->
+           一般不要使用HTML的注释
+       </p>
+       </body>
+       </html>
+
+     #+END_SRC
+4. JSP的Page指令
+   [[./Img/jspPage.png]]
+   - 创建一个jspDemo02.jsp,位置web\jspdemo
+     访问：http://localhost/jspdemo/jspDemo02.jsp
+     #+BEGIN_SRC html
+       <%@ page contentType="text/html;charset=UTF-8" errorPage="errorPage.jsp" buffer="16kb" session="true" import="java.util.Properties" language="java" %>
+       <html>
+       <head>
+           <title>JSP的page指令</title>
+       </head>
+       <body>
+           <h1>1.page指令的基本语法</h1>
+           <p>"< %@ page"  "%>"  这就是page指令 </p>
+           <p> page指令：可以定义[属性=值]的键值对 </p>
+           <p> page指令：能够定义[属性=值]的键值对共有12种 </p>
+           <p> [ language="java" ] ：表示页面中可以书写java代码 </p>
+           <p> [ extends="package.class" ]  ：表示jsp页面可以继承一个父类 </p>
+           <p> [ import="{package.class | package.*}, ..." ] :导入java代码需要使用到的包 </p>
+           <p> [ session="true | false" ] :表示当前页面是否可以使用session对象
+                   默认情况下使用的是true
+               <%= request.getSession().getAttribute("key") %>
+               <%= session.getAttribute("key") %>
+           </p>
+           <p>
+               [ buffer="none | 8kb | sizekb" ] : 表示的是响应流的缓冲区
+               out.write()方法输出内容时，设置的缓冲区大小
+           </p>
+           <p>
+               [ autoFlush="true | false" ]：表示自动刷新缓冲区
+               默认情况下，是true，不需要程序干预缓冲区的刷新
+           </p>
+           <p>
+               [ isThreadSafe="true | false" ]：表示当前的线程时单线程的
+               默认为false
+           </p>
+           <p>
+               <% int i = 1/0; %>
+               [ errorPage="relative_url" ] ：表示当前页面报错时，给这页面配置一个500的错误页面
+               [ isErrorPage="true | false" ] ：表示错误页面中可以使用exception对象捕获异常
+           </p>
+           <p>
+               [ contentType="mimeType [ ;charset=characterSet ]" | "text/html ; charset=ISO-8859-1" ]
+           </p>
+           <p>
+               [ pageEncoding="characterSet | UTF-8" ]：表示服务器在加载页面时，会使用pageEncoding进行编码
+           </p>
+           <p>
+               [ isELIgnored="true | false" ]：表示是否忽略 el表达式
+           </p>
+       </body>
+       </html>
+
+     #+END_SRC
+
 * javaEE开发模式
 1. 纯Servlet开发 单纯的servlet开发，如果面对复杂页面将会难于处理，所以前台HTML内容还是应 该放在页面中书写。
 2. 纯JSP开发
