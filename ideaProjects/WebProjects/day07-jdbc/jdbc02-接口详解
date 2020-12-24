@@ -1,0 +1,161 @@
+1. DriverManager ： java.sql包提供的类
+
+    管理一组 JDBC 驱动程序的基本服务。
+    注：DataSource 接口是 JDBC 2.0 API 中的新增内容，它提供了连接到数据源的另一种方法。
+    使用 DataSource 对象是连接到数据源的首选方法。
+---------------------------------------------------------------------------------------------------------------
+    属性：提供了注册驱动程序的数组，私有化方法，把所有数据库厂商的驱动程序加载到数组中
+    // List of registered JDBC drivers
+    private final static CopyOnWriteArrayList<DriverInfo> registeredDrivers = new CopyOnWriteArrayList<>();
+---------------------------------------------------------------------------------------------------------------
+    方法：向 DriverManager 注册给定驱动程序
+    registerDriver(java.sql.Driver driver); // 可以支持任何的驱动包类型，因为其他驱动包都实现了java.sql.Driver
+        registerDriver(new com.mysql.jdbc.Driver());//mysql的驱动包
+            源码：com.mysql.jdbc.Driver implements java.sql.Driver //mysql的Driver实现了java.sql的Driver
+        registerDriver(new oracle.jdbc.driver.OracleDriver());//oracle的驱动包
+            源码：oracle.jdbc.driver.OracleDriver() implements java.sql.Driver //oracle的Driver实现了java.sql的Driver
+---------------------------------------------------------------------------------------------------------------
+    DriverManager.registerDiver(new Driver());
+    缺点：registerDiver()方法执行了一次注册驱动
+          new Driver()创建对象时又执行了一次注册驱动
+          代码与导包的语句进行了绑定，如果切换了驱动包，那么需要修改代码的导包语句
+          注册的驱动程序越多，执行的越慢
+    建议：该方法现在不常用，使用Class.forName();代替
+---------------------------------------------------------------------------------------------------------------
+
+2. Class.forName("类型") -- 根据类型反射出一个对象
+
+    Class.forName("com.mysql.jdbc.Driver")
+
+    等价于
+
+    Class.forName("com.mysql.jdbc.Driver" , true , this.getClass().getClassLoader())
+    Class.forName("oracle.jdbc.driver.OracleDriver" , true , this.getClass().getClassLoader())
+
+    参数一 ："com.mysql.jdbc.Driver" 需要创建对象的类型
+    参数二 ：只有 initialize 参数为 true 且以前未被初始化时，才初始化该类
+    参数三 ：this.getClass().getClassLoader()类加载器，
+            类加载器负责读取 Java 字节代码，并转换成 java.lang.Class类的一个实例
+
+3. Connection ：java.sql.Connection ，表示数据库的连接
+
+    与特定数据库的连接（会话）。在连接上下文中执行 SQL 语句并返回结果。
+
+    获取连接的方法：Connection conn = DriverManager.getConnection(url,user,password);
+
+        url - jdbc:subprotocol:subname 形式的数据库 url
+        user - 数据库用户，连接是为该用户建立的
+        password - 用户的密码
+
+    获取连接的方法：Connection conn = DriverManager.getConnection(url);
+
+        url - "jdbc:mysql://localhost:3306/mydb1?user=root&password=root"
+
+    获取连接的方法：Connection conn = DriverManager.getConnection(url,Properties对象);
+
+        该方法不常用，因为获取连接直接输入 用户名和密码就可以了，没必要创建一个Properties对象
+
+    创建sql语句对象的方法：conn.createStatement();
+        创建一个 Statement 对象来将 SQL 语句发送到数据库。
+        不带参数的 SQL 语句通常使用 Statement 对象执行。
+
+    创建预编译sql语句的对象：conn.preparedStatement(sql);
+        防止sql注入，一般是动态的sql语句
+
+4.Statement ：用于执行静态 SQL 语句并返回它所生成结果的对象。
+
+    获取Statement的方法：Statement state = conn.createStatement(sql);
+
+    执行sql的方法：state.executeQuery(sql);
+        定义：执行给定的 SQL 语句，该语句返回单个 ResultSet 对象。
+        参数：sql - 要发送给数据库的 SQL 语句，通常为静态 SQL SELECT 语句
+        返回：包含给定查询所生成数据的 ResultSet 对象；永远不能为 null
+
+    执行sql的方法：state.executeUpdate(sql);
+        定义：执行给定 SQL 语句，该语句可能为 INSERT、UPDATE 或 DELETE 语句，
+                    或者不返回任何内容的 SQL 语句（如 SQL DDL 语句）。
+        参数：sql - SQL 数据操作语言（Data Manipulation Language，DML）语句，
+                如 INSERT、UPDATE 或 DELETE；或者不返回任何内容的 SQL 语句，如 DDL 语句。
+        返回：  (1) 对于 SQL 数据操作语言 (DML) 语句，返回行计数
+                (2) 对于什么都不返回的 SQL 语句，返回 0
+
+5.PreparedStatement ：语句预编译对象
+
+    好处1：PreparedStatement提升性能:前提，数据库本身具有sql缓存功能
+        举例：for循环执行1000次有条件查询
+        statement的写法：
+        for (int i = 0; i < 1000 ; i++) {
+            //相当于多次重新的制定sql语句，每一次都是一条新的sql，
+            //每一次都会重新解析sql，解析过程耗费时间
+            statement.executeQuery("select * from table where id = "+i);
+        }
+        PreparedStatement的写法：
+        //相当于只有一条sql语句，只制定一次sql语句
+        ps = conn.preparedStatement("select * from table where id=?");
+        for (int i = 0; i < 1000 ; i++) {
+            //每一次sql语句直接从数据库的缓存中,然后操作该sql语句即可，节省时间
+            ps.setInt(1,i);
+            ps.executeQuery();
+        }
+    好处2：PreparedStatement提升数据安全性
+        举例：根据用户名和密码去，查询某个表中的数据，
+        String username = "123";
+        String password = "123";
+        >>>>>statement的写法：
+        statement.executeQuery("select * from table where username="+username+" and password="+password);
+        >>>>>sql注入如下所示：
+        如果用户所输入的密码如下：password = "'' or 1=1 "
+        数据的安全性将得不到保证：
+        statement.executeQuery("select * from table where username="+username+" and password="+password);
+        select * from table where username='123123' password='' or 1=1 ;
+        >>>>>preparedStatement的写法
+        select * from t where username = ? and password = ?;
+        对JDBC而言，SQL注入攻击只对Statement有效，对PreparedStatement无效，
+        因为PreparedStatement不允许在插入参数时改变SQL语句的逻辑结构。
+        使用预编译的语句对象时，用户传入的任何数据不会和原SQL语句发生匹配关系，
+        无需对输入的数据做过滤。
+        如果用户将 '' or 1=1 传入赋值给占位符，下述SQL语句将无法执行：
+        select * from t where username = ? and password = ''' or 1=1 ';
+
+
+
+6. ResultSet ：表示数据库结果集的数据表，通常通过执行查询数据库的语句生成。
+
+    定义：表示数据库结果集的数据表，通常通过执行查询数据库的语句生成。
+
+    获取结果集的方法：
+        ResultSet rs = statement.executeQuery(sql);
+        ResultSet rs = statement.executeUpdate(sql);
+        ResultSet rs = preparedStatement.executeQuery();
+        ResultSet rs = preparedStatement.executeUpdate();
+
+    遍历结果集的方法：next()方法   while (rs.next()){}
+        定义：将光标从当前位置向前移一行。ResultSet 光标最初位于第一行之前；
+                第一次调用 next 方法使第一行成为当前行；
+                第二次调用使第二行成为当前行，依此类推。
+        返回：如果新的当前行有效，则返回 true；
+              如果不存在下一行，则返回 false
+
+    从结果集中获取数据：
+        columnIndex：列名在table中的排列顺序 ，从1开始
+        columnLabel：table表中的列名
+        返回值类型：列的值
+        getBoolean(columnIndex/columnLabel);
+        getByte(columnIndex/columnLabel);
+        getInt(columnIndex/columnLabel);
+        getShort(columnIndex/columnLabel);
+        getLong(columnIndex/columnLabel);
+        getString(columnIndex/columnLabel);
+        getBlob(columnIndex/columnLabel);
+        getDate(columnIndex/columnLabel);
+        getTime(columnIndex/columnLabel);
+        getTimestamp(columnIndex/columnLabel);
+
+
+
+
+
+
+
+
+

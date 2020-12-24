@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      #center{
+          width: 40%;
+          height: 750px;
+          /*border: 2px solid #FF1493;*/
+          margin: 0 auto;/*外边距，上下距离0px  左右距离 自动居中 */
+          text-align: center;/*文本居中*/
+      }
+      h1 {
+          color: #FF1493;
+      }
+      #register{
+          width: 100%;/*相对于上一级div来说的*/
+          height: 660px;
+          border: 2px solid #FF1493;
+          border-bottom: 0px;/*为了解决底部线条重合问题*/
+          background-color: #F5DEB3;/*注册表单的背景色*/
+      }
+      .rows{
+          width: 100%;
+          height:53px ;/*每一个行的高度*/
+          border-bottom: 2px solid #FF1493;/*每一行的底边显示*/
+          line-height: 53px;/*行高垂直居中*/
+      }
+      .cols1{
+          width: 30%;
+          height: 53px;
+          border-right: 2px solid #FF1493;
+          float:left;/*div飘移到左边*/
+      }
+      .cols2{
+          width: 68%;
+          height: 53px;
+          /*border: 2px solid black;*//*做测试使用*/
+          float:right;/*div飘移到右边*/
+      }
+      textarea{
+          resize: none;/*禁止拖拽文本域的大小*/
+      }
+    </style>
+  </head>
+  <body>
+    <div id="center">
+      <h1>注册表单</h1>
+      <div id="register">
+        <form>
+          <div class="rows">
+            <div class="cols1">
+              用户名：
+            </div>
+            <div class="cols2">
+              <input type="text" name="username" />
+            </div>
+          </div>
+          <div class="rows">
+            <div class="cols1">
+              密码：
+            </div>
+            <div class="cols2">
+              <input type="password" name="password" />
+            </div>
+          </div>
+          <div class="rows">
+            <div class="cols1">
+              确认密码：
+            </div>
+            <div class="cols2">
+              <input type="password" name="password1" />
+            </div>
+          </div>
+          <div class="rows">
+            <div class="cols1">
+              昵称：
+            </div>
+            <div class="cols2">
+              <input type="text" name="name" />
+            </div>
+          </div>
+          <div class="rows">
+            <div class="cols1">
+              邮箱：
+            </div>
+            <div class="cols2">
+              <input type="text" name="email" />
+            </div>
+          </div>
+          <div class="rows">
+            <div class="cols1">
+              上传头像：
+            </div>
+            <div class="cols2">
+              <input type="file" name="file" />
+            </div>
+          </div>
+          <div class="rows">
+            <div class="cols1">
+              性别：
+            </div>
+            <div class="cols2">
+              <input type="radio" name="gender" value="male" />男
+              <input type="radio" name="gender" value="female" />女
+            </div>
+          </div>
+          <div class="rows">
+            <div class="cols1">
+              爱好：
+            </div>
+            <div class="cols2">
+              <input type="checkbox" name="hobby" value="eat" />吃饭
+              <input type="checkbox" name="hobby" value="sleep" />睡觉
+              <input type="checkbox" name="hobby" value="play" />打豆豆
+            </div>
+          </div>
+          <div class="rows">
+            <div class="cols1">
+              所在城市：
+            </div>
+            <div class="cols2">
+              <select name="s1">
+                <option>北京</option>
+                <option>上海</option>
+                <option>广州</option>
+              </select>
+            </div>
+          </div>
+          <div class="rows">
+            <div class="cols1">
+              自我介绍：
+            </div>
+            <div class="cols2">
+              <textarea maxlength="50" cols="33" rows="3" >最多写50个字符</textarea>
+            </div>
+          </div>
+          <div class="rows">
+            <div class="cols1">
+              验证码：
+            </div>
+            <div class="cols2">
+              <input type="text" name="check" />
+              <img src="" alt="" />
+              <input type="button" value="点我" />
+            </div>
+          </div>
+          <div class="rows">
+            <div class="cols3">
+              <input type="submit" />
+              <input type="reset" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

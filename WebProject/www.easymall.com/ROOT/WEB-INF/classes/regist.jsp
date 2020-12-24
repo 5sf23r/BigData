@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="css/regist.css"/>
 		<script src="js/ajax.js"></script>
-		<script src="js/jquery-1.4.2.js"></script>
+		<script src="js/jquery-3.5.1.js"></script>
 		<script>
 			function ajaxCheckUsername(obj){
 				//1. 获取文本框输入的内容value值

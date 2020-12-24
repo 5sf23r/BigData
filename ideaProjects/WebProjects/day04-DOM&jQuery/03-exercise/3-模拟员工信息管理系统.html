@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>table练习</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	body{
+		font-family: "微软雅黑"
+	}
+	h2, h4{ text-align: center; }
+	div#box1, div#box2 {
+		text-align:center;
+	}
+	hr{
+		margin: 20px 0;
+	}
+	table{ 
+		margin: 0 auto; 
+		width: 70%;
+		text-align: center;
+		border-collapse:collapse;
+	}
+	td, th{padding: 7px; width:20%;}
+	th{
+		background-color: #DCDCDC;
+	}
+</style>
+
+<!--引入jquery的js库-->
+<script src="../js/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+
+	//html文档加载完执行
+	$(function(){
+		//为"添加"按钮绑定点击事件(点击按钮添加员工信息到table中)
+		$("#add").click(function(){
+			//获取输入员工信息
+			var id = $.trim($("#box1 input[name='id']").val());	
+			var name = $.trim($("#box1 input[name='name']").val());
+			var email = $.trim($("#box1 input[name='email']").val());	
+			var salary = $.trim($("#box1 input[name='salary']").val());
+			//  校验员工信息
+			//员工信息不能为空
+			if(id == "" || name == "" || email == "" || salary == ""){
+				alert("员工信息不能为空");
+				return;
+			}
+			//员工id不能重复
+			var flag = false;
+			$("table tr").each(function(){
+				//判断id是否等于每行第二个td内的文本, 即id
+				if($(this).find("td:eq(1)").text() == id){
+					alert("ID已存在！");
+					flag = true;
+					return false;
+				}
+			});
+			if(flag){
+				return;
+			}
+			//将新员工的信息插入到员工列表中
+			var $tab = $("table");
+			var $tr = $("<tr></tr>");
+			
+			var $td0 = $("<td><input type='checkbox'></td>");
+			var $td1 = $("<td>"+id+"</td>");
+			var $td2 = $("<td>"+name+"</td>");
+			var $td3 = $("<td>"+email+"</td>");
+			var $td4 = $("<td>"+salary+"</td>");
+			$tr.append($td0).append($td1).append($td2).append($td3).append($td4);
+			$tab.append($tr);
+		});
+
+		//为全选按钮绑定点击事件
+		$("#all").click(function(){
+			//获取全选状态
+			var check = $(this).attr("checked");
+			//将所有复选框状态与全选保持一致
+			$("table input[type='checkbox']").attr("checked",check);
+		});
+
+		//为"删除"绑定点击事件(点击"删除",删除所选员工信息)
+		$("#del").click(function(){
+			$("input:checked:not(input[id='all'])").parents("tr").remove();
+		});
+
+		//为"修改"绑定点击事件(点击"修改",修改指定ID的员工信息)
+		$("#upd").click(function(){
+			//获取修改的员工信息
+		
+			var id = $.trim($("#box2 input[name='id']").val());	
+			var name = $.trim($("#box2 input[name='name']").val());
+			var email = $.trim($("#box2 input[name='email']").val());	
+			var salary = $.trim($("#box2 input[name='salary']").val());
+			//修改员工信息不能为空	
+			if(id == "" || name == "" || email == "" || salary == ""){
+				alert("修改的信息不能为空!");
+				return;
+			}
+			
+			//根据ID修改对应的信息
+			var flag = true;
+			$("table tr").each(function(){
+				//判断id是否等于每行第二个td内的文本, 即id
+				if($(this).find("td:eq(1)").text() == id){
+					//进行修改
+					$(this).find("td:eq(2)").text(name);
+					$(this).find("td:eq(3)").text(email);
+					$(this).find("td:eq(4)").text(salary);
+					flag = false;
+					return false;
+				}
+			})
+			if(flag){
+				alert("修改的员工ID不存在！");
+			}
+		});
+			
+	})
+
+	
+	
+</script>
+</head>
+
+<body>
+	<h2>添加新员工</h2>
+	<div id="box1">
+		ID：<input type="text" name="id"/>
+		姓名：<input type="text" name="name"/>
+		邮箱：<input type="text" name="email"/>
+		工资：<input type="text" name="salary"/>
+		<input type="button" id="add" value="添加"/>
+	</div>
+	<hr/>
+	<table border="1">
+		<tr>
+			<th>
+				<input type="checkbox" id="all"/>
+				<!--全选-->
+			</th>
+			<th>ID</th>
+			<th>姓名</th>
+			<th>邮箱</th>
+			<th>工资</th>
+		</tr>
+		<tr>
+			<td>
+				<input type="checkbox"/>
+			</td>
+			<td>1</td>
+			<td>宋江</td>
+			<td>sj@163.com</td>
+			<td>12000</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="checkbox"/>
+			</td>
+			<td>2</td>
+			<td>武松</td>
+			<td>ws@163.com</td>
+			<td>10500</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="checkbox"/>
+			</td>
+			<td>3</td>
+			<td>孙二娘</td>
+			<td>sen@163.com</td>
+			<td>11000</td>
+		</tr>
+	</table>
+	<h4><a href="#" id="del">删除选中</a></h2>
+
+	<hr/>
+
+	<div id="box2">
+		ID：<input type="text" name="id"/>
+		姓名：<input type="text" name="name"/>
+		邮箱：<input type="text" name="email"/>
+		工资：<input type="text" name="salary"/>
+		<input type="button" id="upd" value="修改"/>
+	</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/EasyMall/EasyMall.iml" filepath="$PROJECT_DIR$/EasyMall/EasyMall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebProjects.iml" filepath="$PROJECT_DIR$/WebProjects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day02-css&amp;js/day02-css&amp;js.iml" filepath="$PROJECT_DIR$/day02-css&amp;js/day02-css&amp;js.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day03-js/day03-js.iml" filepath="$PROJECT_DIR$/day03-js/day03-js.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day04-DOM&amp;jQuery/day04-DOM&amp;jQuery.iml" filepath="$PROJECT_DIR$/day04-DOM&amp;jQuery/day04-DOM&amp;jQuery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day05-jQuery/day05-jQuery.iml" filepath="$PROJECT_DIR$/day05-jQuery/day05-jQuery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day07-jdbc/day07-jdbc.iml" filepath="$PROJECT_DIR$/day07-jdbc/day07-jdbc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day08-jdbc/day08-jdbc.iml" filepath="$PROJECT_DIR$/day08-jdbc/day08-jdbc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day09-tomcat/day09-tomcat.iml" filepath="$PROJECT_DIR$/day09-tomcat/day09-tomcat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day09-webproject/day09-webproject.iml" filepath="$PROJECT_DIR$/day09-webproject/day09-webproject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day10-servlet/day10-servlet.iml" filepath="$PROJECT_DIR$/day10-servlet/day10-servlet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day14-cookie01/day14-cookie01.iml" filepath="$PROJECT_DIR$/day14-cookie01/day14-cookie01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day14-cookie02/day14-cookie02.iml" filepath="$PROJECT_DIR$/day14-cookie02/day14-cookie02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day15-session/day15-session.iml" filepath="$PROJECT_DIR$/day15-session/day15-session.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day16-jsp/day16-jsp.iml" filepath="$PROJECT_DIR$/day16-jsp/day16-jsp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day17-filter/day17-filter.iml" filepath="$PROJECT_DIR$/day17-filter/day17-filter.iml" />
+    </modules>
+  </component>
+</project>

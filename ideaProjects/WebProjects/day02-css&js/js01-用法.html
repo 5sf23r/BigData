@@ -1,0 +1,37 @@
+<script>
+    alert(555);
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js01-基本用法</title>
+    <!--书写方式一：在head标签中写-->
+    <!-- 特点：对不同的html，可以编写html独特的js脚本，其他的页面不能用 -->
+    <script>
+        /*打印语句*/
+        alert(111);
+    </script>
+    <!--书写方式二：引入外部的.js文件-->
+    <!--  特点：任何html都可以重复使用  -->
+    <!--使用双边签，不能进行自闭标签的书写，否则js失效-->
+    <script src="js01.js" ></script>
+</head>
+<body>
+
+    <!--书写方式四：可以写在html的某个标签中-->
+    <a href="javascript:alert(123)" >测试连接</a>
+
+    <script>
+        alert(666);
+    </script>
+</body>
+    <!--书写方式三：js代码写在页面的底部-->
+    <script>
+        alert(333);
+    </script>
+</html>
+
+<script>
+    alert(444);
+</script>

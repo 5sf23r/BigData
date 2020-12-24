@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js02-输出语句</title>
+    <!--四种输出写法-->
+    <script>
+        /*1.弹窗打印*/
+        alert(1);
+        /*2.浏览器的控制台打印：主要是为了打桩测试！！！*/
+        console.log("hahaha");
+        /*3.向浏览器的body中输出信息*/
+        document.write("您好，JavaScript");
+    </script>
+
+</head>
+<body>
+
+    <p id="p1">测试段落</p>
+
+</body>
+<script>
+    /*4.对html页面的某一个标签做修改*/
+    document.getElementById("p1").innerText="这是新的内容";
+</script>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+
+    <!--servlet的映射关系：浏览器请求与servlet代码 的映射关系 -->
+    <servlet>
+        <!--servlet-name是程序员自定义的名字：相当于一个菜名-->
+        <servlet-name>hello</servlet-name>
+        <servlet-class>cn.tedu.servlet.Servlet01_servlet接口</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <!--必须与servlet标签的name对应-->
+        <servlet-name>hello</servlet-name>
+        <!--浏览器发送请求的资源路径：相当于 客户点菜-->
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+    <!--这是案例02的映射关系-->
+    <servlet>
+        <servlet-name>demo02</servlet-name>
+        <servlet-class>cn.tedu.servlet.Servlet02_GenericServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>demo02</servlet-name>
+        <url-pattern>/demo02</url-pattern>
+    </servlet-mapping>
+
+    <!--这是案例03的映射关系-->
+    <servlet>
+        <servlet-name>demo03</servlet-name>
+        <servlet-class>cn.tedu.servlet.Servlet03_HttpServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>demo03</servlet-name>
+        <url-pattern>/demo03</url-pattern>
+    </servlet-mapping>
+
+</web-app>

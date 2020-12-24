@@ -266,6 +266,17 @@
     - [[#1-概述-1][1. 概述]]
     - [[#2-在页面中引入jstl标签库][2. 在页面中引入JSTL标签库]]
   - [[#课堂笔记-6][课堂笔记]]
+    - [[#jsp-2][JSP]]
+      - [[#jsp原生态技术][JSP原生态技术]]
+        - [[#jsp的入门][JSP的入门]]
+        - [[#jsp的演变过程][JSP的演变过程：]]
+        - [[#jsp的基础语法编写][JSP的基础语法编写：]]
+        - [[#jsp的page指令][JSP的Page指令]]
+        - [[#九大隐式对象概述][九大隐式对象概述]]
+        - [[#pagecontext对象][pageContext对象]]
+        - [[#jsp标签技术][JSP标签技术]]
+      - [[#el表达式技术][EL表达式技术]]
+      - [[#jstl标准标签库][JSTL标准标签库]]
 - [[#javaee开发模式][javaEE开发模式]]
 - [[#重构easymall项目][重构EasyMall项目]]
 - [[#修改easymall页面][修改EasyMall页面]]
@@ -12450,9 +12461,11 @@ JSTL全程JavaServerPages Standard Tag Library。由JCP（Java Community Process
 Java EE 5包及其以上版本都已经支持jstl标签库，所以在页面中直接书写指令引入使用即可。
 <%@taglib uri="" prefix=""%>
 ** 课堂笔记
-1. JSP的入门
+*** JSP
+**** JSP原生态技术
+***** JSP的入门
    JSP：Java Server Page,服务器端的java代码的页面;底层其实是一段java代码，是一段servlet代码！！！
-2. JSP的演变过程：
+***** JSP的演变过程：
    1. 早期：只有servlet,没有jsp时
       业务场景：商城主界面，浏览器发送一个主界面的请求，服务器端的servlet给浏览器一个响应，响应的内容是：HTML+JS+CSS+数据！！！这样一个完整的页面。
       #+BEGIN_SRC java
@@ -12491,7 +12504,7 @@ Java EE 5包及其以上版本都已经支持jstl标签库，所以在页面中�
          - regist_jsp.class
            字节码文件，最终jsp执行的是 .class的字节码文件
       2. JSP页面底层是一个servlet代码，其中存在常见的对象：request对象，response对象等等~~
-3. JSP的基础语法编写：
+***** JSP的基础语法编写：
    - 创建一个jspDemo01.jsp,位置 web\jspdemo
      访问：http://localhost/jspdemo/jspDemo01.jsp
      #+BEGIN_SRC html
@@ -12549,7 +12562,7 @@ Java EE 5包及其以上版本都已经支持jstl标签库，所以在页面中�
        </html>
 
      #+END_SRC
-4. JSP的Page指令
+***** JSP的Page指令
    [[./Img/jspPage.png]]
    - 创建一个jspDemo02.jsp,位置web\jspdemo
      访问：http://localhost/jspdemo/jspDemo02.jsp
@@ -12603,6 +12616,180 @@ Java EE 5包及其以上版本都已经支持jstl标签库，所以在页面中�
 
      #+END_SRC
 
+***** 九大隐式对象概述
+#+BEGIN_SRC html
+  <%@ page session="true" contentType="text/html;charset=UTF-8" language="java" errorPage="error.jsp" %>
+  <html>
+    <head>
+      <title>Title</title>
+    </head>
+    <body>
+      <h1>九大隐式对象概述</h1>
+      <p>
+        所谓隐式对象就是：程序员无需自定义对象，这些对象由jsp-servlet的API内部实现和封装
+      </p>
+      <p>
+        page对象：final java.lang.Object page = this，不常用 <br/>
+        <%= page.getClass() %>
+      </p>
+      <p>
+        config对象：final javax.servlet.ServletConfig config;<br/>
+        <%= config.getInitParameterNames()%>
+      </p>
+      <p>
+        application对象：final javax.servlet.ServletContext application;<br/>
+        <%= application.getInitParameter("test")%>
+      </p>
+      <p>
+        response对象：final javax.servlet.http.HttpServletResponse response<br/>
+        <%= response.getContentType()%>
+      </p>
+      <p>
+        request对象：javax.servlet.http.HttpServletRequest request <br/>
+        <%=request.getSession().getId()%>
+
+      </p>
+      <p>
+        session对象：javax.servlet.http.HttpSession session <br/>
+        <%= session.getId() %>
+      </p>
+      <p>
+        out对象：javax.servlet.jsp.JspWriter out  ; <br/>
+        <%=out.getClass() %>
+      </p>
+      <p>
+        exception对象：java.lang.Throwable exception = org.apache.jasper.runtime.JspRuntimeLibrary.getThrowable<br/>
+        <%--<%int i = 1/0;%>--%>
+        需要配合其他异常页面完成
+      </p>
+      <hr>
+    </body>
+  </html>
+#+END_SRC
+[[./SourceCode/a.jsp]]
+
+***** pageContext对象
+#+BEGIN_SRC html
+  <%@ page session="true" contentType="text/html;charset=UTF-8" language="java" errorPage="error.jsp" %>
+  <html>
+    <head>
+      <title>Title</title>
+    </head>
+    <body>
+      <hr>
+      <h1>pageContext对象：作为入口对象获取其他八种隐式对象：</h1>
+      <p>
+        <br/>
+        作为入口对象获取其他八种隐式对象：<br/>
+        pageContext.getException()=<%=pageContext.getException()%><br/>
+        pageContext.getPage()=<%=pageContext.getPage()%><br/>
+        pageContext.getRequest()=<%=pageContext.getRequest()%><br/>
+        pageContext.getResponse()=<%=pageContext.getResponse()%><br/>
+        pageContext.getServletConfig()=<%=pageContext.getServletConfig()%><br/>
+        pageContext.getServletContext()=<%=pageContext.getServletContext()%><br/>
+        pageContext.getPage()=<%=pageContext.getPage()%><br/>
+        pageContext.getSession()=<%=pageContext.getSession()%>
+      </p>
+      <hr>
+      <h2>pagecontext对象：作为入口对象,四大域对象属性</h2>
+      <p>
+        request域对象常量PageContext.REQUEST_SCOPE：<%=PageContext.REQUEST_SCOPE%><br/>
+        session域对象常量PageContext.SESSION_SCOPE：<%=PageContext.SESSION_SCOPE%><br/>
+        application域对象常量PageContext.APPLICATION_SCOPE：<%=PageContext.APPLICATION_SCOPE%><br/>
+        page域对象常量PageContext.PAGE_SCOPE：<%=PageContext.PAGE_SCOPE%>
+      </p>
+      <hr>
+      <h2>pagecontext对象：操作所有域中属性的方法</h2>
+      <p>
+        <h3>1.pagecontext对象：获取attribute属性键值对</h3>
+        <%
+          //session三种写法
+          session.setAttribute("key", "session-value");
+          pageContext.setAttribute("key","session-value",PageContext.SESSION_SCOPE);
+          pageContext.getSession().setAttribute("key","session-value");
+          //application三种写法
+          application.setAttribute("key", "application-value");
+          pageContext.setAttribute("key","application-value",PageContext.APPLICATION_SCOPE);
+          pageContext.getSession().setAttribute("key","application");
+          //request三种写法
+          request.setAttribute("key", "request-value");
+          //pageContext三种写法
+          pageContext.setAttribute("key", "pagecontext-value");
+          %>
+        session-key:<%=pageContext.getAttribute("key",PageContext.SESSION_SCOPE)%><br>
+        application-key:<%=pageContext.getAttribute("key",PageContext.APPLICATION_SCOPE)%><br>
+        request-key:<%=pageContext.getAttribute("key",PageContext.REQUEST_SCOPE)%><br>
+        pagecontext-key:<%=pageContext.getAttribute("key",PageContext.PAGE_SCOPE)%>
+        <h3>2.pagecontext对象：查找四大域对象的属性键值对</h3>
+        顺序1--pageContext：【<%=pageContext.findAttribute("key")%>】<br>
+        <%-- removeAttribute方法：如果不指定scope，它将删除四大作用域对象的key --%>
+        删除pageContext中的key：【<%pageContext.removeAttribute("key",PageContext.PAGE_SCOPE);%>】<br>
+        <%-- getAttribute方法：前提：remove不能删除所有的域，不然无法获取；
+             如果不指定scope，它不能自动的去其他域获取key-value --%>
+        <%-- findAttribute方法：自动的注意搜索四大域对象，从小到大的顺序 --%>
+        顺序2--Request：【<%=pageContext.findAttribute("key")%>】<br>
+        删除Request中的key：【<%pageContext.removeAttribute("key",PageContext.REQUEST_SCOPE);%>】<br>
+        顺序3--session：【<%=pageContext.findAttribute("key")%>】<br>
+        删除session中的key：【<%pageContext.removeAttribute("key", PageContext.SESSION_SCOPE);%>】<br>
+        顺序4--application：【<%=pageContext.findAttribute("key")%>】<br>
+        删除application中的key：【<%pageContext.removeAttribute("key", PageContext.APPLICATION_SCOPE);%>】<br>
+        如果都找不到：【<%=pageContext.findAttribute("key")%>】<br>
+        <h3>3.pagecontext对象：作为域对象使用：默认查找顺序即可</h3>
+        <%request.setAttribute("key1", "value1");%>
+        <%=pageContext.findAttribute("key1")%>
+        <h3>4.pagecontext对象：跳转到其他资源</h3>
+        <%pageContext.forward("../index.jsp");%>
+      </p>
+      <h1></h1>
+      <hr>
+      <h1></h1>
+      <hr>
+    </body>
+  </html>
+#+END_SRC
+[[./SourceCode/b.jsp]]
+***** JSP标签技术
+#+BEGIN_SRC html
+  <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+  <html>
+    <head>
+      <title>Title</title>
+    </head>
+    <body>
+      <h1>JSP标签：由sun公司提供，属于jsp规范中的内容，不需要引入第三方标签库，我们介绍其中的三个。</h1>
+      <%-- 原生态标签的基本格式：<jsp:标签名></jsp:标签名> --%>
+      <p>
+        jsp:include:【<jsp:include page="jsp03.jsp"></jsp:include>】
+        等价于：request.getRequestDispatcher("/jsp03.jsp").include(request,response)
+      </p>
+      <p>
+        <%-- 页面在进行跳转时，可以携带param参数进行跳转 --%>
+        jsp:forward:【<jsp:forward page="jsp03.jsp">】
+          jsp:param:【<jsp:param name="username" value="123213"/>】
+          【<jsp:param name="password" value="110"/>】
+          【</jsp:forward>】
+      </p>
+    </body>
+  </html>
+#+END_SRC
+
+**** EL表达式技术
+[[./Img/EL.png]]
+[[./SourceCode/ELDemo1.jsp]]
+[[./SourceCode/ELDemo2.jsp]]
+[[./SourceCode/ELDemo3.jsp]]
+
+**** JSTL标准标签库
+[[./Img/JSTL.png]]
+[[./SourceCode/cout.jsp]]
+[[./SourceCode/cset.jsp]]
+[[./SourceCode/cremove.jsp]]
+[[./SourceCode/ccatch.jsp]]
+[[./SourceCode/cif.jsp]]
+[[./SourceCode/cforeach.jsp]]
+[[./SourceCode/cfortokends.jsp]]
+[[./SourceCode/cchoose.jsp]]
+[[./SourceCode/curl.jsp]]
 * javaEE开发模式
 1. 纯Servlet开发 单纯的servlet开发，如果面对复杂页面将会难于处理，所以前台HTML内容还是应 该放在页面中书写。
 2. 纯JSP开发

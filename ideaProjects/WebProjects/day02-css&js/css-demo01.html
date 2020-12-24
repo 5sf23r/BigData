@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css01-css选择器</title>
+    <style>/*内嵌样式表*/
+        /*1.元素选择器：根据标签名，选择同一类型的标签*/
+        /*语法格式： 标签名{}   */
+        div {
+            color: pink;
+            background-color: yellow;
+        }
+        /*2.id选择器：每一个html标签都一个id属性，id是标签的唯一标识*/
+        /*语法格式：#id属性的值{}  */
+        #d1 {
+            color: white;
+            background-color: black;
+        }
+        /*3.class选择器：类选择器，根据标签中的class属性选择，可选多个*/
+        /*语法格式：.class属性的值 {}  */
+        .c1 {
+            color: red;
+        }
+        /*4.后代选择器：html标签有多层嵌套关系，不止有子节点，还有孙子节点等等*/
+        /*语法格式： 父节点  子节点 {} */
+        div span {
+            color: blue;
+        }
+        /*5.子元素选择器：选择特定的标签的子节点，不包含孙子节点*/
+        /*语法格式： 父节点>子节点{}  */
+        #d2>p{
+            color: red;
+        }
+        /*6.分组选择器：可以同时选择多个不同的标签，分成一组设置样式  */
+        span,p,#d1,.c1 {
+            color: green;
+        }
+        /*7.属性选择器：*/
+        /*包含所有属性type的标签*/
+        *[type]{
+            background-color: blue;
+        }
+        /*可以选择指定标签的某个属性*/
+        input[value]{
+            background-color: green;
+        }
+        /*可以选择指定标签的某个  属性="值" 的形式 *  /
+         */
+        input[name='password']{
+            background-color: fuchsia;
+        }
+        /*可以选择指定标签的 多个 属性键值对 的形式*/
+        input[type][name][value]{
+            background-color: black;
+        }
+        /*8.伪元素选择器： “伪”指得是html已经为我们提供好的选择器 */
+        a:link{/*未被点击的状态*/
+            background-color: brown;
+        }
+        a:visited{/*被点击过的状态*/
+            background-color: yellow;
+        }
+        a:hover{/*鼠标停留的状态*/
+            background-color: green;
+        }
+        a:active{/*鼠标正在点击的状态*/
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <!--容器标签-->
+    <div>我是一个块级元素，测试元素选择器</div>
+    <div>我是一个块级元素，测试元素选择器</div>
+    <div id="d1">我是一个块级元素，测试id选择器</div>
+    <div>我是一个块级元素，测试元素选择器</div>
+    <div class="c1">我是一个块级元素，测试class选择器</div>
+    <div class="c1">我是一个块级元素，测试class选择器</div>
+    <div class="c1">我是一个块级元素，测试class选择器</div>
+
+    <!--页面的布局是嵌套的形式-->
+    <div id="d2">
+        测试后代选择器
+        <div>这是子节点div
+            <span>这是孙子节点span</span>
+            <p>这是孙子节点P</p>
+        </div>
+        <span>这是子节点span</span>
+        <p>这是子节点P</p>
+    </div>
+    <input type="text" name="username" value="测试" />
+    <input type="text" name="password" value="123213" />
+    <input type="text" name="email" />
+    <a href="#">测试的伪元素选择器</a>
+</body>
+</html>

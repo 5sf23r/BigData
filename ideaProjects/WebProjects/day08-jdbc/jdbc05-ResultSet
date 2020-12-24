@@ -1,0 +1,29 @@
+1.ResultSet其实是一个可滚动的结果集
+
+    属性：
+       Statement stmt = conn.createStatement(type, concurrency);
+       PreparedStatement stmt = conn.prepareStatement(sql, type, concurrency);
+       其中type取值：
+       	TYPE_FORWARD_ONLY：只能向前移动，默认参数
+       	TYPE_SCROLL_INSENSITIVE：可滚动，不感知数据变化
+       	TYPE_SCROLL_SENSITIVE：可滚动，感知数据变化
+       concurrency取值：
+       	CONCUR_READ_ONLY：只读
+       	CONCUR_UPDATABLE：可更新
+
+
+
+
+    方法：next();结果集的光标向下逐行移动
+    	first：指针移动到第一条
+    	last：指针移动到最后一条
+    	beforeFirst：指针移动到第一条之前
+    	afterLast：指针移动到最后一条之后
+    	isFirst：判断指针是否指向第一条
+    	isLast：判断指针是否指向最后一条
+    	isBeforeFirst：判断指针是否在第一条之前
+    	isAfterLast：判断指针是否在最后一条之后
+    	relative：移动到当前指针的相对位置
+    	next：移动到下一条
+    	previous：移动到前一条
+    	absolute：移动到绝对位置
