@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/EasyMall/EasyMall.iml" filepath="$PROJECT_DIR$/EasyMall/EasyMall.iml" />
       <module fileurl="file://$PROJECT_DIR$/WebProjects.iml" filepath="$PROJECT_DIR$/WebProjects.iml" />
       <module fileurl="file://$PROJECT_DIR$/day02-css&amp;js/day02-css&amp;js.iml" filepath="$PROJECT_DIR$/day02-css&amp;js/day02-css&amp;js.iml" />
       <module fileurl="file://$PROJECT_DIR$/day03-js/day03-js.iml" filepath="$PROJECT_DIR$/day03-js/day03-js.iml" />
