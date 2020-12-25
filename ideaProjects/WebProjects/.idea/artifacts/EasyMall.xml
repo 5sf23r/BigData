@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="EasyMall">
-    <output-path>$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT</output-path>
+    <output-path>$PROJECT_DIR$/../../WebProject/EasyMall/ROOT</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="EasyMall/web/Web" />
       <element id="directory" name="WEB-INF">
@@ -10,7 +10,6 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="EasyMall-lib" />
         </element>
-        <element id="dir-copy" path="$PROJECT_DIR$/EasyMall/web" />
       </element>
     </root>
   </artifact>

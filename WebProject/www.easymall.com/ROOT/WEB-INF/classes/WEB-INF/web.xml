@@ -3,22 +3,4 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
-    <context-param>
-        <param-name>encoding</param-name>
-        <param-value>utf-8</param-value>
-    </context-param>
-    <context-param>
-        <param-name>key4</param-name>
-        <param-value>value4</param-value>
-    </context-param>
-
-    <servlet>
-        <servlet-name>config01</servlet-name>
-        <servlet-class>cn.tedu.demo.ServletConfig01</servlet-class>
-        <!-- init-param是当前servlet的初始化配置信息 -->
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>config01</servlet-name>
-        <url-pattern>/config01</url-pattern>
-    </servlet-mapping>
 </web-app>

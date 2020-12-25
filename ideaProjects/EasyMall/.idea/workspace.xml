@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="EasyMall" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="275908ae-c3ae-4bcb-8f00-da668a4db933" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/WEB-INF/lib/c3p0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/WEB-INF/lib/commons-logging-1.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/WEB-INF/lib/commons-pool2-2.9.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/WEB-INF/lib/mchange-commons-java-0.2.20.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/WEB-INF/lib/mysql-connector-java-8.0.22.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/_foot.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/_head.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/_foot.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/_foot.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/_head.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/_head.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/Request01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/Request02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/Request03.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/Request04.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/Response01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/Response02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/Response03.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/Response04.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/Response05.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/ServletConfig01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/ServletConfig02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/ServletContext01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/demo/ServletContext02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/filter/EncodingFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/filter/MyHttpServletRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/servlet/AjaxCheckUsername.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/servlet/LoginServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/servlet/RegisterServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/servlet/ValidateCodeServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/utils/C3P0Util.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/utils/ValiImageServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/utils/VerifyCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/cn/tedu/utils/WebUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/css/foot.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/css/foot.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/css/head.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/css/head.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/css/regist.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/css/regist.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/head/logo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/head/logo.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/head/qr.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/head/qr.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/217.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/217.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv_l1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv_l1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv_l2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv_l2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv_l3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/adv_l3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/banner_big.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/banner_big.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/icon_g1.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/icon_g1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/icon_g2.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/icon_g2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/icon_g3.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/icon_g3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/icon_g4.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/index/icon_g4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/regist/yzm.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/regist/yzm.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/regist/zc.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/regist/zc.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/regist/zc_btn01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/regist/zc_btn01.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/regist/zc_btn02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/img/regist/zc_btn02.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/js/jquery-3.5.1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/jspdemo/errorPage.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/jspdemo/jspDemo01.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/jspdemo/jspDemo02.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/param.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/param.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/regist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/classes/regist.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/css/foot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/css/head.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/css/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/css/regist.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/head/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/head/qr.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/217.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/adv1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/adv2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/adv3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/adv4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/adv_l1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/adv_l2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/adv_l3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/banner_big.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/icon_g1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/icon_g2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/icon_g3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/index/icon_g4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/regist/yzm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/regist/zc.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/regist/zc_btn01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/img/regist/zc_btn02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/js/ajax.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/js/jquery-3.5.1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/jspdemo/errorPage.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/jspdemo/jspDemo01.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/jspdemo/jspDemo02.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/param.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/regist.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/_foot.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/_foot.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/_head.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/_head.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/css/foot.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/css/foot.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/css/head.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/css/head.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/css/regist.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/css/regist.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/head/logo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/head/logo.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/head/qr.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/head/qr.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/217.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/217.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv_l1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv_l1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv_l2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv_l2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv_l3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/adv_l3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/banner_big.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/banner_big.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/icon_g1.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/icon_g1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/icon_g2.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/icon_g2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/icon_g3.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/icon_g3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/icon_g4.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/index/icon_g4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/regist/yzm.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/regist/yzm.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/regist/zc.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/regist/zc.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/regist/zc_btn01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/regist/zc_btn01.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/regist/zc_btn02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/img/regist/zc_btn02.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/js/jquery-3.5.1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/jspdemo/errorPage.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/jspdemo/jspDemo01.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/jspdemo/jspDemo02.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/param.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/param.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/regist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../WebProject/www.easymall.com/ROOT/regist.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/.idea/artifacts/EasyMall.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../WebProjects/.idea/artifacts/EasyMall.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../WebProjects/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/01-注册" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/02-参数的乱码的问题" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/03-请求的转发" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/04-response响应重定向" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/05-ajax的开发步骤" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/06-jquery-ajax" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/07-cookie&amp;session" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/08-session" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/09-jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/EasyMall.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/c3p0-config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/Request01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/Request02.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/Request03.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/Request04.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/Response01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/Response02.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/Response03.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/Response04.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/Response05.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/ServletConfig01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/ServletConfig02.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/ServletContext01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/demo/ServletContext02.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/filter/EncodingFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/filter/MyHttpServletRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/servlet/AjaxCheckUsername.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/servlet/LoginServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/servlet/RegisterServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/servlet/ValidateCodeServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/utils/C3P0Util.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/utils/ValiImageServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/utils/VerifyCode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/src/cn/tedu/utils/WebUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/WEB-INF/lib/c3p0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/WEB-INF/lib/commons-logging-1.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/WEB-INF/lib/commons-pool2-2.9.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/WEB-INF/lib/mchange-commons-java-0.2.20.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/WEB-INF/lib/mysql-connector-java-8.0.22.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/_foot.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/_head.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/c3p0-config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Request01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Request02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Request03.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Request04.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Response01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Response02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Response03.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Response04.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/Response05.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/ServletConfig01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/ServletConfig02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/ServletContext01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/demo/ServletContext02.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/filter/EncodingFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/filter/MyHttpServletRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/servlet/AjaxCheckUsername.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/servlet/LoginServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/servlet/RegisterServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/servlet/ValidateCodeServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/utils/C3P0Util.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/utils/ValiImageServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/utils/VerifyCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/cn/tedu/utils/WebUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/css/foot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/css/head.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/css/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/css/regist.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/head/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/head/qr.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/217.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/adv1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/adv2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/adv3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/adv4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/adv_l1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/adv_l2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/adv_l3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/banner_big.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/icon_g1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/icon_g2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/icon_g3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/index/icon_g4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/regist/yzm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/regist/zc.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/regist/zc_btn01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/img/regist/zc_btn02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/js/ajax.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/js/jquery-3.5.1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/jspdemo/errorPage.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/jspdemo/jspDemo01.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/jspdemo/jspDemo02.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/param.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/classes/regist.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/lib/c3p0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/lib/commons-logging-1.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/lib/commons-pool2-2.9.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/lib/mchange-commons-java-0.2.20.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/lib/mysql-connector-java-8.0.22.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/_foot.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/_head.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/css/foot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/css/head.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/css/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/css/regist.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/head/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/head/qr.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/217.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/adv1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/adv2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/adv3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/adv4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/adv_l1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/adv_l2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/adv_l3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/banner_big.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/icon_g1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/icon_g2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/icon_g3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/index/icon_g4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/regist/yzm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/regist/zc.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/regist/zc_btn01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/img/regist/zc_btn02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/js/ajax.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/js/jquery-3.5.1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/jspdemo/errorPage.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/jspdemo/jspDemo01.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/jspdemo/jspDemo02.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/param.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebProjects/EasyMall/web/regist.jsp" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProjectId" id="1m6OcGDseciwjdDyITgRgmdHXmp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web" />
+      <recent name="$PROJECT_DIR$/src/com/easymall/filter" />
+      <recent name="$PROJECT_DIR$/src/com/easymall/utils" />
+      <recent name="$PROJECT_DIR$/src/com/easymall/servlet" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="EasyMall" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.40" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:9090/" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <deployment>
+        <artifact name="EasyMall">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="4f3d2ae0-54ad-4844-b1ee-2be35e2a2cba" />
+        <option name="HTTP_PORT" value="9090" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="58041" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="EasyMall" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="275908ae-c3ae-4bcb-8f00-da668a4db933" name="Default Changelist" comment="" />
+      <created>1608810651598</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608810651598</updated>
+      <workItem from="1608810654014" duration="8032000" />
+      <workItem from="1608830371001" duration="551000" />
+      <workItem from="1608831122202" duration="92000" />
+      <workItem from="1608831243108" duration="10694000" />
+      <workItem from="1608878102197" duration="718000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
