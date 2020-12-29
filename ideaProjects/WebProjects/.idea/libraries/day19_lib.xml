@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="day19-lib">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/day19-Log4j/web/WEB-INF/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/day19-Log4j/web/WEB-INF/lib" recursive="false" />
+  </library>
+</component>

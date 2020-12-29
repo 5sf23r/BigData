@@ -3,6 +3,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/EasyMall/web/_foot.jsp" value="file://$PROJECT_DIR$/EasyMall/web" />
         <entry key="file://$PROJECT_DIR$/EasyMall/web/regist.jsp" value="file://$PROJECT_DIR$/EasyMall/web" />
         <entry key="file://$PROJECT_DIR$/day16-jsp/web/jsp/jsp03.jsp" value="file://$PROJECT_DIR$/day16-jsp/web/jsp" />
         <entry key="file://$PROJECT_DIR$/day16-jsp/web/jstl/03-cremove.jsp" value="file://$PROJECT_DIR$/day16-jsp/web/jstl" />

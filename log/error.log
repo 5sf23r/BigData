@@ -1,0 +1,9 @@
+2020-12-29 18:38:52 [ main:9 ] - [ ERROR ] 错误日志信息
+2020-12-29 18:38:52 [ main:10 ] - [ FATAL ] 致命的日志信息
+2020-12-29 18:43:49 [ http-nio-9090-exec-4:35044 ] - [ ERROR ] 用户[张飞]已经登录Mall
+2020-12-29 19:06:42 [ http-nio-9090-exec-7:1408147 ] - [ ERROR ] 用户[zhangfei]已经登录Mall
+2020-12-29 19:15:16 [ http-nio-9090-exec-1:21384 ] - [ ERROR ] 用户[zhangfei]已经登录Mall
+2020-12-29 19:25:23 [ http-nio-9090-exec-10:73883 ] - [ ERROR ] 用户[zhangfei]已经登录Mall
+2020-12-29 19:33:42 [ http-nio-9090-exec-7:36159 ] - [ ERROR ] 用户[zhangfei]已经登录Mall
+2020-12-29 19:45:31 [ http-nio-9090-exec-5:40076 ] - [ ERROR ] 用户[zhangfei]已经登录Mall
+2020-12-29 20:23:34 [ http-nio-9090-exec-3:49063 ] - [ ERROR ] 用户[zhangfei]已经登录Mall

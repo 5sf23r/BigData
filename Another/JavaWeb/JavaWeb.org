@@ -265,6 +265,17 @@
   - [[#jstl标签库][JSTL标签库]]
     - [[#1-概述-1][1. 概述]]
     - [[#2-在页面中引入jstl标签库][2. 在页面中引入JSTL标签库]]
+    - [[#3-jstl标签库的字库][3. JSTL标签库的字库]]
+    - [[#4-命名空间或名称空间概念][4. 命名空间或名称空间概念]]
+    - [[#5-核心函数库][5. 核心函数库]]
+      - [[#1-cset标签][1. c:set标签]]
+      - [[#2-cremove-删除指定域中的域属性][2. c:remove 删除指定域中的域属性]]
+      - [[#3-cif判断][3. c:if判断]]
+      - [[#4-ccatch-捕获异常][4. c:catch 捕获异常]]
+      - [[#5-cchoose-多重判断][5. c:choose 多重判断]]
+      - [[#6-cforeach遍历循环][6. c:forEach遍历循环]]
+        - [[#1-如果是利用自身数据遍历][1. 如果是利用自身数据遍历]]
+        - [[#2-如果是遍历其他数据结构][2. 如果是遍历其他数据结构]]
   - [[#课堂笔记-6][课堂笔记]]
     - [[#jsp-2][JSP]]
       - [[#jsp原生态技术][JSP原生态技术]]
@@ -278,8 +289,47 @@
       - [[#el表达式技术][EL表达式技术]]
       - [[#jstl标准标签库][JSTL标准标签库]]
 - [[#javaee开发模式][javaEE开发模式]]
-- [[#重构easymall项目][重构EasyMall项目]]
-- [[#修改easymall页面][修改EasyMall页面]]
+- [[#filter过滤器][Filter过滤器]]
+  - [[#概述][概述]]
+  - [[#实现][实现]]
+  - [[#过滤器的api][过滤器的API]]
+  - [[#filter的生命周期][Filter的生命周期]]
+  - [[#责任链模式][责任链模式]]
+  - [[#过滤器实现全栈乱码处理][过滤器实现全栈乱码处理]]
+    - [[#装饰者模式][装饰者模式]]
+    - [[#全局字符集开关设置][全局字符集开关设置]]
+- [[#easymall自动登录][EasyMall自动登录]]
+- [[#md5加密算法][MD5加密算法]]
+  - [[#简介][简介]]
+  - [[#引入][引入]]
+  - [[#修改项目servlet中的password][修改项目servlet中的password]]
+  - [[#修改数据库中的密码为md5加密算法的结果][修改数据库中的密码为MD5加密算法的结果]]
+- [[#listener监听器][Listener监听器]]
+  - [[#概述-1][概述]]
+  - [[#监听分类][监听分类]]
+    - [[#监听三大作用域创建和销毁的监听器][监听三大作用域创建和销毁的监听器]]
+    - [[#监听三大作用域中属性变化的监听器][监听三大作用域中属性变化的监听器]]
+- [[#监听器---修改easymall][监听器---修改EasyMall]]
+  - [[#监听easymall网站的日志信息][监听EasyMall网站的日志信息]]
+  - [[#手机网站中的日志信息][手机网站中的日志信息]]
+- [[#log4j日志框架][Log4j日志框架]]
+  - [[#概述-2][概述]]
+  - [[#使用方式][使用方式]]
+  - [[#日志文件的组成][日志文件的组成]]
+  - [[#使用log4j][使用Log4j]]
+- [[#事物][事物]]
+  - [[#创建实例数据库][创建实例数据库]]
+  - [[#事物的概念][事物的概念]]
+  - [[#数据库中实现事务][数据库中实现事务]]
+  - [[#在jdbc中实现事务的控制][在JDBC中实现事务的控制]]
+  - [[#事物四大特征acid][事物四大特征(ACID)]]
+  - [[#隔离性][隔离性]]
+    - [[#情景一][情景一]]
+    - [[#情景二][情景二]]
+    - [[#情景三][情景三]]
+  - [[#数据库的隔离级别][数据库的隔离级别]]
+  - [[#数据库中的锁][数据库中的锁]]
+  - [[#行级锁和表级锁][行级锁和表级锁]]
 #+END_QUOTE
 
 * Web概述
@@ -12460,6 +12510,161 @@ JSTL全程JavaServerPages Standard Tag Library。由JCP（Java Community Process
 *** 2. 在页面中引入JSTL标签库
 Java EE 5包及其以上版本都已经支持jstl标签库，所以在页面中直接书写指令引入使用即可。
 <%@taglib uri="" prefix=""%>
+*** 3. JSTL标签库的字库
+核心标签库 core - c
+#+BEGIN_SRC html
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+#+END_SRC
+- 国际化标签 fmt
+- 数据库标签 sql
+- XML标签 xml
+- JSTL函数(EL函数)
+*** 4. 命名空间或名称空间概念
+在uri中包含两部分内容，一个是url，是常见的location地址保存形式。还有一个URN保存的内容是一个名称，这个名称看起来像是一个地址，但是本质存储的是一个Naming，所 以把这中命名方式称之为名称空间或者命名空间。
+*** 5. 核心函数库
+**** 1. c:set标签
+   设置或修改域中的值,设置或修改map中的值,设置修改javaBean中的数据
+   #+BEGIN_SRC html
+     <h4>c:set标签，设置或修改值</h4>
+     <c:set var="a" value="bj" scope="request"></c:set> ${a }
+     <c:set var="a" value="sh" scope="request"></c:set> ${a}
+     <h3>c:set设置或修改map中的值</h3>
+     <%
+       Map<String,String> map = new HashMap<String,String>();
+       pageContext.setAttribute("map", map);
+     %>
+     <c:set target="${map }" property="addr" value="重庆"></c:set> ${map }
+     ${map.addr}
+     <c:set target="${map }" property="addr" value="宝安"></c:set> ${map.addr }
+     <h4>c:set设置或修改javabean中的属性</h4>
+     <%
+       Person p = new Person("李帅",18,"北京");
+       pageContext.setAttribute("p",p);
+     %>
+     <c:set target="${p }" property="name" value="朴乾"></c:set> ${p.name }
+     ${p.age }
+     <!-- javabean中不存在的属性不能直接设置值 -->
+     <%-- <c:set target="${p }" property="gender" value="男"></c:set>--%> <%-- ${p.gender } --%>
+   #+END_SRC
+**** 2. c:remove 删除指定域中的域属性
+   #+BEGIN_SRC html
+     <h3>c:remove</h3> <h4>c:remove删除指定域中的域属性</h4>
+     <c:set var="name" value="张三丰" scope="request"></c:set>
+     ${name }
+     <br>
+     <c:remove var="name" scope="request"></c:remove> 调用remove:${name }
+     <h4>删除全部域中的域属性</h4>
+     <%
+       application.setAttribute("namex", "大一"); session.setAttribute("namex", "大二"); request.setAttribute("namex", "大三");
+       pageContext.setAttribute("namex", "大四");
+     %>
+     <%-- <c:remove var="namex"></c:remove> --%>
+     <c:remove var="namex" scope="request"></c:remove>
+     ${applicationScope.namex }
+     ${sessionScope.namex }
+     ${requestScope.namex }
+     ${pageScope.namex }
+#+END_SRC
+**** 3. c:if判断
+#+BEGIN_SRC html
+  <h3>c:if</h3>
+   <h4>c:if判断</h4>
+   <c:set var="i" value="10" scope="request"></c:set>
+   <c:if test="${i<=10 }" var="flag">
+     no~~~
+   </c:if>
+   <c:if test="${i>10 }" var="f">
+     yes
+   </c:if>
+   ${flag }
+   ${f }
+#+END_SRC
+**** 4. c:catch 捕获异常
+#+BEGIN_SRC html
+  <h3>c:catch</h3>
+  <h4>c:catch捕获异常信息</h4>
+  <c:catch var="e">
+  <%
+  String str = null;
+    str.toUpperCase();
+  %>
+  </c:catch> ${e }
+#+END_SRC
+**** 5. c:choose 多重判断
+可以实现一个类似于if else的判断结构。
+#+BEGIN_SRC html
+  <h3>c:choose</h3>
+  <h4>c:choose实现多重判断</h4>
+  <c:set var="b" value="18" scope="request"></c:set>
+  <c:choose >
+    <c:when test="${b<10 }" >小于10</c:when>
+    <c:when test="${b<100 }">大于10小于100</c:when>
+    <c:when test="${b<1000 }">大于100小于1000</c:when>
+    <c:otherwise>大于1000</c:otherwise>
+  </c:choose>
+#+END_SRC
+多重判断的结果不需要使用变量展示，满足c:when或者从c:otherwise结果会打印在页面当中。
+**** 6. c:forEach遍历循环
+可以循环指定数据内容，也可以遍历一个数据结构。 forEach中有varStatus属性，属性可以引用的内容如下:
+| 属性  | 类型    | 意义                             |
+| index | number  | 现在指到成员的索引               |
+| cout  | number  | 总共指到的成员的总数             |
+| first | boolean | 现在指到的成员是否为第一个成员   |
+| last  | boolean | 现在指到的成员是否为最后一个成员 |
+***** 1. 如果是利用自身数据遍历
+#+BEGIN_SRC html
+  <c:forEach begin="10" end="100" step="1" var="o" varStatus="stat">
+    ${stat.index }
+  </c:forEach>
+#+END_SRC
+循环中会认为10即为第十个下标。打印结果为 10 11 12
+***** 2. 如果是遍历其他数据结构
+#+BEGIN_SRC html
+  <%
+    List<String> list = new LinkedList<String>();
+    list.add("danny");
+    list.add("jenny");
+    list.add("liming"); list.add("laowang"); pageContext.setAttribute("list", list);
+  %>
+  <c:forEach items="${list }" var="h" varStatus="stat">
+    ${h }
+    ${stat.index }
+  </c:forEach>
+#+END_SRC
+循环中下标会从0开始计数,打印结果为 danny 0 jenny1 .....
+#+BEGIN_SRC html
+  <h3>c:forEach实现循环</h3>
+  <h4>c:forEach循环数字</h4>
+  <c:forEach begin="1" end="100" step="1" var="q">
+    ${q }
+  </c:forEach>
+  <h4>c:forEach遍历链表</h4>
+  <%
+    List<String> list = new LinkedList<String>(); list.add("danny");
+    list.add("jenny");
+    list.add("liming");
+    list.add("laowang");
+    pageContext.setAttribute("list", list);
+  %>
+  <c:forEach items="${list }" var="h">
+    ${h}
+  </c:forEach>
+  <c:forEach begin="10" end="100" step="1" var="o" varStatus="stat">
+    ${stat.index }
+  </c:forEach>
+  <br>
+  问题:遍历一个10到100的全部偶数，如果当前总数的下标为3的倍数，则将这个数据变为红色。
+  <br>
+  <c:forEach begin="10" end="100" step="2" var="r" varStatus="s">
+    <c:if test="${s.count%3 == 0}">
+      <font color="red">${r }</font>
+    </c:if>
+    <c:if test="${s.count%3 != 0 }">
+      <font color="blue">${r }</font>
+    </c:if>
+  </c:forEach>
+#+END_SRC
+
 ** 课堂笔记
 *** JSP
 **** JSP原生态技术
@@ -12793,216 +12998,575 @@ Java EE 5包及其以上版本都已经支持jstl标签库，所以在页面中�
 * javaEE开发模式
 1. 纯Servlet开发 单纯的servlet开发，如果面对复杂页面将会难于处理，所以前台HTML内容还是应 该放在页面中书写。
 2. 纯JSP开发
-   相比servlet开发，纯jsp开发比较简单，但是面对复杂页面构成和代码逻辑的时 候，HTML内容和Java语句内容相互嵌套，如果书写有误则会造成完全无法使用， 代码可读性低，可维护性需求较高，便捷性较低。
+   相比servlet开发，纯jsp开发比较简单，但是面对复杂页面构成和代码逻辑的时候，HTML内容和Java语句内容相互嵌套，如果书写有误则会造成完全无法使用，代码可读性低，可维护性需求较高，便捷性较低。
 3. JSP+JSP标签库
-   利用JSP+JSP标签库的确简化了页面内容，但是面对复杂的逻辑需求是，在JSP页 面中标签库可能无法处理，需要自行设计标签，而且这些标签域HTML标签相互 嵌套，对于页面代码的可读性来说还是较低，由于逻辑代码和页面展示代码耦合 在一起所以管理起来十分不便。
+   利用JSP+JSP标签库的确简化了页面内容，但是面对复杂的逻辑需求是，在JSP页面中标签库可能无法处理，需要自行设计标签，而且这些标签域HTML标签相互嵌套，对于页面代码的可读性来说还是较低，由于逻辑代码和页面展示代码耦合 在一起所以管理起来十分不便。
 4. java+javaBean (Model One 模式一)
-   在模式一中JSP页面负责展示页面内容和调用javaBean中的方法。在javaBean中负 责提供封装数据和提供方法。在JSP页面中既展示HTML内容也书写java代码逻辑， 一个模块进行两个模块的工作，导致如果出现问题，模块之间会相互影响，所以 应该将JSP页面中的两部分工作，拆分成两个模块，降低模块之内的耦合性。
-5. Servlet+javaBean+JSP Model Two模式二
-   模式二将javaEE处理的数据分成了三部分。在Servlet中主要负责接收请求，和根 据请求调用javabean中的方法。在javaBean中主要负责封装数据和提供方法。杂 JSP页面中只负责数据和页面的展示。在这样的模型下，摸一个模块都进行各自模
-   分区 day15-javaEEDesignModel 的第 1 页
-   JSP页面中只负责数据和页面的展示。在这样的模型下，摸一个模块都进行各自模 块功能，各个模块之间已经很大程度的降低了耦合性，各自执行各自的工作，当 前模块产生异常，只需寻找当前模块的异常问题，无序寻找其他模块的问题。
+   [[./Img/模式一.png]]
+   在模式一中JSP页面负责展示页面内容和调用javaBean中的方法。在javaBean中负责提供封装数据和提供方法。在JSP页面中既展示HTML内容也书写java代码逻辑，一个模块进行两个模块的工作，导致如果出现问题，模块之间会相互影响，所以 应该将JSP页面中的两部分工作，拆分成两个模块，降低模块之内的耦合性。
+5. Servlet+javaBean+JSP (Model Two模式二)
+   [[./Img/模式二.png]]
+   模式二将javaEE处理的数据分成了三部分：
+   - 在Servlet中主要负责接收请求，和根据请求调用javabean中的方法。
+   - 在javaBean中主要负责封装数据和提供方法。
+   - 在JSP页面中只负责数据和页面的展示。
+   在这样的模型下，摸一个模块都进行各自模块功能，各个模块之间已经很大程度的降低了耦合性，各自执行各自的工作，当前模块产生异常，只需寻找当前模块的异常问题，无序寻找其他模块的问题。
    #+BEGIN_SRC
      三个模块之间:
         相互独立。虽然存在耦合，但是这个耦合是必要的存在，如果抛弃这个耦合将会使每个模块完全独立，导致无法一起工作。
         模块之间相互协作，可读性已经最大程度的提升，代码量虽然有所上升，但是更加便于代码的维护和管理。
    #+END_SRC
 6. MVC设计思想
+   [[./Img/MVC.png]]
    MVC设计思想并不是javaEE特有的设计思想，而是在设计程序代码的时候，一个 通用的设计思想，在其他语言和程序中同样也适用。
-   MVC设计思想一共分为三个部分，第一是负责接收用户发送请求的Controller(控 制器),接收请求之后，根据用户请求的内容，调用对应模型中的方法。第二是负 责提供封装数据和方法的Model(模型),模型中有用户请求发送来的数据，以及数 据处理的方法，model处理完用户数据之后，将结果数据再次范围到Controller 中。第三是负责展示用户结果数据View(视图),View中，将Controller传递的结 果数据不做任何处理直接展示到页面当中。
+
+   MVC设计思想一共分为三个部分:
+   - 第一是负责接收用户发送请求的Controller(控制器),接收请求之后，根据用户请求的内容，调用对应模型中的方法。
+   - 第二是负责提供封装数据和方法的Model(模型),模型中有用户请求发送来的数据，以及数 据处理的方法，model处理完用户数据之后，将结果数据再次范围到Controller中。
+   - 第三是负责展示用户结果数据View(视图),View中，将Controller传递的结 果数据不做任何处理直接展示到页面当中。
    特点:
-       MVC中三个模块都各自执行各自模块的功能，模块之间相互独立。 正是因为模块之间相互独立，所以代码的管理更加便捷，可维护性更强。
+   - MVC中三个模块都各自执行各自模块的功能，模块之间相互独立。 正是因为模块之间相互独立，所以代码的管理更加便捷，可维护性更强。
 7. JavaEE经典三层架构
-* 重构EasyMall项目
-1. 创建EasyMall web应用
-2. 将原有EasyMall的静态资源引入
-   将原有web应用全部静态资源复制到新的EasyMallweb应用中
-3. 导入开发包以及配置文件 在WEB-INF的lib中有开发所需包
-4. 复制web.xml文件内容 将原有web应用的web.xmln内容复制到新的EasyMall 的web.xml中
-5. 根据经典架构---构建新的目录结构
-6. 导入动态资源和工具类
-7. 修改web.xml文件中的配置信息
-   将原有的com.easymall.servlet 更改为com.easymall.web
-8. 创建JavaBean--User 用来存储用户信息数据
-   #+BEGIN_SRC java
-   #+END_SRC
-9. 实现登录功能:
-   1. 修改LoginServlet
-   2. 创建UserService
-   3. 创建异常类MsgException
-   4. 创建UserDao
-   5. head.jsp修改:
-10. 实现注册功能
-    1. 修改 RegistServlet:
-    2. 修改UserService:
-    3. 修改UserDao:
-11. 注销功能
-12. 作业:
-    a. 配置一个错误友好提示页面。<error-page></error-page>
-1. JSTL标签库概述
-   JSTL全称为JavaServerPages Standard Tag Library。由JCP(Java Community Process)指定标准。是提供给 Java Web 开发人员一个标准通用的标签函数库。可以和 EL 配合来取代传统直接在页面上嵌入 Java 程序(Scripting)的做法，以提高程 序可读性、维护性和方便性。
-2. 在页面中引入jstl标签库
-   java EE 5包及其以上版本都已经支持jstl标签库，所以在页面中直接书写指令引入使用即可。
+   [[./Img/javaee经典三层架构.png]]
+* Filter过滤器
+** 概述
+- Servlet三大技术之一。实用性最高的技术之一。它能够实现如下功能: 作用:乱码过滤、响应压缩数据、网盘快传、权限设置、敏感词汇过滤
+- 过滤器中存在责任链模式。
+- 过滤器主要拦截的是访问服务器资源的请求和服务器响应的内容，拦截的数据可以进行处理，处理后可以放行或者不放行，若放行，放行前后都可以添加额外的代码。
+** 实现
+- 创建一个普通类，使类实现一个filter接口
+  #+BEGIN_SRC java
+    package filter;
+    import javax.servlet.*;
+    import java.io.IOException;
+
+    /*
+    ,* 过滤器的编写步骤：
+    ,* 1. 写一个类实现 javax.servlet.Filter接口
+    ,* 2. 编写web.xml文件，配置过滤器的映射关系
+    ,* */
+    public class FilterDemo01 implements Filter {
+        //用于过滤器的初始化工作
+        //FilterConfig对应的是web.xml中配置的过滤器的映射关系，与servlet的映射类似
+        //当服务器启动时加载web.xml，解析过滤器的配置信息
+        //形成filterConfig对象存储于内存中
+        @Override
+        public void init(FilterConfig filterConfig) throws ServletException {
+            System.out.println("filter01 init......");
+        }
+        //过滤器实现业务逻辑的核心
+        //filterChain：过滤器链，多个过滤器之间按照拦截顺序逐一把请求拦截
+        //拦截的顺序：根据每一个过滤器的名字，按照字符串的字典顺序进行拦截
+        @Override
+        public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+            System.out.println("filter start......");
+            //表示处理完毕当前的过滤器，会放行到下一个过滤器
+            //如果没有下一个过滤器，那么会放行到请求对应的servlet中
+            filterChain.doFilter(servletRequest,servletResponse);
+            System.out.println("filter end......");
+        }
+        //服务器关闭时，或者filter过滤器将被移除tomcat容器时，需要处理的销毁方法
+        @Override
+        public void destroy() {
+            System.out.println("filter01 destroy......");
+        }
+    }
+  #+END_SRC
+  #+BEGIN_SRC java
+    package filter;
+    import javax.servlet.*;
+    import javax.servlet.annotation.WebFilter;
+    import java.io.IOException;
+    //过滤器的注解：@WebFilter
+    //过滤器的参数：filterName="程序员自定义的名字"
+    //过滤器的参数：value="/*" 代表url请求路径与filter类的映射关系
+    @WebFilter(filterName = "FilterDemo02",value ="/*")
+    public class FilterDemo02 implements Filter {
+        public void destroy() {
+            System.out.println("filter02 destroy......");
+        }
+
+        public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+            System.out.println("filter02 start......");
+            chain.doFilter(req, resp);
+            System.out.println("filter02 end......");
+        }
+
+        public void init(FilterConfig config) throws ServletException {
+            System.out.println("filter02 init......");
+        }
+
+    }
+  #+END_SRC
+- 配置filter/filter-mapping映射标签
+  #+BEGIN_SRC html
+    <?xml version="1.0" encoding="UTF-8"?>
+    <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+             version="5.0">
+        <filter>
+            <filter-name>filter01</filter-name>
+            <filter-class>filter.FilterDemo01</filter-class>
+        </filter>
+        <filter-mapping>
+            <filter-name>filter01</filter-name>
+            <url-pattern>/*</url-pattern>
+        </filter-mapping>
+    </web-app>
+  #+END_SRC
+  @WebFilter(filtername = "FileterDemo2",value="/*")
+  - 出现此句话时不需要在web.xml中配置FileterDemo02的过滤器的映射关系
+** 过滤器的API
+- destroy()
+  在当前web应用被移出容器(web被销毁的时候)调用次方法完成善 后的操作。
+- init(FileterConfig filterConfig)
+  在web应用创建的时候自动创建一个filter对象在当前tomcat内存当 中，提供服务，创建对象的时候会自动调用一次init方法。
+- doFilter(ServletRequest request,ServletResponse response,FilterChain chain)
+  在每一次的请求或响应过程当中，都会访问一次filter中的doFilter方法，在这里可以对request和response进行处理，处理过后可以选择放行或者不放行，如果放行则在放行前后的代码中可以进行 一些额外的操作。
+** Filter的生命周期
+在web应用启动的时候filter会自动加载，并且创建一个对象驻留在内容当中，创建对象的时候会主动调用一次init方法完成初始化的操作。驻留在内存中的对象会一直拦截后续指定的请求，内存中只有第一次初始化的时候创建的唯一一个filter对象。在一个请求或响应被拦截的时候会调用filter身上的doFiIter方法对请求或响应拦截，然后进行处理，处理后的结果可以放行，也可以不放行。如 果放行，在放行前后可以添加额外的操作。在web容器被销毁的时候filter对象 也会被销毁，在filter对象销毁之前会调用destory方法完成一些善后的操作。
+** 责任链模式
+- 在过滤使用过程中，可以配置多个过滤器，过滤器按照web.xml文件中filter-mapping配置的顺序进行拦截，多个过滤器连接在一起就构成了一个责任链模式的过滤器。
+- doFilter方法执行前后代码都可以正常运行，在所有filter中的doFilter之前的代码会按照filter-mapping的配置顺序执行，在访问结束的时候，filter中doFilter之后的代码会按照filter-mapping配置相反的顺序执行。
+** 过滤器实现全栈乱码处理
+*** 装饰者模式
+装饰类和被装饰类实现一个共同的接口，在装饰类提供一个填写一个填写被装饰类的对象的入口，将被装饰的对象传入，将被传入的对象身上的方法进行改造。
+#+BEGIN_SRC java
+  package com.mall.filter;
+
+  import javax.servlet.http.HttpServletRequest;
+  import javax.servlet.http.HttpServletRequestWrapper;
+  import java.io.UnsupportedEncodingException;
+  import java.util.HashMap;
+  import java.util.Map;
+
+  //继承HttpServletRequestWrapper才能重写request获取参数的API
+  //只有重写这些API才能重新定义解码过程
+  public class MyHttpServletRequest extends HttpServletRequestWrapper {
+      //需要在web.xml中配置context-param标签
+      String encode = null;
+      //调用父类有参构造
+      //encode参数来接收过滤器传入的字符集
+      public MyHttpServletRequest(HttpServletRequest request,String encode) {
+          super(request);
+          this.encode = encode;
+      }
+      //该方法中存在了请求中的所有参数：需要遍历map集合，注意取出value值，逐一进行编码
+      @Override
+      public Map<String, String[]> getParameterMap() {
+          //1. 获取请求中的参数的map集合
+          Map<String, String[]> parameterMap = super.getParameterMap();
+          //2. 定义一个新的map集合：已经进行编码处理过的map
+          HashMap<String, String[]> newmap = new HashMap<String,String[]>();
+          //3. 遍历原始的map集合，然后注意进行编码处理
+          for(Map.Entry<String,String[]> entry:parameterMap.entrySet()){
+              String key = entry.getKey();
+              //3.1 获取原始的没有编码处理的values数组
+              String[] value = entry.getValue();
+              //3.2 定义一个新的数组，存放编码处理之后devalue
+              String[] newvalue = new String[value.length];
+              //3.3 遍历原始的values数组
+              for(int i = 0;i<value.length;i++){
+                  try {
+                      String s = new String(value[i].getBytes("iso-8859-1"), encode);
+                      newvalue[i] = s;
+                  }catch (UnsupportedEncodingException e){
+                      e.printStackTrace();
+                  }
+              }
+              //3.4 map中每一个key对应的values数组处理完毕后，放入到newmap中
+              newmap.put(key,newvalue);
+          }
+          return newmap;
+      }
+
+      //该方法中存在了某一个name，也就是map中的key，对应的value值需要出入参数name，便利value值的数组，注意进行编码
+      @Override
+      public String[] getParameterValues(String name) {
+          //1. 直接调用
+          Map<String, String[]> parameterMap = this.getParameterMap();
+          //2. 通过name 获取values数组
+          String[] strings = parameterMap.get(name);
+          return strings;
+      }
+
+      //该方法中的name也是map中的key，先获取对应的values数组，然后取出下标为0的第一个元素，然后进行编码即可
+      @Override
+      public String getParameter(String name) {
+          //根据用户传入的参数名获取对应名称的参数值
+          //结果为一个数组，取出数组第一个元素即为getParameter方法的返回值
+          //1. 直接调用
+          String[] parameterValues = this.getParameterValues(name);
+          //考虑方法中的参数可能不存在，导致执行方法出现values=null的结果
+          //为了避免null[0]这种情况，应该对结果做出如下判断
+          return parameterValues!=null?parameterValues[0]:"";
+      }
+  }
+#+END_SRC
+#+BEGIN_SRC java
+  package com.mall.filter;
+
+  import javax.servlet.*;
+  import javax.servlet.annotation.WebFilter;
+  import javax.servlet.http.HttpServletRequest;
+  import java.io.IOException;
+  //全栈乱码处理
+  @WebFilter(filterName = "EncodingFilter",value="/*")
+  public class EncodingFilter implements Filter {
+      String encode = null;
+      public void destroy() {
+      }
+
+      public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+          //这是请求的编码格式：请求的方式：GET/POST，还需要考虑其他物种请求方式
+          //设计思路：1. 使用字节流获取参数，并进行编码：String(value.getBytes("iso-8859-1"),"utf-8")
+          MyHttpServletRequest request1 = new MyHttpServletRequest((HttpServletRequest) req,encode);
+          //设置响应的编码格式
+          resp.setContentType("text/html;charset="+encode);
+          //过滤器链的放行方法，一般放在过滤器的最后一句
+          //因为过滤的业务逻辑，是要放行之前就要处理好的
+          chain.doFilter(request1, resp);
+      }
+
+      public void init(FilterConfig config) throws ServletException {
+          encode = config.getServletContext().getInitParameter("encode");
+      }
+
+  }
+#+END_SRC
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8"?>
+  <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+           version="5.0">
+      <context-param>
+          <param-name>encode</param-name>
+          <param-value>utf-8</param-value>
+      </context-param>
+  </web-app>
+#+END_SRC
+*** 全局字符集开关设置
+在使用get提交乱码处理的过程中，我们始终认为服务器一定为iso-8859-1，但是实际上有些服务器可能是utf-8，有些则可能是iso-8859-1，面对不同的服务器配置，我们的代码应该事先一个通用的效果，所以为了实现这个效果，我们需要添加一个控制是否使用乱码处理的开关，开关打开则启用乱码处理，开关关闭则取消乱码处理。
+#+BEGIN_SRC java
+  package com.mall.filter;
+
+  import javax.servlet.*;
+  import javax.servlet.annotation.WebFilter;
+  import javax.servlet.http.HttpServletRequest;
+  import java.io.IOException;
+  //全栈乱码处理
+  @WebFilter(filterName = "EncodingFilter",value="/*")
+  public class EncodingFilter implements Filter {
+      String encode = null;
+      Boolean use_encode = false;
+      public void destroy() {
+      }
+
+      public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+          //在返回request对象的时候判断是否使用乱码处理后的request对象
+          //这是请求的编码格式：请求的方式：GET/POST，还需要考虑其他物种请求方式
+          //设计思路：1. 使用字节流获取参数，并进行编码：String(value.getBytes("iso-8859-1"),"utf-8")
+          ServletRequest request =use_encode? new MyHttpServletRequest((HttpServletRequest) req,encode):req;
+          //设置响应的编码格式
+          resp.setContentType("text/html;charset="+encode);
+          //过滤器链的放行方法，一般放在过滤器的最后一句
+          //因为过滤的业务逻辑，是要放行之前就要处理好的
+          chain.doFilter(request, resp);
+      }
+
+      public void init(FilterConfig config) throws ServletException {
+          encode = config.getServletContext().getInitParameter("encode");
+          //是否开启字符集
+          use_encode = Boolean.parseBoolean(config.getServletContext().getInitParameter("use_encode"));
+      }
+
+  }
+
+#+END_SRC
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8"?>
+  <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+           version="5.0">
+      <!-- 全局字符集开关设置 -->
+      <context-param>
+          <param-name>use_encode</param-name>
+          <param-value>true</param-value>
+      </context-param>
+      <!-- 全局字符集设置 -->
+      <context-param>
+          <param-name>encode</param-name>
+          <param-value>utf-8</param-value>
+      </context-param>
+  </web-app>
+#+END_SRC
+* EasyMall自动登录
+在login.jsp页面中有一个复选框【30天自动登录】，选中之后应该在每一次打开浏览器访问EasyMall服务器上任意一个资源的时候都能实现自动登录的效果。为了实现这个效果，决定使用filter和cookie两项技术解决这个问题。
+* MD5加密算法
+** 简介
+又称作数据摘要算法。MD5可以对重要数据进行加密，还可以对重要文件加密，加密之后文件会产生一个加密结果，所有MD5加密后都应该得到这个结果，如果结果发生变化则证明当前文件已经被其他人修改。利用这个特点可以校验文件的 完整性和正确性。
+- 作用
+  1. 秒传
+  2. 加密
+  3. 文件完整性和正确性
+** 引入
+** 修改项目servlet中的password
+#+BEGIN_SRC java
+  MD5Utils.md5(password);
+#+END_SRC
+** 修改数据库中的密码为MD5加密算法的结果
+#+BEGIN_SRC sql
+  update user set password = md5(password);
+#+END_SRC
+* Listener监听器
+** 概述
+servlet三大技术之一。用于监听某一个域或者域中属性的变化，一旦数据发生 改变，则会触发监听器执行对应的操作。
+** 监听分类
+JAVAEE开发中，监听器共有三类八种。
+*** 监听三大作用域创建和销毁的监听器
+- ServletContextListener
+- HttpSessionListener
+- ServletRequestListener
+*** 监听三大作用域中属性变化的监听器
+- ServletContextAttributeListener
+- HttpSessionAttributeListener
+- ServletRequestAttributeListener
+* 监听器---修改EasyMall
+** 监听EasyMall网站的日志信息
+在EasyMall网站中有很多用户的操作过程，可以将这些用户的操作过程进行记录，记录后的数据可以为后期的数据处理分析提供使用
+** 手机网站中的日志信息
+1. 监听EasyMall这个web应用的创建 --- ServletContextListener
+2. 监听用户登录和注销的过程 --- HttpSessionListener
+3. 监听用户发送的请求 --- ServletRequestListener
+* Log4j日志框架
+** 概述
+log for java 在大部分的java程序都现在都已经使用log4j日志框架来收集日 志。原因是log4j使用简单，操作便捷，非常善于日志的收集。
+** 使用方式
+1. 编写一个log4j的配置文件。放入src目录。
+2. 在类中添加一个Logger类型的对象，通过这个对象记录日志。
+3. 导入log4j的jar包。
+** 日志文件的组成
+1. 日志输出级别。
+   设置日志的输出级别，用来区分当前日志信息的重要程度，日志对程序影响的越严重日志级别越高。如果用户指定日志输出级别，则在日志中输出当前指定级别及其以上级别的日志信息。(注意:根中可以对日志级别做出全局的 规定。)
    #+BEGIN_SRC
-     <%@taglib uri="" prefix=""%>
+     off 最高等级， 用于关闭所有日志记录。
+     fatal 指出每个严重的错误事件将会导致应用程序的退出。
+     error 指出虽然发生错误事件， 但仍然不影响系统的继续运行。
+     warn 表明会出现潜在的错误情形。
+     info 一般和在粗粒度级别上， 强调应用程序的运行全程。
+     debug 一般用于细粒度级别上， 对调试应用程序非常有帮助。
+     all 最低等级， 用于打开所有日志记录
    #+END_SRC
-3. JSTL标签库的子库
-   核心标签库 core - c
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    国际化标签 fmt
-    数据库标签 sql
-    XML标签 xml
-    JSTL函数(EL函数)
-4. 命名空间或名称空间概念
-   在uri中包含两部分内容，一个是url，是常见的location地址保存形式。还有一个URN保存 的内容是一个名称，这个名称看起来像是一个地址，但是本质存储的是一个Naming，所 以把这中命名方式称之为名称空间或者命名空间。
-5. 核心函数库
-   1. c:set标签
-      设置或修改域中的值，设置或修改map中的值，设置修改javaBean中的数据
-      #+BEGIN_SRC
-        <h4>c:set标签，设置或修改值</h4>
-            <c:set var="a" value="bj" scope="request"></c:set>
-            ${a}
-            <c:set var="a" value="sh" scope="request"></c:set>
-            ${a}
-        <h3>c:set设置或修改map中的值</h3>
-            <%
-                Map<String,String> map = new HashMap<String,String>();
-                pageContext.setAttribute("map", map);
-            %>
-            <c:set target="${map }" property="addr" value="重庆"></c:set> ${map }
-            ${map.addr}
-            ${map.addr}
-            <c:set target="${map }" property="addr" value="宝安"></c:set> ${map.addr }
-        <h4>c:set设置或修改javabean中的属性</h4>
-            <%
-                Person p = new Person("李帅",18,"北京");
-                pageContext.setAttribute("p",p);
-            %>
-            <c:set target="${p }" property="name" value="朴乾"></c:set>
-            ${p.name }
-            ${p.age }
-              <!-- javabean中不存在的属性不能直接设置值 -->
-              <%-- <c:set target="${p }" property="gender" value="男"></c:set>--%>
-              <%-- ${p.gender } --%>
-        #+END_SRC
-   2. c:remove 删除指定域中的域属性
-      #+BEGIN_SRC
-        <h3>c:remove</h3>
-            <h4>c:remove删除指定域中的域属性</h4>
-            <c:set var="name" value="张三丰" scope="request"></c:set>
-            ${name}
-            <br>
-                <c:remove var="name" scope="request"></c:remove>
-                调用remove:${name }
-        <h4>删除全部域中的域属性</h4>
-        <%
-            application.setAttribute("namex", "大一");
-            session.setAttribute("namex", "大二");
-            request.setAttribute("namex", "大三");
-            pageContext.setAttribute("namex", "大四");
-        %>
-        <%-- <c:remove var="namex"></c:remove> --%>
-        <c:remove var="namex" scope="request"></c:remove>
-        ${applicationScope.namex }
-        ${sessionScope.namex }
-        ${requestScope.namex }
-        ${pageScope.namex }
-   3. c:if判断
-      #+BEGIN_SRC
-       <h3>c:if</h3>
-           <h4>c:if判断</h4>
-            <c:set var="i" value="10" scope="request"></c:set>
-            <c:if test="${i<=10 }" var="flag">
-                no~~~
-            </c:if>
-            <c:if test="${i>10 }" var="f">
-                yes
-            </c:if> ${flag }
-            ${f }
-      #+END_SRC
-   4. c:catch 捕获异常
-      #+BEGIN_SRC
-        <h3>c:catch</h3>
-            <h4>c:catch捕获异常信息</h4>
-            <c:catch var="e">
-                <%
-                    String str = null;
-                    str.toUpperCase();
-                %>
-            </c:catch>
-            ${e }
-      #+END_SRC
-   5. c:choose 多重判断
-      可以实现一个类似于if else的判断结构。
-      #+BEGIN_SRC
-        <h3>c:choose</h3>
-            <h4>c:choose实现多重判断</h4>
-            <c:set var="b" value="18" scope="request"></c:set>
-            <c:choose >
-                <c:when test="${b<10 }" >小于10</c:when>
-                <c:when test="${b<100 }">大于10小于100</c:when>
-                <c:when test="${b<1000 }">大于100小于1000</c:when>
-                <c:other w is e>大 于 10 00</c:other w is e>
-            </c:choose>
-    #+END_SRC
-    多重判断的结果不需要使用变量展示，满足c:when或者从c:otherwise结果会打印在页面当中。
-   6. c:forEach 遍历循环
-      可以循环指定数据内容，也可以遍历一个数据结构。
-      forEach中有varStatus属性，属性可以引用的内容如下:
-      1. 如果是利用自身数据遍历:
-         #+BEGIN_SRC
-           <c:forEach begin="10" end="100" step="1" var="o" varStatus="stat">
-               ${stat.index }
-           </c:forEach>
-         循环中会认为10即为第十个下标。打印结果为 10 11 12
-      2. 如果是遍历其他数据结构:
-         #+BEGIN_SRC
-         <%
-            List<String> list = new LinkedList<String>();
-            list.add("danny");
-            list.add("jenny");
-            list.add("liming");
-            list.add("laowang");
-            pageContext.setAttribute("list", list);
-         %>
-         <c:forEach items="${list }" var="h" varStatus="stat">
-         ${h }
-         ${stat.index }
-         </c:forEach>
-         #+END_SRC
-         循环中下标会从0开始计数,打印结果为 danny 0 jenny1 .....
-         #+BEGIN_SRC
-           <h3>c:forEach实现循环</h3>
-               <h4>c:forEach循环数字</h4>
-               <c:forEach begin="1" end="100" step="1" var="q">
-                   ${q }
-               </c:forEach>
-               <h4>c:forEach遍历链表</h4>
-               <%
-                  List<String> list = new LinkedList<String>();
-                  list.add("danny");
-                  list.add("jenny");
-                  list.add("liming");
-                  list.add("laowang");
-                  pageContext.setAttribute("list", list);
-               %>
-               <c:forEach items="${list }" var="h">
-                   ${h}
-               </c:forEach>
-               <c:forEach begin="10" end="100" step="1" var="o" varStatus="stat">
-                   ${stat.index }
-               </c:forEach>
-               <br>
-         #+END_SRC
-         问题:遍历一个10到100的全部偶数，如果当前总数的下标为3的倍数，则将这个数据变为红色。
-         #+BEGIN_SRC
-           <c:forEach begin="10" end="100" step="2" var="r" varStatus="s">
-               <c:if test="${s.count%3 == 0}">
-                   <font color="red">${r }</font> </c:if>
-               <c:if test="${s.count%3 != 0 }">
-                   <font color="blue">${r }</font>
-               </c:if>
-           </c:forEach>
-         #+END_SRC
-* 修改EasyMall页面
-1. 将页面中的java代码替换为el表达式和jstl标签
+2. 日志输出的位置
+   #+BEGIN_SRC
+     org.apache.log4j.ConsoleAppender(控制台) ，
+     org.apache.log4j.FileAppender(文件) ，
+     org.apache.log4j.DailyRollingFileAppender(每天产生一个日 志文件) ，
+     org.apache.log4j.RollingFileAppender(文件大小到达指定尺寸的时候产生一个新的文件) ，
+     org.apache.log4j.WriterAppender(将日 志信息以流格式发送到任意指定的地方)
+   #+END_SRC
+3. 日志输出的格式
+   设置日志的格式是用来指定数据以何种形式输出到控制台或文件中。
+   #+BEGIN_SRC
+     %p 输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL
+     %r 输出自 应用启动到输出该log信息耗费的毫秒数
+     %c 输出所属的类目，通常就是所在类的全名
+     %t 输出产生该日志事件的线程名
+     %n 输出一个回车换行符，Windows平台为“rn”，Unix平台为“n”
+     %d 输出日 志时间点的日 期或时间，默认格式为ISO8601,也可以在其后指定格式，比如:%d{yyy MMM dd HH: mm: ss, SSS}，输出类似:2002年10月18日22:10:28，921
+     %l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java: 10)
+     %m所需输出的日志信息
+   #+END_SRC
+4. 布局格式
+   #+BEGIN_SRC
+     org.apache.log4j.HTMLLayout(以HTML表格形式布局) ，
+     org.apache.log4j.PatternLayout(可以灵活地指定布局模式) ，
+     org.apache.log4j.SimpleLayout(包含日 志信息的级别和信息字符串) ，
+     org.apache.log4j.TTCCLayout(包含日 志产生的时间、线程、类别等等信息)
+   #+END_SRC
+** 使用Log4j
+创建一个Logger对象，通过Logger对象引出对应级别的日志方法
+   #+BEGIN_SRC
+     #log4j的根， 日志输出级别，各个管道的名称，如果管道名称存在，则必须制定管道对应 的配置内容
+     log4j.rootLogger = debug,stdout,D,E
+     log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+     log4j.appender.stdout.Target = System.out
+     log4j.appender.stdout.layout = org.apache.log4j.PatternLayout
+     log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%m%n
+     log4j.appender.D = org.apache.log4j.DailyRollingFileAppender
+     log4j.appender.D.File = D://logs/log.log
+     log4j.appender.D.Append = true
+     log4j.appender.D.Threshold = DEBUG
+     log4j.appender.D.layout = org.apache.log4j.PatternLayout
+     log4j.appender.D.layout.ConversionPattern = %-d{yyyy-MM-dd HH:mm:ss} [ %t:%r ] - [ %p ] %m%n
+     log4j.appender.E = org.apache.log4j.DailyRollingFileAppender
+     log4j.appender.E.File =D://logs/error.log log4j.appender.E.Append = true
+     log4j.appender.E.Threshold = ERROR
+     log4j.appender.E.layout = org.apache.log4j.PatternLayout
+     log4j.appender.E.layout.ConversionPattern =%-d{yyyy-MM-dd HH\:mm\:ss} [ %t\:%r ] - [ %p ] %m%n
+   #+END_SRC
+   获取日志信息：代码实现
+   #+BEGIN_SRC java
+     package cn.tedu.log4j;
+     import org.apache.log4j.Logger; public class Demo1 {
+         public static Logger logger = Logger.getLogger(Demo1.class);
+         public static void main(String[] args) {
+             logger.debug("调试级别");
+             logger.info("普通日志信息");
+             logger.warn("警告日志信息");
+             logger.error("错误日志信息");
+             logger.fatal("致命的日志信息");
+         }
+     }
+   #+END_SRC
+* 事物
+** 创建实例数据库
+#+BEGIN_SRC sql
+  create table uesr(id int,name varchar(10),money int);
+  insert into user values(1,'a',1000);
+  insert into user values(2,'b',1000);
+#+END_SRC
+** 事物的概念
+事物是一个不可分割的单位，包含一组操作，这组操作要么全部成功，要么全部失败。
+- 案例
+  - 转账：
+    update user set money = money - 100 where name ='a';
+
+    update user set money = money + 100 where name ='b';
+  - 分析：
+    转账中，扣钱和加钱两个步骤必须同时成功，或者同时失败，不能出现任何一条sql语句单独成功或者失败，如果出现这种情况，应该认为是转账失败了，将所有执行的操作全部撤销
+** 数据库中实现事务
+以前执行sql语句时，并未开启事务，是因为数据库中默认情况下一个sql语句就具有一个事务，sql语句执行会对数据库中的数据做出真是修改，即使尝试撤销操作也无法回复已经修改过的数据
+| start transaction; | 开启事务，如果事务开启，则在rollback或commit之前的全部sql语句都是事务的一部分。这些内容要么全程共，要么全失败。 |
+| rollback;          | 回滚事务，将已经修改但是并未提交的数据恢复到之前的内容，这个过程称之为回滚                                      |
+| commit;            | 提交事务，如果事务被提交，则数据库中的数据就真是的发生改变无法撤销这个过程。                                    |
+
+** 在JDBC中实现事务的控制
+| conn.setAutoCommit(boolean); | 设置自动提交，默认状态下参数值为true，代表开启自动提交，本质是表示一个sql语句为一个事务。如果设置为false则表示关闭自动提交，开启事务 |
+| conn.commit();               | 提交事务                                                                                                                             |
+| conn.rollback();             | 回滚事务                                                                                                                             |
+| conn.rollback(SavePoint);    | 设置一个保存点，可以经事务回滚到保存点的位置，回滚到保存点后可以再次对保存点之前的内容选择提交或继续回滚的操作                       |
+
+** 事物四大特征(ACID)
+1. 原子性(Atomicity)
+   原子性表示事务是一个不可分割的单位，这个单位内的所有操作，要么全部成功，要么全部失败。
+2. 一致性(Consistency)
+   一致性表示事务修改前后的数据在完整性上是一致的。
+3. 隔离性(Isolation)
+   隔离性是为数据库线程安全问题提出的，在一个事务执行的过程中，可能被另一个事务所影响，应该控制两个事务之间是相互独立的。
+4. 持久性(Durability)
+   持久性表示数据库中的事务一旦修改了数据，这个修改的过程就是真实的发生了，数据库中的数据也真实的发生的改变。任何人都无法撤销，改变后的数据。
+** 隔离性
+*** 情景一
+脏读：一个事务读取到另一个未提交事务的数据，导致事务提交前后的查询结果不一致。
+#+BEGIN_SRC
+  ----------------------------------------------------------
+  a 1000
+  b 1000
+  ----------------------------------------------------------
+  a:  start transaction;
+      update user set money = money - 100 where name = 'a';
+      update user set money = money + 100 where name = 'b';
+  ----------------------------------------------------------
+  b:  start transaction;
+      select * from user where name = 'b';
+      b --- 1100
+  ----------------------------------------------------------
+  a:  rollback;
+  ----------------------------------------------------------
+  b:
+      select * from user where name = 'b';
+      b --- 1000
+  ----------------------------------------------------------
+#+END_SRC
+*** 情景二
+不可重复读:一个事务读取到了另外一个已经提交的事务，对表中的数据产生了影 响，在事务执行前后查询的数据结果不一致。
+#+BEGIN_SRC
+  ----------------------------------------------------------
+  a为银行客户，b为银行工作人员，b要查询a的账户总额
+  ----------------------------------------------------------
+  a 1000 1000 1000
+  ----------------------------------------------------------
+  b:  start transaction;
+      select 活期 from accout where name = 'a'; --- 1000
+      select 定期 from accout where name = 'a'; --- 1000
+      select 股票 from accout where name = 'a'; --- 1000
+  ----------------------------------------------------------
+  a:  start transaction;
+      update accout set 活期 = 活期 - 100 where name = 'a'; --- 900
+      commit;
+  ----------------------------------------------------------
+  b:  select 活期+定期+股票 from accout where name = 'a'; --- 2900
+      commit;
+#+END_SRC
+*** 情景三
+虚读/幻读:一个事务读取到另一个事务已经被提交的数据，被提交的数据对整张 表的结果产生的了影响。
+#+BEGIN_SRC
+  ----------------------------------------------------------
+  a 1000
+  ----------------------------------------------------------
+  b 2000
+  ----------------------------------------------------------
+  c:  start transaction;
+      select sum(money) from user; ---总额 3000
+      select count(name) from user; --- 总人数 2
+  ----------------------------------------------------------
+  d:  start transaction;
+      insert into user values(3,'d',3000); --- d存入3000
+      commit;
+  ----------------------------------------------------------
+  c:  select avg(money) from user; --- 2000;
+      commit;
+  ----------------------------------------------------------
+#+END_SRC
+在数据库的事务中，数据库厂商已经对事务的原子性、一致性和持久性进行的实现，只保留隔离性没有做出明确的实现，是因为用户在面对线程安全问题的时候， 可能会有不同的需求。
+情景分析：
+1. 两个线程都是读操作，是否会发生线程安全问题?
+   不会。因为两个读操作不会读数据进行修改，无论如何读取数据，读取的结果都不会发生改变。所以不会出现线程安全问题。
+2. 两个线程都是写操作，是否会发生线程安全问题?
+   会。合理的添加数据库中的锁，可以解决线程安全问题。
+3. 一个读线程，一个写线程，是否会发生线程安全问题?
+   在面对一个读线程一个，写线程的时候，可能会发生线程安全问题，如果这 个问题出现，是否解决这个问题需要再次讨论。
+分析结果：
+- 如果两个线程都为读则不会发生线程安全问题，无需修改任何数据库的隔离级别问题。如果两个线程都为写则一定会发生线程安全问题，这时必须要修改数据库的隔离级别为serializable，才能避免线程安全问题。如果一个读，一个写线程，则可能会发生线程安全问题，所发生的线程安全问题可以选择解决，也可以不解决，取决于具体的开发情景。如果需要解决数据库也提供了四种数据库的隔离级别，可以手动设置这些隔离级别。 在面对一个读，一个写线程时，可能出现的问题有:脏读、不可重复读、虚读/幻读
+
+** 数据库的隔离级别
+
+| read uncommitted | 不管理用户任何的操作，用户任意的读和写，如果出现线程安全问题，也不会做任何处理。在此隔离级别下，脏读、不可重复读、虚读都可能会出现。                                                                          |
+| read committed   | 会对用户的读、写线程进行管理，但是只能避免脏读，不能避免不可重复读和虚读。                                                                                                                                    |
+| repeatable read  | 会对用户的读、写线程进行较强的管理，可以避免脏读和不可重复读，但是不能避免虚读。数据库默认级别                                                                                                                |
+| serializable     | 将数据库修改为一个串行化的工作方式，这种方式下只能允许一个线程操作数据库中的某一张表，由于将多线程强制修改为单线程操作，所以一定不会出现多线程并发安全问题。这种隔离级别可以避免脏读，不可重复读，虚读/幻读。 |
+
+1. 从性能角度排序：
+   read uncommitted > read committed > repeatable read > serializable
+2. 从安全角度排序
+   serializable > repeatable read > read committed >read uncommitted
+3. 数据库中的隔离性，一般不会采用read uncommitted，因为安全性太差，也不会采用serializable，因为效率太低。普遍会使用reapeatable read或者read committed两者之一。这两者读写效率适中，安全性适中，比较适合大部分的开发情景。
+4. 查看数据库的隔离级别：
+   select @@tx_isolation;
+5. 设置数据库的隔离级别：
+   #+BEGIN_SRC sql
+     set global/session transaction isolation level read uncommitted;
+   #+END_SRC
+   设置数据库的隔离级别，当前sql语句中可以使用global来定义全局的隔离级别，由于定义之后是对服务器的配置进行修改，所以需要重启mysql客户端。如果使用session则定义当前会话范围内的隔离级别，只在当前窗口。 如果不写global/session，则表示在下一次的事务当中定义隔离级别。
+** 数据库中的锁
+数据库中有很多种锁：包括共享锁和排他锁。在非serializable级别下，查询不添加任何锁。在serializable级别下，查询会添加共享锁，写操作会添加排他锁。
+1. 特性：
+   - 共享锁和共享锁可以共存
+   - 共享锁和排他锁不能共存
+   - 排他锁和任何锁都不能共存
+2. 如果有共享锁和排他锁同时出现，则后出现的锁需要等待前一个事务的锁释放，才 可以继续执行当前事务。
+3. 死锁
+   - 死锁出现的情况:
+     两个或多个线程相互等待对象释放资源，造成死锁的情况。
+   - 解决死锁:
+     1. 任意杀死一个线程，另外一个线程就可以正常执行。
+     2. 优化锁方案。将锁住部分的代码进行修改，避免死锁的出现。
+** 行级锁和表级锁
+1. 行级锁:
+   表示在数据库表当中为某一行添加锁。当前被锁住的行只允许一个线程操作。
+2. 表级锁:
+   表示在数据库中，为选中的表添加一个表级锁，在一个线程操作当前表的 状态下，不允许另外一个线程操作选中的表。

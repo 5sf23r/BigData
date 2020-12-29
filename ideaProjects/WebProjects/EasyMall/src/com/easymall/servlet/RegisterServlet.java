@@ -135,7 +135,6 @@ public class RegisterServlet extends HttpServlet {
                 return ;
             }
         }
-
         //5.数据库查询是否存在该用户
         Connection connection = C3P0Util.getConnection();
         PreparedStatement ps = null;

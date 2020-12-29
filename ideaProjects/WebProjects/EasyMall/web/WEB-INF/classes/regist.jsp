@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/regist.css"/>
     <script src="js/ajax.js"></script>
     <script src="js/jquery-1.4.2.js"></script>
+
     <script>
         function ajaxCheckUsername(obj) {
             //1.获取文本框输入的内容value值
@@ -90,7 +91,7 @@
                 //这里改变src="xxx"路径即可
                 var d1 = new Date();
                 var time = d1.getTime();
-                $("#img").attr("src","/ValidateCodeServlet?time="+time);
+                $("#img").attr("src","${pageContext.request.contextPath}/ValidateCodeServlet?time="+time);
             });
 
         });
@@ -103,7 +104,8 @@
         <tr>
             <td class="tds">用户名：</td>
             <td>
-                <input type="text" name="username" value="${param.username}"/>
+                <%-- onblur的注释拿掉就是原生态，加上就是jQuery --%>
+                <input <%-- onblur="AjaxCheckUsername(this)" --%> type="text" name="username" value="${username}"/>
                 <span id="uid_msg" style="color: red">
                     ${errorMsg1}
                 </span>
@@ -112,7 +114,7 @@
         <tr>
             <td class="tds">密码：</td>
             <td>
-                <input type="password" name="password" value="${param.password}"/>
+                <input type="password" name="password" />
                 <span style="color: red">
                     ${errorMsg2}
                 </span>
@@ -121,37 +123,50 @@
         <tr>
             <td class="tds">确认密码：</td>
             <td>
-                <input type="password" name="password2" value="<%=request.getParameter("password2")==null?"":request.getParameter("password2")%>"/>
+                <input type="password" name="password2" />
                 <span style="color: red">
-                    <%=request.getAttribute("errorMsg6")==null?"":request.getAttribute("errorMsg6")%>
+                    <%-- <%=request.getAttribute("errorMsg6")==null?"":request.getAttribute("errorMsg6")%> --%>
+                    ${errorMsg6}
                 </span>
             </td>
         </tr>
         <tr>
             <td class="tds">昵称：</td>
             <td>
-                <input type="text" name="nickname" value="<%= request.getParameter("nickname")==null?"":request.getParameter("nickname") %>" />
+                <input type="text" name="nickname" value="
+                <%-- <%= request.getParameter("nickname")==null?"":request.getParameter("nickname") %> --%>
+                ${nickname}
+                "/>
                 <span style="color:red">
-                    <%=request.getAttribute("errorMsg3")==null?"":request.getAttribute("errorMsg3")  %>
+                    <%-- <%=request.getAttribute("errorMsg3")==null?"":request.getAttribute("errorMsg3")  %> --%>
+                    ${errorMsg3}
             </span>
             </td>
         </tr>
         <tr>
             <td class="tds">邮箱：</td>
             <td>
-                <input type="text" name="email" value="<%= request.getParameter("email")==null?"":request.getParameter("email") %>" />
+                <input type="text" name="email" value="
+                <%-- <%= request.getParameter("email")==null?"":request.getParameter("email") %> --%>
+                ${email}
+                " />
                 <span style="color:red">
-                    <%=request.getAttribute("errorMsg4")==null?"":request.getAttribute("errorMsg4")  %>
+                    <%-- <%=request.getAttribute("errorMsg4")==null?"":request.getAttribute("errorMsg4")  %> --%>
+                    ${errorMsg4}
                 </span>
             </td>
         </tr>
         <tr>
             <td class="tds">验证码：</td>
             <td>
-                <input type="text" name="valistr" value="<%= request.getParameter("valistr")==null?"":request.getParameter("valistr") %>" />
+                <input type="text" name="valistr" value="
+                <%-- <%= request.getParameter("valistr")==null?"":request.getParameter("valistr") %> --%>
+                ${valistr}
+                "/>
                 <img id="img" src="${pageContext.request.contextPath}/ValidateCodeServlet" width="" height="" alt="" />
                 <span style="color:red">
-                    <%=request.getAttribute("errorMsg5")==null?"":request.getAttribute("errorMsg5")  %>
+                    <%-- <%=request.getAttribute("errorMsg5")==null?"":request.getAttribute("errorMsg5")  %> --%>
+                    ${errorMsg5}
                 </span>
             </td>
         </tr>

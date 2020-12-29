@@ -1,0 +1,14 @@
+<c3p0-config>
+	<!-- default默认指的是c3p0会直接加载该标签中的内容 -->
+	<default-config>
+		<property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+		<property name="jdbcUrl">jdbc:mysql://localhost:3306/easymall?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true</property>
+		<property name="user">root</property>
+		<property name="password">Root*0201</property>
+
+		<property name="initialPoolSize">10</property>
+		<property name="maxIdleTime">30</property>
+		<property name="maxPoolSize">100</property>
+		<property name="minPoolSize">10</property>
+	</default-config>
+</c3p0-config>

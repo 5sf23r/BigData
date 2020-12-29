@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EasyMall/EasyMall.iml" filepath="$PROJECT_DIR$/EasyMall/EasyMall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mall/Mall.iml" filepath="$PROJECT_DIR$/Mall/Mall.iml" />
       <module fileurl="file://$PROJECT_DIR$/WebProjects.iml" filepath="$PROJECT_DIR$/WebProjects.iml" />
       <module fileurl="file://$PROJECT_DIR$/day02-css&amp;js/day02-css&amp;js.iml" filepath="$PROJECT_DIR$/day02-css&amp;js/day02-css&amp;js.iml" />
       <module fileurl="file://$PROJECT_DIR$/day03-js/day03-js.iml" filepath="$PROJECT_DIR$/day03-js/day03-js.iml" />
@@ -18,6 +19,8 @@
       <module fileurl="file://$PROJECT_DIR$/day15-session/day15-session.iml" filepath="$PROJECT_DIR$/day15-session/day15-session.iml" />
       <module fileurl="file://$PROJECT_DIR$/day16-jsp/day16-jsp.iml" filepath="$PROJECT_DIR$/day16-jsp/day16-jsp.iml" />
       <module fileurl="file://$PROJECT_DIR$/day17-filter/day17-filter.iml" filepath="$PROJECT_DIR$/day17-filter/day17-filter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day18-listener/day18-listener.iml" filepath="$PROJECT_DIR$/day18-listener/day18-listener.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day19-Log4j/day19-Log4j.iml" filepath="$PROJECT_DIR$/day19-Log4j/day19-Log4j.iml" />
     </modules>
   </component>
 </project>

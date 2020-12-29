@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
-<link rel="stylesheet" href="css/head.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}css/head.css"/>
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 
 <div id="common_head">
@@ -10,32 +11,46 @@
             如果session的username为空，显示【登陆】
             如果session的username不为空，显示【欢迎：回来】
             --%>
+            <%--
+             可以从session域中取出用户名
+            --%>
+                <%--
             <%
                 String username = (String) request.getSession().getAttribute("username");
                 if(username == null || "".equals(username)){
             %>
-            <a href="">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="">欢迎&nbsp;<request.getSession().getAttribute("username")>回来</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="${pageContext.request.contextPath}/LogoutServlet">注销</a>
             <%
-            }else{
+                }else{
             %>
-            <a href="">欢迎：<%=username%>回来</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="${pageContext.request.contextPath}/login.jsp">登陆</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="${pageContext.request.contextPath}/regist.jsp">注册</a>
             <%
                 }
             %>
-            <!-- 由于当前项目是虚拟主机的默认web应用，因此项目映射的URL应该是“” -->
-            <!-- <a href="/EasyMall/regist.jsp">注册</a> -->
-            <a href="/regist.jsp">注册</a>
+            --%>
+              <c:if test="${sessionScope.username == null}">
+                  <!-- 由于当前项目是虚拟主机的默认web应用，因此项目映射的URL应该是“” -->
+                  <!-- <a href="/EasyMall/regist.jsp">注册</a> -->
+                  <a href="${pageContext.request.contextPath}/login.jsp">登陆</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                  <a href="${pageContext.request.contextPath}/regist.jsp">注册</a>
+              </c:if>
+              <c:if test="${sessionScope.username != null}">
+                  <a href="#">欢迎&nbsp;${sessionScope.username}&nbsp;回来</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                  <a href="${pageContext.request.contextPath}/LogoutServlet">注销</a>
+              </c:if>
         </div>
     </div>
     <div id="line2">
-        <img id="logo" src="img/head/logo.jpg"/>
+        <img id="logo" src="${pageContext.request.contextPath}/img/head/logo.jpg"/>
         <input type="text" name=""/>
         <input type="button" value="搜 索"/>
         <span id="goto">
 			<a id="goto_order" href="#">我的订单</a>
 			<a id="goto_cart" href="#">我的购物车</a>
 		</span>
-        <img id="erwm" src="img/head/qr.jpg"/>
+        <img id="erwm" src="${pageContext.request.contextPath}/img/head/qr.jpg"/>
     </div>
     <div id="line3">
         <div id="content">

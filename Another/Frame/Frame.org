@@ -1,0 +1,803 @@
+* 框架
+** 基本概念
+所谓的框架其实就是程序的架子，在这个程序的架子中，搭建起程序的基本的骨架，针对程序的通用问题给出了便捷的解决方案，可以使开发人员基于框架快速开发具体的应用程序。框架和具体业务无关，可以套用在不同项目中。
+** 常用框架
+*** SSH(老三大框架)
+**** Struts2
+**** Spring
+**** Hibernate
+*** SSM
+**** SpringMVC
+**** Spring
+***** 概述
+Spring是一个Service层的框架，可以整合许多其它框架进行工作。Spring的主要技术是IOC(DI)、AOP
+1. IOC(DI) - 控制反转(依赖注入)
+2. AOP - 面向切面编程
+***** Spring IOC
+****** IOC(DI) - 控制反转(依赖注入)
+*所谓的IOC称之为控制反转，简单来说就是将对象的创建的权利及对象的生命周期的管理过程交由Spring框架来处理，从此在开发过程中不再需要关注对象的创建和生命周期的管理，而是在需要时由Spring框架提供，这个由spring框架管理对象创建和生命周期的机制称之为控制反转。* 而在创建对象的过程中Spring可以依据配置对对象的属性进行设置，这个过称之为依赖注入,也即DI。
+
+/IOC+接口可以实现软件分层时的彻底解耦，最终实现"高内聚，低耦合/"中的低耦合
+****** IOC入门案例
+1. 创建一个java项目
+   spring并不是非要在javaweb环境下才可以使用，一个普通的java程序中也可以使用Spring。
+2. 导入Spring的lib目录下IOC相关的jar包
+   [[./Img/1.png]]
+3. 创建Spring的配置文件
+   Spring采用xml文件作为配置文件，xml文件名字任意，但通常都取名为applicationContext.xml，通常将该文件放置在类加载的目录里下(src目录)，方便后续使用。
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+     </beans>
+   #+END_SRC
+
+4. 创建bean类，并在Spring中进行配置交由Spring来管理
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+         <bean id="person" class="cn.tedu.domain.Person"></bean>
+     </beans>
+   #+END_SRC
+
+5. 在程序中通过Spring容器获取对象并使用
+
+   #+BEGIN_SRC java
+     /**
+      ,* SpringIOC方式创建并管理bean
+      ,*/
+     @Test
+     public void test02(){
+         //1.初始化Spring容器
+         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+         //2.通过Spring容器获取bean
+         Person p = (Person) context.getBean("person");
+         p.eat();
+         p.say();
+         //3.关闭Spring容器
+         ((ClassPathXmlApplicationContext)context).close();
+     }
+   #+END_SRC
+
+****** IOC的实现原理
+在初始化一个Spring容器时，Spring会去解析指定的xml文件，当解析到其中的<bean>标签时，会根据该标签中的class属性指定的类的全路径名，通过反射创建该类的对象，并将该对象存入内置的Map中管理。其中键就是该标签的id值，值就是该对象。之后，当通过getBean方法来从容器中获取对象时，其实就是根据传入的条件在内置的Map中寻找是否有匹配的键值，如果有则将该键值对中保存的对象返回，如果没有匹配到则抛出异常。
+- 由此可以推测而知：
+
+  #+BEGIN_SRC
+    默认情况下，多次获取同一个id的bean，得到的将是同一个对象。
+    不可以配置多个id相同的bean
+    可以配置多个id不同但class相同的bean
+  #+END_SRC
+
+  #+BEGIN_SRC java
+    /**
+     ,* 默认情况下多次获取同一个id的bean得到的是同一个对象
+     ,* 不可以配置id相同的bena
+     ,* 可以配置多个id不同但class相同的bean
+     ,*/
+    @Test
+    public void test03(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Person p1 = (Person) context.getBean("person");
+        Person p2 = (Person) context.getBean("person");
+        System.out.println(p1);
+        System.out.println(p2);
+        ((ClassPathXmlApplicationContext)context).close();
+    }
+  #+END_SRC
+
+****** IOC获取对象的方式
+通过context.getBeans()方法获取bean时，可以通过如下两种方式获取:
+1. 传入id值
+2. 传入class类型
+通过class方式获取bean时，如果同一个类配置过多个bean，则在获取时因为无法确定到底要获取哪个bean会抛出异常。而id是唯一的，不存在这样的问题，所以建议大家尽量使用id获取bean。
+
+#+BEGIN_SRC java
+  /**
+   ,* 获取对象的方式
+   ,*  通过id获取bean
+   ,*      如果找不到，抛异常NoSuchBeanDefinitionException
+   ,*      如果找到唯一的，返回对象
+   ,*      因为id不重复，不可能找到多个
+   ,*  通过class获取bean
+   ,*      如果找不到,抛出异常NoSuchBeanDefinitionException
+   ,*      如果找到唯一，返回对象
+   ,*      如果找到多个，抛出异常NoUniqueBeanDefinitionException
+   ,*/
+  @Test
+  public void  test04(){
+      ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+      //获取对象方式1：通过id获取
+      //Person p = (Person)context.getBean("person");
+      //p.eat();
+      //p.say();
+      //获取对象方式2：通过class获取
+      Person p = context.getBean(Person.class);
+      p.eat();
+      p.say();
+
+      ((ClassPathXmlApplicationContext)context).close();
+  }
+#+END_SRC
+
+SpringIOC在通过class获取bean时，如果找不到该类型的bean还会去检查是否存在该类型的子孙类型的bean，如果有则返回，如果找不到或找到多个则抛出异常。这符合java面向对象思想 中的多态的特性。
+
+#+BEGIN_SRC java
+  @Test
+  public void test02(){
+      //1. 初始化Spring容器
+      ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+      //2. 获取bean
+      JavaTeacher jt = (JavaTeacher)context.getBean(Teacher.class);
+      System.out.println(jt);
+  }
+#+END_SRC
+
+****** 别名标签
+在Spring中提供了别名标签<alias>可以为配置的<bean>起一个别名，要注意的是这仅仅是对指定的<bean>起的一个额外的名字，并不会额外的创建对象存入map。
+
+<alias name="要起别名的bean的id" alias="要指定的别名"/>
+
+#+BEGIN_SRC java
+  /**
+   ,* 别名标签
+   ,*  可以通过别名标签为bean的id起一个别名，此后除了可以通过别名指代id
+   ,*  <alias name="person" alias="pers"></alias>
+   ,*/
+  @Test
+  public void test05(){
+      ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+      //Person p = (Person) context.getBean("person");
+      Person p = (Person) context.getBean("pers");
+      System.out.println(p);
+      ((ClassPathXmlApplicationContext)context).close();
+  }
+#+END_SRC
+
+****** Spring创建对象的方式
+1. 通过类的无法构造方法创建对象
+   在入门案例中使用的就是这种方式。
+
+   当用最普通方式配置一个<bean>时,默认就是采用类的无参构造创建对象。
+
+   在Spring容器初始化时，通过<bean>上配置的class属性反射得到字节码对象，通过newInstance()创建对象
+
+   #+BEGIN_SRC
+     Class c = Class.forName("类的全路径名称")
+     Object obj = c.newInstance()
+   #+END_SRC
+
+   这种方式下spring创建对象，要求类必须有无参的构造，否则无法通过反射创建对象，会抛出异常。
+
+   #+BEGIN_SRC java
+     public class Person{
+         public Person(){
+             System.out.println("Person被创建了...");
+         }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     /**
+      ,* SpringIOC创建对象方式1 - 反射创建对象 * bean必须有无参构造才可以
+      ,*/
+     @Test
+     public void test01() throws Exception {
+         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+         Person p = (Person) context.getBean("person");
+         System.out.println(p);
+         ((ClassPathXmlApplicationContext)context).close();
+     }
+   #+END_SRC
+
+2. 通过静态工厂创建对象
+   很多的时候，我们面对的类是无法通过无参构造去创建的，例如该类没有无参构造、是一抽象类等等情况 ，此时无法要求spring通过无参构造创建对象，此时可以使用静态工厂 方式创建对象。
+
+   #+BEGIN_SRC java
+     public class Person{
+         public Person(String name){
+             System.out.println("Person被创建了..");
+         }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     /**
+      ,* 静态工厂 */
+     public class PersonStaticFactory {
+         private PersonStaticFactory(){
+         }
+         public static Person getInstance(){
+             return new Person("zs");
+         }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       <bean id="person" class="cn.tedu.factory.PersonStaticFactory" factory-method="getInstance"></bean>
+     </beans>
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     @Test
+     public void test02(){
+         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+         Person p = (Person) context.getBean("person");
+         System.out.println(p);
+         ((ClassPathXmlApplicationContext)context).close();
+     }
+   #+END_SRC
+3. 实例工厂创建对象
+   实例工厂也可以解决类是无法通过无参构造创建的问题，解决的思路和静态工厂类似，只不过实例工厂提供的方法不是静态的。Spring需要先创建出实例工厂的对象，在调用实例工厂对象上指定的普通方法来创建对象。所以实例工厂也需要配置到Spring中管理。
+
+   #+BEGIN_SRC java
+     public class Person{
+         public Person(String name){
+             System.out.println("Person被创建了..");
+         }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     /**
+      ,* 实例工厂 */
+     public class PersonInstanceFactory {
+         public Person getInstance(){
+             return new Person("ls");
+         }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       <bean id="personInstanceFactory" class="cn.tedu.factory.PersonInstanceFactory"></bean>
+       <bean id="person" factory-bean="personInstanceFactory" factory-method="getInstance"></bean>
+     </beans>
+   #+END_SRC
+
+4. Spring工厂创建对象
+   Spring内置了工厂接口，也可以通过实现这个接口来开发Spring工厂，通过这个工厂创建对象。
+
+   #+BEGIN_SRC java
+     public class Person{
+         public Person(String name){
+             System.out.println("Person被创建了..");
+         }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.factory;
+     import cn.tedu.domain.Person;
+     import org.springframework.beans.factory.FactoryBean;
+     /**
+      ,* Spring工厂
+      ,*/
+     public class PersonSpringFactory implements FactoryBean<Person> {
+         /**
+          ,* 生产bean对象方法
+          ,*/
+         @Override
+         public Person getObject() throws Exception {
+             return new Person("ww");
+         }
+         /**
+          ,* 获取bean类型方法
+          ,*/
+         @Override
+         public Class<?> getObjectType() {
+             return Person.class;
+         }
+         /**
+          ,* 告知当前bean是否要采用单例模式
+          ,*/
+         @Override
+         public boolean isSingleton() {
+             return true;
+         }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       <bean id="person" class="cn.tedu.factory.PersonSpringFactory"></bean>
+     </beans>
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     @Test
+     public void test04(){
+         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+         Person p = (Person) context.getBean("person");
+         System.out.println(p);
+         ((ClassPathXmlApplicationContext)context).close();
+         ((ClassPathXmlApplicationContext)context).close();
+     }
+   #+END_SRC
+****** 单例和多例
+Spring容器管理的bean在默认情况下是单例的，也即，一个bean只会创建一个对象，存在内置map中，之后无论获取多少次该bean，都返回同一个对象。
+
+Spring默认采用单例方式，减少了对象的创建，从而减少了内存的消耗。但是在实际开发中是存在多例的需求的，Spring也提供了选项可以将bean设置为多例模式。
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8"?>
+  <beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans
+                             http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <!--scope属性控制当前bean的创建模式: singleton:则当前bean处在单例模式中,默认就是此模式 prototype:则当前bean处在多例模式中-->
+    <bean id="cart" class="cn.tedu.beans.Cart" scope="prototype"></bean>
+  </beans>
+#+END_SRC
+- bean在单例模式下的生命周期:
+  bean在单例模式下，Spring容器启动时解析xml发现该bean标签后，直接创建该bean的对象存入内部map中保存，此后无论调用多少次getBean()获取该bean都是从map中获取该对象返回，一直是一个对象。此对象一直被Spring容器持有，直到容器退出时，随着容器的退出对象被销毁。
+- bean在多例模式下的生命周期:
+  bean在多例模式下，Spring容器启动时解析xml发现该bean标签后，只是将该bean进行管理，并不会创建对象，此后每次使用getBean()获取该bean时，Spring都会重新创建该对象返回，每次都是一个新的对象。这个对象Spring容器并不会持有，什么销毁取决于使用该对 象的用户自己什么时候销毁该对象。
+****** 懒加载机制
+Spring默认会在容器初始化的过程中，解析xml，并将单例的bean创建并保存到map中，这样的机制在bean比较少时问题不大，但一旦bean非常多时，Spring需要在启动的过程中花费大量的时间来创建bean，花费大量的空间存储bean，但这些bean可能很久都用不上，这种在启动时,在时间和空间上的浪费显得非常的不值得。
+
+所以Spring提供了懒加载机制。所谓的懒加载机制就是可以规定指定的bean不在启动时立即创建，而是在后续第一次用到时才创建，从而减轻在启动过程中对时间和内存的消耗。懒加载机制只对单例bean有作用，对于多例bean设置懒加载没有意义。
+- 懒加载的配置方式:
+  1. 为指定bean配置懒加载
+
+     #+BEGIN_SRC html
+       <?xml version="1.0" encoding="UTF-8"?>
+       <beans xmlns="http://www.springframework.org/schema/beans"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring -beans-3.2.xsd"
+              <bean id="cart" class="cn.tedu.beans.Cart" lazy-init="true"></bean>
+       </beans>
+     #+END_SRC
+  2. 为全局配置懒加载
+
+     #+BEGIN_SRC html
+       <?xml version="1.0" encoding="UTF-8"?>
+       <beans xmlns="http://www.springframework.org/schema/beans"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                  http://www.springframework.org/schema/beans/spring -beans-3.2.xsd"
+              default-lazy-init="true"
+              >
+         <bean id="cart" class="cn.tedu.beans.Cart"></bean>
+       </beans>
+     #+END_SRC
+  如果同时设定全局和指定bean的懒加载机制，且配置不相同，则对于该bean局部配置覆盖全局配置。
+
+实验：通过断点调试，验证懒加载机制的执行过程
+
+#+BEGIN_SRC java
+  package cn.tedu.beans;
+  public class Cart {
+      public Cart() {
+          System.out.println("Cart init...");
+      }
+  }
+#+END_SRC
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8"?>
+  <beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="person" class="cn.tedu.domain.Person"></bean>
+  </beans>
+#+END_SRC
+
+#+BEGIN_SRC java
+  @Test
+  /**
+   ,* SpringIOC 懒加载机制
+   ,*/
+  public void test10(){
+      ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+      Cart cart1 = (Cart) context.getBean("cart");
+      Cart cart2 = (Cart) context.getBean("cart");
+      System.out.println(cart1 == cart2);
+  }
+#+END_SRC
+
+****** 配置初始化和销毁的方法
+在Spring中如果某个bean在初始化之后或销毁之前要做一些额外操作可以为该bean配置初始化和销毁的方法，在这些方法中完成要功能。
+
+实验：通过断点调试模式，测试初始化方法和销毁方法的执行
+
+#+BEGIN_SRC java
+  package cn.tedu.beans; public class ProdDao {
+      public ProdDao() {
+          System.out.println("ProdDao 被创建。。。");
+      }
+      public void init(){
+          System.out.println("init。。连接数据库。。。。。");
+      }
+      public void destory(){
+          System.out.println("destory。。断开数据库。。。。。");
+      }
+      public void addProd(){
+          System.out.println("增加商品。。");
+      }
+      public void updateProd(){
+          System.out.println("修改商品。。");
+      }
+      public void delProd(){
+          System.out.println("删除商品。。"); }
+      public void queryProd(){
+          System.out.println("查询商品。。");
+      }
+  }
+#+END_SRC
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8"?>
+  <beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="prodDao" class="cn.tedu.beans.ProdDao" init-method="init" destroy-method="destory"></bean>
+  </beans>
+#+END_SRC
+
+#+BEGIN_SRC java
+  @Test
+  /**
+   ,* SpringIOC 初始化和 销毁方法
+   ,*/
+  public void test11(){
+      ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+      ProdDao prodDao = (ProdDao) context.getBean("prodDao");
+      prodDao.addProd();
+      context.close();
+  }
+#+END_SRC
+
+****** Spring中关键方法的执行顺序
+在Spring创建bean对象时，先创建对象(通过无参构造或工厂)，之后立即调用init方法来执行初始化操作，之后此bean就可以哪来调用其它普通方法,而在对象销毁之前，Spring容器调用其destory方法来执行销毁操作。
+***** Spring DI
+****** IOC(DI) - 控制翻转（依赖注入）
+所谓的IOC称之为控制反转，简单来说就是将对象的创建的权利及对象的生命周期的管理过程交由Spring框架来处理，从此在开发过程中不再需要关注对象的创建和生命周期的管理，而是在需要时由Spring框架提供，这个由spring框架管理对象创建和生命周期的机制称之为控制反转。
+*而在创建对象的过程中Spring可以依据配置对对象的属性进行设置，这个过称之为依赖注入,也即DI。*
+****** set方法注入
+通常的javabean属性都会私有化，而对外暴露setXxx()getXxx()方法，此时Spring可以通过这样的setXxx()方法将属性的值注入对象。
+1. Spring普通属性注入：
+
+   #+BEGIN_SRC java
+     package cn.tedu.beans;
+     import java.util.List;
+     import java.util.Map;
+     import java.util.Properties;
+     import java.util.Set;
+     public class Hero {
+         private int id;
+         private String name;
+         private List<String> jobs;
+         private Set<String> set;
+         private Map<String,String> map;
+         private Properties prop;
+         public void setId(int id) {
+             this.id = id;
+         }
+         public void setName(String name) {
+             this.name = name;
+         }
+         public void setJobs(List<String> jobs) {
+             this.jobs = jobs;
+         }
+         public void setSet(Set<String> set) {
+             this.set = set;
+         }
+         public void setMap(Map<String, String> map) {
+             this.map = map;
+         }
+         public void setProp(Properties prop) { t
+                 his.prop = prop;
+         }
+         @Override
+         public String toString() {
+             return "Hero [id=" + id + ", name=" + name + ", jobs=" + jobs
+                 + ", set=" + set + ", map=" + map + ", prop=" + prop + "]";
+         }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       <bean id="hero" class="cn.tedu.beans.Hero">
+         <property name="id" value="123"></property>
+         <property name="name" value="亚瑟 "></property>
+         <property name="jobs">
+           <list>
+             <value>上单</value>
+             <value>打野</value>
+             <value>辅助</value>
+             <value>中单</value>
+           </list>
+         </property>
+         <property name="set">
+           <set>
+             <value>aaa</value>
+             <value>bbb</value>
+             <value>ccc</value>
+             <value>aaa</value>
+           </set>
+         </property>
+         <property name="map">
+           <map>
+             <entry key="addr" value="王者荣耀"></entry>
+             <entry key="addr" value="英雄联盟"></entry>
+             <entry key="skill" value="风火轮"></entry>
+             <entry key="age" value="19"></entry>
+           </map>
+         </property>
+         <property name="prop">
+           <props>
+             <prop key="k1">v1</prop>
+             <prop key="k2">v2</prop>
+             <prop key="k3">v3</prop>
+             <prop key="k4">v4</prop>
+           </props>
+         </property>
+       </bean>
+     </beans>
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     @Test
+     /**
+      ,* SpringDI set方式属性注入 - Spring内置的可直接注入类型的注入
+      ,*/
+     public void test1(){
+         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+         Hero hero = (Hero) context.getBean("hero");
+         System.out.println(hero);
+     }
+   #+END_SRC
+2. 自定义bean的注入:
+
+   #+BEGIN_SRC java
+     package cn.tedu.beans;
+     import java.util.List;
+     import java.util.Map;
+     import java.util.Properties;
+     import java.util.Set;
+     public class Hero {
+         private int id;
+         private String name;
+         private List<String> jobs;
+         private Set<String> set;
+         private Map<String,String> map;
+         private Properties prop;
+         private Dog dog;
+         private Cat cat;
+         public void setId(int id) {
+             this.id = id;
+         }
+         public void setName(String name) {
+             this.name = name;
+         }
+         public void setJobs(List<String> jobs) {
+             this.jobs = jobs;
+         }
+         public void setSet(Set<String> set) {
+             this.set = set;
+         }
+         public void setMap(Map<String, String> map) {
+             this.map = map;
+         }
+         public void setProp(Properties prop) {
+             this.prop = prop;
+         }
+         public void setDog(Dog dog) {
+             this.dog = dog;
+         }
+         public void setCat(Cat cat) {
+             this.cat = cat;
+         }
+         @Override
+         public String toString() {
+             return "Hero [id=" + id + ", name=" + name + ", jobs=" + jobs
+                 + ", set=" + set + ", map=" + map + ", prop=" + prop + ", dog=" + dog + ", cat=" + cat + "]";
+         }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring -beans-3.2.xsd">
+       <bean id="hero" class="cn.tedu.beans.Hero">
+         <property name="id" value="123"></property>
+
+         <property name="name" value="亚瑟 "></property>
+
+         <property name="jobs">
+           <list>
+             <value>上单</value>
+             <value>打野</value>
+             <value>辅助</value>
+             <value>中单</value>
+           </list>
+         </property>
+         <property name="set">
+           <set>
+             <value>aaa</value>
+             <value>bbb</value>
+             <value>ccc</value>
+             <value>aaa</value>
+           </set>
+         </property>
+         <property name="map">
+           <map>
+             <entry key="addr" value="王者荣耀"></entry>
+             <entry key="addr" value="英雄联盟"></entry>
+             <entry key="skill" value="风火轮"></entry>
+             <entry key="age" value="19"></entry>
+           </map>
+         </property>
+         <property name="prop">
+           <props>
+             <prop key="k1">v1</prop>
+             <prop key="k2">v2</prop>
+             <prop key="k3">v3</prop>
+             <prop key="k4">v4</prop>
+           </props>
+         </property>
+         <property name="dog" ref="dog"></property>
+         <property name="cat" ref="cat"></property>
+       </bean>
+       <bean id="dog" class="cn.tedu.beans.Dog"></bean> <bean id="cat" class="cn.tedu.beans.Cat"></bean>
+     </beans>
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     @Test
+     /**
+      ,* SpringDI set方式属性注入 - 非Spring内置的可以直接注入类型的注入
+      ,*/
+     public void test2(){
+         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+         Hero hero = (Hero) context.getBean("hero");
+         System.out.println(hero);
+     }
+   #+END_SRC
+****** 自动装配
+在Spring的set方式实现的注入过程中，支持自动装配机制，所谓自动装配机制，会根据要设置的javabean属性的名字或类型到spring中自动寻找对应id或类型的<bean>进行设置，从而省去依次配置的过程，简化了配置。
+1. 为指定<bean>开启自动装配:
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       <!--
+           autowire设定自动装配:
+           byName:根据javabean中需要注入的属性的名字，在spring容器中找对应id的<bean>将该<bean>的对象复制给当前的属性
+           byType:根据javabean中需要注入的属性的类型，在spring容器中找对应class类型的<bean>将该<bean>的对象复制给当前属性
+           byType方式 根据类型进行匹配，可能匹配到多个<bean>,此时会抛出异常。而byName是通过id来寻找<bean>，id没有重复，不会有这方面的问题，所以推荐使用byName方式
+         -->
+                   <bean id="teacher" class="cn.tedu.beans.Teacher" autowire="byName"></bean>
+                   <bean id="dog" class="cn.tedu.beans.Dog"></bean>
+                   <bean id="cat" class="cn.tedu.beans.Cat"></bean>
+     </beans>
+   #+END_SRC
+2. 为全局配置自动装配:
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+            default-autowire="byName"
+            >
+       <!--
+           autowire设定自动装配:
+               byName:根据javabean中需要注入的属性的名字 ，在spring容器中找对应id的<bean>将该<bean>的对象复制给当前的属性
+               byType:根据javabean中需要注入的属性的类型，在spring容器中找对应class类型的<bean>将该<bean>的对象复制给当前的属性
+               ,**byType方式 根据类型进行匹配，可能匹配到多个<bean>,此时会抛出异常。而byName是通过id来寻找<bean>，id没有重复，不会有这方面的问题，所以推荐使用byName方式
+         -->
+                   <bean id="teacher" class="cn.tedu.beans.Teacher"></bean>
+                   <bean id="dog" class="cn.tedu.beans.Dog"></bean>
+                   <bean id="cat" class="cn.tedu.beans.Cat"></bean>
+     </beans>
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.beans;
+     public class Teacher {
+         private Dog dog;
+         private Cat cat;
+         public void setDog(Dog dog) {
+             this.dog = dog; }
+         public void setCat(Cat cat) {
+             this.cat = cat;
+         }
+         @Override
+         public String toString() {
+             return "Teacher [dog=" + dog + ", cat=" + cat + "]";
+         }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     @Test
+     /**
+      ,* SpringDI 自动装配
+      ,*/
+     public void test4(){
+         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+         Teacher teacher = (Teacher) context.getBean("teacher");
+         System.out.println(teacher);
+     }
+   #+END_SRC
+****** 基于构造方法的注入
+对象属性设置的另一种方式是在对象创建的过程中通过构造方法传入并设置对象的属性。 spring也可以通过这样的构造方法实现属性的注入。
+
+#+BEGIN_SRC java
+  package cn.tedu.beans;
+  public class Student {
+      private int id;
+      private String name;
+      private Dog dog;
+      public Student(int id, String name, Dog dog) {
+          this.id = id;
+          this.name = name;
+          this.dog = dog; }
+      @Override
+      public String toString() {
+          return "Student [id=" + id + ", name=" + name + ", dog=" + dog + "]";
+      }
+  }
+#+END_SRC
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8"?>
+  <beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="student" class="cn.tedu.beans.Student">
+      <!--
+          index:为构造方法的第几个参数 进行配置
+          name:为构造方法的哪个名字的参数进行配置
+          ,**index和name 可以配置任何一个或同时配置 但要求一旦配置必须正确
+          ,**推荐优先使用index方式配置 防止没有源码造成name无法匹配到对应参数 type:该构造方法参数的类型
+          value:该构造方法参数的值 ,用来指定基本值
+          ref:该构造方法参数的值,用来指定引用其他bean的值
+        -->
+      <constructor-arg index="0" name="id" value="999"/>
+      <constructor-arg index="1" type="java.lang.String" value="张无忌"/>
+      <constructor-arg name="dog" ref="dog"/>
+    </bean>
+    <bean id="dog" class="cn.tedu.beans.Dog"></bean>
+  </beans>
+#+END_SRC
+
+#+BEGIN_SRC java
+  @Test
+  /**
+   ,* SpringDI 构造方法方式属性注入
+   ,*/
+  public void test3(){
+      ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+      Student student = (Student) context.getBean("student");
+      System.out.println(student);
+  }
+#+END_SRC
+
+**** MyBatis
