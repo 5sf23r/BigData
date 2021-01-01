@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="SpringDay01_04_Lazy-lib">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/SpringDay01_04_IOC_Lazy/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/SpringDay01_04_IOC_Lazy/lib" recursive="false" />
+  </library>
+</component>

@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SpringDay01_01_IOC_First/SpringDay01_01_IOC_First.iml" filepath="$PROJECT_DIR$/SpringDay01_01_IOC_First/SpringDay01_01_IOC_First.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay01_02_IOC_Create/SpringDay01_02_IOC_Create.iml" filepath="$PROJECT_DIR$/SpringDay01_02_IOC_Create/SpringDay01_02_IOC_Create.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay01_03_IOC_Single_Mult/SpringDay01_03_IOC_Single_Mult.iml" filepath="$PROJECT_DIR$/SpringDay01_03_IOC_Single_Mult/SpringDay01_03_IOC_Single_Mult.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay01_04_IOC_Lazy/SpringDay01_04_IOC_Lazy.iml" filepath="$PROJECT_DIR$/SpringDay01_04_IOC_Lazy/SpringDay01_04_IOC_Lazy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay01_05_IOC_Init_Destory/SpringDay01_05_IOC_Init_Destory.iml" filepath="$PROJECT_DIR$/SpringDay01_05_IOC_Init_Destory/SpringDay01_05_IOC_Init_Destory.iml" />
     </modules>
   </component>
 </project>

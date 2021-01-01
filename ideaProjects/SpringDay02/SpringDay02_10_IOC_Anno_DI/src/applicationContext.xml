@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- IOC包扫描 -->
+    <context:component-scan base-package="cn.tedu.domain"></context:component-scan>
+    <!-- 开启注解方式DI -->
+    <context:annotation-config/>
+    <!-- 配置接在外部文件 -->
+    <util:list id="l1">
+        <value>lv1</value>
+        <value>lv2</value>
+        <value>lv3</value>
+    </util:list>
+    <util:set id="s1">
+        <value>sv1</value>
+        <value>sv2</value>
+        <value>sv3</value>
+    </util:set>
+    <util:map id="m1">
+        <entry key="k1" value="v1"></entry>
+        <entry key="k2" value="v2"></entry>
+        <entry key="k3" value="v3"></entry>
+    </util:map>
+    <util:properties id="p1">
+        <prop key="pk1"></prop>
+        <prop key="pk2"></prop>
+        <prop key="pk3"></prop>
+    </util:properties>
+</beans>

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="SpringDay01_02_IOC_Create-lib">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/SpringDay01_02_IOC_Create/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/SpringDay01_02_IOC_Create/lib" recursive="false" />
+  </library>
+</component>
