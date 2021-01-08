@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+        ">
+    <!--开启包扫描-->
+    <context:component-scan base-package="cn.tedu.web"></context:component-scan>
+    <context:component-scan base-package="cn.tedu.service"></context:component-scan>
+    <context:component-scan base-package="cn.tedu.aspect"></context:component-scan>
+
+    <!--开启注解方式DI-->
+    <context:annotation-config/>
+
+    <!--配置切面-->
+    <aop:config>
+        <aop:aspect ref="firstAspect">
+            <!-- 此处的*代表切出该包下的所有的类 -->
+            <!--<aop:before method="myFirst" pointcut="within(cn.tedu.service.*)"></aop:before>-->
+            <!-- 此处第一个*代表一层子目录，第二个*代表这个子目录下的所有的类 -->
+            <!--<aop:before method="myFirst" pointcut="within(cn.tedu.service.*.*)"></aop:before>-->
+            <!-- 此处的..*代表匹配指定包下及其子孙包下所有的类 -->
+            <aop:before method="myFirst" pointcut="within(cn.tedu.service..*)"></aop:before>
+        </aop:aspect>
+    </aop:config>
+</beans>

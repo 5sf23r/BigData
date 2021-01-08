@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SpringDay04_01_AOP_Advice/SpringDay04_01_AOP_Advice.iml" filepath="$PROJECT_DIR$/SpringDay04_01_AOP_Advice/SpringDay04_01_AOP_Advice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay04_02_AOP_Advice2/SpringDay04_02_AOP_Advice2.iml" filepath="$PROJECT_DIR$/SpringDay04_02_AOP_Advice2/SpringDay04_02_AOP_Advice2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay04_03_AOP_Adice3/SpringDay04_03_AOP_Adice3.iml" filepath="$PROJECT_DIR$/SpringDay04_03_AOP_Adice3/SpringDay04_03_AOP_Adice3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay04_04_AOP_ProxyType/SpringDay04_04_AOP_ProxyType.iml" filepath="$PROJECT_DIR$/SpringDay04_04_AOP_ProxyType/SpringDay04_04_AOP_ProxyType.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay04_05_AOP_Anno/SpringDay04_05_AOP_Anno.iml" filepath="$PROJECT_DIR$/SpringDay04_05_AOP_Anno/SpringDay04_05_AOP_Anno.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay04_06_AOP_Exec_Exception/SpringDay04_06_AOP_Exec_Exception.iml" filepath="$PROJECT_DIR$/SpringDay04_06_AOP_Exec_Exception/SpringDay04_06_AOP_Exec_Exception.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay04_07_AOP_Exec_useTime/SpringDay04_07_AOP_Exec_useTime.iml" filepath="$PROJECT_DIR$/SpringDay04_07_AOP_Exec_useTime/SpringDay04_07_AOP_Exec_useTime.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay04_08_AOP_Exec_Priv/SpringDay04_08_AOP_Exec_Priv.iml" filepath="$PROJECT_DIR$/SpringDay04_08_AOP_Exec_Priv/SpringDay04_08_AOP_Exec_Priv.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="dog" class="cn.tedu.domain.Dog">
+        <property name="name" value="旺财"></property>
+        <property name="age" value="3"></property>
+    </bean>
+    <bean id="cat" class="cn.tedu.domain.Cat">
+        <property name="name" value="汤姆"></property>
+        <property name="age" value="2"></property>
+    </bean>
+    <bean id="cat2" class="cn.tedu.domain.Cat">
+        <property name="name" value="阿花"></property>
+        <property name="age" value="1"></property>
+    </bean>
+    <!--
+           autowire 实现自动装配
+            byName
+                会自动找和当前bean属性名一样的id的bean进行注入
+                    找不到就不注入
+                    找到唯一的就注入
+                    不可能找到多个
+            byType
+                会自动找和当前bean属性类型一致的bean进行注入
+                    找不到就不注入
+                    找到唯一的就注入
+                    找到多个抛出异常
+    -->
+    <bean id="hero" class="cn.tedu.domain.Hero" autowire="byName">
+        <property name="name" value="亚瑟"></property>
+        <property name="age" value="55"></property>
+        <!--
+        <property name="dog" ref="dog"></property>
+        <property name="cat" ref="cat"></property>
+        -->
+    </bean>
+</beans>

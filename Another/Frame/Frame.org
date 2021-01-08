@@ -191,7 +191,7 @@ Spring是一个Service层的框架，可以整合许多其它框架进行工作�
 #+END_SRC
 
 ****** Spring创建对象的方式
-1. 通过类的无参构造方法创建对象
+1. 通过类的无参构造方法创建对象(反射创建对象)
    在入门案例中使用的就是这种方式。
    当用最普通方式配置一个<bean>时,默认就是采用类的无参构造创建对象。
    在Spring容器初始化时，通过<bean>上配置的class属性反射得到字节码对象，通过newInstance()创建对象
@@ -715,15 +715,39 @@ Spring默认会在容器初始化的过程中，解析xml，并将单例的bean�
      <beans xmlns="http://www.springframework.org/schema/beans"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-       <!--
-           autowire设定自动装配:
-           byName:根据javabean中需要注入的属性的名字，在spring容器中找对应id的<bean>将该<bean>的对象复制给当前的属性
-           byType:根据javabean中需要注入的属性的类型，在spring容器中找对应class类型的<bean>将该<bean>的对象复制给当前属性
-           byType方式 根据类型进行匹配，可能匹配到多个<bean>,此时会抛出异常。而byName是通过id来寻找<bean>，id没有重复，不会有这方面的问题，所以推荐使用byName方式
+         <bean id="dog" class="cn.tedu.domain.Dog">
+             <property name="name" value="旺财"></property>
+             <property name="age" value="3"></property>
+         </bean>
+         <bean id="cat" class="cn.tedu.domain.Cat">
+             <property name="name" value="汤姆"></property>
+             <property name="age" value="2"></property>
+         </bean>
+         <bean id="cat2" class="cn.tedu.domain.Cat">
+             <property name="name" value="阿花"></property>
+             <property name="age" value="1"></property>
+         </bean>
+         <!--
+                autowire 实现自动装配
+                 byName
+                     会自动找和当前bean属性名一样的id的bean进行注入
+                         找不到就不注入
+                         找到唯一的就注入
+                         不可能找到多个
+                 byType
+                     会自动找和当前bean属性类型一致的bean进行注入
+                         找不到就不注入
+                         找到唯一的就注入
+                         找到多个抛出异常
          -->
-                   <bean id="teacher" class="cn.tedu.beans.Teacher" autowire="byName"></bean>
-                   <bean id="dog" class="cn.tedu.beans.Dog"></bean>
-                   <bean id="cat" class="cn.tedu.beans.Cat"></bean>
+         <bean id="hero" class="cn.tedu.domain.Hero" autowire="byName">
+             <property name="name" value="亚瑟"></property>
+             <property name="age" value="55"></property>
+             <!--
+             <property name="dog" ref="dog"></property>
+             <property name="cat" ref="cat"></property>
+             -->
+         </bean>
      </beans>
    #+END_SRC
 2. 为全局配置自动装配:
@@ -732,67 +756,248 @@ Spring默认会在容器初始化的过程中，解析xml，并将单例的bean�
      <?xml version="1.0" encoding="UTF-8"?>
      <beans xmlns="http://www.springframework.org/schema/beans"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
-            default-autowire="byName"
-            >
-       <!--
-           autowire设定自动装配:
-               byName:根据javabean中需要注入的属性的名字 ，在spring容器中找对应id的<bean>将该<bean>的对象复制给当前的属性
-               byType:根据javabean中需要注入的属性的类型，在spring容器中找对应class类型的<bean>将该<bean>的对象复制给当前的属性
-               ,**byType方式 根据类型进行匹配，可能匹配到多个<bean>,此时会抛出异常。而byName是通过id来寻找<bean>，id没有重复，不会有这方面的问题，所以推荐使用byName方式
+            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+         <bean id="dog" class="cn.tedu.domain.Dog">
+             <property name="name" value="旺财"></property>
+             <property name="age" value="3"></property>
+         </bean>
+         <bean id="cat" class="cn.tedu.domain.Cat">
+             <property name="name" value="汤姆"></property>
+             <property name="age" value="2"></property>
+         </bean>
+         <bean id="cat2" class="cn.tedu.domain.Cat">
+             <property name="name" value="阿花"></property>
+             <property name="age" value="1"></property>
+         </bean>
+         <!--
+                autowire 实现自动装配
+                 byName
+                     会自动找和当前bean属性名一样的id的bean进行注入
+                         找不到就不注入
+                         找到唯一的就注入
+                         不可能找到多个
+                 byType
+                     会自动找和当前bean属性类型一致的bean进行注入
+                         找不到就不注入
+                         找到唯一的就注入
+                         找到多个抛出异常
          -->
-                   <bean id="teacher" class="cn.tedu.beans.Teacher"></bean>
-                   <bean id="dog" class="cn.tedu.beans.Dog"></bean>
-                   <bean id="cat" class="cn.tedu.beans.Cat"></bean>
+         <bean id="hero" class="cn.tedu.domain.Hero" autowire="byName">
+             <property name="name" value="亚瑟"></property>
+             <property name="age" value="55"></property>
+             <!--
+             <property name="dog" ref="dog"></property>
+             <property name="cat" ref="cat"></property>
+             -->
+         </bean>
      </beans>
    #+END_SRC
 
    #+BEGIN_SRC java
-     package cn.tedu.beans;
-     public class Teacher {
+     package cn.tedu.domain;
+
+     public class Hero {
+         private String name;
+         private int age;
          private Dog dog;
          private Cat cat;
+
+         public String getName() {
+             return name;
+         }
+
+         public void setName(String name) {
+             this.name = name;
+         }
+
+         public int getAge() {
+             return age;
+         }
+
+         public void setAge(int age) {
+             this.age = age;
+         }
+
+         public Dog getDog() {
+             return dog;
+         }
+
          public void setDog(Dog dog) {
-             this.dog = dog; }
+             this.dog = dog;
+         }
+
+         public Cat getCat() {
+             return cat;
+         }
+
          public void setCat(Cat cat) {
              this.cat = cat;
          }
+
          @Override
          public String toString() {
-             return "Teacher [dog=" + dog + ", cat=" + cat + "]";
+             return "Hero{" +
+                 "name='" + name + '\'' +
+                 ", age=" + age +
+                 ", dog=" + dog +
+                 ", cat=" + cat +
+                 '}';
          }
      }
    #+END_SRC
 
    #+BEGIN_SRC java
-     @Test
-     /**
-      ,* SpringDI 自动装配
-      ,*/
-     public void test4(){
-         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-         Teacher teacher = (Teacher) context.getBean("teacher");
-         System.out.println(teacher);
+     package cn.tedu.domain;
+
+     public class Cat {
+         private String name;
+         private int age;
+
+         public String getName() {
+             return name;
+         }
+
+         public void setName(String name) {
+             this.name = name;
+         }
+
+         public int getAge() {
+             return age;
+         }
+
+         public void setAge(int age) {
+             this.age = age;
+         }
+
+         @Override
+         public String toString() {
+             return "Cat{" +
+                 "name='" + name + '\'' +
+                 ", age=" + age +
+                 '}';
+         }
+     }
+
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.domain;
+
+     public class Dog {
+         private String name;
+         private int age;
+
+         public String getName() {
+             return name;
+         }
+
+         public void setName(String name) {
+             this.name = name;
+         }
+
+         public int getAge() {
+             return age;
+         }
+
+         public void setAge(int age) {
+             this.age = age;
+         }
+
+         @Override
+         public String toString() {
+             return "Dog{" +
+                 "name='" + name + '\'' +
+                 ", age=" + age +
+                 '}';
+         }
+     }
+
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.test;
+
+     import cn.tedu.domain.Hero;
+     import org.junit.Test;
+     import org.springframework.context.ApplicationContext;
+     import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+     public class Test01 {
+         /**
+          ,* Setter方式实现DI 自定义bean类型的注入
+          ,*/
+         @Test
+         public void test01(){
+             ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+             Hero hero = (Hero) context.getBean("hero");
+             System.out.println(hero);
+             ((ClassPathXmlApplicationContext)context).close();
+         }
      }
    #+END_SRC
 ****** 基于构造方法的注入
 对象属性设置的另一种方式是在对象创建的过程中通过构造方法传入并设置对象的属性。 spring也可以通过这样的构造方法实现属性的注入。
 
 #+BEGIN_SRC java
-  package cn.tedu.beans;
+  package cn.tedu.domain;
+
+  public class Dog {
+      private String name;
+      private int age;
+
+      public String getName() {
+          return name;
+      }
+
+      public void setName(String name) {
+          this.name = name;
+      }
+
+      public int getAge() {
+          return age;
+      }
+
+      public void setAge(int age) {
+          this.age = age;
+      }
+
+      @Override
+      public String toString() {
+          return "Dog{" +
+                  "name='" + name + '\'' +
+                  ", age=" + age +
+                  '}';
+      }
+  }
+#+END_SRC
+
+#+BEGIN_SRC java
+  package cn.tedu.domain;
+
   public class Student {
       private int id;
       private String name;
       private Dog dog;
+
+      public Student() {
+      }
+
       public Student(int id, String name, Dog dog) {
           this.id = id;
           this.name = name;
-          this.dog = dog; }
+          this.dog = dog;
+      }
+
       @Override
       public String toString() {
-          return "Student [id=" + id + ", name=" + name + ", dog=" + dog + "]";
+          return "Student{" +
+                  "id=" + id +
+                  ", name='" + name + '\'' +
+                  ", dog=" + dog +
+                  '}';
       }
   }
+
 #+END_SRC
 
 #+BEGIN_SRC html
@@ -800,32 +1005,44 @@ Spring默认会在容器初始化的过程中，解析xml，并将单例的bean�
   <beans xmlns="http://www.springframework.org/schema/beans"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="student" class="cn.tedu.beans.Student">
-      <!--
-          index:为构造方法的第几个参数 进行配置
-          name:为构造方法的哪个名字的参数进行配置
-          ,**index和name 可以配置任何一个或同时配置 但要求一旦配置必须正确
-          ,**推荐优先使用index方式配置 防止没有源码造成name无法匹配到对应参数 type:该构造方法参数的类型
-          value:该构造方法参数的值 ,用来指定基本值
-          ref:该构造方法参数的值,用来指定引用其他bean的值
-        -->
-      <constructor-arg index="0" name="id" value="999"/>
-      <constructor-arg index="1" type="java.lang.String" value="张无忌"/>
-      <constructor-arg name="dog" ref="dog"/>
-    </bean>
-    <bean id="dog" class="cn.tedu.beans.Dog"></bean>
+      <bean id="dog" class="cn.tedu.domain.Dog">
+          <property name="name" value="旺财"></property>
+          <property name="age" value="5"></property>
+      </bean>
+      <bean id="student" class="cn.tedu.domain.Student">
+          <!--
+          index 构造器在中第几个参数
+          name 构造器中叫什么名字的参数
+          type 构造器中什么类型的参数
+          value 给什么值
+          ref 给什么值，通过引用
+          -->
+          <constructor-arg index="0" name="id" type="int" value="3"></constructor-arg>
+          <constructor-arg name="name" value="zs"></constructor-arg>
+          <constructor-arg index="2" ref="dog"></constructor-arg>
+      </bean>
   </beans>
 #+END_SRC
 
 #+BEGIN_SRC java
-  @Test
+  package cn.tedu.test;
+
+  import cn.tedu.domain.Student;
+  import org.junit.Test;
+  import org.springframework.context.ApplicationContext;
+  import org.springframework.context.support.ClassPathXmlApplicationContext;
+
   /**
-   ,* SpringDI 构造方法方式属性注入
+   ,* Spring IOC DI 基于构造器的注入
    ,*/
-  public void test3(){
-      ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-      Student student = (Student) context.getBean("student");
-      System.out.println(student);
+  public class Test01 {
+      @Test
+      public void test01(){
+          ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+          Student student = (Student) context.getBean("student");
+          System.out.println(student);
+          ((ClassPathXmlApplicationContext)context).close();
+      }
   }
 #+END_SRC
 
@@ -843,7 +1060,7 @@ Spring默认会在容器初始化的过程中，解析xml，并将单例的bean�
 | @SuppressWarnings | 压制警告，提示编译器，在编译的过程中对指定类型的警告不再提示                                                    |
 ******* 自定义注解开发
 1. 开发一个注解类
-   开发一个注解类的过程，非常类似于开发一个接口，只不过需要通过@interface关键字 来声明
+   开发一个注解类的过程，非常类似于开发一个接口，需要通过@interface关键字来声明
 2. 使用元注解修饰注解的声明
    所谓的元注解是用来修饰注解声明的注解，可以控制被修饰的注解的特性。
    - @Target
@@ -857,20 +1074,17 @@ Spring默认会在容器初始化的过程中，解析xml，并将单例的bean�
         此注解将会被保留在源码阶段 和 编译阶段 ，.java和.class中，在类加载的过 程中被删除。这种类型的注解通常是给类加载器看的。
      3. RetentionPolicy.RUNTIME
         此注解将会被保留在源码阶段、编译阶段和运行阶段，.java和.class和内存中的字节码中都会存在。这种类型的注解通常用来在运行阶段进行反射，控制程序运行过程。只有RUNTIME级别的注解才可以通过反射技术进行反射。
-3. 为注解增加属性
-   注解类中还可以声明属性。
-
+   - @Documented
+     可以控制自定义注解是否可以被文档提取到doc文档中
+   - @Inherited可以控制自定义注解是否具有继承性
+3. 为自定义注解增加属性
    为注解类声明属性的过程非常类似于为接口定义方法。
-
-   但要求，注解中的所有的属性必须是public的，可以显式声明，也可以不声明，不声明 默认就是public的。
-
-   注解中的属性只能是八种基本数据类型：String类型、Class类型、枚举类型、其他注解类型及以上类型的一维数组。
-
-   注解中声明的属性，需要在使用注解时为其赋值，赋值的方式就是使用注解时，在注解后跟一对小括号，在其中通过属性名=属性值的方式，指定属性的值
-
-   也可以在声明注解时，在注解的属性后通过default关键字声明属性的默认值，声明过默认值的属性可以在使用注解时不赋值，则默认采用默认值，也可以手动赋值覆盖默认值
-   如果属性是一维数组类型，而在传入的数组中只有一个值，则包括数组的大括号可以省略，如果注解的属性只有一个需要赋值，且该属性的名称叫做value，则在使用注解时value= 可以不写
-
+   但要求：
+   1. 注解中的所有的属性必须是public的，可以显式声明，也可以不声明，不声明默认就是public的。
+   2. 注解中的属性只能是八种基本数据类型：String类型、Class类型、枚举类型、其他注解类型及以上类型的一维数组。
+   3. 注解中声明的属性，需要在使用注解时为其赋值，赋值的方式就是使用注解时，在注解后跟一对小括号，在其中通过属性名=属性值的方式，指定属性的值。
+   4. 也可以在声明注解时，在注解的属性后通过default关键字声明属性的默认值，声明过默认值的属性可以在使用注解时不赋值，则默认采用默认值，也可以手动赋值覆盖默认值。
+   5. 如果属性是一维数组类型，而在传入的数组中只有一个值，则包括数组的大括号可以省略，如果注解的属性只有一个需要赋值，且该属性的名称叫做value，则在使用注解时value= 可以不写
 ******* 反射注解
 1. 反射注解的原理
    RetentionPolicy.RUNTIME级别的注解会保留到运行其，可以通过反射技术获取，从而可以根据是否有注解或注解属性值的不同控制程序按照不同方式运行。以下反射相关的类型中都提供了反射注解的方法:
@@ -1233,6 +1447,51 @@ Spring除了默认的使用xml配置文件的方式实现配置之外，也支�
 ****** 改造过后的EasyMall的问题
 改造过后的EasyMall成功解决了耦合的问题，但是在很多地方仍然存在非该层应该实现的功能，造成了无法“高内聚”的现象，同时存在大量存在重复代码，开发效率低下。此时可以通过代理设计模式，将这部分代码提取到代理者中，简化层中的代码。
 ****** 静态代理模式
+
+#+BEGIN_SRC java
+  import org.junit.Test;
+  import java.lang.reflect.InvocationHandler;
+  import java.lang.reflect.Method;
+  import java.lang.reflect.Proxy;
+
+  interface Star{
+      public void qianming();
+      public void chifan();
+  }
+  public class Test02 {
+      /**
+       ,* 静态代理
+       ,*  优点：好理解
+       ,*  缺点：所有方法都要实现 代码存在大量重复
+       ,*/
+      @Test
+      public void test01(){
+          FBB fbb = new FBB();
+
+          class ZuLi implements Star{
+              @Override
+              public void qianming() {
+                  System.out.println("你谁啊？");
+                  fbb.qianming();
+                  System.out.println("记录一下..");
+              }
+              @Override
+              public void chifan() {
+                  System.out.println("你谁啊？");
+                  fbb.chifan();
+                  System.out.println("记录一下..");
+              }
+          }
+
+          ZuLi proxy = new ZuLi();
+
+          proxy.qianming();
+          proxy.chifan();
+      }
+  }
+
+#+END_SRC
+
 静态代理设计模式特点:
 - 优点:
   结构清晰 易于理解
@@ -1241,7 +1500,6 @@ Spring除了默认的使用xml配置文件的方式实现配置之外，也支�
 静态代理设计模式解决了软件分层过程中额外的功能代码侵入模块的问题，将额外的功能代码提取到了代理者中进行，但是静态代理实现的代理者中存在大量重复的代码，并没有解决代码 重复问题。所以在真正开发中--包括spring的底层，基本不会使用静态代理。
 ****** 动态代理 - jdk内置的动态代理
 在jdk中提供了动态代理实现的工具类，直接使用该工具类就可以创建出代理者，并且可以通过内置的回调函数指定代理在工作时的执行逻辑，从而实现基于jdk原生api的动态代理机制。
-
 #+BEGIN_SRC java
   package cn.tedu.javaproxy;
   import java.lang.reflect.InvocationHandler;
@@ -1277,6 +1535,73 @@ Spring除了默认的使用xml配置文件的方式实现配置之外，也支�
       }
   }
 #+END_SRC
+
+#+BEGIN_SRC java
+  package cn.tedu;
+
+  import org.junit.Test;
+  import java.lang.reflect.InvocationHandler;
+  import java.lang.reflect.Method;
+  import java.lang.reflect.Proxy;
+
+  interface Star{
+      public void qianming();
+      public void chifan();
+  }
+
+  class FBB implements Star{
+      public void qianming(){
+          System.out.println("fbb签名..");
+      }
+      public void chifan(){
+          System.out.println("fbb吃饭..");
+      }
+      public void shufa(){
+          System.out.println("fbb写书法..");
+      }
+  }
+
+  public class Test02 {
+      /**
+       ,* 动态代理 - java动态代理
+       ,*  优点：代理代码只需要写一遍就可以对多个方法进行代理
+       ,*  缺点：基于接口实现代理，如果方法不属于任何接口，则无法代理
+       ,*/
+      @Test
+      public void test02(){
+          //被代理者 - 范冰冰
+          FBB fbb = new FBB();
+
+          //代理者 - 助理
+          Star proxy = (Star) Proxy.newProxyInstance(
+                  //类加载器
+                  FBB.class.getClassLoader(),
+                  //要实现的接口们
+                  FBB.class.getInterfaces(),
+                  //回调函数 - 代理者执行的逻辑
+                  new InvocationHandler() {
+                      /**
+                       ,* @param proxy 代理者 - 助理
+                       ,* @param method 被调用的方法
+                       ,* @param args 被调用的方法的参数
+                       ,*/
+                      @Override
+                      public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                          System.out.println("你谁啊？");
+                          Object retuObj = method.invoke(fbb, args);
+                          System.out.println("记录一下..");
+                          return retuObj;
+                      }
+                  }
+          );
+
+          //有事找助理，不能找范冰冰
+          proxy.qianming();
+          proxy.chifan();
+          //proxy.shufa();
+      }
+#+END_SRC
+
 java动态代理的特点:
 - 优点:
   不需要像静态代理一样被代理方法都要实现一遍，而只需要在回调函数中进行处理就可以了，重复代码只需编写一次。
@@ -1289,22 +1614,84 @@ CGLIB是第三方提供的动态代理的实现工具，不管有没有接口都
 2. 开发CGLIB程序
 
    #+BEGIN_SRC java
-     package cn.tedu.cglibproxy; import java.lang.reflect.Method;
      import org.junit.Test;
      import org.springframework.cglib.proxy.Enhancer;
      import org.springframework.cglib.proxy.MethodInterceptor;
      import org.springframework.cglib.proxy.MethodProxy;
+     import java.lang.reflect.Method;
+
+     interface Star{
+         public void qianming();
+         public void chifan();
+     }
+
+     class FBB implements Star{
+         public void qianming(){
+             System.out.println("fbb签名..");
+         }
+         public void chifan(){
+             System.out.println("fbb吃饭..");
+         }
+         public void shufa(){
+             System.out.println("fbb写书法..");
+         }
+     }
+
+     public class Test02 {
+
+         /**
+          ,* 动态代理 - cglib动态代理
+          ,*  优点：基于继承实现代理，无论方法是否属于接口都可以代理
+          ,*  缺点：不是java原生的，需要导如第三方包才能使用
+          ,*/
+         @Test
+         public void test03(){
+             FBB fbb = new FBB();
+             //1.创建增强器
+             Enhancer enhancer = new Enhancer();
+             //2.指定要实现的接口们，不是必须的
+             enhancer.setInterfaces(fbb.getClass().getInterfaces());
+             //3.指定父类，必须的
+             enhancer.setSuperclass(fbb.getClass());
+             //4.指定回调函数
+             enhancer.setCallback(new MethodInterceptor() {
+                     @Override
+                     public Object intercept(Object proxy, Method method, Object[] args, MethodProxy mp) throws Throwable {
+                         System.out.println("你谁啊？");
+                         Object retObj = method.invoke(fbb,args);
+                         System.out.println("记录一下..");
+                         return retObj;
+                     }
+                 });
+             //5.创建代理者
+             FBB proxy = (FBB) enhancer.create();
+
+             //6.有事找代理，不能直接找FBB
+             proxy.qianming();
+             proxy.chifan();
+             proxy.shufa();
+         }
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     import java.lang.reflect.Method;
+     import org.junit.Test;
+     import org.springframework.cglib.proxy.Enhancer;
+     import org.springframework.cglib.proxy.MethodInterceptor;
+     import org.springframework.cglib.proxy.MethodProxy;
+
      public class CglibProxyTest {
          @Test
          public void test01(){
              final FBB fbb = new FBB();
-             //增强器
+             //1.创建增强器
              Enhancer enhancer = new Enhancer();
-             //设定接口 -- 此方法要求生成的动态代理额外实现指定接口们 ，单cglib动态代理不是靠接口实现的，所 以可以不设置
+             //2.设定接口 -- 此方法要求生成的动态代理额外实现指定接口们 ，单cglib动态代理不是靠接口实现的，所 以可以不设置
              enhancer.setInterfaces(fbb.getClass().getInterfaces());
-             //设定父类 -- 此处要传入被代理者的类，cglib是通过集成被代理者的类来持有和被代理者相同的方法 的，此方法必须设置
+             //3.设定父类 -- 此处要传入被代理者的类，cglib是通过集成被代理者的类来持有和被代理者相同的方法 的，此方法必须设置
              enhancer.setSuperclass(fbb.getClass());
-             //设定回调函数 -- 为增强器设定回调函数，之后通过增强器生成的代理对象调用任何方法都会走到此回调 函数中，实现调用真正被代理对象的方法的效果
+             //4.设定回调函数 -- 为增强器设定回调函数，之后通过增强器生成的代理对象调用任何方法都会走到此回调 函数中，实现调用真正被代理对象的方法的效果
              enhancer.setCallback(new MethodInterceptor() {
                      @Override
                      public Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
@@ -1318,13 +1705,76 @@ CGLIB是第三方提供的动态代理的实现工具，不管有没有接口都
                          }
                      }
                  });
-             //生成代理对象
+             //5.创建代理者
              FBB proxy = (FBB) enhancer.create(); proxy.吃();
+             //6.有事找代理，不能直接找FBB
              proxy.唱歌();
              proxy.拍电影();
          }
      }
    #+END_SRC
+
+   #+BEGIN_SRC java
+     import org.junit.Test;
+     import org.springframework.cglib.proxy.Enhancer;
+     import org.springframework.cglib.proxy.MethodInterceptor;
+     import org.springframework.cglib.proxy.MethodProxy;
+     import java.lang.reflect.Method;
+
+     interface 动物{
+         public void 吃();
+         public void 叫();
+     }
+
+     class 狗 implements 动物{
+         public void 吃(){
+             System.out.println("狗在么么么的吃..");
+         }
+         public void 叫(){
+             System.out.println("狗在汪汪汪的叫..");
+         }
+         public void 看家(){
+             System.out.println("狗在看家..");
+         }
+     }
+
+     public class Test01 {
+         /**
+          ,* 改造不喜欢的方法 - 代理设计模式 - 动态代理 - cglib动态代理
+          ,*/
+         @Test
+         public void test05(){
+             狗 dog = new 狗();
+             //1.创建增强器
+             Enhancer enhancer = new Enhancer();
+             //2.指定要实现接口们 - 不是必须的
+             enhancer.setInterfaces(dog.getClass().getInterfaces());
+             //3.指定要继承的父类 - 必须的
+             enhancer.setSuperclass(dog.getClass());
+             //4.指定回调函数
+             enhancer.setCallback(new MethodInterceptor() {
+                     @Override
+                     public Object intercept(Object proxy, Method method, Object[] args, MethodProxy mp) throws Throwable {
+                         if("叫".equals(method.getName())){
+                             System.out.println("狗在呵呵呵的叫..");
+                             return null;
+                         }else{
+                             Object retObj = method.invoke(dog,args);
+                             return retObj;
+                         }
+                     }
+                 });
+             //5.创建代理对象
+             狗 proxy = (狗) enhancer.create();
+
+             //6.有事找代理，不要找dog
+             proxy.吃();
+             proxy.叫();
+             proxy.看家();
+         }
+     }
+   #+END_SRC
+
    CGLIB动态代理原理图：
 
    [[./Img/5.png]]
@@ -1481,12 +1931,12 @@ CGLIB是第三方提供的动态代理的实现工具，不管有没有接口都
 2. 切入点(Pointcut):
    匹配连接点的断言。通知和一个切入点表达式关联，并在满足这个切入点的连接点上运行(例如，当执行某个特定名称的方法时)。切入点表达式如何和连接点匹配是AOP的核心:Spring缺省使用AspectJ切入点语法。
    - 通俗讲:
-     在连接点的基础上 增加上切入规则 选择出需要进行增强的连接点 这些基于切入规则选出来的 连接点 就称之为切入点。
+     在连接点的基础上增加上切入规则 选择出需要进行增强的连接点 这些基于切入规则选出来的 连接点 就称之为切入点。
 3. 切面(Aspect):
    一个关注点的模块化，这个关注点可能会横切多个对象。事务管理是J2EE应用中一个关于横切关注点的很好的例子。在SpringAOP中，切面可以使用基于模式)或者基于@Aspect注解的方式来实现。
    - 通俗讲:
-     + 狭义上就是当spring拦截下切入点后 将这些切入点 交给 处理类 进行功能的增强，这个处 理类就称之为切面。
-     + 广义上来讲将spring底层的代理 切入点 和 处理类 加在一起 实现的 对层与层之间调用过 程进行增强的机制 称之为切面。
+     + 狭义上就是当spring拦截下切入点后 将这些切入点交给处理类进行功能的增强，这个处理类就称之为切面。
+     + 广义上来讲将spring底层的代理切入点和处理类加在一起实现的对层与层之间调用过 程进行增强的机制称之为切面。
 4. 通知(Advice):
    在切面的某个特定的连接点上执行的动作。其中包括了“around”、“before”和“after”等不同类型的通知(通知的类型将在后面部分进行讨论)。许多AOP框架(包括Spring)都是以拦截器做通知模型，并维护一个以连接点为中心的拦截器链。
    - 通俗讲:
@@ -1504,87 +1954,128 @@ CGLIB是第三方提供的动态代理的实现工具，不管有没有接口都
 5. 定义通知
 6. 配置切面、通知、切入点规则
 7. 执行方法，发现切面确实起作用
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8"?>
+  <beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:context="http://www.springframework.org/schema/context"
+         xmlns:aop="http://www.springframework.org/schema/aop"
+         xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         https://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd
+  ">
+      <!-- 开启包扫描 -->
+      <context:component-scan base-package="cn.tedu.service"></context:component-scan>
+      <context:component-scan base-package="cn.tedu.web"></context:component-scan>
+      <context:component-scan base-package="cn.tedu.aspect"></context:component-scan>
+      <!-- 开启注解方式DI -->
+      <context:annotation-config/>
+      <!-- 配置切面 -->
+      <aop:config>
+          <aop:aspect ref="firstAspect">
+              <aop:before method="myFirst" pointcut="within(cn.tedu.service.UserServiceImpl)"></aop:before>
+          </aop:aspect>
+      </aop:config>
+  </beans>
+#+END_SRC
+#+BEGIN_SRC java
+  package cn.tedu.aspect;
+
+  import org.springframework.stereotype.Component;
+
+  @Component
+  public class FirstAspect {
+      public void myFirst(){
+          System.out.println("first...");
+      }
+  }
+
+#+END_SRC
 ****** 切入点表达式
 1. within表达式
    通过类名进行匹配，粗粒度的切入点表达式；within(包名.类名)，则这个类中的所有的连接点都会被表达式识别，成为切入点。
    #+BEGIN_SRC html
      <aop:pointcut expression="within(cn.tedu.service.UserServiceImpl)" id="pc01" />
    #+END_SRC
-   在within表达式中可以使用*号匹配符，匹配指定包下所有的类，注意，只匹配当前包，不包括 当前包的子孙包。
+   1. 在within表达式中可以使用*号匹配符，匹配指定包下所有的类，注意，只匹配当前包，不包括 当前包的子孙包。
 
-   #+BEGIN_SRC html
-     <aop:config>
-       <!-- 配置切入点 -->
-       <aop:pointcut expression="within(cn.tedu.service.*)" id="pc01"/>
-       <!-- 配置切面 -->
-       <aop:aspect ref="firstAspect">
-         <aop:before method="before" pointcut-ref="pc01"/>
-       </aop:aspect>
-     </aop:config>
-   #+END_SRC
-   在within表达式中也可以用*号匹配符，匹配包
+      #+BEGIN_SRC html
+        <aop:config>
+          <!-- 配置切入点 -->
+          <aop:pointcut expression="within(cn.tedu.service.*)" id="pc01"/>
+          <!-- 配置切面 -->
+          <aop:aspect ref="firstAspect">
+            <aop:before method="before" pointcut-ref="pc01"/>
+          </aop:aspect>
+        </aop:config>
+      #+END_SRC
+   2. 在within表达式中也可以用*号匹配符，匹配包
 
-   #+BEGIN_SRC html
-     <aop:config>
-       <!-- 配置切入点 -->
-       <aop:pointcut expression="within(cn.tedu.service.*.*)" id="pc01"/>
-       <!-- 配置切面 -->
-       <aop:aspect ref="firstAspect">
-         <aop:before method="before" pointcut-ref="pc01"/>
-       </aop:aspect>
-     </aop:config>
-   #+END_SRC
-   在within表达式中也可以用..*号匹配符，匹配指定包下及其子孙包下的所有的类
+      #+BEGIN_SRC html
+        <aop:config>
+          <!-- 配置切入点 -->
+          <aop:pointcut expression="within(cn.tedu.service.*.*)" id="pc01"/>
+          <!-- 配置切面 -->
+          <aop:aspect ref="firstAspect">
+            <aop:before method="before" pointcut-ref="pc01"/>
+          </aop:aspect>
+        </aop:config>
+      #+END_SRC
+   3. 在within表达式中也可以用..*号匹配符，匹配指定包下及其子孙包下的所有的类
 
-   #+BEGIN_SRC html
-     <aop:config>
-       <!-- 配置切入点 -->
-       <aop:pointcut expression="within(cn.tedu.service..)" id="pc01"/>
-       <!-- 配置切面 -->
-       <aop:aspect ref="firstAspect">
-         <aop:before method="before" pointcut-ref="pc01"/>
-       </aop:aspect>
-     </aop:config>
-   #+END_SRC
+      #+BEGIN_SRC html
+        <aop:config>
+          <!-- 配置切入点 -->
+          <aop:pointcut expression="within(cn.tedu.service..)" id="pc01"/>
+          <!-- 配置切面 -->
+          <aop:aspect ref="firstAspect">
+            <aop:before method="before" pointcut-ref="pc01"/>
+          </aop:aspect>
+        </aop:config>
+      #+END_SRC
 2. execution()表达式
    细粒度的切入点表达式，可以以方法为单位定义切入点规则
    - 语法：
      execution(返回值类型 包名.类名.方法名(参数类型,参数类型...))
-   - 例子1
+   1. 例子1
 
      #+BEGIN_SRC html
        <aop:pointcut expression="execution(void cn.tedu.service.UserServiceImpl.addUser(java.lang.String)) id=pc1"/>
      #+END_SRC
-   - 例子2
+   2. 例子2
 
      #+BEGIN_SRC html
        <aop:pointcut expression="execution(* cn.tedu.service.*.query()) id=pc1"/>
      #+END_SRC
      该切入点规则表示，切出指定包下所有的类中的query方法，要求无参，但返回值类型不限。
-   - 例子3
+   3. 例子3
 
      #+BEGIN_SRC html
        <aop:pointcut expression="execution(* cn.tedu.service..*.query())" id="pc1"/>
      #+END_SRC
      该切入点规则表示，切出指定包及其子孙包下所有的类中的query方法，要求无参，但返回值类型不限。
-   - 例子4
+   4. 例子4
 
      #+BEGIN_SRC html
        <aop:pointcut expression="execution(* cn.tedu.service.. *.query(int,java.lang.String))" id="pc1"/>
      #+END_SRC
      该切入点规则表示，切出指定包及其子孙包下所有的类中的query方法，要求参数为int java.langString类型，但返回值类型不限。
-   - 例子5
+   5. 例子5
 
      #+BEGIN_SRC html
        <aop:pointcut expression="execution(* cn.tedu.service..*.query(..))" id="pc1"/>
      #+END_SRC
      该切入点规则表示，切出指定包及其子孙包下所有的类中的query方法，参数数量及类型不限，返回值类型不限。
-   - 例子6
+   6. 例子6
 
      #+BEGIN_SRC html
        <aop:pointcut expression="execution(* cn.tedu.service..*.*(..))" id="pc1"/>
      #+END_SRC
-     该切入点规则表示，切出指定包及其子孙包下所有的类中的任意方法，参数数量及类型不 限，返回值类型不限。这种写法等价于within表达式的功能。
+     该切入点规则表示，切出指定包及其子孙包下所有的类中的任意方法，参数数量及类型不限，返回值类型不限。这种写法等价于within表达式的功能。
 ****** Spring的五大通知类型
 1. 前置通知
    在目标方法执行之前执行执行的通知，前置通知方法，可以没有参数，也可以额外接收一个JoinPoint，Spring会自动将该对象传入，代表当前的连接点，通过该对象可以获取目标对象和目标方法相关的信息。注意，如果接收JoinPoint，必须保证其为方法的第一个参数，否则报错。

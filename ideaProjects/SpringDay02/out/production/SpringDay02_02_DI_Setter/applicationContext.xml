@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="hero" class="cn.tedu.domain.Hero">
+        <property name="id" value="3"></property>
+        <property name="name" value="亚瑟"></property>
+        <property name="list">
+            <list>
+                <value>lv1</value>
+                <value>lv2</value>
+                <value>lv3</value>
+            </list>
+        </property>
+        <property name="set">
+            <set>
+                <value>sv1</value>
+                <value>sv2</value>
+                <value>sv3</value>
+                <value>sv2</value>
+            </set>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="k1" value="v1"></entry>
+                <entry key="k2" value="v2"></entry>
+                <entry key="k3" value="v3"></entry>
+                <entry key="k2" value="v4"></entry>
+            </map>
+        </property>
+        <property name="props">
+            <props>
+                <prop key="pk1">pv1</prop>
+                <prop key="pk2">pv2</prop>
+                <prop key="pk3">pv3</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

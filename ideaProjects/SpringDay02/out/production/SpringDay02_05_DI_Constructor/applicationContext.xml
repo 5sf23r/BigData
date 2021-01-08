@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="dog" class="cn.tedu.domain.Dog">
+        <property name="name" value="旺财"></property>
+        <property name="age" value="5"></property>
+    </bean>
+    <bean id="student" class="cn.tedu.domain.Student">
+        <!--
+        index 构造器在中第几个参数
+        name 构造器中叫什么名字的参数
+        type 构造器中什么类型的参数
+        value 给什么值
+        ref 给什么值，通过引用
+        -->
+        <constructor-arg index="0" name="id" type="int" value="3"></constructor-arg>
+        <constructor-arg name="name" value="zs"></constructor-arg>
+        <constructor-arg index="2" ref="dog"></constructor-arg>
+    </bean>
+</beans>

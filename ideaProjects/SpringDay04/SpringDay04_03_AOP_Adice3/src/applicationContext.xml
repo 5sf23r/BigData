@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+        ">
+    <!--开启包扫描-->
+    <context:component-scan base-package="cn.tedu.web"></context:component-scan>
+    <context:component-scan base-package="cn.tedu.service"></context:component-scan>
+    <context:component-scan base-package="cn.tedu.aspect"></context:component-scan>
+
+    <!--开启注解方式DI-->
+    <context:annotation-config/>
+
+    <!--配置切面-->
+    <aop:config>
+        <aop:aspect ref="firstAspect">
+            <aop:pointcut id="pc01" expression="execution(* cn.tedu.service..*(..))"/>
+            <aop:before method="before" pointcut-ref="pc01"></aop:before>
+            <aop:around method="around" pointcut-ref="pc01"></aop:around>
+            <aop:after-returning method="afterReturning" pointcut-ref="pc01" returning="retObj"></aop:after-returning>
+            <aop:after-throwing method="afterThrowing" pointcut-ref="pc01" throwing="e"></aop:after-throwing>
+            <aop:after method="after" pointcut-ref="pc01"></aop:after>
+        </aop:aspect>
+        <aop:aspect ref="secondAspect">
+            <aop:pointcut id="pc01" expression="execution(* cn.tedu.service..*(..))"/>
+            <aop:before method="before" pointcut-ref="pc01"></aop:before>
+            <aop:around method="around" pointcut-ref="pc01"></aop:around>
+            <aop:after-returning method="afterReturning" pointcut-ref="pc01" returning="retObj"></aop:after-returning>
+            <aop:after-throwing method="afterThrowing" pointcut-ref="pc01" throwing="e"></aop:after-throwing>
+            <aop:after method="after" pointcut-ref="pc01"></aop:after>
+        </aop:aspect>
+    </aop:config>
+</beans>
