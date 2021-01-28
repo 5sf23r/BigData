@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="SpringDay04_AOP_Exec_trans">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/SpringDay04_09_AOP_Exec_trans/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/SpringDay04_09_AOP_Exec_trans/lib" recursive="false" />
+  </library>
+</component>

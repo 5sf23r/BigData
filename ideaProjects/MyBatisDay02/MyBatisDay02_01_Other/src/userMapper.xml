@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.userMapper">
+    <!--sql复用-->
+    <sql id="sfu">
+        select * from user
+    </sql>
+
+    <select id="selc02" resultType="userAlias">
+        <include refid="sfu"/> where age between #{min} and #{max};
+    </select>
+    <select id="selc01" resultType="userAlias">
+        <include refid="sfu"/> where id = #{id};
+    </select>
+</mapper>

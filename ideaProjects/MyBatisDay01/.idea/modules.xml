@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MyBatisDay01_01_First/MyBatisDay01_01_First.iml" filepath="$PROJECT_DIR$/MyBatisDay01_01_First/MyBatisDay01_01_First.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyBatisDay01_02_Params/MyBatisDay01_02_Params.iml" filepath="$PROJECT_DIR$/MyBatisDay01_02_Params/MyBatisDay01_02_Params.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyBatisDay01_03_CRUD/MyBatisDay01_03_CRUD.iml" filepath="$PROJECT_DIR$/MyBatisDay01_03_CRUD/MyBatisDay01_03_CRUD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyBatisDay01_04_MultQuery/MyBatisDay01_04_MultQuery.iml" filepath="$PROJECT_DIR$/MyBatisDay01_04_MultQuery/MyBatisDay01_04_MultQuery.iml" />
+    </modules>
+  </component>
+</project>

@@ -37,7 +37,9 @@ public class PrivAspect {
 //    public Object around(ProceedingJoinPoint pjp) throws Throwable {
 //        //获取目标方法
 //        MethodSignature signature = (MethodSignature) pjp.getSignature();
+//        //接口上的方法
 //        Method intf_method = signature.getMethod();
+//        //得到实现类的目标方法
 //        Class<?> clz = pjp.getTarget().getClass();
 //        Method inst_method = clz.getMethod(intf_method.getName(),intf_method.getParameterTypes());
 //        //检查目标方法是否有@PrivAnno

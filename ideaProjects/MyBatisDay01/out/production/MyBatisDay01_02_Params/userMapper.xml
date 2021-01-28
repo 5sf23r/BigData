@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.userMapper">
+    <select id="selc04" resultType="cn.tedu.domain.User">select * from user order by ${c};</select>
+    <select id="selc03" resultType="cn.tedu.domain.User">select * from user where name = "${name}";</select>
+    <!-- <select id="selc03" resultType="cn.tedu.domain.User">select * from user where name = '${name}';</select> -->
+    <select id="selc02" resultType="cn.tedu.domain.User">select * from user where name = #{name};</select>
+    <insert id="insert01">insert into user values (null,#{name},#{age});</insert>
+    <select id="slec01" resultType="cn.tedu.domain.User">select * from user where id = #{uid};</select>
+</mapper>

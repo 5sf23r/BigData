@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MyBatisDay02_01_Other/MyBatisDay02_01_Other.iml" filepath="$PROJECT_DIR$/MyBatisDay02_01_Other/MyBatisDay02_01_Other.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyBatisDay02_02_Cache/MyBatisDay02_02_Cache.iml" filepath="$PROJECT_DIR$/MyBatisDay02_02_Cache/MyBatisDay02_02_Cache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyBatisDay02_03_Interface/MyBatisDay02_03_Interface.iml" filepath="$PROJECT_DIR$/MyBatisDay02_03_Interface/MyBatisDay02_03_Interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SSMDemo1/SSMDemo1.iml" filepath="$PROJECT_DIR$/SSMDemo1/SSMDemo1.iml" />
+    </modules>
+  </component>
+</project>

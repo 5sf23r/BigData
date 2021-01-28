@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="SpringMVCDay02_03_ResponseBody">
+    <output-path>$PROJECT_DIR$/out/artifacts/SpringMVCDay02_03_ResponseBody</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="SpringMVCDay02_03_ResponseBody/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SpringMVCDay02_03_ResponseBody" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="SpringMVCDay02_03_ResponseBody" module-name="SpringMVCDay02_03_ResponseBody" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

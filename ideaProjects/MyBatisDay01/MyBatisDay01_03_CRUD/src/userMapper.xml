@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.userMapper">
+    <delete id="delete02">
+        delete from user where id in 
+        <foreach collection="list" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="delete01">
+        delete from user
+        <where>
+            <if test="id!=0">id=#{id}</if>
+            <if test="name!=null">and name=#{name}</if>
+            <if test="age!=0">and age=#{age}</if>
+        </where>
+    </delete>
+    <insert id="insert01">
+        insert into user
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                id,
+                <if test="name != null">name,</if>
+                <if test="age != 0">age,</if>
+            </trim>
+         values
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                null,
+                <if test="name!=null">#{name},</if>
+                <if test="age!=0">#{age},</if>
+            </trim>
+    </insert>
+    <select id="select01" resultType="cn.tedu.domain.User">
+        select * from user
+        <where>
+            <if test="id != 0">id = #{id}</if>
+            <if test="name != null">and name = #{name}</if>
+            <if test="age != 0">and age = #{age}</if>
+        </where>
+    </select>
+    <update id="update01">
+        update user
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="age != 0">age = #{age}</if>
+        </set>
+        where
+            id = #{id};
+    </update>
+</mapper>

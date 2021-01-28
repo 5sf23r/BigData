@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="SpringMVCDay02_01_forward_redirect_refresh">
+    <output-path>$PROJECT_DIR$/out/artifacts/SpringMVCDay02_01_forward_redirect_refresh</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="SpringMVCDay02_01_forward_redirect_refresh/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SpringMVCDay02_01_forward_redirect_refresh" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="SpringMVCDay02_01_forward_redirect_refresh" module-name="SpringMVCDay02_01_forward_redirect_refresh" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -40,17 +40,1913 @@
 *** SSM
 **** SpringMVC
 **** Spring
+**** MyBatis
+
+* -----------------------------------
+* 1 SpringMVC
+[[./Img/SpringMVC.png]]
+** 1.1 概述
+SpringMVC是一个WEB层、控制层框架,主要用来负责与客户端交互,业务逻辑的调用.SpringMVC是Spring家族的一大组件.Spring整合SpringMVC可以做到无缝集成.
+- 特点：
+  简单易用性能佳。
+- 为了么有了Servlet还要学SpringMVC
+  1. Servlet的开发配置相对麻烦，servlet特别多的时候web.xml文件将会非常臃肿
+  2. 每个Servlet都只能处理一个功能，如果需要多个功能就需要开发多个Servlet，项目中存在大量Servlet显得臃肿。
+  3. 获取请求参数 进行类型转换 封装数据到bean的过程比较繁琐。
+  4. 其他开发中不方便的地方，例如，乱码问题..数据格式处理..表单校验..
+** 1.2 详解
+*** 1.2.1 组件
+1. 前端控制器（DispatcherServlet）
+   本质上是一个Servlet，相当于一个中转站，所有的访问都会走到这个Servlet中，再根据配置进行中转到相应的Handler中进行处理,获取到数据和视图后，在使用相应视图做出响应。
+2. 处理器映射器(HandlerMapping)
+   本质上就是一段映射关系，将访问路径和对应的Handler存储为映射关系，在需要时供前端控制器查阅。
+3. 处理器适配器(HandlerAdapter)
+   本质上是一个适配器，可以根据要求找到对应的Handler来运行。前端控制器通过处理器映射器找到对应的Handler信息之后，将请求响应和对应的Handler信息交由处理器适配器处理，处理器适配器找到真正handler执行后，将结果即model和view返回给前端控制器
+4. 视图解析器(ViewResolver)
+   本质上也是一种映射关系，可以将视图名称映射到真正的视图地址。前端控制器调用处理器适配完成后得到model和view，将view信息传给视图解析器得到真正的view。
+5. 视图(View)
+   本质上就是将handler处理器中返回的model数据嵌入到视图解析器解析后得到的jsp页面中，向客户端做出响应
+6. 图解
+   [[./Img/35.png]]
+*** 1.2.2 SpringMVC入门案例
+1. 创建web项目
+2. 导入SpringMVC相关开发包
+3. 配置前端控制器
+   本质上是一个servlet，在当前web项目中配置该servlet
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+              version="4.0">
+         <servlet>
+             <servlet-name>springmvc</servlet-name>
+             <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+         </servlet>
+         <servlet-mapping>
+             <servlet-name>springmvc</servlet-name>
+             <url-pattern>*.action</url-pattern>
+         </servlet-mapping>
+     </web-app>
+   #+END_SRC
+4. 生成SpringMVC的核心配置文件
+   SpringMVC默认会自动在web应用的WEB-INF目录下去寻找[前端控制器ServletName]-servlet.xml作为当前SpringMVC的核心配置文件。创建这个文件，这个文件本身其实就是Spring的配置文件，所以导入Spring相关的约束信息，包括 beans、context、mvc
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:mvc="http://www.springframework.org/schema/mvc"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            https://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/aop
+            https://www.springframework.org/schema/spring-aop.xsd
+            http://www.springframework.org/schema/mvc
+            https://www.springframework.org/schema/spring-mvc.xsd">
+
+     </beans>
+   #+END_SRC
+5. 创建处理器，编写代码
+   想要开发一个处理器，写一个类实现Controller接口，在其中的handlerRequest中编写代码处理请求，并将处理好的数据和目标视图封装到ModelAndView中返回
+
+   [[./Img/36.png]]
+
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.web.servlet.ModelAndView;
+     import org.springframework.web.servlet.mvc.Controller;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     //实现Controller接口
+     public class FirstController implements Controller {
+         @Override
+         public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+             System.out.println("hello springmvc~");
+             //1. 创建ModelAndView
+             ModelAndView mav = new ModelAndView();
+             //2. 封装数据
+             mav.addObject("k1","v1");
+             mav.addObject("k2","v2");
+             mav.addObject("k3","v3");
+             //3. 封装视图
+             mav.setViewName("first");
+             //4. 返回ModelAndView
+             return mav;
+         }
+     }
+
+   #+END_SRC
+
+6. 配置处理器映射器中的路径和处理器的映射关系
+
+   #+BEGIN_SRC html
+      <!-- 配置处理器映射器 -->
+         <bean name="/first.action" class="cn.tedu.controller.FirstController"></bean>
+   #+END_SRC
+
+7. 配置视图解析器
+
+   #+BEGIN_SRC html
+     <!-- 配置试图解析器 -->
+         <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+             <property name="prefix" value="/WEB-INF/jsp/"></property>
+             <property name="suffix" value=".jsp"></property>
+         </bean>
+   #+END_SRC
+
+8. 开发视图
+
+   #+BEGIN_SRC html
+     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+     <html>
+     <head>
+         <title>Title</title>
+     </head>
+     <body>
+     first.jsp....
+     ${k1}
+     ${k2}
+     ${k3}
+     </body>
+     </html>
+
+   #+END_SRC
+
+9. 发布应用，通过浏览器访问
+   localhost/SpringMVCDay01_01_First/first.action
+10. 整体流程
+    [[./Img/37.png]]
+*** 1.2.3 修改SpringMVC核心配置文件的位置
+SpringMVC默认在和web.xml相同的位置即WEB-INF目录下寻找核心配置文件,文件名默认[前端控制器Servlet-name]-servlet.xml
+
+如果需要，可以通过配置，手动指定核心配置文件的位置，和文件的名称：
+
+#+BEGIN_SRC html
+  <!-- 配置文件位置 -->
+          <init-param>
+              <param-name>contextConfigLocation</param-name>
+              <param-value>classpath:/springmvc.xml</param-value>
+          </init-param>
+#+END_SRC
+*** 1.2.4 SpringMVC的注解方式配置
+SpringMVC支持使用注解方式配置，比配置文件方式更加的灵活易用，是SpringMVC使用的主流模式。
+1. 在配置文件中开启SpringMVC的注解模式
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:mvc="http://www.springframework.org/schema/mvc"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            https://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/aop
+            https://www.springframework.org/schema/spring-aop.xsd
+            http://www.springframework.org/schema/mvc
+            https://www.springframework.org/schema/spring-mvc.xsd">
+
+         <!-- 配置包扫描 -->
+         <context:component-scan base-package="cn.tedu.controller"></context:component-scan>
+         <!-- 开启注解方式mvc -->
+         <mvc:annotation-driven/>
+
+     </beans>
+   #+END_SRC
+2. 使用注解开发Handler
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.ui.Model;
+     import org.springframework.web.bind.annotation.RequestMapping;
+     import org.springframework.web.servlet.ModelAndView;
+
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+
+     @Controller
+     public class FirstController {
+
+         @RequestMapping("/first.action")
+         public ModelAndView first(){
+             ModelAndView mav = new ModelAndView();
+             mav.addObject("k1","vx1");
+             mav.addObject("k2","vx2");
+             mav.addObject("k3","vx3");
+             mav.setViewName("first");
+             return mav;
+         }
+
+         @RequestMapping("/first2.action")
+         public String first2(Model model){
+             model.addAttribute("k1","vz1");
+             model.addAttribute("k2","vz2");
+             model.addAttribute("k3","vz3");
+             return "first2";
+         }
+     }
+
+   #+END_SRC
+3. 发布应用，通过浏览器进行访问
+   http://localhost/SpringMVCDay01_02_First_Anno/first.action
+   http://localhost/SpringMVCDay01_02_First_Anno/first2.action
+4. 整体流程
+   [[./Img/38.png]]
+5. SpringMVC注解方式工作原理
+   1. 当服务器启动时,先会加载web.xml,创建前端控制器Servlet，前端控制器加载并解析SpringMVC的配置文件。
+   2. 当解析到包扫描时，扫描指定的包，并将含有@Controller注解的类解析为处理器
+   3. 如果配置过<mvc:annotation-driven/> 就会解析Spring-MVC注解
+   4. 解析@RequestMapping(value="/hello.action")，将指定的地址和当前方法的映射关系进行保存
+   5. 当用户发出请求访问一个地址时，SpringMVC寻找该地址映射关系，如果存在，则找到响应处理器相应方法执行，如果找不到，则报404。
+** 1.3 细节
+*** 1.3.1 @RequestMapping
+1. 基本使用
+   - 通过注解方式实现路径到处理器方法的映射。
+   - 可以用在类或方法上。
+   - 用在方法上表示将该方法变为一个处理器，且和指定路径做映射。
+   - 用在类上则配置的路径会作为这个类中所有处理器的路径的父路径使用。
+   #+BEGIN_SRC java
+     @RequestMapping("/test01.action")
+     public ModelAndView test01(){
+         ModelAndView mav = new ModelAndView();
+         mav.addObject("attr1", "hello anno~");
+         mav.addObject("attr2", "hello mvc~");
+         mav.setViewName("first");
+         return mav;
+     }
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+     import org.springframework.web.bind.annotation.RequestMethod;
+
+     @Controller
+     @RequestMapping("/my01")
+     public class MyController01 {
+         /**
+          ,* @RequestMapping的基本使用
+          ,*      用在方法上 - 将当前方法转为一个控制器方法，绑定到指定路径
+          ,*      用在类上 - 作为当前类中所有控制器方法路径的父路径
+          ,* http://localhost/SpringMVCDay01_03_RequestMapping/my01/test01.action
+          ,*/
+         @RequestMapping("/test01.action")
+         public void test01(){
+             System.out.println("test01...");
+         }
+     }
+
+   #+END_SRC
+
+2. 注解属性
+   1. String [] value() default {};
+      - 指定要将当前处理器绑定到哪个访问路径上。
+      - 可以配置多个路径。
+      - 路径中也可以使用*号作为通配符匹配部分路径。
+      #+BEGIN_SRC java
+        @RequestMapping({"/test02.action","/test002.action","/test002*.action"})
+        public ModelAndView test02() {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("attr1", "hello anno~");
+            mav.addObject("attr2", "hello mvc~");
+            mav.setViewName("first");
+            return mav;
+
+        }
+      #+END_SRC
+
+      #+BEGIN_SRC java
+        package cn.tedu.controller;
+
+        import org.springframework.stereotype.Controller;
+        import org.springframework.web.bind.annotation.RequestMapping;
+        import org.springframework.web.bind.annotation.RequestMethod;
+
+        @Controller
+        @RequestMapping("/my01")
+        public class MyController01 {
+            /**
+             ,* @RequestMapping的value属性
+             ,*      绑定路径到控制器方法
+             ,*      可以配置多个值，将多个路径绑定到当前方法
+             ,*      可以在路径中使用*号作为通配符
+             ,* http://localhost/SpringMVCDay01_03_RequestMapping/my01/test02.action
+             ,* http://localhost/SpringMVCDay01_03_RequestMapping/my01/test02x.action
+             ,* http://localhost/SpringMVCDay01_03_RequestMapping/my01/test02zabcdefg.action
+             ,*/
+            @RequestMapping(value={"/test02.action","/test02x.action","/test02z*.action"})
+            public void test02(){
+                System.out.println("test02...");
+            }
+        }
+
+      #+END_SRC
+
+   2. RequestMethod[] method() default {}
+      指定当前处理器处理哪种提交方式提交的请求。
+
+      #+BEGIN_SRC java
+        @RequestMapping(value="/test03.action",method= RequestMethod.POST)
+        public ModelAndView test03() {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("attr1", "hello anno~");
+            mav.addObject("attr2", "hello mvc~");
+            mav.setViewName("first");
+            return mav;
+
+        }
+      #+END_SRC
+
+      #+BEGIN_SRC java
+        package cn.tedu.controller;
+
+        import org.springframework.stereotype.Controller;
+        import org.springframework.web.bind.annotation.RequestMapping;
+        import org.springframework.web.bind.annotation.RequestMethod;
+
+        @Controller
+        @RequestMapping("/my01")
+        public class MyController01 {
+            /**
+             ,* @RequestMapping的method属性
+             ,*      限定只允许哪种请求方式的请求访问此方法
+             ,*      如果不做配置，所有请求方式都可以访问此控制器方法
+             ,*      可以通过配置method属性限定哪此控制器方法只接受哪些中方式的请求
+             ,* http://localhost/SpringMVCDay01_03_RequestMapping/test03.jsp
+             ,*/
+            @RequestMapping(value="/test03.action",method=RequestMethod.GET)
+            public void test03(){
+                System.out.println("test03...");
+            }
+        }
+
+      #+END_SRC
+
+   3. String[] params() default {};
+      - 用来限定当前请求中必须包含指定名称的请求参数才会被当前处理器处理
+      - 通过params属性指定只处理请求参数符合指定要求的请求
+      - 格式
+        1. 只指定名称，要求必须具有该名称的请求参数
+        2. 以"名称=值"或"名称!=值"的方式指定必须具有某个请求参数，且值必须等于或不等于给定值
+        3. 以"!名称"的方式指定必须不包含指定名称的请求参数
+
+        #+BEGIN_SRC java
+          @RequestMapping(value="/test04.action",params= {"name","gender=male","!age","addr!=bj"})
+          public ModelAndView test04() {
+              ModelAndView mav = new ModelAndView();
+              mav.addObject("attr1", "hello anno~");
+              mav.addObject("attr2", "hello mvc~");
+              mav.setViewName("first");
+              return mav;
+          }
+        #+END_SRC
+
+        #+BEGIN_SRC java
+          package cn.tedu.controller;
+
+          import org.springframework.stereotype.Controller;
+          import org.springframework.web.bind.annotation.RequestMapping;
+          import org.springframework.web.bind.annotation.RequestMethod;
+
+          @Controller
+          @RequestMapping("/my01")
+          public class MyController01 {
+              /**
+               ,* @RequestMapping的params属性
+               ,*      要求请求参数必须符合指定要求才能访问此控制器方法
+               ,*          格式1:只指定名称，要求必须具有该名称的请求参数
+               ,*          格式2:以"名称=值"或"名称!=值"的方式指定必须具有某个请求参数，且值必须等于或不等于给定值
+               ,*          格式3:以"!名称"的方式指定必须不包含指定名称的请求参数
+               ,* http://localhost/SpringMVCDay01_03_RequestMapping/my01/test04.action
+               ,* http://localhost/SpringMVCDay01_03_RequestMapping/my01/test04.action?uname=zs
+               ,* http://localhost/SpringMVCDay01_03_RequestMapping/my01/test04.action?uname=zs&gender=male
+               ,* http://localhost/SpringMVCDay01_03_RequestMapping/my01/test04.action?uname=zs&gender=male&country=cn
+               ,* http://localhost/SpringMVCDay01_03_RequestMapping/my01/test04.action?uname=zs&gender=male&country=us
+               ,* http://localhost/SpringMVCDay01_03_RequestMapping/my01/test04.action?uname=zs&gender=male&country=us&age=99
+               ,*/
+              @RequestMapping(value="/test04.action",params={"uname","gender=male","country!=cn","!age"})
+              public void test04(){
+                  System.out.println("test04...");
+              }
+          }
+        #+END_SRC
+
+   4. String[] headers() default {};
+      - 用来限定当前请求中必须包含指定名称的请求头才会被当前处理器处理
+      - 格式
+        1. 只指定名称，要求必须具有该名称的请求头
+        2. 以"名称=值"或"名称!=值"的方式指定必须具有某个请求头，且值必须等于或不等于给定值
+        3. 以"!名称"的方式指定必须不包含指定名称的请求头
+        #+BEGIN_SRC java
+          @RequestMapping(value="/test05.action",headers= {"host=localhost"})
+          public ModelAndView test05() {
+              ModelAndView mav = new ModelAndView();
+              mav.addObject("attr1", "hello anno~");
+              mav.addObject("attr2", "hello mvc~");
+              mav.setViewName("first");
+              return mav;
+          }
+        #+END_SRC
+
+        #+BEGIN_SRC java
+          package cn.tedu.controller;
+
+          import org.springframework.stereotype.Controller;
+          import org.springframework.web.bind.annotation.RequestMapping;
+          import org.springframework.web.bind.annotation.RequestMethod;
+
+          @Controller
+          @RequestMapping("/my01")
+          public class MyController01 {
+
+              /**
+               ,* @RequestMapping的headers属性
+               ,*      要求请求头必须符合指定要求才能访问此控制器方法
+               ,*          格式1:只指定头名称，要求必须具有该名称的请求头
+               ,*          格式2:以"头名称=值"或"名称!=值"的方式指定必须具有某个请求头，且值必须等于或不等于给定值
+               ,*          格式3:以"!头名称"的方式指定必须不包含指定名称的请求头
+               ,* http://localhost/SpringMVCDay01_03_RequestMapping/my01/test05.action
+               ,*/
+              @RequestMapping(value="/test05.action",headers={"Cookie","!Refresh","Connection=keep-alive","Host!=localhost"})
+              public void test05(){
+                  System.out.println("test05..");
+              }
+          }
+        #+END_SRC
+
+*** 1.3.2 获取请求参数
+1. 通过request对象获取
+   在SpringMVC的注解开发中，可以选择性的接收Request和Response对象来使用，可以用request对象来获取请求参数
+
+   #+BEGIN_SRC java
+     /**
+      ,* 获取请求参数 - 通过request对象获取请求参数
+      ,* http://localhost/SpringMVCDay01_04_Parameter/my01/test01.action?uname=zs&uage=19
+      ,*/
+     @RequestMapping("/test01.action")
+     public void test01(HttpServletRequest request){
+         String  uname = request.getParameter("uname");
+         int uage = Integer.parseInt(request.getParameter("uage"));
+         System.out.println(uname);
+         System.out.println(uage);
+     }
+   #+END_SRC
+2. 直接接受请求参数
+   可以在Controller方法中直接接收请求参数相同名称的方法形参，可以直接得到请求参数的值
+   [[./Img/39.png]]
+
+   #+BEGIN_SRC java
+     /**
+      ,* 获取请求参数 - 直接获取
+      ,*      要求方法参数名必须和请求参数名对应
+      ,* http://localhost/SpringMVCDay01_04_Parameter/my01/test02.action?uname=zs&uage=19
+      ,*/
+     @RequestMapping("/test02.action")
+     public void test02(String uname,int uage){
+         System.out.println(uname);
+         System.out.println(uage);
+     }
+   #+END_SRC
+3. 请求参数中的名称和属性名不同的处理@RequestParam
+   可以通过@RequestParam来修饰Controller方法中用来接收请求参数的形参，有如下属性可以配置：
+   | value        | 参数名字，即入参的请求参数名字，如value=“delId”表示请求的参数区中的名字为delId的参数的值将传入 |
+   | required     | 是否必须，默认是true，表示请求中一定要有相应的参数，否则将报400错误码；                        |
+   | defaultValue | 默认值，表示如果请求中没有同名参数时的默认值                                                   |
+   - value来指定 将那个请求参数赋值给当前形参
+   - 将required声明为true，则请求参数中必须有该属性，如果没有客户端将受到400
+     [[./Img/40.png]]
+   - defaultValue可以设定当前形参的默认值
+
+     #+BEGIN_SRC java
+       /**
+        ,* 获取请求参数 - 直接获取 - 方法参数名和请求参数名不一致
+        ,*      可以通过@RequestParam手工指定方法参数到请求参数的映射关系
+        ,* http://localhost/SpringMVCDay01_04_Parameter/my01/test03.action?uname=zs&uage=19
+        ,*/
+       @RequestMapping("/test03.action")
+       public void test03(@RequestParam("uname") String name,@RequestParam("uage") int age){
+           System.out.println(name);
+           System.out.println(age);
+       }
+     #+END_SRC
+4. 自动封装请求参数信息到bean
+   SpringMVC框架可以自动将请求参数封装到bean中，要求bean中必须提供属性的setXxx方法，且bean的属性名和请求参数中请求参数的名字必须一致，才可以自动设置
+
+   [[./Img/41.png]]
+   #+BEGIN_SRC java
+     package cn.tedu.domain;
+
+     public class User {
+         private String uname;
+         private int uage;
+         private String uaddr;
+
+         public User() {
+         }
+
+         public User(String uname, int uage, String uaddr) {
+             this.uname = uname;
+             this.uage = uage;
+             this.uaddr = uaddr;
+         }
+
+         public String getUname() {
+             return uname;
+         }
+
+         public void setUname(String uname) {
+             this.uname = uname;
+         }
+
+         public int getUage() {
+             return uage;
+         }
+
+         public void setUage(int uage) {
+             this.uage = uage;
+         }
+
+         public String getUaddr() {
+             return uaddr;
+         }
+
+         public void setUaddr(String uaddr) {
+             this.uaddr = uaddr;
+         }
+
+         @Override
+         public String toString() {
+             return "User{" +
+                     "uname='" + uname + '\'' +
+                     ", uage=" + uage +
+                     ", uaddr='" + uaddr + '\'' +
+                     '}';
+         }
+     }
+
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     /**
+      ,* 获取请求参数 - 自动封装数据到bean
+      ,*      要求请求参数名和bean的属性名对应
+      ,* http://localhost/SpringMVCDay01_04_Parameter/my01/test04.action?uname=zs&uage=19&uaddr=bj
+      ,*/
+     @RequestMapping("/test04.action")
+     public void test04(User user){
+         System.out.println(user);
+     }
+   #+END_SRC
+5. 处理复杂类型
+   如果自动封装的bean中存在复杂类型，只要该复杂类型的属性同样具有setXxx方法，则可以在请求参数中包含[bean中复杂类型].[属性]的方式为该复杂类型的参数复制，从而实现自动封装bean的过程中处理其中的复杂类型
+
+   [[./Img/42.png]]
+   #+BEGIN_SRC java
+     package cn.tedu.domain;
+
+     public class User2 {
+         private String uname;
+         private int uage;
+         private String uaddr;
+         private Dog dog;
+
+         public User2() {
+         }
+
+         public User2(String uname, int uage, String uaddr, Dog dog) {
+             this.uname = uname;
+             this.uage = uage;
+             this.uaddr = uaddr;
+             this.dog = dog;
+         }
+
+         public String getUname() {
+             return uname;
+         }
+
+         public void setUname(String uname) {
+             this.uname = uname;
+         }
+
+         public int getUage() {
+             return uage;
+         }
+
+         public void setUage(int uage) {
+             this.uage = uage;
+         }
+
+         public String getUaddr() {
+             return uaddr;
+         }
+
+         public void setUaddr(String uaddr) {
+             this.uaddr = uaddr;
+         }
+
+         public Dog getDog() {
+             return dog;
+         }
+
+         public void setDog(Dog dog) {
+             this.dog = dog;
+         }
+
+         @Override
+         public String toString() {
+             return "User2{" +
+                     "uname='" + uname + '\'' +
+                     ", uage=" + uage +
+                     ", uaddr='" + uaddr + '\'' +
+                     ", dog=" + dog +
+                     '}';
+         }
+     }
+
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.domain;
+
+     public class Dog {
+         private String name;
+         private int age;
+
+         public Dog() {
+         }
+
+         public Dog(String name, int age) {
+             this.name = name;
+             this.age = age;
+         }
+
+         public String getName() {
+             return name;
+         }
+
+         public void setName(String name) {
+             this.name = name;
+         }
+
+         public int getAge() {
+             return age;
+         }
+
+         public void setAge(int age) {
+             this.age = age;
+         }
+
+         @Override
+         public String toString() {
+             return "Dog{" +
+                     "name='" + name + '\'' +
+                     ", age=" + age +
+                     '}';
+         }
+     }
+     x
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     /**
+      ,* 获取请求参数 - 自动封装数据到bean - 处理复杂类型
+      ,*      可以通过点号设定自定义bean类型中带有复杂类型的数据
+      ,* http://localhost/SpringMVCDay01_04_Parameter/my01/test05.action?uname=zs&uage=19&uaddr=bj&dog.name=wc&dog.age=5
+      ,*/
+     @RequestMapping("/test05.action")
+     public void test05(User2 user2){
+         System.out.println(user2);
+     }
+   #+END_SRC
+6. 请求参数中存在多个同名参数
+   如果请求参数中存在多个同名值
+
+   [[./Img/43.png]]
+
+   此时直接获取，会得到一个用逗号分隔的字符串
+
+   #+BEGIN_SRC java
+     /**
+      ,* 获取请求参数 - 处理多个同名请求参数
+      ,*      如果用String接收，则传入多个值用逗号连接后的字符串
+      ,*      如果用Stirng数组接收，则传入多个值组成的数组
+      ,* http://localhost/SpringMVCDay01_04_Parameter/my01/test06.action?like=zq&like=lq&like=ppq
+      ,*/
+     @RequestMapping("/test06.action")
+     public void test06(String like){
+         System.out.println(like);
+     }
+   #+END_SRC
+   也可以修改Controller方法的形参为数组类型，则直接接收到一个数组
+
+   #+BEGIN_SRC java
+     /**
+      ,* 获取请求参数 - 处理多个同名请求参数
+      ,*      如果用String接收，则传入多个值用逗号连接后的字符串
+      ,*      如果用Stirng数组接收，则传入多个值组成的数组
+      ,* http://localhost/SpringMVCDay01_04_Parameter/my01/test06.action?like=zq&like=lq&like=ppq
+      ,*/
+     @RequestMapping("/test06.action")
+     //public void test06(String like){
+     public void test06(String [] like){
+         //System.out.println(like);
+         System.out.println(Arrays.asList(like));
+     }
+   #+END_SRC
+7. 请求参数中的中文乱码
+
+   #+BEGIN_SRC html
+     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+     <html>
+     <head>
+         <title>my01test07.jsp</title>
+     </head>
+     <body>
+         <h1>GET请求</h1><hr>
+         <form action="${pageContext.request.contextPath}/my01/test07.action" method="get">
+             用户名:<input type="text" name="username"/>
+             地址:<input type="text" name="addr"/>
+             <input type="submit"/>
+         </form>
+         <h1>POST请求</h1><hr>
+         <form action="${pageContext.request.contextPath}/my01/test07.action" method="post">
+             用户名:<input type="text" name="username"/>
+             地址:<input type="text" name="addr"/>
+             <input type="submit"/>
+         </form>
+     </body>
+     </html>
+
+   #+END_SRC
+   #+BEGIN_SRC java
+     /**
+      ,* http://localhost/SpringMVCDay01_04_Parameter/my01test07.jsp
+      ,*/
+     @RequestMapping("/test07.action")
+     public void test07(String username,String addr) {
+         System.out.println(username);
+         System.out.println(addr);
+     }
+   #+END_SRC
+   此时会出现乱码，解决乱码如下：
+   1. 手动编解码
+      #+BEGIN_SRC java
+        /**
+         ,* http://localhost/SpringMVCDay01_04_Parameter/my01test07.jsp
+         ,*/
+        @RequestMapping("/test07.action")
+        public void test07(HttpServletRequest request,String username,String addr) throws UnsupportedEncodingException {
+            username = new String(username.getBytes("iso8859-1"),"utf-8");
+            addr = new String(addr.getBytes("iso8859-1"),"utf-8");
+            System.out.println(username);
+            System.out.println(addr);
+        }
+      #+END_SRC
+   2. SpringMVC提供了过滤器用来解决全站乱码
+
+      #+BEGIN_SRC html
+        <!--配置乱码解决过滤器-->
+        <filter>
+          <filter-name>encodingFilter</filter-name>
+          <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+          <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+          </init-param>
+        </filter>
+        <filter-mapping>
+          <filter-name>encodingFilter</filter-name>
+          <url-pattern>/*</url-pattern>
+        </filter-mapping>
+      #+END_SRC
+
+      #+BEGIN_SRC java
+        /**
+         ,* 获取请求参数 - 中文乱码处理
+         ,*      springmvc内置了乱码解决过滤器，简单配置后可以用来解决请求参数乱码
+         ,*      但这个过滤器只能解决POST提交乱码，对GET提交请求参数乱码无效
+         ,* http://localhost/SpringMVCDay01_04_Parameter/my01test07.jsp
+         ,*/
+        @RequestMapping("/test07.action")
+        public void test07(String username,String addr) throws UnsupportedEncodingException {
+            System.out.println(username);
+            System.out.println(addr);
+        }
+      #+END_SRC
+
+      这种方式只能解决POST提交的乱码，对GET方式提交的乱码无效！此时只能手动进行编解码 解决GET方式请求参数乱码
+      也可以直接修改Tomcat中连接器的配置来使tomcat默认采用指定编码处理请求参数,但这种方式不建议大家使用，因为生产环境下不一定允许修改此项
+8. 日期数据的处理
+   在SpringMVC中解析页面提交的请求参数时，无法自动获取封装日期到Data。如果想要实现自动封装，必须手动注册适配器自己来指定转换方式。
+
+   #+BEGIN_SRC html
+     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+     <html>
+     <head>
+         <title>my01test08.jsp</title>
+     </head>
+     <body>
+         <form action="${pageContext.request.contextPath}/my01/test08.action" method="post">
+             用户名:<input type="text" name="username"/>
+             出生日期:<input type="date" name="birthday"/>
+             <input type="submit"/>
+         </form>
+     </body>
+     </html>
+
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     /**
+      ,* 获取请求参数 - 日期数据处理
+      ,* http://localhost/SpringMVCDay01_04_Parameter/my01test08.jsp
+      ,*/
+     @InitBinder
+     public void myDateInitBinder(ServletRequestDataBinder binder){
+         binder.registerCustomEditor(Date.class,new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"),true));
+     }
+     @RequestMapping("/test08.action")
+     public void test08(String username,Date birthday) throws ParseException {
+         System.out.println(username);
+         System.out.println(birthday);
+     }
+   #+END_SRC
+9. SpringMVC文件上传
+   1. 准备文件上传表单
+      文件上传表单必须满足如下三个条件
+      1. 文件上传项必须有name属性
+      2. 表单必须是Post提交
+      3. 表单必须是enctype="multipart/form-data"
+
+      #+BEGIN_SRC html
+        <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+        <html>
+        <head>
+            <title>my01test09.jsp</title>
+        </head>
+        <body>
+            <h1>文件上传</h1><hr>
+            <form action="${pageContext.request.contextPath}/my01/test09.action"
+                  method="POST"
+                  enctype="multipart/form-data">
+                选择头像:<input type="file" name="fx"/>
+                <input type="submit"/>
+            </form>
+        </body>
+        </html>
+      #+END_SRC
+   2. 在配置文件中配置文件上传工具
+
+      #+BEGIN_SRC html
+        <!-- 配置文件上传工具类 -->
+            <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+      #+END_SRC
+   3. 在Controller中实现文件上传
+
+      #+BEGIN_SRC java
+        /**
+         ,* 获取请求参数 - 实现文件上传
+         ,*      开发文件上传表单
+         ,*      开发文件上传代码
+         ,* http://localhost/SpringMVCDay01_04_Parameter/my01test09.jsp
+         ,*/
+        @RequestMapping("/test09.action")
+        public void test09(MultipartFile fx) throws IOException {
+            fx.transferTo(new File("C://"+fx.getOriginalFilename()));
+        }
+      #+END_SRC
+10. 路径动态数据的获取(RESTFul风格的请求参数处理)
+    1. RESTFul风格的请求：
+       普通get请求：
+       #+BEGIN_SRC
+         Url:localhost/XXXX/addUser.action?name=tom&age=18
+       #+END_SRC
+       RESTFul风格的请求：
+       #+BEGIN_SRC
+         Url:localhost/XXXX/addUser/tom/18.action
+       #+END_SRC
+    2. SpringMVC对RESTFul风格的请求的处理
+
+       #+BEGIN_SRC java
+         /**
+          ,* 获取请求参数 - 获取路径中的数据(RESTFUL风格编程支持)
+          ,* http://localhost/SpringMVCDay01_04_Parameter/my01/zs/bj/test10.action
+          ,*/
+         @RequestMapping("/{uname}/{uaddr}/test10.action")
+         public void test10(@PathVariable("uname") String uname,@PathVariable("uaddr") String uaddr){
+             System.out.println(uname);
+             System.out.println(uaddr);
+         }
+       #+END_SRC
+*** 1.3.3 SpringMVC中的重定向、转发和定时刷新的实现
+- 请求转发、重定向和定时刷新的区别
+  请求重定向和请求转发都是web开发中资源跳转的方式。
+   #+BEGIN_SRC
+     转发：
+           请求转发是服务器内部的跳转
+           地址栏不发生变化
+           只有一个请求响应
+           可以通过request域传递数据
+     重定向：
+           请求重定向是浏览器自动发起对跳转目标的请求
+           地址栏会发生变化
+           两次请求响应
+           无法通过request域传递对象
+     定时刷新：
+           定时刷新是浏览器自动发起对跳转目标的请求
+           地址栏会发生变化
+           两次请求响应
+           无法通过request域传递对象
+           可以在资源跳转期间提示额外信息
+   #+END_SRC
+******* 请求转发实现
+1. 传统方式实现请求转发
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+
+     import javax.servlet.ServletException;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+
+     @Controller
+     @RequestMapping("/my01")
+     public class MyController01 {
+         /**
+          ,* 请求转发 - 传统方式
+          ,* http://localhost/SpringMVCDay02_01_forward_redirect_refresh/my01/test01.action
+          ,*/
+         @RequestMapping("/test01.action")
+         public void test01(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+             request.getRequestDispatcher("/index.jsp").forward(request,response);
+         }
+     }
+
+   #+END_SRC
+2. SpringMVC方式实现请求转发
+   可以通过返回forward:/xxxx.xxx格式的字符串表名要转发到指定地址
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+
+     import javax.servlet.ServletException;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+
+     @Controller
+     @RequestMapping("/my01")
+     public class MyController01 {
+
+         /**
+          ,* 请求转发 - springMVC方式
+          ,*  http://localhost/SpringMVCDay02_01_forward_redirect_refresh/my01/test02.action
+          ,*/
+         @RequestMapping("/test02.action")
+         public String test02(){
+             return "forward:/index.jsp";
+         }
+     }
+
+   #+END_SRC
+******* 请求重定向
+1. 传统方式实现请求重定向
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+
+     @Controller
+     @RequestMapping("/my02")
+     public class MyController02 {
+         /**
+          ,* 请求重定向 - 传统方式
+          ,* http://localhost/SpringMVCDay02_01_forward_redirect_refresh/my02/test01.action
+          ,*/
+         @RequestMapping("/test01.action")
+         public void test01(HttpServletRequest request,HttpServletResponse response) throws IOException {
+             response.sendRedirect(request.getContextPath()+"/index.jsp");
+         }
+     }
+
+   #+END_SRC
+2. SpringMVC方式实现请求重定向
+   可以通过返回redirect:/xxxx.xxx格式的字符串表名要重定向到指定地址，通过这种方式实现请求重定向时不用在路径前写出应用名，SpringMVC会自动拼接应用名
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+
+     @Controller
+     @RequestMapping("/my02")
+     public class MyController02 {
+
+         /**
+          ,* 请求重定向 - SpringMVC方式
+          ,* http://localhost/SpringMVCDay02_01_forward_redirect_refresh/my02/test02.action
+          ,*/
+         @RequestMapping("/test02.action")
+         public String test02(){
+             return "redirect:/index.jsp";
+         }
+     }
+
+   #+END_SRC
+******* 定时刷新
+SpringMVC中没有提供实现定时刷新的辩解方式，只能用传统方式实现定时刷新
+- 传统方式实现定时刷新
+
+  #+BEGIN_SRC java
+    package cn.tedu.controller;
+
+    import org.springframework.stereotype.Controller;
+    import org.springframework.web.bind.annotation.RequestMapping;
+
+    import javax.servlet.http.HttpServletRequest;
+    import javax.servlet.http.HttpServletResponse;
+    import java.io.IOException;
+
+    @Controller
+    @RequestMapping("/my03")
+    public class MyController03 {
+        /**
+         ,* 定时刷新 - 传统方式
+         ,* http://localhost/SpringMVCDay02_01_forward_redirect_refresh/my03/test01.action
+         ,*/
+        @RequestMapping("/test01.action")
+        public void test01(HttpServletRequest request,HttpServletResponse response) throws IOException {
+            response.setContentType("text/html;charset=utf-8");
+            response.getWriter().write("注册成功，3秒后回到主页..");
+            response.setHeader("refresh","3;url="+request.getContextPath()+"/index.jsp");
+        }
+    }
+
+  #+END_SRC
+
+*** 1.3.4 SpringMVC中域的使用
+******* request域的使用
+1. 传统方式向request域中写入数据
+
+   #+BEGIN_SRC html
+     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+     <html>
+     <head>
+         <title>my01test01.jsp</title>
+     </head>
+     <body>
+         my01test01.jsp
+         ${requestScope.k1}
+         ${requestScope.k2}
+     </body>
+     </html>
+
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.ui.Model;
+     import org.springframework.web.bind.annotation.RequestMapping;
+
+     import javax.servlet.http.HttpServletRequest;
+
+     /**
+      ,* request域的使用
+      ,*/
+     @Controller
+     @RequestMapping("/my01")
+     public class MyController01 {
+         /**
+          ,* 传统方式使用request域
+          ,* http://localhost/SpringMVCDay01_05_Scope/my01/test01.action
+          ,*/
+         @RequestMapping("/test01.action")
+         public String test01(HttpServletRequest request){
+             request.setAttribute("k1","v1");
+             request.setAttribute("k2","v2");
+             return "my01test01";
+         }
+     }
+
+   #+END_SRC
+2. 向model中写入数据，默认就是写入request域
+
+   #+BEGIN_SRC html
+     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+     <html>
+     <head>
+         <title>my01test02.jsp</title>
+     </head>
+     <body>
+     my01test02.jsp
+     ${requestScope.k1}
+     ${requestScope.k2}
+     </body>
+     </html>
+
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.ui.Model;
+     import org.springframework.web.bind.annotation.RequestMapping;
+
+     import javax.servlet.http.HttpServletRequest;
+
+     /**
+      ,* request域的使用
+      ,*/
+     @Controller
+     @RequestMapping("/my01")
+     public class MyController01 {
+
+         /**
+          ,* 通过Model将数据存入request域
+          ,*      存入Model中的数据默认就是存入了requset域
+          ,* http://localhost/SpringMVCDay01_05_Scope/my01/test02.action
+          ,*/
+         @RequestMapping("/test02.action")
+         public String test02(Model model){
+             model.addAttribute("k1","v1");
+             model.addAttribute("k2","v2");
+             return "my01test02";
+         }
+     }
+
+   #+END_SRC
+******* session域的使用
+1. 传统方式向session域中写入数据
+
+   #+BEGIN_SRC html
+     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+     <html>
+     <head>
+         <title>my02test01.jsp</title>
+     </head>
+     <body>
+     my02test01.jsp
+     ${sessionScope.k1}
+     ${sessionScope.k2}
+     </body>
+     </html>
+
+   #+END_SRC
+   #+BEGIN_SRC html
+     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+     <html>
+     <head>
+         <title>my02test02.jsp</title>
+     </head>
+     <body>
+     my02test02.jsp
+     ${sessionScope.k1}
+     ${sessionScope.k2}
+     </body>
+     </html>
+
+   #+END_SRC
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.ui.Model;
+     import org.springframework.web.bind.annotation.RequestMapping;
+     import org.springframework.web.bind.annotation.SessionAttributes;
+
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpSession;
+
+     @Controller
+     @RequestMapping("/my02")
+     @SessionAttributes({"kx1","kx2"})
+     public class MyController02 {
+         /**
+          ,* 传统方式操作session域
+          ,* http://localhost/SpringMVCDay01_05_Scope/my02/test02.action
+          ,*/
+         @RequestMapping("/test02.action")
+         public String test02(HttpSession session){
+             session.setAttribute("k1","v1");
+             session.setAttribute("k2","v2");
+             return "my02test02";
+         }
+
+         /**
+          ,* 传统方式操作session域
+          ,* http://localhost/SpringMVCDay01_05_Scope/my02/test01.action
+          ,*/
+         @RequestMapping("/test01.action")
+         public String test01(HttpServletRequest request){
+             HttpSession session = request.getSession();
+             session.setAttribute("k1","v1");
+             session.setAttribute("k2","v2");
+             return "my02test01";
+         }
+     }
+   #+END_SRC
+2. 通过model+@SessionAttributes实现将数据写入session
+
+   #+BEGIN_SRC html
+     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+     <html>
+     <head>
+         <title>my02test03.jsp</title>
+     </head>
+     <body>
+     my02test03.jsp
+     <br>request:<br>
+     ${requestScope.kx1}
+     ${requestScope.kx2}
+     <br>session:<br>
+     ${sessionScope.kx1}
+     ${sessionScope.kx2}
+     </body>
+     </html>
+
+   #+END_SRC
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.ui.Model;
+     import org.springframework.web.bind.annotation.RequestMapping;
+     import org.springframework.web.bind.annotation.SessionAttributes;
+
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpSession;
+
+     /**
+      ,* SpringMVC操作session域
+      ,*/
+     @Controller
+     @RequestMapping("/my02")
+     @SessionAttributes({"kx1","kx2"})
+     public class MyController02 {
+         /**
+          ,* SpringMVC方式操作session域
+          ,*      @SessionAttributes注解可以将Model中存入的指定名称的键值对复制到session域中
+          ,*      但此注解是用在类上的，所以会影响这个类中所有的控制器方法，作用范围比较大，用的时候要小心
+          ,* http://localhost/SpringMVCDay01_05_Scope/my02/test03.action
+          ,*/
+         @RequestMapping("/test03.action")
+         public String test03(Model model){
+             model.addAttribute("kx1","v1");
+             model.addAttribute("kx2","v2");
+             return "my02test03";
+         }
+     }
+   #+END_SRC
+******* ServletContext域的使用
+1. 只能通过传统方式写入
+
+   #+BEGIN_SRC html
+     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+     <html>
+     <head>
+         <title>my03test01.jsp</title>
+     </head>
+     <body>
+     my03test01.jsp
+     ${applicationScope.k1}
+     ${applicationScope.k2}
+     </body>
+     </html>
+
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+
+     import javax.servlet.ServletContext;
+     import javax.servlet.http.HttpServletRequest;
+
+     /**
+      ,* SpringMVC操作servletContext域
+      ,*/
+     @Controller
+     @RequestMapping("/my03")
+     public class MyController03 {
+
+         /**
+          ,* 传统方式使用ServletContext域
+          ,* http://localhost/SpringMVCDay01_05_Scope/my03/test01.action
+          ,*/
+         @RequestMapping("/test01.action")
+         public String test01(HttpServletRequest request){
+             ServletContext context = request.getServletContext();
+             context.setAttribute("k1","v1");
+             context.setAttribute("k2","v2");
+             return "my03test01";
+         }
+     }
+
+   #+END_SRC
+******* @ModelAttribute
+1. 使用在方法上
+   则被修饰的方法将会在当前类的任意handler方法执行之前执行，该方法返回的返回值会自动存入model供后续使用
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Component;
+     import org.springframework.stereotype.Controller;
+     import org.springframework.ui.Model;
+     import org.springframework.web.bind.annotation.ModelAttribute;
+     import org.springframework.web.bind.annotation.RequestMapping;
+
+     import java.util.Map;
+
+     /**
+      ,*  @ModelAttribute的使用
+      ,*      可以用在普通方法上
+      ,*      可以用在控制器方法的参数上
+      ,*/
+     @Controller
+     @RequestMapping("/my04")
+     public class MyController04 {
+
+         @ModelAttribute("k1")
+         public String myfunc01(){
+             System.out.println("myfunc01..");
+             return "abc";
+         }
+
+         /**
+          ,* @ModelAttribute 用法1
+          ,*      用在普通方法上，则此方法会在这个控制器类的所有控制器方法执行之前执行
+          ,*      将返回值按照指定键预存入Model中，控制器方法得到的Model中提前就有了这个键值对
+          ,* http://localhost/SpringMVCDay01_05_Scope/my04/test01.action
+          ,*/
+         @RequestMapping("/test01.action")
+         public void test01(Model model){
+             Map<String,Object> map = model.asMap();
+             System.out.println(map);
+         }
+     }
+
+         #+END_SRC
+2. 使用在方法参数之前
+   则会从model中获取属性值赋值到被修饰的方法参数上
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Component;
+     import org.springframework.stereotype.Controller;
+     import org.springframework.ui.Model;
+     import org.springframework.web.bind.annotation.ModelAttribute;
+     import org.springframework.web.bind.annotation.RequestMapping;
+
+     import java.util.Map;
+
+     /**
+      ,*  @ModelAttribute的使用
+      ,*      可以用在普通方法上
+      ,*      可以用在控制器方法的参数上
+      ,*/
+     @Controller
+     @RequestMapping("/my04")
+     public class MyController04 {
+
+         @ModelAttribute("k1")
+         public String myfunc01(){
+             System.out.println("myfunc01..");
+             return "abc";
+         }
+
+         /**
+          ,* @ModelAttribute 用法2
+          ,*      用在控制器方法的参数上，则在控制器方法执行时，会自动从Model中获取指定键的值赋值给该参数
+          ,* http://localhost/SpringMVCDay01_05_Scope/my04/test02.action
+          ,*/
+         @RequestMapping("/test02.action")
+         public void test02(@ModelAttribute("k1") String str){
+             System.out.println(str);
+         }
+     }
+
+   #+END_SRC
+*** 1.3.5 异常处理
+******* 为当前Controller配置错误处理
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.ExceptionHandler;
+     import org.springframework.web.bind.annotation.RequestMapping;
+
+     @Controller
+     @RequestMapping("/my01")
+     public class MyController01 {
+
+         /**
+          ,* 当前控制器类内部的异常处理机制 - 只对当前控制器类内部的控制方法有效
+          ,*/
+         @ExceptionHandler
+         public String My01ExceptionHander(Exception e){
+             System.out.println("#####发生异常#####"+e.getMessage());
+             return "my01err";
+         }
+     }
+
+   #+END_SRC
+******* 注解方式配置全局的错误处理
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.web.bind.annotation.ControllerAdvice;
+     import org.springframework.web.bind.annotation.ExceptionHandler;
+
+     /**
+      ,* 全局错误处理器
+      ,*/
+     //@ControllerAdvice
+     public class MyGlobalExceptionHandler {
+         @ExceptionHandler
+         public String myExceptionHandler(Exception e){
+             System.out.println("#####全局发生异常#####"+e.getMessage());
+             return "err";
+         }
+     }
+
+   #+END_SRC
+******* 配置文件方式配置全局错误处理
+   在SpringMVC配置文件中配置
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:mvc="http://www.springframework.org/schema/mvc"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+         <!-- 配置包扫描 -->
+         <context:component-scan base-package="cn.tedu.controller"/>
+         <!-- 注解方式mvc -->
+         <mvc:annotation-driven/>
+         <!-- 视图解析器 -->
+         <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+             <property name="prefix" value="/WEB-INF/jsp/"></property>
+             <property name="suffix" value=".jsp"></property>
+         </bean>
+         <!-- 配置文件方式全局错误处理 -->
+         <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+             <property name="exceptionMappings">
+                 <props>
+                     <prop key="java.lang.NullPointerException">null_err</prop>
+                     <prop key="java.io.IOException">io_err</prop>
+                     <prop key="java.lang.Throwable">g_err</prop>
+                 </props>
+             </property>
+         </bean>
+     </beans>
+   #+END_SRC
+
+*** 1.3.6 实现返回一段数据 - @ReponseBody
+******* 返回字符串数据
+1. 方式一：通过response返回
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+     import org.springframework.web.bind.annotation.RequestParam;
+     import org.springframework.web.bind.annotation.ResponseBody;
+
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.io.PrintWriter;
+
+     @Controller
+     @RequestMapping("/my01")
+     public class MyController01 {
+         /**
+          ,* 向浏览器直接输出数据 - 传统方式
+          ,* http://localhost/SpringMVCDay02_03_ResponseBody/my01/test01.action
+          ,*/
+         @RequestMapping("/test01.action")
+         public void test01(HttpServletResponse response) throws IOException {
+             response.getWriter().write("hello~my01test01~");
+         }
+     }
+
+   #+END_SRC
+2. 方式二：直接获取PrintWriter返回
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+     import org.springframework.web.bind.annotation.RequestParam;
+     import org.springframework.web.bind.annotation.ResponseBody;
+
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.io.PrintWriter;
+
+     @Controller
+     @RequestMapping("/my01")
+     public class MyController01 {
+         /**
+          ,* 向浏览器直接输出数据 - 传统方式2
+          ,* http://localhost/SpringMVCDay02_03_ResponseBody/my01/test02.action
+          ,*/
+         @RequestMapping("/test02.action")
+         public void tset02(PrintWriter writer){
+             writer.write("hello~my01test02~");
+         }
+     }
+
+   #+END_SRC
+3. 通过@ResponseBody返回
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+     import org.springframework.web.bind.annotation.RequestParam;
+     import org.springframework.web.bind.annotation.ResponseBody;
+
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.io.PrintWriter;
+
+     @Controller
+     @RequestMapping("/my01")
+     public class MyController01 {
+         /**
+          ,* 向浏览器直接输出数据 - SpringMVC方式
+          ,*      通过@ResponseBody注解表明当前控制器方法的返回值要直接输出到响应体中发送给浏览器
+          ,* http://localhost/SpringMVCDay02_03_ResponseBody/my01/test03.action
+          ,*/
+         @RequestMapping("/test03.action")
+         @ResponseBody
+         public String test03(){
+             return "hello~my01test03~";
+         }
+     }
+   #+END_SRC
+4. SpringMVC方式中文乱码
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+     import org.springframework.web.bind.annotation.RequestParam;
+     import org.springframework.web.bind.annotation.ResponseBody;
+
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.io.PrintWriter;
+
+     @Controller
+     @RequestMapping("/my01")
+     public class MyController01 {
+
+         /**
+          ,* 向浏览器直接输出数据 - SpringMVC方式 - 中文乱码解决
+          ,*      通过@ResponseBody输出数据时，设定response.setContentType("text/html;charset=utf-8");是无效的
+          ,*      此时只能通过@RequestMapping注解中的produces属性来设置输出的MIME类型
+          ,* http://localhost/SpringMVCDay02_03_ResponseBody/my01/test04.action
+          ,*/
+         @RequestMapping(value="/test04.action",produces="text/html;charset=utf-8")
+         @ResponseBody
+         public String test04(HttpServletResponse response){
+             //response.setContentType("text/html;charset=utf-8");
+             return "hello~my01test03~中国~";
+         }
+     }
+
+   #+END_SRC
+******* 返回json数据
+1. 手动拼接json
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import cn.tedu.domain.Dog;
+     import cn.tedu.domain.User;
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+     import org.springframework.web.bind.annotation.ResponseBody;
+
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.util.Arrays;
+
+     @Controller
+     @RequestMapping("/my02")
+     public class MyController02 {
+         /**
+          ,* 将对象转为json发送给客户端 - 手工方式
+          ,* http://localhost/SpringMVCDay02_03_ResponseBody/my02/test01.action
+          ,*/
+         @RequestMapping("/test01.action")
+         public void test01(HttpServletResponse response) throws IOException {
+             User user = new User(9,"zs", Arrays.asList("bj","sh","gz"),new Dog("wc",5));
+             StringBuilder sb = new StringBuilder();
+             for (String addr : user.getAddrs()){
+                 sb.append("'"+addr+"',");
+             }
+             String addr = sb.subSequence(0,sb.length()-1).toString();
+             String json = "{'id':"+user.getId()+",'name':'"+user.getName()+"','addrs':["+addr+"],'dog':{'name':'"+user.getDog().getName()+"','age':"+user.getDog().getAge()+"}}";
+             response.getWriter().write(json);
+         }
+     }
+
+   #+END_SRC
+2. 方式二：通过配置@ResponseBody利用内置的jackson将对象处理为json返回
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import cn.tedu.domain.Dog;
+     import cn.tedu.domain.User;
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+     import org.springframework.web.bind.annotation.ResponseBody;
+
+     import javax.servlet.http.HttpServletResponse;
+     import java.io.IOException;
+     import java.util.Arrays;
+
+     @Controller
+     @RequestMapping("/my02")
+     public class MyController02 {
+
+         /**
+          ,* 将对象转为json发送给客户端 - @ResponseBody
+          ,*      当在@ResponseBody标注的控制器方法中返回一个对象时，SpringMVC会先将对象转为json格式后输出给客户端
+          ,* http://localhost/SpringMVCDay02_03_ResponseBody/my02/test02.action
+          ,*/
+         @RequestMapping("/test02.action")
+         @ResponseBody
+         public User test02(){
+             User user = new User(9,"zs", Arrays.asList("bj","sh","gz"),new Dog("wc",5));
+             return user;
+         }
+     }
+
+   #+END_SRC
+*** 1.3.7 处理器方法支持的参数类型和返回值类型总结
+******* 支持的方法参数类型
+1. HttpServletRequest
+      代表当前请求的对象
+2. HttpServletResponse
+      代表当前响应的对象
+3. HttpSession
+      代表当前会话的对象
+4. WebRequest
+      SpringMVC提供的对象，相当于是request和session的合体，可以操作这两个域中的属性。
+5. InputStream OutputStream Reader Writer
+      代表request中获取的输入流和response中获取的输出流
+6. 通过@PathVariable @RequestParam声明的方法参数
+      @PathVariable可以将请求路径的指定部分获取赋值给指定方法参数
+      @RequestParam可以将指定请求参数赋值给指定方法参数
+      如果不写此注解，则默认会将同名的请求参数赋值给方法参数
+7. 通过@CookieValue和@RequestHeader声明的方法参数
+      @CookieValue可以将请求中的指定名称的cookie赋值给指定方法参数
+      @RequestHeader可以将请求参数中的指定名称的头赋值给指定方法参数
+8. Model和ModelMap和java.util.Map
+      向这些Model ModelMap Map中存入属性，相当于向模型中存入数据
+9. Bean类
+      SpringMVC自动将请求参数封装到bean
+10. MultipartFile
+       实现文件上传功能时，接收上传的文件对象
+11. Errors BindingResult
+       实现数据验证的参数
+
+       #+BEGIN_SRC java
+         package cn.tedu.controller;
+
+         import cn.tedu.domain.User;
+         import org.springframework.stereotype.Controller;
+         import org.springframework.ui.Model;
+         import org.springframework.ui.ModelMap;
+         import org.springframework.validation.BindingResult;
+         import org.springframework.validation.Errors;
+         import org.springframework.web.bind.annotation.*;
+         import org.springframework.web.context.request.WebRequest;
+         import org.springframework.web.multipart.MultipartFile;
+
+         import javax.servlet.http.Cookie;
+         import javax.servlet.http.HttpServletRequest;
+         import javax.servlet.http.HttpServletResponse;
+         import javax.servlet.http.HttpSession;
+         import java.io.InputStream;
+         import java.io.OutputStream;
+         import java.io.Reader;
+         import java.io.Writer;
+         import java.util.Map;
+
+         /**
+          ,* SpringMVC控制器方法可以接受的参数
+          ,*/
+         @Controller
+         @RequestMapping("/my01")
+         public class MyController01 {
+             /**
+              ,* http://localhost/SpringMVCDay02_04_details/my01/test01.action
+              ,* http://localhost/SpringMVCDay02_04_details/my01/test01.action?name=zs&age=91&addr=bj
+              ,*/
+             @RequestMapping("/test01.action")
+             public void test01(
+                                HttpServletRequest request,
+                                HttpServletResponse respons,
+                                HttpSession session,
+                                //WebRequest webRequest//request和session的合体
+                                //InputStream in,//request.getInputStream()
+                                //OutputStream out,//response.getOutputStream()
+                                //Reader reader,//request.getReader()
+                                //Writer writer,//response.getWriter()
+                                String name, //获取请求参数
+                                @RequestParam("uaddr") String addr, //获取请求参数，请求参数名和方法参数名不一致时
+                                @PathVariable("ucountry") String country,//获取路径中的请求参数
+                                //@CookieValue("JSESSIONID") String cv,//获取cookie值
+                                RequestHeader("Host") String hv,//获取请求头的值
+                                Model model, //Model模型对象
+                                Map map,//Map作为模型对象
+                                ModelMap modelMap, //ModelMap作为模型对象，ModelMap = Model+Map
+                                User user //直接将请求参数封装到bean中
+                                MultipartFile fx,//实现文件上传
+                                Errors errs, //实现数据校验
+                                BindingResult bresult //实现数据校验
+                                ){
+                 model.addAttribute("k1","v1");
+                 model.addAttribute("k2","v2");
+                 model.addAttribute("k3","v3");
+
+                 map.put("k1","v1");
+                 map.put("k2","v2");
+                 map.put("k3","v3");
+
+                 modelMap.addAttribute("k1","v1");
+                 modelMap.addAttribute("k2","v2");
+                 modelMap.put("k3","v3");
+                 return "my01test01";
+
+                 System.out.println(user);
+             }
+         }
+
+       #+END_SRC
+
+******* 支持的返回值类型
+1. ModelAndView
+      可以返回一个ModelAndView对象，在其中封装Model和View信息
+2. View
+      可以直接返回一个代表视图的View对象
+3. 字符串
+      直接返回视图的名称
+4. void
+      如果返回值类型是void，则会自动返回和当前处理器路径名相同的视图名
+5. 方法被@ResponseBody修饰
+      当方法被@ResponseBody修饰时，默认将返回的对象转为json写入输出
+6. 除以上之外返回的任何内容都会被当做模型中的数据来处理，而返回的视图名等同于当前处理器路径名
+
+#+BEGIN_SRC java
+  package cn.tedu.controller;
+
+  import cn.tedu.domain.User;
+  import org.springframework.stereotype.Controller;
+  import org.springframework.ui.Model;
+  import org.springframework.web.bind.annotation.RequestMapping;
+  import org.springframework.web.bind.annotation.ResponseBody;
+  import org.springframework.web.servlet.ModelAndView;
+  import org.springframework.web.servlet.View;
+
+  /**
+   ,* SpringMVC控制器方法可以返回的返回值
+   ,*/
+  @Controller
+  @RequestMapping("/my02")
+  public class MyController02 {
+
+      /**
+       ,* http://localhost/SpringMVCDay02_04_details/my02/test06.action
+       ,* 其他情况下，无论返回什么，返回值都会被加入模型中
+       ,*/
+      @RequestMapping("/test06.action")
+      public User test06(){
+          User user = new User("zs",19,"bj");
+          return user;
+      }
+
+      /**
+       ,* http://localhost/SpringMVCDay02_04_details/my02/test05.action
+       ,* @ResponseBody 注解 修饰的控制器方法 无论返回什么 都发送给浏览器
+       ,*/
+      @ResponseBody
+      @RequestMapping("/test05.action")
+      public String test05(){
+          return "test05";
+      }
+
+      /**
+       ,* http://localhost/SpringMVCDay02_04_details/my02/test04.action
+       ,* void 将当前控制器方法路径去除后缀后作为视图名返回
+       ,*/
+      @RequestMapping("/test04.action")
+      public void test04(){
+
+      }
+
+      /**
+       ,* http://localhost/SpringMVCDay02_04_details/my02/test03.action
+       ,* String 返回的字符串作为视图名称使用
+       ,*/
+      @RequestMapping("/test03.action")
+      public String test03(){
+          return "test03";
+      }
+
+      /**
+       ,* http://localhost/SpringMVCDay02_04_details/my02/test02.action
+       ,* View 视图信息对象
+       ,*/
+      @RequestMapping("/test02.action")
+      public View test02(Model model){
+          return null;
+      }
+
+      /**
+       ,* http://localhost/SpringMVCDay02_04_details/my02/test01.action
+       ,* ModelAndView 封装了视图和模型信息的对象
+       ,*/
+      @RequestMapping("/test01.action")
+      public ModelAndView test01(){
+          ModelAndView mav = new ModelAndView();
+          mav.addObject("k1","v1");
+          mav.addObject("k2","v2");
+          mav.setViewName("test01");
+          return mav;
+      }
+  }
+
+#+END_SRC
+
+* 2 Spring
 [[./Img/Spring.png]]
-***** 概述
+** 2.1 概述
 Spring是一个Service层的框架，可以整合许多其它框架进行工作。Spring的主要技术是IOC(DI)、AOP
 1. IOC(DI) - 控制反转(依赖注入)
 2. AOP - 面向切面编程
-***** Spring IOC
-****** IOC(DI) - 控制反转(依赖注入)
+** 2.2 Spring IOC
+*** 2.2.1 IOC(DI) - 控制反转(依赖注入)
 *所谓的IOC称之为控制反转，简单来说就是将对象的创建的权利及对象的生命周期的管理过程交由Spring框架来处理，从此在开发过程中不再需要关注对象的创建和生命周期的管理，而是在需要时由Spring框架提供，这个由spring框架管理对象创建和生命周期的机制称之为控制反转。* 而在创建对象的过程中Spring可以依据配置对对象的属性进行设置，这个过称之为依赖注入,也即DI。
 
 /IOC+接口可以实现软件分层时的彻底解耦，最终实现"高内聚，低耦合/"中的低耦合
-****** IOC入门案例
+*** 2.2.2 IOC入门案例
 1. 创建一个java项目
    spring并不是非要在javaweb环境下才可以使用，一个普通的java程序中也可以使用Spring。
 2. 导入Spring的lib目录下IOC相关的jar包
@@ -97,7 +1993,7 @@ Spring是一个Service层的框架，可以整合许多其它框架进行工作�
      }
    #+END_SRC
 
-****** IOC的实现原理
+*** 2.2.3 IOC的实现原理
 在初始化一个Spring容器时，Spring会去解析指定的xml文件，当解析到其中的<bean>标签时，会根据该标签中的class属性指定的类的全路径名，通过反射创建该类的对象，并将该对象存入内置的Map中管理。其中键就是该标签的id值，值就是该对象。之后，当通过getBean方法来从容器中获取对象时，其实就是根据传入的条件在内置的Map中寻找是否有匹配的键值，如果有则将该键值对中保存的对象返回，如果没有匹配到则抛出异常。
 - 由此可以推测而知：
 
@@ -124,7 +2020,7 @@ Spring是一个Service层的框架，可以整合许多其它框架进行工作�
     }
   #+END_SRC
 
-****** IOC获取对象的方式
+*** 2.2.4 IOC获取对象的方式
 通过context.getBeans()方法获取bean时，可以通过如下两种方式获取:
 1. 传入id值
 2. 传入class类型
@@ -159,7 +2055,7 @@ Spring是一个Service层的框架，可以整合许多其它框架进行工作�
   }
 #+END_SRC
 
-****** 别名标签
+*** 2.2.5 别名标签
 在Spring中提供了别名标签<alias>可以为配置的<bean>起一个别名，要注意的是这仅仅是对指定的<bean>起的一个额外的名字，并不会额外的创建对象存入map。
 
 <alias name="要起别名的bean的id" alias="要指定的别名"/>
@@ -190,7 +2086,7 @@ Spring是一个Service层的框架，可以整合许多其它框架进行工作�
   </beans>
 #+END_SRC
 
-****** Spring创建对象的方式
+*** 2.2.6 创建对象的方式
 1. 通过类的无参构造方法创建对象(反射创建对象)
    在入门案例中使用的就是这种方式。
    当用最普通方式配置一个<bean>时,默认就是采用类的无参构造创建对象。
@@ -359,7 +2255,7 @@ Spring是一个Service层的框架，可以整合许多其它框架进行工作�
          ((ClassPathXmlApplicationContext)context).close();
      }
    #+END_SRC
-****** 单例和多例
+*** 2.2.7 单例和多例
 Spring容器管理的bean在默认情况下是单例的，也即，一个bean只会创建一个对象，存在内置map中，之后无论获取多少次该bean，都返回同一个对象。
 
 Spring默认采用单例方式，减少了对象的创建，从而减少了内存的消耗。但是在实际开发中是存在多例的需求的，Spring也提供了选项可以将bean设置为多例模式。
@@ -379,7 +2275,7 @@ Spring默认采用单例方式，减少了对象的创建，从而减少了内�
   bean在单例模式下，Spring容器启动时解析xml发现该bean标签后，直接创建该bean的对象存入内部map中保存，此后无论调用多少次getBean()获取该bean都是从map中获取该对象返回，一直是一个对象。此对象一直被Spring容器持有，直到容器退出时，随着容器的退出对象被销毁。
 - bean在多例模式下的生命周期:
   bean在多例模式下，Spring容器启动时解析xml发现该bean标签后，只是将该bean进行管理，并不会创建对象，此后每次使用getBean()获取该bean时，Spring都会重新创建该对象返回，每次都是一个新的对象。这个对象Spring容器并不会持有，什么销毁取决于使用该对 象的用户自己什么时候销毁该对象。
-****** 懒加载机制
+*** 2.2.8 懒加载机制
 Spring默认会在容器初始化的过程中，解析xml，并将单例的bean创建并保存到map中，这样的机制在bean比较少时问题不大，但一旦bean非常多时，Spring需要在启动的过程中花费大量的时间来创建bean，花费大量的空间存储bean，但这些bean可能很久都用不上，这种在启动时,在时间和空间上的浪费显得非常的不值得。
 
 所以Spring提供了懒加载机制。所谓的懒加载机制就是可以规定指定的bean不在启动时立即创建，而是在后续第一次用到时才创建，从而减轻在启动过程中对时间和内存的消耗。懒加载机制只对单例bean有作用，对于多例bean设置懒加载没有意义。
@@ -441,7 +2337,7 @@ Spring默认会在容器初始化的过程中，解析xml，并将单例的bean�
     }
   #+END_SRC
 
-****** 配置初始化和销毁的方法
+*** 2.2.9 配置初始化和销毁的方法
 在Spring中如果某个bean在初始化之后或销毁之前要做一些额外操作可以为该bean配置初始化和销毁的方法，在这些方法中完成要功能。
 
 实验：通过断点调试模式，测试初始化方法和销毁方法的执行
@@ -494,13 +2390,13 @@ Spring默认会在容器初始化的过程中，解析xml，并将单例的bean�
   }
 #+END_SRC
 
-****** Spring中关键方法的执行顺序
+*** 2.2.10 关键方法的执行顺序
 在Spring创建bean对象时，先创建对象(通过无参构造或工厂)，之后立即调用init方法来执行初始化操作，之后此bean就可以哪来调用其它普通方法,而在对象销毁之前，Spring容器调用其destory方法来执行销毁操作。
-***** Spring DI
-****** IOC(DI) - 控制翻转（依赖注入）
+** 2.3 Spring DI
+*** 2.3.1 IOC(DI) - 控制翻转（依赖注入）
 所谓的IOC称之为控制反转，简单来说就是将对象的创建的权利及对象的生命周期的管理过程交由Spring框架来处理，从此在开发过程中不再需要关注对象的创建和生命周期的管理，而是在需要时由Spring框架提供，这个由spring框架管理对象创建和生命周期的机制称之为控制反转。
 *而在创建对象的过程中Spring可以依据配置对对象的属性进行设置，这个过称之为依赖注入,也即DI。*
-****** set方法注入
+*** 2.3.2 set方法注入
 通常的javabean属性都会私有化，而对外暴露setXxx()getXxx()方法，此时Spring可以通过这样的setXxx()方法将属性的值注入对象。
 1. Spring普通属性注入：
 
@@ -706,7 +2602,7 @@ Spring默认会在容器初始化的过程中，解析xml，并将单例的bean�
          System.out.println(hero);
      }
    #+END_SRC
-****** 自动装配
+*** 2.3.3 自动装配
 在Spring的set方式实现的注入过程中，支持自动装配机制，所谓自动装配机制，会根据要设置的javabean属性的名字或类型到spring中自动寻找对应id或类型的<bean>进行设置，从而省去依次配置的过程，简化了配置。
 1. 为指定<bean>开启自动装配:
 
@@ -935,7 +2831,7 @@ Spring默认会在容器初始化的过程中，解析xml，并将单例的bean�
          }
      }
    #+END_SRC
-****** 基于构造方法的注入
+*** 2.3.4 基于构造方法的注入
 对象属性设置的另一种方式是在对象创建的过程中通过构造方法传入并设置对象的属性。 spring也可以通过这样的构造方法实现属性的注入。
 
 #+BEGIN_SRC java
@@ -1046,8 +2942,8 @@ Spring默认会在容器初始化的过程中，解析xml，并将单例的bean�
   }
 #+END_SRC
 
-***** 注解
-****** 注解回顾
+** 2.4 注解
+*** 2.4.1 注解回顾
 ******* 注解概念
 - 注释：
   给人看的提示信息，人看了提示信息了解程序的内容 java中注释的格式:// /**/ /** */
@@ -1124,7 +3020,7 @@ Spring默认会在容器初始化的过程中，解析xml，并将单例的bean�
      }
    #+END_SRC
 
-****** Spring注解方式实现IOC和DI
+*** 2.4.2 Spring注解方式实现IOC和DI
 ******* Spring注解
 Spring除了默认的使用xml配置文件的方式实现配置之外，也支持使用注解方式实现配置，这种方式效率更高，配置信息清晰，代码在哪对应的配置就在哪，方便开发阶段修改，推荐使用。所谓注解就是给程序看的提示信息，很多时候都用来作为轻量级配置的方式。 关于注解的知识点，参看java基础课程中java基础加强部分的内容。
 ******* Spring注解方式实现IOC
@@ -1433,20 +3329,20 @@ Spring除了默认的使用xml配置文件的方式实现配置之外，也支�
      #+END_SRC
 5. @Controller @Service @Repository @Component
    这四个注解的功能是完全相同的，都是用来修饰类，将类声明为Spring管理的bean的。其中@Component一般认为是通用的注解,而@Controller用在软件分层中的控制层，一般用在web层，而@Service用在软件分层中的业务访问层，一般用在service层，而@Repository用在软件分层中的数据访问层，一般用在dao层
-***** 利用Spring IOC DI 实现软件分层解耦
-****** 软件分层思想回顾
+** 2.5 利用Spring IOC DI 实现软件分层解耦
+*** 2.5.1 软件分层思想回顾
 在软件领域有MVC软件设计思想，指导着软件开发过程。在javaee开发领域，javaee的经典三层架构MVC设计思想的经典应用。而在软件设计思想中，追求的是"高内聚低耦合"的目标，利用Spring的IOC 和 DI 可以非常方便的实现这个需求。
-****** Spring IOC DI 改造EasyMall
+*** 2.5.2 Spring IOC DI 改造EasyMall
 在层与层之间设计接口，面向接口编程:
 
 [[./Img/4.png]]
 不再直接创建对象，而是通过Spring注入:
 
 如果存在多个实现类，则通过指定名称声明<bean>的id，实现使用指定实现类的
-***** SpringAOP基础 - 代理设计模式
-****** 改造过后的EasyMall的问题
+** 2.6 SpringAOP基础 - 代理设计模式
+*** 2.6.1 改造过后的EasyMall的问题
 改造过后的EasyMall成功解决了耦合的问题，但是在很多地方仍然存在非该层应该实现的功能，造成了无法“高内聚”的现象，同时存在大量存在重复代码，开发效率低下。此时可以通过代理设计模式，将这部分代码提取到代理者中，简化层中的代码。
-****** 静态代理模式
+*** 2.6.2 静态代理模式
 
 #+BEGIN_SRC java
   import org.junit.Test;
@@ -1498,7 +3394,7 @@ Spring除了默认的使用xml配置文件的方式实现配置之外，也支�
 - 缺点:
   如果被代理者有多个方法，则代理者也需要开发多个方法，其中往往存在大量重复代码，仍然存在代码重复。
 静态代理设计模式解决了软件分层过程中额外的功能代码侵入模块的问题，将额外的功能代码提取到了代理者中进行，但是静态代理实现的代理者中存在大量重复的代码，并没有解决代码 重复问题。所以在真正开发中--包括spring的底层，基本不会使用静态代理。
-****** 动态代理 - jdk内置的动态代理
+*** 2.6.3 动态代理 - jdk内置的动态代理
 在jdk中提供了动态代理实现的工具类，直接使用该工具类就可以创建出代理者，并且可以通过内置的回调函数指定代理在工作时的执行逻辑，从而实现基于jdk原生api的动态代理机制。
 #+BEGIN_SRC java
   package cn.tedu.javaproxy;
@@ -1607,7 +3503,7 @@ java动态代理的特点:
   不需要像静态代理一样被代理方法都要实现一遍，而只需要在回调函数中进行处理就可以了，重复代码只需编写一次。
 - 缺点:
   java的动态代理是通过代理者实现和被代理者相同的接口来保证两者具有相同的方法的，如果被代理者想要被代理的方法不属于任何接口，则生成的代理者自然无法具有这个方法，也就无法实现对该方法的代理。 所以java的动态代理机制是基于接口进行的，受制于要代理的方法是否有接口的支持。
-****** 动态代理 - 第三方包cglib实现的动态代理
+*** 2.6.4 动态代理 - 第三方包cglib实现的动态代理
 CGLIB是第三方提供的动态代理的实现工具，不管有没有接口都可以实现动态代理。CGLIB实现动态代理的原理是生成的动态代理是被代理者的子类，所以代理者具有和父类即被代理者 相同的方法，从而实现代理，这种方式基于继承，不再受制于接口。
 1. 导入CGLIB相关包
    之前导入的spring包中就包含了CGLIB
@@ -1784,7 +3680,7 @@ CGLIB是第三方提供的动态代理的实现工具，不管有没有接口都
      无论是否有接口都可以实现动态代理，使用场景基本不受限
    - 缺点:
      第三方提供的动态代理机制，不是原生的，需要导入第三方开发包才可以使用。
-****** 使用代理改造EasyMall
+*** 2.6.5 使用代理改造EasyMall
 使用代理改造EasyMall，将功能代码提取到代理者中，实现“高内聚”的效果。
 1. 静态代理
 
@@ -1922,8 +3818,8 @@ CGLIB是第三方提供的动态代理的实现工具，不管有没有接口都
      }
    #+END_SRC
 
-***** SpringAOP详解
-****** Spring aop中的基本概念
+** 2.7 SpringAOP详解
+*** 2.7.1 Spring aop中的基本概念
 1. 连接点(Joinpoint):
    在程序执行过程中某个特定的点，比如某方法调用的时候或者处理异常的 时候。在Spring AOP中，一个连接点总是表示一个方法的执行。
    - 通俗讲:
@@ -1946,7 +3842,7 @@ CGLIB是第三方提供的动态代理的实现工具，不管有没有接口都
    - 通俗讲:
      就是真正希望被访问到的对象。spring底层的动态代理对他进行了代理，具体能不能真的访问到目标对象，或在目标对象真正执行之前和之后是否做一些额外的操作，取决于切面
    [[./Img/6.png]]
-****** spring的aop入门案例
+*** 2.7.2 spring的aop入门案例
 1. 导入aop相关开发包
 2. 创建配置文件，并导入aop约束
 3. 创建基本的层级结构调用过程
@@ -1995,7 +3891,7 @@ CGLIB是第三方提供的动态代理的实现工具，不管有没有接口都
   }
 
 #+END_SRC
-****** 切入点表达式
+*** 2.7.3 切入点表达式
 1. within表达式
    通过类名进行匹配，粗粒度的切入点表达式；within(包名.类名)，则这个类中的所有的连接点都会被表达式识别，成为切入点。
    #+BEGIN_SRC html
@@ -2076,18 +3972,4047 @@ CGLIB是第三方提供的动态代理的实现工具，不管有没有接口都
        <aop:pointcut expression="execution(* cn.tedu.service..*.*(..))" id="pc1"/>
      #+END_SRC
      该切入点规则表示，切出指定包及其子孙包下所有的类中的任意方法，参数数量及类型不限，返回值类型不限。这种写法等价于within表达式的功能。
-****** Spring的五大通知类型
+*** 2.7.4 Spring的五大通知
+******* 通知类型
 1. 前置通知
-   在目标方法执行之前执行执行的通知，前置通知方法，可以没有参数，也可以额外接收一个JoinPoint，Spring会自动将该对象传入，代表当前的连接点，通过该对象可以获取目标对象和目标方法相关的信息。注意，如果接收JoinPoint，必须保证其为方法的第一个参数，否则报错。
+   在目标方法执行之前执行执行的通知。
+   前置通知方法，可以没有参数，也可以额外接收一个JoinPoint，Spring会自动将该对象传入，代表当前的连接点，通过该对象可以获取目标对象和目标方法相关的信息。注意，如果接收JoinPoint，必须保证其为方法的第一个参数，否则报错。
+
+   配置方法：
+
+   [[./Img/7.png]]
+
+   [[./Img/8.png]]
 2. 环绕通知
-   在目标方法执行之前和之后都可以执行额外代码的通知。在环绕通知中必须显式的调用目标方法，否则目标方法不会执行。这个显式调用是通过ProceedingJoinPoint来实现的，可以在环绕通知中接收一个此类型的形 参，spring容器会自动将该对象传入，这个参数必须处在环绕通知的第一个形参位置。
+   在目标方法执行之前和之后都可以执行额外代码的通知。
+   在环绕通知中必须显式的调用目标方法，否则目标方法不会执行。这个显式调用是通过ProceedingJoinPoint来实现的，可以在环绕通知中接收一个此类型的形参，spring容器会自动将该对象传入，这个参数必须处在环绕通知的第一个形参位置。
    - ProceedingJoinPoint时JoinPoint的子类，要注意，只有环绕通知可以接收 ProceedingJoinPoint，而其他通知只能接收JoinPoint。
-   环绕通知需要返回返回值，否则真正调用者将拿不到返回值，只能得到一个null。
-环绕通知有控制目标方法是否执行、目标方法执行之前或之后执行额外代码、控制是否返回返回值、改变返回值的能力
-环绕通知虽然有这样的能力，但一定要慎用，要小心不要破坏了软件分层的“高内聚 低耦合” 的目标。
+   [[./Img/9.png]]
+   - 环绕通知需要返回返回值，否则真正调用者将拿不到返回值，只能得到一个null。
+   - 环绕通知有控制目标方法是否执行、目标方法执行之前或之后执行额外代码、控制是否返回返回值、改变返回值的能力
+   - 环绕通知虽然有这样的能力，但一定要慎用，要小心不要破坏了软件分层的“高内聚 低耦合” 的目标。
 3. 后置通知
    在目标方法执行之后执行的通知。 在后置通知中也可以选择性的接收一个JoinPoint来获取连接点的额外信息，但是这个参数必须 处在参数列表的第一个。
+
+   [[./Img/10.png]]
+
+   - 在后置通知中，还可以通过配置获取目标方法的返回值
+   [[./Img/11.png]]
+   - 一定要保证JoinPoint处在参数列表的第一位，否则抛异常
+   [[./Img/12.png]]
 4. 异常通知
    在目标方法抛出异常时执行的通知
+
+   [[./Img/13.png]]
+   - 可以配置传入JoinPoint获取目标对象和目标方法相关信息，但必须处在参数列表第一位,另外，还可以配置参数，让异常通知接收到目标方法抛出的异常对象
+   [[./Img/14.png]]
 5. 最终通知
-**** MyBatis
+   是在目标方法执行之后执行的通知。
+   和后置通知不同之处在于，后置通知是在方法正常返回后执行的通知，如果方法没有正常返-例如抛出异常，则后置通知不会执行。而最终通知无论如何都会在目标方法调用过后执行，即使使目标方法没有正常的执行完成。另外，后置通知可以通过配置得到返回值，而最终通知无法得到。
+
+   [[./Img/15.png]]
+
+   [[./Img/16.png]]
+   - 最终通知也可以额外接收一个JoinPoint参数，来获取目标对象和目标方法相关信息，但一定要保证必须是第一个参数。
+   [[./Img/17.png]]
+******* Spring的五种通知顺序
+1. 在目标方法没有抛出异常的情况下
+   #+BEGIN_SRC
+     *前置通知*
+     *环绕通知的调用目标方法之前的代码*//取决于配置顺序
+     目标方法
+     *环绕通知的调用目标方法之后的代码*
+     *后置通知
+     *最终通知//取决于配置顺序
+   #+END_SRC
+2. 在目标方法抛出异常的情况下：
+   #+BEGIN_SRC
+     *前置通知*
+     *环绕通知的调用目标方法之前的代码*//取决于配置顺序
+     目标方法 抛出异常
+     *异常通知*
+     *最终通知*//取决于配置顺序
+   #+END_SRC
+3. 如果存在多个切面：
+   多切面执行时，采用了责任链设计模式。
+   - 切面的配置顺序决定了切面的执行顺序，多个切面执行的过程，类似于方法调用的过程，在环绕通知的proceed()执行时，去执行下一个切面或如果没有下一个切面执行目标方法，从而达成了如下的执行过程：
+     [[./Img/18.png]]
+
+    - 如果目标抛出异常
+      [[./Img/19.png]]
+******* 五种通知的常见使用场景
+| 前置通知 | 记录日志(方法将被调用)               |
+| 环绕通知 | 控制事务 权限控制                    |
+| 后置通知 | 记录日志(方法已经成功调用)           |
+| 异常通知 | 异常处理 控制事务                    |
+| 最终通知 | 记录日志(方法已经调用，但不一定成功) |
+|          |                                      |
+*** 2.7.5 AOP的原理
+[[./Img/28.png]]
+
+Spring在创建bean时，除了创建目标对象bean之外，会根据aop的配置，生成目标对象的代理对象，将其存储，之后获取bean时得到的其实是代理对象，在代理对象中，根据配置的切入点规则，决定哪些方法不处理直接执行目标方法，哪些方法拦截后进行增强，需要增强的方法拦截后根据配置调用指定切面中的指定通知执行增强操作。
+
+Spring自动为目标对象生成代理对象，默认情况下，如果目标对象实现过接口，则采用java的动态代理机制，如果目标对象没有实现过接口，则采用cglib动态代理。开发者可以可以在spring中进行配置，要求无论目标对象是否实现过接口，都强制使用cglib动态代理。
+
+[[./Img/20.png]]
+*** 2.7.6AOP注解方式的实现
+spring也支持注解方式实现AOP，相对于配置文件方式，注解配置更加的轻量级，配置、修改更加方便，是目前最流行的方式。
+1. 开启AOP的注解配置方式
+   [[./Img/21.png]]
+2. 将指定的类标志位一个切面
+   [[./Img/22.png]]
+3. 配置通知 制定切入点规则
+   | 前置通知 | @Before         |
+   | 环绕通知 | @Around         |
+   | 后置通知 | @AfterReturning |
+   | 异常通知 | @AfterThrowing  |
+   | 最终通知 | @After          |
+   [[./Img/23.png]]
+   - 通过注解的配置 等价于 配置文件的配置
+     [[./Img/24.png]]
+4. 如果一个切面中多个通知重复使用同一个切入点表达式，则可以将该切入点表达式单独定义，后续引用，注意，在当前切面中通过注解定义的切入点只在当前切面中起作用，其他切面看不到。
+   [[./Img/25.png]]
+5. 在后置通知的注解中，也可以额外配置一个returning属性，来指定一个参数名接受目标方法执行后的返回值
+   [[./Img/26.png]]
+6. 在异常通知的注解中，也可以额外配置一个throwing属性，来指定一个参数名接受目标方法抛出的异常对象
+   [[./Img/27.png]]
+7. 代码实现
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+             ">
+         <!--配置IOC包扫描-->
+         <context:component-scan base-package="cn.tedu"></context:component-scan>
+         <!--配置注解方式DI-->
+         <context:annotation-config/>
+         <!--配置注解方式AOP-->
+         <aop:aspectj-autoproxy/>
+     </beans>
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.aspect;
+
+     import org.aspectj.lang.ProceedingJoinPoint;
+     import org.aspectj.lang.annotation.*;
+     import org.springframework.stereotype.Component;
+
+     /**
+      ,* 注解方式开发AOP
+      ,*/
+     @Component
+     @Aspect
+     public class FirstAspect {
+         @Before("execution(* cn.tedu.service..*(..))")
+         public void myBefore(){
+             System.out.println("前置通知..");
+         }
+
+         @Around("execution(* cn.tedu.service..*(..))")
+         public Object myAround(ProceedingJoinPoint pjp) throws Throwable {
+             System.out.println("环绕前..");
+             Object retObj = pjp.proceed();
+             System.out.println("环绕后..");
+             return retObj;
+         }
+
+         @AfterReturning(value="execution(* cn.tedu.service..*(..))",returning = "retObj")
+         public void myAfterReturning(Object retObj){
+             System.out.println("后置通知.."+retObj);
+         }
+
+         @AfterThrowing(value="execution(* cn.tedu.service..*(..))",throwing="e")
+         public void myAfterThrowing(Throwable e){
+             System.out.println("异常通知.."+e);
+         }
+
+         @After("execution(* cn.tedu.service..*(..))")
+         public void myAfter(){
+             System.out.println("最终通知..");
+         }
+
+     }
+
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.aspect;
+
+     import org.aspectj.lang.ProceedingJoinPoint;
+     import org.aspectj.lang.annotation.*;
+     import org.springframework.stereotype.Component;
+
+     /**
+      ,* 注解方式AOP @Pointcut的使用
+      ,*/
+     @Component
+     @Aspect
+     public class SecondAspect {
+
+         @Pointcut("execution(* cn.tedu.service..*(..))")
+         public void mx(){
+         }
+
+         @Before("mx()")
+         public void myBefore(){
+             System.out.println("second前置通知..");
+         }
+
+         @Around("mx()")
+         public Object myAround(ProceedingJoinPoint pjp) throws Throwable {
+             System.out.println("second环绕前..");
+             Object retObj = pjp.proceed();
+             System.out.println("second环绕后..");
+             return retObj;
+         }
+
+         @AfterReturning(value="mx()",returning = "retObj")
+         public void myAfterReturning(Object retObj){
+             System.out.println("second后置通知.."+retObj);
+         }
+
+         @AfterThrowing(value="mx()",throwing="e")
+         public void myAfterThrowing(Throwable e){
+             System.out.println("second异常通知.."+e);
+         }
+
+         @After("mx()")
+         public void myAfter(){
+             System.out.println("second最终通知..");
+         }
+
+     }
+
+   #+END_SRC
+
+** 2.8 SpringAop案例
+*** 2.8.1 异常信息收集
+在业务方法执行时，如果有异常抛出，则根据异常信息记录日志
+
+#+BEGIN_SRC java
+  package cn.tedu.aspect;
+
+  import org.apache.log4j.Logger;
+  import org.aspectj.lang.JoinPoint;
+  import org.aspectj.lang.Signature;
+  import org.aspectj.lang.annotation.AfterThrowing;
+  import org.aspectj.lang.annotation.Aspect;
+  import org.aspectj.lang.reflect.MethodSignature;
+  import org.springframework.stereotype.Component;
+
+  import java.lang.reflect.Method;
+  import java.util.concurrent.ExecutorService;
+
+
+  @Component
+  @Aspect
+  public class ExceptionAspect {
+
+      private static Logger logger = Logger.getLogger(ExceptionAspect.class);
+
+      @AfterThrowing(value="execution(* cn.tedu.service..*(..))",throwing = "e")
+      public void afterThrowing(JoinPoint jp,Throwable e){
+          //获取目标对象
+          Object target = jp.getTarget();
+          Class clz = target.getClass();
+          //获取目标方法
+          MethodSignature signature = (MethodSignature) jp.getSignature();
+          Method method = signature.getMethod();
+          //记录日志
+          logger.info("在["+clz+"]类中的["+method+"]方法中发生了["+e+"]异常");
+      }
+  }
+
+#+END_SRC
+*** 2.8.2 统计业务方法执行的时间
+统计所有业务方法执行时的耗时
+
+#+BEGIN_SRC java
+  package cn.tedu.aspect;
+
+  import org.apache.log4j.Logger;
+  import org.aspectj.lang.ProceedingJoinPoint;
+  import org.aspectj.lang.Signature;
+  import org.aspectj.lang.annotation.Around;
+  import org.aspectj.lang.annotation.Aspect;
+  import org.aspectj.lang.reflect.MethodSignature;
+  import org.springframework.stereotype.Component;
+
+  import java.lang.reflect.Method;
+
+  @Component
+  @Aspect
+  public class UseTimeAspect {
+
+      private static Logger logger = Logger.getLogger(UseTimeAspect.class);
+
+      @Around("execution(* cn.tedu.service..*(..))")
+      public Object around(ProceedingJoinPoint pjp) throws Throwable {
+          //开始时间
+          long begin = System.currentTimeMillis();
+          //--调用目标方法
+          Object retObj = pjp.proceed();
+          //结束时间
+          long end = System.currentTimeMillis();
+
+          //用时 = 结束时间 - 开始时间
+          long useTime = end - begin;
+
+          //记录日志
+          Class clz = pjp.getTarget().getClass();
+          MethodSignature signature = (MethodSignature) pjp.getSignature();
+          Method method = signature.getMethod();
+          logger.debug("["+clz+"]类中["+method+"]方法执行耗时["+useTime+"]毫秒");
+
+          //--返回返回值
+          return retObj;
+      }
+  }
+#+END_SRC
+*** 2.8.3 通过aop进行权限控制
+- 通过aop来实现权限控制
+  1. 通过自定义注解声明业务方法是否需要权限控制
+  2. 通过权限注解上的属性声明需要什么样的权限
+  3. 通过切面拦截业务方法，根据是否需要权限、是否具有权限，控制目标方法的执行
+1. 开发权限注解
+
+   #+BEGIN_SRC java
+     package cn.tedu.enums;
+
+     public enum PrivEnum {
+         VISITOR,USER,ADMIN
+     }
+
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.anno;
+
+     import cn.tedu.enums.PrivEnum;
+
+     import java.lang.annotation.ElementType;
+     import java.lang.annotation.Retention;
+     import java.lang.annotation.RetentionPolicy;
+     import java.lang.annotation.Target;
+
+     @Target(ElementType.METHOD)
+     @Retention(RetentionPolicy.RUNTIME)
+     public @interface PrivAnno {
+         public PrivEnum[] value();
+     }
+
+   #+END_SRC
+2. 应用权限注解
+
+   #+BEGIN_SRC java
+     package cn.tedu.service;
+
+     import cn.tedu.anno.PrivAnno;
+     import cn.tedu.enums.PrivEnum;
+     import org.springframework.stereotype.Service;
+
+     @Service
+     public class UserServiceImpl implements UserService {
+
+         @Override
+         public void addUser() {
+             System.out.println("增加用户");
+         }
+
+         @PrivAnno({PrivEnum.USER,PrivEnum.ADMIN})
+         @Override
+         public void updateUser() {
+             System.out.println("修改用户");
+         }
+
+         @PrivAnno({PrivEnum.USER,PrivEnum.ADMIN})
+         @Override
+         public void queryUser() {
+             System.out.println("查询用户");
+         }
+
+         @PrivAnno(PrivEnum.ADMIN)
+         @Override
+         public void delUser() {
+             System.out.println("删除用户");
+         }
+     }
+
+   #+END_SRC
+3. 开发切面，实现环绕通知，检查用户是否具有权限，有权限则执行目标方法，没权限提示权限不足
+
+   #+BEGIN_SRC java
+     package cn.tedu.aspect;
+
+     import cn.tedu.anno.PrivAnno;
+     import cn.tedu.enums.PrivEnum;
+     import cn.tedu.web.UserServlet;
+     import org.aspectj.lang.ProceedingJoinPoint;
+     import org.aspectj.lang.annotation.Around;
+     import org.aspectj.lang.annotation.Aspect;
+     import org.springframework.stereotype.Component;
+
+     import java.util.Arrays;
+
+     @Component
+     @Aspect
+     public class PrivAspect {
+         @Around("execution(* cn.tedu.service..*(..))")
+         public Object around(ProceedingJoinPoint pjp) throws Throwable {
+             //获取目标方法
+             MethodSignature signature = (MethodSignature) pjp.getSignature();
+             //接口上的方法
+             Method intf_method = signature.getMethod();
+             //得到实现类上的目标方法
+             Class<?> clz = pjp.getTarget().getClass();
+             Method inst_method = clz.getMethod(intf_method.getName(),intf_method.getParameterTypes());
+             //检查目标方法是否有@PrivAnno
+             if(inst_method.isAnnotationPresent(PrivAnno.class)){
+                 //有注解 - 获取当前注解
+                 PrivAnno privAnno = inst_method.getAnnotation(PrivAnno.class);// @PrivAnno({PrivEnum.USER,PrivEnum.ADMIN})
+                 //当前方法可以接受的角色数组
+                 PrivEnum[] privs = privAnno.value();//{PrivEnum.USER,PrivEnum.ADMIN}
+                 //当前用户角色
+                 PrivEnum userPriv = UserServlet.role;//PrivEnum.VISITOR
+                 //检查当前用户角色是否在可接受角色数组中存在
+                 if(Arrays.asList(privs).contains(userPriv)){
+                     //有，权限检查通过，直接放行
+                     Object retObj = pjp.proceed();
+                     return retObj;
+                 }else{
+                     //每有，权限检查不通过，抛出异常
+                     throw new RuntimeException("权限不足！");
+                 }
+             }else{
+                 //没注解 - 不需要权限，直接放行
+                 Object retObj = pjp.proceed();
+                 return retObj;
+             }
+         }
+     }
+   #+END_SRC
+   另外一种写法
+   #+BEGIN_SRC java
+     package cn.tedu.aspect;
+
+     import cn.tedu.anno.PrivAnno;
+     import cn.tedu.enums.PrivEnum;
+     import cn.tedu.web.UserServlet;
+     import org.aspectj.lang.ProceedingJoinPoint;
+     import org.aspectj.lang.annotation.Around;
+     import org.aspectj.lang.annotation.Aspect;
+     import org.springframework.stereotype.Component;
+
+     import java.util.Arrays;
+
+     @Component
+     @Aspect
+     public class PrivAspect {
+
+         //拦下cn.tedu.service包下及其子孙包下的所有的类所有的方法所有属性并且是带注解的，没有注解的直接放行
+         @Around("execution(* cn.tedu.service..*(..)) && @annotation(pa)")
+         public Object around(ProceedingJoinPoint pjp, PrivAnno pa) throws Throwable {
+             //当前方法可以接受的角色数组
+             PrivEnum[] privs = pa.value();
+             //当前用户角色
+             PrivEnum userPriv = UserServlet.role;
+             //检查当前用户角色是否在可接受角色数组中存在
+             if(Arrays.asList(privs).contains(userPriv)){
+                 //有，权限检查通过，直接放行
+                 Object retObj = pjp.proceed();
+                 return retObj;
+             }else{
+                 //每有，权限检查不通过，抛出异常
+                 throw new RuntimeException("权限不足！");
+             }
+         }
+     }
+   #+END_SRC
+4. 测试代码
+
+   #+BEGIN_SRC java
+     package cn.tedu.test;
+
+     import cn.tedu.web.UserServlet;
+     import org.junit.Test;
+     import org.springframework.context.ApplicationContext;
+     import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+     public class Test01 {
+         @Test
+         public void test01(){
+             ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+             UserServlet userServlet = context.getBean(UserServlet.class);
+             userServlet.updateUser();
+             ((ClassPathXmlApplicationContext)context).close();
+         }
+     }
+
+   #+END_SRC
+*** 2.8.4 实现事务控制
+通过AOP实现事务控制
+  1. 开发事务注解，通过业务方法上是否有注解来标识方法是否需要事务
+  2. 在切面中通过判断目标方法是否具有事务注解决定是否执行事务
+  3. 通过事务管理器管理事务防止耦合
+1. 开发事务注解
+
+   #+BEGIN_SRC java
+     package cn.tedu.anno;
+
+     import java.lang.annotation.ElementType;
+     import java.lang.annotation.Retention;
+     import java.lang.annotation.RetentionPolicy;
+     import java.lang.annotation.Target;
+
+     @Target(ElementType.METHOD)
+     @Retention(RetentionPolicy.RUNTIME)
+     public @interface Trans {
+     }
+
+   #+END_SRC
+2. 在业务层使用注解
+
+   #+BEGIN_SRC java
+     package cn.tedu.service;
+
+     import cn.tedu.anno.Trans;
+     import cn.tedu.dao.UserDao;
+     import cn.tedu.domain.User;
+     import org.springframework.beans.factory.annotation.Autowired;
+     import org.springframework.stereotype.Service;
+
+     @Service
+     public class UserServiceImpl implements UserService {
+
+         @Autowired
+         private UserDao userDao = null;
+
+         @Trans
+         @Override
+         public void addUser(User user) {
+             userDao.addUser(user);
+             int i = 1/0;
+         }
+
+         @Override
+         public User queryUser(int id) {
+             return userDao.queryUser(id);
+         }
+     }
+   #+END_SRC
+3. 为了不再Service层使用conn造成耦合，开发TransactionManager专门用于管理事务
+   [[./Img/30.png]]
+   #+BEGIN_SRC java
+     package cn.tedu.utils;
+
+     import java.sql.Connection;
+     import java.sql.SQLException;
+
+     public class TransactionManager {
+
+         //private static Connection conn = JDBCUtils.getConn();
+         private static ThreadLocal<Connection> tl = new ThreadLocal<Connection>(){
+             @Override
+             protected Connection initialValue() {
+                 return C3P0Util.getConnection();
+             }
+         };
+
+         /**
+          ,* 开事务
+          ,*/
+         public static void startTran(){
+             try {
+                 tl.get().setAutoCommit(false);
+             } catch (SQLException e) {
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+
+         /**
+          ,* 提交事务
+          ,*/
+         public static void commitTran(){
+             try {
+                 tl.get().commit();
+             } catch (SQLException e) {
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+
+
+         /**
+          ,* 回滚事务
+          ,*/
+         public static void rollbackTran(){
+             try {
+                 tl.get().rollback();
+             } catch (SQLException e) {
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+
+         /**
+          ,* 获取连接
+          ,* @return
+          ,*/
+         public static Connection getConn(){
+             return tl.get();
+         }
+
+         /**
+          ,* 释放资源
+          ,*/
+         public static void relase(){
+             try {
+                 tl.get().close();
+                 tl.remove();
+             } catch (SQLException e) {
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+
+     }
+   #+END_SRC
+4. 开发切面，实现环绕通知 根据目标方法是否有@Trans决定要不要增强事务控制
+   [[./Img/31.png]]
+   #+BEGIN_SRC java
+     package cn.tedu.aspect;
+
+     import cn.tedu.anno.Trans;
+     import cn.tedu.utils.TransactionManager;
+     import org.aspectj.lang.ProceedingJoinPoint;
+     import org.aspectj.lang.annotation.Around;
+     import org.aspectj.lang.annotation.Aspect;
+     import org.springframework.stereotype.Component;
+
+     @Component
+     @Aspect
+     public class TransAspect {
+         @Around("execution(* cn.tedu.service..*(..)) && @annotation(ts)")
+         public Object around(ProceedingJoinPoint pjp,Trans ts) throws Throwable {
+             try {
+                 TransactionManager.startTran();
+                 Object retObj = pjp.proceed();
+                 TransactionManager.commitTran();
+                 return retObj;
+             } catch (Exception e) {
+                 TransactionManager.rollbackTran();
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             } finally {
+                 TransactionManager.relase();
+             }
+         }
+     }
+
+   #+END_SRC
+5. 进行测试
+
+   #+BEGIN_SRC java
+     package cn.tedu.test;
+
+     import cn.tedu.domain.User;
+     import cn.tedu.web.UserServlet;
+     import org.junit.Test;
+     import org.springframework.context.ApplicationContext;
+     import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+     public class Test01 {
+         @Test
+         public void test02(){
+             ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+             UserServlet userServlet = context.getBean(UserServlet.class);
+             User user = userServlet.queryUser(2);
+             System.out.println(user);
+             ((ClassPathXmlApplicationContext)context).close();
+         }
+         @Test
+         public void test01(){
+             ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+             UserServlet userServlet = context.getBean(UserServlet.class);
+             userServlet.addUser(new User(0,"iii",28));
+             ((ClassPathXmlApplicationContext)context).close();
+         }
+     }
+
+   #+END_SRC
+6. 改进：利用spring提供的切入点表达式来直接获取注解
+
+   #+BEGIN_SRC java
+     @Around("execution(* cn.tedu.service..*(..)) && @annotation(ts)")
+     public Object around(ProceedingJoinPoint pjp,Trans ts) throws Throwable {
+         try {
+             TransactionManager.startTran();
+             Object retObj = pjp.proceed();
+             TransactionManager.commitTran();
+             return retObj;
+         } catch (Exception e) {
+             TransactionManager.rollbackTran();
+             e.printStackTrace();
+             throw new RuntimeException(e);
+         } finally {
+             TransactionManager.relase();
+         }
+     }
+   #+END_SRC
+   @annotation(ax)  --->   Trans ax
+   - 表示此切入点表达式表示要切出cn.tedu.service报下任意类的任意方法，并且要求此方法必须有注解，且注解类型必须为ax对应的类型Trans
+7. 扩展：通过ThreadLocal，保证每个线程个字使用个字的Conn对象
+   以上案例只有一个conn对象，当在多线程环境下时，所有线程都用统一个conn必然会出现线程安全问题。此时可以通过ThreadLocal让每个Thread都具有自己的Conn，保证线程安全。
+
+   [[./Img/32.png]]
+   - ThreadLocal是一种传递消息的机制，线程由程序的上游下游执行，此时利用线程对象中的map来存储数据，从而实现由程序的上游向下游传递数据。
+     1. 利用ThreadLocal可以实现隐式的传参数。
+     2. 由于每个线程都有各自的Map，从而可以各自持有各自的数据，不会存在多线程并发安全问题，所以也可以作为多线程并发安全问题解决方案之一。
+
+   #+BEGIN_SRC java
+     package cn.tedu.utils;
+
+     import java.sql.Connection;
+     import java.sql.SQLException;
+
+     public class TransactionManager {
+
+         //private static Connection conn = JDBCUtils.getConn();
+         private static ThreadLocal<Connection> tl = new ThreadLocal<Connection>(){
+             @Override
+             protected Connection initialValue() {
+                 return C3P0Util.getConnection();
+             }
+         };
+
+         /**
+          ,* 开事务
+          ,*/
+         public static void startTran(){
+             try {
+                 tl.get().setAutoCommit(false);
+             } catch (SQLException e) {
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+
+         /**
+          ,* 提交事务
+          ,*/
+         public static void commitTran(){
+             try {
+                 tl.get().commit();
+             } catch (SQLException e) {
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+
+
+         /**
+          ,* 回滚事务
+          ,*/
+         public static void rollbackTran(){
+             try {
+                 tl.get().rollback();
+             } catch (SQLException e) {
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+
+         /**
+          ,* 获取连接
+          ,* @return
+          ,*/
+         public static Connection getConn(){
+             return tl.get();
+         }
+
+         /**
+          ,* 释放资源
+          ,*/
+         public static void relase(){
+             try {
+                 tl.get().close();
+                 tl.remove();
+             } catch (SQLException e) {
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+
+     }
+
+   #+END_SRC
+
+** 2.9 Spring整合JDBC
+*** 2.9.1 回顾JDBC
+1. java操作关系型数据的API
+   导入相关数据库的驱动包后可以通过JDBC提供的接口来操作数据库。
+2. 实现JDBC的六个步骤
+   #+BEGIN_SRC
+     注册数据库驱动
+     获取数据库连接
+     获取传输器对象
+     传输sql执行获取结果集对象
+     遍历结果集获取信息
+     关闭资源
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.test;
+
+     import com.mchange.v2.c3p0.ComboPooledDataSource;
+     import org.junit.Test;
+
+     import javax.sql.DataSource;
+     import java.sql.*;
+
+     public class Test01 {
+         /**
+          ,* 回顾jdbc
+          ,*/
+         @Test
+         public void test01(){
+             Connection conn = null;
+             PreparedStatement ps = null;
+             ResultSet rs = null;
+             try {
+                 //1.注册数据库驱动
+                 Class.forName("com.mysql.jdbc.Driver");
+                 //2.获取数据库连接
+                 conn = DriverManager.getConnection("jdbc:mysql:///ssmdb","root","123456");
+                 //3.获取传输器对象
+                 ps = conn.prepareStatement("select * from user where id < ?");
+                 ps.setInt(1,3);
+                 //4.传输sql执行获取结果集
+                 rs = ps.executeQuery();
+                 //5.遍历结果集
+                 while(rs.next()){
+                     String name = rs.getString("name");
+                     System.out.println(name);
+                 }
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }finally {
+                 if(rs!=null){
+                     try {
+                         rs.close();
+                     } catch (SQLException e) {
+                         e.printStackTrace();
+                     } finally {
+                         rs = null;
+                     }
+                 }
+                 if(ps!=null){
+                     try {
+                         ps.close();
+                     } catch (SQLException e) {
+                         e.printStackTrace();
+                     } finally {
+                         ps = null;
+                     }
+                 }
+                 if(conn!=null){
+                     try {
+                         conn.close();
+                     } catch (SQLException e) {
+                         e.printStackTrace();
+                     } finally {
+                         conn = null;
+                     }
+                 }
+             }
+         }
+     }
+
+   #+END_SRC
+3. 数据库连接池(数据源)
+   #+BEGIN_SRC java
+     package cn.tedu.test;
+
+     import com.mchange.v2.c3p0.ComboPooledDataSource;
+     import org.junit.Test;
+
+     import javax.sql.DataSource;
+     import java.sql.*;
+
+     public class Test01 {
+         /**
+          ,* 回顾C3P0连接池
+          ,*/
+         @Test
+         public void test02(){
+             DataSource dataSource = new ComboPooledDataSource();
+
+             Connection conn = null;
+             PreparedStatement ps = null;
+             ResultSet rs = null;
+             try {
+                 //1.注册数据库驱动
+                 //2.获取数据库连接
+                 conn = dataSource.getConnection();
+                 //3.获取传输器对象
+                 ps = conn.prepareStatement("select * from user where id < ?");
+                 ps.setInt(1,3);
+                 //4.传输sql执行获取结果集
+                 rs = ps.executeQuery();
+                 //5.遍历结果集
+                 while(rs.next()){
+                     String name = rs.getString("name");
+                     System.out.println(name);
+                 }
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }finally {
+                 if(rs!=null){
+                     try {
+                         rs.close();
+                     } catch (SQLException e) {
+                         e.printStackTrace();
+                     } finally {
+                         rs = null;
+                     }
+                 }
+                 if(ps!=null){
+                     try {
+                         ps.close();
+                     } catch (SQLException e) {
+                         e.printStackTrace();
+                     } finally {
+                         ps = null;
+                     }
+                 }
+                 if(conn!=null){
+                     try {
+                         conn.close();
+                     } catch (SQLException e) {
+                         e.printStackTrace();
+                     } finally {
+                         conn = null;
+                     }
+                 }
+             }
+         }
+     }
+
+   #+END_SRC
+*** 2.9.2 Spring整合JDBC-管理数据源
+1. 导入相关开关包
+   [[./Img/33.png]]
+2. 将数据源交于Spring管理
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+             ">
+
+         <!--配置数据源-->
+         <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+           <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+           <property name="jdbcUrl" value="jdbc:mysql:///ssmdb?useSSL=false&amp;serverTimezone=UTC"></property>
+           <property name="user" value="root"></property>
+           <property name="password" value="Root*0201"></property>
+         </bean>
+
+         <!--配置JDBC模板类-->
+         <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+             <property name="dataSource" ref="dataSource"/>
+         </bean>
+
+     </beans>
+   #+END_SRC
+
+3. 通过Spring获取数据源，获取连接，操作数据库
+
+   #+BEGIN_SRC java
+     package cn.tedu;
+     import java.sql.Connection;
+     import java.sql.PreparedStatement;
+     import java.sql.PreparedStatement;
+     import java.sql.ResultSet;
+     import java.sql.SQLException;
+     import javax.sql.DataSource;
+     import org.springframework.context.ApplicationContext;
+     import org.springframework.context.support.ClassPathXmlApplicationContext;
+     /**
+      ,* 通过spring管理数据源
+      ,*/
+     public class Demo01 {
+         public static void main(String[] args) {
+             ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+             DataSource dataSource = (DataSource) context.getBean("dataSource");
+             Connection conn = null;
+             PreparedStatement ps = null;
+             ResultSet rs = null;
+             try {
+                 conn = dataSource.getConnection();
+                 ps = conn.prepareStatement("select * from user where id = ?");
+                 ps.setInt(1, 2);
+                 rs = ps.executeQuery();
+                 while(rs.next()) {
+                     String name = rs.getString("name");
+                     System.out.println(name);
+                 }
+             } catch (SQLException e) {
+                 e.printStackTrace();
+             }finally {
+                 if(rs!=null) {
+                     try {
+                         rs.close();
+                     } catch (SQLException e) {
+                         e.printStackTrace();
+                     } finally {
+                         rs = null;
+                     }
+                 }
+                 if(ps!=null) {
+                     try {
+                         ps.close();
+                     } catch (SQLException e) {
+                         e.printStackTrace();
+                     } finally {
+                         ps = null;
+                     }
+                 }
+
+                 if(conn!=null) {
+                     try {
+                         conn.close();
+                     } catch (SQLException e) {
+                         e.printStackTrace();
+                     } finally {
+                         conn = null;
+                     }
+                 }
+             }
+         }
+     }
+   #+END_SRC
+
+*** 2.9.3 JDBC模块类
+使用模版类能够极大的简化原有JDBC的编程过程。
+1. 在Spring中配置JDBC模板类
+
+   #+BEGIN_SRC html
+     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+             <property name="dataSource" ref="dataSource"/>
+     </bean>
+   #+END_SRC
+
+2. 使用JDBC模板类实现增删改查
+   #+BEGIN_SRC java
+     package cn.tedu.test;
+
+     import cn.tedu.domain.User;
+     import org.junit.After;
+     import org.junit.Before;
+     import org.junit.Test;
+     import org.springframework.context.ApplicationContext;
+     import org.springframework.context.support.ClassPathXmlApplicationContext;
+     import org.springframework.jdbc.core.BeanPropertyRowMapper;
+     import org.springframework.jdbc.core.JdbcTemplate;
+     import org.springframework.jdbc.core.RowMapper;
+     import org.springframework.jdbc.support.rowset.SqlRowSet;
+
+     import java.sql.JDBCType;
+     import java.sql.ResultSet;
+     import java.sql.SQLException;
+     import java.util.List;
+     import java.util.Map;
+
+     /**
+      ,* JdbcTemplate完成CRUD
+      ,*/
+     public class Test01 {
+         private ApplicationContext context = null;
+         private JdbcTemplate jdbcTemplate = null;
+
+         @Before
+         public void beofre(){
+             context = new ClassPathXmlApplicationContext("applicationContext.xml");
+             jdbcTemplate = (JdbcTemplate) context.getBean("jdbcTemplate");
+         }
+
+         @After
+         public void after(){
+             ((ClassPathXmlApplicationContext)context).close();
+         }
+
+         /**
+          ,* 自定义RowMapper
+          ,*/
+         class UserRowMapper implements RowMapper<User>{
+             @Override
+             public User mapRow(ResultSet rs, int i) throws SQLException {
+                 User user = new User();
+                 user.setId(rs.getInt("id"));
+                 user.setName(rs.getString("name"));
+                 user.setAge(rs.getInt("age"));
+                 return user;
+             }
+         }
+
+         /**
+          ,* 查询为一个对象集合 - 通过BeanPropertyRowMapper自动实现映射
+          ,*/
+         @Test
+         public void test10(){
+             List<User> list = jdbcTemplate.query(
+                     "select * from user where id < ?",
+                     new BeanPropertyRowMapper<User>(User.class),
+                     3);
+             System.out.println(list);
+         }
+
+         /**
+          ,* 查询为一个对象 - 通过BeanPropertyRowMapper自动实现映射
+          ,*/
+         @Test
+         public void test9(){
+             User user = jdbcTemplate.queryForObject(
+                     "select * from user where id = ?",
+                     new BeanPropertyRowMapper<User>(User.class),
+                     3);
+             System.out.println(user);
+         }
+
+         /**
+          ,* 查询为一个对象集合 - 通过自定义RowMapper实现映射
+          ,*/
+         @Test
+         public void test08(){
+             List<User> list = jdbcTemplate.query("select * from user where id < ?", new UserRowMapper(), 3);
+             System.out.println(list);
+         }
+
+
+         /**
+          ,* 查询为一个对象 - 通过自定义RowMapper实现映射
+          ,*/
+         @Test
+         public void test07(){
+             User user = jdbcTemplate.queryForObject("select * from user where id = ?", new UserRowMapper(), 3);
+             System.out.println(user);
+         }
+
+         /**
+          ,* 查询为一个SqlRowSet
+          ,*/
+         @Test
+         public void test06(){
+             SqlRowSet rs = jdbcTemplate.queryForRowSet("select * from user where id < ?", 3);
+             while(rs.next()){
+                 User user = new User();
+                 user.setId(rs.getInt("id"));
+                 user.setName(rs.getString("name"));
+                 user.setAge(rs.getInt("age"));
+                 System.out.println(user);
+             }
+         }
+
+         /**
+          ,* 查询为一个List<Map>
+          ,*/
+         @Test
+         public void test05(){
+             List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from user where id < ?", 3);
+             System.out.println(list);
+         }
+
+         /**
+          ,* 查询为一个Map
+          ,*/
+         @Test
+         public void test04(){
+             Map<String, Object> map = jdbcTemplate.queryForMap("select * from user where id = ?", 3);
+             System.out.println(map);
+         }
+
+         /**
+          ,* 删除
+          ,*/
+         @Test
+         public void test03(){
+             jdbcTemplate.update("delete from user where id = ?",15);
+         }
+
+         /**
+          ,* 修改
+          ,*/
+         @Test
+         public void test02(){
+             jdbcTemplate.update("update user set age = ? where id = ?",88,15);
+         }
+
+         /**
+          ,* 新增
+          ,*/
+         @Test
+         public void test01(){
+             jdbcTemplate.update("insert into user values (null,?,?)","zzz",99);
+         }
+     }
+
+   #+END_SRC
+3. 使用RowMapper封装bean
+   RowMapper接口定义了对象到列的映射关系，可以帮助我们在查询时自动封装bean。
+
+   #+BEGIN_SRC java
+     package cn.tedu.test;
+
+     import cn.tedu.domain.Prod;
+     import org.junit.After;
+     import org.junit.Before;
+     import org.junit.Test;
+     import org.springframework.context.ApplicationContext;
+     import org.springframework.context.support.ClassPathXmlApplicationContext;
+     import org.springframework.jdbc.core.BeanPropertyRowMapper;
+     import org.springframework.jdbc.core.JdbcTemplate;
+     import org.springframework.jdbc.core.RowMapper;
+
+     import java.sql.ResultSet;
+     import java.sql.SQLException;
+
+     public class Test02 {
+         private ApplicationContext context = null;
+         private JdbcTemplate jdbcTemplate = null;
+
+         @Before
+         public void beofre(){
+             context = new ClassPathXmlApplicationContext("applicationContext.xml");
+             jdbcTemplate = (JdbcTemplate) context.getBean("jdbcTemplate");
+         }
+
+         @After
+         public void after(){
+             ((ClassPathXmlApplicationContext)context).close();
+         }
+
+         @Test
+         public void test02(){
+             Prod prod = jdbcTemplate.queryForObject("select * from prod where id = ?",
+                     new BeanPropertyRowMapper<Prod>(Prod.class),
+                     2);
+             System.out.println(prod);
+         }
+
+         @Test
+         public void test01(){
+             Prod prod = jdbcTemplate.queryForObject(
+                     "select * from prod where id = ?",
+                     new RowMapper<Prod>() {
+                         @Override
+                         public Prod mapRow(ResultSet rs, int i) throws SQLException {
+                             Prod  prod = new Prod();
+                             prod.setId(rs.getInt("id"));
+                             prod.setName(rs.getString("name"));
+                             prod.setPrice(rs.getDouble("price"));
+                             return prod;
+                         }
+                     },
+                     2);
+             System.out.println(prod);
+         }
+     }
+
+   #+END_SRC
+
+4. 使用BeanPropertyRowMapper自动进行映射
+   - BeanPropertyRowMapper内部可以使用指定类进行反射(内省)来获知类内部的属性信息，自动映射到表的列。
+   - 使用它一定要注意，类的属性名要和对应表的列名必须对应的上，否则属性无法自动映射。
+   - BeanPropertyRowMapper底层通过反射(内省)来实现，相对于之前自己写的RowMapper效率比较低。
+   #+BEGIN_SRC java
+     /**
+      ,* 查询为一个对象 - 通过BeanPropertyRowMapper自动实现映射
+     ,*/
+     @Test
+     public void test9(){
+         User user = jdbcTemplate.queryForObject(
+                     "select * from user where id = ?",
+                     new BeanPropertyRowMapper<User>(User.class),
+                     3);
+         System.out.println(user);
+     }
+   #+END_SRC
+*** 2.9.4 声明事务处理
+在之前的案例中，我们实现了自定义切面管理事务：
+#+BEGIN_SRC
+  开发事务管理注解
+  开发事务管理切面
+  开发事务管理器TransactionManager
+  在事务管理器中通过ThreadLocal保证每个线程各自使用各自的Conn
+#+END_SRC
+事实上，SpringJDBC中提供了内置的事务处理机制，可以经过简单的配置完成事务管理，这称之为声明式事务处理。
+1. 创建项目，模拟MVC三层架构
+2. 在配置文件中导入相关约束
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:tx="http://www.springframework.org/schema/tx"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx.xsd
+             ">
+     </beans>
+   #+END_SRC
+3. 配置事务管理器
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:tx="http://www.springframework.org/schema/tx"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx.xsd
+             ">
+         <!--事务管理器-->
+         <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+             <property name="dataSource" ref="dataSource"></property>
+         </bean>
+     </beans>
+   #+END_SRC
+4. 配置事务切面
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:tx="http://www.springframework.org/schema/tx"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx.xsd
+             ">
+         <!--配置事务切面-->
+         <aop:config>
+             <aop:pointcut id="pc01" expression="execution(* cn.tedu.service..*(..))"/>
+             <aop:advisor advice-ref="txAdvice" pointcut-ref="pc01"></aop:advisor>
+         </aop:config>
+     </beans>
+   #+END_SRC
+5. 配置事务通知
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:tx="http://www.springframework.org/schema/tx"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx.xsd
+             ">
+         <!--配置事务通知逻辑-->
+         <tx:advice id="txAdvice" transaction-manager="transactionManager">
+             <tx:attributes>
+                 <tx:method name="registUser" propagation="REQUIRED"/>
+                 <tx:method name="add*" propagation="REQUIRED"/>
+                 <tx:method name="update*" propagation="REQUIRED"/>
+                 <tx:method name="query*" propagation="NEVER"/>
+             </tx:attributes>
+         </tx:advice>
+     </beans>
+   #+END_SRC
+6. 配置关系图
+   [[,/Img/34.png]]
+7. 事务管理策略
+   异常的种类：
+   #+BEGIN_SRC
+     java.lang.Throwable
+          |-Exception
+               |-Runtime Exception
+               |-其他Exception
+          |-Error
+   #+END_SRC
+   SpringJDBC内置的事务策略，只在底层抛出的异常是运行时异常时，才会回滚，其他异常不回滚，留给用户手动处理。也可以在配置中指定在原有规则的基础上，哪些异常额外的回滚或不回滚：
+   #+BEGIN_SRC html
+     <!--配置事务通知逻辑-->
+         <tx:advice id="txAdvice" transaction-manager="transactionManager">
+             <tx:attributes>
+               <tx:method name="add*" propagation="REQUIRED"
+                          rollback-for="java.sql.SQLException"
+                          no-rollback-for="java.lang.ArithmeticException"/>
+               <tx:method name="delete*" propagation="REQUIRED"/>
+               <tx:method name="update*" propagation="REQUIRED"/>
+             </tx:attributes>
+         </tx:advice>
+   #+END_SRC
+   配置成如下形式，可以实现任意异常都自动回滚：
+   #+BEGIN_SRC html
+     <!--配置事务通知逻辑-->
+         <tx:advice id="txAdvice" transaction-manager="transactionManager">
+             <tx:attributes>
+               <tx:method name="add*" propagation="REQUIRED"
+                          rollback-for="java.sql.Throwable"/>
+               <tx:method name="delete*" propagation="REQUIRED"/>
+               <tx:method name="update*" propagation="REQUIRED"/>
+             </tx:attributes>
+         </tx:advice>
+   #+END_SRC
+
+8. 注意：如果在一个业务逻辑中，需要有多步不同表的操作，此时应该在service层中完成对不同表的操作，以此保证多步操作处在同一个事务中，切勿将业务代码在web层中调用不同Service来实现，虽然正常情况下也可以完成功能，但一旦出问题，很可能只有部分操作被回滚，数据出问题。出现这种问题，不是事务管理机制的问题，而是开发者将业务逻辑错误的在web层中进行了实现，所以切记，web层只负责和用户交互和业务逻辑的调用，不进行任何业务逻辑的处理，任何业务逻辑都在service层中进行。
+*** 2.9.5 注解方式
+1. 开启事务注解配置
+2. 在方法上通过注解开启事务
+   即可以标注在接口上，也可以标注在实现类上，理论上应该表在接口上，实现面向接口编程，但实际开发中为了方便也有人写在实现类上。
+
+   #+BEGIN_SRC html
+     <!--SpringJDBC-数据源-->
+       <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+         <property name="jdbcUrl" value="jdbc:mysql:///ssmdb?useSSL=false&amp;serverTimezone=UTC"></property>
+         <property name="user" value="root"></property>
+         <property name="password" value="Root*0201"></property>
+       </bean>
+       <!--事务管理器-->
+         <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+             <property name="dataSource" ref="dataSource"></property>
+         </bean>
+       <!-- 开启spring的注解方式配置事务 -->
+         <tx:annotation-driven/>
+   #+END_SRC
+   也可以在类上使用此接口，此时类中所有方法都会有事务
+   #+BEGIN_SRC java
+     @Transactional
+     public void addUser(User user)throws SQLException;
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     @Override
+     @Transactional
+     public void addUser(User user) throws SQLException{
+         userDao.addUser(user);
+         int i = 1/0;
+         //throw new SQLException();
+     }
+   #+END_SRC
+
+   当在类上开启了事务后，可以此类的方法中使用如下方式，控制某个方法没有事务
+   #+BEGIN_SRC java
+     @Transactional
+     public void addUser(User user)throws SQLException{
+         userDao.addUser(user);
+         int i = 1/0;
+         //throw new SQLException();
+     }
+   #+END_SRC
+   通过注解控制事务时，和配置文件方式控制事务相同的是，默认只有运行时异常会回滚，非运行异常不回滚，此时可以通过如下注解选项额外配置 哪些异常需要回滚，哪些不需要。
+   #+BEGIN_SRC java
+     @Transactional(rollbackFor=Throwable.class,noRollBackFor=SQLException.class)
+     public void addUser(User user) throws SQLException{
+         userDao.addUser(user);
+         //int i = 1/0;
+         throw new SQLException();
+     }
+   #+END_SRC
+*** 2.9.6 扩展案例
+1. 缓存的作用 - 通过AOP实现为查询操作增加缓存机制
+   #+BEGIN_SRC java
+     @Component
+     @Aspect
+     /**
+      ,* 使用Map实现的缓存
+      ,* 只会增加不会减少
+      ,* 没有超时时间，不管过了多久都使用历史缓存
+      ,* 没有存储优化
+      ,*/
+     private Map<Integer,User> map = new HashMap<Integer,User>();
+     @Around("execution(* cn.tedu.spring.service.*.queryUser(..))")
+     int i = (Integer) jp.getArgs()[0];
+     System.out.println("使用缓存查询。。。");
+     if(map.containsKey(i)){
+         public User around(ProceedingJoinPoint jp) throws Throwable{
+             public class CatchAspect {
+                 System.out.println("使用缓存查询。。。");
+                 //有缓存
+                 return map.get(i);
+             }else{
+                 System.out.println("使用数据库查询。。。");
+                 //没缓存
+                 User user = (User) jp.proceed();
+                 map.put(user.getId(), user);
+                 return user;
+             }
+         }
+     }
+   #+END_SRC
+
+* 3 MyBatis
+[[./Img/MyBatis.png]]
+** 3.1 概述
+MyBatis是最近几年非常流行的数据访问层(DAO)框架，能够简单高效的实现对数据层访问。
+*** 3.1.1常见的数据层访问方式比较
+***** JDBC
+java原生的关系型数据库访问方式
+1. 每次操作数据库都需要获取连接关闭连接，在大量访问数据库时，频繁的开关连接消耗性能。
+2. 需要手动编写sql，有学习成本
+3. 查询出的结果需要手动进行封装到bean
+4. 没有缓存处理机制
+5. sql语句写死在程序中，需要修改sql必须修改源文件
+
+   #+BEGIN_SRC
+     ps = insert into user values(null,?,?,?,?);
+     ps.setString(1,user.getName());
+     ps.setString(2,user.getPassword());
+     ps.setString(3,user.getNickname());
+     ps.setString(4,user.getEmail());
+     ----------------------------------------------------
+     ps = select * from user where id = 3;
+     List list = ..
+     rs = ps.executeQuery();
+     while(rs.next()){
+         User user = new User();
+         user.setId(rs.getInt("id"));
+         user.setName(rs.getString("name"));
+         user.setPassword(.....
+                  ......
+         list.add(user);
+     }
+     ----------------------------------------------------
+      类    _____________________    表
+     对象              |            表记录
+                   ENTITY实体
+     User.username     --->      user.uname
+     User.age          --->      user.uage
+                       ...
+   #+END_SRC
+
+***** Hibernate
+基于面向对象理念设计的DAO层框架，基本理念就是维护对象到表的映射关系，通过操作对象操作表中的数据，从而可以减少甚至杜绝sql的使用
+1. 相对比较沉重，效率不好
+2. 当涉及到比较复杂的查询时Hibernate的操作对象的方式用起来非常麻烦，甚至无法实现，只能用sql操作
+3. 底层需要频繁的拼接sql，产生大量冗余的sql
+***** MyBatis
+- 是一种半自动对象-表映射关系的DAO层框架，可以自动的进行对象的封装，但是sql仍然需要自己来写。
+- 结合了JDBC和Hibernate的优点，可以手写sql灵活实现数据访问，自动封装数据，减少冗余代码。
+** 3.2 详解
+*** 3.2.1 MyBatis的结构
+[[./Img/44.png]]
+*** 3.2.2 MyBatis的入门案例
+1. 创建java项目，并在其中导入相关开发包
+   [[./Img/45.png]]
+2. 创建表，创建bean
+   1. 创建表
+
+      #+BEGIN_SRC sql
+        create database mydb;
+        use mydb;
+        create table user (id int primary key auto_increment,name varchar(255),age int);
+        insert into user values (null,'aaa',19),(null,'bbb',29),(null,'ccc',39),(null,'ddd',22),(null,'eee',33);
+      #+END_SRC
+   2. 创建bean
+
+      #+BEGIN_SRC java
+        package cn.tedu.domain;
+
+        public class User {
+            private int id;
+            private String name;
+            private int age;
+
+            public User() {
+            }
+
+            public User(int id, String name, int age) {
+                this.id = id;
+                this.name = name;
+                this.age = age;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public int getAge() {
+                return age;
+            }
+
+            public void setAge(int age) {
+                this.age = age;
+            }
+
+            @Override
+            public String toString() {
+                return "User{" +
+                        "id=" + id +
+                        ", name='" + name + '\'' +
+                        ", age=" + age +
+                        '}';
+            }
+        }
+
+      #+END_SRC
+   3. Eclipse导入约束文件（idea不需要）
+   4. 编写配置文件sqlMapConfig.xml，配置数据源
+
+      #+BEGIN_SRC html
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE configuration
+            PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+            "http://mybatis.org/dtd/mybatis-3-config.dtd">
+        <configuration>
+            <!-- 配置数据源 -->
+            <environments default="mysqldb">
+                <environment id="mysqldb">
+                    <transactionManager type="JDBC"/>
+                    <dataSource type="POOLED">
+                        <property name="driver" value="com.mysql.jdbc.Driver"/>
+                        <property name="url" value="jdbc:mysql:///mydb"/>
+                        <property name="username" value="root"/>
+                        <property name="password" value="123456"/>
+                    </dataSource>
+                </environment>
+            </environments>
+        </configuration>
+
+      #+END_SRC
+   5. 编写映射文件，描述bean和表sql的映射关系
+
+      #+BEGIN_SRC html
+        e<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+            PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+            "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <mapper namespace="cn.tedu.userMapper">
+            <select id="slec01" resultType="cn.tedu.domain.User">select * from user;</select>
+        </mapper>
+      #+END_SRC
+   6. 将映射文件配置到sqlMapConfig.xml中
+
+      #+BEGIN_SRC html
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE configuration
+            PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+            "http://mybatis.org/dtd/mybatis-3-config.dtd">
+        <configuration>
+            <!-- 配置数据源 -->
+            <environments default="mysqldb">
+                <environment id="mysqldb">
+                    <transactionManager type="JDBC"/>
+                    <dataSource type="POOLED">
+                        <property name="driver" value="com.mysql.jdbc.Driver"/>
+                        <property name="url" value="jdbc:mysql:///mydb"/>
+                        <property name="username" value="root"/>
+                        <property name="password" value="123456"/>
+                    </dataSource>
+                </environment>
+            </environments>
+            <!--配置映射文件-->
+            <mappers>
+                <mapper resource="userMapper.xml"></mapper>
+            </mappers>
+        </configuration>
+
+      #+END_SRC
+   7. 测试类测试
+
+      #+BEGIN_SRC java
+        package cn.tedu.test;
+
+        import cn.tedu.domain.User;
+        import org.apache.ibatis.io.Resources;
+        import org.apache.ibatis.session.SqlSession;
+        import org.apache.ibatis.session.SqlSessionFactory;
+        import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+        import org.junit.Test;
+
+        import java.io.FileInputStream;
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.util.List;
+
+        public class Test01 {
+            @Test
+            public void test01() throws Exception {
+                //1.创建SqlSession工厂
+                InputStream in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
+                //2.创建SqlSession对象
+                SqlSession sqlSession = factory.openSession();
+                //3.通过名称空间+id调用sql
+                List<User> list = sqlSession.selectList("cn.tedu.userMapper.slec01");
+                //4.处理结果
+                System.out.println(list);
+                //5.关闭资源
+                sqlSession.close();
+            }
+        }
+
+      #+END_SRC
+   8. 调试过程
+      [[./Img/50.png]]
+*** 3.2.3 值的传递 - Map传值
+可以通过对象 获取 Map传递值，在配置文件中 通过 #{} 或 ${}进行应用
+
+#+BEGIN_SRC html
+
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cn.tedu.userMapper">
+      <select id="slec01" resultType="cn.tedu.domain.User">select * from user where id = #{uid};</select>
+  </mapper>
+#+END_SRC
+测试类：
+
+#+BEGIN_SRC java
+  package cn.tedu.test;
+
+  import cn.tedu.domain.User;
+  import org.apache.ibatis.io.Resources;
+  import org.apache.ibatis.session.SqlSession;
+  import org.apache.ibatis.session.SqlSessionFactory;
+  import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+  import org.junit.After;
+  import org.junit.Before;
+  import org.junit.Test;
+
+  import java.io.FileInputStream;
+  import java.io.IOException;
+  import java.io.InputStream;
+  import java.util.HashMap;
+  import java.util.List;
+  import java.util.Map;
+
+  public class Test01 {
+      private SqlSessionFactory sqlSessionFactory = null;
+      private SqlSession sqlSession = null;
+      @Before
+      public void before(){
+          InputStream in = null;
+          try {
+              in = Resources.getResourceAsStream("sqlMapConfig.xml");
+              sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+              sqlSession = sqlSessionFactory.openSession();
+          } catch (IOException e) {
+              e.printStackTrace();
+              throw new RuntimeException(e);
+          }
+      }
+
+      @After
+      public void after(){
+          //5.关闭资源
+          sqlSession.close();
+      }
+
+      /**
+       ,* MyBatis值传递 - Map传递
+       ,*/
+      @Test
+      public void test01() throws Exception {
+          //3.调用Sql
+          Map<String,Integer> map = new HashMap<>();
+          map.put("uid",5);
+          User user = sqlSession.selectOne("cn.tedu.userMapper.slec01",map);
+          //4.处理结果
+          System.out.println(user);
+      }
+  }
+
+#+END_SRC
+*** 3.2.4 值的传递 - 对象传值
+可以通过对象 获取 Map传递值，在配置文件中 通过 #{} 或 ${}进行应用
+在UserMapper.xml中配置：
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cn.tedu.userMapper">
+      <insert id="insert01">insert into user values (null,#{name},#{age});</insert>
+  </mapper>
+#+END_SRC
+测试类：
+
+#+BEGIN_SRC java
+  package cn.tedu.test;
+
+  import cn.tedu.domain.User;
+  import org.apache.ibatis.io.Resources;
+  import org.apache.ibatis.session.SqlSession;
+  import org.apache.ibatis.session.SqlSessionFactory;
+  import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+  import org.junit.After;
+  import org.junit.Before;
+  import org.junit.Test;
+
+  import java.io.FileInputStream;
+  import java.io.IOException;
+  import java.io.InputStream;
+  import java.util.HashMap;
+  import java.util.List;
+  import java.util.Map;
+
+  public class Test01 {
+      private SqlSessionFactory sqlSessionFactory = null;
+      private SqlSession sqlSession = null;
+      @Before
+      public void before(){
+          InputStream in = null;
+          try {
+              in = Resources.getResourceAsStream("sqlMapConfig.xml");
+              sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+              sqlSession = sqlSessionFactory.openSession();
+          } catch (IOException e) {
+              e.printStackTrace();
+              throw new RuntimeException(e);
+          }
+      }
+
+      @After
+      public void after(){
+          //5.关闭资源
+          sqlSession.close();
+      }
+      /**
+       ,* MyBatis值传递 - 对象传递
+       ,*/
+      @Test
+      public void test02(){
+          User user = new User(0,"zzz",99);
+          sqlSession.insert("cn.tedu.userMapper.insert01",user);
+          sqlSession.commit();
+      }
+  }
+
+#+END_SRC
+*** 3.2.5 值的传递 - 单值传值
+如果程序中只有一个参数需要传递给sql，则不需要封装到bean或map中，可以直接传入。在sql中可以使用任意名称获取到这个参数，虽然名称可以任意，但通常仍然使用该属性的名称，以便于阅读。
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cn.tedu.userMapper">
+      <select id="selc02" resultType="cn.tedu.domain.User">select * from user where name = #{name};</select>
+  </mapper>
+#+END_SRC
+测试类：
+
+#+BEGIN_SRC java
+  package cn.tedu.test;
+
+  import cn.tedu.domain.User;
+  import org.apache.ibatis.io.Resources;
+  import org.apache.ibatis.session.SqlSession;
+  import org.apache.ibatis.session.SqlSessionFactory;
+  import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+  import org.junit.After;
+  import org.junit.Before;
+  import org.junit.Test;
+
+  import java.io.FileInputStream;
+  import java.io.IOException;
+  import java.io.InputStream;
+  import java.util.HashMap;
+  import java.util.List;
+  import java.util.Map;
+
+  public class Test01 {
+      private SqlSessionFactory sqlSessionFactory = null;
+      private SqlSession sqlSession = null;
+      @Before
+      public void before(){
+          InputStream in = null;
+          try {
+              in = Resources.getResourceAsStream("sqlMapConfig.xml");
+              sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+              sqlSession = sqlSessionFactory.openSession();
+          } catch (IOException e) {
+              e.printStackTrace();
+              throw new RuntimeException(e);
+          }
+      }
+
+      @After
+      public void after(){
+          //5.关闭资源
+          sqlSession.close();
+      }
+      /**
+       ,* MyBatis值传递 - 单值传递
+       ,*/
+      @Test
+      public void test03(){
+          User user = sqlSession.selectOne("cn.tedu.userMapper.selc02", "bbb");
+          System.out.println(user);
+      }
+  }
+
+#+END_SRC
+*** 3.2.6 #{}和${}区别
+1. #{}会作为方法参数使用，替代sql中的？
+   - 有预编译机制，防止sql注入，效率高
+   - 字符串类型会自动两边拼单引号
+   #+BEGIN_SRC sql
+     insert into user values (null,#{name},55); --> insert into user values (null,'fff',55);
+     insert into user values (null,${name},55); --> insert into user values (null,fff,55);//sql语句错误
+   #+END_SRC
+2. ${}会原样直接拼接到sql上
+   - 没有预编译机制，不能防止sql注入，效率低
+   - 字符串类型会两边不会自动拼单引号
+   #+BEGIN_SRC sql
+     select * from user order by #{cname}; --> select * from user order by 'age';//sql语义错误
+     select * from user order by ${cname}; --> select * from user order by age;
+   #+END_SRC
+3. 总结
+   通常都使用#{},有预编译机制，可以防止sql注入，效率高，但如果传递的是表名、列名、关键字等必须直接拼接到sql中的内容时，使用${}，防止自动拼接单引号改变sql语义。
+4. 对比案例01
+   在UserMapper.xml中配置：
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8" ?>
+     <!DOCTYPE mapper
+         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     <mapper namespace="cn.tedu.userMapper">
+         <select id="selc03" resultType="cn.tedu.domain.User">select * from user where name = "${name}";</select>
+     </mapper>
+   #+END_SRC
+   测试类：
+
+   #+BEGIN_SRC java
+     package cn.tedu.test;
+
+     import cn.tedu.domain.User;
+     import org.apache.ibatis.io.Resources;
+     import org.apache.ibatis.session.SqlSession;
+     import org.apache.ibatis.session.SqlSessionFactory;
+     import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+     import org.junit.After;
+     import org.junit.Before;
+     import org.junit.Test;
+
+     import java.io.FileInputStream;
+     import java.io.IOException;
+     import java.io.InputStream;
+     import java.util.HashMap;
+     import java.util.List;
+     import java.util.Map;
+
+     public class Test01 {
+         private SqlSessionFactory sqlSessionFactory = null;
+         private SqlSession sqlSession = null;
+         @Before
+         public void before(){
+             InputStream in = null;
+             try {
+                 in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+                 sqlSession = sqlSessionFactory.openSession();
+             } catch (IOException e) {
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+
+         @After
+         public void after(){
+             //5.关闭资源
+             sqlSession.close();
+         }
+         /**
+          ,* #{} 和 ${}的区别
+          ,*/
+         @Test
+         public void test04(){
+             Map<String,String> map = new HashMap<>();
+             map.put("name","bbb");
+             User user = sqlSession.selectOne("cn.tedu.userMapper.selc03", map);
+             System.out.println(user);
+         }
+     }
+
+   #+END_SRC
+5. 对比案例02：
+   在UserMapper.xml中配置：
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8" ?>
+     <!DOCTYPE mapper
+         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     <mapper namespace="cn.tedu.userMapper">
+         <select id="selc04" resultType="cn.tedu.domain.User">select * from user order by ${c};</select>
+     </mapper>
+   #+END_SRC
+   测试类：
+
+   #+BEGIN_SRC java
+     package cn.tedu.test;
+
+     import cn.tedu.domain.User;
+     import org.apache.ibatis.io.Resources;
+     import org.apache.ibatis.session.SqlSession;
+     import org.apache.ibatis.session.SqlSessionFactory;
+     import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+     import org.junit.After;
+     import org.junit.Before;
+     import org.junit.Test;
+
+     import java.io.FileInputStream;
+     import java.io.IOException;
+     import java.io.InputStream;
+     import java.util.HashMap;
+     import java.util.List;
+     import java.util.Map;
+
+     public class Test01 {
+         private SqlSessionFactory sqlSessionFactory = null;
+         private SqlSession sqlSession = null;
+         @Before
+         public void before(){
+             InputStream in = null;
+             try {
+                 in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+                 sqlSession = sqlSessionFactory.openSession();
+             } catch (IOException e) {
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+
+         @After
+         public void after(){
+             //5.关闭资源
+             sqlSession.close();
+         }
+
+         /**
+          ,* #{} 和 ${}的区别
+          ,*/
+         @Test
+         public void test05(){
+             Map<String,String> map = new HashMap<>();
+             map.put("c","age");
+             List<User> list = sqlSession.selectList("cn.tedu.userMapper.selc04", map);
+             System.out.println(list);
+         }
+     }
+
+   #+END_SRC
+*** 3.2.7 CRUD
+#+BEGIN_SRC html
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    <configuration>
+        <!-- 配置数据源 -->
+        <environments default="mysqldb">
+            <environment id="mysqldb">
+                <transactionManager type="JDBC"/>
+                <dataSource type="POOLED">
+                    <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                    <property name="url" value="jdbc:mysql:///mydb?userSSL=false&amp;serverTimezone=UTC"/>
+                    <property name="username" value="root"/>
+                    <property name="password" value="Root*0201"/>
+                </dataSource>
+            </environment>
+        </environments>
+        <!--配置映射文件-->
+        <mappers>
+            <mapper resource="userMapper.xml"></mapper>
+        </mappers>
+    </configuration>
+
+#+END_SRC
+#+BEGIN_SRC html
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="cn.tedu.userMapper">
+        <delete id="delete02">
+            delete from user where id in
+            <foreach collection="list" open="(" close=")" separator="," item="id">
+                #{id}
+            </foreach>
+        </delete>
+        <delete id="delete01">
+            delete from user
+            <where>
+                <if test="id!=0">id=#{id}</if>
+                <if test="name!=null">and name=#{name}</if>
+                <if test="age!=0">and age=#{age}</if>
+            </where>
+        </delete>
+        <insert id="insert01">
+            insert into user
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    id,
+                    <if test="name != null">name,</if>
+                    <if test="age != 0">age,</if>
+                </trim>
+             values
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    null,
+                    <if test="name!=null">#{name},</if>
+                    <if test="age!=0">#{age},</if>
+                </trim>
+        </insert>
+        <select id="select01" resultType="cn.tedu.domain.User">
+            select * from user
+            <where>
+                <if test="id != 0">id = #{id}</if>
+                <if test="name != null">and name = #{name}</if>
+                <if test="age != 0">and age = #{age}</if>
+            </where>
+        </select>
+        <update id="update01">
+            update user
+            <set>
+                <if test="name != null">name=#{name},</if>
+                <if test="age != 0">age = #{age}</if>
+            </set>
+            where
+                id = #{id};
+        </update>
+    </mapper>
+#+END_SRC
+******* update修改
+- update修改也可以使用之前的机制在配置文件中直接编写sql，但是update语句 的 set字句中 拼接哪些字段 是根据传入的值决定，此时可以通过
+- MyBatis提供的标签 实现判断 动态拼接update语句：
+
+  #+BEGIN_SRC java
+    package cn.tedu.test;
+
+    import cn.tedu.domain.User;
+    import org.apache.ibatis.io.Resources;
+    import org.apache.ibatis.session.SqlSession;
+    import org.apache.ibatis.session.SqlSessionFactory;
+    import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+    import org.junit.After;
+    import org.junit.Before;
+    import org.junit.Test;
+
+    import java.io.FileInputStream;
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.util.ArrayList;
+    import java.util.Arrays;
+    import java.util.List;
+
+    public class Test01 {
+        private SqlSessionFactory sqlSessionFactory = null;
+        private SqlSession sqlSession = null;
+
+        @Before
+        public void before(){
+            try {
+                InputStream in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+                sqlSession = sqlSessionFactory.openSession();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+
+        @After
+        public void after(){
+            //5.关闭资源
+            sqlSession.close();
+        }
+        @Test
+        public void update(){
+            //User user = new User(3,"cccc",49);
+            //User user = new User(3,null,49);
+            User user = new User(3,"ccc",0);
+            sqlSession.update("cn.tedu.userMapper.update01",user);
+            sqlSession.commit();
+        }
+    }
+
+  #+END_SRC
+******* select查询
+- select查询也可以使用之前的机制在配置文件中直接编写sql，但是select语句 的 where字句中 拼接哪些查询字段 是根据传入的值决定，此时可以通过
+- MyBatis提供的标签 实现判断 动态拼接select语句：
+
+  #+BEGIN_SRC java
+    package cn.tedu.test;
+
+    import cn.tedu.domain.User;
+    import org.apache.ibatis.io.Resources;
+    import org.apache.ibatis.session.SqlSession;
+    import org.apache.ibatis.session.SqlSessionFactory;
+    import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+    import org.junit.After;
+    import org.junit.Before;
+    import org.junit.Test;
+
+    import java.io.FileInputStream;
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.util.ArrayList;
+    import java.util.Arrays;
+    import java.util.List;
+
+    public class Test01 {
+        private SqlSessionFactory sqlSessionFactory = null;
+        private SqlSession sqlSession = null;
+
+        @Before
+        public void before(){
+            try {
+                InputStream in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+                sqlSession = sqlSessionFactory.openSession();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+
+        @After
+        public void after(){
+            //5.关闭资源
+            sqlSession.close();
+        }
+        @Test
+        public void select(){
+            //User user = new User(2,"bbb",29);
+            // User user = new User(2,null,0);
+            //User user = new User(2,"bbb",0);
+            User user = new User(0,"bbb",29);
+            List<User> list = sqlSession.selectList("cn.tedu.userMapper.select01", user);
+            System.out.println(list);
+        }
+    }
+
+  #+END_SRC
+******* insert操作
+- insert插入也可以使用之前的机制在配置文件中直接编写sql，但是insert语句 的参数和值的列表 拼接哪些字段 是根据传入的值决定，此时可以通过
+- MyBatis提供的标签 实现判断 动态拼接insert语句：
+
+  #+BEGIN_SRC java
+    package cn.tedu.test;
+
+    import cn.tedu.domain.User;
+    import org.apache.ibatis.io.Resources;
+    import org.apache.ibatis.session.SqlSession;
+    import org.apache.ibatis.session.SqlSessionFactory;
+    import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+    import org.junit.After;
+    import org.junit.Before;
+    import org.junit.Test;
+
+    import java.io.FileInputStream;
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.util.ArrayList;
+    import java.util.Arrays;
+    import java.util.List;
+
+    public class Test01 {
+        private SqlSessionFactory sqlSessionFactory = null;
+        private SqlSession sqlSession = null;
+
+        @Before
+        public void before(){
+            try {
+                InputStream in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+                sqlSession = sqlSessionFactory.openSession();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+
+        @After
+        public void after(){
+            //5.关闭资源
+            sqlSession.close();
+        }
+        @Test
+        public void insert(){
+            //User user = new User(0,"qqq",888);
+            //User user = new User(0,null,99);
+            //User user = new User(0,"yyy",0);
+            User user = new User(0,null,0);
+            sqlSession.insert("cn.tedu.userMapper.insert01",user);
+            sqlSession.commit();
+        }
+    }
+
+  #+END_SRC
+
+******* delete删除
+- delete删除也可以使用之前的机制在配置文件中直接编写sql，但是delete语句 的删除条件 拼接哪些字段 是根据传入的值决定，此时可以通过MyBatis
+- 提供的标签 实现判断 动态拼接delete语句：
+
+  #+BEGIN_SRC java
+    package cn.tedu.test;
+
+    import cn.tedu.domain.User;
+    import org.apache.ibatis.io.Resources;
+    import org.apache.ibatis.session.SqlSession;
+    import org.apache.ibatis.session.SqlSessionFactory;
+    import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+    import org.junit.After;
+    import org.junit.Before;
+    import org.junit.Test;
+
+    import java.io.FileInputStream;
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.util.ArrayList;
+    import java.util.Arrays;
+    import java.util.List;
+
+    public class Test01 {
+        private SqlSessionFactory sqlSessionFactory = null;
+        private SqlSession sqlSession = null;
+
+        @Before
+        public void before(){
+            try {
+                InputStream in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+                sqlSession = sqlSessionFactory.openSession();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+
+        @After
+        public void after(){
+            //5.关闭资源
+            sqlSession.close();
+        }
+
+        @Test
+        public void delete2(){
+            List<Integer> list = Arrays.asList(11,12,5,3);
+            sqlSession.delete("cn.tedu.userMapper.delete02",list);
+            sqlSession.commit();
+        }
+        @Test
+        public void delete(){
+            //User user = new User(9,"qqq",88);
+            //User user = new User(0,null,99);
+            User user = new User(0,"eee",33);
+            sqlSession.delete("cn.tedu.userMapper.delete01",user);
+            sqlSession.commit();
+        }
+    }
+
+  #+END_SRC
+*** 3.2.8 手动映射结果集
+- MyBatis可以自动将查询结果封装到bean中，前提条件是bean的属性名和查询的结果列名相同，就会依次对应存储。
+- 如果查询结果的列名和bean的属性名不一致，则需要手动映射结果集
+
+  #+BEGIN_SRC html
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="cn.tedu.userMapper">
+        <!--手动映射结果集-->
+        <resultMap id="rm01" type="cn.tedu.domain.User2">
+            <id column="id" property="uid"></id>
+            <result column="name" property="uname"></result>
+            <result column="age" property="uage"></result>
+        </resultMap>
+        <select id="selc01" resultMap="rm01">
+            select * from user;
+        </select>
+    </mapper>
+  #+END_SRC
+  测试类：
+
+  #+BEGIN_SRC java
+    package cn.tedu.test;
+
+    import cn.tedu.domain.User;
+    import cn.tedu.domain.User2;
+    import org.apache.ibatis.io.Resources;
+    import org.apache.ibatis.session.SqlSession;
+    import org.apache.ibatis.session.SqlSessionFactory;
+    import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+    import org.junit.After;
+    import org.junit.Before;
+    import org.junit.Test;
+
+    import java.io.FileInputStream;
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.util.ArrayList;
+    import java.util.Arrays;
+    import java.util.List;
+
+    public class Test01 {
+        private SqlSessionFactory sqlSessionFactory = null;
+        private SqlSession sqlSession = null;
+
+        @Before
+        public void before(){
+            try {
+                InputStream in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+                sqlSession = sqlSessionFactory.openSession();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+
+        @After
+        public void after(){
+            sqlSession.close();
+        }
+
+        /**
+         ,* 手动映射结果集
+         ,*      当查询的表的列名和bean的属性名不一致时，将无法自动封装数据
+         ,*      此时可以通过<resultMap>标签手动映射结果集
+         ,*/
+        @Test
+        public void test01(){
+            List<User2> list = sqlSession.selectList("cn.tedu.userMapper.selc01");
+            System.out.println(list);
+        }
+
+    }
+
+  #+END_SRC
+*** 3.2.9 多表设计、多表查询
+******* 多表设计
+1. 一对一
+   在任意一方设计外键保存另一张表的主键，维系表和表的关系
+2. 一对多
+   在多的一方设计外键保存一的一方的主键，维系表和表的关系
+3. 多对多
+   设计一张第三方关系表，存储两张表的主键的对应关系，将一个多对多拆成两个一对多来存储
+
+   [[./Img/46.png]]
+******* 多表查询
+1. 笛卡尔积查询
+   两张表相乘的结果，因为没有考虑两张表的关系，所以存在大量错误的结果，通常不会直接使用
+   #+BEGIN_SRC sql
+     select * from dept,emp;
+    #+END_SRC
+
+2. 内连接查询
+   在笛卡尔积查询的基础上考虑表之前的关系过滤出正确的数据，查询到正确的结果
+   #+BEGIN_SRC sql
+     select * from dept,emp where dept.id = emp.did;
+   #+END_SRC
+   内连接查询也可以使用如下语法实现，原理同上:
+   #+BEGIN_SRC sql
+     select * from dept inner join emp on dept.id = emp.did;
+   #+END_SRC
+   内连接查询只查询两边表都有对应数据的
+3. 外连接查询
+   1. 左外连接查询
+      在内连接的基础上增加左边表有而右边表没有的数据
+      #+BEGIN_SRC sql
+        select * from dept left join emp on dept.id = emp.did;
+      #+END_SRC
+
+   2. 右外连接查询
+      在内连接的基础上增加右边表有而左边表没有的数据
+      #+BEGIN_SRC sql
+        select * from dept right join emp on dept.id = emp.did;
+      #+END_SRC
+
+   3. 全外连接查询
+      mysql不支持full join关键字
+      #+BEGIN_SRC sql
+        select * from dept full join emp on dept.id = emp.did;
+      #+END_SRC
+      通过以下实现full join效果
+      #+BEGIN_SRC sql
+        select * from dept left join emp on dept.id = emp.did union select * fromdept right join emp on dept.id = emp.did;
+      #+END_SRC
+*** 3.2.10 MyBatis中的一对一查询
+创建表：
+
+#+BEGIN_SRC sql
+  create table room(id int primary key,name varchar(255));
+  insert into room values (1,'梅花屋'),(2,'兰花屋'),(3,'桃花屋');
+  create table grade(id int primary key,name varchar(255), rid int);
+  insert into grade values (999,'向日葵班',2),(888,'玫瑰花班',3),(777,'菊花班',1);
+#+END_SRC
+在通过MyBatis实现一对一的查询时，需要通过resultMap指定如何将结果集中的列名对应到目标bean中，在一对一的bean中，如果包含了另一个表的对应对象，则可以在resultMap中通过association标签来声明映射方式：
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE configuration
+      PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+      "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <configuration>
+      <!-- 配置数据源 -->
+      <environments default="mysqldb">
+          <environment id="mysqldb">
+              <transactionManager type="JDBC"/>
+              <dataSource type="POOLED">
+                  <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                  <property name="url" value="jdbc:mysql:///mydb?useSSL=false&amp;serverTimezone=UTC"/>
+                  <property name="username" value="root"/>
+                  <property name="password" value="Root*0201"/>
+              </dataSource>
+          </environment>
+      </environments>
+      <!--配置映射文件-->
+      <mappers>
+          <mapper resource="o2o.xml"></mapper>
+      </mappers>
+  </configuration>
+
+#+END_SRC
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE mapper
+          PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cn.tedu.o2oMapper">
+      <!--以Room为视角-->
+      <resultMap id="rm02" type="cn.tedu.domain.Room">
+          <id property="id" column="rid"/>
+          <result property="name" column="rname"/>
+          <association property="grade" javaType="cn.tedu.domain.Grade">
+              <id property="id" column="gid"/>
+              <result property="name" column="gname"/>
+          </association>
+      </resultMap>
+      <select id="o2o02" resultMap="rm02">
+          select
+              grade.id as gid,
+              grade.name as gname,
+              room.id as rid,
+              room.name as rname
+          from
+              grade inner join room on room.id = grade.rid;
+      </select>
+
+
+      <!--以Grade为视角-->
+      <resultMap id="rm01" type="cn.tedu.domain.Grade">
+          <id property="id" column="gid"/>
+          <result property="name" column="gname"/>
+          <association property="room" javaType="cn.tedu.domain.Room">
+              <id property="id" column="rid"/>
+              <result property="name" column="rname"/>
+          </association>
+      </resultMap>
+      <select id="o2o01" resultMap="rm01">
+          select
+              grade.id as gid,
+              grade.name as gname,
+              room.id as rid,
+              room.name as rname
+          from
+              grade inner join room on room.id = grade.rid;
+      </select>
+  </mapper>
+#+END_SRC
+
+#+BEGIN_SRC java
+  package cn.tedu.domain;
+
+  public class Grade {
+      private int id;
+      private String name;
+      private Room room;
+
+      public Grade() {
+      }
+
+      public Grade(int id, String name, Room room) {
+          this.id = id;
+          this.name = name;
+          this.room = room;
+      }
+
+      public int getId() {
+          return id;
+      }
+
+      public void setId(int id) {
+          this.id = id;
+      }
+
+      public String getName() {
+          return name;
+      }
+
+      public void setName(String name) {
+          this.name = name;
+      }
+
+      public Room getRoom() {
+          return room;
+      }
+
+      public void setRoom(Room room) {
+          this.room = room;
+      }
+
+      @Override
+      public String toString() {
+          return "Grade{" +
+                  "id=" + id +
+                  ", name='" + name + '\'' +
+                  ", room=" + room +
+                  '}';
+      }
+  }
+
+#+END_SRC
+
+#+BEGIN_SRC java
+  package cn.tedu.domain;
+
+  public class Room {
+      private int id;
+      private String name;
+      private Grade grade;
+
+      public Room() {
+      }
+
+      public Room(int id, String name, Grade grade) {
+          this.id = id;
+          this.name = name;
+          this.grade = grade;
+      }
+
+      public int getId() {
+          return id;
+      }
+
+      public void setId(int id) {
+          this.id = id;
+      }
+
+      public String getName() {
+          return name;
+      }
+
+      public void setName(String name) {
+          this.name = name;
+      }
+
+      public Grade getGrade() {
+          return grade;
+      }
+
+      public void setGrade(Grade grade) {
+          this.grade = grade;
+      }
+
+      @Override
+      public String toString() {
+          return "Room{" +
+                  "id=" + id +
+                  ", name='" + name + '\'' +
+                  ", grade=" + grade +
+                  '}';
+      }
+  }
+
+#+END_SRC
+
+测试类：
+
+#+BEGIN_SRC java
+  package cn.tedu.test;
+
+  import cn.tedu.domain.Grade;
+  import cn.tedu.domain.Room;
+  import org.apache.ibatis.io.Resources;
+  import org.apache.ibatis.session.SqlSession;
+  import org.apache.ibatis.session.SqlSessionFactory;
+  import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+  import org.junit.After;
+  import org.junit.Before;
+  import org.junit.Test;
+
+  import java.io.IOException;
+  import java.io.InputStream;
+  import java.util.List;
+
+  public class Test02 {
+      private SqlSessionFactory sqlSessionFactory = null;
+      private SqlSession sqlSession = null;
+
+      @Before
+      public void before(){
+          try {
+              InputStream in = Resources.getResourceAsStream("sqlMapConfig.xml");
+              sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+              sqlSession = sqlSessionFactory.openSession();
+          } catch (IOException e) {
+              e.printStackTrace();
+              throw new RuntimeException(e);
+          }
+      }
+
+      @After
+      public void after(){
+          sqlSession.close();
+      }
+
+      /**
+          一对一:以Room为视角
+       ,*/
+      @Test
+      public void test02(){
+          List<Room> list = sqlSession.selectList("cn.tedu.o2oMapper.o2o02");
+          System.out.println(list);
+      }
+
+      /**
+          一对一:以Grade为视角
+       ,*/
+      @Test
+      public void test01(){
+          List<Grade> list = sqlSession.selectList("cn.tedu.o2oMapper.o2o01");
+          System.out.println(list);
+      }
+  }
+
+#+END_SRC
+*** 3.2.11 MyBatis中的一对多查询
+创建表
+
+#+BEGIN_SRC sql
+  create table dept(id int primary key,name varchar(255));
+  insert into dept values (1,'财务部'),(2,'行政部'),(3,'人事部'),(4,'销售部');
+  create table emp(id int primary key,name varchar(255), deptid int);
+  insert into emp values (999,'孙悟空',4),(888,'萨达姆',3),(777,'哈利波特',1),(666,'特朗普',2),(555,'鑫三胖',3);
+#+END_SRC
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE configuration
+      PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+      "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <configuration>
+      <!-- 配置数据源 -->
+      <environments default="mysqldb">
+          <environment id="mysqldb">
+              <transactionManager type="JDBC"/>
+              <dataSource type="POOLED">
+                  <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                  <property name="url" value="jdbc:mysql:///mydb?useSSL=false&amp;serverTimezone=UTC"/>
+                  <property name="username" value="root"/>
+                  <property name="password" value="Root*0201"/>
+              </dataSource>
+          </environment>
+      </environments>
+      <!--配置映射文件-->
+      <mappers>
+          <mapper resource="o2m.xml"></mapper>
+      </mappers>
+  </configuration>
+
+#+END_SRC
+
+#+BEGIN_SRC java
+  package cn.tedu.domain;
+
+  import java.util.List;
+
+  public class Dept {
+      private int id;
+      private String name;
+      private List<Emp> emps;
+
+      public Dept() {
+      }
+
+      public Dept(int id, String name, List<Emp> emps) {
+          this.id = id;
+          this.name = name;
+          this.emps = emps;
+      }
+
+      public int getId() {
+          return id;
+      }
+
+      public void setId(int id) {
+          this.id = id;
+      }
+
+      public String getName() {
+          return name;
+      }
+
+      public void setName(String name) {
+          this.name = name;
+      }
+
+      public List<Emp> getEmps() {
+          return emps;
+      }
+
+      public void setEmps(List<Emp> emps) {
+          this.emps = emps;
+      }
+
+      @Override
+      public String toString() {
+          return "Dept{" +
+                  "id=" + id +
+                  ", name='" + name + '\'' +
+                  ", emps=" + emps +
+                  '}';
+      }
+  }
+#+END_SRC
+
+#+BEGIN_SRC java
+  package cn.tedu.domain;
+
+  public class Emp {
+      private int id;
+      private String name;
+      private Dept dept;
+
+      public Emp() {
+      }
+
+      public Emp(int id, String name, Dept dept) {
+          this.id = id;
+          this.name = name;
+          this.dept = dept;
+      }
+
+      public int getId() {
+          return id;
+      }
+
+      public void setId(int id) {
+          this.id = id;
+      }
+
+      public String getName() {
+          return name;
+      }
+
+      public void setName(String name) {
+          this.name = name;
+      }
+
+      public Dept getDept() {
+          return dept;
+      }
+
+      public void setDept(Dept dept) {
+          this.dept = dept;
+      }
+
+      @Override
+      public String toString() {
+          return "Emp{" +
+                  "id=" + id +
+                  ", name='" + name + '\'' +
+                  ", dept=" + dept +
+                  '}';
+      }
+  }
+#+END_SRC
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE mapper
+          PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cn.tedu.o2mMapper">
+      <!--以Dept为视角-->
+      <resultMap id="rm02" type="cn.tedu.domain.Dept">
+          <id property="id" column="did"/>
+          <result property="name" column="dname"/>
+          <collection property="emps" ofType="cn.tedu.domain.Emp">
+              <id property="id" column="eid"/>
+              <result property="name" column="ename"/>
+          </collection>
+      </resultMap>
+      <select id="o2m02" resultMap="rm02">
+          select
+              dept.id as did,
+              dept.name as dname,
+              emp.id as eid,
+              emp.name as ename
+          from
+              dept inner join emp on dept.id = emp.deptid;
+      </select>
+      <!--以Emp为视角-->
+      <resultMap id="rm01" type="cn.tedu.domain.Emp">
+          <id property="id" column="eid"/>
+          <result property="name" column="ename"/>
+          <association property="dept" javaType="cn.tedu.domain.Dept">
+              <id property="id" column="did"/>
+              <result property="name" column="dname"/>
+          </association>
+      </resultMap>
+      <select id="o2m01" resultMap="rm01">
+          select
+              dept.id as did,
+              dept.name as dname,
+              emp.id as eid,
+              emp.name as ename
+          from
+              dept inner join emp on dept.id = emp.deptid;
+      </select>
+  </mapper>
+#+END_SRC
+1. 方式一：以部门为角度，在部门bean中保存emp的集合
+   在通过MyBatis实现一对多的查询时，通过resultMap指定如何将结果集中的列名对应到目标bean中，在一对多的bean中如果包含了另一个表的对应对象的集合，则可以在resultMap中通过collection标签来声明映射方式：
+2. 方式二：以员工为角度，在员工bean中存储部门bean
+   在通过MyBatis实现一对多的查询时，通过resultMap指定如何将结果集中的列名对应到目标bean中，在resultMap中通过association标签来声明映射方式：
+
+- 测试类：
+
+   #+BEGIN_SRC java
+     package cn.tedu.test;
+
+     import cn.tedu.domain.Dept;
+     import cn.tedu.domain.Emp;
+     import org.apache.ibatis.io.Resources;
+     import org.apache.ibatis.session.SqlSession;
+     import org.apache.ibatis.session.SqlSessionFactory;
+     import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+     import org.junit.After;
+     import org.junit.Before;
+     import org.junit.Test;
+
+     import java.io.IOException;
+     import java.io.InputStream;
+     import java.util.List;
+
+     public class Test03 {
+         private SqlSessionFactory sqlSessionFactory = null;
+         private SqlSession sqlSession = null;
+
+         @Before
+         public void before(){
+             try {
+                 InputStream in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+                 sqlSession = sqlSessionFactory.openSession();
+             } catch (IOException e) {
+                 e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+
+         @After
+         public void after(){
+             sqlSession.close();
+         }
+
+         /**
+          ,* 1对多：以dept为视角
+          ,*/
+         @Test
+         public void test02(){
+             List<Dept> list= sqlSession.selectList("cn.tedu.o2mMapper.o2m02");
+             System.out.println(list);
+         }
+
+         /**
+          ,* 1对多：以emp为视角
+          ,*/
+         @Test
+         public void test01(){
+             List<Emp> list= sqlSession.selectList("cn.tedu.o2mMapper.o2m01");
+             System.out.println(list);
+         }
+     }
+   #+END_SRC
+
+*** 3.2.12 MyBatis中的多对多查询
+创建表
+
+#+BEGIN_SRC sql
+  create table stu(id int primary key,name varchar(255));
+  insert into stu values (1,'小新'),(2,'小白'),(3,'美伢'),(4,'风间');
+  create table teacher(id int primary key,name varchar(255));
+  insert into teacher values (999,'孙悟空'),(888,'猪八戒'),(777,'萨达姆'),(666,'哈利波特');
+  create table stu_teacher (sid int,tid int);
+  insert into stu_teacher values (1,999),(1,888),(2,999),(2,777),(3,666),(4,888),(4,666);
+#+END_SRC
+
+#+BEGIN_SRC java
+  package cn.tedu.domain;
+
+  import java.util.List;
+
+  public class Teacher {
+      private int id;
+      private String name;
+      private List<Stu> stus;
+
+      public Teacher() {
+      }
+
+      public Teacher(int id, String name, List<Stu> stus) {
+          this.id = id;
+          this.name = name;
+          this.stus = stus;
+      }
+
+      public int getId() {
+          return id;
+      }
+
+      public void setId(int id) {
+          this.id = id;
+      }
+
+      public String getName() {
+          return name;
+      }
+
+      public void setName(String name) {
+          this.name = name;
+      }
+
+      public List<Stu> getStus() {
+          return stus;
+      }
+
+      public void setStus(List<Stu> stus) {
+          this.stus = stus;
+      }
+
+      @Override
+      public String toString() {
+          return "Teacher{" +
+                  "id=" + id +
+                  ", name='" + name + '\'' +
+                  ", stus=" + stus +
+                  '}';
+      }
+  }
+
+#+END_SRC
+
+#+BEGIN_SRC java
+  package cn.tedu.domain;
+
+  import java.util.List;
+
+  public class Stu {
+      private int id;
+      private String name;
+      private List<Teacher> teachers;
+
+      public Stu() {
+      }
+
+      public Stu(int id, String name, List<Teacher> teachers) {
+          this.id = id;
+          this.name = name;
+          this.teachers = teachers;
+      }
+
+      public int getId() {
+          return id;
+      }
+
+      public void setId(int id) {
+          this.id = id;
+      }
+
+      public String getName() {
+          return name;
+      }
+
+      public void setName(String name) {
+          this.name = name;
+      }
+
+      public List<Teacher> getTeachers() {
+          return teachers;
+      }
+
+      public void setTeachers(List<Teacher> teachers) {
+          this.teachers = teachers;
+      }
+
+      @Override
+      public String toString() {
+          return "Stu{" +
+                  "id=" + id +
+                  ", name='" + name + '\'' +
+                  ", teachers=" + teachers +
+                  '}';
+      }
+  }
+
+#+END_SRC
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE configuration
+      PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+      "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <configuration>
+      <!-- 配置数据源 -->
+      <environments default="mysqldb">
+          <environment id="mysqldb">
+              <transactionManager type="JDBC"/>
+              <dataSource type="POOLED">
+                  <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                  <property name="url" value="jdbc:mysql:///mydb?useSSL=false&amp;serverTimezone=UTC"/>
+                  <property name="username" value="root"/>
+                  <property name="password" value="Root*0201"/>
+              </dataSource>
+          </environment>
+      </environments>
+      <!--配置映射文件-->
+      <mappers>
+          <mapper resource="m2m.xml"></mapper>
+      </mappers>
+  </configuration>
+
+#+END_SRC
+
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE mapper
+          PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cn.tedu.m2mMapper">
+      <!--以Teacher为视角-->
+      <resultMap id="rm02" type="cn.tedu.domain.Teacher">
+          <id property="id" column="tid"/>
+          <result property="name" column="tname"/>
+          <collection property="stus" ofType="cn.tedu.domain.Stu">
+              <id property="id" column="sid"/>
+              <result property="name" column="sname"/>
+          </collection>
+      </resultMap>
+      <select id="m2m02" resultMap="rm02">
+          select
+              stu.id as sid,
+              stu.name as sname,
+              teacher.id as tid,
+              teacher.name as tname
+          from
+              stu inner join stu_teacher on stu.id = stu_teacher.sid inner join teacher on teacher.id = stu_teacher.tid;
+      </select>
+      <!--以Stu为视角-->
+      <resultMap id="rm01" type="cn.tedu.domain.Stu">
+          <id property="id" column="sid"/>
+          <result property="name" column="sname"/>
+          <collection property="teachers" ofType="cn.tedu.domain.Teacher">
+              <id property="id" column="tid"/>
+              <result property="name" column="tname"/>
+          </collection>
+      </resultMap>
+      <select id="m2m01" resultMap="rm01">
+          select
+              stu.id as sid,
+              stu.name as sname,
+              teacher.id as tid,
+              teacher.name as tname
+          from
+              stu inner join stu_teacher on stu.id = stu_teacher.sid inner join teacher on teacher.id = stu_teacher.tid;
+      </select>
+  </mapper>
+#+END_SRC
+
+在通过MyBatis实现多对多的查询时，需要通过resultMap指定如何将结果集中的列名对应到目标bean中，在多对多的bean中，如果包含了另一个表的对应对象的集合，则可以在resultMap中通过collection标签来声明映射方式
+1. 方式一：以Teacher为角度，在Teacher bean中存储Stu bean的List
+2. 方式二：以Stu为角度，在Stu bean中存储Teacher bean的List
+
+- 测试类：
+
+  #+BEGIN_SRC java
+    package cn.tedu.test;
+
+    import cn.tedu.domain.Dept;
+    import cn.tedu.domain.Emp;
+    import cn.tedu.domain.Stu;
+    import cn.tedu.domain.Teacher;
+    import org.apache.ibatis.io.Resources;
+    import org.apache.ibatis.session.SqlSession;
+    import org.apache.ibatis.session.SqlSessionFactory;
+    import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+    import org.junit.After;
+    import org.junit.Before;
+    import org.junit.Test;
+
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.util.List;
+
+    public class Test04 {
+        private SqlSessionFactory sqlSessionFactory = null;
+        private SqlSession sqlSession = null;
+
+        @Before
+        public void before(){
+            try {
+                InputStream in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+                sqlSession = sqlSessionFactory.openSession();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+
+        @After
+        public void after(){
+            sqlSession.close();
+        }
+
+        /**
+         ,* 多对多：以Teacher为视角
+         ,*/
+        @Test
+        public void test02(){
+            List<Teacher> list= sqlSession.selectList("cn.tedu.m2mMapper.m2m02");
+            System.out.println(list);
+        }
+
+        /**
+         ,* 多对多：以Stu为视角
+         ,*/
+        @Test
+        public void test01(){
+            List<Stu> list= sqlSession.selectList("cn.tedu.m2mMapper.m2m01");
+            System.out.println(list);
+        }
+    }
+  #+END_SRC
+
+*** 3.2.13 MyBatis中的其他细节
+1. 别名标签
+   如果在映射文件中，大量使用类名比较长，可以在sqlMapConfig.xml声明别名，在映射文件中可以使用别名缩短配置，注意此配置要放在最前面sqlMapConfig.xml中：
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8" ?>
+     <!DOCTYPE configuration
+             PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-config.dtd">
+     <configuration>
+         <!--别名标签-->
+         <typeAliases>
+             <typeAlias type="cn.tedu.domain.User" alias="userAlias"></typeAlias>
+         </typeAliases>
+
+         <!-- 配置数据源 -->
+         <environments default="mysqldb">
+             <environment id="mysqldb">
+                 <transactionManager type="JDBC"/>
+                 <dataSource type="POOLED">
+                     <property name="driver" value="com.mysql.jdbc.Driver"/>
+                     <property name="url" value="jdbc:mysql:///mydb"/>
+                     <property name="username" value="root"/>
+                     <property name="password" value="123456"/>
+                 </dataSource>
+             </environment>
+         </environments>
+         <!--配置映射文件-->
+         <mappers>
+             <mapper resource="userMapper.xml"></mapper>
+         </mappers>
+     </configuration>
+   #+END_SRC
+   映射文件中：
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8" ?>
+     <!DOCTYPE mapper
+             PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     <mapper namespace="cn.tedu.userMapper">
+         <select id="selc01" resultType="userAlias">
+             where id = #{id};
+         </select>
+     </mapper>
+   #+END_SRC
+2. sql的复用
+   如果某段sql语句的片段在映射文件中重复出现，可以将其单独配置为一个引用，从而在需要时直接引用，减少配置量
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8" ?>
+     <!DOCTYPE mapper
+             PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     <mapper namespace="cn.tedu.userMapper">
+         <!--sql复用-->
+         <sql id="sfu">
+             select * from user
+         </sql>
+
+         <select id="selc02" resultType="userAlias">
+             <include refid="sfu"/> where age between #{min} and #{max};
+         </select>
+         <select id="selc01" resultType="userAlias">
+             <include refid="sfu"/> where id = #{id};
+         </select>
+     </mapper>
+   #+END_SRC
+3. MyBatis的缓存机制
+   缓存机制可以减轻数据库的压力，原理是在第一查询时，将查询结果缓存起来，之后再查询同样的sql，不是真的去查询数据库，而是直接返回缓存中的结果。缓存可以降低数据库的压力，但同时可能无法得到最新的结果数据。
+   1. 数据库缓存的实现:
+      1. 通过第三方工具实现缓存：
+         Redis内存数据库 - 可以实现缓存
+      2. 通过MyBatis提供的缓存机制来实现缓存：
+         - 一级缓存：
+           缓存只在一个事务中有效，即同一个事务中先后执行多次同一个查询，只在第一次真正去查库，并将结果缓存，之后的查询都直接获取缓存中的中数据。如果是不同的事务，则缓存是隔离的。
+         - 二级缓存：
+           缓存在全局有效，一个事务查询一个sql得到结果，会被缓存起来，之后只要缓存未被清除，则其他事务如果查询同一个sql，得到的将会是之前缓存的结果。二级缓存作用范围大，作用时间长，可能造成的危害也更大，所以在开发中一般很少启用Mybatis的二级缓存。
+   2. MyBatis的一级缓存
+      MyBatis的一级缓存默认就是开启状态，且无法手动关闭。
+
+      #+BEGIN_SRC java
+        package cn.tedu.test;
+
+        import cn.tedu.domain.User;
+        import org.apache.ibatis.io.Resources;
+        import org.apache.ibatis.session.SqlSession;
+        import org.apache.ibatis.session.SqlSessionFactory;
+        import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+        import org.junit.After;
+        import org.junit.Before;
+        import org.junit.Test;
+
+        import java.io.IOException;
+        import java.io.InputStream;
+
+        public class Test01 {
+            private SqlSessionFactory factory = null;
+
+            @Before
+            public void before() throws IOException {
+                SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+                InputStream in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                factory = builder.build(in);
+            }
+
+            /**
+             ,* 一级缓存演示
+             ,*      一级缓存默认开启 且 无法关闭
+             ,*      一级缓存在一个事务内有效 跨事务无效
+             ,*      在同一个事务内多次执行相同的sql只会在第一次执行时真正走库，之后将数据缓存，之后的其他相同查询得到的都是缓存的数据
+             ,*/
+            @Test
+            public void test01() {
+                SqlSession sqlSession = factory.openSession();
+
+                User user1 = sqlSession.selectOne("cn.tedu.userMapper.selc01",3);
+                System.out.println(user1);
+                User user2 = sqlSession.selectOne("cn.tedu.userMapper.selc01",3);
+                System.out.println(user2);
+
+                sqlSession.close();
+            }
+        }
+
+      #+END_SRC
+   3. MyBatis的二级缓存
+      1. MyBatis的二级缓存默认是关闭的,可以配置选项开启二级缓存,在sqlMapConfig.xml配置：
+
+         #+BEGIN_SRC html
+           <?xml version="1.0" encoding="UTF-8" ?>
+           <!DOCTYPE configuration
+                   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+                   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+           <configuration>
+               <!--配置二级缓存-->
+               <settings>
+                   <setting name="cacheEnabled" value="true"/>
+               </settings>
+               <!-- 配置数据源 -->
+               <environments default="mysqldb">
+                   <environment id="mysqldb">
+                       <transactionManager type="JDBC"/>
+                       <dataSource type="POOLED">
+                           <property name="driver" value="com.mysql.jdbc.Driver"/>
+                           <property name="url" value="jdbc:mysql:///mydb"/>
+                           <property name="username" value="root"/>
+                           <property name="password" value="123456"/>
+                       </dataSource>
+                   </environment>
+               </environments>
+               <!--配置映射文件-->
+               <mappers>
+                   <mapper resource="userMapper.xml"></mapper>
+               </mappers>
+           </configuration>
+         #+END_SRC
+      2. 在映射文件中配置：
+
+         #+BEGIN_SRC html
+           <?xml version="1.0" encoding="UTF-8" ?>
+           <!DOCTYPE mapper
+                   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+           <mapper namespace="cn.tedu.userMapper">
+               <!--二级缓存开关-->
+               <cache/>
+
+               <select id="selc01" resultType="cn.tedu.domain.User">
+                   select * from user where id = #{id};
+               </select>
+           </mapper>
+         #+END_SRC
+      3. 要被二级缓存缓存的bean必须实现序列化接口：
+
+         #+BEGIN_SRC java
+           public class User implements Serializable {}
+         #+END_SRC
+
+         #+BEGIN_SRC java
+           package cn.tedu.domain;
+
+           import java.io.Serializable;
+
+           public class User implements Serializable {
+               private int id;
+               private String name;
+               private int age;
+
+               public User() {
+               }
+
+               public User(int id, String name, int age) {
+                   this.id = id;
+                   this.name = name;
+                   this.age = age;
+               }
+
+               public int getId() {
+                   return id;
+               }
+
+               public void setId(int id) {
+                   this.id = id;
+               }
+
+               public String getName() {
+                   return name;
+               }
+
+               public void setName(String name) {
+                   this.name = name;
+               }
+
+               public int getAge() {
+                   return age;
+               }
+
+               public void setAge(int age) {
+                   this.age = age;
+               }
+
+               @Override
+               public String toString() {
+                   return "User{" +
+                           "id=" + id +
+                           ", name='" + name + '\'' +
+                           ", age=" + age +
+                           '}';
+               }
+           }
+
+         #+END_SRC
+      4. 测试类：
+         #+BEGIN_SRC java
+           package cn.tedu.test;
+
+           import cn.tedu.domain.User;
+           import org.apache.ibatis.io.Resources;
+           import org.apache.ibatis.session.SqlSession;
+           import org.apache.ibatis.session.SqlSessionFactory;
+           import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+           import org.junit.After;
+           import org.junit.Before;
+           import org.junit.Test;
+
+           import java.io.IOException;
+           import java.io.InputStream;
+
+           public class Test01 {
+               private SqlSessionFactory factory = null;
+
+               @Before
+               public void before() throws IOException {
+                   SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+                   InputStream in = Resources.getResourceAsStream("sqlMapConfig.xml");
+                   factory = builder.build(in);
+               }
+
+               /**
+                ,* 二级缓存演示
+                ,*      二级缓存 默认关闭 需要手工开启
+                ,*      在全局范围内 跨事务有效
+                ,*      由于二级缓存 范围大 时间长 可能造成严重的数据不一致问题 慎用
+                ,*/
+               @Test
+               public void test02() {
+                   SqlSession session1 = factory.openSession();
+                   User user1 = session1.selectOne("cn.tedu.userMapper.selc01",3);
+                   System.out.println(user1);
+                   session1.commit();
+
+                   SqlSession session2 = factory.openSession();
+                   User user2 = session2.selectOne("cn.tedu.userMapper.selc01",3);
+                   System.out.println(user2);
+                   session2.commit();
+
+                   session1.close();
+                   session2.close();
+               }
+           }
+         #+END_SRC
+*** 3.2.14 接口的使用
+为了简化MyBatis的使用，MyBatis提供了接口方式 自动化 生成调用过程的机制，可以大大简化MyBatis的开发
+1. 实现过程
+   1. 开发映射文件：
+
+      #+BEGIN_SRC html
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <mapper namespace="cn.tedu.mapper.UserMapper">
+            <select id="selectOrderByAge" resultType="cn.tedu.domain.User">
+                select * from user order by age;
+            </select>
+            <select id="selectBetweenAge" resultType="cn.tedu.domain.User">
+                select * from user where age between #{min} and #{max};
+            </select>
+        </mapper>
+      #+END_SRC
+   2. 开发接口：
+
+      #+BEGIN_SRC
+        接口的全路径名应为映射文件中声明的名称空间
+        接口中应该声明和映射文件中sql对应的id相同名称的方法
+        方法接收的参数应该和sql中接收的参数一致
+        方法的返回值应该和sql中声明的返回值类型一致
+      #+END_SRC
+
+      #+BEGIN_SRC java
+        package cn.tedu.mapper;
+
+        import cn.tedu.domain.User;
+        import org.apache.ibatis.annotations.Param;
+
+        import java.util.List;
+        import java.util.Map;
+
+        public interface UserMapper {
+            public List<User> selectOrderByAge();
+            public List<User> selectBetweenAge(@Param("min") int min,@Param("max") int max);
+        }
+      #+END_SRC
+   3. 开发测试类：
+
+      #+BEGIN_SRC java
+        package cn.tedu.test;
+
+        import cn.tedu.domain.User;
+        import cn.tedu.mapper.UserMapper;
+        import org.apache.ibatis.io.Resources;
+        import org.apache.ibatis.session.SqlSession;
+        import org.apache.ibatis.session.SqlSessionFactory;
+        import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+        import org.junit.Test;
+
+        import java.io.IOException;
+        import java.util.HashMap;
+        import java.util.List;
+        import java.util.Map;
+
+
+        public class Test01 {
+
+            @Test
+            public void test02() throws IOException {
+                SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+                SqlSessionFactory factory = builder.build(Resources.getResourceAsStream("sqlMapConfig.xml"));
+                SqlSession session = factory.openSession();
+                UserMapper userMapper = session.getMapper(UserMapper.class);
+
+                List<User> list = userMapper.selectBetweenAge(20,30);
+                System.out.println(list);
+
+                List<User> list2 = userMapper.selectOrderByAge();
+                System.out.println(list2);
+
+                session.close();
+            }
+
+            @Test
+            public void test01() throws IOException {
+                SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+                SqlSessionFactory factory = builder.build(Resources.getResourceAsStream("sqlMapConfig.xml"));
+                SqlSession session = factory.openSession();
+
+                Map<String,Integer> map = new HashMap<>();
+                map.put("min",20);
+                map.put("max",30);
+                List<User> list = session.selectList("cn.tedu.mapper.UserMapper.selectBetweenAge", map);
+                System.out.println(list);
+
+                session.close();
+            }
+        }
+
+      #+END_SRC
+      真正的开发中，都是使用这种接口+配置文件方式，实现MyBatis的使用。
+
+   4. 实现原理：
+
+   [[./Img/48.png]]
+** 3.3 SSM整合
+*** 3.3.1 导入相关开发包
+*** 3.3.2 创建包结构
+[[./Img/49.png]]
+*** 3.3.3 配置SpringMVC
+1. 配置web.xml
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+              version="4.0">
+         <!-- SpringMVC配置 -->
+         <!-- 前端控制器 -->
+         <servlet>
+             <servlet-name>springmvc</servlet-name>
+             <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+             <init-param>
+                 <param-name>contextConfigLocation</param-name>
+                 <param-value>classpath:springmvc.xml</param-value>
+             </init-param>
+         </servlet>
+         <servlet-mapping>
+             <servlet-name>springmvc</servlet-name>
+             <url-pattern>*.action</url-pattern>
+         </servlet-mapping>
+         <!-- 全栈乱码结局过滤器 -->
+         <filter>
+             <filter-name>encodingFilter</filter-name>
+             <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+             <init-param>
+                 <param-name>encoding</param-name>
+                 <param-value>utf-8</param-value>
+             </init-param>
+         </filter>
+         <filter-mapping>
+             <filter-name>encodingFilter</filter-name>
+             <url-pattern>/*</url-pattern>
+         </filter-mapping>
+     </web-app>
+   #+END_SRC
+2. 配置applicationContext-mvc.xml中：
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:tx="http://www.springframework.org/schema/tx"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx.xsd
+             ">
+         <!--包扫描-->
+         <context:component-scan base-package="cn.tedu.service"></context:component-scan>
+         <context:component-scan base-package="cn.tedu.mapper"></context:component-scan>
+
+         <!--注解方式DI-->
+         <context:annotation-config/>
+
+         <!--注解方式AOP-->
+         <aop:aspectj-autoproxy/>
+
+     </beans>
+   #+END_SRC
+3. 开发控制器
+
+   #+BEGIN_SRC java
+     package cn.tedu.controller;
+
+     import cn.tedu.domain.User;
+     import cn.tedu.service.UserService;
+     import org.junit.Test;
+     import org.springframework.beans.factory.annotation.Autowired;
+     import org.springframework.stereotype.Controller;
+     import org.springframework.web.bind.annotation.RequestMapping;
+
+     @Controller
+     @RequestMapping("/user")
+     public class UserController {
+
+         @Autowired
+         private UserService userService = null;
+
+         @RequestMapping("/regist.action")
+         public void regist(User user){
+             System.out.println("UserController..注册..");
+             userService.regist(user);
+         }
+     }
+   #+END_SRC
+*** 3.3.4 配置Spring
+1. applicationContext.xml中：
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:tx="http://www.springframework.org/schema/tx"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx.xsd
+             ">
+         <!--包扫描-->
+         <context:component-scan base-package="cn.tedu.service"></context:component-scan>
+         <context:component-scan base-package="cn.tedu.mapper"></context:component-scan>
+
+         <!--注解方式DI-->
+         <context:annotation-config/>
+
+         <!--注解方式AOP-->
+         <aop:aspectj-autoproxy/>
+
+     </beans>
+   #+END_SRC
+2. web.xml中配置监听器，是Spring容器在web应用初始化时自动加载：
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+              version="4.0">
+         <!-- Spring配置 -->
+         <listener>
+             <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+         </listener>
+         <context-param>
+             <param-name>contextConfigLocation</param-name>
+             <param-value>classpath:applicationContext.xml</param-value>
+         </context-param>
+         <!-- SpringMVC配置 -->
+         <!-- 前端控制器 -->
+         <servlet>
+             <servlet-name>springmvc</servlet-name>
+             <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+             <init-param>
+                 <param-name>contextConfigLocation</param-name>
+                 <param-value>classpath:springmvc.xml</param-value>
+             </init-param>
+         </servlet>
+         <servlet-mapping>
+             <servlet-name>springmvc</servlet-name>
+             <url-pattern>*.action</url-pattern>
+         </servlet-mapping>
+         <!-- 全栈乱码结局过滤器 -->
+         <filter>
+             <filter-name>encodingFilter</filter-name>
+             <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+             <init-param>
+                 <param-name>encoding</param-name>
+                 <param-value>utf-8</param-value>
+             </init-param>
+         </filter>
+         <filter-mapping>
+             <filter-name>encodingFilter</filter-name>
+             <url-pattern>/*</url-pattern>
+         </filter-mapping>
+     </web-app>
+   #+END_SRC
+3. 开发Service
+
+   #+BEGIN_SRC java
+     package cn.tedu.service;
+
+     import cn.tedu.domain.User;
+
+     public interface UserService {
+         public void regist(User user);
+     }
+
+   #+END_SRC
+
+   #+BEGIN_SRC java
+     package cn.tedu.service;
+
+     import cn.tedu.domain.User;
+     import cn.tedu.mapper.UserMapper;
+     import org.springframework.beans.factory.annotation.Autowired;
+     import org.springframework.stereotype.Service;
+     import org.springframework.transaction.annotation.Transactional;
+
+     @Service
+     public class UserServiceImpl implements UserService {
+
+         @Autowired
+         private UserMapper userMapper = null;
+
+         @Transactional
+         @Override
+         public void regist(User user) {
+             System.out.println("UserService..注册..");
+             userMapper.insertUser(user);
+             //int i = 1/0;
+         }
+     }
+
+   #+END_SRC
+*** 3.3.5 配置MyBatis
+1. 配置sqlMapConfig.xml
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8" ?>
+     <!DOCTYPE configuration
+             PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-config.dtd">
+     <configuration>
+
+     </configuration>
+   #+END_SRC
+2. 配置applicationContext.xml
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:tx="http://www.springframework.org/schema/tx"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx.xsd
+             ">
+         <!--包扫描-->
+         <context:component-scan base-package="cn.tedu.service"></context:component-scan>
+         <context:component-scan base-package="cn.tedu.mapper"></context:component-scan>
+
+         <!--注解方式DI-->
+         <context:annotation-config/>
+
+         <!--注解方式AOP-->
+         <aop:aspectj-autoproxy/>
+
+         <!--配置数据源-->
+         <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+             <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+             <property name="jdbcUrl" value="jdbc:mysql:///ssmdb?useSSL=false&amp;serverTimezone=UTC"/>
+             <property name="user" value="root"/>
+             <property name="password" value="Root*0201"/>
+         </bean>
+
+         <!--整合MyBatis-->
+         <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+             <property name="dataSource" ref="dataSource"/>
+             <property name="configLocation" value="classpath:/sqlMapConfig.xml"/>
+             <property name="mapperLocations" value="classpath:/mappers/*.xml"/>
+         </bean>
+
+         <!-- MyBatis MapperBean扫描器，负责为MapperBean生成实现类 -->
+         <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+             <property name="basePackage" value="cn.tedu.mapper"></property>
+         </bean>
+     </beans>
+   #+END_SRC
+3. 创建bean，并同时创建User bean的映射文件UserMapper.xml:
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8" ?>
+     <!DOCTYPE mapper
+             PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     <mapper namespace="cn.tedu.mapper.UserMapper">
+         <select id="selectBetweenAge" resultType="cn.tedu.domain.User">
+             select * from user where age between #{min} and #{max};
+         </select>
+         <insert id="insertUser">
+             insert into user values (#{id},#{name},#{age},#{addr});
+         </insert>
+     </mapper>
+   #+END_SRC
+4. 创建bean的Mapper接口：
+
+   #+BEGIN_SRC java
+     package cn.tedu.mapper;
+
+     import cn.tedu.domain.User;
+     import org.apache.ibatis.annotations.Param;
+     import org.springframework.stereotype.Repository;
+
+     import java.util.List;
+
+     /**
+         create database ssmdb1;
+         use ssmdb1;
+          create table user(id int,name varchar(20),age int ,addr varchar(20));
+          insert into user values (1,'aaa',19,'bj');
+          insert into user values (2,'bbb',29,'sh');
+          insert into user values (3,'ccc',23,'gz');
+          insert into user values (4,'ddd',31,'sz');
+      ,*/
+     public interface UserMapper {
+         public List<User> selectBetweenAge(@Param("min") int min, @Param("max") int max);
+         public void insertUser(User user);
+     }
+   #+END_SRC
+*** 3.3.6 配置声明式事务处理
+1. 修改applicationContext.xml
+
+   #+BEGIN_SRC html
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xmlns:tx="http://www.springframework.org/schema/tx"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx.xsd
+             ">
+         <!--包扫描-->
+         <context:component-scan base-package="cn.tedu.service"></context:component-scan>
+         <context:component-scan base-package="cn.tedu.mapper"></context:component-scan>
+
+         <!--注解方式DI-->
+         <context:annotation-config/>
+
+         <!--注解方式AOP-->
+         <aop:aspectj-autoproxy/>
+
+         <!--配置数据源-->
+         <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+             <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+             <property name="jdbcUrl" value="jdbc:mysql:///ssmdb?useSSL=false&amp;serverTimezone=UTC"/>
+             <property name="user" value="root"/>
+             <property name="password" value="Root*0201"/>
+         </bean>
+
+         <!--整合MyBatis-->
+         <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+             <property name="dataSource" ref="dataSource"/>
+             <property name="configLocation" value="classpath:/sqlMapConfig.xml"/>
+             <property name="mapperLocations" value="classpath:/mappers/*.xml"/>
+         </bean>
+
+         <!-- MyBatis MapperBean扫描器，负责为MapperBean生成实现类 -->
+         <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+             <property name="basePackage" value="cn.tedu.mapper"></property>
+         </bean>
+
+         <!--配置事务管理器-->
+         <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+             <property name="dataSource" ref="dataSource"/>
+         </bean>
+         <!--开启注解方式的事务管理-->
+         <tx:annotation-driven/>
+     </beans>
+   #+END_SRC

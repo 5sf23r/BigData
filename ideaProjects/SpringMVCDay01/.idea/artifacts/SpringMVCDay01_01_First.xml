@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="SpringMVCDay01_01_First">
+    <output-path>$PROJECT_DIR$/../../WebProject/SpringMVCDay01_01_First/Root</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="SpringMVCDay01_01_First/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SpringMVCDay01_01_First" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="SpringMVCDay01_01_First" module-name="SpringMVCDay01_01_First" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

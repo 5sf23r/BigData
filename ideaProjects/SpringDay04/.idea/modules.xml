@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/SpringDay04_06_AOP_Exec_Exception/SpringDay04_06_AOP_Exec_Exception.iml" filepath="$PROJECT_DIR$/SpringDay04_06_AOP_Exec_Exception/SpringDay04_06_AOP_Exec_Exception.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpringDay04_07_AOP_Exec_useTime/SpringDay04_07_AOP_Exec_useTime.iml" filepath="$PROJECT_DIR$/SpringDay04_07_AOP_Exec_useTime/SpringDay04_07_AOP_Exec_useTime.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpringDay04_08_AOP_Exec_Priv/SpringDay04_08_AOP_Exec_Priv.iml" filepath="$PROJECT_DIR$/SpringDay04_08_AOP_Exec_Priv/SpringDay04_08_AOP_Exec_Priv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringDay04_09_AOP_Exec_trans/SpringDay04_09_AOP_Exec_trans.iml" filepath="$PROJECT_DIR$/SpringDay04_09_AOP_Exec_trans/SpringDay04_09_AOP_Exec_trans.iml" />
     </modules>
   </component>
 </project>

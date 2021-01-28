@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.userMapper">
+    <!--手动映射结果集-->
+    <resultMap id="rm01" type="cn.tedu.domain.User2">
+        <id column="id" property="uid"></id>
+        <result column="name" property="uname"></result>
+        <result column="age" property="uage"></result>
+    </resultMap>
+    <select id="selc01" resultMap="rm01">
+        select * from user;
+    </select>
+</mapper>

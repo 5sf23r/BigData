@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="SpringMVCDay02_02_Exception">
+    <output-path>$PROJECT_DIR$/out/artifacts/SpringMVCDay02_02_Exception</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="SpringMVCDay02_02_Exception/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SpringMVCDay02_02_Exception" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="SpringMVCDay02_02_Exception" module-name="SpringMVCDay02_02_Exception" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.m2mMapper">
+    <!--以Teacher为视角-->
+    <resultMap id="rm02" type="cn.tedu.domain.Teacher">
+        <id property="id" column="tid"/>
+        <result property="name" column="tname"/>
+        <collection property="stus" ofType="cn.tedu.domain.Stu">
+            <id property="id" column="sid"/>
+            <result property="name" column="sname"/>
+        </collection>
+    </resultMap>
+    <select id="m2m02" resultMap="rm02">
+        select
+            stu.id as sid,
+            stu.name as sname,
+            teacher.id as tid,
+            teacher.name as tname
+        from
+            stu inner join stu_teacher on stu.id = stu_teacher.sid inner join teacher on teacher.id = stu_teacher.tid;
+    </select>
+    <!--以Stu为视角-->
+    <resultMap id="rm01" type="cn.tedu.domain.Stu">
+        <id property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <collection property="teachers" ofType="cn.tedu.domain.Teacher">
+            <id property="id" column="tid"/>
+            <result property="name" column="tname"/>
+        </collection>
+    </resultMap>
+    <select id="m2m01" resultMap="rm01">
+        select
+            stu.id as sid,
+            stu.name as sname,
+            teacher.id as tid,
+            teacher.name as tname
+        from
+            stu inner join stu_teacher on stu.id = stu_teacher.sid inner join teacher on teacher.id = stu_teacher.tid;
+    </select>
+</mapper>
