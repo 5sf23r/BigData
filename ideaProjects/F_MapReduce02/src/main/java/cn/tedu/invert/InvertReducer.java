@@ -1,4 +1,4 @@
-package cn.tedu;
+package cn.tedu.invert;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -20,5 +20,6 @@ public class InvertReducer extends Reducer<Text, Text,Text,Text> {
         for (String s : set) {
             sb.append(s).append("\t");
         }
+        context.write(key,new Text(sb.toString()));
     }
 }

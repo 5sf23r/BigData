@@ -1,4 +1,4 @@
-package cn.tedu;
+package cn.tedu.invert;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
