@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/G_Flume/pom.xml" />
+        <option value="$PROJECT_DIR$/F_MapReduce04/pom.xml" />
+        <option value="$PROJECT_DIR$/F_MapReduce03/pom.xml" />
+        <option value="$PROJECT_DIR$/F_MapReduce02/pom.xml" />
+        <option value="$PROJECT_DIR$/F_MapReduce01/pom.xml" />
+        <option value="$PROJECT_DIR$/E_HDFS/pom.xml" />
+        <option value="$PROJECT_DIR$/D_AVRO/pom.xml" />
+        <option value="$PROJECT_DIR$/C_Zookeeper/pom.xml" />
+        <option value="$PROJECT_DIR$/B_Concurrent03/pom.xml" />
+        <option value="$PROJECT_DIR$/B_Concurrent02/pom.xml" />
+        <option value="$PROJECT_DIR$/B_Concurrent01/pom.xml" />
+        <option value="$PROJECT_DIR$/A_NIO/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

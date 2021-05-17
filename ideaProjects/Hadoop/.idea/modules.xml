@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/A_NIO/A_NIO.iml" filepath="$PROJECT_DIR$/A_NIO/A_NIO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/B_Concurrent01/B_Concurrent01.iml" filepath="$PROJECT_DIR$/B_Concurrent01/B_Concurrent01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/B_Concurrent02/B_Concurrent02.iml" filepath="$PROJECT_DIR$/B_Concurrent02/B_Concurrent02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/B_Concurrent03/B_Concurrent03.iml" filepath="$PROJECT_DIR$/B_Concurrent03/B_Concurrent03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/C_Zookeeper/C_Zookeeper.iml" filepath="$PROJECT_DIR$/C_Zookeeper/C_Zookeeper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/D_AVRO/D_AVRO.iml" filepath="$PROJECT_DIR$/D_AVRO/D_AVRO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/E_HDFS/E_HDFS.iml" filepath="$PROJECT_DIR$/E_HDFS/E_HDFS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/F_MapReduce01/F_MapReduce01.iml" filepath="$PROJECT_DIR$/F_MapReduce01/F_MapReduce01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/F_MapReduce02/F_MapReduce02.iml" filepath="$PROJECT_DIR$/F_MapReduce02/F_MapReduce02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/F_MapReduce03/F_MapReduce03.iml" filepath="$PROJECT_DIR$/F_MapReduce03/F_MapReduce03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/F_MapReduce04/F_MapReduce04.iml" filepath="$PROJECT_DIR$/F_MapReduce04/F_MapReduce04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/G_Flume/G_Flume.iml" filepath="$PROJECT_DIR$/G_Flume/G_Flume.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Hadoop.iml" filepath="$PROJECT_DIR$/Hadoop.iml" />
+    </modules>
+  </component>
+</project>

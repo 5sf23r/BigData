@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="B_Concurrent02" />
+        <module name="B_Concurrent03" />
+        <module name="B_Concurrent01" />
+        <module name="C_Zookeeper" />
+        <module name="A_NIO" />
+        <module name="E_HDFS" />
+        <module name="F_MapReduce04" />
+        <module name="G_Flume" />
+        <module name="F_MapReduce03" />
+        <module name="F_MapReduce02" />
+        <module name="F_MapReduce01" />
+        <module name="D_AVRO" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="A_NIO" target="8" />
+      <module name="B_Concurrent01" target="8" />
+      <module name="B_Concurrent02" target="8" />
+      <module name="B_Concurrent03" target="8" />
+      <module name="C_Zookeeper" target="8" />
+      <module name="D_AVRO" target="8" />
+      <module name="E_HDFS" target="8" />
+      <module name="F_MapReduce01" target="8" />
+      <module name="F_MapReduce02" target="8" />
+      <module name="F_MapReduce03" target="8" />
+      <module name="F_MapReduce04" target="8" />
+      <module name="G_Flume" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
